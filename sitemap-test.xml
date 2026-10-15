@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kaku.fun/</loc><priority>1.0</priority></url>
+  <url><loc>https://kaku.fun/zh</loc><priority>1.0</priority></url>
+  <url><loc>https://kaku.fun/docs</loc><priority>0.9</priority></url>
+  <url><loc>https://kaku.fun/zh/docs</loc><priority>0.9</priority></url>
+  <url><loc>https://kaku.fun/docs/guide</loc><priority>0.9</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/guide</loc><priority>0.9</priority></url>
+  <url><loc>https://kaku.fun/docs/features</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/features</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/docs/cli</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/cli</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/docs/configuration</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/configuration</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/docs/keybindings</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/keybindings</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/docs/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/docs/contributing</loc><priority>0.5</priority></url>
+  <url><loc>https://kaku.fun/zh/docs/contributing</loc><priority>0.5</priority></url>
+  <url><loc>https://kaku.fun/compare</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/zh/compare</loc><priority>0.8</priority></url>
+  <url><loc>https://kaku.fun/roadmap</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/roadmap</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/changelog</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/changelog</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/about</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/about</loc><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/contact</loc><priority>0.5</priority></url>
+  <url><loc>https://kaku.fun/zh/contact</loc><priority>0.5</priority></url>
+  <url><loc>https://kaku.fun/privacy</loc><priority>0.5</priority></url>
+  <url><loc>https://kaku.fun/zh/privacy</loc><priority>0.5</priority></url>
+</urlset>
