@@ -29,7 +29,7 @@ Tabs and splits use the shortcuts you'd expect on a Mac.
 | Move between panes | `Cmd + Opt + arrows` | Moves focus to the pane in that direction. |
 | Close pane / tab | `Cmd + W` | Closes the active pane. On a tab's last pane it closes the tab, and on the last tab of the last window it hides Kaku. |
 | Reopen a closed tab | `Cmd + Shift + T` | Brings back the last tab you closed, in its old folder. |
-| Rename a tab | Double-click its title | Type a name, then press Enter. |
+| Rename a tab | Cmd + Shift + I, or double-click its title | Type a name, then press Enter. |
 
 In the Tab Navigator, `Backspace` closes the highlighted tab, with the usual confirmation. It only does that while the filter box is empty, so you can still delete what you typed.
 

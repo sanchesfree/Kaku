@@ -67,10 +67,25 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
-  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.22.0</a><div class="nav-links"><a href="/zh/docs">文档</a></div><div class="nav-actions"><a class="nav-pill" aria-current="page" href="/zh/changelog" hreflang="zh-CN">中</a><a class="nav-pill" href="/changelog" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.23.0</a><div class="nav-links"><a href="/zh/docs">文档</a></div><div class="nav-actions"><a class="nav-pill" aria-current="page" href="/zh/changelog" hreflang="zh-CN">中</a><a class="nav-pill" href="/changelog" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content"><section class="section"><div class="wide release-doc">
 <h1>更新日志</h1>
 <p class="release-sub">Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 <a href="/feed.xml">RSS</a> 订阅。</p>
+<h2 id="v0.23.0">V0.23.0 Drawer <span class="release-date">2026-10-14</span></h2>
+<ol>
+<li><b>快捷键抽屉</b>：Cmd+Opt+Ctrl+K 改为从屏幕顶部拉出终端，盖在当前应用之上，设置 <code>config.macos_global_hotkey_mode = 'Ordinary'</code> 可恢复原来的显示隐藏。</li>
+<li><b>远程桌面</b>：在任意位置长按即可打开右键菜单，开启 Window &gt; Touch Mode 后每个标签都有关闭按钮。</li>
+<li><b>重命名标签</b>：Cmd+Shift+I 可直接重命名当前标签，编辑框会显示选中的文字，隐藏标签栏时也保持居中。</li>
+<li><b>字体与缩放</b>：缩放更顺滑，位图回退字体在每一级都选对尺寸，修改字体、字号和行高后已打开的窗口会同步更新。</li>
+<li><b>提示符图标</b>：Starship 的分支和 git 状态图标恢复显示，之前版本留下空白图标的安装也会一并修好。</li>
+<li><b>AI 会话</b>：重启 Kaku 后，Claude Code 和 Codex 会保留上一次的画面。</li>
+<li><b>搜索与输入框</b>：Cmd+F 只在输入大写字母时区分大小写，Kaku 自带的输入框里 Ctrl-U 可删除到行首。</li>
+<li><b>通知</b>：每条通知只弹一次，正文里的分号不再丢失，macOS 拦截通知时 Kaku 会提示去系统设置开启。</li>
+<li><b>终端修复</b>：配色变化时会通知程序，OSC 8 链接保留分号，tmux -CC 输入恢复正常，也不再响应读取屏幕校验和的请求。</li>
+<li><b>快捷键</b>：Ctrl 组合键直接交给 shell，Ctrl+Shift+C 和 V 不再复制粘贴，Quick Select、Copy Mode 和分屏选择器不再默认绑定，都可在 kaku.lua 里自行绑定。</li>
+</ol>
+<p class="release-more"><a href="https://github.com/tw93/Kaku/releases/tag/V0.23.0">GitHub</a> · <a href="https://github.com/tw93/Kaku/releases/download/V0.23.0/Kaku.dmg">DMG</a></p>
+<hr>
 <h2 id="v0.22.0">V0.22.0 Handy <span class="release-date">2026-10-05</span></h2>
 <ol>
 <li><b>标签栏</b>：远程桌面下用手指也更容易点中标签，标签栏末尾多了 + 按钮，右键标签可以新建、打开标签导航或关闭标签。</li>

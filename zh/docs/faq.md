@@ -197,7 +197,7 @@ Kaku 可能没拿到通知权限。打开 System Settings > Notifications > Kaku
 
 ## 怎么修改全局快捷键？
 
-`Cmd + Opt + Ctrl + K` 在任何应用里都能呼出或隐藏 Kaku，它跟着当前键盘布局走，用 Colemak 或 Dvorak 时就是打出 K 的那个键，想换组合的话在 `kaku config` 里改 Global Hotkey，或者直接写进 Lua：
+`Cmd + Opt + Ctrl + K` 在任何应用里都能从屏幕顶部拉出 Kaku，想恢复原来显示和隐藏窗口的方式，设置 `config.macos_global_hotkey_mode = 'Ordinary'` 就行，这个快捷键跟着当前键盘布局走，用 Colemak 或 Dvorak 时就是打出 K 的那个键，想换组合的话在 `kaku config` 里改 Global Hotkey，或者直接写进 Lua：
 
 ```lua
 config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }

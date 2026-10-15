@@ -2,6 +2,23 @@
 
 Stable Kaku releases, newest first. Nightly builds stay on GitHub. Subscribe with [RSS](https://kaku.fun/feed.xml).
 
+## V0.23.0 Drawer 2026-10-14
+
+1. **Hotkey Drawer**: Cmd+Opt+Ctrl+K now drops a terminal from the top of the screen over any app, and `config.macos_global_hotkey_mode = 'Ordinary'` brings back the old show and hide.
+2. **Remote Desktop**: Press and hold anywhere to open the right-click menu, and Window > Touch Mode adds a close button to every tab.
+3. **Rename Tabs**: Cmd+Shift+I renames the current tab, and the editor shows its selection and stays centered when the tab bar is hidden.
+4. **Fonts and Zoom**: Zooming is smoother, bitmap fallback fonts pick the right size at every step, and font, size and line height changes reach open windows on reload.
+5. **Prompt Icons**: The Starship branch and git status icons are back, including for installs that kept the blank ones from earlier versions.
+6. **AI Sessions**: Claude Code and Codex keep their last screen when Kaku restarts.
+7. **Search and Prompts**: Cmd+F matches case only when you type a capital letter, and Ctrl-U deletes to the start of the line in Kaku's prompts.
+8. **Notifications**: Each notification shows once, semicolons in its text are kept, and Kaku points to System Settings when macOS blocks them.
+9. **Terminal Fixes**: Apps hear when the color palette changes, OSC 8 links keep their semicolons, tmux -CC input works again, and Kaku no longer answers screen checksum queries.
+10. **Shortcuts**: Ctrl chords now reach the shell, so Ctrl+Shift+C and V no longer copy and paste, and Quick Select, Copy Mode and the pane picker lose their default keys; all can still be bound in kaku.lua.
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.23.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.23.0/Kaku.dmg)
+
+---
+
 ## V0.22.0 Handy 2026-10-05
 
 1. **Tab Bar**: Tabs are easier to hit with a finger over remote desktop, a + button opens new tabs, and right-clicking a tab offers New Tab, Tab Navigator, and Close Tab.

@@ -5,8 +5,37 @@
 <link>https://kaku.fun/changelog</link>
 <description>Stable Kaku releases. Nightly builds are not included.</description>
 <language>en</language>
-<lastBuildDate>Mon, 05 Oct 2026 06:59:22 +0000</lastBuildDate>
+<lastBuildDate>Wed, 14 Oct 2026 07:46:18 +0000</lastBuildDate>
 <atom:link href="https://kaku.fun/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>V0.23.0 Drawer</title>
+<link>https://kaku.fun/changelog#v0.23.0</link>
+<guid isPermaLink="true">https://kaku.fun/changelog#v0.23.0</guid>
+<pubDate>Wed, 14 Oct 2026 07:46:18 +0000</pubDate>
+<description><![CDATA[<h2>Changelog</h2><ol>
+<li><b>Hotkey Drawer</b>: Cmd+Opt+Ctrl+K now drops a terminal from the top of the screen over any app, and <code>config.macos_global_hotkey_mode = 'Ordinary'</code> brings back the old show and hide.</li>
+<li><b>Remote Desktop</b>: Press and hold anywhere to open the right-click menu, and Window &gt; Touch Mode adds a close button to every tab.</li>
+<li><b>Rename Tabs</b>: Cmd+Shift+I renames the current tab, and the editor shows its selection and stays centered when the tab bar is hidden.</li>
+<li><b>Fonts and Zoom</b>: Zooming is smoother, bitmap fallback fonts pick the right size at every step, and font, size and line height changes reach open windows on reload.</li>
+<li><b>Prompt Icons</b>: The Starship branch and git status icons are back, including for installs that kept the blank ones from earlier versions.</li>
+<li><b>AI Sessions</b>: Claude Code and Codex keep their last screen when Kaku restarts.</li>
+<li><b>Search and Prompts</b>: Cmd+F matches case only when you type a capital letter, and Ctrl-U deletes to the start of the line in Kaku's prompts.</li>
+<li><b>Notifications</b>: Each notification shows once, semicolons in its text are kept, and Kaku points to System Settings when macOS blocks them.</li>
+<li><b>Terminal Fixes</b>: Apps hear when the color palette changes, OSC 8 links keep their semicolons, tmux -CC input works again, and Kaku no longer answers screen checksum queries.</li>
+<li><b>Shortcuts</b>: Ctrl chords now reach the shell, so Ctrl+Shift+C and V no longer copy and paste, and Quick Select, Copy Mode and the pane picker lose their default keys; all can still be bound in kaku.lua.</li>
+</ol><h2>更新日志</h2><ol>
+<li><b>快捷键抽屉</b>：Cmd+Opt+Ctrl+K 改为从屏幕顶部拉出终端，盖在当前应用之上，设置 <code>config.macos_global_hotkey_mode = 'Ordinary'</code> 可恢复原来的显示隐藏。</li>
+<li><b>远程桌面</b>：在任意位置长按即可打开右键菜单，开启 Window &gt; Touch Mode 后每个标签都有关闭按钮。</li>
+<li><b>重命名标签</b>：Cmd+Shift+I 可直接重命名当前标签，编辑框会显示选中的文字，隐藏标签栏时也保持居中。</li>
+<li><b>字体与缩放</b>：缩放更顺滑，位图回退字体在每一级都选对尺寸，修改字体、字号和行高后已打开的窗口会同步更新。</li>
+<li><b>提示符图标</b>：Starship 的分支和 git 状态图标恢复显示，之前版本留下空白图标的安装也会一并修好。</li>
+<li><b>AI 会话</b>：重启 Kaku 后，Claude Code 和 Codex 会保留上一次的画面。</li>
+<li><b>搜索与输入框</b>：Cmd+F 只在输入大写字母时区分大小写，Kaku 自带的输入框里 Ctrl-U 可删除到行首。</li>
+<li><b>通知</b>：每条通知只弹一次，正文里的分号不再丢失，macOS 拦截通知时 Kaku 会提示去系统设置开启。</li>
+<li><b>终端修复</b>：配色变化时会通知程序，OSC 8 链接保留分号，tmux -CC 输入恢复正常，也不再响应读取屏幕校验和的请求。</li>
+<li><b>快捷键</b>：Ctrl 组合键直接交给 shell，Ctrl+Shift+C 和 V 不再复制粘贴，Quick Select、Copy Mode 和分屏选择器不再默认绑定，都可在 kaku.lua 里自行绑定。</li>
+</ol>]]></description>
+</item>
 <item>
 <title>V0.22.0 Handy</title>
 <link>https://kaku.fun/changelog#v0.22.0</link>

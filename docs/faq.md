@@ -197,7 +197,7 @@ Kaku may not have notification permission. Open System Settings > Notifications 
 
 ## How do I change the global hotkey?
 
-`Cmd + Opt + Ctrl + K` shows or hides Kaku from any app. It follows your current keyboard layout, so on Colemak or Dvorak it is whichever key types K. To pick another combination, change Global Hotkey in `kaku config`, or set it in Lua:
+`Cmd + Opt + Ctrl + K` drops Kaku down from the top of the screen over any app. Set `config.macos_global_hotkey_mode = 'Ordinary'` to show and hide the normal window instead. The hotkey follows your current keyboard layout, so on Colemak or Dvorak it is whichever key types K. To pick another combination, change Global Hotkey in `kaku config`, or set it in Lua:
 
 ```lua
 config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }
