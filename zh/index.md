@@ -84,5 +84,5 @@ kaku doctor                    # 检查 App 包、PATH、shell 集成
 
 ---
 
-Source: https://kaku.fun/zh/
+Source: https://kaku.fun/zh
 Site index for LLMs: https://kaku.fun/llms.txt

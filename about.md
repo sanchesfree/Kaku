@@ -22,7 +22,7 @@ Kaku is built by Tw93, an independent developer who also created [Pake](https://
 
 ## Where to start
 
-Start at the [docs](https://kaku.fun/docs/), read the [terminal comparison](https://kaku.fun/compare) if you are coming from iTerm2, Warp, Ghostty, or WezTerm, check the [roadmap](https://kaku.fun/roadmap) for what is being worked on, or [get in touch](https://kaku.fun/contact).
+Start at the [docs](https://kaku.fun/docs), read the [terminal comparison](https://kaku.fun/compare) if you are coming from iTerm2, Warp, Ghostty, or WezTerm, check the [roadmap](https://kaku.fun/roadmap) for what is being worked on, or [get in touch](https://kaku.fun/contact).
 
 ---
 

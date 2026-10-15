@@ -14,7 +14,7 @@ Open Kaku and you get one window with a shell prompt. There's no setup wizard an
 - **No title bar.** The close, minimize, and zoom buttons sit in the top-left corner of the window.
 - **The tab bar stays out of the way.** It's hidden while you have one tab and appears when you open a second.
 
-If your shell can't find the `kaku` command, run `kaku doctor`. First-run details are on the [Install](https://kaku.fun/docs/) page.
+If your shell can't find the `kaku` command, run `kaku doctor`. First-run details are on the [Install](https://kaku.fun/docs) page.
 
 ## Tabs & panes
 

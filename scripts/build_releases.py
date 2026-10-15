@@ -305,7 +305,7 @@ def render_page(donor: str, releases: list[dict], zh: bool) -> str:
         description = "Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 RSS 订阅。"
         url = CHANGELOG_ZH
         language = "zh-CN"
-        home = "https://kaku.fun/zh/"
+        home = "https://kaku.fun/zh"
         intro = (
             'Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 <a href="/feed.xml">RSS</a> 订阅。'
         )

@@ -86,7 +86,7 @@
     "Cmd+Shift+R": "Remote files"
   },
   "docs": [
-    {"title": "Install", "url": "https://kaku.fun/docs/", "markdown": "https://kaku.fun/docs/index.md"},
+    {"title": "Install", "url": "https://kaku.fun/docs", "markdown": "https://kaku.fun/docs/index.md"},
     {"title": "Guide", "url": "https://kaku.fun/docs/guide", "markdown": "https://kaku.fun/docs/guide.md"},
     {"title": "Features", "url": "https://kaku.fun/docs/features", "markdown": "https://kaku.fun/docs/features.md"},
     {"title": "CLI Reference", "url": "https://kaku.fun/docs/cli", "markdown": "https://kaku.fun/docs/cli.md"},
@@ -120,6 +120,6 @@
   },
   "languages": {
     "en": "https://kaku.fun/",
-    "zh-CN": "https://kaku.fun/zh/"
+    "zh-CN": "https://kaku.fun/zh"
   }
 }

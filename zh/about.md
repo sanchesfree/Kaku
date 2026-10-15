@@ -22,7 +22,7 @@ Kaku 由独立开发者 Tw93 开发，他也是 [Pake](https://github.com/tw93/P
 
 ## 从哪开始看
 
-你可以从[文档](https://kaku.fun/zh/docs/)开始上手；若从 iTerm2、Warp、Ghostty 或 WezTerm 迁移，建议先浏览[终端对比](https://kaku.fun/zh/compare)；关注后续开发进展可查看[路线图](https://kaku.fun/zh/roadmap)；其他交流事宜参见[联系](https://kaku.fun/zh/contact)页面。
+你可以从[文档](https://kaku.fun/zh/docs)开始上手；若从 iTerm2、Warp、Ghostty 或 WezTerm 迁移，建议先浏览[终端对比](https://kaku.fun/zh/compare)；关注后续开发进展可查看[路线图](https://kaku.fun/zh/roadmap)；其他交流事宜参见[联系](https://kaku.fun/zh/contact)页面。
 
 ---
 

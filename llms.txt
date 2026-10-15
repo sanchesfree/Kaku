@@ -29,7 +29,7 @@ Kaku is driven from the shell, not over HTTP:
 
 ## Docs
 
-- [Install](https://kaku.fun/docs/): DMG, official Homebrew cask, post-install verification, troubleshooting
+- [Install](https://kaku.fun/docs): DMG, official Homebrew cask, post-install verification, troubleshooting
 - [Guide](https://kaku.fun/docs/guide): plain-language walkthrough from first launch to tabs, panes, shell, the AI assistant, and built-in tools
 - [Features](https://kaku.fun/docs/features): tabs and panes, assistant, preset defaults, performance, shell suite, Lua config
 - [Configuration](https://kaku.fun/docs/configuration): font, opacity, Smart Tab, close confirmation, shortcuts, Lua overrides
@@ -64,5 +64,5 @@ Kaku is driven from the shell, not over HTTP:
 - [GitHub](https://github.com/tw93/Kaku): source, issues, releases
 - [Download](https://github.com/tw93/Kaku/releases/latest): latest DMG, or `brew install --cask kaku`
 - [Discussions](https://github.com/tw93/Kaku/discussions): usage questions and ideas
-- [Chinese site](https://kaku.fun/zh/): every page mirrored under `/zh/`
+- [Chinese site](https://kaku.fun/zh): every page mirrored under `/zh/`
 - [Author](https://tw93.fun): Tw93

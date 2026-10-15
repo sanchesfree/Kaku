@@ -83,7 +83,7 @@ brew install --cask kaku
 kaku doctor
 ```
 
-Or download the DMG from [GitHub Releases](https://github.com/tw93/Kaku/releases/latest). The [install guide](https://kaku.fun/docs/) covers post-install checks and moving off the old personal tap.
+Or download the DMG from [GitHub Releases](https://github.com/tw93/Kaku/releases/latest). The [install guide](https://kaku.fun/docs) covers post-install checks and moving off the old personal tap.
 
 ---
 
