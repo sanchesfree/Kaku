@@ -2,8 +2,8 @@
 """Generate the NLWeb schema feed (feeds/pages.jsonl) from the site's HTML.
 
 One schema.org WebPage object per line, built from each page's <title>,
-<meta name="description">, canonical URL, and language. robots.txt points a
-`schemamap:` directive at schema-map.xml, which lists this feed.
+<meta name="description">, canonical URL, and language. schemamap.xml lists
+this feed and the Link response header announces it.
 
     python3 scripts/build_feed.py
     python3 scripts/build_feed.py --check

@@ -50,4 +50,3 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 Sitemap: https://kaku.fun/sitemap.xml
-Schemamap: https://kaku.fun/schemamap.xml
