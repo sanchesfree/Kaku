@@ -2,6 +2,30 @@
 
 Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 [RSS](https://kaku.fun/feed.xml) 订阅。
 
+## V0.24.0 Reach 2026-10-17
+
+1. **远程访问**：运行 kaku remote，可以在另一台电脑的浏览器里打开这台 Mac 的终端，正在运行的 Claude Code、Codex 等会话也在其中。
+2. **配对**：每个链接只能配对一个浏览器且只能用一次，之后从书签即可打开，中继只转发浏览器与 Mac 之间加密后的内容。
+3. **网页终端**：标签、分屏和复制粘贴与 Kaku 一致，拖进页面的文件会上传到 Mac，Cmd+点击路径即可下载。
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.24.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.24.0/Kaku.dmg)
+
+---
+
+## V0.23.1 Steady 2026-10-16
+
+1. **性能**：绘制时不再扫描整台 Mac 的全部进程，跑 AI 编程工具和光标闪烁时 CPU 占用明显下降。
+2. **标签**：全屏下点击标签不再打乱顺序，设置里新增了标签编号开关。
+3. **会话**：恢复会话、退出和应用内更新之后，标签和历史内容都能找回，用 Restore Previous Window 重新打开的窗口也会继续保存。
+4. **Shell**：程序隐藏光标后退出，回到提示符时光标会自动恢复，用符号链接管理的配置文件在 Kaku 更新时保持链接不变。
+5. **Kaku AI**：保存 Gemini 模型时保留其他设置，解析失败的 assistant.toml 不再被覆盖，私有 IPv6 地址上的模型服务不再走系统代理。
+6. **诊断包**：kaku doctor 生成的诊断包不再包含输入过的按键、输入法文字、链接里的密码和 GitHub 令牌。
+7. **快捷键抽屉**：上方叠着另一块显示器时，抽屉直接出现，不再从那块屏幕上滑过，拖动调整过的高度也会保留。
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.23.1) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.23.1/Kaku.dmg)
+
+---
+
 ## V0.23.0 Drawer 2026-10-14
 
 1. **快捷键抽屉**：Cmd+Opt+Ctrl+K 改为从屏幕顶部拉出终端，盖在当前应用之上，设置 `config.macos_global_hotkey_mode = 'Ordinary'` 可恢复原来的显示隐藏。

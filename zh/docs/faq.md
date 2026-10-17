@@ -207,6 +207,10 @@ config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }
 
 能用。如果一直闪，通常是平铺 WM 和 Kaku 的全屏、resize 逻辑在打架，把 Kaku 的原生全屏关掉（`config.native_macos_fullscreen_mode = false`），或者在平铺 WM 的管理列表里排除 Kaku，一般就好了。
 
+## 远程网页显示 Mac 离线，或者要求重新配对。
+
+网页要通过 Kaku 连到你的 Mac，所以 Mac 需要保持唤醒、Kaku 在运行并且开着远程访问。笔记本插着电源，在系统设置 > 电池 > 选项里打开「使用电源适配器且显示器关闭时，防止自动进入睡眠」，台式 Mac 在系统设置 > 能源里打开「显示器关闭时，防止自动进入睡眠」。配对保存在浏览器里，换一个浏览器、用无痕窗口或清除了网站数据，都需要一个新链接，而新链接只能在 Mac 上运行 `kaku remote` 生成，所以出门前先把要用的浏览器都配对好。
+
 ---
 
 Source: https://kaku.fun/zh/docs/faq

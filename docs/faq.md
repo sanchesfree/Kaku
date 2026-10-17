@@ -207,6 +207,10 @@ config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }
 
 Yes, Kaku works with yabai and AeroSpace. Constant flickering usually means the tiling WM is fighting Kaku's fullscreen and resize logic. Turning off Kaku's native fullscreen (`config.native_macos_fullscreen_mode = false`) or excluding Kaku from the WM's managed windows usually fixes it.
 
+## The remote web page says the Mac is offline, or asks me to pair again.
+
+The page reaches your Mac through Kaku, so the Mac has to be awake with Kaku running and remote access on. On a laptop, keep it plugged in and turn on Prevent automatic sleeping on power adapter when the display is off in System Settings > Battery > Options; on a desktop Mac it is Prevent automatic sleeping when the display is off in System Settings > Energy. Pairing lives in the browser: another browser, a private window or cleared site data needs a new link, which only `kaku remote` on the Mac can make, so pair each browser you plan to use before you leave.
+
 ---
 
 Source: https://kaku.fun/docs/faq

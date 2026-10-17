@@ -4,7 +4,7 @@ Kaku has no account and collects no usage data. This page lists every network re
 
 ## Summary
 
-Kaku runs locally on your Mac. There is no sign-up and no usage or crash reporting. Using it as a terminal sends none of your terminal contents, command history, or files to the project, though the commands you run can reach the network on their own. The optional AI features send the context they use to the services listed below.
+Kaku runs locally on your Mac. There is no sign-up and no usage or crash reporting. Using it as a terminal sends none of your terminal contents, command history, or files to the project, though the commands you run can reach the network on their own. The optional AI features send the context they use to the services listed below, and remote access, off until you turn it on, passes terminal contents through the project's relay encrypted, so the relay cannot read them.
 
 ## Network calls the app makes
 
@@ -13,6 +13,7 @@ Kaku runs locally on your Mac. There is no sign-up and no usage or crash reporti
 - **Usage in `kaku ai`.** When you open `kaku ai`, it shows plan usage for AI coding tools you already have installed, such as Claude Code, Codex, Copilot, and Kimi. It reuses their existing sign-ins to ask those providers directly (`api.anthropic.com`, `chatgpt.com`, `api.github.com`, `api.kimi.com`), renews an expired token with the provider when needed, and caches the results in `~/.cache/kaku/`. Model lists come from the public catalog at `models.dev`, a request that carries no account data.
 - **AI web tools.** When the assistant searches or reads the web, queries and URLs can go to the Brave, Tavily, or Pipellm service you configured (`api.search.brave.com`, `api.tavily.com`, `api.pipellm.ai` or `api.pipellm.com`). The default page reader sends the URL to `defuddle.md` and falls back to `r.jina.ai`. A custom reader script uses whatever services it calls. The HTTP request tool contacts its target URL directly with the headers and body the assistant asked for. Each of these services has its own privacy policy.
 - **Optional tool install.** First-run setup, `kaku init`, and shell integration updates ask before they run, and can then install missing optional tools such as Starship, Delta, Lazygit, and Yazi with Homebrew, which does the download. If Homebrew itself is missing, Kaku asks separately before running the official Homebrew installer from `raw.githubusercontent.com`.
+- **Remote access.** Only after you run `kaku remote` and confirm, Kaku keeps a connection to the relay at `r.kaku.fun`, and paired browsers load the page from `t.kaku.fun`. What you type and see is encrypted between the browser and Kaku, and the relay only forwards it. The relay logs when a Mac or a browser connects, with a short id, the region and the kind of browser, but no IP address or content. `kaku remote off` turns it off.
 - **No telemetry.** Kaku sends no heartbeat, install ping, usage events, or error reports.
 
 ## What is stored on your machine

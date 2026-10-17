@@ -4,7 +4,7 @@ Kaku 没有账号，也不收集使用数据，这一页列出 App 可能发出�
 
 ## 概要
 
-Kaku 是跑在你 Mac 本地的应用，不用注册，也没有使用统计和崩溃上报，平时当终端用，终端内容、命令历史和文件都不会传给项目方，至于你运行的命令要不要联网，由命令自己决定。可选的 AI 功能会把用到的上下文发给下面列出的服务。
+Kaku 是跑在你 Mac 本地的应用，不用注册，也没有使用统计和崩溃上报，平时当终端用，终端内容、命令历史和文件都不会传给项目方，至于你运行的命令要不要联网，由命令自己决定。可选的 AI 功能会把用到的上下文发给下面列出的服务，远程访问默认关闭，开启后终端内容会加密经过项目的中继，中继无法读取。
 
 ## App 会发起的网络请求
 
@@ -13,6 +13,7 @@ Kaku 是跑在你 Mac 本地的应用，不用注册，也没有使用统计和�
 - **`kaku ai` 里的用量。**打开 `kaku ai` 时，它会显示你已经装好的 AI 编程工具的套餐用量，比如 Claude Code、Codex、Copilot 和 Kimi，做法是借用这些工具现成的登录，直接去问对应的服务商（`api.anthropic.com`、`chatgpt.com`、`api.github.com`、`api.kimi.com`），token 过期时会找服务商续期，结果缓存在 `~/.cache/kaku/`。模型列表来自 `models.dev` 的公开目录，这个请求不带任何账号信息。
 - **AI 网页工具。**助手搜索或读网页时，查询词和网址可能发给你配置的 Brave、Tavily 或 Pipellm（`api.search.brave.com`、`api.tavily.com`、`api.pipellm.ai` 或 `api.pipellm.com`）。默认的网页读取器把网址发给 `defuddle.md`，不行再换 `r.jina.ai`，自定义读取脚本用哪些服务由脚本自己决定。HTTP 请求工具直接访问目标网址，带上助手指定的请求头和请求体，这些服务都适用各自的隐私政策。
 - **可选工具安装。**首次启动的设置、`kaku init` 和 shell 集成更新都会先问你，同意后才可能用 Homebrew 安装缺少的可选工具，比如 Starship、Delta、Lazygit 和 Yazi，下载由 Homebrew 完成。如果连 Homebrew 都没装，Kaku 会再单独问一次，然后运行 `raw.githubusercontent.com` 上的 Homebrew 官方安装脚本。
+- **远程访问。**只有运行 `kaku remote` 并确认之后，Kaku 才会和 `r.kaku.fun` 上的中继保持连接，配对的浏览器从 `t.kaku.fun` 打开页面。输入和显示的内容在浏览器与 Kaku 之间加密，中继只负责转发。中继只记录 Mac 或浏览器何时连接，带一段简短的 id、所在区域和浏览器类型，不记录 IP 地址和内容。`kaku remote off` 可随时关闭。
 - **没有遥测。**Kaku 不发心跳、安装统计、功能使用事件，也不上报错误。
 
 ## 本机存了什么

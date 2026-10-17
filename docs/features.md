@@ -99,7 +99,7 @@ Kaku ships a minimal AppleScript dictionary, so it shows up in Script Editor and
 ```applescript
 tell application "Kaku"
   get name        -- "Kaku"
-  get version     -- e.g. "0.23.0"
+  get version     -- e.g. "0.24.0"
   get frontmost   -- true / false
   quit            -- optional `saving ask|yes|no`
 end tell
@@ -138,6 +138,12 @@ Press `Cmd + Shift + R` to mount the current SSH session's remote filesystem wit
 Kaku picks up the SSH target from the active pane and mounts it at `~/Library/Caches/dev.kaku/sshfs/<host>`.
 
 Requirements: `sshfs` installed (`brew install macfuse sshfs`) and key-based SSH auth to the remote host.
+
+## Remote Access
+
+Run `kaku remote` to use this Mac's terminals from a desktop browser on another computer. It asks before turning remote access on, then prints a link that pairs one browser; bookmark the page after pairing to come back.
+
+The page has your tabs and splits, copy and paste, dropping files to upload them to the Mac, and Cmd+Click on a path to download it. What you type and see is encrypted between the browser and Kaku. Remote access is off by default. Commands are in the [CLI reference](https://kaku.fun/docs/cli#cli-kaku-remote).
 
 ## Shell Suite
 

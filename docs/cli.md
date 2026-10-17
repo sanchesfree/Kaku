@@ -40,6 +40,20 @@ kaku doctor
 kaku doctor --fix
 ```
 
+## kaku remote
+
+Use this Mac's terminals from a desktop browser on another computer, through Kaku's relay. Remote access is off until you turn it on.
+
+```bash
+kaku remote               # turn remote access on (asks first) and print a pairing link
+kaku remote devices       # list paired browsers
+kaku remote revoke <id>   # remove a browser; its open sessions end within seconds
+kaku remote off           # turn remote access off
+kaku remote --reset       # new identity, every paired browser removed
+```
+
+Open the link in the browser you want to pair. A link works once, for 10 minutes, so run `kaku remote` again for each browser. After pairing, bookmark the page: the browser keeps its own key and comes back without a new link. What you type and see is encrypted between the browser and Kaku, and the relay only forwards it. Kaku posts a notification when a new browser pairs.
+
 ## kaku update
 
 Downloads and installs the latest Kaku release.

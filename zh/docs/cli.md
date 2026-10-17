@@ -40,6 +40,20 @@ kaku doctor
 kaku doctor --fix
 ```
 
+## kaku remote
+
+在另一台电脑的桌面浏览器里使用这台 Mac 的终端，经 Kaku 的中继连接。远程访问默认关闭，需要自己开启。
+
+```bash
+kaku remote               # turn remote access on (asks first) and print a pairing link
+kaku remote devices       # list paired browsers
+kaku remote revoke <id>   # remove a browser; its open sessions end within seconds
+kaku remote off           # turn remote access off
+kaku remote --reset       # new identity, every paired browser removed
+```
+
+在要配对的浏览器里打开链接即可。每个链接只能用一次，10 分钟内有效，每配对一个浏览器就重新运行一次 `kaku remote`。配对后把页面加入书签，浏览器会保存自己的密钥，之后不用新链接也能回来。输入和显示的内容在浏览器与 Kaku 之间加密，中继只负责转发。有新浏览器配对时，Kaku 会发一条通知。
+
 ## kaku update
 
 下载并安装最新的 Kaku 版本。

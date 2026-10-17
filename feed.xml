@@ -5,8 +5,46 @@
 <link>https://kaku.fun/changelog</link>
 <description>Stable Kaku releases. Nightly builds are not included.</description>
 <language>en</language>
-<lastBuildDate>Wed, 14 Oct 2026 07:46:18 +0000</lastBuildDate>
+<lastBuildDate>Sat, 17 Oct 2026 02:18:25 +0000</lastBuildDate>
 <atom:link href="https://kaku.fun/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>V0.24.0 Reach</title>
+<link>https://kaku.fun/changelog#v0.24.0</link>
+<guid isPermaLink="true">https://kaku.fun/changelog#v0.24.0</guid>
+<pubDate>Sat, 17 Oct 2026 02:18:25 +0000</pubDate>
+<description><![CDATA[<h2>Changelog</h2><ol>
+<li><b>Remote Access</b>: kaku remote opens this Mac's terminals in a browser on another computer, including sessions already running such as Claude Code or Codex.</li>
+<li><b>Pairing</b>: Each link pairs one browser and works once, a bookmark reopens the page afterwards, and the relay forwards only content encrypted between the browser and the Mac.</li>
+<li><b>Web Terminal</b>: Tabs, splits and copy and paste match Kaku, files dropped on the page upload to the Mac, and Cmd+Click on a path downloads it.</li>
+</ol><h2>更新日志</h2><ol>
+<li><b>远程访问</b>：运行 kaku remote，可以在另一台电脑的浏览器里打开这台 Mac 的终端，正在运行的 Claude Code、Codex 等会话也在其中。</li>
+<li><b>配对</b>：每个链接只能配对一个浏览器且只能用一次，之后从书签即可打开，中继只转发浏览器与 Mac 之间加密后的内容。</li>
+<li><b>网页终端</b>：标签、分屏和复制粘贴与 Kaku 一致，拖进页面的文件会上传到 Mac，Cmd+点击路径即可下载。</li>
+</ol>]]></description>
+</item>
+<item>
+<title>V0.23.1 Steady</title>
+<link>https://kaku.fun/changelog#v0.23.1</link>
+<guid isPermaLink="true">https://kaku.fun/changelog#v0.23.1</guid>
+<pubDate>Fri, 16 Oct 2026 15:01:44 +0000</pubDate>
+<description><![CDATA[<h2>Changelog</h2><ol>
+<li><b>Performance</b>: Kaku no longer scans every process on the Mac while it draws, so AI coding tools and a blinking cursor cost far less CPU.</li>
+<li><b>Tabs</b>: Clicking tabs in fullscreen no longer reorders them, and Settings adds a Tab Numbers switch.</li>
+<li><b>Sessions</b>: Tabs and their history come back after a restore, a quit or an in-app update, and windows reopened with Restore Previous Window keep saving.</li>
+<li><b>Shell</b>: The cursor comes back at the prompt after a program hides it and exits, and dotfiles kept as symlinks stay linked when Kaku updates them.</li>
+<li><b>Kaku AI</b>: Saving a Gemini model keeps its other settings, a broken assistant.toml is no longer overwritten, and model servers on private IPv6 addresses skip the system proxy.</li>
+<li><b>Diagnostics</b>: The kaku doctor bundle leaves out typed keys, input method text, passwords in URLs and GitHub tokens.</li>
+<li><b>Hotkey Drawer</b>: With a display stacked above, the drawer appears at once instead of sliding across it, and it keeps the height you drag it to.</li>
+</ol><h2>更新日志</h2><ol>
+<li><b>性能</b>：绘制时不再扫描整台 Mac 的全部进程，跑 AI 编程工具和光标闪烁时 CPU 占用明显下降。</li>
+<li><b>标签</b>：全屏下点击标签不再打乱顺序，设置里新增了标签编号开关。</li>
+<li><b>会话</b>：恢复会话、退出和应用内更新之后，标签和历史内容都能找回，用 Restore Previous Window 重新打开的窗口也会继续保存。</li>
+<li><b>Shell</b>：程序隐藏光标后退出，回到提示符时光标会自动恢复，用符号链接管理的配置文件在 Kaku 更新时保持链接不变。</li>
+<li><b>Kaku AI</b>：保存 Gemini 模型时保留其他设置，解析失败的 assistant.toml 不再被覆盖，私有 IPv6 地址上的模型服务不再走系统代理。</li>
+<li><b>诊断包</b>：kaku doctor 生成的诊断包不再包含输入过的按键、输入法文字、链接里的密码和 GitHub 令牌。</li>
+<li><b>快捷键抽屉</b>：上方叠着另一块显示器时，抽屉直接出现，不再从那块屏幕上滑过，拖动调整过的高度也会保留。</li>
+</ol>]]></description>
+</item>
 <item>
 <title>V0.23.0 Drawer</title>
 <link>https://kaku.fun/changelog#v0.23.0</link>

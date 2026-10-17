@@ -6,6 +6,116 @@
   "source": "https://github.com/tw93/Kaku/releases",
   "releases": [
     {
+      "version": "0.24.0",
+      "tag": "V0.24.0",
+      "name": "V0.24.0 Reach",
+      "codename": "Reach",
+      "publishedAt": "2026-10-17T02:18:25Z",
+      "url": "https://kaku.fun/changelog#v0.24.0",
+      "urlZh": "https://kaku.fun/zh/changelog#v0.24.0",
+      "github": "https://github.com/tw93/Kaku/releases/tag/V0.24.0",
+      "items": [
+        {
+          "label": "Remote Access",
+          "text": "kaku remote opens this Mac's terminals in a browser on another computer, including sessions already running such as Claude Code or Codex."
+        },
+        {
+          "label": "Pairing",
+          "text": "Each link pairs one browser and works once, a bookmark reopens the page afterwards, and the relay forwards only content encrypted between the browser and the Mac."
+        },
+        {
+          "label": "Web Terminal",
+          "text": "Tabs, splits and copy and paste match Kaku, files dropped on the page upload to the Mac, and Cmd+Click on a path downloads it."
+        }
+      ],
+      "itemsZh": [
+        {
+          "label": "远程访问",
+          "text": "运行 kaku remote，可以在另一台电脑的浏览器里打开这台 Mac 的终端，正在运行的 Claude Code、Codex 等会话也在其中。"
+        },
+        {
+          "label": "配对",
+          "text": "每个链接只能配对一个浏览器且只能用一次，之后从书签即可打开，中继只转发浏览器与 Mac 之间加密后的内容。"
+        },
+        {
+          "label": "网页终端",
+          "text": "标签、分屏和复制粘贴与 Kaku 一致，拖进页面的文件会上传到 Mac，Cmd+点击路径即可下载。"
+        }
+      ],
+      "download": "https://github.com/tw93/Kaku/releases/download/V0.24.0/Kaku.dmg"
+    },
+    {
+      "version": "0.23.1",
+      "tag": "V0.23.1",
+      "name": "V0.23.1 Steady",
+      "codename": "Steady",
+      "publishedAt": "2026-10-16T15:01:44Z",
+      "url": "https://kaku.fun/changelog#v0.23.1",
+      "urlZh": "https://kaku.fun/zh/changelog#v0.23.1",
+      "github": "https://github.com/tw93/Kaku/releases/tag/V0.23.1",
+      "items": [
+        {
+          "label": "Performance",
+          "text": "Kaku no longer scans every process on the Mac while it draws, so AI coding tools and a blinking cursor cost far less CPU."
+        },
+        {
+          "label": "Tabs",
+          "text": "Clicking tabs in fullscreen no longer reorders them, and Settings adds a Tab Numbers switch."
+        },
+        {
+          "label": "Sessions",
+          "text": "Tabs and their history come back after a restore, a quit or an in-app update, and windows reopened with Restore Previous Window keep saving."
+        },
+        {
+          "label": "Shell",
+          "text": "The cursor comes back at the prompt after a program hides it and exits, and dotfiles kept as symlinks stay linked when Kaku updates them."
+        },
+        {
+          "label": "Kaku AI",
+          "text": "Saving a Gemini model keeps its other settings, a broken assistant.toml is no longer overwritten, and model servers on private IPv6 addresses skip the system proxy."
+        },
+        {
+          "label": "Diagnostics",
+          "text": "The kaku doctor bundle leaves out typed keys, input method text, passwords in URLs and GitHub tokens."
+        },
+        {
+          "label": "Hotkey Drawer",
+          "text": "With a display stacked above, the drawer appears at once instead of sliding across it, and it keeps the height you drag it to."
+        }
+      ],
+      "itemsZh": [
+        {
+          "label": "性能",
+          "text": "绘制时不再扫描整台 Mac 的全部进程，跑 AI 编程工具和光标闪烁时 CPU 占用明显下降。"
+        },
+        {
+          "label": "标签",
+          "text": "全屏下点击标签不再打乱顺序，设置里新增了标签编号开关。"
+        },
+        {
+          "label": "会话",
+          "text": "恢复会话、退出和应用内更新之后，标签和历史内容都能找回，用 Restore Previous Window 重新打开的窗口也会继续保存。"
+        },
+        {
+          "label": "Shell",
+          "text": "程序隐藏光标后退出，回到提示符时光标会自动恢复，用符号链接管理的配置文件在 Kaku 更新时保持链接不变。"
+        },
+        {
+          "label": "Kaku AI",
+          "text": "保存 Gemini 模型时保留其他设置，解析失败的 assistant.toml 不再被覆盖，私有 IPv6 地址上的模型服务不再走系统代理。"
+        },
+        {
+          "label": "诊断包",
+          "text": "kaku doctor 生成的诊断包不再包含输入过的按键、输入法文字、链接里的密码和 GitHub 令牌。"
+        },
+        {
+          "label": "快捷键抽屉",
+          "text": "上方叠着另一块显示器时，抽屉直接出现，不再从那块屏幕上滑过，拖动调整过的高度也会保留。"
+        }
+      ],
+      "download": "https://github.com/tw93/Kaku/releases/download/V0.23.1/Kaku.dmg"
+    },
+    {
       "version": "0.23.0",
       "tag": "V0.23.0",
       "name": "V0.23.0 Drawer",

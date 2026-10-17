@@ -99,7 +99,7 @@ Kaku 带了一份极简的 AppleScript 字典，所以能在 Script Editor 和�
 ```applescript
 tell application "Kaku"
   get name        -- "Kaku"
-  get version     -- e.g. "0.23.0"
+  get version     -- e.g. "0.24.0"
   get frontmost   -- true / false
   quit            -- optional `saving ask|yes|no`
 end tell
@@ -138,6 +138,12 @@ git 仓库里有未提交的改动、而你还没在这个目录用过 lazygit �
 Kaku 从当前分屏自动识别 SSH 目标，挂载在 `~/Library/Caches/dev.kaku/sshfs/<host>`。
 
 前置条件：装好 `sshfs`（`brew install macfuse sshfs`），远端主机配好基于密钥的 SSH 登录。
+
+## 远程访问
+
+运行 `kaku remote`，可以在另一台电脑的桌面浏览器里使用这台 Mac 的终端。开启前会先确认，之后给出一个配对链接，每个链接配对一个浏览器，配对后把页面加入书签即可随时回来。
+
+页面里有你的标签和分屏，支持复制粘贴，拖进页面的文件会上传到 Mac，Cmd+点击路径即可下载。输入和显示的内容在浏览器与 Kaku 之间加密。远程访问默认关闭。命令见 [CLI 参考](https://kaku.fun/zh/docs/cli#cli-kaku-remote)。
 
 ## Shell 套件
 

@@ -2,6 +2,30 @@
 
 Stable Kaku releases, newest first. Nightly builds stay on GitHub. Subscribe with [RSS](https://kaku.fun/feed.xml).
 
+## V0.24.0 Reach 2026-10-17
+
+1. **Remote Access**: kaku remote opens this Mac's terminals in a browser on another computer, including sessions already running such as Claude Code or Codex.
+2. **Pairing**: Each link pairs one browser and works once, a bookmark reopens the page afterwards, and the relay forwards only content encrypted between the browser and the Mac.
+3. **Web Terminal**: Tabs, splits and copy and paste match Kaku, files dropped on the page upload to the Mac, and Cmd+Click on a path downloads it.
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.24.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.24.0/Kaku.dmg)
+
+---
+
+## V0.23.1 Steady 2026-10-16
+
+1. **Performance**: Kaku no longer scans every process on the Mac while it draws, so AI coding tools and a blinking cursor cost far less CPU.
+2. **Tabs**: Clicking tabs in fullscreen no longer reorders them, and Settings adds a Tab Numbers switch.
+3. **Sessions**: Tabs and their history come back after a restore, a quit or an in-app update, and windows reopened with Restore Previous Window keep saving.
+4. **Shell**: The cursor comes back at the prompt after a program hides it and exits, and dotfiles kept as symlinks stay linked when Kaku updates them.
+5. **Kaku AI**: Saving a Gemini model keeps its other settings, a broken assistant.toml is no longer overwritten, and model servers on private IPv6 addresses skip the system proxy.
+6. **Diagnostics**: The kaku doctor bundle leaves out typed keys, input method text, passwords in URLs and GitHub tokens.
+7. **Hotkey Drawer**: With a display stacked above, the drawer appears at once instead of sliding across it, and it keeps the height you drag it to.
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.23.1) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.23.1/Kaku.dmg)
+
+---
+
 ## V0.23.0 Drawer 2026-10-14
 
 1. **Hotkey Drawer**: Cmd+Opt+Ctrl+K now drops a terminal from the top of the screen over any app, and `config.macos_global_hotkey_mode = 'Ordinary'` brings back the old show and hide.
