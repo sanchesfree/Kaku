@@ -1195,6 +1195,10 @@ button, input { font: inherit; }
    Same parchment cards and serif rhythm as mole.fit's blog, on Kaku's tokens.
    The article column is narrower than the docs so long prose stays readable. */
 .blog-article { max-width: 760px; }
+/* Blog tables hold sentences, not config keys, so the docs rules that pin a
+   key column to nowrap would push long cells past the page. */
+.doc-content.blog-article table th,
+.doc-content.blog-article table td { width: auto !important; white-space: normal !important; }
 .blog-hero .wide > * { max-width: 760px; }
 .blog-crumb {
   margin: 0;
