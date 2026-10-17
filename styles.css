@@ -520,6 +520,12 @@ button, input { font: inherit; }
   line-height: 1.25;
   letter-spacing: 0;
 }
+/* Quick card titles are h2 for heading order, styled as the h3 they replaced. */
+.doc-content .quick-card h2 {
+  margin: 32px 0 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
 .doc-card h2 {
   margin: 0;
   color: var(--ink);

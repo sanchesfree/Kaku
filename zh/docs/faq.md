@@ -191,9 +191,24 @@ brew uninstall --cask tw93/tap/kakuku
 brew install --cask kaku
 ```
 
-## Claude Code 的通知不出现。
+## Claude Code 或 Codex 的通知不出现。
 
-Kaku 可能没拿到通知权限。打开 System Settings > Notifications > Kaku，开启 Allow Notifications，然后重启 Kaku。
+先确认 macOS 允许 Kaku 发通知，打开 Kaku > Notification Settings... 把 Allow Notifications 打开。拒绝过一次之后 macOS 不会再问，所以通知因为这个被丢掉时，Kaku 会在你下次切回来时提醒你。
+
+Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 `auto` 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里这样设置就行：
+
+```json
+{ "preferredNotifChannel": "ghostty" }
+```
+
+Codex 不用改，它会响终端铃声，Kaku 把铃声转成通知。想看到 Codex 自己的消息而不是一条通用提醒，在 `~/.codex/config.toml` 里加上：
+
+```toml
+[tui]
+notification_method = "osc9"
+```
+
+通知只在 Kaku 处于后台时出现，正在看的那个窗格不会弹。
 
 ## 怎么修改全局快捷键？
 

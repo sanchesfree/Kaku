@@ -8,7 +8,9 @@ Every page below has a markdown twin at the same URL with `.md` appended, served
 
 - **Someone cannot install Kaku, or the `kaku` command is missing.** Start at [Install](https://kaku.fun/docs/index.md). It covers the DMG, the official Homebrew cask (`brew install --cask kaku`), `kaku doctor`, and shell integration recovery.
 - **Someone is new and wants the tour.** [Guide](https://kaku.fun/docs/guide.md) walks first launch through tabs, panes, the shell suite, and the assistant in plain language.
+- **Someone is switching from iTerm2 or WezTerm.** [Migrate](https://kaku.fun/docs/migrate.md) covers where settings live, the shortcuts that match, and moving WezTerm Lua settings into `kaku.lua`.
 - **A question about what Kaku can do.** [Features](https://kaku.fun/docs/features.md) is the authoritative list: Kaku Assistant, AI chat panel, window snapshots, AppleScript, Lazygit, Yazi, remote files, and the shell suite.
+- **Running Claude Code or Codex in Kaku.** [AI Coding Tools](https://kaku.fun/docs/ai-coding.md) covers `kaku ai`, notification settings for both tools, multi-line prompts, and restore after a restart.
 - **A `kaku` subcommand question, or scripting Kaku.** [CLI Reference](https://kaku.fun/docs/cli.md) documents `kaku ai`, `chat`, `config`, `doctor`, `update`, `reset`, `init`, and `kaku cli` for driving the multiplexer from scripts.
 - **Changing a setting.** [Configuration](https://kaku.fun/docs/configuration.md) covers font, opacity, Smart Tab, close confirmation, and Lua overrides in `~/.config/kaku/kaku.lua`.
 - **A shortcut question, or rebinding keys.** [Keybindings](https://kaku.fun/docs/keybindings.md) has the full default table plus the `config.keys` append pattern.
@@ -18,8 +20,10 @@ Every page below has a markdown twin at the same URL with `.md` appended, served
 ## Pages
 
 - [Install](https://kaku.fun/docs/index.md)
+- [Migrate](https://kaku.fun/docs/migrate.md)
 - [Guide](https://kaku.fun/docs/guide.md)
 - [Features](https://kaku.fun/docs/features.md)
+- [AI Coding Tools](https://kaku.fun/docs/ai-coding.md)
 - [CLI Reference](https://kaku.fun/docs/cli.md)
 - [Configuration](https://kaku.fun/docs/configuration.md)
 - [Keybindings](https://kaku.fun/docs/keybindings.md)

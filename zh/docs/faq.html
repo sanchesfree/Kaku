@@ -81,7 +81,7 @@
       <div class="wide docs-layout">
         <aside class="docs-sidebar">
           <a class="docs-home" href="/zh/docs">文档</a>
-          <nav class="docs-menu" aria-label="Documentation pages"><a href="/zh/docs"><span>安装</span></a><a href="/zh/docs/guide"><span>上手指南</span></a><a href="/zh/docs/features"><span>功能特性</span></a><a href="/zh/docs/cli"><span>命令参考</span></a><a href="/zh/docs/configuration"><span>配置</span></a><a href="/zh/docs/keybindings"><span>快捷键</span></a><a href="/zh/docs/faq" aria-current="page"><span>常见问答</span></a><a href="/zh/docs/contributing"><span>贡献</span></a></nav>
+          <nav class="docs-menu" aria-label="Documentation pages"><a href="/zh/docs"><span>安装</span></a><a href="/zh/docs/migrate"><span>迁移</span></a><a href="/zh/docs/guide"><span>上手指南</span></a><a href="/zh/docs/features"><span>功能特性</span></a><a href="/zh/docs/ai-coding"><span>AI 编程工具</span></a><a href="/zh/docs/cli"><span>命令参考</span></a><a href="/zh/docs/configuration"><span>配置</span></a><a href="/zh/docs/keybindings"><span>快捷键</span></a><a href="/zh/docs/faq" aria-current="page"><span>常见问答</span></a><a href="/zh/docs/contributing"><span>贡献</span></a></nav>
         </aside>
         <article class="doc-content">
           <h2 id="faq-how-do-i-install-kaku"><a class="anchor" href="#faq-how-do-i-install-kaku" aria-label="链接到「怎么安装 Kaku」">#</a>怎么安装 Kaku？</h2><p>从 <a href="https://github.com/tw93/Kaku/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a> 下载 DMG，或运行 <code>brew install --cask kaku</code>。</p>
@@ -145,7 +145,13 @@ kaku cli --help</code></pre>
           <p>如果还在用以前的 tap <code>tw93/tap/kakuku</code>，可以继续升级那个 tap，也可以迁到官方 cask：</p>
           <pre><code class="language-bash">brew uninstall --cask tw93/tap/kakuku
 brew install --cask kaku</code></pre>
-          <h2 id="faq-claude-code-notifications-don-t-appear"><a class="anchor" href="#faq-claude-code-notifications-don-t-appear" aria-label="链接到「Claude Code 通知不出现」">#</a>Claude Code 的通知不出现。</h2><p>Kaku 可能没拿到通知权限。打开 System Settings &gt; Notifications &gt; Kaku，开启 Allow Notifications，然后重启 Kaku。</p>
+          <h2 id="faq-claude-code-notifications-don-t-appear"><a class="anchor" href="#faq-claude-code-notifications-don-t-appear" aria-label="链接到「Claude Code 或 Codex 的通知不出现」">#</a>Claude Code 或 Codex 的通知不出现。</h2><p>先确认 macOS 允许 Kaku 发通知，打开 Kaku &gt; Notification Settings... 把 Allow Notifications 打开。拒绝过一次之后 macOS 不会再问，所以通知因为这个被丢掉时，Kaku 会在你下次切回来时提醒你。</p>
+          <p>Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 <code>auto</code> 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里这样设置就行：</p>
+          <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+          <p>Codex 不用改，它会响终端铃声，Kaku 把铃声转成通知。想看到 Codex 自己的消息而不是一条通用提醒，在 <code>~/.codex/config.toml</code> 里加上：</p>
+          <pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+          <p>通知只在 Kaku 处于后台时出现，正在看的那个窗格不会弹。</p>
           <h2 id="faq-the-global-hotkey-doesn-t-work-on-non-qwerty-keyboards-e-g-colemak"><a class="anchor" href="#faq-the-global-hotkey-doesn-t-work-on-non-qwerty-keyboards-e-g-colemak" aria-label="链接到「修改全局快捷键」">#</a>怎么修改全局快捷键？</h2><p><code>Cmd + Opt + Ctrl + K</code> 在任何应用里都能从屏幕顶部拉出 Kaku，想恢复原来显示和隐藏窗口的方式，设置 <code>config.macos_global_hotkey_mode = 'Ordinary'</code> 就行，这个快捷键跟着当前键盘布局走，用 Colemak 或 Dvorak 时就是打出 K 的那个键，想换组合的话在 <code>kaku config</code> 里改 Global Hotkey，或者直接写进 Lua：</p>
           <pre><code class="language-lua">config.macos_global_hotkey = { key = <span class="tok-s">'j'</span>, mods = <span class="tok-s">'CMD|OPT|CTRL'</span> }</code></pre>
           <h2 id="faq-can-i-use-kaku-with-tiling-window-managers-yabai-aerospace"><a class="anchor" href="#faq-can-i-use-kaku-with-tiling-window-managers-yabai-aerospace" aria-label="链接到「配合 yabai / AeroSpace」">#</a>Kaku 能和 yabai、AeroSpace 这类平铺窗口管理器一起用吗？</h2><p>能用。如果一直闪，通常是平铺 WM 和 Kaku 的全屏、resize 逻辑在打架，把 Kaku 的原生全屏关掉（<code>config.native_macos_fullscreen_mode = false</code>），或者在平铺 WM 的管理列表里排除 Kaku，一般就好了。</p>

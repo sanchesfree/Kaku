@@ -25,8 +25,10 @@ SITE = "https://kaku.fun"
 # Pages whose prose is generated. The homepage twins are excluded on purpose.
 PAGES = [
     "docs/index.html",
+    "docs/migrate.html",
     "docs/guide.html",
     "docs/features.html",
+    "docs/ai-coding.html",
     "docs/cli.html",
     "docs/configuration.html",
     "docs/keybindings.html",

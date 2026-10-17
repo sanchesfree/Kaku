@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>从 iTerm2 或 WezTerm 迁移 · Kaku 文档</title>
+  <meta name="description" content="从 iTerm2 或 WezTerm 换到 Kaku：设置放在哪里，哪些快捷键一样，怎么搬 WezTerm 的 Lua 配置，以及字体、配色和 shell 设置。">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/docs/migrate"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/docs/migrate.md">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/docs/migrate">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/docs/migrate">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/docs/migrate">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kaku",
+            "item": "https://kaku.fun/zh"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "文档",
+            "item": "https://kaku.fun/zh/docs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "从 iTerm2 或 WezTerm 迁移",
+            "item": "https://kaku.fun/zh/docs/migrate"
+          }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://kaku.fun/zh/docs/migrate#article",
+        "headline": "从 iTerm2 或 WezTerm 迁移",
+        "name": "从 iTerm2 或 WezTerm 迁移",
+        "description": "从 iTerm2 或 WezTerm 换到 Kaku：设置放在哪里，哪些快捷键一样，怎么搬 WezTerm 的 Lua 配置，以及字体、配色和 shell 设置。",
+        "url": "https://kaku.fun/zh/docs/migrate",
+        "inLanguage": "zh-CN",
+        "isPartOf": {
+          "@id": "https://kaku.fun/#website"
+        },
+        "about": {
+          "@id": "https://kaku.fun/#software"
+        },
+        "publisher": {
+          "@id": "https://kaku.fun/#organization"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tw93",
+          "url": "https://tw93.fun"
+        },
+        "encoding": {
+          "@type": "MediaObject",
+          "encodingFormat": "text/markdown",
+          "contentUrl": "https://kaku.fun/zh/docs/migrate.md"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/zh/docs" aria-current="page">文档</a></div><div class="nav-actions"><a class="nav-pill" aria-current="page" href="/zh/docs/migrate" hreflang="zh-CN">中</a><a class="nav-pill" href="/docs/migrate" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page">
+    <header class="page-hero doc-hero"><div class="wide"><span class="label">文档</span><h1>从 iTerm2 或 WezTerm 迁移</h1><p>哪些会变，哪些能直接带过来，设置该放在哪里。</p></div></header>
+    <section class="section docs-section">
+      <div class="wide docs-layout">
+        <aside class="docs-sidebar">
+          <a class="docs-home" href="/zh/docs">文档</a>
+          <nav class="docs-menu" aria-label="Documentation pages"><a href="/zh/docs"><span>安装</span></a><a href="/zh/docs/migrate" aria-current="page"><span>迁移</span></a><a href="/zh/docs/guide"><span>上手指南</span></a><a href="/zh/docs/features"><span>功能特性</span></a><a href="/zh/docs/ai-coding"><span>AI 编程工具</span></a><a href="/zh/docs/cli"><span>命令参考</span></a><a href="/zh/docs/configuration"><span>配置</span></a><a href="/zh/docs/keybindings"><span>快捷键</span></a><a href="/zh/docs/faq"><span>常见问答</span></a><a href="/zh/docs/contributing"><span>贡献</span></a></nav>
+          <div class="section-toc"><p>本页目录</p><a class="depth-2" href="#migrate-first-run">第一次启动</a><a class="depth-2" href="#migrate-from-iterm2">从 iTerm2 过来</a><a class="depth-2" href="#migrate-from-wezterm">从 WezTerm 过来</a><a class="depth-2" href="#migrate-next">接下来</a></div>
+        </aside>
+        <article class="doc-content">
+          <h2 id="migrate-first-run"><a class="anchor" href="#migrate-first-run" aria-label="Link to 第一次启动">#</a>第一次启动</h2>
+          <p>用 <code>brew install --cask kaku</code> 安装后先打开一次，Kaku 会在首次启动时生成 <code>~/.config/kaku/kaku.lua</code>，字体、主题、标签和 shell 套件都已经设好。<code>kaku init</code> 负责 shell 集成，它只在 <code>~/.zshrc</code> 里加一行加载 Kaku 的 shell 配置，文件里其他内容不动，还可以顺手装上 Starship、Delta、Lazygit 和 Yazi，装完用 <code>kaku doctor</code> 检查一遍。</p>
+          <pre><code class="language-bash">brew install --cask kaku
+kaku init
+kaku doctor</code></pre>
+          <h2 id="migrate-from-iterm2"><a class="anchor" href="#migrate-from-iterm2" aria-label="Link to 从 iTerm2 过来">#</a>从 iTerm2 过来</h2>
+          <p>Kaku 没有 Profile 设置窗口，设置都写在 <code>kaku.lua</code> 里，常用的几项比如主题、字体和全局快捷键，可以用 <code>kaku config</code> 或 <code>Cmd + ,</code> 打开设置面板来改。iTerm2 用户最常按的几个快捷键在 Kaku 里是一样的：</p>
+          <table>
+<thead><tr><th align="left">操作</th><th align="left">Kaku</th></tr></thead>
+<tbody>
+<tr><td align="left">新建标签</td><td align="left"><code>Cmd + T</code></td></tr>
+<tr><td align="left">左右分屏</td><td align="left"><code>Cmd + D</code></td></tr>
+<tr><td align="left">上下分屏</td><td align="left"><code>Cmd + Shift + D</code></td></tr>
+<tr><td align="left">放大 / 还原窗格</td><td align="left"><code>Cmd + Shift + Enter</code></td></tr>
+<tr><td align="left">按词左右跳</td><td align="left"><code>Opt + Left</code> / <code>Opt + Right</code></td></tr>
+<tr><td align="left">在任意 App 里呼出或隐藏 Kaku</td><td align="left"><code>Cmd + Opt + Ctrl + K</code></td></tr>
+</tbody></table>
+          <p>全局快捷键的用法和 iTerm2 的 Hotkey Window 差不多，可以在 <code>kaku config</code> 里改，也可以写 <code>config.macos_global_hotkey</code>。关闭窗口时 Kaku 会保存窗口布局，按 <code>Cmd + Option + Shift + T</code> 可以打开上一次的布局。</p>
+          <p>Kaku 默认是 Kaku Dark 主题，WezTerm 内置的配色方案都可以直接按名字用，其中不少比如 Dracula、Solarized、Catppuccin，和 iTerm2 用户常导入的是同一套：</p>
+          <pre><code class="language-lua">config.color_scheme = <span class="tok-s">"Catppuccin Mocha"</span>
+config.font = wezterm.<span class="tok-f">font</span>(<span class="tok-s">'Your Font Name'</span>)
+config.font_size = <span class="tok-n">16</span></code></pre>
+          <h2 id="migrate-from-wezterm"><a class="anchor" href="#migrate-from-wezterm" aria-label="Link to 从 WezTerm 过来">#</a>从 WezTerm 过来</h2>
+          <p>Kaku 基于 WezTerm，用的是同一套 Lua 配置，不过它读的是 <code>~/.config/kaku/kaku.lua</code>，不会去找 <code>~/.wezterm.lua</code>。这个文件会先加载 Kaku 自带的默认配置，把想保留的 WezTerm 设置复制到 <code>-- User overrides:</code> 下面就行，<code>wezterm</code> 已经引入好了：</p>
+          <pre><code class="language-lua"><span class="tok-c">-- User overrides:</span>
+config.font_size = <span class="tok-n">15</span>
+config.window_background_opacity = <span class="tok-n">0.95</span>
+
+<span class="tok-b">table.insert</span>(config.keys, {
+  key = <span class="tok-s">'RightArrow'</span>,
+  mods = <span class="tok-s">'CMD|SHIFT'</span>,
+  action = wezterm.action.<span class="tok-f">ActivatePaneDirection</span>(<span class="tok-s">'Right'</span>),
+})</code></pre>
+          <p>快捷键要往 <code>config.keys</code> 里追加，不要直接赋一个新表，那样会把 Kaku 的默认快捷键清掉。Kaku 有些默认值和 WezTerm 不一样，比如 <code>line_height = 1.28</code>，想要 WezTerm 那样的行高就设成 <code>config.line_height = 1.0</code>，其他设置照着 WezTerm 的 Lua 文档写就可以。</p>
+          <h2 id="migrate-next"><a class="anchor" href="#migrate-next" aria-label="Link to 接下来">#</a>接下来</h2>
+          <p><a href="/zh/docs/guide">上手指南</a>讲日常怎么用，<a href="/zh/docs/configuration">配置</a>列出了 Kaku 的全部设置，<a href="/zh/compare">对比</a>把 Kaku 和 iTerm2、Warp、Ghostty、WezTerm 放在一起看。</p>
+          <nav class="doc-pager" aria-label="Pagination"><a href="/zh/docs"><span>上一页</span><strong>安装</strong></a><a href="/zh/docs/guide"><span>下一页</span><strong>上手指南</strong></a></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">开箱即用、默认好用、AI 友好的 Mac 终端。</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/zh/about">关于</a> · <a href="/zh/compare">对比</a> · <a href="/zh/contact">联系</a> · <a href="/zh/privacy">隐私</a> · <a href="/zh/roadmap">Roadmap</a> · <a href="/zh/changelog">Changelog</a> · <a href="/zh/docs">文档</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">少和终端较劲 · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>

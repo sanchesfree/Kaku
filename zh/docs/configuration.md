@@ -2,11 +2,11 @@
 
 字体、主题、标签栏、快捷键和助手怎么改，用设置界面或者 Lua 都行。
 
-### 打开配置
+## 打开配置
 
 运行 `kaku config` 或按 `Cmd + ,` 打开设置。
 
-### 最常改的几项
+## 最常改的几项
 
 先从 `font_size`、`window_background_opacity`、`copy_on_select` 和 [`smart_tab_mode`](https://kaku.fun/zh/docs/features#features-shell-suite) 这几项改起。
 

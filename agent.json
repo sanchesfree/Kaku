@@ -87,8 +87,10 @@
   },
   "docs": [
     {"title": "Install", "url": "https://kaku.fun/docs", "markdown": "https://kaku.fun/docs/index.md"},
+    {"title": "Migrate", "url": "https://kaku.fun/docs/migrate", "markdown": "https://kaku.fun/docs/migrate.md"},
     {"title": "Guide", "url": "https://kaku.fun/docs/guide", "markdown": "https://kaku.fun/docs/guide.md"},
     {"title": "Features", "url": "https://kaku.fun/docs/features", "markdown": "https://kaku.fun/docs/features.md"},
+    {"title": "AI Coding Tools", "url": "https://kaku.fun/docs/ai-coding", "markdown": "https://kaku.fun/docs/ai-coding.md"},
     {"title": "CLI Reference", "url": "https://kaku.fun/docs/cli", "markdown": "https://kaku.fun/docs/cli.md"},
     {"title": "Configuration", "url": "https://kaku.fun/docs/configuration", "markdown": "https://kaku.fun/docs/configuration.md"},
     {"title": "Keybindings", "url": "https://kaku.fun/docs/keybindings", "markdown": "https://kaku.fun/docs/keybindings.md"},

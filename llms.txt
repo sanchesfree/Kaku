@@ -30,8 +30,10 @@ Kaku is driven from the shell, not over HTTP:
 ## Docs
 
 - [Install](https://kaku.fun/docs): DMG, official Homebrew cask, post-install verification, troubleshooting
+- [Migrate](https://kaku.fun/docs/migrate): moving from iTerm2 or WezTerm, where settings live, shortcuts that match, carrying over Lua config
 - [Guide](https://kaku.fun/docs/guide): plain-language walkthrough from first launch to tabs, panes, shell, the AI assistant, and built-in tools
 - [Features](https://kaku.fun/docs/features): tabs and panes, assistant, preset defaults, performance, shell suite, Lua config
+- [AI Coding Tools](https://kaku.fun/docs/ai-coding): Claude Code and Codex in Kaku, notifications, multi-line prompts, restore after restart
 - [Configuration](https://kaku.fun/docs/configuration): font, opacity, Smart Tab, close confirmation, shortcuts, Lua overrides
 - [Keybindings](https://kaku.fun/docs/keybindings): tab, pane, window, and tool shortcuts
 - [CLI](https://kaku.fun/docs/cli): the `kaku` command, `kaku doctor`, `kaku ai`, `kaku config`, `kaku update`

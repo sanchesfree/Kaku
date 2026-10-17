@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>在 Kaku 里用 Claude Code 和 Codex · Kaku 文档</title>
+  <meta name="description" content="在 Kaku 里使用 Claude Code、Codex 等 AI 编程工具：kaku ai 配置、通知、多行输入、分屏、重启后恢复和远程访问。">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/docs/ai-coding"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/docs/ai-coding.md">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/docs/ai-coding">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/docs/ai-coding">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/docs/ai-coding">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kaku",
+            "item": "https://kaku.fun/zh"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "文档",
+            "item": "https://kaku.fun/zh/docs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "在 Kaku 里用 Claude Code 和 Codex",
+            "item": "https://kaku.fun/zh/docs/ai-coding"
+          }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://kaku.fun/zh/docs/ai-coding#article",
+        "headline": "在 Kaku 里用 Claude Code 和 Codex",
+        "name": "在 Kaku 里用 Claude Code 和 Codex",
+        "description": "在 Kaku 里使用 Claude Code、Codex 等 AI 编程工具：kaku ai 配置、通知、多行输入、分屏、重启后恢复和远程访问。",
+        "url": "https://kaku.fun/zh/docs/ai-coding",
+        "inLanguage": "zh-CN",
+        "isPartOf": {
+          "@id": "https://kaku.fun/#website"
+        },
+        "about": {
+          "@id": "https://kaku.fun/#software"
+        },
+        "publisher": {
+          "@id": "https://kaku.fun/#organization"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tw93",
+          "url": "https://tw93.fun"
+        },
+        "encoding": {
+          "@type": "MediaObject",
+          "encodingFormat": "text/markdown",
+          "contentUrl": "https://kaku.fun/zh/docs/ai-coding.md"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/zh/docs" aria-current="page">文档</a></div><div class="nav-actions"><a class="nav-pill" aria-current="page" href="/zh/docs/ai-coding" hreflang="zh-CN">中</a><a class="nav-pill" href="/docs/ai-coding" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page">
+    <header class="page-hero doc-hero"><div class="wide"><span class="label">文档</span><h1>在 Kaku 里用 Claude Code 和 Codex</h1><p>Kaku 和你已经在用的 AI 编程工具怎么配合。</p></div></header>
+    <section class="section docs-section">
+      <div class="wide docs-layout">
+        <aside class="docs-sidebar">
+          <a class="docs-home" href="/zh/docs">文档</a>
+          <nav class="docs-menu" aria-label="Documentation pages"><a href="/zh/docs"><span>安装</span></a><a href="/zh/docs/migrate"><span>迁移</span></a><a href="/zh/docs/guide"><span>上手指南</span></a><a href="/zh/docs/features"><span>功能特性</span></a><a href="/zh/docs/ai-coding" aria-current="page"><span>AI 编程工具</span></a><a href="/zh/docs/cli"><span>命令参考</span></a><a href="/zh/docs/configuration"><span>配置</span></a><a href="/zh/docs/keybindings"><span>快捷键</span></a><a href="/zh/docs/faq"><span>常见问答</span></a><a href="/zh/docs/contributing"><span>贡献</span></a></nav>
+          <div class="section-toc"><p>本页目录</p><a class="depth-2" href="#ai-coding-setup">配置工具</a><a class="depth-2" href="#ai-coding-notifications">通知</a><a class="depth-2" href="#ai-coding-prompts">写提示词</a><a class="depth-2" href="#ai-coding-splits">几个 agent 并排跑</a><a class="depth-2" href="#ai-coding-restore">重启之后</a><a class="depth-2" href="#ai-coding-remote">从另一台电脑用</a><a class="depth-2" href="#ai-coding-assistant">Kaku Assistant</a></div>
+        </aside>
+        <article class="doc-content">
+          <h2 id="ai-coding-setup"><a class="anchor" href="#ai-coding-setup" aria-label="Link to 配置工具">#</a>配置工具</h2>
+          <p>运行 <code>kaku ai</code> 会打开 AI 设置面板，可以配置 Claude Code、Codex、Gemini CLI、Copilot CLI、Kimi Code 这些外部编程工具，看它们的套餐用量，也可以设置 Kaku Assistant。只有在这里修改时 Kaku 才会改对应工具的配置，你自己写的字段会保留，Kaku 不会主动往 agent 里加 hook 或指令。</p>
+          <pre><code class="language-bash">kaku ai</code></pre>
+          <h2 id="ai-coding-notifications"><a class="anchor" href="#ai-coding-notifications" aria-label="Link to 通知">#</a>通知</h2>
+          <p>Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 <code>auto</code> 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里这样设置就行：</p>
+          <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+          <p>Codex 不用改，它会响终端铃声，Kaku 把铃声转成通知。想看到 Codex 自己的消息而不是一条通用提醒，在 <code>~/.codex/config.toml</code> 里加上：</p>
+          <pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+          <p>通知只在 Kaku 处于后台时出现，正在看的那个窗格不会弹。如果一条都收不到，打开 Kaku &gt; Notification Settings... 把 Allow Notifications 打开。</p>
+          <h2 id="ai-coding-prompts"><a class="anchor" href="#ai-coding-prompts" aria-label="Link to 写提示词">#</a>写提示词</h2>
+          <p><code>Shift + Enter</code> 和 <code>Cmd + Enter</code> 都是换行，长提示词可以分几行写完再发。</p>
+          <p>工具打印出来的链接和文件路径可以 <code>Cmd + Click</code> 打开，即使它正占用着鼠标也可以，带位置的路径比如 <code>src/main.rs:42:7</code> 会直接跳到那一行。想指定编辑器就设置 <code>file_link_editor</code>：</p>
+          <pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"zed"</span>
+<span class="tok-c">-- config.file_link_editor = "cursor --goto"</span></code></pre>
+          <h2 id="ai-coding-splits"><a class="anchor" href="#ai-coding-splits" aria-label="Link to 几个 agent 并排跑">#</a>几个 agent 并排跑</h2>
+          <p>用 <code>Cmd + D</code> 或 <code>Cmd + Shift + D</code> 分屏，一边跑 agent 一边留一个 shell，或者让两个 agent 各做一件事，想细看哪个窗格就按 <code>Cmd + Shift + Enter</code> 放大。前台正在跑 Claude Code、Codex 或其他长时间运行程序的窗格和标签，关闭前会先确认，手滑按了 <code>Cmd + W</code> 也不会把会话关掉。</p>
+          <h2 id="ai-coding-restore"><a class="anchor" href="#ai-coding-restore" aria-label="Link to 重启之后">#</a>重启之后</h2>
+          <p>Kaku 重启后，比如装完更新，标签和分屏都会回来，之前在跑 Claude Code 或 Codex 的窗格还会保留最后一屏，接着聊之前能先看到每个对话停在哪里。</p>
+          <h2 id="ai-coding-remote"><a class="anchor" href="#ai-coding-remote" aria-label="Link to 从另一台电脑用">#</a>从另一台电脑用</h2>
+          <p>运行 <code>kaku remote</code>，可以在另一台电脑的浏览器里使用这些终端，正在跑的 agent 也在其中，配对和命令见<a href="/zh/docs/cli#cli-kaku-remote">命令参考</a>。</p>
+          <h2 id="ai-coding-assistant"><a class="anchor" href="#ai-coding-assistant" aria-label="Link to Kaku Assistant">#</a>Kaku Assistant</h2>
+          <p>Kaku 自己也带一个助手，在 shell 里问点小问题、修一修命令很方便，它是可选的，用的是你配置的 AI 服务，也可以直接复用 Codex 的登录，详见<a href="/zh/docs/features#features-kaku-assistant">功能特性</a>。</p>
+          <nav class="doc-pager" aria-label="Pagination"><a href="/zh/docs/features"><span>上一页</span><strong>功能特性</strong></a><a href="/zh/docs/cli"><span>下一页</span><strong>命令参考</strong></a></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">开箱即用、默认好用、AI 友好的 Mac 终端。</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/zh/about">关于</a> · <a href="/zh/compare">对比</a> · <a href="/zh/contact">联系</a> · <a href="/zh/privacy">隐私</a> · <a href="/zh/roadmap">Roadmap</a> · <a href="/zh/changelog">Changelog</a> · <a href="/zh/docs">文档</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">少和终端较劲 · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>

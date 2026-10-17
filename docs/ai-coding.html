@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code and Codex in Kaku · Kaku Docs</title>
+  <meta name="description" content="Run Claude Code, Codex and other AI coding CLIs in Kaku: setup with kaku ai, notifications, multi-line prompts, splits, restore after restart and remote access.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/docs/ai-coding"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/docs/ai-coding.md">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/docs/ai-coding">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/docs/ai-coding">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/docs/ai-coding">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kaku",
+            "item": "https://kaku.fun/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Docs",
+            "item": "https://kaku.fun/docs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Claude Code and Codex in Kaku",
+            "item": "https://kaku.fun/docs/ai-coding"
+          }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://kaku.fun/docs/ai-coding#article",
+        "headline": "Claude Code and Codex in Kaku",
+        "name": "Claude Code and Codex in Kaku",
+        "description": "Run Claude Code, Codex and other AI coding CLIs in Kaku: setup with kaku ai, notifications, multi-line prompts, splits, restore after restart and remote access.",
+        "url": "https://kaku.fun/docs/ai-coding",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://kaku.fun/#website"
+        },
+        "about": {
+          "@id": "https://kaku.fun/#software"
+        },
+        "publisher": {
+          "@id": "https://kaku.fun/#organization"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tw93",
+          "url": "https://tw93.fun"
+        },
+        "encoding": {
+          "@type": "MediaObject",
+          "encodingFormat": "text/markdown",
+          "contentUrl": "https://kaku.fun/docs/ai-coding.md"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/docs" aria-current="page">Docs</a></div><div class="nav-actions"><a class="nav-pill" href="/zh/docs/ai-coding" hreflang="zh-CN">中</a><a class="nav-pill" aria-current="page" href="/docs/ai-coding" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page">
+    <header class="page-hero doc-hero"><div class="wide"><span class="label">Docs</span><h1>Claude Code and Codex in Kaku</h1><p>How Kaku fits the AI coding tools you already use.</p></div></header>
+    <section class="section docs-section">
+      <div class="wide docs-layout">
+        <aside class="docs-sidebar">
+          <a class="docs-home" href="/docs">Docs</a>
+          <nav class="docs-menu" aria-label="Documentation pages"><a href="/docs"><span>Install</span></a><a href="/docs/migrate"><span>Migrate</span></a><a href="/docs/guide"><span>Guide</span></a><a href="/docs/features"><span>Features</span></a><a href="/docs/ai-coding" aria-current="page"><span>AI Coding Tools</span></a><a href="/docs/cli"><span>CLI Reference</span></a><a href="/docs/configuration"><span>Configuration</span></a><a href="/docs/keybindings"><span>Keybindings</span></a><a href="/docs/faq"><span>FAQ</span></a><a href="/docs/contributing"><span>Contributing</span></a></nav>
+          <div class="section-toc"><p>On this page</p><a class="depth-2" href="#ai-coding-setup">Set Up the Tools</a><a class="depth-2" href="#ai-coding-notifications">Notifications</a><a class="depth-2" href="#ai-coding-prompts">Writing Prompts</a><a class="depth-2" href="#ai-coding-splits">Several Agents Side by Side</a><a class="depth-2" href="#ai-coding-restore">After a Restart</a><a class="depth-2" href="#ai-coding-remote">From Another Computer</a><a class="depth-2" href="#ai-coding-assistant">Kaku Assistant</a></div>
+        </aside>
+        <article class="doc-content">
+          <h2 id="ai-coding-setup"><a class="anchor" href="#ai-coding-setup" aria-label="Link to Set Up the Tools">#</a>Set Up the Tools</h2>
+          <p>Run <code>kaku ai</code> to open the AI settings panel. It configures external coding tools such as Claude Code, Codex, Gemini CLI, Copilot CLI and Kimi Code, shows their plan usage, and sets up Kaku Assistant. Kaku only changes a tool&#39;s settings when you edit them there, and keeps the fields you wrote yourself. It never adds hooks or instructions to your agents on its own.</p>
+          <pre><code class="language-bash">kaku ai</code></pre>
+          <h2 id="ai-coding-notifications"><a class="anchor" href="#ai-coding-notifications" aria-label="Link to Notifications">#</a>Notifications</h2>
+          <p>Claude Code only notifies terminals it recognizes and does not recognize Kaku yet, so its default <code>auto</code> channel sends nothing here. Kaku understands the sequence Claude Code sends to Ghostty, so set this in <code>~/.claude/settings.json</code>:</p>
+          <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+          <p>Codex works without changes: it rings the terminal bell and Kaku turns that into a notification. To see Codex&#39;s own message instead of a generic one, add this to <code>~/.codex/config.toml</code>:</p>
+          <pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+          <p>Notifications appear while Kaku is in the background, not for the pane you are looking at. If none show up at all, choose Kaku &gt; Notification Settings... and turn on Allow Notifications.</p>
+          <h2 id="ai-coding-prompts"><a class="anchor" href="#ai-coding-prompts" aria-label="Link to Writing Prompts">#</a>Writing Prompts</h2>
+          <p><code>Shift + Enter</code> and <code>Cmd + Enter</code> insert a newline, so a long prompt can span several lines before you send it.</p>
+          <p><code>Cmd + Click</code> opens links and file paths the tool prints, even while it captures the mouse. A path with a location such as <code>src/main.rs:42:7</code> opens at that line. To choose the editor, set <code>file_link_editor</code>:</p>
+          <pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"zed"</span>
+<span class="tok-c">-- config.file_link_editor = "cursor --goto"</span></code></pre>
+          <h2 id="ai-coding-splits"><a class="anchor" href="#ai-coding-splits" aria-label="Link to Several Agents Side by Side">#</a>Several Agents Side by Side</h2>
+          <p>Split with <code>Cmd + D</code> or <code>Cmd + Shift + D</code> to run an agent next to a shell, or two agents on different tasks, and press <code>Cmd + Shift + Enter</code> to zoom the pane you are reading. Closing a pane or tab where Claude Code, Codex or another long-running program is in the foreground asks first, so a stray <code>Cmd + W</code> does not end a session.</p>
+          <h2 id="ai-coding-restore"><a class="anchor" href="#ai-coding-restore" aria-label="Link to After a Restart">#</a>After a Restart</h2>
+          <p>When Kaku restarts, for example to install an update, your tabs and splits come back. Panes that were running Claude Code or Codex keep their last screen, so you can see where each conversation stopped before you resume it.</p>
+          <h2 id="ai-coding-remote"><a class="anchor" href="#ai-coding-remote" aria-label="Link to From Another Computer">#</a>From Another Computer</h2>
+          <p>Run <code>kaku remote</code> to use the same terminals, including agents that are already running, from a desktop browser on another computer. Pairing and commands are in the <a href="/docs/cli#cli-kaku-remote">CLI reference</a>.</p>
+          <h2 id="ai-coding-assistant"><a class="anchor" href="#ai-coding-assistant" aria-label="Link to Kaku Assistant">#</a>Kaku Assistant</h2>
+          <p>Kaku also has its own assistant for quick questions and command fixes in the shell. It is optional, uses the AI service you configure, and can reuse your Codex login. See <a href="/docs/features#features-kaku-assistant">Features</a>.</p>
+          <nav class="doc-pager" aria-label="Pagination"><a href="/docs/features"><span>Previous</span><strong>Features</strong></a><a href="/docs/cli"><span>Next</span><strong>CLI Reference</strong></a></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">An AI-friendly Mac terminal, ready out of the box.</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/about">About</a> · <a href="/compare">Compare</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/roadmap">Roadmap</a> · <a href="/changelog">Changelog</a> · <a href="/docs">Docs</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">Less time fighting the terminal · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Migrate from iTerm2 or WezTerm · Kaku Docs</title>
+  <meta name="description" content="Moving to Kaku from iTerm2 or WezTerm: where settings live, shortcuts that match, carrying over WezTerm Lua config, fonts, color schemes and your shell setup.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/docs/migrate"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/docs/migrate.md">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/docs/migrate">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/docs/migrate">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/docs/migrate">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kaku",
+            "item": "https://kaku.fun/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Docs",
+            "item": "https://kaku.fun/docs"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Migrate from iTerm2 or WezTerm",
+            "item": "https://kaku.fun/docs/migrate"
+          }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://kaku.fun/docs/migrate#article",
+        "headline": "Migrate from iTerm2 or WezTerm",
+        "name": "Migrate from iTerm2 or WezTerm",
+        "description": "Moving to Kaku from iTerm2 or WezTerm: where settings live, shortcuts that match, carrying over WezTerm Lua config, fonts, color schemes and your shell setup.",
+        "url": "https://kaku.fun/docs/migrate",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://kaku.fun/#website"
+        },
+        "about": {
+          "@id": "https://kaku.fun/#software"
+        },
+        "publisher": {
+          "@id": "https://kaku.fun/#organization"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tw93",
+          "url": "https://tw93.fun"
+        },
+        "encoding": {
+          "@type": "MediaObject",
+          "encodingFormat": "text/markdown",
+          "contentUrl": "https://kaku.fun/docs/migrate.md"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/docs" aria-current="page">Docs</a></div><div class="nav-actions"><a class="nav-pill" href="/zh/docs/migrate" hreflang="zh-CN">中</a><a class="nav-pill" aria-current="page" href="/docs/migrate" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page">
+    <header class="page-hero doc-hero"><div class="wide"><span class="label">Docs</span><h1>Migrate from iTerm2 or WezTerm</h1><p>What changes, what carries over, and where your settings go.</p></div></header>
+    <section class="section docs-section">
+      <div class="wide docs-layout">
+        <aside class="docs-sidebar">
+          <a class="docs-home" href="/docs">Docs</a>
+          <nav class="docs-menu" aria-label="Documentation pages"><a href="/docs"><span>Install</span></a><a href="/docs/migrate" aria-current="page"><span>Migrate</span></a><a href="/docs/guide"><span>Guide</span></a><a href="/docs/features"><span>Features</span></a><a href="/docs/ai-coding"><span>AI Coding Tools</span></a><a href="/docs/cli"><span>CLI Reference</span></a><a href="/docs/configuration"><span>Configuration</span></a><a href="/docs/keybindings"><span>Keybindings</span></a><a href="/docs/faq"><span>FAQ</span></a><a href="/docs/contributing"><span>Contributing</span></a></nav>
+          <div class="section-toc"><p>On this page</p><a class="depth-2" href="#migrate-first-run">First Run</a><a class="depth-2" href="#migrate-from-iterm2">From iTerm2</a><a class="depth-2" href="#migrate-from-wezterm">From WezTerm</a><a class="depth-2" href="#migrate-next">Next Steps</a></div>
+        </aside>
+        <article class="doc-content">
+          <h2 id="migrate-first-run"><a class="anchor" href="#migrate-first-run" aria-label="Link to First Run">#</a>First Run</h2>
+          <p>Install with <code>brew install --cask kaku</code> and open it once. Kaku creates <code>~/.config/kaku/kaku.lua</code> on first launch, with fonts, themes, tabs and the shell suite already set. <code>kaku init</code> sets up shell integration: it adds one line to <code>~/.zshrc</code> that loads Kaku&#39;s shell setup and leaves the rest of the file alone, and can install Starship, Delta, Lazygit and Yazi. <code>kaku doctor</code> checks the result.</p>
+          <pre><code class="language-bash">brew install --cask kaku
+kaku init
+kaku doctor</code></pre>
+          <h2 id="migrate-from-iterm2"><a class="anchor" href="#migrate-from-iterm2" aria-label="Link to From iTerm2">#</a>From iTerm2</h2>
+          <p>Kaku has no profile window. Settings live in <code>kaku.lua</code>, and <code>kaku config</code> or <code>Cmd + ,</code> opens a settings panel for the common ones: theme, font, global hotkey and more. The shortcuts iTerm2 users reach for most already match:</p>
+          <table>
+<thead><tr><th align="left">Action</th><th align="left">Kaku</th></tr></thead>
+<tbody>
+<tr><td align="left">New tab</td><td align="left"><code>Cmd + T</code></td></tr>
+<tr><td align="left">Split vertical</td><td align="left"><code>Cmd + D</code></td></tr>
+<tr><td align="left">Split horizontal</td><td align="left"><code>Cmd + Shift + D</code></td></tr>
+<tr><td align="left">Zoom / unzoom pane</td><td align="left"><code>Cmd + Shift + Enter</code></td></tr>
+<tr><td align="left">Jump word left / right</td><td align="left"><code>Opt + Left</code> / <code>Opt + Right</code></td></tr>
+<tr><td align="left">Show or hide Kaku from any app</td><td align="left"><code>Cmd + Opt + Ctrl + K</code></td></tr>
+</tbody></table>
+          <p>The hotkey works like an iTerm2 hotkey window and can be changed in <code>kaku config</code> or with <code>config.macos_global_hotkey</code>. Window layouts are saved when you close a window, and <code>Cmd + Option + Shift + T</code> reopens the last one.</p>
+          <p>Kaku starts in Kaku Dark. WezTerm&#39;s built-in color schemes are available by name, and many of them, such as Dracula, Solarized and Catppuccin, come from the same collection iTerm2 users import:</p>
+          <pre><code class="language-lua">config.color_scheme = <span class="tok-s">"Catppuccin Mocha"</span>
+config.font = wezterm.<span class="tok-f">font</span>(<span class="tok-s">'Your Font Name'</span>)
+config.font_size = <span class="tok-n">16</span></code></pre>
+          <h2 id="migrate-from-wezterm"><a class="anchor" href="#migrate-from-wezterm" aria-label="Link to From WezTerm">#</a>From WezTerm</h2>
+          <p>Kaku is built on WezTerm and uses the same Lua configuration, but it reads <code>~/.config/kaku/kaku.lua</code> and never looks at <code>~/.wezterm.lua</code>. That file loads Kaku&#39;s bundled defaults first; copy the settings you want from your WezTerm config below <code>-- User overrides:</code>, where <code>wezterm</code> is already required:</p>
+          <pre><code class="language-lua"><span class="tok-c">-- User overrides:</span>
+config.font_size = <span class="tok-n">15</span>
+config.window_background_opacity = <span class="tok-n">0.95</span>
+
+<span class="tok-b">table.insert</span>(config.keys, {
+  key = <span class="tok-s">'RightArrow'</span>,
+  mods = <span class="tok-s">'CMD|SHIFT'</span>,
+  action = wezterm.action.<span class="tok-f">ActivatePaneDirection</span>(<span class="tok-s">'Right'</span>),
+})</code></pre>
+          <p>Append to <code>config.keys</code> instead of assigning a new table, which would erase Kaku&#39;s default shortcuts. Kaku&#39;s defaults differ from WezTerm&#39;s in places, for example <code>line_height = 1.28</code>; set <code>config.line_height = 1.0</code> to get WezTerm&#39;s row height back. The WezTerm Lua reference applies to everything else.</p>
+          <h2 id="migrate-next"><a class="anchor" href="#migrate-next" aria-label="Link to Next Steps">#</a>Next Steps</h2>
+          <p>The <a href="/docs/guide">Guide</a> walks through daily use, <a href="/docs/configuration">Configuration</a> lists every Kaku setting, and <a href="/compare">Compare</a> sets Kaku next to iTerm2, Warp, Ghostty and WezTerm.</p>
+          <nav class="doc-pager" aria-label="Pagination"><a href="/docs"><span>Previous</span><strong>Install</strong></a><a href="/docs/guide"><span>Next</span><strong>Guide</strong></a></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">An AI-friendly Mac terminal, ready out of the box.</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/about">About</a> · <a href="/compare">Compare</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/roadmap">Roadmap</a> · <a href="/changelog">Changelog</a> · <a href="/docs">Docs</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">Less time fighting the terminal · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>

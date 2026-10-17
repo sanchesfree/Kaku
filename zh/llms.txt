@@ -18,8 +18,10 @@
 ## 页面
 
 - [安装](https://kaku.fun/zh/docs/index.md)：DMG、官方 Homebrew cask、安装后检查、排障
+- [迁移](https://kaku.fun/zh/docs/migrate.md)：从 iTerm2 或 WezTerm 换过来，设置位置、相同的快捷键、搬 Lua 配置
 - [指南](https://kaku.fun/zh/docs/guide.md)：从首次启动到标签页、分屏、shell、助手和内置工具
 - [功能特性](https://kaku.fun/zh/docs/features.md)：助手、AI 聊天、默认值、性能、shell 套件、Lua 配置
+- [AI 编程工具](https://kaku.fun/zh/docs/ai-coding.md)：在 Kaku 里用 Claude Code 和 Codex，通知、多行输入、重启后恢复
 - [命令参考](https://kaku.fun/zh/docs/cli.md)：`kaku doctor`、`kaku ai`、`kaku config`、`kaku update` 等
 - [配置](https://kaku.fun/zh/docs/configuration.md)：字体、透明度、Smart Tab、关闭确认、快捷键、Lua 覆盖
 - [快捷键](https://kaku.fun/zh/docs/keybindings.md)：标签页、分屏、窗口和工具快捷键
