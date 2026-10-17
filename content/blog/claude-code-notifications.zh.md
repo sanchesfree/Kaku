@@ -1,0 +1,105 @@
+如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
+
+## Claude Code 的快速修法
+
+打开 `~/.claude/settings.json`，把 `preferredNotifChannel` 设成你的终端认识的通道，Claude Code 接受的值有 `auto`、`terminal_bell`、`iterm2`、`iterm2_with_bell`、`kitty`、`ghostty` 和 `notifications_disabled`。
+
+| 终端 | 怎么设 |
+|---|---|
+| iTerm2 | Claude Code 里不用改，在 iTerm2 的 Settings > Profiles > Terminal 里勾上 Notification Center Alerts，再在 Filter Alerts 里打开 Send escape sequence-generated alerts |
+| Ghostty、Kitty | 不用改，`auto` 就能用 |
+| Kaku | `"ghostty"` |
+| Terminal.app | `auto` 只在关掉提示音时响铃，`/terminal-setup` 会帮你关掉 |
+| WezTerm、Warp、VS Code | `"terminal_bell"`，或者加一个 Notification hook |
+
+Kaku 只需要改这一行：
+
+```json
+{ "preferredNotifChannel": "ghostty" }
+```
+
+## Codex 的快速修法
+
+Codex 在 Kaku 里不用改，它默认需要你的时候会响终端铃声，Kaku 会把后台窗口里的铃声变成一条通知，只是内容比较笼统，取的是上一条命令或者窗格标题。想看到 Codex 自己写的消息，就在 `~/.codex/config.toml` 里换成 OSC 9 序列：
+
+```toml
+[tui]
+notification_method = "osc9"
+```
+
+`notification_method` 可以是 `auto`、`osc9` 或 `bel`，旁边还有两个值得知道的设置，`notifications` 控制开关，也可以只对某几类事件开，`notification_condition` 决定只在终端没获得焦点时提醒，也就是默认值，还是任何时候都提醒。
+
+## 一条都收不到的时候
+
+设置没问题还是什么都没有，下一个要怀疑的就是 macOS。终端发出的通知是由终端这个 App 来显示的，所以得给终端本身授权，在系统设置 > 通知里找到你的终端，打开允许通知，Kaku 里点 Kaku > Notification Settings 就能直接跳到这一页。
+
+这个权限 macOS 只问一次，如果哪次点了不允许，之后它不会再问，后面的每条通知都会被悄无声息地丢掉。Kaku 会检查这种情况，有通知因此被丢掉时，下次你切回 Kaku 会提示一句。
+
+还有两个常见原因：
+
+- **tmux。** 不在 `~/.tmux.conf` 里加上 `set -g allow-passthrough on` 并用 `tmux source-file ~/.tmux.conf` 重新加载，tmux 会把这些序列吞掉。
+- **你正看着它。** 大部分终端包括 Kaku 都不会对眼前这个窗口弹通知，Codex 默认也只在终端没获得焦点时提醒，测试时记得把窗口放到后台。
+
+## 通知是怎么从 agent 走到 macOS 的
+
+Claude Code 和 Codex 都不直接跟通知中心打交道，它们往终端里写一小段转义序列，跟输出颜色是一个路子，接下来怎么处理由终端决定。
+
+[[figure:claude-code-notifications|Claude Code、Codex 和你自己的脚本把序列或铃声发给 Kaku，Kaku 只在处于后台时把它变成 macOS 通知|不管从哪来，最后都是一段终端读得懂的序列，再由终端变成通知。]]
+
+常用的序列有几种，OSC 9 最早出自 iTerm2，只带一行文字，OSC 777 带标题和正文，单独一个铃声字符则什么内容都不带，只表示有事发生。Ghostty 和 Kaku 两种都认，Kitty 用的是自己的 OSC 99，各家不统一，这也是为什么 Claude Code 要维护一串通道而不是一个开关。
+
+在 Kaku 里这几条路最后汇到同一个地方，哪些会变成通知由 `notification_handling` 决定：
+
+```lua
+-- 默认：只在 Kaku 窗口处于后台时提醒
+config.notification_handling = "AlwaysShow"
+-- 没在看的标签或窗格也提醒：
+-- config.notification_handling = "SuppressFromFocusedTab"
+-- config.notification_handling = "SuppressFromFocusedPane"
+-- 从不提醒：
+-- config.notification_handling = "NeverShow"
+```
+
+后台窗口里的铃声同样会变成通知，还会累加到 Dock 图标的角标上，通知消失了也能看出刚才有东西响过。
+
+## 给自己的脚本加通知
+
+既然通知只是一段序列，任何脚本都能发，长时间的构建或测试跑完时提醒一下很好用：
+
+```bash
+# 一行文字（OSC 9）
+printf '\e]9;%s\a' "Tests finished"
+
+# 标题加正文（OSC 777）
+printf '\e]777;notify;%s;%s\a' "Build" "Release build finished"
+```
+
+把终端放到后台再跑，就会像其他通知一样弹出来，在 tmux 里同样要打开上面说的 passthrough。
+
+## 常见问题
+
+### 为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？
+
+`preferredNotifChannel` 保持 `auto` 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 `ghostty`，其他终端可以用 `terminal_bell`。
+
+### 通过 SSH 跑的 Claude Code 也能通知吗？
+
+可以，序列会沿着 SSH 连接回到你 Mac 上的终端，由它弹出通知，前提是这个终端认识你选的通道。
+
+### 能不能只放个声音，不弹通知？
+
+可以，在 `~/.claude/settings.json` 里加一个 Notification hook，它会和自带的通知同时运行：
+
+```json
+{
+  "hooks": {
+    "Notification": [
+      { "hooks": [{ "type": "command", "command": "afplay /System/Library/Sounds/Glass.aiff" }] }
+    ]
+  }
+}
+```
+
+### 为什么正在看的窗口也会弹通知？
+
+有些终端每条都弹，Kaku 默认的 `AlwaysShow` 只在窗口处于后台时提醒，`Suppress` 开头的几个选项会把没在看的标签和窗格也算进去。
