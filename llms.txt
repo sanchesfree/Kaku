@@ -45,6 +45,10 @@ Kaku is driven from the shell, not over HTTP:
 - [Docs-only index](https://kaku.fun/docs/llms.txt): scoped llms.txt for the documentation section
 
 <!-- blog:start -->
+## Blog
+
+- [The Best Terminal for Claude Code: What Actually Matters](https://kaku.fun/blog/best-terminal-for-claude-code.md): Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.
+
 <!-- blog:end -->
 ## Project
 

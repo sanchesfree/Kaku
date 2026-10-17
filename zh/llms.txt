@@ -33,6 +33,10 @@
 - [关于](https://kaku.fun/zh/about.md) · [联系](https://kaku.fun/zh/contact.md) · [隐私](https://kaku.fun/zh/privacy.md)
 
 <!-- blog:start -->
+## 博客
+
+- [Claude Code 用什么终端最好，真正影响体验的五件事](https://kaku.fun/zh/blog/best-terminal-for-claude-code.md)：Claude Code 在哪个终端都能跑，长时间会话舒不舒服取决于五件事：多行输入、通知、可点击的路径、重启后恢复和分屏。
+
 <!-- blog:end -->
 ## 其他
 

@@ -6,6 +6,13 @@
     <atom:link href="https://kaku.fun/zh/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>关于 Mac 终端、Claude Code、Codex、shell 配置的指南，以及 Kaku 是怎么做出来的。</description>
     <language>zh-CN</language>
-
+    <item>
+      <title>Claude Code 用什么终端最好，真正影响体验的五件事</title>
+      <link>https://kaku.fun/zh/blog/best-terminal-for-claude-code</link>
+      <guid isPermaLink="true">https://kaku.fun/zh/blog/best-terminal-for-claude-code</guid>
+      <pubDate>Sat, 17 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Claude Code 在哪个终端都能跑，长时间会话舒不舒服取决于五件事：多行输入、通知、可点击的路径、重启后恢复和分屏。</description>
+    </item>
   </channel>
 </rss>

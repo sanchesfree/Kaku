@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>The Best Terminal for Claude Code: What Actually Matters · Kaku Blog</title>
+  <meta name="description" content="Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.">
+  <meta property="og:title" content="The Best Terminal for Claude Code: What Actually Matters · Kaku Blog">
+  <meta property="og:description" content="Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/best-terminal-for-claude-code.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="The Best Terminal for Claude Code: What Actually Matters">
+  <meta property="og:url" content="https://kaku.fun/blog/best-terminal-for-claude-code">
+  <meta property="article:published_time" content="2026-10-17">
+  <meta property="article:modified_time" content="2026-10-17">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/best-terminal-for-claude-code.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/best-terminal-for-claude-code"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/best-terminal-for-claude-code">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/best-terminal-for-claude-code">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/best-terminal-for-claude-code">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/best-terminal-for-claude-code.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Best Terminal for Claude Code: What Actually Matters",
+          "item": "https://kaku.fun/blog/best-terminal-for-claude-code"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/best-terminal-for-claude-code#article",
+      "headline": "The Best Terminal for Claude Code: What Actually Matters",
+      "description": "Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.",
+      "url": "https://kaku.fun/blog/best-terminal-for-claude-code",
+      "mainEntityOfPage": "https://kaku.fun/blog/best-terminal-for-claude-code",
+      "datePublished": "2026-10-17",
+      "dateModified": "2026-10-17",
+      "inLanguage": "en",
+      "image": "https://kaku.fun/img/blog/cards/best-terminal-for-claude-code.webp",
+      "timeRequired": "PT6M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/best-terminal-for-claude-code.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Claude Code need a special terminal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It runs in any terminal with a modern TUI. The terminal changes how comfortable long sessions are: multi-line input, notifications, clickable paths and restoring after a restart."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why don't Claude Code notifications show up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With the default auto channel Claude Code only notifies iTerm2, Ghostty and Kitty. In other terminals set preferredNotifChannel in ~/.claude/settings.json to a channel the terminal understands, such as ghostty in Kaku, or terminal_bell. Inside tmux, also run set -g allow-passthrough on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I add a new line in Claude Code without sending the prompt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Press Shift + Enter in terminals that support it, or Ctrl + J, or type a backslash and press Enter. Those last two work in every terminal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I keep using tmux with Claude Code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Shift + Enter inside tmux needs set -s extended-keys on and set -as terminal-features 'xterm*:extkeys', and notifications need set -g allow-passthrough on."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><a class="nav-pill" href="/zh/blog/best-terminal-for-claude-code" hreflang="zh-CN">中</a><a class="nav-pill" aria-current="page" href="/blog/best-terminal-for-claude-code" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>The Best Terminal for Claude Code: What Actually Matters</h1><p class="blog-meta"><span>Published <time datetime="2026-10-17">Oct 17, 2026</time></span><span>6 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/best-terminal-for-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray <code>Cmd + W</code>. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, is set up for all five out of the box, and this post walks through each one so you can check whatever terminal you use now.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-session-loop-mobile.webp" width="340" height="517"><img src="/img/blog/claude-code-session-loop.webp" width="873" height="231" loading="lazy" alt="A Claude Code session as a loop: you write a prompt, Claude works, it asks for input or finishes, you read the result and open files, and the session survives a restart"></picture><figcaption>The five places where the terminal either helps a Claude Code session or gets in its way.</figcaption></figure>
+
+<h2 id="writing-a-prompt-that-spans-several-lines">Writing a prompt that spans several lines</h2>
+<p>Prompts for an agent are rarely one line. You paste an error, add a file path, then describe what you want, and pressing Enter in the middle sends half a prompt.</p>
+<p>Claude Code's own docs list where <code>Shift + Enter</code> inserts a newline without setup: Ghostty, Kitty, iTerm2, WezTerm, Warp, Apple Terminal and Windows Terminal. VS Code, Cursor, Zed and Alacritty before 0.16 need <code>/terminal-setup</code> once. Two fallbacks work everywhere: <code>Ctrl + J</code>, or a backslash followed by Enter.</p>
+<p>In Kaku both <code>Shift + Enter</code> and <code>Cmd + Enter</code> insert a newline, and nothing needs to be run first.</p>
+<h2 id="knowing-when-claude-is-waiting-for-you">Knowing when Claude is waiting for you</h2>
+<p>The most expensive minute in an agent session is the one where Claude asked a question and you were in another window. A desktop notification fixes that, but only if the terminal and Claude Code agree on how to send one.</p>
+<p>Claude Code's <code>preferredNotifChannel</code> setting defaults to <code>auto</code>, and <code>auto</code> only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it rings the bell, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.</p>
+<p>Kaku understands the sequence Claude Code sends to Ghostty, so one line in <code>~/.claude/settings.json</code> is enough:</p>
+<pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+<p>Kaku shows the notification only while it is in the background, so the pane you are already looking at does not ping you. If nothing appears at all, check Kaku &gt; Notification Settings and turn on Allow Notifications.</p>
+<h2 id="opening-what-claude-prints">Opening what Claude prints</h2>
+<p>Claude Code prints file paths, often with a line number, and links to docs or pull requests. Two details decide whether you can click them.</p>
+<p>First, Claude Code captures the mouse while it runs, and in many terminals a plain click then goes to the TUI instead of opening the link. Kaku opens links and paths with <code>Cmd + Click</code> even while a program has the mouse.</p>
+<p>Second, a path like <code>src/main.rs:42:7</code> should open your editor at that line. Kaku sends local paths to the editor you set, with the line and column appended:</p>
+<pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"zed"</span>
+<span class="tok-c">-- config.file_link_editor = "cursor --goto"</span></code></pre>
+<p>Without that setting it falls back to VS Code when it finds it, then <code>$VISUAL</code> and <code>$EDITOR</code>.</p>
+<h2 id="keeping-the-session-through-a-restart">Keeping the session through a restart</h2>
+<p>Agent sessions run for hours, and the terminal will restart in that time, for an update if nothing else. Two layers matter here. Claude Code keeps the conversation itself, and <code>claude --continue</code> picks up the most recent one in the current directory. The terminal has to keep everything around it: which tabs and splits you had, which directory each pane was in, and what was on screen.</p>
+<p>Kaku saves the window layout while it runs and restores tabs and splits when it starts again. For panes that were running Claude Code or Codex it also keeps the last screen, so before you resume you can see where each conversation stopped.</p>
+<p>Closing by accident is the other half. In Kaku, closing a pane or tab whose foreground program is Claude Code, Codex, an editor or a build asks first, and a plain shell closes without a prompt.</p>
+<h2 id="running-more-than-one">Running more than one</h2>
+<p>Once one session works, the next step is two: one agent refactoring while another writes tests, or an agent next to a shell where you run the app. That is a job for splits. In Kaku <code>Cmd + D</code> splits to the right, <code>Cmd + Shift + D</code> splits down, and <code>Cmd + Shift + Enter</code> zooms the pane you want to read, then puts it back.</p>
+<h2 id="picking-up-from-another-computer">Picking up from another computer</h2>
+<p>Sometimes the session is on the Mac at your desk and you are not. Anthropic offers Remote Control, which lets you steer a running Claude Code session from claude.ai or the Claude app on a paid plan, and cloud sessions that run on Anthropic's machines instead of yours. Kaku has <code>kaku remote</code>, which opens the Mac's terminals in a desktop browser on another computer, including every pane that is already running Claude Code. The <a href="https://kaku.fun/docs/cli#cli-kaku-remote">CLI reference</a> covers pairing.</p>
+<h2 id="how-common-terminals-compare">How common terminals compare</h2>
+<p>Checked on 2026-10-17 against Claude Code's terminal docs.</p>
+<table>
+<thead>
+<tr>
+<th>Terminal</th>
+<th>Shift + Enter newline</th>
+<th>Claude Code notifications with default settings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminal.app</td>
+<td>Works</td>
+<td>Bell only, and only when the audible bell is off</td>
+</tr>
+<tr>
+<td>iTerm2</td>
+<td>Works</td>
+<td>Yes, after enabling escape sequence alerts in its settings</td>
+</tr>
+<tr>
+<td>Ghostty</td>
+<td>Works</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Kitty</td>
+<td>Works</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>WezTerm</td>
+<td>Works</td>
+<td>No, set <code>terminal_bell</code> or add a hook</td>
+</tr>
+<tr>
+<td>Warp</td>
+<td>Works</td>
+<td>No, set <code>terminal_bell</code> or add a hook</td>
+</tr>
+<tr>
+<td>Kaku</td>
+<td>Works, <code>Cmd + Enter</code> too</td>
+<td>Yes, after setting the <code>ghostty</code> channel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="faq">FAQ</h2>
+<h3 id="does-claude-code-need-a-special-terminal">Does Claude Code need a special terminal?</h3>
+<p>No. It runs in any terminal with a modern TUI. The terminal changes how comfortable long sessions are: multi-line input, notifications, clickable paths and restoring after a restart.</p>
+<h3 id="why-dont-claude-code-notifications-show-up">Why don't Claude Code notifications show up?</h3>
+<p>With the default <code>auto</code> channel Claude Code only notifies iTerm2, Ghostty and Kitty. In other terminals set <code>preferredNotifChannel</code> in <code>~/.claude/settings.json</code> to a channel the terminal understands, such as <code>ghostty</code> in Kaku, or <code>terminal_bell</code>. Inside tmux, also run <code>set -g allow-passthrough on</code>.</p>
+<h3 id="how-do-i-add-a-new-line-in-claude-code-without-sending-the-prompt">How do I add a new line in Claude Code without sending the prompt?</h3>
+<p>Press <code>Shift + Enter</code> in terminals that support it, or <code>Ctrl + J</code>, or type a backslash and press Enter. Those last two work in every terminal.</p>
+<h3 id="can-i-keep-using-tmux-with-claude-code">Can I keep using tmux with Claude Code?</h3>
+<p>Yes. Shift + Enter inside tmux needs <code>set -s extended-keys on</code> and <code>set -as terminal-features 'xterm*:extkeys'</code>, and notifications need <code>set -g allow-passthrough on</code>.</p>
+          <aside class="blog-cta"><p>Kaku is a free, open-source Mac terminal with these defaults already set.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">An AI-friendly Mac terminal, ready out of the box.</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/about">About</a> · <a href="/compare">Compare</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/roadmap">Roadmap</a> · <a href="/changelog">Changelog</a> · <a href="/blog">Blog</a> · <a href="/docs">Docs</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">Less time fighting the terminal · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>
