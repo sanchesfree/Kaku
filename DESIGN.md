@@ -33,7 +33,14 @@ The chrome aligns with the mole-mac (Kami) site so the two feel like one series:
 
 Inner content widths stay close to the blog: about 760px for prose and 1120px for page sections.
 
-Sidebar-less prose pages (`/about`, `/compare`, `/contact`, `/privacy`) reuse the docs chrome, `page-hero doc-hero` plus `article.doc-content`, with `.prose-doc` spanning the same width as the page hero so the intro and body share one right edge. Do not add a Mole-style `/blog` tree unless there are several dated essays to publish; the comparison page is the durable home for alternative-intent queries.
+Sidebar-less prose pages (`/about`, `/compare`, `/contact`, `/privacy`) reuse the docs chrome, `page-hero doc-hero` plus `article.doc-content`, with `.prose-doc` spanning the same width as the page hero so the intro and body share one right edge. The comparison page stays the durable home for alternative-intent queries.
+
+## Blog
+
+`/blog` and `/zh/blog` follow mole.fit's blog on Kaku's tokens: an index of parchment cards with the cover flush on top, and an article page with the page hero (breadcrumb, title, date and reading time), a cover cropped to 16:7 on desktop and 16:9 on phones, a 760px prose column, one quiet install card, and three related posts. Search intent picks the topics, and every post opens with the direct answer before Kaku's part.
+
+- **Covers** are illustrations from an image model (the Codex CLI's image tool), not screenshots: matte paper cutouts on `#F5F4ED` parchment, navy `#1B365D`, pale grey-blue `#DCE3EE` and `#EEF2F7`, off-white, at most one small muted green `#0D7D4D` accent, with no text, logos, real UI or window chrome. Keep the subject between y 100 and 800 of the 1600x900 canvas, measured with a threshold mask rather than `-trim` because the paper grain defeats it. Convert with `magick in.png -resize 1600x900^ -gravity center -extent 1600x900` and `cwebp -q 86`.
+- **Diagrams** explain a mechanism only. Each one is data in `scripts/build_blog_diagrams.py`, drawn as a desktop layout and a stacked `-mobile` layout in JetBrains Mono, saved at 2x and shown at their own width up to the column, so a narrow diagram is never stretched. Labels stay English and short; the caption carries the explanation in each language.
 
 ## Agent surface
 

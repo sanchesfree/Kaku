@@ -102,7 +102,10 @@ def main() -> int:
 
     newest = newest_content_date()
     if newest is not None:
-        oldest = min(date.fromisoformat(lastmod) for _, lastmod in urls)
+        # Blog posts carry their own publish or edit date, so only the
+        # hand-maintained pages are held to the newest content commit.
+        pages = [(loc, lastmod) for loc, lastmod in urls if "/blog" not in loc]
+        oldest = min(date.fromisoformat(lastmod) for _, lastmod in pages)
         if oldest < newest:
             raise SystemExit(
                 f"sitemap lastmod {oldest.isoformat()} is older than content {newest.isoformat()}"

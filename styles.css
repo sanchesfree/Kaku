@@ -1190,3 +1190,137 @@ button, input { font: inherit; }
   .hero h1 { opacity: 1; transform: none; filter: none; }
   .cn-orbit::after { animation: none; opacity: 0; }
 }
+
+/* ===== Blog =====
+   Same parchment cards and serif rhythm as mole.fit's blog, on Kaku's tokens.
+   The article column is narrower than the docs so long prose stays readable. */
+.blog-article { max-width: 760px; }
+.blog-hero .wide > * { max-width: 760px; }
+.blog-crumb {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.blog-crumb a { color: var(--ink-muted); }
+.blog-crumb a:hover { color: var(--brand); text-decoration: none; }
+.page-hero .blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.blog-meta > span { white-space: nowrap; }
+.blog-cover {
+  aspect-ratio: 16 / 7;
+  margin: 0 0 40px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--brand-tint);
+}
+.blog-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blog-diagram { margin: 28px 0 32px; }
+.blog-diagram picture { display: block; }
+/* Diagrams are saved at 2x and keep their own width up to the column, so a
+   narrow one is not blown up to 760px with oversized text. */
+.blog-diagram img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+}
+.blog-diagram figcaption {
+  margin-top: 10px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.55;
+}
+.blog-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin: 56px 0 0;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper-card);
+}
+.blog-cta p { flex: 1 1 280px; margin: 0; color: var(--ink); }
+.blog-article .blog-cta a.btn { border-bottom: 0; color: #fff; }
+.blog-related { margin-top: 64px; }
+.doc-content .blog-related-title { margin: 0 0 18px; font-size: 20px; }
+.blog-related-list, .blog-cards {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.blog-related-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.doc-content .blog-related-list li { margin: 0; }
+.doc-content .blog-related-list a {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper-card);
+  color: var(--ink);
+  font-weight: 400;
+}
+.blog-related-name { font-weight: 600; line-height: 1.4; }
+.blog-related-meta, .blog-card-date {
+  margin-top: auto;
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.blog-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.blog-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper-card);
+}
+.blog-card a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.blog-card a:hover { text-decoration: none; }
+.blog-card-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--line-faint);
+  background: var(--brand-tint);
+}
+.blog-card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.blog-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px 18px;
+}
+.blog-card-title { color: var(--ink); font-size: 18px; font-weight: 600; line-height: 1.35; }
+.blog-card-desc { margin-bottom: 8px; color: var(--ink-dim); font-size: 15px; line-height: 1.55; }
+@media (hover: hover) {
+  .blog-card:hover, .doc-content .blog-related-list a:hover { border-color: var(--brand-light); }
+  .blog-card:hover .blog-card-title { color: var(--brand); }
+}
+.blog-card a:active, .doc-content .blog-related-list a:active { background: var(--paper-soft); }
+@media (max-width: 1024px) {
+  .blog-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .blog-cards, .blog-related-list { grid-template-columns: 1fr; }
+  .blog-cover { aspect-ratio: 16 / 9; margin-bottom: 28px; }
+}

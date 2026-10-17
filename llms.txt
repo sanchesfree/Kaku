@@ -44,6 +44,8 @@ Kaku is driven from the shell, not over HTTP:
 - [Changelog](https://kaku.fun/changelog): stable releases, newest first, English and Chinese notes
 - [Docs-only index](https://kaku.fun/docs/llms.txt): scoped llms.txt for the documentation section
 
+<!-- blog:start -->
+<!-- blog:end -->
 ## Project
 
 - [About](https://kaku.fun/about): what Kaku is, who builds it, and what it deliberately is not

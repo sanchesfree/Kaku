@@ -32,6 +32,8 @@
 - [更新日志](https://kaku.fun/zh/changelog.md)：正式版更新，从新到旧，不含 Nightly
 - [关于](https://kaku.fun/zh/about.md) · [联系](https://kaku.fun/zh/contact.md) · [隐私](https://kaku.fun/zh/privacy.md)
 
+<!-- blog:start -->
+<!-- blog:end -->
 ## 其他
 
 - [英文站索引](https://kaku.fun/llms.txt)
