@@ -2,6 +2,21 @@
 
 Stable Kaku releases, newest first. Nightly builds stay on GitHub. Subscribe with [RSS](https://kaku.fun/feed.xml).
 
+## V0.25.0 Signal 2026-10-18
+
+1. **Agent Title**: While Claude Code, Codex or Kimi works, its mark and current topic show at the top right of the window, and Agent Title in kaku config turns it off.
+2. **Claude Code Alerts**: Claude Code 2.1.295 and later notify you and mark the tab when they wait on you, finish or fail, with no setup needed.
+3. **AI Chat**: History, Context and Model sit above the input, shell code blocks can be inserted into the shell, tool requests show their full details before you allow them, and Stop keeps the partial answer.
+4. **Remote Access**: Typing stays responsive while a lot of output streams in, and remote access stays free.
+5. **Touch**: Press and hold opens menus sooner, and their items are larger and easier to tap.
+6. **Window Padding**: The space around terminal content and the tab bar is now even.
+7. **Links and Shell**: File paths after Chinese punctuation are clickable, shells start faster by loading completions from cache, and Yazi leaves a row under the path.
+8. **Fixes**: kaku ai opens each tool's real login command, and q quits the kaku menu as its hint says.
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.25.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.25.0/Kaku.dmg)
+
+---
+
 ## V0.24.0 Reach 2026-10-17
 
 1. **Remote Access**: kaku remote opens this Mac's terminals in a browser on another computer, including sessions already running such as Claude Code or Codex.

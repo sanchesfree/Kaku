@@ -193,7 +193,7 @@ brew install --cask kaku
 
 First check that macOS allows them: choose Kaku > Notification Settings... and turn on Allow Notifications. macOS never asks again after a denial, so when a notification gets dropped for this reason Kaku tells you the next time you switch back to it.
 
-Claude Code only notifies terminals it recognizes and does not recognize Kaku yet, so its default `auto` channel sends nothing here. Kaku understands the sequence Claude Code sends to Ghostty, so set this in `~/.claude/settings.json`:
+Claude Code 2.1.295 and later tell Kaku whether they are working, waiting on you or done, and Kaku turns waiting, done and errors into a notification and the tab's attention dot with no setting needed. Check with `claude --version`, and leave `preferredNotifChannel` at its default `auto`, since `ghostty` there makes Claude Code post a second notification of its own. Older versions only notify terminals they recognize and send nothing to Kaku, so on those set this in `~/.claude/settings.json`:
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -219,6 +219,10 @@ config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }
 ## Can I use Kaku with tiling window managers (yabai, AeroSpace)?
 
 Yes, Kaku works with yabai and AeroSpace. Constant flickering usually means the tiling WM is fighting Kaku's fullscreen and resize logic. Turning off Kaku's native fullscreen (`config.native_macos_fullscreen_mode = false`) or excluding Kaku from the WM's managed windows usually fixes it.
+
+## Is remote access free?
+
+Yes. I pay for the relay server myself, as a thank-you to everyone who has been building Kaku in the open with me. Your privacy does not rest on trusting that server: what you type and see is encrypted between the browser and Kaku, so the relay only forwards data it cannot read. It is a server that does this one job, so the connection stays quick.
 
 ## The remote web page says the Mac is offline, or asks me to pair again.
 

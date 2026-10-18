@@ -65,7 +65,7 @@
       "dateModified": "2026-10-18",
       "inLanguage": "zh-CN",
       "image": "https://kaku.fun/img/blog/cards/claude-code-notifications.webp",
-      "timeRequired": "PT3M",
+      "timeRequired": "PT4M",
       "author": {
         "@type": "Person",
         "name": "Tw93",
@@ -98,7 +98,7 @@
           "name": "为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "preferredNotifChannel 保持 auto 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 ghostty，其他终端可以用 terminal_bell。"
+            "text": "preferredNotifChannel 保持 auto 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，0.25.0 之前的 Kaku 里用 ghostty，其他终端可以用 terminal_bell。"
           }
         },
         {
@@ -133,9 +133,9 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到内容</a>
-  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/claude-code-notifications" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.25.0</a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/claude-code-notifications" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content" class="docs-page blog-page">
-    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 通知不弹出，在 Mac 上怎么修</h1><p class="blog-meta"><span>发布于 <time datetime="2026-10-18">2026年10月18日</time></span><span>约 3 分钟</span></p></div></header>
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 通知不弹出，在 Mac 上怎么修</h1><p class="blog-meta"><span>发布于 <time datetime="2026-10-18">2026年10月18日</time></span><span>约 4 分钟</span></p></div></header>
     <section class="section">
       <div class="wide">
         <article class="doc-content blog-article">
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td>Kaku</td>
-<td><code>"ghostty"</code></td>
+<td>0.25.0 配 Claude Code 2.1.295 及以上不用改，更早的版本设成 <code>"ghostty"</code></td>
 </tr>
 <tr>
 <td>Terminal.app</td>
@@ -173,7 +173,7 @@
 </tr>
 </tbody>
 </table>
-<p>Kaku 只需要改这一行：</p>
+<p>Kaku 0.25.0 配 Claude Code 2.1.295 及以上版本什么都不用改，再设成 <code>ghostty</code> 反而会多出一条重复通知，更早的版本只需要改这一行：</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
 <h2 id="codex-的快速修法">Codex 的快速修法</h2>
 <p>Codex 在 Kaku 里不用改，它默认需要你的时候会响终端铃声，Kaku 会把后台窗口里的铃声变成一条通知，只是内容比较笼统，取的是上一条命令或者窗格标题。想看到 Codex 自己写的消息，就在 <code>~/.codex/config.toml</code> 里换成 OSC 9 序列：</p>
@@ -212,7 +212,7 @@ config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
 <p>把终端放到后台再跑，就会像其他通知一样弹出来，在 tmux 里同样要打开上面说的 passthrough。</p>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="为什么-claude-code-在-iterm2-里有通知在我的终端里没有">为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？</h3>
-<p><code>preferredNotifChannel</code> 保持 <code>auto</code> 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 <code>ghostty</code>，其他终端可以用 <code>terminal_bell</code>。</p>
+<p><code>preferredNotifChannel</code> 保持 <code>auto</code> 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，0.25.0 之前的 Kaku 里用 <code>ghostty</code>，其他终端可以用 <code>terminal_bell</code>。</p>
 <h3 id="通过-ssh-跑的-claude-code-也能通知吗">通过 SSH 跑的 Claude Code 也能通知吗？</h3>
 <p>可以，序列会沿着 SSH 连接回到你 Mac 上的终端，由它弹出通知，前提是这个终端认识你选的通道。</p>
 <h3 id="能不能在-claude-等我的时候也放个声音">能不能在 Claude 等我的时候也放个声音？</h3>

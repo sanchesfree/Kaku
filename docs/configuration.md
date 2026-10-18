@@ -115,6 +115,14 @@ By default the traffic light buttons sit in the tab bar (`INTEGRATED_BUTTONS|RES
 config.window_decorations = "RESIZE"
 ```
 
+**Agent title**
+
+While Claude Code, Codex or Kimi runs in the active pane, its mark and current topic show at the top right of the window. To turn it off, choose Off for Agent Title in `kaku config`, or:
+
+```lua
+config.show_agent_title = false
+```
+
 **Padding**
 
 ```lua
@@ -194,7 +202,7 @@ config.tab_title_use_pane_title = true             -- show titles set by apps li
 
 Setting `config.tab_title_use_pane_title = true` shows the title set by tools such as Claude Code, while tabs you renamed by hand keep your custom name.
 
-When a background tab rings the bell (BEL), its title shows a small dot. To turn that off:
+When a background tab rings the bell (BEL), its title shows a small dot. Claude Code lights the same dot when it waits on you, finishes or fails. To turn off the bell part:
 
 ```lua
 config.bell_tab_indicator = false

@@ -115,6 +115,14 @@ config.macos_window_background_blur = 20  -- optional blur (0–100)
 config.window_decorations = "RESIZE"
 ```
 
+**Agent 标题**
+
+当前面板里跑着 Claude Code、Codex 或 Kimi 时，窗口右上角会显示它的标志和当前话题。不需要的话，在 `kaku config` 里把 Agent Title 关掉，或者写：
+
+```lua
+config.show_agent_title = false
+```
+
 **内边距**
 
 ```lua
@@ -194,7 +202,7 @@ config.tab_title_use_pane_title = true             -- show titles set by apps li
 
 开启 `config.tab_title_use_pane_title = true` 后，标签将优先显示 Claude Code 等命令行应用上报的动态标题；手动双击重命名过的标签仍会保留自定义名称。
 
-后台标签响铃（BEL）时，标题上会出现一个小圆点，要关掉：
+后台标签响铃（BEL）时，标题上会出现一个小圆点，Claude Code 在等你操作、跑完或出错时也会点亮它。只想关掉响铃这部分：
 
 ```lua
 config.bell_tab_indicator = false

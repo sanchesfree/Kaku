@@ -98,7 +98,7 @@
           "name": "Why does Claude Code send notifications in iTerm2 but not in my terminal?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "With preferredNotifChannel left at auto, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example ghostty in Kaku or terminal_bell elsewhere."
+            "text": "With preferredNotifChannel left at auto, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example ghostty in Kaku before 0.25.0 or terminal_bell elsewhere."
           }
         },
         {
@@ -133,7 +133,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-notifications" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.25.0</a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-notifications" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content" class="docs-page blog-page">
     <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Notifications Not Showing? How to Fix Them on Mac</h1><p class="blog-meta"><span>Published <time datetime="2026-10-18">Oct 18, 2026</time></span><span>5 min read</span></p></div></header>
     <section class="section">
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td>Kaku</td>
-<td><code>"ghostty"</code></td>
+<td>Nothing on 0.25.0 with Claude Code 2.1.295 or later, <code>"ghostty"</code> before that</td>
 </tr>
 <tr>
 <td>Terminal.app</td>
@@ -173,7 +173,7 @@
 </tr>
 </tbody>
 </table>
-<p>For Kaku the whole change is one line:</p>
+<p>Kaku 0.25.0 with Claude Code 2.1.295 or later needs nothing, and setting <code>ghostty</code> there would make Claude Code post a second notification. On older versions the whole change is one line:</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
 <h2 id="the-quick-fix-for-codex">The quick fix for Codex</h2>
 <p>Codex works in Kaku without changes. With its default settings it rings the terminal bell when it needs you, and Kaku turns a bell in a background window into a notification. The text of that notification is generic, built from the last command or the pane title. To see Codex's own message instead, switch it to the OSC 9 sequence in <code>~/.codex/config.toml</code>:</p>
@@ -212,7 +212,7 @@ config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
 <p>Run it with the terminal in the background and it arrives like any other notification. Inside tmux the passthrough setting above still applies.</p>
 <h2 id="faq">FAQ</h2>
 <h3 id="why-does-claude-code-send-notifications-in-iterm2-but-not-in-my-terminal">Why does Claude Code send notifications in iTerm2 but not in my terminal?</h3>
-<p>With <code>preferredNotifChannel</code> left at <code>auto</code>, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example <code>ghostty</code> in Kaku or <code>terminal_bell</code> elsewhere.</p>
+<p>With <code>preferredNotifChannel</code> left at <code>auto</code>, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example <code>ghostty</code> in Kaku before 0.25.0 or <code>terminal_bell</code> elsewhere.</p>
 <h3 id="do-claude-code-notifications-work-over-ssh">Do Claude Code notifications work over SSH?</h3>
 <p>Yes. The sequence travels back through the SSH connection to the terminal on your Mac, which shows the notification, as long as that terminal understands the channel you picked.</p>
 <h3 id="can-i-also-play-a-sound-when-claude-needs-me">Can I also play a sound when Claude needs me?</h3>

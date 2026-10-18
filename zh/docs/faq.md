@@ -193,7 +193,7 @@ brew install --cask kaku
 
 先确认 macOS 允许 Kaku 发通知，打开 Kaku > Notification Settings... 把 Allow Notifications 打开。拒绝过一次之后 macOS 不会再问，所以通知因为这个被丢掉时，Kaku 会在你下次切回来时提醒你。
 
-Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 `auto` 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里这样设置就行：
+Claude Code 2.1.295 及以后的版本会告诉 Kaku 自己是在干活、在等你还是已经跑完，等你、跑完和出错都会变成通知和标签上的提醒点，不用任何设置。用 `claude --version` 看一下版本，`preferredNotifChannel` 保持默认的 `auto` 就好，改成 `ghostty` 会让 Claude Code 自己再发一条重复的通知。更早的版本只给它认识的终端发通知，在 Kaku 里什么都不会发，这时在 `~/.claude/settings.json` 里这样设置：
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -219,6 +219,10 @@ config.macos_global_hotkey = { key = 'j', mods = 'CMD|OPT|CTRL' }
 ## Kaku 能和 yabai、AeroSpace 这类平铺窗口管理器一起用吗？
 
 能用。如果一直闪，通常是平铺 WM 和 Kaku 的全屏、resize 逻辑在打架，把 Kaku 的原生全屏关掉（`config.native_macos_fullscreen_mode = false`），或者在平铺 WM 的管理列表里排除 Kaku，一般就好了。
+
+## 远程访问收费吗？
+
+不收费，中继服务器的钱我自己出，算是谢谢一直陪 Kaku 开源走过来的大家。你的隐私也不靠信任这台服务器，输入和看到的内容在浏览器和 Kaku 之间是加密的，中继只转发它读不懂的数据，而且它只干这一件事，所以连接一直很快。
 
 ## 远程网页显示 Mac 离线，或者要求重新配对。
 

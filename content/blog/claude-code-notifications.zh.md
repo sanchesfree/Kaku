@@ -8,11 +8,11 @@
 |---|---|
 | iTerm2 | Claude Code 里不用改，在 iTerm2 的 Settings > Profiles > Terminal 里勾上 Notification Center Alerts，再在 Filter Alerts 里打开 Send escape sequence-generated alerts |
 | Ghostty、Kitty | 不用改，`auto` 就能用 |
-| Kaku | `"ghostty"` |
+| Kaku | 0.25.0 配 Claude Code 2.1.295 及以上不用改，更早的版本设成 `"ghostty"` |
 | Terminal.app | `auto` 只在关掉提示音时响铃，`/terminal-setup` 会帮你关掉 |
 | WezTerm、Warp、VS Code | `"terminal_bell"`，或者加一个 Notification hook |
 
-Kaku 只需要改这一行：
+Kaku 0.25.0 配 Claude Code 2.1.295 及以上版本什么都不用改，再设成 `ghostty` 反而会多出一条重复通知，更早的版本只需要改这一行：
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -80,7 +80,7 @@ printf '\e]777;notify;%s;%s\a' "Build" "Release build finished"
 
 ### 为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？
 
-`preferredNotifChannel` 保持 `auto` 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 `ghostty`，其他终端可以用 `terminal_bell`。
+`preferredNotifChannel` 保持 `auto` 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，0.25.0 之前的 Kaku 里用 `ghostty`，其他终端可以用 `terminal_bell`。
 
 ### 通过 SSH 跑的 Claude Code 也能通知吗？
 

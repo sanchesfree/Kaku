@@ -36,6 +36,10 @@ Press `Cmd + L` to open the AI chat panel. Answers stream in as Markdown with hi
 
 When the Simple Model and Deep Model differ, `Shift + Tab` switches between them. When they are the same, `/model` lists every model the current provider returns, and your configured model always stays on the list. Type `/suggest` to have Kaku predict the next message you might send.
 
+History, Context and Model sit above the input for browsing saved conversations, attaching terminal context and switching models. With an empty input, Tab moves focus to these controls and to code actions, and Enter runs the focused one. During a reply, Esc or Stop ends it and keeps what has arrived, and Enter with a draft interrupts and sends it. Scrolling up keeps your place while text keeps coming, and Latest jumps back.
+
+Code blocks offer Copy. Finished single-line shell blocks also offer Insert, which pastes the command into the shell you came from without running it. A tool permission request opens a scrollable review of the full target and parameters, where Enter allows and Esc denies.
+
 In a shell, `k` and `kaku chat` pick up the same conversations:
 
 ```bash
@@ -99,7 +103,7 @@ Kaku ships a minimal AppleScript dictionary, so it shows up in Script Editor and
 ```applescript
 tell application "Kaku"
   get name        -- "Kaku"
-  get version     -- e.g. "0.24.0"
+  get version     -- e.g. "0.25.0"
   get frontmost   -- true / false
   quit            -- optional `saving ask|yes|no`
 end tell

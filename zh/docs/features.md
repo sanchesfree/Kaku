@@ -36,6 +36,10 @@ Kaku Assistant 能在命令报错时提供修复建议，将自然语言转换�
 
 Simple Model 和 Deep Model 不同时，按 `Shift + Tab` 在两者之间切换，两者相同时，`/model` 会列出当前服务商返回的全部模型，你配置的模型始终留在列表里。输入 `/suggest` 可以让 Kaku 猜你下一句想发什么。
 
+输入框上方有 History、Context 和 Model，分别用来翻看保存的对话、附带终端上下文和切换模型。输入框为空时按 Tab 会在这些按钮和代码块操作之间移动焦点，按 Enter 执行当前选中的那个。回答过程中按 Esc 或 Stop 会停下并保留已经收到的内容，输入框里有草稿时按 Enter 会打断并直接发出。往上翻时阅读位置不会被新内容顶走，点 Latest 回到最新的回答。
+
+代码块都有 Copy，生成完成的单行 shell 代码块还有 Insert，会把命令粘贴回原来的 shell 但不执行。工具权限请求会打开一个可以滚动的确认页，列出完整的目标和参数，Enter 允许，Esc 拒绝。
+
 在 shell 里用 `k` 或 `kaku chat`，接着用的是同一份对话记录：
 
 ```bash
@@ -99,7 +103,7 @@ Kaku 带了一份极简的 AppleScript 字典，所以能在 Script Editor 和�
 ```applescript
 tell application "Kaku"
   get name        -- "Kaku"
-  get version     -- e.g. "0.24.0"
+  get version     -- e.g. "0.25.0"
   get frontmost   -- true / false
   quit            -- optional `saving ask|yes|no`
 end tell

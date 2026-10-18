@@ -6,6 +6,85 @@
   "source": "https://github.com/tw93/Kaku/releases",
   "releases": [
     {
+      "version": "0.25.0",
+      "tag": "V0.25.0",
+      "name": "V0.25.0 Signal",
+      "codename": "Signal",
+      "publishedAt": "2026-10-18T14:29:30Z",
+      "url": "https://kaku.fun/changelog#v0.25.0",
+      "urlZh": "https://kaku.fun/zh/changelog#v0.25.0",
+      "github": "https://github.com/tw93/Kaku/releases/tag/V0.25.0",
+      "items": [
+        {
+          "label": "Agent Title",
+          "text": "While Claude Code, Codex or Kimi works, its mark and current topic show at the top right of the window, and Agent Title in kaku config turns it off."
+        },
+        {
+          "label": "Claude Code Alerts",
+          "text": "Claude Code 2.1.295 and later notify you and mark the tab when they wait on you, finish or fail, with no setup needed."
+        },
+        {
+          "label": "AI Chat",
+          "text": "History, Context and Model sit above the input, shell code blocks can be inserted into the shell, tool requests show their full details before you allow them, and Stop keeps the partial answer."
+        },
+        {
+          "label": "Remote Access",
+          "text": "Typing stays responsive while a lot of output streams in, and remote access stays free."
+        },
+        {
+          "label": "Touch",
+          "text": "Press and hold opens menus sooner, and their items are larger and easier to tap."
+        },
+        {
+          "label": "Window Padding",
+          "text": "The space around terminal content and the tab bar is now even."
+        },
+        {
+          "label": "Links and Shell",
+          "text": "File paths after Chinese punctuation are clickable, shells start faster by loading completions from cache, and Yazi leaves a row under the path."
+        },
+        {
+          "label": "Fixes",
+          "text": "kaku ai opens each tool's real login command, and q quits the kaku menu as its hint says."
+        }
+      ],
+      "itemsZh": [
+        {
+          "label": "Agent 标题",
+          "text": "Claude Code、Codex 或 Kimi 工作时，窗口右上角会显示它的标志和当前话题，可在 kaku config 里关闭 Agent Title。"
+        },
+        {
+          "label": "Claude Code 提醒",
+          "text": "Claude Code 2.1.295 及以上版本在等你操作、完成或出错时会发通知并标记标签，无需任何设置。"
+        },
+        {
+          "label": "AI 对话",
+          "text": "输入框上方新增历史、上下文和模型切换，代码块可插入 shell，工具请求在允许前展示完整参数，停止生成会保留已有回答。"
+        },
+        {
+          "label": "远程访问",
+          "text": "大量输出时输入依然跟手，远程访问继续免费。"
+        },
+        {
+          "label": "触屏",
+          "text": "长按更快弹出菜单，菜单项更大也更好点。"
+        },
+        {
+          "label": "窗口边距",
+          "text": "终端内容和标签栏四周的留白更均匀。"
+        },
+        {
+          "label": "链接与 Shell",
+          "text": "中文标点后的文件路径可直接点击，补全改从缓存加载让 shell 启动更快，Yazi 在路径下方留出一行。"
+        },
+        {
+          "label": "修复",
+          "text": "kaku ai 会打开各工具真正的登录命令，kaku 主菜单按 q 可按提示退出。"
+        }
+      ],
+      "download": "https://github.com/tw93/Kaku/releases/download/V0.25.0/Kaku.dmg"
+    },
+    {
       "version": "0.24.0",
       "tag": "V0.24.0",
       "name": "V0.24.0 Reach",

@@ -479,6 +479,34 @@ def session_restore_flow(name):
     ])
 
 
+@diagram
+def claude_code_hooks_lifecycle(name):
+    flow(name, [
+        Node("PreToolUse", ["exit 2 blocks"], "brand"),
+        Node("Tool runs", ["Edit, Bash"], "card"),
+        Node("PostToolUse", ["format, lint"], "card"),
+        Node("Stop", ["notify you"], "tint"),
+    ])
+
+
+@diagram
+def claude_code_statusline(name):
+    flow(name, [
+        Node("Claude Code", ["session JSON"], "tint"),
+        Node("Your script", ["stdin, jq, git"], "brand"),
+        Node("Status line", ["row under", "the input"], "card"),
+    ], back="runs again on each new message")
+
+
+@diagram
+def claude_code_git_worktrees(name):
+    pairs(name, [
+        (Node("repo", ["main"]), Node("Tab 1", ["claude"], "brand")),
+        (Node("repo-feature", ["feature-auth"]), Node("Tab 2", ["claude"], "card")),
+        (Node("repo-fix", ["fix-login"]), Node("Tab 3", ["codex"], "card")),
+    ], head=("Worktree, branch", "Kaku tab"))
+
+
 def main() -> int:
     wanted = sys.argv[1:]
     for name, fn in DIAGRAMS.items():

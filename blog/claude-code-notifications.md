@@ -14,11 +14,11 @@ Open `~/.claude/settings.json` and set `preferredNotifChannel` to a channel your
 |---|---|
 | iTerm2 | Nothing in Claude Code. In iTerm2, open Settings > Profiles > Terminal, check Notification Center Alerts, then under Filter Alerts enable Send escape sequence-generated alerts |
 | Ghostty, Kitty | Nothing, `auto` already works |
-| Kaku | `"ghostty"` |
+| Kaku | Nothing on 0.25.0 with Claude Code 2.1.295 or later, `"ghostty"` before that |
 | Terminal.app | `auto` rings the bell only when the audible bell is off; `/terminal-setup` turns it off for you |
 | WezTerm, Warp, VS Code | `"terminal_bell"`, or a Notification hook |
 
-For Kaku the whole change is one line:
+Kaku 0.25.0 with Claude Code 2.1.295 or later needs nothing, and setting `ghostty` there would make Claude Code post a second notification. On older versions the whole change is one line:
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -88,7 +88,7 @@ Run it with the terminal in the background and it arrives like any other notific
 
 ### Why does Claude Code send notifications in iTerm2 but not in my terminal?
 
-With `preferredNotifChannel` left at `auto`, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example `ghostty` in Kaku or `terminal_bell` elsewhere.
+With `preferredNotifChannel` left at `auto`, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example `ghostty` in Kaku before 0.25.0 or `terminal_bell` elsewhere.
 
 ### Do Claude Code notifications work over SSH?
 

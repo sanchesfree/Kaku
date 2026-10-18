@@ -2,6 +2,21 @@
 
 Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 [RSS](https://kaku.fun/feed.xml) 订阅。
 
+## V0.25.0 Signal 2026-10-18
+
+1. **Agent 标题**：Claude Code、Codex 或 Kimi 工作时，窗口右上角会显示它的标志和当前话题，可在 kaku config 里关闭 Agent Title。
+2. **Claude Code 提醒**：Claude Code 2.1.295 及以上版本在等你操作、完成或出错时会发通知并标记标签，无需任何设置。
+3. **AI 对话**：输入框上方新增历史、上下文和模型切换，代码块可插入 shell，工具请求在允许前展示完整参数，停止生成会保留已有回答。
+4. **远程访问**：大量输出时输入依然跟手，远程访问继续免费。
+5. **触屏**：长按更快弹出菜单，菜单项更大也更好点。
+6. **窗口边距**：终端内容和标签栏四周的留白更均匀。
+7. **链接与 Shell**：中文标点后的文件路径可直接点击，补全改从缓存加载让 shell 启动更快，Yazi 在路径下方留出一行。
+8. **修复**：kaku ai 会打开各工具真正的登录命令，kaku 主菜单按 q 可按提示退出。
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.25.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.25.0/Kaku.dmg)
+
+---
+
 ## V0.24.0 Reach 2026-10-17
 
 1. **远程访问**：运行 kaku remote，可以在另一台电脑的浏览器里打开这台 Mac 的终端，正在运行的 Claude Code、Codex 等会话也在其中。

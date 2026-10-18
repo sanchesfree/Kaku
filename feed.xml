@@ -5,8 +5,33 @@
 <link>https://kaku.fun/changelog</link>
 <description>Stable Kaku releases. Nightly builds are not included.</description>
 <language>en</language>
-<lastBuildDate>Sat, 17 Oct 2026 02:18:25 +0000</lastBuildDate>
+<lastBuildDate>Sun, 18 Oct 2026 14:29:30 +0000</lastBuildDate>
 <atom:link href="https://kaku.fun/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>V0.25.0 Signal</title>
+<link>https://kaku.fun/changelog#v0.25.0</link>
+<guid isPermaLink="true">https://kaku.fun/changelog#v0.25.0</guid>
+<pubDate>Sun, 18 Oct 2026 14:29:30 +0000</pubDate>
+<description><![CDATA[<h2>Changelog</h2><ol>
+<li><b>Agent Title</b>: While Claude Code, Codex or Kimi works, its mark and current topic show at the top right of the window, and Agent Title in kaku config turns it off.</li>
+<li><b>Claude Code Alerts</b>: Claude Code 2.1.295 and later notify you and mark the tab when they wait on you, finish or fail, with no setup needed.</li>
+<li><b>AI Chat</b>: History, Context and Model sit above the input, shell code blocks can be inserted into the shell, tool requests show their full details before you allow them, and Stop keeps the partial answer.</li>
+<li><b>Remote Access</b>: Typing stays responsive while a lot of output streams in, and remote access stays free.</li>
+<li><b>Touch</b>: Press and hold opens menus sooner, and their items are larger and easier to tap.</li>
+<li><b>Window Padding</b>: The space around terminal content and the tab bar is now even.</li>
+<li><b>Links and Shell</b>: File paths after Chinese punctuation are clickable, shells start faster by loading completions from cache, and Yazi leaves a row under the path.</li>
+<li><b>Fixes</b>: kaku ai opens each tool's real login command, and q quits the kaku menu as its hint says.</li>
+</ol><h2>更新日志</h2><ol>
+<li><b>Agent 标题</b>：Claude Code、Codex 或 Kimi 工作时，窗口右上角会显示它的标志和当前话题，可在 kaku config 里关闭 Agent Title。</li>
+<li><b>Claude Code 提醒</b>：Claude Code 2.1.295 及以上版本在等你操作、完成或出错时会发通知并标记标签，无需任何设置。</li>
+<li><b>AI 对话</b>：输入框上方新增历史、上下文和模型切换，代码块可插入 shell，工具请求在允许前展示完整参数，停止生成会保留已有回答。</li>
+<li><b>远程访问</b>：大量输出时输入依然跟手，远程访问继续免费。</li>
+<li><b>触屏</b>：长按更快弹出菜单，菜单项更大也更好点。</li>
+<li><b>窗口边距</b>：终端内容和标签栏四周的留白更均匀。</li>
+<li><b>链接与 Shell</b>：中文标点后的文件路径可直接点击，补全改从缓存加载让 shell 启动更快，Yazi 在路径下方留出一行。</li>
+<li><b>修复</b>：kaku ai 会打开各工具真正的登录命令，kaku 主菜单按 q 可按提示退出。</li>
+</ol>]]></description>
+</item>
 <item>
 <title>V0.24.0 Reach</title>
 <link>https://kaku.fun/changelog#v0.24.0</link>
