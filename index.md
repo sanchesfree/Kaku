@@ -1,6 +1,6 @@
 # Kaku
 
-Kaku is an AI-friendly Mac terminal with sensible defaults, ready out of the box. It is open source (MIT), needs no account, and connects to the AI service you configure yourself.
+Kaku is an AI-friendly Mac terminal with sensible defaults, ready out of the box. Its built-in AI helps with commands, and Remote lets you continue your Mac session from a browser. It is open source (MIT), needs no account, and connects to the AI service you configure yourself.
 
 This is the markdown twin of <https://kaku.fun>. Every page on this site has one: append `.md` to any URL, or send `Accept: text/markdown`.
 
@@ -39,10 +39,9 @@ Run `kaku remote` and pair a browser with the generated link to continue your ru
 ```bash
 brew install --cask kaku
 open -a Kaku
-kaku doctor                    # verify app bundle, PATH, shell integration
 ```
 
-Or download the DMG from <https://github.com/tw93/Kaku/releases/latest>, drag Kaku into Applications, and launch it.
+Or download the DMG from <https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg>, drag Kaku into Applications, and launch it.
 
 ## Command line
 

@@ -1,6 +1,6 @@
 # Kaku
 
-Kaku 是一个开箱即用、默认好用、AI 友好的 Mac 终端。MIT 开源，无需账号，AI 服务由用户自行配置，Kaku 不提供或中转 AI 服务。
+Kaku 是一个开箱即用、默认好用、AI 友好的 Mac 终端。内置 AI 助手，也能从浏览器接着操作 Mac 上的会话。MIT 开源，无需账号，AI 服务由用户自行配置，Kaku 不提供或中转 AI 服务。
 
 这是 <https://kaku.fun/zh/> 的 markdown 孪生版本。本站每个页面都有：在任意 URL 后加 `.md`，或请求头带 `Accept: text/markdown`。
 
@@ -39,10 +39,9 @@ Claude Code 和 Codex 可以在同一个 Kaku 窗口里分屏运行，保留各�
 ```bash
 brew install --cask kaku
 open -a Kaku
-kaku doctor                    # 检查 App 包、PATH、shell 集成
 ```
 
-或者从 <https://github.com/tw93/Kaku/releases/latest> 下载 DMG，把 Kaku 拖进 Applications 后启动。
+或者从 <https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg> 下载 DMG，把 Kaku 拖进 Applications 后启动。
 
 ## 命令行
 

@@ -2,7 +2,7 @@
 
 ## Visual Theme
 
-Kaku shares the Kami parchment system used across the family sites (mole.fit and kin) so the apps read as one series. Warm parchment page surface, ink-blue accents, serif type, restrained hairline rules, and dark terminal/screenshot surfaces only where the product needs them. Avoid decorative grids, heavy shadows, oversized marketing type, and card-heavy composition.
+Kaku shares the Kami parchment system used across the family sites (mole.fit and kin) so the apps read as one series. Warm parchment page surface, logo-green accents, serif type, restrained hairline rules, and dark terminal/screenshot surfaces only where the product needs them. Avoid decorative grids, heavy shadows, oversized marketing type, and card-heavy composition.
 
 ## Palette
 
@@ -19,7 +19,7 @@ Token names are Kami's, shared by every family site (`python3 ~/www/Kata/scripts
 
 ## Typography
 
-Serif-first, matching the family. English pages use Charter with Georgia / Palatino fallbacks; Chinese pages use `Kaku Serif SC`, a TsangerJinKai02 subset shipped in `fonts/`, then `Source Han Serif SC` and `Songti SC`; iOS has no Chinese serif, so the face must ship. `python3 scripts/build_fonts.py` rebuilds the subset from every page and every queued blog source, plus the one-glyph `Kaku Mark` for the hero's 書 so English pages load 1 KB instead of the whole subset; `--check` runs in CI. TsangerJinKai02 is free for non-commercial use, which Kaku (MIT) is; never copy it to a paid product's site. Body, headings, and small labels (eyebrows, captions, nav) all share the serif; `--ui` is an alias of `--serif`, and labels are never uppercased. Reading copy is 17px, secondary copy 16px, labels and meta 13 to 15px, with nothing under 12px outside code. Monospace (`JetBrains Mono`) is for terminal prompts, code snippets, and the version tag. Do not add a font CDN.
+Serif-first, matching the family. English pages use Charter with Georgia / Palatino fallbacks; Chinese pages put the same Latin faces first, followed by `Kaku Serif SC`, a TsangerJinKai02 subset shipped in `fonts/`, then `Source Han Serif SC` and `Songti SC`; iOS has no Chinese serif, so the face must ship. `python3 scripts/build_fonts.py` rebuilds the subset from every page and every queued blog source, plus the one-glyph `Kaku Mark` for the hero's 書 so English pages load 1 KB instead of the whole subset; `--check` runs in CI. TsangerJinKai02 is free for non-commercial use, which Kaku (MIT) is; never copy it to a paid product's site. Body, headings, and small labels (eyebrows, captions, nav) all share the serif; `--ui` is an alias of `--serif`, and labels are never uppercased. Reading copy is 17px, secondary copy 16px, labels and meta 13 to 15px, with nothing under 12px outside code. Monospace (`JetBrains Mono`) is for terminal prompts, code snippets, and the version tag. Do not add a font CDN.
 
 ## Components
 
@@ -49,7 +49,7 @@ Sidebar-less prose pages (`/about`, `/compare`, `/contact`, `/privacy`) reuse th
 
 ## Product screenshots
 
-Use genuine, current app output with syntax colors and the real startup marks of Claude Code and Codex. The wide AI hero needs enough columns for both panes without cramped wrapping; phones show one assistant at a time. Use the shared gallery wallpaper around feature captures, and keep the app content legible at its rendered size. Check the product itself while capturing: report awkward layout, clipping, weak contrast, or rough interaction, fix within the authorized scope, then recapture. Never hide product defects through cropping or fabricated output.
+Use genuine, current app output with syntax colors and the real startup marks of Claude Code and Codex. The wide AI hero needs enough columns for both panes without cramped wrapping. Every gallery capture is 2200 × 1540 pixels, shared across desktop and phone layouts, with a full-size link. Do not narrow the app window or change product layouts just to create small phone captures. Capture the source window at those dimensions; do not stretch or crop it to fit. Keep one image layer, without wallpaper padding or an outer border. The Remote capture includes a Safari-style toolbar with the example address `remote.example.com` within the same total dimensions. Keep the app content legible at its rendered size. Check the product itself while capturing: report awkward layout, clipping, weak contrast, or rough interaction, fix within the authorized scope, then recapture. Never hide product defects through cropping or fabricated output.
 
 ## Agent surface
 
