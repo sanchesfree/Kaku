@@ -86,9 +86,9 @@ With `preferredNotifChannel` left at `auto`, Claude Code only sends desktop noti
 
 Yes. The sequence travels back through the SSH connection to the terminal on your Mac, which shows the notification, as long as that terminal understands the channel you picked.
 
-### Can I play a sound instead of showing a notification?
+### Can I also play a sound when Claude needs me?
 
-Yes, with a Notification hook in `~/.claude/settings.json`. Hooks run alongside the built-in notification:
+Yes, with a [Notification hook](https://code.claude.com/docs/en/terminal-config#play-a-sound-with-a-notification-hook) in `~/.claude/settings.json`. Hooks run alongside the built-in notification:
 
 ```json
 {

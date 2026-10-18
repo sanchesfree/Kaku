@@ -16,12 +16,12 @@ brew install zsh-autosuggestions zsh-syntax-highlighting zsh-completions starshi
 # 补全定义要在 compinit 之前放进 fpath
 fpath=(${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-completions $fpath)
 
-# 补全缓存最多一天重建一次
+# 补全缓存最多一天完整检查一次
 # (#q...) 需要 EXTENDED_GLOB，不开的话这个判断永远为真
 setopt EXTENDED_GLOB
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
+  compinit && touch "${ZDOTDIR:-$HOME}/.zcompdump"
 else
   compinit -C
 fi
@@ -48,7 +48,7 @@ source ${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-syntax-highlighting/zsh-synta
 大部分问题由三条规则决定：
 
 - **补全要在 `compinit` 之前。** `compinit` 只扫一次 `fpath`，之后才加进去的，要等下次重建才看得到。
-- **大多数时候用 `compinit -C`。** 完整的 `compinit` 会检查每一个补全文件，加上 `-C` 就直接信任缓存的 `.zcompdump`，上面那个判断会在缓存超过 24 小时时重建一次，在 M5 Pro 上完整跑一次是 29.3 ms，走缓存是 16.2 ms。`(#q...)` 这个判断只有开了 `EXTENDED_GLOB` 才生效，不开的话这串字符根本不会被当成通配，判断永远为真，每个 shell 都会悄悄完整重建一遍。
+- **大多数时候用 `compinit -C`。** 完整的 `compinit` 会检查每一个补全文件，加上 `-C` 就直接信任缓存的 `.zcompdump`，上面那个判断会在缓存超过 24 小时时完整检查一次，需要时才重建，成功后更新缓存时间，在 M5 Pro 上完整跑一次是 29.3 ms，走缓存是 16.2 ms。`(#q...)` 这个判断只有开了 `EXTENDED_GLOB` 才生效，不开的话这串字符根本不会被当成通配，判断永远为真，每个 shell 都会悄悄完整检查一遍。
 - **语法高亮放最后。** 它是靠包住 zsh 行编辑器的 widget 来工作的，在它之后定义的 widget，包括 autosuggestions 的，都不会被高亮，它自己的文档也要求放在最后加载。
 
 ## 别猜，测一下
@@ -70,7 +70,7 @@ hyperfine --warmup 5 'zsh -i -c exit'
 
 Kaku 自带这一套，在你的 `.zshrc` 里加两行来加载，一行管 `PATH`，一行 source `~/.config/kaku/zsh/kaku.zsh`，里面带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions，以及用来跳到常去目录的 zsh-z，提示符用 Starship。
 
-[[figure:kaku-zsh-load-order|Kaku 的 zsh 配置按顺序分六步：PATH 和 Kaku 检测，用缓存的 init 启动 Starship 提示符，历史和按键，每天最多重建一次的 compinit -C，z 和 autosuggestions 以你自己的为准，语法高亮推迟到第一个提示符|规则和上面一样，多了缓存的提示符 init，以及推迟到第一个提示符的高亮。]]
+[[figure:kaku-zsh-load-order|Kaku 的 zsh 配置按顺序分六步：PATH 和 Kaku 检测，用缓存的 init 启动 Starship 提示符，历史和按键，每天最多完整检查一次的 compinit -C，z 和 autosuggestions 以你自己的为准，语法高亮推迟到第一个提示符|规则和上面一样，多了缓存的提示符 init，以及推迟到第一个提示符的高亮。]]
 
 在上面几条规则之外，它还多做了三件事：
 

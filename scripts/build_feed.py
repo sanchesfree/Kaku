@@ -16,6 +16,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 FEED = ROOT / "feeds" / "pages.jsonl"
@@ -54,7 +55,7 @@ def build() -> str:
                 "encoding": {
                     "@type": "MediaObject",
                     "encodingFormat": "text/markdown",
-                    "contentUrl": re.sub(r"/$", "/index", url) + ".md",
+                    "contentUrl": urlsplit(url)._replace(path="/" + Path(rel).with_suffix(".md").as_posix()).geturl(),
                 },
             }
         )

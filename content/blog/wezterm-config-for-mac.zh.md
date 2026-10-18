@@ -26,7 +26,7 @@ config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 ```
 
 - **`font_with_fallback`** 对每个字符按顺序挨个字体试，中文和日文会落到 PingFang SC 上，而不是让 macOS 随便挑一个。
-- **`line_height`** 大于 1.0 会在行与行之间加空隙，长输出读起来更舒服，但制表符和方块字符会跟着行一起拉高，二维码和字符画都会变高。
+- **`line_height`** 大于 1.0 会在行与行之间加空隙，长输出读起来更舒服，但制表字符和方块字符会跟着行一起拉高，二维码和字符画都会变高。
 - **`harfbuzz_features`** 关掉连字，喜欢把 `=>` 画成箭头的话就别加这行。
 
 ## 按键像个 Mac
@@ -129,4 +129,4 @@ config.line_height = 1.1
 
 ### 我的 WezTerm 配置能在 Kaku 里用吗？
 
-能，Kaku 用的是 WezTerm 的配置系统，任何 WezTerm 选项在 `kaku.lua` 里都能用，把设置写在 `-- User overrides:` 下面，Kaku 的默认值就还会在底下加载。
+Kaku 用的是 WezTerm 的配置系统，大多数 macOS 设置都能写在 `kaku.lua` 里，Windows 专用选项已经弃用，不会生效，把设置写在 `-- User overrides:` 下面，Kaku 的默认值就还会在底下加载。

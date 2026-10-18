@@ -25,7 +25,7 @@ Check it with `codex --version`, and update it later with the same tool you inst
 printenv OPENAI_API_KEY | codex login --with-api-key
 ```
 
-On a machine without a browser, `codex login --device-auth` gives you a code to enter on another device. Either way the credentials are stored in `~/.codex/auth.json`. `codex login status` shows which account is active, and `codex logout` removes it.
+On a machine without a browser, `codex login --device-auth` gives you a code to enter on another device. With file-based storage, credentials go in `auth.json` under `CODEX_HOME` (by default `~/.codex`); [`cli_auth_credentials_store`](https://learn.chatgpt.com/docs/config-file/config-reference) can also select the system keyring or memory-only storage. `codex login status` shows which account is active, and `codex logout` removes it.
 
 ## Where the settings come from
 

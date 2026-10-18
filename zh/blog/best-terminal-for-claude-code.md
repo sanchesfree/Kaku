@@ -4,7 +4,7 @@
 
 发布于 2026-10-17 · Tw93 · https://kaku.fun/zh/blog/best-terminal-for-claude-code
 
-Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 是把这五样都默认配好了，下面一项项讲，你也可以拿来对照自己现在用的终端。
+Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，其中通知需要在 Claude Code 里改一项设置，下面一项项讲，你也可以拿来对照自己现在用的终端。
 
 ![Claude Code 会话的循环：写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在](https://kaku.fun/img/blog/claude-code-session-loop.webp)
 
@@ -79,17 +79,9 @@ Kaku 运行时会定时保存窗口布局，再启动时把标签和分屏都恢
 
 ## 常见问题
 
-### Claude Code 需要专门的终端吗？
-
-不需要，能显示现代 TUI 的终端都能跑，终端影响的是长时间会话舒不舒服，多行输入、通知、可点击的路径和重启后恢复这几样。
-
 ### 为什么收不到 Claude Code 的通知？
 
 默认的 `auto` 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端要在 `~/.claude/settings.json` 里把 `preferredNotifChannel` 设成终端认识的通道，比如 Kaku 用 `ghostty`，或者用 `terminal_bell`，在 tmux 里还要执行 `set -g allow-passthrough on`。
-
-### 在 Claude Code 里怎么换行而不发送？
-
-支持的终端里按 `Shift + Enter`，或者按 `Ctrl + J`，或者先打一个反斜杠再回车，后两个在任何终端里都能用。
 
 ### 还能在 tmux 里用 Claude Code 吗？
 

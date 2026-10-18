@@ -129,4 +129,4 @@ Set `send_composed_key_when_left_alt_is_pressed = false`. Do the same for the ri
 
 ### Can I use my WezTerm config in Kaku?
 
-Yes, Kaku uses WezTerm's configuration system, so any WezTerm option works in `kaku.lua`. Put your settings below `-- User overrides:` so Kaku's defaults still load underneath.
+Kaku uses WezTerm's configuration system and supports most macOS settings in `kaku.lua`; Windows-only options are deprecated and have no effect. Put your settings below `-- User overrides:` so Kaku's defaults still load underneath.

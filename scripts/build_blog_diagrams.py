@@ -446,7 +446,7 @@ def kaku_zsh_load_order(name):
         Node("1 PATH, Kaku check", [], "card"),
         Node("2 Starship prompt", ["cached init"], "tint"),
         Node("3 History, keys", [], "card"),
-        Node("4 compinit -C", ["rebuild once a day"], "tint"),
+        Node("4 compinit -C", ["full check daily"], "tint"),
         Node("5 z, autosuggestions", ["yours win"], "card"),
         Node("6 Syntax highlighting", ["after first prompt"], "brand"),
     ], ["", "", "", "", "", ""], note="the whole file is zcompiled")

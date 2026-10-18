@@ -16,12 +16,12 @@ That is the whole dependency list. There is no framework to update and nothing r
 # Completion definitions go on fpath before compinit
 fpath=(${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-completions $fpath)
 
-# Rebuild the completion cache at most once a day.
+# Check the completion cache at most once a day.
 # (#q...) needs EXTENDED_GLOB, without it the test is always true.
 setopt EXTENDED_GLOB
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
+  compinit && touch "${ZDOTDIR:-$HOME}/.zcompdump"
 else
   compinit -C
 fi
@@ -48,7 +48,7 @@ source ${HOMEBREW_PREFIX:-/opt/homebrew}/share/zsh-syntax-highlighting/zsh-synta
 Three rules decide most of it:
 
 - **Completions before `compinit`.** `compinit` scans `fpath` once. Anything added later is not seen until the next rebuild.
-- **`compinit -C` most of the time.** A full `compinit` checks every completion file. With `-C` it trusts the cached `.zcompdump`, and the check above rebuilds it when the cache is more than 24 hours old. On an M5 Pro the full run took 29.3 ms and the cached one 16.2 ms. The `(#q...)` test only works with `EXTENDED_GLOB` on; without it the string is never treated as a glob, the test is always true, and every shell quietly does the full rebuild.
+- **`compinit -C` most of the time.** A full `compinit` checks every completion file. With `-C` it trusts the cached `.zcompdump`, and the check above runs a full check when the cache is more than 24 hours old, rebuilding it if needed and refreshing its timestamp only after success. On an M5 Pro the full run took 29.3 ms and the cached one 16.2 ms. The `(#q...)` test only works with `EXTENDED_GLOB` on; without it the string is never treated as a glob, the test is always true, and every shell quietly does the full check.
 - **Syntax highlighting last.** It works by wrapping zsh's line editor widgets, so widgets defined after it, autosuggestions included, would not be highlighted. Its own documentation asks to be sourced at the end.
 
 ## Measure it instead of guessing
@@ -70,7 +70,7 @@ hyperfine --warmup 5 'zsh -i -c exit'
 
 Kaku ships this setup and loads it from two lines it adds to your `.zshrc`, one for `PATH` and one that sources `~/.config/kaku/zsh/kaku.zsh`. The bundled pieces are zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z for jumping to directories you visit often, with Starship for the prompt.
 
-[[figure:kaku-zsh-load-order|The six steps of Kaku's zsh setup in order: PATH and Kaku check, Starship prompt from a cached init, history and keys, compinit -C rebuilt once a day, z and autosuggestions where yours win, and syntax highlighting after the first prompt|The same rules as above, plus a cached prompt init and highlighting deferred to the first prompt.]]
+[[figure:kaku-zsh-load-order|The six steps of Kaku's zsh setup in order: PATH and Kaku check, Starship prompt from a cached init, history and keys, compinit -C with a full check once a day, z and autosuggestions where yours win, and syntax highlighting after the first prompt|The same rules as above, plus a cached prompt init and highlighting deferred to the first prompt.]]
 
 On top of the rules above, it does three more things:
 

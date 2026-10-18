@@ -59,7 +59,7 @@ UI = {
         "read": "{n} min read",
         "related": "Keep reading",
         "faq": "FAQ",
-        "cta": "Kaku is a free, open-source Mac terminal with these defaults already set.",
+        "cta": "Kaku is a free, open-source Mac terminal.",
         "cta_btn": "Install Kaku",
         "skip": "Skip to content",
         "feed_title": "Kaku Blog",
@@ -78,7 +78,7 @@ UI = {
         "read": "{n} 分钟读完",
         "related": "继续阅读",
         "faq": "常见问题",
-        "cta": "Kaku 是一个免费开源的 Mac 终端，这些默认设置都已经配好了。",
+        "cta": "Kaku 是一个免费开源的 Mac 终端。",
         "cta_btn": "安装 Kaku",
         "skip": "跳到正文",
         "feed_title": "Kaku 博客",
@@ -420,7 +420,7 @@ def replace_block(text: str, start: str, end: str, inner: str, path: str) -> str
 
 def sitemap_block(live: list[dict]) -> str:
     rows = []
-    newest = live[0]["date"] if live else None
+    newest = max((p.get("modified") or p["date"] for p in live), default=None)
     if newest:
         for lang in LANGS:
             rows.append(f"  <url><loc>{SITE}{url(lang)}</loc><lastmod>{newest}</lastmod><priority>0.7</priority></url>")
@@ -457,6 +457,21 @@ def outputs() -> dict[Path, str]:
             files[base / f"{p['slug']}.md"] = twin
     sm = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     files[ROOT / "sitemap.xml"] = replace_block(sm, "<!-- blog:start -->", "<!-- blog:end -->", sitemap_block(live), "sitemap.xml")
+    # A scheduled post also changes the sitemap and its discovery indexes.
+    newest = max(re.findall(r"<lastmod>([0-9-]+)</lastmod>", files[ROOT / "sitemap.xml"]))
+    index = (ROOT / "sitemap-index.xml").read_text(encoding="utf-8")
+    files[ROOT / "sitemap-index.xml"] = re.sub(
+        r"<lastmod>([0-9-]+)</lastmod>",
+        lambda m: f"<lastmod>{max(m[1], newest)}</lastmod>", index,
+    )
+    schema = (ROOT / "schemamap.xml").read_text(encoding="utf-8")
+    blog_date = max((p.get("modified") or p["date"] for p in live), default=None)
+    if blog_date:
+        schema = re.sub(
+            r"(<loc>https://kaku.fun/(?:feeds/pages.jsonl|llms.txt)</loc>\s*<lastmod>)([0-9-]+)(</lastmod>)",
+            lambda m: m[1] + max(m[2], blog_date) + m[3], schema,
+        )
+    files[ROOT / "schemamap.xml"] = schema
     for lang, path in (("en", "llms.txt"), ("zh", "zh/llms.txt")):
         t = (ROOT / path).read_text(encoding="utf-8")
         files[ROOT / path] = replace_block(t, "<!-- blog:start -->", "<!-- blog:end -->", llms_block(lang, live), path)

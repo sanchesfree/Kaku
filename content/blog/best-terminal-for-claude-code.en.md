@@ -1,4 +1,4 @@
-Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, is set up for all five out of the box, and this post walks through each one so you can check whatever terminal you use now.
+Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, with one Claude Code setting needed for notifications, and this post walks through each one so you can check whatever terminal you use now.
 
 [[figure:claude-code-session-loop|A Claude Code session as a loop: you write a prompt, Claude works, it asks for input or finishes, you read the result and open files, and the session survives a restart|The five places where the terminal either helps a Claude Code session or gets in its way.]]
 
@@ -71,17 +71,9 @@ Checked on 2026-10-17 against Claude Code's terminal docs.
 
 ## FAQ
 
-### Does Claude Code need a special terminal?
-
-No. It runs in any terminal with a modern TUI. The terminal changes how comfortable long sessions are: multi-line input, notifications, clickable paths and restoring after a restart.
-
 ### Why don't Claude Code notifications show up?
 
 With the default `auto` channel Claude Code only notifies iTerm2, Ghostty and Kitty. In other terminals set `preferredNotifChannel` in `~/.claude/settings.json` to a channel the terminal understands, such as `ghostty` in Kaku, or `terminal_bell`. Inside tmux, also run `set -g allow-passthrough on`.
-
-### How do I add a new line in Claude Code without sending the prompt?
-
-Press `Shift + Enter` in terminals that support it, or `Ctrl + J`, or type a backslash and press Enter. Those last two work in every terminal.
 
 ### Can I keep using tmux with Claude Code?
 

@@ -86,9 +86,9 @@ printf '\e]777;notify;%s;%s\a' "Build" "Release build finished"
 
 可以，序列会沿着 SSH 连接回到你 Mac 上的终端，由它弹出通知，前提是这个终端认识你选的通道。
 
-### 能不能只放个声音，不弹通知？
+### 能不能在 Claude 等我的时候也放个声音？
 
-可以，在 `~/.claude/settings.json` 里加一个 Notification hook，它会和自带的通知同时运行：
+可以，在 `~/.claude/settings.json` 里加一个 [Notification hook](https://code.claude.com/docs/en/terminal-config#play-a-sound-with-a-notification-hook)，它会和自带的通知同时运行：
 
 ```json
 {

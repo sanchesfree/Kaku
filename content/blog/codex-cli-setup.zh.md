@@ -25,7 +25,7 @@ npm install -g @openai/codex
 printenv OPENAI_API_KEY | codex login --with-api-key
 ```
 
-没有浏览器的机器上用 `codex login --device-auth`，它会给一个代码，拿到另一台设备上输入，不管哪种方式，凭据都存在 `~/.codex/auth.json`，`codex login status` 可以看当前是哪个账号，`codex logout` 退出。
+没有浏览器的机器上用 `codex login --device-auth`，它会给一个代码，拿到另一台设备上输入，使用文件存储时，凭据存在 `CODEX_HOME` 下的 `auth.json`，默认就是 `~/.codex/auth.json`，也可以通过 [`cli_auth_credentials_store`](https://learn.chatgpt.com/docs/config-file/config-reference) 选择系统钥匙串或只存在内存里，`codex login status` 可以看当前是哪个账号，`codex logout` 退出。
 
 ## 设置从哪里来
 
