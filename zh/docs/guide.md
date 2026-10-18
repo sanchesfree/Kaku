@@ -4,7 +4,7 @@ Kaku 日常怎么用，从第一个窗口一直讲到 AI 助手。
 
 > 完整的选项分别在[功能特性](https://kaku.fun/zh/docs/features)、[快捷键](https://kaku.fun/zh/docs/keybindings)和[配置](https://kaku.fun/zh/docs/configuration)这几页。
 
-![Kaku 终端，显示标签栏、分屏和 shell 提示符](https://kaku.fun/shots/kaku-dark.webp)标签在底部，分屏左右并排。
+![Kaku 终端，显示标签栏、分屏和 shell 提示符](https://kaku.fun/shots/tools-dark.webp)标签在底部，分屏左右并排。
 
 ## 第一次打开
 

@@ -4,7 +4,7 @@ How to use Kaku day to day, from the first window to the AI assistant.
 
 > For every option, see [Features](https://kaku.fun/docs/features), [Keybindings](https://kaku.fun/docs/keybindings), and [Configuration](https://kaku.fun/docs/configuration).
 
-![Kaku terminal showing the tab bar, panes, and shell prompt](https://kaku.fun/shots/kaku-dark.webp)Tabs along the bottom, panes side by side.
+![Kaku terminal showing the tab bar, panes, and shell prompt](https://kaku.fun/shots/tools-dark.webp)Tabs along the bottom, panes side by side.
 
 ## First launch
 

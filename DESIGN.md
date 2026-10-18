@@ -42,6 +42,10 @@ Sidebar-less prose pages (`/about`, `/compare`, `/contact`, `/privacy`) reuse th
 - **Covers** are illustrations from an image model (the Codex CLI's image tool), not screenshots: matte paper cutouts on `#F5F4ED` parchment, navy `#1B365D`, pale grey-blue `#DCE3EE` and `#EEF2F7`, off-white, at most one small muted green `#0D7D4D` accent, with no text, logos, real UI or window chrome. Keep the subject between y 100 and 800 of the 1600x900 canvas, measured with a threshold mask rather than `-trim` because the paper grain defeats it. Convert with `magick in.png -resize 1600x900^ -gravity center -extent 1600x900` and `cwebp -q 86`.
 - **Diagrams** explain a mechanism only. Each one is data in `scripts/build_blog_diagrams.py`, drawn as a desktop layout and a stacked `-mobile` layout in JetBrains Mono, saved at 2x and shown at their own width up to the column, so a narrow diagram is never stretched. Labels stay English and short; the caption carries the explanation in each language.
 
+## Product screenshots
+
+Use genuine, current app output with syntax colors and the real startup marks of Claude Code and Codex. The wide AI hero needs enough columns for both panes without cramped wrapping; phones show one assistant at a time. Use the shared gallery wallpaper around feature captures, and keep the app content legible at its rendered size. Check the product itself while capturing: report awkward layout, clipping, weak contrast, or rough interaction, fix within the authorized scope, then recapture. Never hide product defects through cropping or fabricated output.
+
 ## Agent surface
 
 The site serves a machine-readable twin of itself so AI agents do not have to scrape the HTML:

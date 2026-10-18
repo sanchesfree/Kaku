@@ -10,13 +10,13 @@
   <meta property="og:title" content="Kaku · An AI-friendly Mac terminal">
   <meta property="og:description" content="A fast, out-of-the-box macOS terminal: tabs, panes, preset defaults, and an AI assistant when you want it.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://kaku.fun/shots/kaku-og.webp">
+  <meta property="og:image" content="https://kaku.fun/shots/ai-og.webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Kaku terminal in dark mode with tabs, panes, and tools">
   <meta property="og:url" content="https://kaku.fun/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://kaku.fun/shots/kaku-og.webp">
+  <meta name="twitter:image" content="https://kaku.fun/shots/ai-og.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
   <link rel="alternate" hreflang="en" href="https://kaku.fun/">
   <link rel="canonical" href="https://kaku.fun/"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
@@ -43,7 +43,7 @@
         "downloadUrl": "https://github.com/tw93/Kaku/releases/latest",
         "installUrl": "https://github.com/tw93/Kaku/releases/latest",
         "softwareHelp": "https://kaku.fun/docs",
-        "screenshot": "https://kaku.fun/shots/kaku-og.webp",
+        "screenshot": "https://kaku.fun/shots/ai-og.webp",
         "license": "https://opensource.org/licenses/MIT",
         "isBasedOn": "https://wezterm.org",
         "featureList": [
@@ -215,15 +215,45 @@
         <p class="hero-more"><a href="/compare">Compare with iTerm2, Warp, Ghostty, and WezTerm</a></p>
       </div>
     </section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">00 · See it</span><h2>What it actually looks like</h2><p>Dark by default, with a light theme and Auto one setting away.</p></div><div class="gallery"><figure class="shot"><img src="/shots/kaku-dark.webp" width="1920" height="1192" loading="lazy" alt="Kaku dark mode screenshot"><figcaption>Dark theme</figcaption></figure><figure class="shot"><img src="/shots/kaku-light.webp" width="1920" height="1192" loading="lazy" alt="Kaku light mode screenshot"><figcaption>Light theme</figcaption></figure></div></div></section>
-    <section class="section"><div class="wide split"><div class="terminal-window command-card"><div class="terminal-body"><div class="command-row"><span class="command-label">Tabs</span>New ⌘T · Close ⌘W · Switch ⌘1–9</div><div class="command-row"><span class="command-label">Panes</span>Split ⌘D and ⌘⇧D · Navigate ⌘⌥ + arrows</div><div class="command-row"><span class="command-label">Window</span>Settings ⌘, · Clear ⌘K · Restore sessions</div></div></div><div class="prose"><span class="section-num">01 · Tabs &amp; panes</span><h2>Tabs and splits with the shortcuts you already know</h2><p>⌘T opens a tab, ⌘D splits, ⌘1 to ⌘9 switches. Right-click to copy, paste, search, or open AI chat. Quit and reopen Kaku, and your windows, panes, and working directories are right where you left them.</p><p><a href="/docs/keybindings">See all shortcuts</a></p></div></div></section>
-    <section class="section"><div class="wide terminal-demo"><div class="prose"><span class="section-num">02 · Assistant</span><h2>A failed command should be more than red text</h2><p>With the assistant set up, a failed command comes back with a suggested fix. Press <span class="sk">Cmd + Shift + E</span> to drop it at the prompt, and you decide whether it runs. Can't remember the syntax? Type <code>#</code> and describe what you want.</p><p><a href="/docs/features">Explore the assistant</a></p></div><div class="terminal-window"><div class="terminal-body"><p class="term-line"><span class="prompt">~/proj $</span> npm run buidl</p><p class="term-line error">npm ERR! Missing script: "buidl"</p><div class="term-callout">Kaku Assistant · suggested fix<br><code>npm run build</code><br><span class="muted">Press <kbd>⌘⇧E</kbd> to paste it at the prompt. Nothing runs on its own.</span></div><p class="term-line"><span class="prompt">~/proj $</span> npm run build</p></div></div></div></section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">03 · Defaults</span><h2>Ready when you open it</h2><p>Fonts, themes, shortcuts, and shell integration come set up, so there is no config file to write first.</p></div><div class="feature-grid"><a class="feature" href="/docs/keybindings"><span class="mark">01</span><strong>Tabs &amp; Panes</strong><span>Native shortcuts you already know. Restores windows on launch.</span></a><a class="feature" href="/docs/configuration"><span class="mark">02</span><strong>Fonts &amp; Themes</strong><span>Crisp Retina typography. Dark by default, with Light and Auto options.</span></a><a class="feature" href="/docs/features"><span class="mark">03</span><strong>Fast &amp; Light</strong><span>GPU-accelerated native core. Instant startup, zero typing lag.</span></a><a class="feature" href="/docs/features"><span class="mark">04</span><strong>Small Touches</strong><span>Copy on select, and long URLs stay clickable across line wraps.</span></a><a class="feature" href="/docs/features"><span class="mark">05</span><strong>Built-in Tools</strong><span>Comes with a terminal file manager, Git diffs, and smart tab completion.</span></a><a class="feature" href="/docs/features"><span class="mark">06</span><strong>AI Assistant</strong><span>Fixes broken commands and writes shell syntax from plain English.</span></a><a class="feature" href="/docs/configuration"><span class="mark">07</span><strong>Lua Config</strong><span>Fully configurable in Lua. Drop in your existing settings.</span></a></div></div></section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">04 · Get started</span><h2>First steps</h2><p>Install it and go. Set up AI and the rest when you need them.</p></div><div class="workflow-list"><article class="workflow-item"><span class="mark">01</span><h3>Install</h3><p>Grab the DMG or run <code>brew install --cask kaku</code>, then run <code>kaku doctor</code> once to check the app, PATH, and shell integration.</p></article><article class="workflow-item"><span class="mark">02</span><h3>AI setup</h3><p>Run <code>kaku ai</code> and add your own AI service and model, then press <span class="sk">Cmd + L</span> to open chat.</p></article><article class="workflow-item"><span class="mark">03</span><h3>Tools</h3><p><span class="sk">Cmd + Shift + G</span> for Lazygit, <span class="sk">Cmd + Shift + Y</span> for Yazi, and <span class="sk">Cmd + Shift + R</span> to mount remote files in an SSH session.</p></article><article class="workflow-item"><span class="mark">04</span><h3>Config</h3><p>Run <code>kaku config</code> to change font size, opacity, Smart Tab, close confirmation, and shortcuts right in the terminal. Anything deeper goes in Lua.</p></article></div></div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">AI</span><h2>Room for your AI workflow</h2><p>Run Claude Code and Codex side by side, with room for code, diffs, and terminal output.</p></div>
+      <div class="screenshot-gallery">
+        <div class="shot-tabs" role="tablist" aria-label="AI workflow screenshots" hidden>
+          <button id="ai-tab-together" type="button" role="tab" aria-selected="true" aria-controls="ai-together" data-wide>Side by side</button>
+          <button id="ai-tab-claude" type="button" role="tab" aria-selected="false" aria-controls="ai-claude" tabindex="-1">Claude Code</button>
+          <button id="ai-tab-codex" type="button" role="tab" aria-selected="false" aria-controls="ai-codex" tabindex="-1">Codex</button>
+        </div>
+        <figure class="shot" id="ai-together" role="tabpanel" aria-labelledby="ai-tab-together" tabindex="0"><a href="/shots/ai-together.webp"><picture><source media="(max-width: 560px)" srcset="/shots/ai-claude.webp" width="1920" height="1702"><img src="/shots/ai-together.webp" width="2560" height="1562" fetchpriority="high" alt="Claude Code and Codex in two Kaku panes, showing their startup marks and highlighted code"></picture></a></figure>
+        <figure class="shot shot-detail" id="ai-claude" role="tabpanel" aria-labelledby="ai-tab-claude" tabindex="0" hidden><a href="/shots/ai-claude.webp"><img src="/shots/ai-claude.webp" width="1920" height="1702" loading="lazy" alt="Claude Code reviewing TypeScript inside Kaku"></a></figure>
+        <figure class="shot shot-detail" id="ai-codex" role="tabpanel" aria-labelledby="ai-tab-codex" tabindex="0" hidden><a href="/shots/ai-codex.webp"><img src="/shots/ai-codex.webp" width="1920" height="1702" loading="lazy" alt="Codex reviewing TypeScript inside Kaku"></a></figure>
+      </div>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">Remote</span><h2>Your Mac terminal, in a browser</h2><p>Run <code>kaku remote</code> on your Mac and pair a browser with the generated link. Continue your running terminal and AI sessions, with tabs, splits, and file transfers.</p><p><a href="/docs/features#features-remote-access">Explore Remote</a></p></div>
+      <figure class="shot wallpaper-shot"><div class="browser-window"><div class="browser-label">Kaku Remote</div><a href="/shots/remote.webp"><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="A browser connected to a live Codex session on a Mac, with Kaku tabs along the bottom"></a></div><figcaption>Keep your Mac awake and online. Content is end-to-end encrypted between the browser and Kaku.</figcaption></figure>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">Kaku AI</span><h2>A little help, right at the prompt</h2><p>Press <span class="sk">Cmd + L</span> to open built-in chat. Ask about terminal output or project files, with syntax-highlighted code in the reply.</p><p><a href="/docs/features#features-kaku-assistant">Set up the assistant</a></p></div>
+      <figure class="shot wallpaper-shot"><a href="/shots/assistant.webp"><img src="/shots/assistant.webp" width="2200" height="1280" loading="lazy" alt="Kaku Assistant explains how to undo a commit while keeping changes, with syntax-highlighted commands"></a></figure>
+      <div class="assistant-actions"><article><span class="sk">Cmd + L</span><h3>Ask in context</h3><p>Chat about terminal output and project files. Tools that require permission ask for your approval.</p></article><article><span class="sk">Cmd + Shift + E</span><h3>Fix a failed command</h3><p>Get a suggested fix and paste it at the prompt. You decide whether to run it.</p></article><article><span class="sk">#</span><h3>Describe a command</h3><p>Type # followed by what you want to do. Review the generated command before running it.</p></article></div>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">Everyday use</span><h2>Tabs and splits with the shortcuts you already know</h2><p>⌘T opens a tab, ⌘D splits, ⌘1 to ⌘9 switches. Right-click to copy, paste, search, or open AI chat. Quit and reopen Kaku, and your windows, panes, and working directories are right where you left them.</p><p><a href="/docs/keybindings">See all shortcuts</a></p></div>
+      <div class="screenshot-gallery">
+        <div class="shot-tabs" role="tablist" aria-label="Terminal themes" hidden>
+          <button id="tools-tab-dark" type="button" role="tab" aria-selected="true" aria-controls="tools-dark">Dark</button>
+          <button id="tools-tab-light" type="button" role="tab" aria-selected="false" aria-controls="tools-light" tabindex="-1">Light</button>
+        </div>
+        <figure class="shot wallpaper-shot" id="tools-dark" role="tabpanel" aria-labelledby="tools-tab-dark" tabindex="0"><a href="/shots/tools-dark.webp"><img src="/shots/tools-dark.webp" width="3400" height="1360" loading="lazy" alt="Kaku Dark with Yazi browsing files and Git showing code changes side by side"></a></figure>
+        <figure class="shot wallpaper-shot" id="tools-light" role="tabpanel" aria-labelledby="tools-tab-light" tabindex="0" hidden><a href="/shots/tools-light.webp"><img src="/shots/tools-light.webp" width="3400" height="1360" loading="lazy" alt="The same working window in Kaku Light"></a></figure>
+      </div>
+    </div></section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Defaults</span><h2>Ready when you open it</h2><p>Fonts, themes, shortcuts, and shell integration come set up, so there is no config file to write first.</p></div><div class="feature-grid"><a class="feature" href="/docs/keybindings"><span class="mark">01</span><strong>Tabs &amp; Panes</strong><span>Native shortcuts you already know. Restores windows on launch.</span></a><a class="feature" href="/docs/configuration"><span class="mark">02</span><strong>Fonts &amp; Themes</strong><span>Crisp Retina typography. Dark by default, with Light and Auto options.</span></a><a class="feature" href="/docs/features"><span class="mark">03</span><strong>Fast &amp; Light</strong><span>GPU-accelerated rendering with native windows and shortcuts.</span></a><a class="feature" href="/docs/features"><span class="mark">04</span><strong>Small Touches</strong><span>Copy on select, and long URLs stay clickable across line wraps.</span></a><a class="feature" href="/docs/features"><span class="mark">05</span><strong>Built-in Tools</strong><span>Comes with a terminal file manager, Git diffs, and smart tab completion.</span></a><a class="feature" href="/docs/features"><span class="mark">06</span><strong>AI Assistant</strong><span>Fixes broken commands and writes shell syntax from plain English.</span></a><a class="feature" href="/docs/configuration"><span class="mark">07</span><strong>Lua Config</strong><span>Fully configurable in Lua. Drop in your existing settings.</span></a></div></div></section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Get started</span><h2>First steps</h2><p>Install it and go. Set up AI and the rest when you need them.</p></div><div class="workflow-list"><article class="workflow-item"><span class="mark">01</span><h3>Install</h3><p>Grab the DMG or run <code>brew install --cask kaku</code>, then run <code>kaku doctor</code> once to check the app, PATH, and shell integration.</p></article><article class="workflow-item"><span class="mark">02</span><h3>AI setup</h3><p>Run <code>kaku ai</code> to use your Codex connection or configure an API service, then press <span class="sk">Cmd + L</span> to open chat.</p></article><article class="workflow-item"><span class="mark">03</span><h3>Tools</h3><p><span class="sk">Cmd + Shift + G</span> for Lazygit, <span class="sk">Cmd + Shift + Y</span> for Yazi, and <span class="sk">Cmd + Shift + R</span> to mount remote files in an SSH session.</p></article><article class="workflow-item"><span class="mark">04</span><h3>Config</h3><p>Run <code>kaku config</code> to change font size, opacity, Smart Tab, close confirmation, and shortcuts right in the terminal. Anything deeper goes in Lua.</p></article></div></div></section>
     <section class="section-tight">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">05 · Why Kaku</span>
+          <span class="section-num">Why Kaku</span>
           <h2>It started as my own daily driver</h2>
         </div>
         <div class="section-body prose">
@@ -235,7 +265,7 @@
     <section class="section">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">06 · Questions</span>
+          <span class="section-num">Questions</span>
           <h2>Common questions</h2>
         </div>
         <dl class="faq">
@@ -252,5 +282,6 @@
     </section>
   </main>
   <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">An AI-friendly Mac terminal, ready out of the box.</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/about">About</a> · <a href="/compare">Compare</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/roadmap">Roadmap</a> · <a href="/changelog">Changelog</a> · <a href="/blog">Blog</a> · <a href="/docs">Docs</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">Less time fighting the terminal · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+  <script src="/showcase.js" defer></script>
 </body>
 </html>

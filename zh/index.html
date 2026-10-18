@@ -9,13 +9,13 @@
   <meta property="og:title" content="Kaku · 开箱即用、AI 友好的 Mac 终端">
   <meta property="og:description" content="一个快速、开箱即用的 macOS 终端：标签、分屏、调好的默认值，AI 助手随时待命。">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://kaku.fun/shots/kaku-og.webp">
+  <meta property="og:image" content="https://kaku.fun/shots/ai-og.webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Kaku 深色主题终端，含标签、分屏和工具">
   <meta property="og:url" content="https://kaku.fun/zh">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://kaku.fun/shots/kaku-og.webp">
+  <meta name="twitter:image" content="https://kaku.fun/shots/ai-og.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
   <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh">
   <link rel="canonical" href="https://kaku.fun/zh"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
@@ -42,7 +42,7 @@
         "downloadUrl": "https://github.com/tw93/Kaku/releases/latest",
         "installUrl": "https://github.com/tw93/Kaku/releases/latest",
         "softwareHelp": "https://kaku.fun/zh/docs",
-        "screenshot": "https://kaku.fun/shots/kaku-og.webp",
+        "screenshot": "https://kaku.fun/shots/ai-og.webp",
         "license": "https://opensource.org/licenses/MIT",
         "isBasedOn": "https://wezterm.org",
         "featureList": [
@@ -249,65 +249,55 @@
         <p class="hero-more"><a href="/zh/compare">对比 iTerm2、Warp、Ghostty 和 WezTerm</a></p>
       </div>
     </section>
-    <section class="section">
-      <div class="wide">
-        <div class="section-head">
-          <span class="section-num">00 · 看界面</span>
-          <h2>实际长这样</h2>
-          <p>默认深色，也能换成浅色或跟随系统。</p>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">AI</span><h2>给 AI 工作留足空间</h2><p>Claude Code 和 Codex 并排运行，写代码、看差异、查输出，都放在同一个窗口里。</p></div>
+      <div class="screenshot-gallery">
+        <div class="shot-tabs" role="tablist" aria-label="AI 工作界面" hidden>
+          <button id="ai-tab-together" type="button" role="tab" aria-selected="true" aria-controls="ai-together" data-wide>并排</button>
+          <button id="ai-tab-claude" type="button" role="tab" aria-selected="false" aria-controls="ai-claude" tabindex="-1">Claude Code</button>
+          <button id="ai-tab-codex" type="button" role="tab" aria-selected="false" aria-controls="ai-codex" tabindex="-1">Codex</button>
         </div>
-        <div class="gallery">
-          <figure class="shot"><img src="/shots/kaku-dark.webp" width="1920" height="1192" loading="lazy" alt="Kaku 深色主题截图"><figcaption>深色主题</figcaption></figure>
-          <figure class="shot"><img src="/shots/kaku-light.webp" width="1920" height="1192" loading="lazy" alt="Kaku 浅色主题截图"><figcaption>浅色主题</figcaption></figure>
-        </div>
+        <figure class="shot" id="ai-together" role="tabpanel" aria-labelledby="ai-tab-together" tabindex="0"><a href="/shots/ai-together.webp"><picture><source media="(max-width: 560px)" srcset="/shots/ai-claude.webp" width="1920" height="1702"><img src="/shots/ai-together.webp" width="2560" height="1562" fetchpriority="high" alt="Claude Code 和 Codex 在 Kaku 的两个分屏中显示启动标记和带颜色的代码"></picture></a></figure>
+        <figure class="shot shot-detail" id="ai-claude" role="tabpanel" aria-labelledby="ai-tab-claude" tabindex="0" hidden><a href="/shots/ai-claude.webp"><img src="/shots/ai-claude.webp" width="1920" height="1702" loading="lazy" alt="Claude Code 在 Kaku 中查看 TypeScript 代码"></a></figure>
+        <figure class="shot shot-detail" id="ai-codex" role="tabpanel" aria-labelledby="ai-tab-codex" tabindex="0" hidden><a href="/shots/ai-codex.webp"><img src="/shots/ai-codex.webp" width="1920" height="1702" loading="lazy" alt="Codex 在 Kaku 中查看 TypeScript 代码"></a></figure>
       </div>
-    </section>
-    <section class="section">
-      <div class="wide split">
-        <div class="terminal-window command-card">
-          <div class="terminal-body">
-            <div class="command-row"><span class="command-label">标签</span>新建 ⌘T · 关闭 ⌘W · 切换 ⌘1–9</div>
-            <div class="command-row"><span class="command-label">分屏</span>⌘D 和 ⌘⇧D 拆分 · ⌘⌥ + 方向键 切换</div>
-            <div class="command-row"><span class="command-label">窗口</span>设置 ⌘, · 清屏 ⌘K · 恢复会话</div>
-          </div>
-        </div>
-        <div class="prose">
-          <span class="section-num">01 · 标签与分屏</span>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">Remote</span><h2>离开 Mac，也能接着用</h2><p>在 Mac 上运行 <code>kaku remote</code>，用生成的链接配对浏览器，就能继续操作正在运行的终端和 AI 会话，标签、分屏和文件传输也都在。</p><p><a href="/zh/docs/features#features-remote-access">了解 Remote</a></p></div>
+      <figure class="shot wallpaper-shot"><div class="browser-window"><div class="browser-label">Kaku Remote</div><a href="/shots/remote.webp"><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="通过浏览器连接 Mac 上的真实 Codex 会话，下方保留 Kaku 标签栏"></a></div><figcaption>Mac 需保持开机联网，浏览器与 Kaku 之间的内容经过端到端加密</figcaption></figure>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head"><span class="section-num">Kaku AI</span><h2>问一句、改个错，不用离开终端</h2><p>按 <span class="sk">Cmd + L</span> 打开内置对话，带上终端输出或项目文件一起问，回答里的代码也有语法高亮。</p><p><a href="/zh/docs/features#features-kaku-assistant">设置内置助手</a></p></div>
+      <figure class="shot wallpaper-shot"><a href="/shots/assistant.webp"><img src="/shots/assistant.webp" width="2200" height="1280" loading="lazy" alt="Kaku 内置 AI 对话解释如何撤回提交并保留修改，命令带有语法高亮"></a></figure>
+      <div class="assistant-actions"><article><span class="sk">Cmd + L</span><h3>边看边问</h3><p>围绕终端输出和项目文件对话，需要授权的工具操作会先征求你的同意。</p></article><article><span class="sk">Cmd + Shift + E</span><h3>报错后改一下</h3><p>失败的命令会给出修复建议，按快捷键放回命令行，由你决定是否执行。</p></article><article><span class="sk">#</span><h3>一句话说命令</h3><p>输入 # 加一句描述，把想做的事变成命令，确认后再运行。</p></article></div>
+    </div></section>
+    <section class="section"><div class="wide">
+      <div class="section-head">
+          <span class="section-num">日常使用</span>
           <h2>标签和分屏，还是 Mac 上那套快捷键</h2>
           <p>⌘T 开标签，⌘D 分屏，⌘1 到 ⌘9 切换；右键可快速复制、粘贴、搜索或发起 AI 对话。退出后再打开 Kaku，窗口、分屏和工作目录都会原样恢复。</p>
           <p><a href="/zh/docs/keybindings">查看全部快捷键</a></p>
         </div>
-      </div>
-    </section>
-    <section class="section">
-      <div class="wide terminal-demo">
-        <div class="prose">
-          <span class="section-num">02 · 助手</span>
-          <h2>命令报错，不该只剩一行红字</h2>
-          <p>配好助手后，命令跑错时会自动给出修复建议。按 <span class="sk">Cmd + Shift + E</span> 放回命令行，是否执行完全由你决定；想不起命令怎么写时，输入 <code>#</code> 加一句日常描述也能直接生成。</p>
-          <p><a href="/zh/docs/features">了解助手</a></p>
+      <div class="screenshot-gallery">
+        <div class="shot-tabs" role="tablist" aria-label="终端主题" hidden>
+          <button id="tools-tab-dark" type="button" role="tab" aria-selected="true" aria-controls="tools-dark">深色</button>
+          <button id="tools-tab-light" type="button" role="tab" aria-selected="false" aria-controls="tools-light" tabindex="-1">浅色</button>
         </div>
-        <div class="terminal-window">
-          <div class="terminal-body" aria-label="Kaku 错误自动修复演示">
-            <p class="term-line"><span class="prompt">~/proj $</span> npm run buidl</p>
-            <p class="term-line error">npm ERR! Missing script: "buidl"</p>
-            <div class="term-callout">Kaku Assistant · 建议修复<br><code>npm run build</code><br><span class="muted">按 <kbd>⌘⇧E</kbd> 放回命令行，不会自动执行。</span></div>
-            <p class="term-line"><span class="prompt">~/proj $</span> npm run build</p>
-          </div>
-        </div>
+        <figure class="shot wallpaper-shot" id="tools-dark" role="tabpanel" aria-labelledby="tools-tab-dark" tabindex="0"><a href="/shots/tools-dark.webp"><img src="/shots/tools-dark.webp" width="3400" height="1360" loading="lazy" alt="Kaku 深色主题，左侧 Yazi 浏览文件，右侧 Git 显示代码修改"></a></figure>
+        <figure class="shot wallpaper-shot" id="tools-light" role="tabpanel" aria-labelledby="tools-tab-light" tabindex="0" hidden><a href="/shots/tools-light.webp"><img src="/shots/tools-light.webp" width="3400" height="1360" loading="lazy" alt="同一个工作窗口切换到 Kaku 浅色主题"></a></figure>
       </div>
-    </section>
+    </div></section>
     <section class="section">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">03 · 默认值</span>
+          <span class="section-num">默认值</span>
           <h2>装好就能用</h2>
           <p>字体、主题、快捷键和 Shell 集成都提前配好了，不用先去改配置文件。</p>
         </div>
         <div class="feature-grid">
           <a class="feature" href="/zh/docs/keybindings"><span class="mark">01</span><strong>标签分屏</strong><span>熟悉的 Mac 快捷键，重开自动恢复会话与目录</span></a>
           <a class="feature" href="/zh/docs/configuration"><span class="mark">02</span><strong>字体主题</strong><span>精调等宽字体，默认深色，可选浅色或 Auto</span></a>
-          <a class="feature" href="/zh/docs/features"><span class="mark">03</span><strong>快而轻量</strong><span>GPU 硬件加速，启动秒开，打字跟手不卡顿</span></a>
+          <a class="feature" href="/zh/docs/features"><span class="mark">03</span><strong>快而轻量</strong><span>GPU 加速渲染，原生窗口与快捷键</span></a>
           <a class="feature" href="/zh/docs/features"><span class="mark">04</span><strong>小细节</strong><span>选中文本直接复制，长网址折行也能直接点</span></a>
           <a class="feature" href="/zh/docs/features"><span class="mark">05</span><strong>内置工具</strong><span>自带终端文件管家、Git 界面和命令自动补全</span></a>
           <a class="feature" href="/zh/docs/features"><span class="mark">06</span><strong>AI 助手</strong><span>报错一键给修复建议，用大白话也能直接写命令</span></a>
@@ -318,13 +308,13 @@
     <section class="section">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">04 · 上手</span>
+          <span class="section-num">上手</span>
           <h2>从这里开始</h2>
           <p>装完直接用，AI 服务和其他设置等用到时再配。</p>
         </div>
         <div class="workflow-list">
           <article class="workflow-item"><span class="mark">01</span><h3>安装</h3><p>下载 DMG 或运行 <code>brew install --cask kaku</code>，装完跑一次 <code>kaku doctor</code>，看看 app、PATH 和 shell 集成是否正常。</p></article>
-          <article class="workflow-item"><span class="mark">02</span><h3>AI 设置</h3><p>运行 <code>kaku ai</code> 填上自己的 AI 服务和模型，之后按 <span class="sk">Cmd + L</span> 就能打开 AI 对话。</p></article>
+          <article class="workflow-item"><span class="mark">02</span><h3>AI 设置</h3><p>运行 <code>kaku ai</code>，沿用 Codex 的连接或配置自己的 API 服务，之后按 <span class="sk">Cmd + L</span> 就能打开 AI 对话。</p></article>
           <article class="workflow-item"><span class="mark">03</span><h3>工具</h3><p><span class="sk">Cmd + Shift + G</span> 打开 Lazygit，<span class="sk">Cmd + Shift + Y</span> 打开 Yazi，在 SSH 会话里按 <span class="sk">Cmd + Shift + R</span> 可以挂载远端文件。</p></article>
           <article class="workflow-item"><span class="mark">04</span><h3>配置</h3><p>运行 <code>kaku config</code>，在终端里改字号、透明度、Smart Tab、关闭确认和快捷键，更细的地方用 Lua 覆盖。</p></article>
         </div>
@@ -333,7 +323,7 @@
     <section class="section-tight">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">05 · 为什么是 Kaku</span>
+          <span class="section-num">为什么是 Kaku</span>
           <h2>先是我自己天天在用</h2>
         </div>
         <div class="section-body prose">
@@ -345,7 +335,7 @@
     <section class="section">
       <div class="wide">
         <div class="section-head">
-          <span class="section-num">06 · 问答</span>
+          <span class="section-num">问答</span>
           <h2>常见问题</h2>
         </div>
         <dl class="faq">
@@ -362,5 +352,6 @@
     </section>
   </main>
   <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">开箱即用、默认好用、AI 友好的 Mac 终端。</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/zh/about">关于</a> · <a href="/zh/compare">对比</a> · <a href="/zh/contact">联系</a> · <a href="/zh/privacy">隐私</a> · <a href="/zh/roadmap">Roadmap</a> · <a href="/zh/changelog">Changelog</a> · <a href="/zh/blog">博客</a> · <a href="/zh/docs">文档</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">少和终端较劲 · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+  <script src="/showcase.js" defer></script>
 </body>
 </html>
