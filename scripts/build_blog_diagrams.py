@@ -25,12 +25,12 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "img" / "blog"
 
-PAPER = (245, 244, 237)      # --paper
-CARD = (250, 249, 245)       # --paper-card
+PAPER = (245, 244, 237)      # --parchment
+CARD = (250, 249, 245)       # --ivory
 LINE = (216, 213, 200)       # --line
-INK = (20, 20, 19)           # --ink
-DIM = (61, 61, 58)           # --ink-dim
-MUTED = (107, 106, 100)      # --ink-muted
+INK = (20, 20, 19)           # --near-black
+DIM = (61, 61, 58)           # --dark-warm
+MUTED = (107, 106, 100)      # --stone
 BRAND = (27, 54, 93)         # --brand
 TINT = (238, 242, 247)       # --brand-tint
 GREEN = (13, 125, 77)        # --green

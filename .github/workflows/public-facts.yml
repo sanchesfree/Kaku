@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install Pygments Markdown Pillow
+      - run: python -m pip install Pygments Markdown Pillow fonttools brotli
       - run: python3 scripts/test_blog_pipeline.py
       - run: python3 scripts/build_blog.py --check
       - run: python3 scripts/build_markdown.py --check
@@ -31,3 +31,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - run: python3 scripts/check_sitemap.py
+      - run: python3 scripts/build_fonts.py --check

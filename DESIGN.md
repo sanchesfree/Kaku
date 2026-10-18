@@ -6,17 +6,19 @@ Kaku shares the Kami parchment system used across the family sites (mole.fit and
 
 ## Palette
 
-- `#f5f4ed` parchment page background (`--paper`)
-- `#faf9f5` elevated and card surface (`--paper-elev` / `--paper-card`)
-- `#141413` primary ink text (`--ink`); `#3d3d3a` dim, `#6b6a64` muted
+Token names are Kami's, shared by every family site (`python3 ~/www/Kata/scripts/site-tokens.py` checks them); a different value keeps the name.
+
+- `#f5f4ed` parchment page background (`--parchment`)
+- `#faf9f5` elevated and card surface (`--ivory`); `#e8e6dc` warm sand (`--warm-sand`)
+- `#141413` primary text (`--near-black`); `#3d3d3a` dim (`--dark-warm`), `#6b6a64` muted (`--stone`)
 - `#1B365D` ink-blue brand and actions (`--brand`); `#2D5A8A` hover (`--brand-light`); `#EEF2F7` tint
 - `#0d7d4d` green for command-success accents only
 - `#141318` terminal canvas (`--term`); `#e7e4d9` terminal text
-- `#d8d5c8` warm line/divider (`--line`); `#e5e3d8` soft line (`--line-soft`)
+- `#d8d5c8` warm line/divider (`--line`); `#e5e3d8` soft line (`--border-soft`); `#ebe9e0` faint line (`--line-faint`)
 
 ## Typography
 
-Serif-first, matching the family. English pages use Charter with Georgia / Palatino fallbacks; Chinese pages use `TsangerJinKai02`, `Source Han Serif SC`, then `Songti SC`. Body, headings, and small labels (eyebrows, captions, nav) all share the serif; `--ui` is an alias of `--serif`, and labels are never uppercased. Reading copy is 17px, secondary copy 16px, labels and meta 13 to 15px, with nothing under 12px outside code. Monospace (`JetBrains Mono`) is for terminal prompts, code snippets, and the version tag. Do not add a font CDN by default.
+Serif-first, matching the family. English pages use Charter with Georgia / Palatino fallbacks; Chinese pages use `Kaku Serif SC`, a TsangerJinKai02 subset shipped in `fonts/`, then `Source Han Serif SC` and `Songti SC`; iOS has no Chinese serif, so the face must ship. `python3 scripts/build_fonts.py` rebuilds the subset from every page and every queued blog source, plus the one-glyph `Kaku Mark` for the hero's 書 so English pages load 1 KB instead of the whole subset; `--check` runs in CI. TsangerJinKai02 is free for non-commercial use, which Kaku (MIT) is; never copy it to a paid product's site. Body, headings, and small labels (eyebrows, captions, nav) all share the serif; `--ui` is an alias of `--serif`, and labels are never uppercased. Reading copy is 17px, secondary copy 16px, labels and meta 13 to 15px, with nothing under 12px outside code. Monospace (`JetBrains Mono`) is for terminal prompts, code snippets, and the version tag. Do not add a font CDN.
 
 ## Components
 
