@@ -1,4 +1,4 @@
-Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is a settings window with more features than either of the others, Ghostty is a text file of `key = value` lines on a fast native app, and WezTerm is a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds. Warp, Kitty, Alacritty and Terminal.app are covered in [the best terminal for Mac](/blog/best-terminal-for-mac).
+Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is configured through a settings window with more features than either of the others, Ghostty uses a text file of `key = value` lines on a fast native app, and WezTerm uses a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds. Warp, Kitty, Alacritty and Terminal.app are covered in [the best terminal for Mac](/blog/best-terminal-for-mac).
 
 [[figure:terminal-config-models|iTerm2 is configured in a settings window saved to a plist, Ghostty in a text file of key = value lines, WezTerm in a Lua script with hot reload|The configuration model decides more about daily use than any single feature.]]
 
@@ -26,7 +26,7 @@ config.font_size = 15
 return config
 ```
 
-Because it is a program, the config can pick a color scheme from the system appearance, build a status bar from events, or define keys that run Lua. It reloads on save. The cost is that a typo is a Lua error, not an ignored line.
+Because the config is a program, it can pick a color scheme from the system appearance, build a status bar from events, or define keys that run Lua. It reloads on save. The cost is that a typo is a Lua error, not an ignored line.
 
 ## Splits, tabs and tmux
 

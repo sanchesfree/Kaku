@@ -34,7 +34,7 @@ claude --cloud "fix the flaky login test"
 
 ## kaku remote，浏览器里的整个终端
 
-上面两种看到的都是 Claude 的对话，可有时候你需要的是终端里的其他东西，旁边分屏里开发服务器的日志，另一个标签里的 Codex，或者一个随手查东西的 shell，`kaku remote` 打开的就是终端本身，在另一台电脑的浏览器里。
+上面两种看到的都是 Claude 的对话，可有时候你需要的是终端里的其他东西，比如旁边分屏里开发服务器的日志、另一个标签里的 Codex，或者一个随手查东西的 shell，`kaku remote` 则是直接在另一台电脑的浏览器里打开终端本身。
 
 [[figure:remote-access-architecture|另一台电脑上的浏览器经过中继连到你 Mac 上的 Kaku，你输入的和看到的内容从浏览器到 Kaku 全程加密|中继只负责转发连接，读不到里面的内容。]]
 
@@ -81,4 +81,4 @@ kaku remote --reset        # 移除所有已配对的浏览器
 
 ### kaku remote 能用 Codex 和别的命令行工具吗？
 
-能，它显示的是终端本身，Kaku 标签里跑着什么，Claude Code、Codex、编辑器还是 shell，浏览器里就是什么。
+能，它显示的是终端本身，Kaku 标签里不管跑着 Claude Code、Codex、编辑器还是 shell，浏览器里就是什么。

@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -98,6 +99,60 @@ class BlogPipelineTests(unittest.TestCase):
         result = self.script("check_sitemap", success=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("best-terminal-for-claude-code lastmod", result.stdout + result.stderr)
+
+
+sys.path.insert(0, str(ROOT / "scripts"))
+import build_blog  # noqa: E402
+
+
+def post(slug, category, day=None, **extra):
+    return {"slug": slug, "category": category, "date": day, **extra}
+
+
+class BlogCategoryTests(unittest.TestCase):
+    def test_every_queued_and_live_post_has_a_known_category(self):
+        build_blog.load_queue()
+        for broken in (post("a", "agents", "2026-10-17"), post("b", None)), (post("c", "nope"),):
+            with self.subTest(broken=broken), self.assertRaises(SystemExit):
+                build_blog.check_categories(list(broken))
+        with self.assertRaises(SystemExit):
+            build_blog.check_categories([{"slug": "d", "date": None}])
+
+    def test_index_groups_live_posts_and_skips_empty_groups(self):
+        live = [p for p in build_blog.live_posts(build_blog.load_queue(), build_blog.today())]
+        for lang in build_blog.LANGS:
+            page = build_blog.index_page(lang, live)
+            ids = re.findall(r'<section id="topic-([a-z]+)" class="blog-group"', page)
+            expected = [c for c in build_blog.CATEGORIES if any(p["category"] == c for p in live)]
+            self.assertEqual(ids, expected)
+            for cat in ids:
+                group = re.search(rf'id="topic-{cat}".*?</section>', page, re.S).group(0)
+                hrefs = re.findall(r'<li class="blog-card"><a href="[^"]*/blog/([^"]+)"', group)
+                self.assertEqual(hrefs, [p["slug"] for p in live if p["category"] == cat])
+                self.assertIn(build_blog.CATEGORY_COPY[cat][lang][1], group)
+
+    def test_related_is_pins_then_live_pillar_then_neighbours_then_fallback(self):
+        queue = [
+            post("pillar-terminal", "terminal", "2026-10-01"),
+            post("t1", "terminal", "2026-10-02"),
+            post("a1", "agents", "2026-10-03"),
+            post("t2", "terminal", "2026-10-04", related=["queued", "a1"]),
+            post("t3", "terminal", "2026-10-05"),
+            post("queued", "terminal"),
+            post("install-claude-code-mac", "agents"),
+            post("a2", "agents", "2026-10-06"),
+        ]
+        live = build_blog.live_posts(queue, build_blog.date(2026, 10, 18))
+        slugs = lambda p: [x["slug"] for x in build_blog.related_posts(p, live, queue)]  # noqa: E731
+        by = {p["slug"]: p for p in queue}
+        self.assertEqual(slugs(by["t2"]), ["a1", "t1", "t3"])
+        self.assertEqual(slugs(by["t3"]), ["t2", "t1", "pillar-terminal"])
+        # The agents pillar is still queued, so it is skipped rather than linked.
+        self.assertEqual(slugs(by["a2"]), ["a1", "t3", "t2"])
+        with unittest.mock.patch.dict(build_blog.CATEGORY_PILLARS, {"terminal": "pillar-terminal"}):
+            self.assertEqual(slugs(by["t3"]), ["pillar-terminal", "t2", "t1"])
+        for p in live:
+            self.assertTrue(all(x["date"] for x in build_blog.related_posts(p, live, queue)))
 
 
 if __name__ == "__main__":

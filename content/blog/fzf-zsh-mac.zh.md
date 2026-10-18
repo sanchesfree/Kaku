@@ -1,4 +1,4 @@
-在 Mac 上给 zsh 配 fzf，先 `brew install fzf`，再往 `~/.zshrc` 里加一行 `source <(fzf --zsh)`，开一个新 shell 就有三个快捷键可用，Ctrl + R 搜历史命令，Ctrl + T 把文件和目录贴到命令行上，Alt + C 直接跳进某个目录。前两个装好就能用，Alt + C 在 Mac 上要多一步，得让终端把 Option 键当成 Meta 发出去，而大多数终端默认都没开这个。
+在 Mac 上给 zsh 配 fzf，先 `brew install fzf`，再往 `~/.zshrc` 里加一行 `source <(fzf --zsh)`。新开一个 shell 就能用上三个快捷键，Ctrl + R 搜历史命令，Ctrl + T 把文件和目录贴到命令行上，Alt + C 直接跳进某个目录。前两个装好就能用，Alt + C 在 Mac 上要多一步，得让终端把 Option 键当成 Meta 发出去，而大多数终端默认都没开这个。
 
 ## 安装和启用
 
@@ -25,11 +25,11 @@ FZF_CTRL_R_COMMAND= FZF_ALT_C_COMMAND= source <(fzf --zsh)
 
 ## 三个快捷键
 
-**Ctrl + R 搜历史。** 它在历史命令里模糊搜索，选中的那条会贴到命令行上但不会直接执行，再按一次 Ctrl + R 可以在按相关度和按时间排序之间切换，`TAB` 能一次选好几条，Alt + R 进入 raw 模式，匹配项周围的几行也会留在列表里，这时用 Ctrl + N 和 Ctrl + P 只在匹配项之间跳。
+**Ctrl + R 搜历史。** 它在历史命令里模糊搜索，选中的那条会贴到命令行上但不会直接执行。再按一次 Ctrl + R 可以在按相关度和按时间排序之间切换，`TAB` 能一次选好几条，Alt + R 进入 raw 模式，匹配项周围的几行也会留在列表里，这时用 Ctrl + N 和 Ctrl + P 只在匹配项之间跳。
 
-**Ctrl + T 找文件。** 它列出当前目录下的文件和目录，把选中的路径贴到光标位置，比如先敲 `vim ` 再按 Ctrl + T，挑完路径就直接落在 vim 后面，列表来自 fzf 自带的 walker，参数是 `--walker file,dir,follow,hidden`，所以隐藏文件也会列出来。
+**Ctrl + T 找文件。** 它列出当前目录下的文件和目录，把选中的路径贴到光标位置，比如先敲 `vim ` 再按 Ctrl + T，挑完路径就直接落在 vim 后面。列表来自 fzf 自带的 walker，参数是 `--walker file,dir,follow,hidden`，所以隐藏文件也会列出来。
 
-**Alt + C 跳目录。** 它只列目录，用的是 `--walker dir,follow,hidden`，选中哪个就 `cd` 进哪个，在一个层级很深的仓库里找某个子目录时，比一层层敲 `cd` 加 Tab 快不少。
+**Alt + C 跳目录。** 它只列目录，用的是 `--walker dir,follow,hidden`，选中哪个就 `cd` 进哪个。在一个层级很深的仓库里找某个子目录时，比一层层敲 `cd` 加 Tab 快不少。
 
 在搜索框里，Ctrl + K 和 Ctrl + J（或者 Ctrl + P 和 Ctrl + N）上下移动，回车确认，Ctrl + C、Ctrl + G 或 Esc 退出。输入默认是模糊匹配，空格分开多个词，`'wild` 是精确匹配，`^music` 匹配开头，`.mp3$` 匹配结尾，`!fire` 排除，想整个切到精确模式就给 fzf 加 `-e`。
 
@@ -48,7 +48,7 @@ zsh 眼里的 Alt + C 是 Esc 后面跟一个 `c`，得让终端把 Option 当�
 
 ## 用 fd 和 bat 调一调默认行为
 
-自带的 walker 在大多数项目里已经够快，剩下要调的一般就两类，一是跳过 `node_modules` 这类文件特别多的目录，二是加一个预览窗，每个快捷键都有自己的 `*_OPTS` 变量，写在 source 那一行之前：
+自带的 walker 在大多数项目里已经够快，剩下要调的一般就两类，一是跳过 `node_modules` 这类文件特别多的目录，二是加一个预览窗。每个快捷键都有自己的 `*_OPTS` 变量，写在 source 那一行之前：
 
 ```bash
 brew install bat tree
@@ -88,11 +88,11 @@ export FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude .git'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 ```
 
-`FZF_DEFAULT_COMMAND`（比如 `fd --type f`）只管直接敲 `fzf` 时列什么，README 里写明了 shell 集成不读它，所以几个快捷键才各有各的变量，想处处生效的选项，比如 `--height 40% --layout reverse --border`，放进 `FZF_DEFAULT_OPTS` 就行。
+`FZF_DEFAULT_COMMAND`（比如 `fd --type f`）只管直接敲 `fzf` 时列什么，README 里写明了 shell 集成不读它，所以几个快捷键才各有各的变量。想处处生效的选项，比如 `--height 40% --layout reverse --border`，放进 `FZF_DEFAULT_OPTS` 就行。
 
 ## 用 fzf-tab 接管所有补全
 
-`**<Tab>` 只有敲了触发符才会出来，[fzf-tab](https://github.com/Aloxaf/fzf-tab) 则把 zsh 整个补全菜单换成 fzf，在 `git checkout `、`kill ` 或者变量名后面直接按 Tab 就是一个模糊列表，它自己不做补全，只是把 zsh 原生补全系统的结果拿来展示，所以你原来那些补全配置大都还能用。
+`**<Tab>` 只有敲了触发符才会出来，[fzf-tab](https://github.com/Aloxaf/fzf-tab) 则把 zsh 整个补全菜单换成 fzf。在 `git checkout `、`kill ` 或者变量名后面直接按 Tab 就是一个模糊列表，它自己不做补全，只是把 zsh 原生补全系统的结果拿来展示，所以你原来那些补全配置大都还能用。
 
 ```bash
 git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
@@ -110,13 +110,13 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 最后一行是在补全 `cd` 时用 eza 预览目录内容，没装的话 `brew install eza`，或者直接删掉这一行。
 
-最容易出问题的是加载顺序。fzf-tab 要放在 `compinit` 之后，又得在 zsh-autosuggestions、fast-syntax-highlighting 这类会包装 widget 的插件之前，同时它还必须是最后一个绑定 Tab 的，而 fzf 自己的补全也绑了 Tab，所以上面 fzf-tab 排在 `source <(fzf --zsh)` 后面。跑起来之后有两个键值得记一下，Ctrl + Space 多选，`/` 在补很深的路径时可以一路连着补下去，不用插件管理器、其余顺序也都排好的 `.zshrc` 可以参考[不用 Oh My Zsh 配好 zsh](/zh/blog/zsh-without-oh-my-zsh)。
+最容易出问题的是加载顺序。fzf-tab 要放在 `compinit` 之后，又得在 zsh-autosuggestions、fast-syntax-highlighting 这类会包装 widget 的插件之前。同时它还必须是最后一个绑定 Tab 的，而 fzf 自己的补全也绑了 Tab，所以上面 fzf-tab 排在 `source <(fzf --zsh)` 后面。跑起来之后有两个键值得记一下，Ctrl + Space 多选，`/` 在补很深的路径时可以一路连着补下去。不用插件管理器、其余顺序也都排好的 `.zshrc` 可以参考[不用 Oh My Zsh 配好 zsh](/zh/blog/zsh-without-oh-my-zsh)。
 
 ## 在 Kaku 里用 fzf
 
-Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装，zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，如果 zoxide 已经定义了 `z`，zsh-z 会自动跳过，所以 `source <(fzf --zsh)` 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，`kaku init` 又是把它的 source 行追加到 `.zshrc` 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，`**<Tab>` 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab，放在上面的话 Tab 就归 Smart Tab 了，`**` 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。
+Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，如果 zoxide 已经定义了 `z`，zsh-z 会自动跳过，所以 `source <(fzf --zsh)` 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，`kaku init` 又是把它的 source 行追加到 `.zshrc` 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，`**<Tab>` 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，`**` 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。
 
-要用 fzf-tab，就在 `~/.config/kaku/kaku.lua` 里写 `config.smart_tab_mode = 'off'`，新开的 shell 会带上 `KAKU_SMART_TAB_DISABLE=1`，再把 `compinit`、fzf 那行和 fzf-tab 都放在 Kaku 那行上面，补全已经初始化过的话 Kaku 会跳过自己的 `compinit`，autosuggestions 则排在 fzf-tab 之后加载，正好是 fzf-tab 要求的顺序。Alt + C 在 Kaku 里不用额外设置，自带配置把左 Option 当 Meta 发，右 Option 留着打组合字符。
+要用 fzf-tab，就在 `~/.config/kaku/kaku.lua` 里写 `config.smart_tab_mode = 'off'`，新开的 shell 会带上 `KAKU_SMART_TAB_DISABLE=1`。再把 `compinit`、fzf 那行和 fzf-tab 都放在 Kaku 那行上面，补全已经初始化过的话 Kaku 会跳过自己的 `compinit`，autosuggestions 则排在 fzf-tab 之后加载，正好是 fzf-tab 要求的顺序。Alt + C 在 Kaku 里不用额外设置，自带配置把左 Option 当 Meta 发，右 Option 留着打组合字符。
 
 ## 常见问题
 
@@ -138,4 +138,4 @@ shell 集成本来就不读这个变量，Ctrl + T 要设 `FZF_CTRL_T_COMMAND`�
 
 ### 用 fzf 一定要装 fd 吗？
 
-不用，fzf 自带 walker，不装别的工具也能列文件，`--walker-skip` 也能跳过那几个常见的大目录，只有在你别处已经依赖 fd 的过滤规则、想让 fzf 列出同样的结果时，才值得把 fd 接进来。
+不用，fzf 自带 walker，不装别的工具也能列文件，`--walker-skip` 也能跳过那几个常见的大目录。只有在你别处已经依赖 fd 的过滤规则、想让 fzf 列出同样的结果时，才值得把 fd 接进来。

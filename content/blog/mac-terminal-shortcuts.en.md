@@ -37,7 +37,7 @@ macos-option-as-alt = left
 
 Using `left` keeps the right Option key for accented letters and symbols, which matters if you type anything other than English. More Ghostty keys are in [Ghostty config](/blog/ghostty-config).
 
-**WezTerm and Kaku.** The two keys are `send_composed_key_when_left_alt_is_pressed` and `send_composed_key_when_right_alt_is_pressed`. Setting one to `false` makes that Option key act as Alt.
+**WezTerm and Kaku.** The two settings are `send_composed_key_when_left_alt_is_pressed` and `send_composed_key_when_right_alt_is_pressed`. Setting one to `false` makes that Option key act as Alt.
 
 ## History search
 
@@ -75,7 +75,7 @@ Marks are the underrated one. `Cmd + Return` marks a command line as you run it,
 
 ## Moving between words with Option + Arrow
 
-Option + Left and Option + Right moving by word is the Mac habit most people bring from text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for that key, though. When Option + Left prints `[1;3D` or `;3D` instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send `Esc b` and `Esc f`, or bind the codes in zsh:
+Moving by word with Option + Left and Option + Right is the habit most people bring from Mac text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for those keys, though. When Option + Left prints `[1;3D` or `;3D` instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send `Esc b` and `Esc f`, or bind the codes in zsh:
 
 ```bash
 bindkey '^[[1;3D' backward-word

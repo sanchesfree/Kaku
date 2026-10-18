@@ -38,7 +38,7 @@ Codex reads its settings in layers, and a setting closer to the current run wins
 - **`.codex/config.toml`** inside a repository overrides it for that project.
 - **Flags** such as `-m`, `-s`, `-a` and `-c key=value` override everything for one run.
 
-`-c` takes any key from the config file, with dots for nested tables, so `codex -c tui.notification_method=osc9` tries a setting before you write it down. Named profiles sit alongside: `codex -p work` layers `~/.codex/work.config.toml` on top of the user config.
+`-c` takes any key from the config file, with dots for nested tables, so `codex -c tui.notification_method=osc9` lets you test a setting before saving it to your config file. You can also use named profiles: `codex -p work` layers `~/.codex/work.config.toml` on top of the user config.
 
 ## The settings worth changing first
 
@@ -53,7 +53,7 @@ sandbox_mode = "workspace-write"
 notification_method = "osc9"
 ```
 
-Leave `model` out to use the default, or set it to one of the names `/model` lists inside a session, since the list depends on your account. `/model` also switches for the current session without editing the file.
+Leave `model` out to use the default, or set it to one of the names `/model` lists inside a session, since the list depends on your account. `/model` also switches models for the current session without editing the file.
 
 The two settings that decide how much Codex does on its own are worth understanding before you change them:
 
@@ -66,9 +66,9 @@ The two settings that decide how much Codex does on its own are worth understand
 
 ## Notifications
 
-By default Codex rings the terminal bell when it finishes or needs approval, and only while the terminal is not focused. Whether that bell becomes a desktop notification depends on the terminal. Kaku turns a bell from a background window into one, and with `notification_method = "osc9"` the notification carries Codex's own message instead of a generic one. `tui.notification_condition = "always"` notifies even when the terminal is in front.
+By default, Codex rings the terminal bell when it finishes or needs approval, and only while the terminal is not focused. Whether that bell becomes a desktop notification depends on the terminal. Kaku turns a bell from a background window into a desktop notification, and with `notification_method = "osc9"` the notification carries Codex's own message instead of a generic alert. `tui.notification_condition = "always"` notifies even when the terminal is in the foreground.
 
-If nothing shows up, the [notification guide](https://kaku.fun/blog/claude-code-notifications) covers the macOS permission and tmux settings that block it.
+If nothing shows up, the [notification guide](https://kaku.fun/blog/claude-code-notifications) covers the macOS permissions and tmux settings that can block them.
 
 ## Picking a session back up
 
@@ -84,13 +84,13 @@ The terminal side is separate. In Kaku, the tabs and splits you had open come ba
 
 ## Using your Codex login inside Kaku
 
-Kaku has its own assistant for `#` command generation and `Cmd + L` chat. Instead of a second API key, it can follow the Codex connection you already have: run `kaku ai`, choose Kaku Assistant, and set Auth Type to `codex`. Kaku then reads the user-level Codex config, including a ChatGPT login or API key and the selected provider. The Codex entry on the same screen shows Codex's own model and login state.
+Kaku has its own assistant for `#` command generation and `Cmd + L` chat. Instead of a second API key, it can reuse your existing Codex connection: run `kaku ai`, choose Kaku Assistant, and set Auth Type to `codex`. Kaku then reads the user-level Codex config, including a ChatGPT login or API key and the selected provider. The Codex entry on the same screen shows Codex's own model and login state.
 
 ## FAQ
 
 ### Is Codex CLI free?
 
-The CLI is open source, but using it needs either a ChatGPT plan that includes Codex or an OpenAI API key billed per use.
+The CLI is open source, but using it requires either a ChatGPT plan that includes Codex or an OpenAI API key billed per use.
 
 ### Where is the Codex config file on Mac?
 

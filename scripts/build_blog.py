@@ -86,6 +86,34 @@ UI = {
     },
 }
 
+# Topic clusters, in the index's reading order. Each post's `category` in
+# index.json picks one; the index groups by it, the article meta line links to
+# its group, related links stay inside it, and BlogPosting carries it as
+# articleSection.
+CATEGORIES = ("agents", "terminal", "shell")
+
+CATEGORY_COPY = {
+    "agents": {
+        "en": ("Claude Code and Codex", "Install, configure and run AI coding agents in the terminal."),
+        "zh": ("Claude Code 与 Codex", "在终端里安装、配置和使用 AI 编程助手。"),
+    },
+    "terminal": {
+        "en": ("Terminal", "Choose and configure a Mac terminal: fonts, splits, shortcuts."),
+        "zh": ("终端", "挑选和配置 Mac 终端，包括字体、分屏和快捷键。"),
+    },
+    "shell": {
+        "en": ("Shell and tools", "Set up zsh, the prompt and the command-line tools around it."),
+        "zh": ("Shell 与命令行工具", "配置 zsh、提示符和围绕它的命令行工具。"),
+    },
+}
+
+# One entry point per cluster, linked first from its siblings once it is live.
+CATEGORY_PILLARS = {
+    "agents": "install-claude-code-mac",
+    "terminal": "best-terminal-for-mac",
+    "shell": "zsh-without-oh-my-zsh",
+}
+
 FIGURE_RE = re.compile(r"^\[\[figure:([a-z0-9-]+)\|([^|\]]+)\|([^\]]+)\]\]$", re.M)
 
 
@@ -97,7 +125,21 @@ def today() -> date:
 
 
 def load_queue() -> list[dict]:
-    return json.loads((SRC / "index.json").read_text(encoding="utf-8"))["posts"]
+    queue = json.loads((SRC / "index.json").read_text(encoding="utf-8"))["posts"]
+    check_categories(queue)
+    return queue
+
+
+def check_categories(queue: list[dict]) -> None:
+    """Every post, queued or live, needs a known category: the index only renders
+    the groups in CATEGORIES, so a typo would drop a live post from it silently."""
+    bad = sorted(p["slug"] for p in queue if p.get("category") not in CATEGORIES)
+    if bad:
+        raise SystemExit(f"blog posts with a missing or unknown category: {', '.join(bad)}")
+
+
+def category_label(category: str, lang: str) -> str:
+    return CATEGORY_COPY[category][lang][0]
 
 
 def live_posts(queue: list[dict], now: date) -> list[dict]:
@@ -241,7 +283,7 @@ def post_minutes(p: dict, lang: str) -> int:
     return reading_minutes((SRC / f"{p['slug']}.{lang}.md").read_text(encoding="utf-8"), lang)
 
 
-def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
+def post_page(p: dict, lang: str, live: list[dict], queue: list[dict]) -> tuple[str, str]:
     meta = p[lang]
     slug = p["slug"]
     src = (SRC / f"{slug}.{lang}.md").read_text(encoding="utf-8")
@@ -262,6 +304,7 @@ def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
         "datePublished": p["date"],
         "dateModified": modified,
         "inLanguage": ui["html_lang"],
+        "articleSection": category_label(p["category"], lang),
         "image": cover_url(slug),
         "timeRequired": f"PT{minutes}M",
         "author": AUTHOR,
@@ -284,15 +327,18 @@ def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
                og_type="article", image=cover_url(slug), image_alt=meta["title"],
                jsonld={"@context": "https://schema.org", "@graph": graph}, extra=extra)
     nav, foot = chrome(lang, url("en", slug), url("zh", slug))
-    dates = f'<span>{ui["published"]} <time datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time></span>'
+    cat = p["category"]
+    dates = (f'<span><a href="{url(lang)}#topic-{cat}">{html.escape(category_label(cat, lang))}</a></span>'
+             f'<span>{ui["published"]} <time datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time></span>')
     if modified != p["date"]:
         dates += f'<span>{ui["updated"]} <time datetime="{modified}">{fmt_date(modified, lang)}</time></span>'
     dates += f'<span>{ui["read"].format(n=minutes)}</span>'
-    related = related_posts(p, live)
+    related = related_posts(p, live, queue)
     rel_html = ""
     if related:
         items = "".join(
-            f'<li><a href="{url(lang, r["slug"])}"><span class="blog-related-name">{html.escape(r[lang]["title"])}</span>'
+            f'<li><a href="{url(lang, r["slug"])}"><span class="blog-related-cat">{html.escape(category_label(r["category"], lang))}</span>'
+            f'<span class="blog-related-name">{html.escape(r[lang]["title"])}</span>'
             f'<span class="blog-related-meta"><time datetime="{r["date"]}">{fmt_date(r["date"], lang)}</time> · {ui["read"].format(n=post_minutes(r, lang))}</span></a></li>'
             for r in related)
         rel_html = (f'\n          <nav class="blog-related" aria-label="{ui["related"]}">'
@@ -323,11 +369,31 @@ def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
     return out, md_twin
 
 
-def related_posts(p: dict, live: list[dict]) -> list[dict]:
-    others = [x for x in live if x["slug"] != p["slug"]]
-    pinned = [x for x in others if x["slug"] in p.get("related", [])]
-    rest = [x for x in others if x not in pinned]
-    return (pinned + rest)[:3]
+def related_posts(p: dict, live: list[dict], queue: list[dict], limit: int = 3) -> list[dict]:
+    """Explicit `related` pins, then the category pillar, then the nearest
+    same-category neighbours in queue order, then any other live post. Only live
+    posts are candidates, so a queued pin or pillar is skipped, never linked."""
+    by_slug = {x["slug"]: x for x in live}
+    picked: list[dict] = []
+
+    def add(x: dict | None) -> None:
+        if x and x["slug"] != p["slug"] and x not in picked and len(picked) < limit:
+            picked.append(x)
+
+    for slug in p.get("related", []):
+        add(by_slug.get(slug))
+    add(by_slug.get(CATEGORY_PILLARS.get(p["category"], "")))
+    order = [x["slug"] for x in queue]
+    same = sorted((x for x in live if x["category"] == p["category"]),
+                  key=lambda x: order.index(x["slug"]))
+    at = next((i for i, x in enumerate(same) if x["slug"] == p["slug"]), -1)
+    if at >= 0:
+        for d in range(1, len(same)):
+            add(same[at - d] if at - d >= 0 else None)
+            add(same[at + d] if at + d < len(same) else None)
+    for x in live:
+        add(x)
+    return picked
 
 
 def index_page(lang: str, live: list[dict]) -> str:
@@ -353,20 +419,29 @@ def index_page(lang: str, live: list[dict]) -> str:
                og_type="website", image=image, image_alt=ui["index_title"],
                jsonld={"@context": "https://schema.org", "@graph": graph})
     nav, foot = chrome(lang, url("en"), url("zh"))
-    cards = "".join(
+    card = lambda p: (  # noqa: E731
         f'<li class="blog-card"><a href="{url(lang, p["slug"])}">'
         f'<span class="blog-card-media"><img src="/img/blog/cards/{p["slug"]}.webp" width="1600" height="900" alt="" loading="lazy"></span>'
         f'<span class="blog-card-body"><span class="blog-card-title">{html.escape(p[lang]["title"])}</span>'
         f'<span class="blog-card-desc">{html.escape(p[lang]["description"])}</span>'
-        f'<span class="blog-card-date"><time datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time> · {UI[lang]["read"].format(n=post_minutes(p, lang))}</span></span></a></li>'
-        for p in live)
+        f'<span class="blog-card-date"><time datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time> · {UI[lang]["read"].format(n=post_minutes(p, lang))}</span></span></a></li>')
+    groups = ""
+    for cat in CATEGORIES:
+        posts = [p for p in live if p["category"] == cat]
+        if not posts:
+            continue
+        label, desc = CATEGORY_COPY[cat][lang]
+        groups += (f'<section id="topic-{cat}" class="blog-group" aria-labelledby="topic-{cat}-title">'
+                   f'<div class="blog-group-head"><h2 id="topic-{cat}-title" class="blog-group-title">{html.escape(label)}</h2>'
+                   f'<p class="blog-group-description">{html.escape(desc)}</p></div>'
+                   f'<ul class="blog-cards">{"".join(card(p) for p in posts)}</ul></section>')
     out += f"""<body>
   {nav}
   <main id="main-content" class="docs-page blog-page">
     <header class="page-hero doc-hero"><div class="wide"><h1>{ui['index_title']}</h1><p>{ui['index_lede']}</p></div></header>
     <section class="section">
       <div class="wide">
-        <ul class="blog-cards">{cards}</ul>
+        <div class="blog-groups">{groups}</div>
       </div>
     </section>
   </main>
@@ -380,9 +455,16 @@ def index_page(lang: str, live: list[dict]) -> str:
 def index_md(lang: str, live: list[dict]) -> str:
     ui = UI[lang]
     lines = [f"# {ui['index_title']}", "", ui["index_lede"], ""]
-    for p in live:
-        lines.append(f"- [{p[lang]['title']}]({SITE}{url(lang, p['slug'])}.md) ({p['date']}): {p[lang]['description']}")
-    return "\n".join(lines) + "\n"
+    for cat in CATEGORIES:
+        posts = [p for p in live if p["category"] == cat]
+        if not posts:
+            continue
+        label, desc = CATEGORY_COPY[cat][lang]
+        lines += [f"## {label}", "", desc, ""]
+        for p in posts:
+            lines.append(f"- [{p[lang]['title']}]({SITE}{url(lang, p['slug'])}.md) ({p['date']}): {p[lang]['description']}")
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def feed_xml(lang: str, live: list[dict]) -> str:
@@ -456,7 +538,7 @@ def outputs() -> dict[Path, str]:
         files[base / "index.md"] = index_md(lang, live)
         files[base / "feed.xml"] = feed_xml(lang, live)
         for p in live:
-            page, twin = post_page(p, lang, live)
+            page, twin = post_page(p, lang, live, queue)
             files[base / f"{p['slug']}.html"] = page
             files[base / f"{p['slug']}.md"] = twin
     sm = (ROOT / "sitemap.xml").read_text(encoding="utf-8")

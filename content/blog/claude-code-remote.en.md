@@ -18,9 +18,9 @@ Remote Control keeps Claude Code running on your Mac, with your files, tools and
 claude --remote-control
 ```
 
-Or run `claude remote-control` in a project, and sessions you start from claude.ai/code or the app run there on your Mac; `claude remote-control --continue` reattaches to the one last started in that directory. It needs a paid Claude plan with a claude.ai login, since API keys are not supported, and the Mac has to stay awake and online for as long as you want to reach it.
+Or run `claude remote-control` in a project, and sessions you start from claude.ai/code or the app run there on your Mac; `claude remote-control --continue` reattaches to the last session started in that directory. It needs a paid Claude plan with a claude.ai login, since API keys are not supported, and the Mac has to stay awake and online for as long as you want to reach it.
 
-It is the right choice when the work depends on your machine, a local database, a private network, a build that only runs there, and all you want from the phone is to approve a step or send the next instruction.
+It is the right choice when the work depends on your machine, such as a local database, a private network, or a build that only runs there, and all you want from the phone is to approve a step or send the next instruction.
 
 ## Cloud sessions: nothing has to stay on
 
@@ -44,7 +44,7 @@ Turn it on and pair a browser:
 kaku remote
 ```
 
-Kaku asks before turning remote access on, then prints a pairing link. Open it in the browser you want to pair. A link works once and expires after 10 minutes, so run `kaku remote` again for each device. Once paired, bookmark the page and the browser comes back to it without a new link.
+Kaku asks before turning remote access on, then prints a pairing link. Open it in the browser you want to pair. A link works once and expires after 10 minutes, so run `kaku remote` again for each device. Once paired, bookmark the page to return to it without a new link.
 
 What you type and what you see is encrypted between that browser and Kaku, and the relay in the middle only forwards it. Kaku posts a notification on your Mac whenever a new browser pairs, so a pairing you did not make does not go unnoticed. Managing access stays on the Mac:
 
@@ -55,13 +55,13 @@ kaku remote off            # turn remote access off
 kaku remote --reset        # remove every paired browser
 ```
 
-The page is made for desktop browsers for now. Like Remote Control it reaches your actual Mac, so the Mac needs to be awake with Kaku running.
+The page is made for desktop browsers for now. Like Remote Control, it reaches your actual Mac, so the Mac needs to be awake with Kaku running.
 
 ## Which one to use
 
 - **Approving a step from your phone:** Remote Control.
 - **Work that should continue with the laptop closed:** a cloud session.
-- **Using the terminal from another computer, agents and everything else in it:** `kaku remote`.
+- **Using the terminal from another computer, with agents and everything else in it:** `kaku remote`.
 
 They also combine. A session started with `claude --remote-control` inside Kaku can be answered from the phone during the day and picked up in the browser at another desk in the evening.
 
@@ -81,4 +81,4 @@ Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so th
 
 ### Does kaku remote work with Codex and other CLI tools?
 
-Yes. It shows the terminal itself, so whatever runs in a Kaku tab, Claude Code, Codex, an editor or a shell, appears in the browser.
+Yes. It shows the terminal itself, so whatever runs in a Kaku tab, whether Claude Code, Codex, an editor or a shell, appears in the browser.

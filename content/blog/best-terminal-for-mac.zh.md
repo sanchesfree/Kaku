@@ -1,4 +1,4 @@
-Mac 上没有哪个终端对所有人都是最好的，但只要想清楚自己要什么，选起来其实不难，什么都不想装就继续用 Terminal.app，想要所有功能都在设置窗口里点出来就用 iTerm2，Ghostty 快、原生、配置是纯文本，WezTerm 适合想用 Lua 写配置、在每个平台都用同一份的人，Warp 把 agent 直接做进了终端，我做的 Kaku 是在 WezTerm 基础上为 macOS 和 AI 编程命令行工具改出来的，第一次打开就配好了。下面一个个讲它们各自好在哪、差在哪，版本和价格按 2026-10-17 核对。
+Mac 上没有哪个终端对所有人都是最好的，但只要想清楚自己要什么，选起来其实不难，什么都不想装就继续用 Terminal.app，想要所有功能都在设置窗口里点出来就用 iTerm2。Ghostty 快、原生、配置是纯文本，WezTerm 适合想用 Lua 写配置、在每个平台都用同一份的人。Warp 把 agent 直接做进了终端，我做的 Kaku 是在 WezTerm 基础上为 macOS 和 AI 编程命令行工具改出来的，第一次打开就配好了。下面一个个讲它们各自好在哪、差在哪，版本和价格按 2026-10-17 核对。
 
 [[figure:mac-terminal-picker|从想要什么到先试哪个终端：什么都不想装对应 Terminal.app，所有功能都有图形设置对应 iTerm2，快、原生、文本配置对应 Ghostty，Lua、全平台对应 WezTerm，内置 agent 对应 Warp，为 AI 编程工具准备好对应 Kaku|从自己想要什么出发，而不是从功能列表出发。]]
 
@@ -17,7 +17,7 @@ Mac 上没有哪个终端对所有人都是最好的，但只要想清楚自己�
 
 ## Terminal.app
 
-每台 Mac 都自带，跑几条命令完全够用，macOS 26 给它翻新了一次，加上了 24 位色和 Powerline 字体，但真要整天待在终端里还是会不够，分屏只能把同一个会话显示两遍，设置存在 plist 里而不是文本文件，AI 编程工具能用上的东西也少，比如 Claude Code 在这里只会响铃，还得先把提示音关掉才响。
+每台 Mac 都自带，跑几条命令完全够用，macOS 26 给它翻新了一次，加上了 24 位色和 Powerline 字体，但真要整天待在终端里还是会不够。分屏只能把同一个会话显示两遍，设置存在 plist 里而不是文本文件，AI 编程工具能用上的东西也少，比如 Claude Code 在这里只会响铃，还得先把提示音关掉才响。
 
 ## iTerm2
 
@@ -41,7 +41,7 @@ Warp 围绕 block 重新设计了终端，每条命令和它的输出算一个�
 
 ## Kaku
 
-Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换，还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来，Claude Code 的通知在 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本设成 `ghostty` 通道，见[Claude Code 通知](/zh/blog/claude-code-notifications)。它只支持 macOS，这是为了在这一个平台上做得更贴合换来的。
+Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换。还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来。Claude Code 的通知在 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本设成 `ghostty` 通道，见[Claude Code 通知](/zh/blog/claude-code-notifications)。它只支持 macOS，这是为了在这一个平台上做得更贴合换来的。
 
 ```bash
 brew install --cask kaku
@@ -49,7 +49,7 @@ brew install --cask kaku
 
 ## 如果主要用来跑 Claude Code 或 Codex
 
-这里的每个终端都能跑 AI 编程命令行工具，差别要在长时间会话里才看得出来，`Shift + Enter` 能不能换行，agent 停下来时你能不能收到通知，重启之后会话还在不在，[Claude Code 用什么终端最好](https://kaku.fun/zh/blog/best-terminal-for-claude-code)那篇一项项讲过。
+这里的每个终端都能跑 AI 编程命令行工具，差别要在长时间会话里才看得出来。`Shift + Enter` 能不能换行，agent 停下来时你能不能收到通知，重启之后会话还在不在，[Claude Code 用什么终端最好](https://kaku.fun/zh/blog/best-terminal-for-claude-code)那篇一项项讲过。
 
 ## 常见问题
 

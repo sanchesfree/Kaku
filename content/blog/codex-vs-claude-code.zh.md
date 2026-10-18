@@ -98,7 +98,7 @@ Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更�
 
 ### 哪个更便宜？
 
-每个 ChatGPT 方案都包含 Codex，但 Free 和 Go 只列了桌面 App，CLI 从每月 $20 的 Plus 起才有，用 OpenAI 的 API key 也行，Claude Code 要 Pro、Max、Team 或 Enterprise 订阅，或者一个 Console 账号，具体以 [Codex 价格页](https://developers.openai.com/codex/pricing)和 [claude.com/pricing](https://claude.com/pricing) 上的为准，用之前再看一眼。
+每个 ChatGPT 方案都包含 Codex，但 Free 和 Go 只列了桌面 App，CLI 从每月 $20 的 Plus 起才有，用 OpenAI 的 API key 也行。Claude Code 要 Pro、Max、Team 或 Enterprise 订阅，或者一个 Console 账号，具体以 [Codex 价格页](https://developers.openai.com/codex/pricing)和 [claude.com/pricing](https://claude.com/pricing) 上的为准，用之前再看一眼。
 
 ### 为什么只有一个会提醒我？
 

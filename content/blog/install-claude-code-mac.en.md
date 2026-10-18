@@ -23,7 +23,7 @@ brew install --cask claude-code
 brew install --cask claude-code@latest
 ```
 
-npm installs the same native binary. It asks for Node.js 22 or later. Older Node prints `EBADENGINE` and still finishes, because `claude` does not run on Node. Optional dependencies have to be allowed. Do not use `sudo npm install -g`. It can cause permission and security problems.
+npm installs the same native binary. It asks for Node.js 22 or later. Older Node versions print `EBADENGINE` but still finish, because `claude` does not run on Node. Optional dependencies have to be allowed. Do not use `sudo npm install -g`. It can cause permission and security problems.
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -54,7 +54,7 @@ brew upgrade claude-code@latest
 
 Set `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` to `1`. Claude Code then runs that upgrade in the background when a new version is available, and shows a restart prompt on success. You may be told about an update before the cask has it. If the upgrade fails, wait and try again.
 
-npm auto-updates when its global directory is writable. Otherwise Claude Code shows a one-time notice at startup, and `claude doctor` lists fixes. Upgrade with `npm install -g @anthropic-ai/claude-code@latest`. Avoid `npm update -g`, which can stay on the old semver range.
+npm auto-updates when its global directory is writable. Otherwise, Claude Code shows a one-time notice at startup, and `claude doctor` lists fixes. Upgrade with `npm install -g @anthropic-ai/claude-code@latest`. Avoid `npm update -g`, which can stay on the old semver range.
 
 On a native install, `autoUpdatesChannel` chooses the channel for auto-update and for `claude update`. `"latest"` is the default. `"stable"` is typically about a week behind. Set it under Auto-update channel in `/config`, or in `~/.claude/settings.json`:
 
@@ -87,13 +87,13 @@ rm -f ~/.local/bin/claude
 rm -rf ~/.local/share/claude
 ```
 
-Homebrew is `brew uninstall --cask claude-code`, or `brew uninstall --cask claude-code@latest` if that is the cask you installed. npm is `npm uninstall -g @anthropic-ai/claude-code`.
+For Homebrew, run `brew uninstall --cask claude-code`, or `brew uninstall --cask claude-code@latest` if that is the cask you installed. For npm, run `npm uninstall -g @anthropic-ai/claude-code`.
 
 To move from npm to the native installer, uninstall the npm package, run `curl -fsSL https://claude.ai/install.sh | bash`, then open a new terminal and run `claude --version`. Leave `~/.claude` in place to keep settings and session history. Deleting `~/.claude` and `~/.claude.json` removes settings, allowed tools, MCP server configurations, and session history. The VS Code extension, the JetBrains plugin, and the Desktop app recreate that directory the next time they run. If `claude` still starts, you likely have a second installation or a leftover shell alias.
 
 ## Newlines and notifications
 
-Enter submits the prompt, and `Ctrl + J`, or `\` then Enter, inserts a newline in every terminal. [The best terminal for Claude Code](/blog/best-terminal-for-claude-code) lists where `Shift + Enter` works with no setup and where `/terminal-setup` has to run once, and in VS Code, Cursor and Devin Desktop that command also sets `terminal.integrated.gpuAcceleration` to `"off"`, which you undo by setting it back to `"auto"` and reloading the window. By default a desktop notification is sent only in Ghostty, Kitty and iTerm2, and [Claude Code notifications](/blog/claude-code-notifications) covers the setting for other terminals, the iTerm2 alert option, SSH and [tmux](/blog/tmux-alternative-mac).
+Enter submits the prompt, and `Ctrl + J`, or `\` then Enter, inserts a newline in every terminal. [The best terminal for Claude Code](/blog/best-terminal-for-claude-code) lists where `Shift + Enter` works with no setup and where `/terminal-setup` has to run once. In VS Code, Cursor and Devin Desktop that command also sets `terminal.integrated.gpuAcceleration` to `"off"`, which you undo by setting it back to `"auto"` and reloading the window. By default a desktop notification is sent only in Ghostty, Kitty and iTerm2, and [Claude Code notifications](/blog/claude-code-notifications) covers the setting for other terminals, the iTerm2 alert option, SSH and [tmux](/blog/tmux-alternative-mac).
 
 ## In Kaku
 

@@ -63,7 +63,7 @@ window-padding-balance = true
 
 Two comma-separated values set left and right, or top and bottom. `window-padding-balance` spreads the leftover space that does not fit a whole cell across all four edges. Padding changes apply to new windows and tabs, not to ones already open.
 
-The macOS titlebar has four styles in `macos-titlebar-style`: `native`, `transparent` (the default), `tabs`, which puts the tab bar in the titlebar, and `hidden`. `hidden` removes the titlebar but keeps the rounded frame, while `window-decoration = none` removes the titlebar and borders together and, on macOS, tabs with them. For a translucent window, set `background-opacity` to something like `0.9` and add `background-blur = 20`, the same intensity `true` gives you. On macOS, an opacity change only takes effect after you quit and reopen Ghostty, not on reload.
+The macOS titlebar has four styles in `macos-titlebar-style`: `native`, `transparent` (the default), `tabs`, which puts the tab bar in the titlebar, and `hidden`. `hidden` removes the titlebar but keeps the rounded frame, while `window-decoration = none` removes the titlebar and borders together, as well as tabs on macOS. For a translucent window, set `background-opacity` to something like `0.9` and add `background-blur = 20`, the same intensity `true` gives you. On macOS, an opacity change only takes effect after you quit and reopen Ghostty, not on reload.
 
 ## Keybinds
 
@@ -112,7 +112,7 @@ quick-terminal-screen = mouse
 
 ## Moving a Ghostty setup to Kaku
 
-Kaku is configured in Lua at `~/.config/kaku/kaku.lua`, a file that loads the bundled defaults first and applies your lines on top, and Kaku reloads it when you save. Several of the knobs above are already set. The default font is JetBrains Mono with PingFang SC for Chinese, and Symbols Nerd Font Mono is bundled and added as a fallback after any font you choose. Left Option sends Meta and right Option still types composed characters, which matches `macos-option-as-alt = left`. `Cmd + Opt + Ctrl + K` drops a Kaku window from the top of the screen, like the quick terminal, and `config.macos_global_hotkey` changes the key. New installs start in Kaku Dark. A config without a `config.color_scheme` line follows the macOS appearance, and Auto in `kaku config` sets that up for you.
+Kaku is configured in Lua at `~/.config/kaku/kaku.lua`, a file that loads the bundled defaults first and applies your lines on top, and Kaku reloads it when you save. Several of the settings above are already set. The default font is JetBrains Mono with PingFang SC for Chinese, and Symbols Nerd Font Mono is bundled and added as a fallback after any font you choose. Left Option sends Meta and right Option still types composed characters, which matches `macos-option-as-alt = left`. `Cmd + Opt + Ctrl + K` drops a Kaku window from the top of the screen, like the quick terminal, and `config.macos_global_hotkey` changes the key. New installs start in Kaku Dark. A config without a `config.color_scheme` line follows the macOS appearance, and Auto in `kaku config` sets that up for you.
 
 The rest translates line by line:
 

@@ -17,7 +17,7 @@ claude
 
 [Cursor 的价格页](https://cursor.com/pricing) 列了 Free、Plus、Premium、Super 和 Ultra，另外还有 Teams 和 Enterprise，价目以这一页上的数字为准，2026 年 10 月核对过。Cursor 的用量和 Grok 那边的 Chat、Imagine、Voice、Bot 放在同一个池子里，每周刷新，更高的档位池子更大，包含的额度用完还可以再买一笔。Free 的 agent 请求有限，聊天请求也有限，Plus 只含 Grok 模型。Premium 及以上含 Grok 的用量，第三方模型按 API 标价另计，不在这份包含的额度里，并且有花费上限。Cloud agents 和 Bugbot 的代码审查从 Premium 起才有，agent 每个方案都有，Free 也有。
 
-Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、Team 或 Enterprise），或者按用量计费的 [Anthropic Console](https://platform.claude.com/) 账号，Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 上也能用，登录怎么做写在[在 Mac 上安装 Claude Code](/zh/blog/install-claude-code-mac) 那篇。claude.ai 的方案里，`/usage` 显示当前会话和这一周，用 API key 或第三方登录时，显示的是这一次会话的费用和 token，更多价格在 [code.claude.com](https://code.claude.com)。
+Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、Team 或 Enterprise），或者按用量计费的 [Anthropic Console](https://platform.claude.com/) 账号，Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 上也能用。登录怎么做写在[在 Mac 上安装 Claude Code](/zh/blog/install-claude-code-mac) 那篇。claude.ai 的方案里，`/usage` 显示当前会话和这一周，用 API key 或第三方登录时，显示的是这一次会话的费用和 token，更多价格在 [code.claude.com](https://code.claude.com)。
 
 ## 上下文和模型
 
@@ -54,7 +54,7 @@ Claude Code 的 [plan mode](/zh/blog/claude-code-plan-mode) 只读仓库，你�
 
 [概述](https://code.claude.com/docs/en/overview)里，Cursor 用 `cursor:extension/anthropic.claude-code` 装扩展，VS Code 用 `vscode:extension/anthropic.claude-code`，装好之后，**Open in New Tab** 在 Command Palette（`Cmd + Shift + P`）里。具体写在 [IDE 集成](https://code.claude.com/docs/en/ide-integrations)，终端里的步骤来自 [VS Code 指南](https://code.claude.com/docs/en/vs-code)。
 
-用 Command 和反引号打开集成终端，然后跑 `claude`，这样 CLI 会把 diff 和诊断放到这个编辑器里显示。扩展不会把 `claude` 放进 `PATH`，所以终端里要另有一份独立的 CLI，`/ide` 把外面的终端接到 VS Code。`claude --resume` 接着面板里的那段聊天，这段要是还在别处开着，面板会说两份可能会把消息混在一起，关掉另一份，或者选 **Open here anyway**。
+用 Command 和反引号打开集成终端，然后跑 `claude`，这样 CLI 会把 diff 和诊断放到这个编辑器里显示。扩展不会把 `claude` 放进 `PATH`，所以终端里要另有一份独立的 CLI，`/ide` 把外面的终端接到 VS Code。`claude --resume` 接着面板里的那段聊天。这段要是还在别处开着，面板会说两份可能会把消息混在一起，关掉另一份，或者选 **Open here anyway**。
 
 ## 在 Kaku 里并排
 

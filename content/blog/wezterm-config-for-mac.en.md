@@ -1,4 +1,4 @@
-A good WezTerm config for Mac only needs a dozen lines: a font with a CJK fallback, a little extra line height, the left Option key sent as Meta, integrated title bar buttons, a color scheme that follows the system, and the Metal renderer. The file is `~/.wezterm.lua`, it is a Lua script that returns a table, and WezTerm reloads it every time you save. This post walks through those settings one group at a time, then shows which of them Kaku already sets for you, since Kaku is a WezTerm fork that ships with a full config of its own. If you are still choosing between WezTerm, Ghostty and iTerm2, [Ghostty vs iTerm2 vs WezTerm](/blog/ghostty-vs-iterm2-vs-wezterm) compares them first.
+A good WezTerm config for Mac only needs a dozen lines: a font with a CJK fallback, a little extra line height, the left Option key sent as Meta, integrated title bar buttons, a color scheme that follows the system, and the Metal renderer. The file is `~/.wezterm.lua`, a Lua script that returns a table. WezTerm reloads it every time you save. This post walks through those settings one group at a time, then shows which of them Kaku already sets for you, since Kaku is a WezTerm fork that ships with a full config of its own. If you are still choosing between WezTerm, Ghostty and iTerm2, [Ghostty vs iTerm2 vs WezTerm](/blog/ghostty-vs-iterm2-vs-wezterm) compares them first.
 
 ## Start from config_builder
 
@@ -86,12 +86,12 @@ Kaku keeps WezTerm's engine and Lua API, so all of the settings above work in Ka
 
 [[figure:kaku-config-layers|Three layers: your overrides in kaku.lua are applied last, on top of Kaku's bundled config with its fonts, keys and 1.28 line height, which sits on WezTerm's defaults|Write only what you want different; everything else comes from the bundled layer.]]
 
-Most of this post is already in that bundled layer:
+Most of the settings above are already in that bundled layer:
 
 | Setting | Kaku default |
 |---|---|
 | Font | JetBrains Mono, with PingFang SC for CJK |
-| Size | 17, or 15 on a low resolution screen |
+| Size | 17, or 15 on a low-resolution screen |
 | `line_height` | 1.28 |
 | Ligatures | Off |
 | Left / right Option | Meta / compose characters |
@@ -111,7 +111,7 @@ New installs start in Kaku Dark. Choose Auto in `kaku config` to follow the macO
 
 ## Bringing a WezTerm config over
 
-Copy the settings you care about into `kaku.lua` below the `-- User overrides:` line, not over the whole file, so the bundled layer still loads. Settings you leave out keep Kaku's value, not WezTerm's, which is usually what you want, but worth knowing if something looks different from before.
+Copy the settings you care about into `kaku.lua` below the `-- User overrides:` line, not over the whole file, so the bundled layer still loads. Settings you leave out keep Kaku's values, not WezTerm's, which is usually what you want, but worth knowing if something looks different from before.
 
 ## FAQ
 
@@ -129,4 +129,4 @@ Set `send_composed_key_when_left_alt_is_pressed = false`. Do the same for the ri
 
 ### Can I use my WezTerm config in Kaku?
 
-Kaku uses WezTerm's configuration system and supports most macOS settings in `kaku.lua`; Windows-only options are deprecated and have no effect. Put your settings below `-- User overrides:` so Kaku's defaults still load underneath.
+Kaku uses WezTerm's configuration system and supports most macOS settings in `kaku.lua`. Windows-only options are deprecated and have no effect. Put your settings below `-- User overrides:` so Kaku's defaults still load underneath.

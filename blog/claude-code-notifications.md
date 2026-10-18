@@ -41,7 +41,7 @@ notification_method = "osc9"
 
 If the setting is right and still nothing appears, macOS is the next suspect. A notification from a terminal is shown by the terminal app, so the terminal itself needs permission. In System Settings > Notifications, find your terminal and turn on Allow Notifications. In Kaku the same page is one click away under Kaku > Notification Settings.
 
-macOS only asks for that permission once. If you clicked Don't Allow at some point, it never asks again, and every later notification is dropped without a trace. Kaku checks for that case and, after a notification was dropped, tells you the next time you switch back to it.
+macOS only asks for that permission once. If you clicked Don't Allow at some point, it never asks again, and every later notification is dropped without a trace. Kaku checks for that case and, after a notification is dropped, tells you the next time you switch back to it.
 
 Two more causes are common:
 
@@ -70,7 +70,7 @@ config.notification_handling = "AlwaysShow"
 -- config.notification_handling = "NeverShow"
 ```
 
-A bell does not go through `notification_handling`, it always becomes a notification while the Kaku window is in the background, and bells also add to the badge on Kaku's Dock icon, so you can see that something rang even after the notification is gone.
+A bell does not go through `notification_handling`. It always becomes a notification while the Kaku window is in the background, and bells also add to the badge on Kaku's Dock icon, so you can see that something rang even after the notification is gone.
 
 ## Notifications for your own scripts
 

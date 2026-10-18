@@ -1,4 +1,4 @@
-Lazygit 加 delta，不离开终端就能把 git 用得又快又顺，lazygit 是一个全屏的 git 界面，暂存一行、修改上一个提交、做 rebase 都只差一个键，delta 则让每一份 diff 都好读，有语法高亮、行号，还能标出一行里具体改了哪几个词。用 `brew install lazygit git-delta` 装上，把 git 的 pager 指向 delta，再在 lazygit 的配置里加一行 renderer，让它的 diff 视图也用 delta，这篇就讲这几步，以及审 AI 编程 agent 刚改完的代码时最有用的几个快捷键，按 lazygit 0.66 和 delta 0.20.1 核对过。
+Lazygit 加 delta，不离开终端就能把 git 用得又快又顺，lazygit 是一个全屏的 git 界面，暂存一行、修改上一个提交、做 rebase 都只差一个键，delta 则让每一份 diff 都好读，有语法高亮、行号，还能标出一行里具体改了哪几个词。用 `brew install lazygit git-delta` 装上，把 git 的 pager 指向 delta，再在 lazygit 的配置里加一行 renderer，让它的 diff 视图也用 delta。这篇就讲这几步，以及审 AI 编程 agent 刚改完的代码时最有用的几个快捷键，按 lazygit 0.66 和 delta 0.20.1 核对过。
 
 ## 安装
 
@@ -10,7 +10,7 @@ Homebrew 里的名字是 `git-delta`，写 `delta` 也能装，是它的别名�
 
 ## 让 git 用 delta
 
-delta 读进 git 的输出，再打印一份更好看的，所以它是作为 git 的 pager 接进去的：
+delta 接过 git 的输出再打印一份更好看的结果，所以是作为 git 的 pager 接进去的：
 
 ```bash
 git config --global core.pager delta
@@ -60,7 +60,7 @@ git:
 
 ## 审 agent 的改动
 
-Claude Code 或 Codex 一口气改了十几个文件之后，提交之前真正要回答的是到底改了什么，这件事 lazygit 很擅长：
+Claude Code 或 Codex 一口气改了十几个文件之后，提交前真正要看清的是到底改了什么，这件事 lazygit 很擅长：
 
 1. 打开 Files 面板，一个个文件看过去，diff 由 delta 来渲染。
 2. 在文件上按 `enter`，只暂存你认可的那些 hunk，其余的留在工作区，让 agent 重做。
@@ -71,7 +71,7 @@ Claude Code 或 Codex 一口气改了十几个文件之后，提交之前真正�
 
 ## 在 Kaku 里用 lazygit
 
-Kaku 里按 `Cmd + Shift + G` 会在当前窗格、当前目录打开 lazygit，如果一个仓库有没提交的改动，而你还没在这里用过 lazygit，Kaku 会提示一次有这个快捷键。lazygit 和 delta 都在 `kaku init` 可以用 Homebrew 帮你装的可选工具里，上面那些 git 和 lazygit 的设置还是要你自己加。
+Kaku 里按 `Cmd + Shift + G` 会在当前窗格、当前目录打开 lazygit，如果一个仓库有没提交的改动，而你还没在这里用过 lazygit，Kaku 会提示一次可以用这个快捷键。lazygit 和 delta 都在 `kaku init` 可以用 Homebrew 帮你装的可选工具里，上面那些 git 和 lazygit 的设置还是要你自己加。
 
 ## 常见问题
 

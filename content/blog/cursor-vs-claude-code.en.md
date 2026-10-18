@@ -1,10 +1,10 @@
-Cursor is an editor with a coding agent inside it. Claude Code is an agent that reads your codebase, edits files, and runs commands, in the terminal and in an IDE extension, so those files stay ordinary project files you can open in Cursor or another editor. Choose by where you want to read the diff, and by how many sessions you want running at once.
+Cursor is an editor with a coding agent inside it. Claude Code is an agent that reads your codebase, edits files, and runs commands in the terminal and in an IDE extension, so those files stay ordinary project files you can open in Cursor or another editor. Choose based on where you want to read diffs and how many sessions you want running at once.
 
 ## How each one works
 
 [Cursor](https://cursor.com/docs) describes itself as an AI editor and a coding agent. You use it to understand a repo, plan and build features with Plan Mode, fix bugs, and review changes by inspecting diffs and running checks before you merge. Plugins, skills, MCPs, and rules are added from one place.
 
-[Claude Code](https://code.claude.com/docs/en/overview) runs in the terminal, in IDE extensions, in a desktop app, and in the browser. Those share one engine, so a project's `CLAUDE.md`, settings, and MCP servers apply on each of them. In a project:
+[Claude Code](https://code.claude.com/docs/en/overview) runs in the terminal, in IDE extensions, in a desktop app, and in the browser. They share one engine, so a project's `CLAUDE.md`, settings, and MCP servers apply across all of them. In a project:
 
 ```bash
 cd your-project
@@ -17,21 +17,21 @@ It edits files, runs commands, and uses git for staging, commit messages, branch
 
 Checked October 2026. The figures are on the pricing pages.
 
-[Cursor's pricing page](https://cursor.com/pricing) lists Free, Plus, Premium, Super, and Ultra, plus Teams and Enterprise. Cursor and Grok Chat, Imagine, Voice, and Bot share one usage pool. It refreshes weekly, higher tiers include a larger pool, and you can buy a top-off past the included amount. Free is limited agent requests and limited chat requests. Plus includes Grok models only. Premium and above include Grok usage, and third-party models are billed at API list price outside that allowance, with spending caps. Cloud agents and Bugbot code reviews start at Premium. The agent is on every plan, including Free.
+[Cursor's pricing page](https://cursor.com/pricing) lists Free, Plus, Premium, Super, and Ultra, plus Teams and Enterprise. Cursor and Grok Chat, Imagine, Voice, and Bot share one usage pool. It refreshes weekly, higher tiers include a larger pool, and you can buy a top-off past the included amount. Free includes limited agent requests and limited chat requests. Plus includes Grok models only. Premium and above include Grok usage, and third-party models are billed at API list price outside that allowance, with spending caps. Cloud agents and Bugbot code reviews start at Premium. The agent is on every plan, including Free.
 
-Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Max, Team, or Enterprise) or an [Anthropic Console](https://platform.claude.com/) account billed per use, and is also available through Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry. [Installing it on a Mac](/blog/install-claude-code-mac) covers the sign-in. On a claude.ai plan, `/usage` shows the current session and the week. An API key or third-party sign-in shows that session's cost and tokens. More pricing is on [code.claude.com](https://code.claude.com).
+Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Max, Team, or Enterprise) or an [Anthropic Console](https://platform.claude.com/) account billed per use, and is also available through Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry. [Installing it on a Mac](/blog/install-claude-code-mac) covers the sign-in. On a claude.ai plan, `/usage` shows usage for the current session and the week. An API key or third-party sign-in shows that session's cost and tokens. More pricing is on [code.claude.com](https://code.claude.com).
 
 ## Context and models
 
-Cursor lists each model with a default context window and, for many, a larger maximum, and that table changes as models are added, so check the current numbers on the [models page](https://cursor.com/docs) rather than trusting a copy.
+Cursor lists each model with a default context window and, for many, a larger maximum. That table changes as models are added, so check the current numbers on the [models page](https://cursor.com/docs) rather than trusting a copy.
 
 Claude Code's docs give no fixed context window size. The extension shows how full the window is. Claude compacts when it needs to, and `/compact` does it on request. An `@` directory reference adds only the list of files, not their contents. Click the model name to switch, or type `/model` on Claude Code v2.1.284 or later.
 
 ## Parallel work and long sessions
 
-A git worktree checks the repo out again in another directory on another branch, so `claude --worktree feature-auth` keeps two Claude Code tasks off the same files, and a second terminal uses another name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and the errors.
+A git worktree checks the repo out again in another directory on another branch, so `claude --worktree feature-auth` keeps two Claude Code tasks off the same files, and a second terminal uses another name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and common errors.
 
-**Open in New Tab** (`Cmd + Shift + Esc` on Mac) or **Open in New Window** is another conversation, with its own history and context.
+**Open in New Tab** (`Cmd + Shift + Esc` on Mac) or **Open in New Window** opens another conversation, with its own history and context.
 
 ```bash
 claude --continue
@@ -46,7 +46,7 @@ claude --resume
 
 Cursor's review stays in the editor: inspect the diff, run checks, and catch problems before you merge.
 
-In Claude Code, [plan mode](/blog/claude-code-plan-mode) reads the repo and writes nothing until you approve, and you reach it with `Shift + Tab`, `/plan`, or `--permission-mode plan`.
+In Claude Code, [plan mode](/blog/claude-code-plan-mode) reads the repo and writes nothing until you approve. You reach it with `Shift + Tab`, `/plan`, or `--permission-mode plan`.
 
 The extension has several permission modes. Edit writes files without asking. Auto has a classifier review most actions. Manual waits on a side-by-side diff, where you accept, reject, or correct the proposal. **Accept this change** and **Reject this change** step through hunks on Claude Code v2.1.275 or later. A diff with more than 100 changes opens without those buttons.
 
@@ -54,15 +54,15 @@ The extension has several permission modes. Edit writes files without asking. Au
 
 ## Using Claude Code inside Cursor
 
-The [overview](https://code.claude.com/docs/en/overview) installs the extension in Cursor with `cursor:extension/anthropic.claude-code`, and in VS Code with `vscode:extension/anthropic.claude-code`. After that, **Open in New Tab** is in the Command Palette (`Cmd + Shift + P`). See [IDE integrations](https://code.claude.com/docs/en/ide-integrations). The terminal steps are from the [VS Code guide](https://code.claude.com/docs/en/vs-code).
+The [overview](https://code.claude.com/docs/en/overview) links to install the extension in Cursor with `cursor:extension/anthropic.claude-code`, and in VS Code with `vscode:extension/anthropic.claude-code`. After that, **Open in New Tab** is in the Command Palette (`Cmd + Shift + P`). See [IDE integrations](https://code.claude.com/docs/en/ide-integrations). The terminal steps are from the [VS Code guide](https://code.claude.com/docs/en/vs-code).
 
-Open the integrated terminal with Command and backtick, then run `claude`. The CLI uses the editor for diffs and diagnostics. The extension does not put `claude` on `PATH`, so the terminal needs the standalone CLI. `/ide` connects an outside terminal to VS Code. `claude --resume` continues a panel chat. If it is still open elsewhere, the panel says two copies can mix the messages. Close the other one, or choose **Open here anyway**.
+Open the integrated terminal with Command and backtick, then run `claude`. The CLI uses the editor for diffs and diagnostics. The extension does not put `claude` on `PATH`, so the terminal needs the standalone CLI. `/ide` connects an outside terminal to VS Code. `claude --resume` continues a panel chat. If it is still open elsewhere, the panel warns that two copies can mix messages. Close the other one, or choose **Open here anyway**.
 
 ## Side by side in Kaku
 
 In [Kaku](https://kaku.fun/docs/ai-coding), `Cmd + D` splits side by side and `Cmd + Shift + D` top and bottom, so Claude Code can sit next to a shell or next to Codex. `Cmd + Shift + Enter` zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground.
 
-`restore_previous_session` is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit brings that layout back. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with `claude --resume`. Codex in the other pane is in [the Codex CLI post](/blog/codex-cli-setup).
+`restore_previous_session` is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit restores that layout. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with `claude --resume`. Resuming Codex in the other pane is covered in [the Codex CLI post](/blog/codex-cli-setup).
 
 `Cmd + Click` opens a path such as `src/main.rs:42:7` even while the tool captures the mouse, the same reason it matters in [a terminal for Claude Code](/blog/best-terminal-for-claude-code). Point it at Cursor in `~/.config/kaku/kaku.lua`:
 
@@ -80,7 +80,7 @@ Yes. Use `cursor:extension/anthropic.claude-code`, or run `claude` in the integr
 
 ### How do I stop two Claude Code sessions from editing the same files?
 
-`claude --worktree feature-auth` creates another checkout on its own branch, and the next terminal uses a different name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and errors.
+`claude --worktree feature-auth` creates another checkout on its own branch, and the next terminal uses a different name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and common errors.
 
 ### How do I pick up a Claude Code session later?
 
@@ -88,7 +88,7 @@ Yes. Use `cursor:extension/anthropic.claude-code`, or run `claude` in the integr
 
 ### Does a Cursor subscription include Claude and GPT models?
 
-Plus is Grok models only. From Premium up, third-party models such as Claude and GPT are billed at API list price, on top of the monthly price. Claude Code is a separate bill: Pro, Max, Team, Enterprise, Console, or a provider such as Bedrock.
+Plus includes Grok models only. From Premium up, third-party models such as Claude and GPT are billed at API list price, on top of the monthly price. Claude Code is billed separately through Pro, Max, Team, Enterprise, Console, or a provider such as Bedrock.
 
 ### What does Kaku keep after a restart?
 

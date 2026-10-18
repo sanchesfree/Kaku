@@ -25,7 +25,7 @@ starship init fish | source
 
 Open a new shell and the prompt changes. If you are rebuilding your zsh setup at the same time, [zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh) covers where the Starship line sits relative to completion, autosuggestions and syntax highlighting.
 
-The guide lists one prerequisite, a [Nerd Font](https://www.nerdfonts.com/) installed and enabled in your terminal, because the default symbols for Git, languages and tools come from those glyphs. Without one you get empty boxes. [Nerd Fonts on Mac](/blog/nerd-fonts-mac) explains how to add only the symbols as a fallback instead of switching fonts.
+The guide lists one prerequisite: a [Nerd Font](https://www.nerdfonts.com/) installed and enabled in your terminal, because the default symbols for Git, languages and tools come from those glyphs. Without one you get empty boxes. [Nerd Fonts on Mac](/blog/nerd-fonts-mac) explains how to add only the symbols as a fallback instead of switching fonts.
 
 ## The config file
 
@@ -99,7 +99,7 @@ style = 'bold mustard'
 
 ## Presets
 
-The [presets page](https://starship.rs/presets/) collects community configurations. Each entry links to its own page with the TOML and how to apply it. The ones there, checked October 2026:
+The [presets page](https://starship.rs/presets/) collects community configurations. Each entry links to its own page with the TOML and how to apply it. The presets listed there, checked October 2026:
 
 | Preset | What it changes |
 |---|---|
@@ -113,13 +113,13 @@ The [presets page](https://starship.rs/presets/) collects community configuratio
 | Pastel Powerline, Tokyo Night, Gruvbox Rainbow, Catppuccin Powerline | Powerline-style colored segments |
 | Jetpack | A pseudo minimalist prompt |
 
-The page notes that No Nerd Fonts will become the default in a future release. A preset is a starting point, not a mode: it becomes your `starship.toml`, and you edit it from there like any other config. Copy your current file aside before you replace it. The `starship` binary also prints the bundled presets, so `starship preset --list` shows their names and `starship preset tokyo-night -o ~/.config/starship.toml` writes one out.
+The page notes that No Nerd Fonts will become the default in a future release. A preset is a starting point, not a mode: it becomes your `starship.toml`, and you edit it from there like any other config. Back up your current file before replacing it. The `starship` binary also prints the bundled presets, so `starship preset --list` shows their names and `starship preset tokyo-night -o ~/.config/starship.toml` writes one out.
 
 ## Keep it fast
 
 The prompt is drawn before you can type, so anything slow in it is felt on every Enter. Three settings do most of the work.
 
-`scan_timeout` limits how long Starship spends scanning files in the current directory, which is how language modules decide whether you are in a Node.js or Python project. The default is 30 ms. `command_timeout` limits each external command a module runs, such as `git` or `node --version`, and the default is 500 ms. Git status in a very large repository can need more than that, so raise it if you work in one, and keep it low if you would rather never wait long for a prompt:
+`scan_timeout` limits how long Starship spends scanning files in the current directory, which is how language modules decide whether you are in a Node.js or Python project. The default is 30 ms. `command_timeout` limits each external command a module runs, such as `git` or `node --version`, and the default is 500 ms. Git status in a very large repository can take longer than that, so raise it if you work in one, or keep it low if you would rather never wait long for a prompt:
 
 ```toml
 scan_timeout = 10
@@ -142,11 +142,11 @@ right_format = '$cmd_duration$time'
 disabled = false
 ```
 
-The left format is written out instead of using `$all`, because `$all` already includes `cmd_duration` and `time`.
+The format on the left lists modules explicitly instead of using `$all`, because `$all` already includes `cmd_duration` and `time`.
 
 ## Starship in Kaku
 
-Kaku's shell setup (`kaku init`, also offered on first launch) installs Starship through Homebrew when it is missing, and starts it only inside Kaku, which includes tmux sessions started from Kaku: the managed `kaku.zsh` checks `TERM_PROGRAM=Kaku`, or `$TMUX` together with the `KAKU_SESSION` variable a Kaku shell exports, and the fish setup uses the same test. Other terminals keep the prompt you already had. To use Kaku's Starship in every terminal, add `export KAKU_PROMPT_EVERYWHERE=1` before the Kaku line in `.zshrc`, or `set -gx KAKU_PROMPT_EVERYWHERE 1` in `config.fish`. Icons render without installing a Nerd Font, because Kaku bundles Symbols Nerd Font Mono and appends it as a fallback to whatever font you set.
+Kaku's shell setup (`kaku init`, also offered on first launch) installs Starship through Homebrew when it is missing, and starts it only inside Kaku, including tmux sessions started from Kaku. The managed `kaku.zsh` checks `TERM_PROGRAM=Kaku`, or `$TMUX` together with the `KAKU_SESSION` variable a Kaku shell exports, and the fish setup uses the same test. Other terminals keep the prompt you already had. To use Kaku's Starship in every terminal, add `export KAKU_PROMPT_EVERYWHERE=1` before the Kaku line in `.zshrc`, or `set -gx KAKU_PROMPT_EVERYWHERE 1` in `config.fish`. Icons render without installing a Nerd Font, because Kaku bundles Symbols Nerd Font Mono and appends it as a fallback to whatever font you set.
 
 There is no separate Kaku prompt config. Kaku does not set `STARSHIP_CONFIG`, so Starship reads the normal `~/.config/starship.toml`, and Kaku copies its own file there only when none exists. If you already have one, it is left alone. The single exception is a file byte-identical to the one Kaku 0.10.0 to 0.22.0 shipped with its icons stripped, which is replaced with the current version, while an edited or symlinked file always stays. The copied file is an ordinary config you can edit: it uses a short explicit `format` instead of `$all`, sets `command_timeout = 2000` so a large repository's Git status has room, and turns on `ignore_submodules` for `git_status`.
 
@@ -154,7 +154,7 @@ There is no separate Kaku prompt config. Kaku does not set `STARSHIP_CONFIG`, so
 
 ### Why does my Starship prompt show boxes or question marks?
 
-The terminal font has no glyphs for the Nerd Font symbols the modules use. Install a Nerd Font or add the symbols-only font as a fallback, or switch to the No Nerd Fonts or Plain Text Symbols preset.
+The terminal font has no glyphs for the Nerd Font symbols the modules use. Install a Nerd Font, add the symbols-only font as a fallback, or switch to the No Nerd Fonts or Plain Text Symbols preset.
 
 ### Where is the Starship config file?
 

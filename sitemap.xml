@@ -35,11 +35,11 @@
   <url><loc>https://kaku.fun/privacy</loc><lastmod>2026-10-19</lastmod><priority>0.5</priority></url>
   <url><loc>https://kaku.fun/zh/privacy</loc><lastmod>2026-10-19</lastmod><priority>0.5</priority></url>
   <!-- blog:start -->
-  <url><loc>https://kaku.fun/blog</loc><lastmod>2026-10-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://kaku.fun/zh/blog</loc><lastmod>2026-10-18</lastmod><priority>0.7</priority></url>
-  <url><loc>https://kaku.fun/blog/claude-code-notifications</loc><lastmod>2026-10-18</lastmod><priority>0.6</priority></url>
-  <url><loc>https://kaku.fun/zh/blog/claude-code-notifications</loc><lastmod>2026-10-18</lastmod><priority>0.6</priority></url>
-  <url><loc>https://kaku.fun/blog/best-terminal-for-claude-code</loc><lastmod>2026-10-18</lastmod><priority>0.6</priority></url>
-  <url><loc>https://kaku.fun/zh/blog/best-terminal-for-claude-code</loc><lastmod>2026-10-18</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog</loc><lastmod>2026-10-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/zh/blog</loc><lastmod>2026-10-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-notifications</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-notifications</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/best-terminal-for-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/best-terminal-for-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
   <!-- blog:end -->
 </urlset>

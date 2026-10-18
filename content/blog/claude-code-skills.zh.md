@@ -19,7 +19,7 @@
 
 ## SKILL.md 里有什么
 
-开头的 `---` 必须是文件第一行，字段都可选，名字用小写加连字符，只有 `when_to_use` 用的是下划线，Claude 拿来对任务的是 `description`，不认识的字段会被忽略，YAML 解析失败时 skill 照样加载，只是字段全空，`/name` 还能用，没有字段就不会自己去匹配。
+开头的 `---` 必须是文件第一行，字段都可选，名字用小写加连字符，只有 `when_to_use` 用的是下划线。Claude 拿来对任务的是 `description`，不认识的字段会被忽略。YAML 解析失败时 skill 照样加载，只是字段全空，`/name` 还能用，没有字段就不会自己去匹配。
 
 ```yaml
 ---
@@ -43,23 +43,23 @@ Summarize the diff in a few bullets. If it is empty, say so.
 
 先写它做什么、什么时候用，场景放在前面，`when_to_use` 会把触发短语接在 `description` 后面，没写 `description` 就用正文第一行非空的 markdown 代替。`description` 和 `when_to_use` 加在一起，到 1,536 个字符就截断，这个上限由 `skillListingMaxDescChars` 设定。名字和 `description` 每一轮都会送出去，预算是上下文窗口的 1%，`skillListingBudgetFraction` 用来改这个比例，比如 `0.02`，要固定字符数就用 `SLASH_COMMAND_TOOL_CHAR_BUDGET`。超出预算之后，先丢掉用得最少的 `description`，名字还留着。2026 年 10 月核对过。
 
-`paths` 的写法和按路径生效的规则一样是 glob，只有碰到匹配的文件时才会自动加载。一个 skill 一直不自己出现，多半是 `description` 里没有你会说的那些词，YAML 没有解析成功，或者模型调用被关掉了。问 `What skills are available?` 能看到当前列出来的 skill，`/doctor` 会估算这份列表的开销，`/skill-doctor` 从 v2.1.252 起还会报开销和用过的情况，内置的和企业的 skill 除外，交互会话里它开在 `/plugin` 的 Stats 标签上。
+`paths` 的写法和按路径生效的规则一样是 glob，只有碰到匹配的文件时才会自动加载。一个 skill 一直不自己出现，多半是 `description` 里没有你会说的那些词，YAML 没有解析成功，或者模型调用被关掉了。问 `What skills are available?` 能看到当前列出来的 skill，`/doctor` 会估算这份列表的开销。`/skill-doctor` 从 v2.1.252 起还会报开销和用过的情况，内置的和企业的 skill 除外，交互会话里它开在 `/plugin` 的 Stats 标签上。
 
 ## 脚本和参考文件
 
 `SKILL.md` 保持在 500 行以内，调用过一次，这段文字就留在对话里，不会再从磁盘读，自动压缩之后，每个 skill 可以留下最近一次运行开头的 5,000 token，从共用的 25,000 token 里取，新的先占。
 
-`SKILL.md` 指向一份参考文件时，不会跟正文一起读进来，要等说明写了去读，Claude 才会去读那个文件，脚本是拿去执行的，不会塞进提示词。`${CLAUDE_SKILL_DIR}` 就是 `SKILL.md` 所在的目录，正文和 `allowed-tools` 里都写它，比如 `Bash(${CLAUDE_SKILL_DIR}/scripts/render.sh *)`，这样授权才能和要跑的命令对上，工作区信任管不到 `allowed-tools` 这个字段，在从未信任过的文件夹里跑 `claude -p` 也一样。
+`SKILL.md` 指向一份参考文件时，不会跟正文一起读进来，要等说明写了去读，Claude 才会去读那个文件，脚本是拿去执行的，不会塞进提示词。`${CLAUDE_SKILL_DIR}` 就是 `SKILL.md` 所在的目录，正文和 `allowed-tools` 里都写它，比如 `Bash(${CLAUDE_SKILL_DIR}/scripts/render.sh *)`，这样授权才能和要跑的命令对上。工作区信任管不到 `allowed-tools` 这个字段，在从未信任过的文件夹里跑 `claude -p` 也一样。
 
 ## 用名字调用
 
-消息开头的 `/fix-issue 123` 会跑这个 skill，`$ARGUMENTS` 是 `123`，`$0` 是第一个参数，正文里没有占位符时，Claude Code 会接上 `ARGUMENTS:` 和你打的那段文字，写成 `go ahead and /deploy to staging` 这种夹在句子里的样子，不会直接跑，这个名字只表示当前这条回复允许用它。
+消息开头的 `/fix-issue 123` 会跑这个 skill，`$ARGUMENTS` 是 `123`，`$0` 是第一个参数，正文里没有占位符时，Claude Code 会接上 `ARGUMENTS:` 和你打的那段文字。写成 `go ahead and /deploy to staging` 这种夹在句子里的样子，不会直接跑，这个名字只表示当前这条回复允许用它。
 
 在提示符里打 `/write-tests /fix-issue 123`，两个都会加载，`123` 分给每一个，最多展开第一个 skill 加后面五个，从左往右认，遇到第一个不是行内运行、用户可直接调用的 skill 名就停下，`claude -p` 和 Agent SDK 只加载第一个。
 
 ## 用 plugin 分享
 
-把 `.claude/skills/` 提交进仓库，这个仓库里的会话都会加载，克隆了仓库的云端会话也算，要连 subagent、hook 或 MCP server 一起装，就做成一个 [plugin](https://code.claude.com/docs/en/plugins)，清单是 `.claude-plugin/plugin.json`，里面的 skill 以 `/plugin-name:skill-name` 运行。
+把 `.claude/skills/` 提交进仓库，这个仓库里的会话都会加载，克隆了仓库的云端会话也算。要连 subagent、hook 或 MCP server 一起装，就做成一个 [plugin](https://code.claude.com/docs/en/plugins)，清单是 `.claude-plugin/plugin.json`，里面的 skill 以 `/plugin-name:skill-name` 运行。
 
 marketplace 是带 `.claude-plugin/marketplace.json` 的仓库，Claude Code 在第一次交互式终端会话里，会把 Anthropic 的官方 marketplace 加进来，之后从 `/plugin` 的 Discover 标签安装，也可以直接写名字：
 
@@ -67,7 +67,7 @@ marketplace 是带 `.claude-plugin/marketplace.json` 的仓库，Claude Code 在
 /plugin install skill-creator@claude-plugins-official
 ```
 
-User scope 装给你自己，这台电脑上每个项目都能用，Project scope 写进已经提交的 `.claude/settings.json`，但每个协作者还是要自己装一次，Local scope 也只给你自己，而且只限这个仓库，装好之后每次会话都会加载。Claude 自己能调用的 skill，名字和 `description` 每一轮都在上下文里，也计入用量，正文要等 skill 跑起来才加载，官方 marketplace 的 plugin 在安装之前，Marketplaces 标签上会显示 Context cost。`skillOverrides` 不影响 plugin 里的 skill，要关掉某一个，用 `/plugin`，或者跑 `claude plugin disable`。
+User scope 装给你自己，这台电脑上每个项目都能用，Project scope 写进已经提交的 `.claude/settings.json`，但每个协作者还是要自己装一次。Local scope 也只给你自己，而且只限这个仓库，装好之后每次会话都会加载。Claude 自己能调用的 skill，名字和 `description` 每一轮都在上下文里，也计入用量，正文要等 skill 跑起来才加载，官方 marketplace 的 plugin 在安装之前，Marketplaces 标签上会显示 Context cost。`skillOverrides` 不影响 plugin 里的 skill，要关掉某一个，用 `/plugin`，或者跑 `claude plugin disable`。
 
 ## 常见写错
 
@@ -103,4 +103,4 @@ skill 跑在当前这场对话里，用的是同一份上下文，subagent 另�
 
 ### 怎么不让 Claude 自己去部署？
 
-写上 `disable-model-invocation: true`，部署留给自己打 `/deploy`，权限里的 deny 规则写上 `Skill(deploy)`，会拦住 Skill 工具，`skillOverrides` 写成 `"deploy": "user-invocable-only"` 时 `/deploy` 还留在菜单里，写成 `"off"` 就把它藏起来。
+写上 `disable-model-invocation: true`，部署留给自己打 `/deploy`。权限里的 deny 规则写上 `Skill(deploy)`，会拦住 Skill 工具，`skillOverrides` 写成 `"deploy": "user-invocable-only"` 时 `/deploy` 还留在菜单里，写成 `"off"` 就把它藏起来。

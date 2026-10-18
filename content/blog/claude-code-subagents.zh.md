@@ -1,10 +1,10 @@
-[Claude Code 的 subagent](https://code.claude.com/docs/en/sub-agents) 是一个单独写了系统提示词的帮手，有自己的工具列表和自己的上下文窗口，定义它只要在 `~/.claude/agents/` 或 `.claude/agents/` 里放一个 Markdown 文件，Claude 把任务交给它，它干完只把总结带回来，用它的目的就是让搜索结果、日志和整页整页的文件内容别堆进你的主对话里。
+[Claude Code 的 subagent](https://code.claude.com/docs/en/sub-agents) 是一个单独写了系统提示词的帮手，有自己的工具列表和自己的上下文窗口。定义它只要在 `~/.claude/agents/` 或 `.claude/agents/` 里放一个 Markdown 文件，Claude 把任务交给它，它干完只把总结带回来。用它的目的就是让搜索结果、日志和整页整页的文件内容别堆进你的主对话里。
 
 ## subagent、skill 和 agent teams 的区别
 
-[skill](/zh/blog/claude-code-skills) 跑在主对话里，是一段可以反复用的流程，Claude 把它加载进你当前所在的上下文，subagent 则是从零开始，看不到你的对话历史，看不到你调用过的 skill，也看不到 Claude 已经读过的文件，Claude 给它写一段委派说明，它照着这段说明干活，最后交回一个结果。两者在两个方向上会碰到一起，带 `context: fork` 的 skill 会把自己的正文当成一个 subagent 的任务来跑，而写了 `skills` 字段的 subagent 会在启动时把这些 skill 的完整内容预先装进来。
+[skill](/zh/blog/claude-code-skills) 跑在主对话里，是一段可以反复用的流程，Claude 把它加载进你当前所在的上下文。subagent 则是从零开始，看不到你的对话历史，看不到你调用过的 skill，也看不到 Claude 已经读过的文件，Claude 给它写一段委派说明，它照着这段说明干活，最后交回一个结果。两者在两个方向上会碰到一起，带 `context: fork` 的 skill 会把自己的正文当成一个 subagent 的任务来跑，而写了 `skills` 字段的 subagent 会在启动时把这些 skill 的完整内容预先装进来。
 
-[agent teams](https://code.claude.com/docs/en/agent-teams) 是第三种东西，几个 Claude Code 会话一起干活，其中一个当 lead，队友之间可以直接发消息，还共用一份任务列表，2026 年 10 月核对过，它目前是实验功能，默认关着，要用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` 打开，打开之后，Claude 委派时只要给 subagent 起了名字，它就会作为队友启动，而不是普通的 subagent。文档对取舍说得很直白，subagent 把总结交回调用方，花得少，每个队友却是一个单独的 Claude 实例，token 消耗随着活跃队友的数量一起涨。
+[agent teams](https://code.claude.com/docs/en/agent-teams) 是第三种东西，几个 Claude Code 会话一起干活，其中一个当 lead，队友之间可以直接发消息，还共用一份任务列表。2026 年 10 月核对过，它目前是实验功能，默认关着，要用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` 打开。打开之后，Claude 委派时只要给 subagent 起了名字，它就会作为队友启动，而不是普通的 subagent。文档对取舍说得很直白，subagent 把总结交回调用方，花得少，每个队友却是一个单独的 Claude 实例，token 消耗随着活跃队友的数量一起涨。
 
 | | 跑在哪 | 能不能看到你的对话 | 交回什么 |
 |---|---|---|---|
@@ -39,7 +39,7 @@ You are a code reviewer. Run git diff, focus on the modified files,
 and report issues ordered by priority with a suggested fix for each.
 ```
 
-放在 `~/.claude/agents/` 里每个项目都能用，放在 `.claude/agents/` 里就跟着这个仓库一起提交，两边重名时项目里的那个优先。Claude Code 会盯着这两个目录，改完文件下一次委派就用上新定义，不用重启，例外是会话启动时这个 `agents` 目录还不存在，那就先建好第一个文件，再重启一次。
+放在 `~/.claude/agents/` 里每个项目都能用，放在 `.claude/agents/` 里就跟着这个仓库一起提交，两边重名时项目里的那个优先。Claude Code 会盯着这两个目录，改完文件下一次委派就用上新定义，不用重启，唯一例外是会话启动时如果 `agents` 目录原本不存在，那就先建好第一个文件，再重启一次。
 
 值得知道的字段大概是这些：
 
@@ -54,7 +54,7 @@ and report issues ordered by priority with a suggested fix for each.
 | `memory` | `user`、`project` 或 `local`，一个跨对话保留下来的目录 |
 | `background` | 设成 `true`，Claude 想放到前台也照样留在后台 |
 | `isolation` | 设成 `worktree`，在一个临时的 git worktree 里跑 |
-| `hooks` | 只在这个 subagent 活着时才跑的 hook |
+| `hooks` | 只在这个 subagent 运行期间生效的 hook |
 
 多个单词的字段名用 camelCase，必须一字不差，Claude Code 碰到不认识的字段会直接忽略，不报错，没有 `description` 或者 YAML 解析不了的文件也会被悄悄跳过，想知道原因就用 `claude --debug` 启动，原因会写进 debug 日志。
 
@@ -109,7 +109,7 @@ Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更�
 
 ### 用 subagent 会让 Claude Code 更便宜吗？
 
-单靠它不会，它能让主上下文保持精简，但每个 subagent 都在同一份用量额度里花自己的 token，真正能降下来的是把搜索交给 `model: haiku`，再让它交回来的总结尽量短。
+单靠它不会，它能让主上下文保持精简，但每个 subagent 都在同一份用量额度里花自己的 token，真正能把开销降下来的是把搜索交给 `model: haiku`，再让它交回来的总结尽量短。
 
 ### 该用 subagent 还是 agent team？
 

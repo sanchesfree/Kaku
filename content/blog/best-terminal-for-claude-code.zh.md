@@ -1,12 +1,12 @@
-Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置，下面一项项讲，你也可以拿来对照自己现在用的终端。
+Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样，长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置，下面一项项讲，你也可以拿来对照自己现在用的终端。
 
-[[figure:claude-code-session-loop|Claude Code 会话的循环：写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在|终端会在这五个地方帮上忙，或者添乱。]]
+[[figure:claude-code-session-loop|Claude Code 会话的循环，写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在|终端会在这五个地方帮上忙，或者添乱。]]
 
 ## 提示词要能分行写
 
 给 agent 的提示词很少只有一行，常常是先贴一段报错，再补一个文件路径，最后才写要它做什么，写到一半按了回车，发出去的就是半句话。
 
-Claude Code 自己的文档列了哪些终端里 `Shift + Enter` 不用设置就能换行：Ghostty、Kitty、iTerm2、WezTerm、Warp、Apple Terminal 和 Windows Terminal，VS Code、Cursor、Zed 以及 0.16 之前的 Alacritty 需要先跑一次 `/terminal-setup`。还有两个到哪都能用的办法，`Ctrl + J`，或者先打一个反斜杠再回车。
+Claude Code 自己的文档列了哪些终端里 `Shift + Enter` 不用设置就能换行，包括 Ghostty、Kitty、iTerm2、WezTerm、Warp、Apple Terminal 和 Windows Terminal，VS Code、Cursor、Zed 以及 0.16 之前的 Alacritty 需要先跑一次 `/terminal-setup`。还有两个到哪都能用的办法，`Ctrl + J`，或者先打一个反斜杠再回车。
 
 在 Kaku 里 `Shift + Enter` 和 `Cmd + Enter` 都是换行，不用提前跑任何命令。
 
@@ -22,11 +22,11 @@ Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本不用任何设置�
 { "preferredNotifChannel": "ghostty" }
 ```
 
-通知只在 Kaku 处于后台时出现，正在看的那个窗格不会再弹一次，如果一条都收不到，打开 Kaku > Notification Settings 把 Allow Notifications 打开。
+通知只在 Kaku 处于后台时出现，正在看的那个窗格不会再弹一次，如果一条都收不到，点 Kaku > Notification Settings 把 Allow Notifications 打开。
 
 ## 它打印出来的东西要能点开
 
-Claude Code 会打印文件路径，常常还带着行号，也会给出文档或者 PR 的链接，能不能直接点开取决于两个细节。
+Claude Code 会打印文件路径，常常还带着行号，也会给出文档或者 PR 的链接，能不能直接点开主要看两个细节。
 
 第一个是 Claude Code 运行时会占用鼠标，很多终端里这时普通点击会被它收走，链接打不开，Kaku 里 `Cmd + Click` 即使在程序占着鼠标时也能打开链接和路径。
 

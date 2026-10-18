@@ -1,4 +1,4 @@
-在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`，之后的事情基本都在 `~/.codex/config.toml` 这一个文件里，用哪个模型，不问你能做多少事，需要你的时候怎么提醒你，都由它决定。这篇按顺序讲每一步，最值得先改的几个设置，以及关掉终端之后怎么接着上次的会话，内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
+在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`。之后的事情基本都在 `~/.codex/config.toml` 这一个文件里，用哪个模型，不问你能做多少事，需要你的时候怎么提醒你，都由它决定。这篇按顺序讲每一步，最值得先改的几个设置，以及关掉终端之后怎么接着上次的会话，内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
 
 ## 安装
 
@@ -15,7 +15,7 @@ curl -fsSL https://chatgpt.com/codex/install.sh | sh
 npm install -g @openai/codex
 ```
 
-装完用 `codex --version` 看一下，以后升级用当初安装它的那个工具，哪里看着不对就跑 `codex doctor`，它会把安装、配置、登录和运行环境一起查一遍。
+装完用 `codex --version` 确认版本，以后升级直接用当初安装它的那个工具。哪里看着不对就跑 `codex doctor`，它会把安装、配置、登录和运行环境一起查一遍。
 
 ## 登录
 
@@ -25,7 +25,7 @@ npm install -g @openai/codex
 printenv OPENAI_API_KEY | codex login --with-api-key
 ```
 
-没有浏览器的机器上用 `codex login --device-auth`，它会给一个代码，拿到另一台设备上输入，使用文件存储时，凭据存在 `CODEX_HOME` 下的 `auth.json`，默认就是 `~/.codex/auth.json`，也可以通过 [`cli_auth_credentials_store`](https://learn.chatgpt.com/docs/config-file/config-reference) 选择系统钥匙串或只存在内存里，`codex login status` 可以看当前是哪个账号，`codex logout` 退出。
+没有浏览器的机器上用 `codex login --device-auth`，它会给一个代码，拿到另一台设备上输入。使用文件存储时，凭据存在 `CODEX_HOME` 下的 `auth.json`，默认就是 `~/.codex/auth.json`，也可以通过 [`cli_auth_credentials_store`](https://learn.chatgpt.com/docs/config-file/config-reference) 选择系统钥匙串或只存在内存里。`codex login status` 可以看当前是哪个账号，`codex logout` 退出。
 
 ## 设置从哪里来
 
@@ -66,7 +66,7 @@ notification_method = "osc9"
 
 ## 通知
 
-Codex 默认在做完或者等你批准时响一下终端铃声，而且只在终端没获得焦点时响，这一声能不能变成桌面通知要看终端，Kaku 会把后台窗口里的铃声变成通知，设成 `notification_method = "osc9"` 之后，通知里显示的是 Codex 自己写的消息，而不是笼统的一句，`tui.notification_condition = "always"` 则是终端在前台也提醒。
+Codex 默认在做完或者等你批准时响一下终端铃声，而且只在终端没获得焦点时响，这一声能不能变成桌面通知要看终端。Kaku 会把后台窗口里的铃声变成通知，设成 `notification_method = "osc9"` 之后，通知里显示的是 Codex 自己写的消息，而不是笼统的一句。`tui.notification_condition = "always"` 则是终端在前台也提醒。
 
 如果什么都没收到，可以看这篇[通知指南](https://kaku.fun/zh/blog/claude-code-notifications)，里面讲了会挡住通知的 macOS 权限和 tmux 设置。
 
@@ -84,7 +84,7 @@ codex fork --last     # 从最近一次分叉出去，原来那个不动
 
 ## 在 Kaku 里用同一个 Codex 登录
 
-Kaku 自带的助手负责 `#` 生成命令和 `Cmd + L` 对话，它不需要你再准备一个 API key，可以直接跟着现有的 Codex 连接走，运行 `kaku ai`，选 Kaku Assistant，把 Auth Type 设成 `codex`，Kaku 就会去读用户级的 Codex 配置，包括 ChatGPT 登录或 API key，以及选中的服务商，同一个界面里的 Codex 那一项也能看到 Codex 自己的模型和登录状态。
+Kaku 自带的助手负责 `#` 生成命令和 `Cmd + L` 对话，它不需要你再准备一个 API key，可以直接跟着现有的 Codex 连接走。运行 `kaku ai`，选 Kaku Assistant，把 Auth Type 设成 `codex`，Kaku 就会去读用户级的 Codex 配置，包括 ChatGPT 登录或 API key，以及选中的服务商。同一个界面里的 Codex 那一项也能看到 Codex 自己的模型和登录状态。
 
 ## 常见问题
 

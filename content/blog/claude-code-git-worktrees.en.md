@@ -4,11 +4,11 @@
 
 A repository has one main working tree. Two `claude` processes started there share that tree, the index, and the files, so each write lands in the same place.
 
-`git worktree add` refuses a branch another worktree already has checked out, unless you pass `--force`. Each session needs its own branch and directory. Worktrees are Claude Code's file isolation for that. Subagents split work inside one session, and the same docs point at agent teams to coordinate several Claude sessions.
+`git worktree add` refuses a branch another worktree already has checked out, unless you pass `--force`. Each session needs its own branch and directory. Claude Code uses worktrees for that file isolation. Subagents split work inside one session, and the same docs point to agent teams to coordinate several Claude sessions.
 
 ## Add, list, and remove a worktree
 
-[`git worktree`](https://git-scm.com/docs/git-worktree) attaches another working tree to the same repository. `-b` creates the branch, starting at `HEAD` when you name no commit.
+[`git worktree`](https://git-scm.com/docs/git-worktree) attaches another working tree to the same repository. `-b` creates the branch, starting at `HEAD` if you do not specify a commit.
 
 ```bash
 git worktree add ../repo-feature -b feature
@@ -24,17 +24,17 @@ A linked worktree has its own `HEAD` and index. Refs under `refs/` are shared, e
 git worktree remove ../repo-feature
 ```
 
-`remove` refuses the main worktree. It also refuses a linked worktree with untracked files or modifications to tracked files. `--force` removes an unclean worktree, or one with submodules. A locked worktree takes `--force` twice. Delete the folder by hand and the admin files remain until `git worktree prune`, or until `gc.worktreePruneExpire`. Git calls multiple checkouts experimental, and its submodule support is incomplete.
+`remove` refuses the main worktree. It also refuses a linked worktree with untracked files or modifications to tracked files. `--force` removes an unclean worktree, or one with submodules. A locked worktree requires `--force` twice. If you delete the folder by hand, the admin files remain until `git worktree prune`, or until `gc.worktreePruneExpire`. Git calls multiple checkouts experimental, and its submodule support is incomplete.
 
 ## Let Claude Code create the worktree
 
-From the repository, `--worktree` and `-w` are the same flag. A second terminal takes a different name. With no name, Claude picks one such as `bright-running-fox`. Add `.claude/worktrees/` to `.gitignore`.
+From the repository, `--worktree` and `-w` are the same flag. A second terminal takes a different name. Without a name, Claude picks one such as `bright-running-fox`. Add `.claude/worktrees/` to `.gitignore`.
 
 ```bash
 claude --worktree feature-auth
 ```
 
-The repository needs a commit. Otherwise you get `Failed to resolve base branch "HEAD": git rev-parse failed`. The first interactive `claude` in a directory has to accept workspace trust, or `--worktree` exits with an error. `claude -p --worktree` skips that check and, on exit, leaves the worktree and the `git worktree lock` it took.
+The repository needs a commit. Otherwise it fails with `Failed to resolve base branch "HEAD": git rev-parse failed`. The first interactive `claude` session in a directory has to accept workspace trust, or `--worktree` exits with an error. `claude -p --worktree` skips that check and, on exit, leaves the worktree and the `git worktree lock` it took.
 
 New worktrees branch from the remote default branch, usually `main` (`worktree.baseRef` `"fresh"`). If the last fetch was more than 24 hours ago, Claude Code fetches that branch, capped at five seconds. `"head"` starts at the current local `HEAD` and carries unpushed commits. The setting cannot name a branch. For an existing branch, add the worktree with git, `cd` into it, and run `claude`.
 
@@ -46,19 +46,19 @@ New worktrees branch from the remote default branch, usually `main` (`worktree.b
 }
 ```
 
-`claude --worktree "#1234"` fetches that pull request from `origin` into `.claude/worktrees/pr-<number>/`. Quote the `#`. A name whose directory already exists reopens that worktree. On `"fresh"`, a clean worktree still on Claude's branch resets to the default branch if it has no commits of its own, or if its pull request was merged and the remote branch deleted.
+`claude --worktree "#1234"` fetches that pull request from `origin` into `.claude/worktrees/pr-<number>/`. Quote the `#`. If a worktree directory with that name already exists, Claude reopens that worktree. On `"fresh"`, a clean worktree still on Claude's branch resets to the default branch if it has no commits of its own, or if its pull request was merged and the remote branch deleted.
 
-Asking Claude to work in a worktree calls `EnterWorktree`. `isolation: worktree` under `.claude/agents/` gives a subagent its own worktree, removed after a clean finish. One that still has changes stays until the `cleanupPeriodDays` sweep can remove it without losing the work.
+Asking Claude to work in a worktree calls `EnterWorktree`. `isolation: worktree` under `.claude/agents/` gives a subagent its own worktree, removed after a clean finish. A worktree that still has changes stays until the `cleanupPeriodDays` sweep can remove it without losing the work.
 
-On exit, Claude looks for changes, untracked files, uncommitted submodule work, and new commits. A clean worktree from a session with no session name is removed with its branch. A named session asks. Keeping a worktree that has work leaves the directory and the branch, and Claude prints `claude --worktree <name> --resume`. Removing deletes the directory, the branch, and the work. An unverifiable state asks instead of deleting.
+On exit, Claude looks for changes, untracked files, uncommitted submodule work, and new commits. A clean worktree from an unnamed session is removed with its branch. A named session asks before removing. Keeping a worktree that has work leaves the directory and the branch, and Claude prints `claude --worktree <name> --resume`. Removing deletes the directory, the branch, and the work. If the state cannot be verified, Claude asks instead of deleting.
 
-`git worktree remove` refuses a locked worktree until `git worktree unlock`. Edits to the main checkout are blocked, and so are shell commands that run there or point git there (`git -C`, `--git-dir`, `GIT_DIR`, `GIT_WORK_TREE`, or `cd`). `cp` into the main checkout is outside those checks. In [hooks](/blog/claude-code-hooks), `${CLAUDE_PROJECT_DIR}` stays at the startup project root. The hook's `cwd` is the worktree.
+`git worktree remove` refuses a locked worktree until it is unlocked with `git worktree unlock`. Edits to the main checkout are blocked, and so are shell commands that run there or point git there (`git -C`, `--git-dir`, `GIT_DIR`, `GIT_WORK_TREE`, or `cd`). `cp` into the main checkout is outside those checks. In [hooks](/blog/claude-code-hooks), `${CLAUDE_PROJECT_DIR}` stays at the startup project root. The hook's `cwd` is the worktree.
 
 ## Set up each checkout
 
 The new directory is a checkout of tracked files. Install dependencies there, or ask Claude to. A gitignored `.env` is not in the checkout.
 
-A `.worktreeinclude` at the project root copies gitignored files into worktrees Claude creates with git. The syntax is `.gitignore` syntax, and a tracked file is never copied.
+A `.worktreeinclude` at the project root copies gitignored files into worktrees Claude creates with git. It uses `.gitignore` syntax, and tracked files are never copied.
 
 ```text
 .env
@@ -77,7 +77,7 @@ git worktree remove ../repo-feature
 git worktree remove .claude/worktrees/feature-auth
 ```
 
-Pass `--force` when there are uncommitted changes or untracked files. If git refuses because the worktree is locked, `git worktree unlock` that path, then remove it. After you delete a folder yourself, `git worktree prune` drops the stale entry under `$GIT_DIR/worktrees`.
+Pass `--force` when there are uncommitted changes or untracked files. If git refuses because the worktree is locked, run `git worktree unlock` on that path, then remove it. After you delete a folder yourself, `git worktree prune` drops the stale entry under `$GIT_DIR/worktrees`.
 
 To return to a worktree you kept:
 
@@ -91,7 +91,7 @@ claude --worktree feature-auth --resume
 
 [New tab](https://kaku.fun/docs/keybindings) is `Cmd + T`. New tabs and splits inherit the current directory (`config.tab_inherit_working_directory` and `config.split_pane_inherit_working_directory` default to true), so `cd ../repo-feature` or run `claude --worktree` from the repo. `Cmd + Shift + I` or a double-click renames the tab, and a hand-set name stays when `config.tab_title_use_pane_title` shows Claude Code's title. Automatic titles show the directory. `Cmd + Shift + O` opens the Tab Navigator.
 
-`Cmd + D` splits side by side, `Cmd + Shift + D` top and bottom, and `Cmd + Shift + Enter` zooms the pane. Closing a pane or tab with Claude Code in front asks first. Bundled `tab_close_confirmation` and `pane_close_confirmation` are `SmartPrompt`, and `Cmd + W` closes the active pane when the tab has several.
+`Cmd + D` splits side by side, `Cmd + Shift + D` top and bottom, and `Cmd + Shift + Enter` zooms the pane. Closing a pane or tab asks first while Claude Code is in the foreground. Bundled `tab_close_confirmation` and `pane_close_confirmation` are `SmartPrompt`, and `Cmd + W` closes the active pane when the tab has several.
 
 [`kaku start --new-tab`](https://kaku.fun/docs/cli) adds a tab to the current window. `kaku cli split-pane` splits the current pane and can run a command in the new one:
 

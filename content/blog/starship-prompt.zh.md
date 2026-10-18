@@ -59,9 +59,9 @@ truncation_length = 2
 disabled = true
 ```
 
-`$schema` 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。`add_newline` 这种顶层的键管整个提示符，每个 `[表]` 管一个模块。按[配置文档](https://starship.rs/config/)的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 `nodejs` 模块会显示当前的 Node.js 版本，任何模块加上 `disabled = true` 就会从提示符里彻底消失。
+`$schema` 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。`add_newline` 这种顶层的键管整个提示符，每个 `[表]` 管一个模块。按[配置文档](https://starship.rs/config/)的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 `nodejs` 模块会显示当前的 Node.js 版本。任何模块加上 `disabled = true` 就会从提示符里彻底消失。
 
-有几个默认值最好心里有数，以下是 2026 年 10 月核对过的。`add_newline` 默认是 `true`，所以两次提示符之间会空一行，不喜欢就关掉，`directory` 默认截到三层父目录，在 Git 仓库里还会截到仓库根目录，`cmd_duration` 只在命令跑了超过两秒时才出现，对应的是 `min_time = 2_000`。`time` 和 `git_metrics` 默认是关着的，要自己写 `disabled = false` 才会显示。
+有几个默认值最好心里有数，以下是 2026 年 10 月核对过的。`add_newline` 默认是 `true`，所以两次提示符之间会空一行，不喜欢就关掉。`directory` 默认截到三层父目录，在 Git 仓库里还会截到仓库根目录。`cmd_duration` 只在命令跑了超过两秒时才出现，对应的是 `min_time = 2_000`。`time` 和 `git_metrics` 默认是关着的，要自己写 `disabled = false` 才会显示。
 
 ## 格式字符串
 
@@ -119,7 +119,7 @@ style = 'bold mustard'
 
 提示符画出来之前你是没法打字的，所以它里面任何一点慢，每按一次回车都感觉得到，大部分情况下动这三个地方就够了。
 
-`scan_timeout` 限制 Starship 扫描当前目录文件的时间，各个语言模块就是靠这一步判断你是不是在 Node.js 或 Python 项目里，默认是 30 ms。`command_timeout` 限制模块调用的每一条外部命令，比如 `git` 或 `node --version`，默认是 500 ms，在特别大的仓库里 Git 的状态可能要算更久，经常待在这种仓库里就把它调高一点，宁可少显示点信息也不想等的话就保持低一些：
+`scan_timeout` 限制 Starship 扫描当前目录文件的时间，各个语言模块就是靠这一步判断你是不是在 Node.js 或 Python 项目里，默认是 30 ms。`command_timeout` 限制模块调用的每一条外部命令，比如 `git` 或 `node --version`，默认是 500 ms。在特别大的仓库里 Git 的状态可能要算更久，经常待在这种仓库里就把它调高一点，宁可少显示点信息也不想等的话就保持低一些：
 
 ```toml
 scan_timeout = 10
@@ -128,7 +128,7 @@ command_timeout = 1000
 
 大仓库里最花时间的通常是 Git，`git_status` 有个 `ignore_submodules`，打开后子模块里的改动就不再算进去，还有个 `use_git_executable`，让它改用 `git` 命令本身来算状态，而不是用 gitoxide。统计增删行数的 `git_metrics` 默认是关的，不看那两个数字就让它一直关着。平时根本不看的模块，直接写 `disabled = true`，或者干脆不写进 `format`。
 
-排查的时候有几样东西能帮上忙，`starship timings` 会列出当前目录下每个模块花了多久，找慢的那个最快，`starship explain` 会显示每个模块的说明，一眼就知道提示符里每一段是谁画的。警告和错误会写进 `~/.cache/starship/session_${STARSHIP_SESSION_KEY}.log`，每个终端会话一个文件，想换目录的话设 `STARSHIP_CACHE` 就行。
+排查的时候有几样东西能帮上忙，`starship timings` 会列出当前目录下每个模块花了多久，找慢的那个最快。`starship explain` 会显示每个模块的说明，一眼就知道提示符里每一段是谁画的。警告和错误会写进 `~/.cache/starship/session_${STARSHIP_SESSION_KEY}.log`，每个终端会话一个文件，想换目录的话设 `STARSHIP_CACHE` 就行。
 
 ## 右侧提示符
 
@@ -148,7 +148,7 @@ disabled = false
 
 Kaku 的 shell 配置会在没装 Starship 时用 Homebrew 装上，`kaku init` 和首次打开时都会先问你，但它只在 Kaku 里启动 Starship，从 Kaku 里开的 tmux 会话也算。托管的 `kaku.zsh` 判断的是 `TERM_PROGRAM=Kaku`，或者同时有 `$TMUX` 和 Kaku shell 导出的 `KAKU_SESSION`，fish 那边是同一套判断，其他终端还是你原来的提示符。想让所有终端都用 Kaku 的 Starship，在 `.zshrc` 里 Kaku 那行之前加上 `export KAKU_PROMPT_EVERYWHERE=1`，fish 则在 `config.fish` 里写 `set -gx KAKU_PROMPT_EVERYWHERE 1`。图标也不用另装 Nerd Font，Kaku 自带 Symbols Nerd Font Mono，会接在你设的字体后面当回退。
 
-Kaku 没有另外一份提示符配置，它不设 `STARSHIP_CONFIG`，所以 Starship 读的就是正常的 `~/.config/starship.toml`，Kaku 只在这个文件不存在时才把自己那份拷过去，你已经有的话就不会动。唯一的例外是 Kaku 0.10.0 到 0.22.0 拷过去的那份去掉了图标的旧配置，你的文件要是和它一个字节都没差，Kaku 会换成当前版本，改过的或者是软链接的都原样保留。拷过去的那份就是普通配置，随便改，它用一条很短的显式 `format` 代替了 `$all`，把 `command_timeout` 设成 2000 给大仓库里的 Git 状态留出余量，还给 `git_status` 打开了 `ignore_submodules`。
+Kaku 没有另外一份提示符配置，它不设 `STARSHIP_CONFIG`，所以 Starship 读的就是正常的 `~/.config/starship.toml`。Kaku 只在这个文件不存在时才把自己那份拷过去，你已经有的话就不会动。唯一的例外是 Kaku 0.10.0 到 0.22.0 拷过去的那份去掉了图标的旧配置，你的文件要是和它一个字节都没差，Kaku 会换成当前版本，改过的或者是软链接的都原样保留。拷过去的那份就是普通配置，随便改。它用一条很短的显式 `format` 代替了 `$all`，把 `command_timeout` 设成 2000 给大仓库里的 Git 状态留出余量，还给 `git_status` 打开了 `ignore_submodules`。
 
 ## 常见问题
 

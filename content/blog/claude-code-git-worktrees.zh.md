@@ -1,4 +1,4 @@
-`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。这篇讲两个会话为什么不能共用一棵工作树，`git worktree` 怎么添加、列出和删除，`--worktree` 怎么建、退出时怎么清，以及一个标签放一棵工作树，flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
+`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。这篇讲两个会话为什么不能共用一棵工作树，`git worktree` 怎么添加、列出和删除，`--worktree` 怎么建、退出时怎么清理，以及一个标签放一棵工作树。文中的 flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
 
 ## 为什么两个 agent 不能共用一个检出目录
 
@@ -34,7 +34,7 @@ git worktree remove ../repo-feature
 claude --worktree feature-auth
 ```
 
-仓库里得先有一次提交，不然会报 `Failed to resolve base branch "HEAD": git rev-parse failed`，某个目录第一次跑交互式 `claude`，还得先接受工作区信任，否则 `--worktree` 会报错退出，`claude -p --worktree` 会跳过这次检查，退出时留下那棵工作树，以及它加上的 `git worktree lock`。
+仓库里得先有一次提交，不然会报 `Failed to resolve base branch "HEAD": git rev-parse failed`。某个目录第一次跑交互式 `claude`，还得先接受工作区信任，否则 `--worktree` 会报错退出，`claude -p --worktree` 会跳过这次检查，退出时留下那棵工作树，以及它加上的 `git worktree lock`。
 
 `worktree.baseRef` 默认是 `"fresh"`，新建的工作树从远端默认分支分出来，一般是 `main`，距离上次 fetch 超过 24 小时的话，Claude Code 会再 fetch 这个分支，最多等 5 秒。设成 `"head"` 就从当前本地 `HEAD` 开始，还没 push 的提交也会带上，这个设置不能写成某个分支名，已有的分支得先用 git 把工作树建好，`cd` 进去再跑 `claude`。
 

@@ -45,7 +45,7 @@ notification_method = "osc9"
 
 还有两个常见原因：
 
-- **tmux。** 不在 `~/.tmux.conf` 里加上 `set -g allow-passthrough on` 并用 `tmux source-file ~/.tmux.conf` 重新加载，tmux 会把这些序列吞掉。
+- **tmux。** 不在 `~/.tmux.conf` 里加上 `set -g allow-passthrough on` 并用 `tmux source-file ~/.tmux.conf` 重新加载的话，tmux 会把这些序列吞掉。
 - **你正看着它。** 大部分终端包括 Kaku 都不会对眼前这个窗口弹通知，Codex 默认也只在终端没获得焦点时提醒，测试时记得把窗口放到后台。
 
 ## 通知是怎么从 agent 走到 macOS 的

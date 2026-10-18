@@ -44,7 +44,7 @@ ssh **<Tab>      # hosts from /etc/hosts and ~/.ssh/config
 
 ## Mac gotcha: Alt + C and the Option key
 
-zsh sees Alt + C as Esc followed by `c`, so it only works when the terminal sends Option as Meta, and by default a Mac types a character for Option plus a letter instead. Kaku's left Option key already acts as Meta, and [Mac terminal shortcuts](/blog/mac-terminal-shortcuts) covers the setting in Terminal.app, iTerm2, Ghostty and WezTerm.
+zsh sees Alt + C as Esc followed by `c`, so it only works when the terminal sends Option as Meta. By default, a Mac types a character for Option plus a letter instead. Kaku's left Option key already acts as Meta, and [Mac terminal shortcuts](/blog/mac-terminal-shortcuts) covers the setting in Terminal.app, iTerm2, Ghostty and WezTerm.
 
 ## Better defaults with fd and bat
 
@@ -110,11 +110,11 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 The last line previews a directory with eza while you complete `cd`, so install it with `brew install eza` or drop the line.
 
-Order is the part that breaks. fzf-tab needs to load after `compinit` but before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting. It also has to be the last thing that binds Tab, and fzf's own completion binds Tab too, which is why fzf-tab comes after `source <(fzf --zsh)` above. Two keys worth knowing once it runs: Ctrl + Space selects several entries, and `/` starts continuous completion for deep paths. For a plugin-manager-free `.zshrc` that already gets the rest of this order right, see [zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh).
+Loading order is where setups usually break. fzf-tab needs to load after `compinit` but before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting. It also has to be the last thing that binds Tab, and fzf's own completion binds Tab too, which is why fzf-tab comes after `source <(fzf --zsh)` above. Two keys worth knowing once it runs: Ctrl + Space selects several entries, and `/` starts continuous completion for deep paths. For a plugin-manager-free `.zshrc` that already gets the rest of this order right, see [zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh).
 
 ## Using fzf in Kaku
 
-Kaku does not install or configure fzf. Its optional Homebrew bootstrap installs starship, delta, lazygit and yazi (zoxide only for fish), and for zsh it bundles zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, so the `source <(fzf --zsh)` line is still yours to add. zsh-z is skipped when zoxide already defines `z`. Inside Kaku, Smart Tab binds Tab, and `kaku init` appends its source line to the end of `.zshrc`, so the order of the two lines matters. With `source <(fzf --zsh)` below the Kaku line, `**<Tab>` keeps working, because fzf hands every other Tab press back to Smart Tab. With it above, Tab stays with Smart Tab and `**` no longer opens fzf. Ctrl + T, Ctrl + R and Alt + C were bound to fzf either way.
+Kaku does not install or configure fzf. Its optional Homebrew bootstrap installs starship, delta, lazygit and yazi (zoxide only for fish), and for zsh it bundles zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, so the `source <(fzf --zsh)` line is still yours to add. zsh-z is skipped when zoxide already defines `z`. Inside Kaku, Smart Tab binds Tab, and `kaku init` appends its source line to the end of `.zshrc`, so the order of the two lines matters. With `source <(fzf --zsh)` below the Kaku line, `**<Tab>` keeps working, because fzf hands every other Tab press back to Smart Tab. With it above, Tab stays with Smart Tab and `**` no longer opens fzf. Ctrl + T, Ctrl + R and Alt + C remain bound to fzf either way.
 
 For fzf-tab, set `config.smart_tab_mode = 'off'` in `~/.config/kaku/kaku.lua`, which exports `KAKU_SMART_TAB_DISABLE=1` to new shells, and keep `compinit`, the fzf line and fzf-tab above the Kaku line. Kaku skips its own `compinit` when completion is already initialized and loads autosuggestions after fzf-tab, which matches the order fzf-tab asks for. Alt + C needs no extra setting here: the bundled config sends the left Option key as Meta and keeps the right one for composed characters.
 

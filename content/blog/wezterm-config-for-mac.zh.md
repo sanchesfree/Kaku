@@ -41,7 +41,7 @@ config.keys = {
 }
 ```
 
-前两行把两个 Option 键分开用，左 Option 当 Meta 发出去，shell、Vim 和 Emacs 里的 `Alt` 快捷键才能用，右 Option 照样能打出 `é` 和 `€` 这类字符，后面的按键表加上了 iTerm2 风格的分屏，`Cmd + D` 和 `Cmd + Shift + D`。
+前两行把两个 Option 键分开用，左 Option 当 Meta 发出去，shell、Vim 和 Emacs 里的 `Alt` 快捷键才能用，右 Option 照样能打出 `é` 和 `€` 这类字符。后面的按键表加上了 iTerm2 风格的分屏，`Cmd + D` 和 `Cmd + Shift + D`。
 
 ## 窗口
 
@@ -129,4 +129,4 @@ config.line_height = 1.1
 
 ### 我的 WezTerm 配置能在 Kaku 里用吗？
 
-Kaku 用的是 WezTerm 的配置系统，大多数 macOS 设置都能写在 `kaku.lua` 里，Windows 专用选项已经弃用，不会生效，把设置写在 `-- User overrides:` 下面，Kaku 的默认值就还会在底下加载。
+Kaku 用的是 WezTerm 的配置系统，大多数 macOS 设置都能写在 `kaku.lua` 里，Windows 专用选项已经弃用，不会生效。把设置写在 `-- User overrides:` 下面，Kaku 的默认值就还会在底下加载。

@@ -30,7 +30,7 @@ config-file = ?local.ghostty
 
 有一点容易踩坑，`config-file` 是在当前文件读完之后才处理的，所以被引入的文件会盖掉写在 `config-file` 那行后面的同名设置。
 
-`Cmd + Shift + ,` 重新加载配置，想换键就去绑 `reload_config` 这个 action，不过有些选项重载后只对新开的窗口和标签生效，还有几个要整个退出重开才行，官方参考文档在每个选项下面都写了是哪种情况。
+按 `Cmd + Shift + ,` 就能重新加载配置，想换键就去绑 `reload_config` 这个 action，不过有些选项重载后只对新开的窗口和标签生效，还有几个要整个退出重开才行，官方参考文档在每个选项下面都写了是哪种情况。
 
 ## 字体和主题
 
@@ -108,7 +108,7 @@ quick-terminal-size = 40%
 quick-terminal-screen = mouse
 ```
 
-`backquote` 是数字 `1` 左边那个键在 W3C 规范里的名字，位置可以选 `top`、`bottom`、`left`、`right` 或 `center`，macOS 上改位置要重启才生效。macOS 上 `quick-terminal-autohide` 默认是 true，窗口一失去焦点就收起来，想让它一直开着就设成 `false`。
+`backquote` 是数字 `1` 左边那个键在 W3C 规范里的名字，位置可以选 `top`、`bottom`、`left`、`right` 或 `center`，macOS 上改位置要重启才生效。macOS 上 `quick-terminal-autohide` 默认是 `true`，窗口一失去焦点就收起来，想让它一直开着就设成 `false`。
 
 ## 把 Ghostty 的配置搬到 Kaku
 
@@ -132,7 +132,7 @@ table.insert(config.keys, {
 })
 ```
 
-`window_padding` 用 `pt` 才和 Ghostty 的边距一个意思，直接写数字或者 `px` 是物理像素，在 Retina 屏上会显得小一圈，分屏那几条不用搬，`Cmd + D` 和 `Cmd + Shift + D` 本来就是分屏，另外记得用 `table.insert` 往 `config.keys` 里加，直接给它赋一个新表会把 Kaku 的默认快捷键全部冲掉。三种配置方式具体差在哪，可以看 [Ghostty、iTerm2 和 WezTerm 的对比](/zh/blog/ghostty-vs-iterm2-vs-wezterm)。
+`window_padding` 用 `pt` 才和 Ghostty 的边距一个意思，直接写数字或者 `px` 是物理像素，在 Retina 屏上会显得小一圈。分屏那几条不用搬，`Cmd + D` 和 `Cmd + Shift + D` 本来就是分屏，另外记得用 `table.insert` 往 `config.keys` 里加，直接给它赋一个新表会把 Kaku 的默认快捷键全部冲掉。三种配置方式具体差在哪，可以看 [Ghostty、iTerm2 和 WezTerm 的对比](/zh/blog/ghostty-vs-iterm2-vs-wezterm)。
 
 ## 常见问题
 
@@ -146,7 +146,7 @@ table.insert(config.keys, {
 
 ### Ghostty 里怎么让 Option 当 Alt 用？
 
-两个键都要就设 `macos-option-as-alt = true`，只要一边就写 `left` 或 `right`，用 U.S. 布局的话默认本来就是 true。
+两个键都要就设 `macos-option-as-alt = true`，只要一边就写 `left` 或 `right`，用 U.S. 布局的话默认本来就是 `true`。
 
 ### 怎么看 Ghostty 的全部选项？
 

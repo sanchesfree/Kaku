@@ -2,7 +2,7 @@
 
 ## Nerd Font 是什么
 
-[Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) 拿 JetBrains Mono、Fira Code、Hack 这类编程字体，往里面加上几套图标字体的字形，包括 Powerline 符号、Font Awesome、Material Design Icons、Devicons、Octicons、Codicons 等，Starship 这样的提示符、Yazi 和 lazygit 这样的终端工具，还有很多状态栏，画分支、文件夹和语言图标时用的就是这些码位。
+[Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) 拿 JetBrains Mono、Fira Code、Hack 这类编程字体，往里面加上几套图标字体的字形，包括 Powerline 符号、Font Awesome、Material Design Icons、Devicons、Octicons、Codicons 等。Starship 这样的提示符、Yazi 和 lazygit 这样的终端工具，还有很多状态栏，画分支、文件夹和语言图标时用的就是这些码位。
 
 这个项目还发布了只含图标的 `SymbolsOnly` 字体，用途是让你保留喜欢的字体，你的字体里缺的字符，终端再去这份符号字体里找。
 

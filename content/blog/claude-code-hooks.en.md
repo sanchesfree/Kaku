@@ -61,7 +61,7 @@ The reference lists more events. These six are the ones used below:
 
 `jq` reads the path. Install it with `brew install jq` if the hook reports `jq: command not found`. Exit 0 prints nothing in the conversation.
 
-A `Bash` command that rewrites a file does not fire an `Edit|Write` hook. The guide uses `FileChanged` when the hook has to see the file whatever wrote it.
+A `Bash` command that rewrites a file does not fire an `Edit|Write` hook. The guide uses `FileChanged` when the hook has to see the file regardless of what wrote it.
 
 ## Block a command before it runs
 
@@ -102,7 +102,7 @@ exit 0
 
 `$CLAUDE_PROJECT_DIR` is the project root from session start. A command has to start with `rm`, so `npm test && rm -rf dist` gets through.
 
-To decide in JSON, exit 0 and print this object alone. `permissionDecision` belongs inside `hookSpecificOutput`. On the top level, Claude Code ignores it and shows no error.
+To decide in JSON, exit 0 and print this object alone. `permissionDecision` belongs inside `hookSpecificOutput`. At the top level, Claude Code ignores it and shows no error.
 
 ```json
 {
@@ -153,14 +153,14 @@ A `Notification` hook can return the same field, and `preferredNotifChannel` set
 
 ## See what a hook did
 
-If `/hooks` lists the hook and it never runs, the matcher missed the tool name. `Ctrl + O` opens the transcript. Success is blank, a block shows the reason, and any exit other than 0 or 2 is usually a non-blocking error: the action continues, with `Failed with non-blocking status code:` and the first stderr line.
+If `/hooks` lists the hook but it never runs, the matcher missed the tool name. `Ctrl + O` opens the transcript. Success is blank, a block shows the reason, and any exit other than 0 or 2 is usually a non-blocking error: the action continues, with `Failed with non-blocking status code:` and the first stderr line.
 
 ```bash
 echo '{"tool_name":"Bash","tool_input":{"command":"ls"}}' | ./.claude/hooks/no-rm.sh
 echo $?
 ```
 
-`claude --debug` writes `~/.claude/debug/<session-id>.txt` and prints nothing in the terminal. `claude --debug-file /tmp/claude.log` picks the path, and `/debug` turns logging on mid-session. `Hook output does not start with {` means stdout was not one JSON object, often a shell profile line printed first, so the JSON never applies. `Hook JSON output had unrecognized keys` means a field was at the wrong level.
+`claude --debug` writes `~/.claude/debug/<session-id>.txt` and prints nothing in the terminal. `claude --debug-file /tmp/claude.log` picks the path, and `/debug` turns logging on mid-session. `Hook output does not start with {` means stdout was not one JSON object, often because a shell profile line printed first, so the JSON never applies. `Hook JSON output had unrecognized keys` means a field was at the wrong level.
 
 ## Hooks run with your permissions
 
@@ -174,7 +174,7 @@ Kaku never adds hooks or instructions to your agents. `kaku ai` changes a tool's
 
 Claude Code's own alerts are a separate switch: Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs no setting, and older versions need `"preferredNotifChannel": "ghostty"` in `~/.claude/settings.json`, as [Claude Code notifications](/blog/claude-code-notifications) explains.
 
-The Stop script is separate from that channel. It asks Claude Code to write OSC 777, the Ghostty notification on the allowlist. On Kaku 0.25.0 or later with Claude Code 2.1.295 or later, Kaku already notifies when Claude finishes, so the Stop hook above adds a second notification there, and it is meant for older versions or another terminal. OSC 9 is allowlisted too, and Kaku shows it as the tool's own message when Codex has `notification_method = "osc9"`.
+The Stop script is separate from that channel. It asks Claude Code to write OSC 777, the Ghostty notification on the allowlist. On Kaku 0.25.0 or later with Claude Code 2.1.295 or later, Kaku already notifies when Claude finishes, so the Stop hook above adds a second notification there. It is meant for older versions or another terminal. OSC 9 is allowlisted too, and Kaku shows it as the tool's own message when Codex has `notification_method = "osc9"`.
 
 ## FAQ
 

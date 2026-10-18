@@ -26,7 +26,7 @@ Here is what each one adds:
 | `imagemagick-full` | Font, HEIC and JPEG XL preview (7.1.1 or newer) |
 | `font-symbols-only-nerd-font` | The file-type icons |
 
-You can install `yazi` on its own and add the others later. The docs say to upgrade these tools to their newest versions if a preview does not work, and `brew install yazi --HEAD` builds from the latest code if you want it. If the icons show up as boxes, the font side is covered in [Nerd Fonts on Mac](/blog/nerd-fonts-mac).
+You can install `yazi` on its own and add the others later. The docs say to upgrade these tools to their newest versions if a preview does not work, and `brew install yazi --HEAD` builds from the latest code if you want it. If the icons show up as boxes, font setup is covered in [Nerd Fonts on Mac](/blog/nerd-fonts-mac).
 
 ## The keys you need first
 
@@ -51,7 +51,7 @@ Run `yazi` in any directory. You get three columns: the parent directory, the cu
 | `c` `c` | Copy the file path |
 | `t` `t` | New tab in the current directory |
 
-Keys written as two letters, like `g` `g`, are pressed one after the other. `d` sends files to the trash and `g` `t` opens the trash bin, so a wrong delete is easy to undo, while `D` is permanent. If you already use fzf in your shell, `z` feels the same, and the zsh side of that is in [fzf in zsh on Mac](/blog/fzf-zsh-mac).
+Keys written as two letters, like `g` `g`, are pressed one after the other. `d` sends files to the trash and `g` `t` opens the trash bin, so an accidental deletion is easy to undo, while `D` is permanent. If you already use fzf in your shell, `z` feels the same, and the zsh setup is covered in [fzf in zsh on Mac](/blog/fzf-zsh-mac).
 
 ## The y wrapper
 
@@ -88,7 +88,7 @@ Yazi reads [three configuration files](https://yazi-rs.github.io/docs/configurat
 - `keymap.toml` for keybindings
 - `theme.toml` for colors
 
-The defaults are built into the release, so you never copy a whole file. Create the file and write only the option you want to change. To show hidden files by default:
+The defaults are built into the release, so you do not need to copy the whole file. Create the file and write only the options you want to change. To show hidden files by default:
 
 ```toml
 # ~/.config/yazi/yazi.toml
@@ -129,7 +129,7 @@ edit = [
 ]
 ```
 
-`block = true` makes Yazi hand the terminal to the editor and come back when you quit it. For copying paths into another app, `c` `c` copies the full path, `c` `d` the directory, and `c` `f` the file name.
+`block = true` makes Yazi hand the terminal to the editor and come back when you quit it. To copy paths into another app, `c` `c` copies the full path, `c` `d` the directory, and `c` `f` the file name.
 
 ## Yazi in Kaku
 

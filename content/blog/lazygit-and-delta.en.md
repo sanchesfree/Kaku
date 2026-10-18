@@ -42,7 +42,7 @@ Use `--light` instead of `--dark` with a light theme. `--paging=never` matters b
 
 [[figure:lazygit-delta-pipeline|git diff and git log -p reach delta through core.pager, lazygit reaches it through diffRenderers, and delta's colored output shows up in a Kaku pane, where Cmd+Shift+G opens lazygit|Two entry points, one renderer.]]
 
-One delta option does not carry over: its `n` and `N` keys for jumping between files, the `navigate` setting, only work when delta runs its own pager, so they do nothing inside lazygit.
+One delta option does not carry over: the `navigate` setting, which uses `n` and `N` to jump between files, only works when delta runs its own pager, so it does nothing inside lazygit.
 
 ## The shortcuts worth learning first
 

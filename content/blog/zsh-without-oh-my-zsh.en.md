@@ -49,7 +49,7 @@ Three rules decide most of it:
 
 - **Completions before `compinit`.** `compinit` scans `fpath` once. Anything added later is not seen until the next rebuild.
 - **`compinit -C` most of the time.** A full `compinit` checks every completion file. With `-C` it trusts the cached `.zcompdump`, and the check above runs a full check when the cache is more than 24 hours old, rebuilding it if needed and refreshing its timestamp only after success. On an M5 Pro the full run took 29.3 ms and the cached one 16.2 ms. The `(#q...)` test only works with `EXTENDED_GLOB` on; without it the string is never treated as a glob, the test is always true, and every shell quietly does the full check.
-- **Syntax highlighting last.** It works by wrapping zsh's line editor widgets, so widgets defined after it, autosuggestions included, would not be highlighted. Its own documentation asks to be sourced at the end.
+- **Syntax highlighting last.** It works by wrapping zsh's line editor widgets, so widgets defined after it, autosuggestions included, would not be highlighted. Its documentation advises sourcing it at the end.
 
 ## Measure it instead of guessing
 
@@ -75,10 +75,10 @@ Kaku ships this setup and loads it from two lines it adds to your `.zshrc`, one 
 On top of the rules above, it does three more things:
 
 - **Caches Starship's init script**, so a warm start runs no extra process for the prompt.
-- **Defers syntax highlighting** until the first prompt is about to appear, keeping it last without slowing the part before.
+- **Defers syntax highlighting** until the first prompt is about to appear, keeping it last without slowing down earlier startup steps.
 - **Compiles the whole file** with `zcompile`, so zsh reads bytecode instead of parsing it again.
 
-It also steps aside for your own setup. If your `.zshrc` already loads autosuggestions, a highlighter or a directory jumper such as zoxide, Kaku skips its copy, and if completion is already initialized it skips `compinit`.
+It also steps aside for your own setup. If your `.zshrc` already loads autosuggestions, a highlighter or a directory jumper such as zoxide, Kaku skips its own copy, and if completion is already initialized it skips `compinit`.
 
 Measured on an M5 Pro with `hyperfine`, 30 runs each, an empty `.zshrc` starts in 10.8 ms and the full Kaku setup in 43.3 ms.
 

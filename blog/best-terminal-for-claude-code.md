@@ -4,7 +4,7 @@
 
 Published 2026-10-17 · Tw93 · https://kaku.fun/blog/best-terminal-for-claude-code
 
-Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no setting. This post walks through each one so you can check whatever terminal you use now.
+Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no configuration. This post walks through each one so you can check whatever terminal you use now.
 
 ![A Claude Code session as a loop: you write a prompt, Claude works, it asks for input or finishes, you read the result and open files, and the session survives a restart](https://kaku.fun/img/blog/claude-code-session-loop.webp)
 
@@ -16,15 +16,15 @@ Prompts for an agent are rarely one line. You paste an error, add a file path, t
 
 Claude Code's own docs list where `Shift + Enter` inserts a newline without setup: Ghostty, Kitty, iTerm2, WezTerm, Warp, Apple Terminal and Windows Terminal. VS Code, Cursor, Zed and Alacritty before 0.16 need `/terminal-setup` once. Two fallbacks work everywhere: `Ctrl + J`, or a backslash followed by Enter.
 
-In Kaku both `Shift + Enter` and `Cmd + Enter` insert a newline, and nothing needs to be run first.
+In Kaku, both `Shift + Enter` and `Cmd + Enter` insert a newline, with no setup needed.
 
 ## Knowing when Claude is waiting for you
 
-The most expensive minute in an agent session is the one where Claude asked a question and you were in another window. A desktop notification fixes that, but only if the terminal and Claude Code agree on how to send one.
+The most expensive minute in an agent session is the one where Claude asks a question while you are in another window. A desktop notification fixes that, but only if the terminal and Claude Code agree on how to send one.
 
 Claude Code's `preferredNotifChannel` setting defaults to `auto`, and `auto` only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it rings the bell, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.
 
-Kaku 0.25.0 or later needs no setting with Claude Code 2.1.295 or later: Claude Code tells Kaku when it is waiting on you or done, and Kaku turns that into a notification. On older versions, Kaku understands the sequence Claude Code sends to Ghostty, so one line in `~/.claude/settings.json` is enough:
+Kaku 0.25.0 or later needs no configuration with Claude Code 2.1.295 or later: Claude Code tells Kaku when it is waiting on you or done, and Kaku turns that into a notification. On older versions, Kaku understands the sequence Claude Code sends to Ghostty, so one line in `~/.claude/settings.json` is enough:
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -45,19 +45,19 @@ config.file_link_editor = "zed"
 -- config.file_link_editor = "cursor --goto"
 ```
 
-Without that setting it falls back to VS Code when it finds it, then `$VISUAL` and `$EDITOR`.
+Without that setting, it falls back to VS Code if found, then `$VISUAL` and `$EDITOR`.
 
 ## Keeping the session through a restart
 
 Agent sessions run for hours, and the terminal will restart in that time, for an update if nothing else. Two layers matter here. Claude Code keeps the conversation itself, and `claude --continue` picks up the most recent one in the current directory. The terminal has to keep everything around it: which tabs and splits you had, which directory each pane was in, and what was on screen.
 
-Kaku saves the window layout while it runs and restores tabs and splits when it starts again. For panes that were running Claude Code or Codex it also keeps the last screen, so before you resume you can see where each conversation stopped.
+Kaku saves the window layout while it runs and restores tabs and splits when it starts again. For panes that were running Claude Code or Codex, it also keeps the last screen, so before you resume you can see where each conversation stopped.
 
-Closing by accident is the other half. In Kaku, closing a pane or tab whose foreground program is Claude Code, Codex, an editor or a build asks first, and a plain shell closes without a prompt.
+Closing by accident is the other half. In Kaku, closing a pane or tab whose foreground program is Claude Code, Codex, an editor or a build asks for confirmation first, while a plain shell closes without a prompt.
 
 ## Running more than one
 
-Once one session works, the next step is two: one agent refactoring while another writes tests, or an agent next to a shell where you run the app. That is a job for splits. In Kaku `Cmd + D` splits to the right, `Cmd + Shift + D` splits down, and `Cmd + Shift + Enter` zooms the pane you want to read, then puts it back.
+Once one session works, the next step is two: one agent refactoring while another writes tests, or an agent next to a shell where you run the app. That is a job for splits. In Kaku, `Cmd + D` splits to the right, `Cmd + Shift + D` splits down, and `Cmd + Shift + Enter` zooms the pane you want to read, then restores it.
 
 ## Picking up from another computer
 
@@ -81,8 +81,8 @@ Checked on 2026-10-17 against Claude Code's terminal docs.
 
 ### Why don't Claude Code notifications show up?
 
-With the default `auto` channel Claude Code only notifies iTerm2, Ghostty and Kitty, so other terminals need `preferredNotifChannel` set in `~/.claude/settings.json`, except Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs nothing. [Claude Code notifications](/blog/claude-code-notifications) lists the value for each terminal and the tmux line.
+With the default `auto` channel, Claude Code only notifies iTerm2, Ghostty and Kitty. Other terminals need `preferredNotifChannel` set in `~/.claude/settings.json`, except Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs no configuration. [Claude Code notifications](/blog/claude-code-notifications) lists the value for each terminal and the tmux line.
 
 ### Can I keep using tmux with Claude Code?
 
-Yes. Shift + Enter inside tmux needs `set -s extended-keys on` and `set -as terminal-features 'xterm*:extkeys'`, and notifications need `set -g allow-passthrough on`.
+Yes. `Shift + Enter` inside tmux needs `set -s extended-keys on` and `set -as terminal-features 'xterm*:extkeys'`, and notifications need `set -g allow-passthrough on`.

@@ -12,13 +12,13 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ## Startup files, the prompt, and completion
 
-`.zprofile` corresponds to `.bash_profile` and runs at login, including over SSH. `.zshrc` corresponds to `.bashrc` and runs for each new Terminal session. An environment assignment can move from the bash file as written:
+`.zprofile` corresponds to `.bash_profile` and runs at login, including over SSH. `.zshrc` corresponds to `.bashrc` and runs for each new Terminal session. Environment variable exports can be copied from the bash file as written:
 
 ```bash
 export MY_SETTING=1
 ```
 
-A POSIX `.profile` can be read from `.zprofile`:
+A POSIX `.profile` can be sourced from `.zprofile`:
 
 ```bash
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
@@ -36,13 +36,13 @@ into this zsh prompt for `.zprofile` or `.zshrc`:
 export PS1="%10F%m%f:%11F%1~%f \$ "
 ```
 
-`man zsh` in Terminal is where Apple sends you for those specifiers, and for zsh's command-line completion system. A `.zshrc` that loads history suggestions, syntax highlighting, extra completions, and a prompt on its own is written out in [Zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh).
+`man zsh` in Terminal is where Apple sends you for those specifiers, and for zsh's command-line completion system. For a `.zshrc` that loads history suggestions, syntax highlighting, extra completions, and a prompt on its own, see [Zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh).
 
 ## Scripts
 
 On macOS 10.15 or later, you can test Bourne-compatible scripts by changing `/var/select/sh` to `/bin/bash`, `/bin/dash`, or `/bin/zsh`. If you point `/var/select/sh` at a shell other than bash, scripts that use bashisms (bash-only syntax) may not work properly.
 
-zsh can take the sh side of that test for one invocation:
+For a single test, run zsh in sh emulation:
 
 ```bash
 zsh --emulate sh
@@ -88,7 +88,7 @@ Login settings, including ones that should apply over SSH, go in `.zprofile`, wh
 
 ### How do I test a script against sh?
 
-On macOS 10.15 or later, change `/var/select/sh` to `/bin/bash`, `/bin/dash`, or `/bin/zsh`. If that path is a shell other than bash, scripts that use bashisms may not work properly. `zsh --emulate sh` runs zsh in sh emulation.
+On macOS 10.15 or later, change `/var/select/sh` to `/bin/bash`, `/bin/dash`, or `/bin/zsh`. If that path points to a shell other than bash, scripts that use bashisms may not work properly. `zsh --emulate sh` runs zsh in sh emulation.
 
 ### Does Kaku set up bash the way it sets up zsh?
 

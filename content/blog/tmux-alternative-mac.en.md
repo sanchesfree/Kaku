@@ -1,4 +1,4 @@
-On a Mac you mostly use yourself, you may not need tmux anymore. Most people start it for three things: splitting one window into panes, keeping work alive when the terminal closes, and getting back to a session from somewhere else. A modern terminal covers the first natively, and session restore covers most of the second. What it does not replace is tmux's real strength: processes that keep running on a server after you disconnect. So the honest answer is to drop tmux for local splits if you like, and keep it for SSH and remote machines. This post explains where the line falls and how to set tmux up well if you keep it.
+If you work mostly on your own Mac, you may not need tmux anymore. Most people start it for three things: splitting one window into panes, keeping work alive when the terminal closes, and getting back to a session from somewhere else. A modern terminal covers the first natively, and session restore covers most of the second. What it does not replace is tmux's real strength: processes that keep running on a server after you disconnect. So the honest answer is to drop tmux for local splits if you like, and keep it for SSH and remote machines. This post explains where the line falls and how to set tmux up well if you keep it.
 
 ## What tmux actually does
 
@@ -16,7 +16,7 @@ tmux runs a server that owns your shells. The terminal is only a client that dra
 
 [[figure:session-restore-flow|Kaku session restore: panes with agents and shells are captured in a snapshot every 60 seconds, survive a restart from an update or crash, and come back as restored text without re-running anything|Restored panes show what was there; the programs themselves are not started again.]]
 
-When Kaku quits, it saves every window, its tabs, the split layout, each pane's working directory, and up to 1500 lines from each pane. While it runs, it also refreshes that snapshot every minute after the layout changes, so an unexpected quit still leaves a recent layout. On the next launch the panes come back with their text, in their directories, with a fresh shell. Panes that were running Claude Code or Codex keep the agent's last screen, so you can see where each conversation stopped and resume it with `claude --continue` or `codex resume --last`.
+When Kaku quits, it saves every window, its tabs, the split layout, each pane's working directory, and up to 1500 lines from each pane. While it runs, it also refreshes that snapshot every minute after the layout changes, so an unexpected quit still leaves a recent layout. On the next launch, the panes come back with their text, in their directories, with a fresh shell. Panes that were running Claude Code or Codex keep the agent's last screen, so you can see where each conversation stopped and resume it with `claude --continue` or `codex resume --last`.
 
 This is the important difference from tmux. Kaku restores what you saw, not the processes. A build that was running when the terminal quit is not running anymore. tmux keeps it running, because the process never belonged to the terminal.
 
@@ -46,7 +46,7 @@ When tmux is installed, `kaku init` also adds one `source-file` line to `~/.tmux
 
 ## A middle path
 
-You do not have to choose one. A common setup is native splits and session restore for everything local, and tmux only on the servers you SSH into. In Kaku that means `Cmd + D` and `Cmd + Shift + D` for splits on the Mac, and `ssh server -t tmux new -A -s main` to land in the same remote session every time.
+You do not have to choose one. A common setup is native splits and session restore for everything local, and tmux only on the servers you SSH into. In Kaku, that means `Cmd + D` and `Cmd + Shift + D` for splits on the Mac, and `ssh server -t tmux new -A -s main` to land in the same remote session every time.
 
 ## FAQ
 

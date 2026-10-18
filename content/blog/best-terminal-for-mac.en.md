@@ -41,7 +41,7 @@ Both are fast, keyboard-driven and configured with text files. Kitty adds tabs, 
 
 ## Kaku
 
-Kaku is a fork of WezTerm that keeps its engine and Lua config, and changes what you get before writing any config. It ships JetBrains Mono, Kaku Dark and Kaku Light themes that can follow the system appearance, and a zsh setup with autosuggestions, syntax highlighting and a Starship prompt that is two lines in your `.zshrc`. The parts aimed at AI coding CLIs mostly work without setup: `Cmd + Click` on paths that opens your editor at the right line, a confirmation before closing a pane that is running an agent, and tabs, splits and last screens that come back after a restart. Claude Code notifications need no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and older versions set the `ghostty` channel, as [Claude Code notifications](/blog/claude-code-notifications) explains. It is macOS only, which is the trade-off for fitting in there.
+Kaku is a fork of WezTerm that keeps its engine and Lua config, and changes what you get before writing any config. It ships JetBrains Mono, Kaku Dark and Kaku Light themes that can follow the system appearance, and a zsh setup with autosuggestions, syntax highlighting and a Starship prompt that is two lines in your `.zshrc`. The parts aimed at AI coding CLIs mostly work without setup: `Cmd + Click` on paths to open your editor at the right line, a confirmation before closing a pane that is running an agent, and tabs, splits and last screens that come back after a restart. Claude Code notifications need no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and older versions set the `ghostty` channel, as [Claude Code notifications](/blog/claude-code-notifications) explains. It is macOS only, which is the trade-off for fitting in there.
 
 ```bash
 brew install --cask kaku
@@ -67,4 +67,4 @@ Ghostty is faster to set up and feels more native, while iTerm2 has more feature
 
 ### Do I need to sign in to use Warp?
 
-No. Signing in is optional, though it unlocks the AI features and plans.
+No. Signing in is optional, though you need an account for the AI features and plans.

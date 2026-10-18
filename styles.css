@@ -1476,3 +1476,13 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .blog-cta { grid-template-columns: auto minmax(0, 1fr); gap: 14px 16px; }
   .blog-cta .btn { grid-column: 1 / -1; }
 }
+
+/* Blog topic groups: the index lists live posts under their category, and the
+   article meta line and related cards name it. Labels stay serif and unuppercased. */
+.blog-group + .blog-group { margin-top: 64px; }
+.blog-group-head { max-width: 760px; margin: 0 0 20px; }
+.blog-group-title { margin: 0 0 8px; color: var(--dark-warm); font-size: 22px; font-weight: 500; line-height: 1.25; }
+.blog-group-description { margin: 0; color: var(--stone); font-size: 15px; line-height: 1.55; }
+.page-hero .blog-meta a { color: var(--stone); }
+.page-hero .blog-meta a:hover { color: var(--brand); text-decoration: none; }
+.blog-related-cat { color: var(--stone); font-size: 13px; line-height: 1.4; }

@@ -35,7 +35,7 @@ shell 说找不到 `claude`，是安装目录还没进 `PATH`，原生启动器 
 
 `claude` 在当前目录启动，第一次会把你带到浏览器。免费的 claude.ai 方案不含 Claude Code，Pro、Max、Team、Enterprise 和 Console 才有。Console 账号走的是 API，花的是预付的额度，第一次用 Console 登录会建一个名叫「Claude Code」的工作区。Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 也能用。
 
-设了 `ANTHROPIC_API_KEY`，问到时确认用这把密钥，登录提示就会跳过。`claude auth login --console` 走 Console 计费，不走订阅，会话里用 `/login` 换账号，登录之后凭据会存下来，细节见[快速入门](https://code.claude.com/docs/zh-CN/quickstart)。
+设了 `ANTHROPIC_API_KEY`，问到时确认用这把密钥，就会跳过登录提示。`claude auth login --console` 走 Console 计费，不走订阅，会话里用 `/login` 换账号，登录之后凭据会存下来，细节见[快速入门](https://code.claude.com/docs/zh-CN/quickstart)。
 
 ## 确认装好了
 
@@ -89,7 +89,7 @@ rm -rf ~/.local/share/claude
 
 Homebrew 用 `brew uninstall --cask claude-code`，装的是 latest 那个 cask 就用 `brew uninstall --cask claude-code@latest`，npm 用 `npm uninstall -g @anthropic-ai/claude-code`。
 
-从 npm 换到原生安装程序，先卸掉 npm 包，再跑 `curl -fsSL https://claude.ai/install.sh | bash`，然后新开一个终端跑 `claude --version`，`~/.claude` 留着，设置和会话历史都还在。要是想彻底清干净，再删掉 `~/.claude` 和 `~/.claude.json`，设置、允许的工具、MCP 服务器配置和会话历史会一起清掉。VS Code 扩展、JetBrains 插件和 Desktop app 下次跑起来会把这个目录再建出来。`claude` 还能启动的话，多半还有第二份安装，或者 shell 里留着别名。
+从 npm 换到原生安装程序，先卸掉 npm 包，再跑 `curl -fsSL https://claude.ai/install.sh | bash`，然后新开一个终端跑 `claude --version`，`~/.claude` 留着，设置和会话历史都还在。要是想彻底清干净，再删掉 `~/.claude` 和 `~/.claude.json`，设置、允许的工具、MCP 服务器配置和会话历史会一起清掉。VS Code 扩展、JetBrains 插件和 Desktop app 下次跑起来会把这个目录再建出来。要是 `claude` 还能启动，多半还有第二份安装，或者 shell 里留着别名。
 
 ## 换行和通知
 

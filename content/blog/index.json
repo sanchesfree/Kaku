@@ -2,6 +2,7 @@
   "posts": [
     {
       "slug": "best-terminal-for-claude-code",
+      "category": "agents",
       "date": "2026-10-17",
       "keyword": "best terminal for claude code",
       "en": {
@@ -12,10 +13,11 @@
         "title": "Claude Code 用什么终端最好，真正影响体验的五件事",
         "description": "Claude Code 在哪个终端都能跑，长时间会话舒不舒服取决于五件事：多行输入、通知、可点击的路径、重启后恢复和分屏。"
       },
-      "modified": "2026-10-18"
+      "modified": "2026-10-19"
     },
     {
       "slug": "claude-code-notifications",
+      "category": "agents",
       "date": "2026-10-18",
       "keyword": "claude code notifications",
       "en": {
@@ -26,10 +28,11 @@
         "title": "Claude Code 通知不弹出，在 Mac 上怎么修",
         "description": "为什么 Claude Code 和 Codex 在大多数终端里不发通知，每种情况该改哪个设置，以及终端通知序列是怎么走到 macOS 的。"
       },
-      "modified": "2026-10-18"
+      "modified": "2026-10-19"
     },
     {
       "slug": "codex-cli-setup",
+      "category": "agents",
       "date": null,
       "keyword": "codex cli",
       "en": {
@@ -43,6 +46,7 @@
     },
     {
       "slug": "claude-code-remote",
+      "category": "agents",
       "date": null,
       "keyword": "claude code remote",
       "en": {
@@ -56,6 +60,7 @@
     },
     {
       "slug": "best-terminal-for-mac",
+      "category": "terminal",
       "date": null,
       "keyword": "best terminal for mac",
       "en": {
@@ -69,6 +74,7 @@
     },
     {
       "slug": "ghostty-vs-iterm2-vs-wezterm",
+      "category": "terminal",
       "date": null,
       "keyword": "ghostty vs iterm2",
       "en": {
@@ -82,6 +88,7 @@
     },
     {
       "slug": "zsh-without-oh-my-zsh",
+      "category": "shell",
       "date": null,
       "keyword": "zsh autosuggestions",
       "en": {
@@ -95,6 +102,7 @@
     },
     {
       "slug": "lazygit-and-delta",
+      "category": "shell",
       "date": null,
       "keyword": "lazygit",
       "en": {
@@ -108,6 +116,7 @@
     },
     {
       "slug": "wezterm-config-for-mac",
+      "category": "terminal",
       "date": null,
       "keyword": "wezterm config",
       "en": {
@@ -121,6 +130,7 @@
     },
     {
       "slug": "tmux-alternative-mac",
+      "category": "terminal",
       "date": null,
       "keyword": "tmux alternative",
       "en": {
@@ -134,6 +144,7 @@
     },
     {
       "slug": "install-claude-code-mac",
+      "category": "agents",
       "date": null,
       "keyword": "install claude code",
       "en": {
@@ -147,6 +158,7 @@
     },
     {
       "slug": "claude-code-hooks",
+      "category": "agents",
       "date": null,
       "keyword": "claude code hooks",
       "en": {
@@ -160,6 +172,7 @@
     },
     {
       "slug": "zsh-vs-bash",
+      "category": "shell",
       "date": null,
       "keyword": "zsh vs bash",
       "en": {
@@ -173,6 +186,7 @@
     },
     {
       "slug": "claude-code-statusline",
+      "category": "agents",
       "date": null,
       "keyword": "claude code statusline",
       "en": {
@@ -186,6 +200,7 @@
     },
     {
       "slug": "claude-code-skills",
+      "category": "agents",
       "date": null,
       "keyword": "claude code skills",
       "en": {
@@ -199,6 +214,7 @@
     },
     {
       "slug": "claude-code-git-worktrees",
+      "category": "agents",
       "date": null,
       "keyword": "git worktree",
       "en": {
@@ -212,6 +228,7 @@
     },
     {
       "slug": "nerd-fonts-mac",
+      "category": "terminal",
       "date": null,
       "keyword": "nerd fonts",
       "en": {
@@ -225,6 +242,7 @@
     },
     {
       "slug": "claude-code-plan-mode",
+      "category": "agents",
       "date": null,
       "keyword": "claude code plan mode",
       "en": {
@@ -238,6 +256,7 @@
     },
     {
       "slug": "cursor-vs-claude-code",
+      "category": "agents",
       "date": null,
       "keyword": "cursor vs claude code",
       "en": {
@@ -251,6 +270,7 @@
     },
     {
       "slug": "codex-vs-claude-code",
+      "category": "agents",
       "date": null,
       "keyword": "codex cli vs claude code",
       "en": {
@@ -264,6 +284,7 @@
     },
     {
       "slug": "ghostty-config",
+      "category": "terminal",
       "date": null,
       "keyword": "ghostty config",
       "en": {
@@ -277,6 +298,7 @@
     },
     {
       "slug": "claude-code-subagents",
+      "category": "agents",
       "date": null,
       "keyword": "claude code subagents",
       "en": {
@@ -290,6 +312,7 @@
     },
     {
       "slug": "starship-prompt",
+      "category": "shell",
       "date": null,
       "keyword": "starship prompt",
       "en": {
@@ -303,6 +326,7 @@
     },
     {
       "slug": "mac-terminal-shortcuts",
+      "category": "terminal",
       "date": null,
       "keyword": "mac terminal shortcuts",
       "en": {
@@ -316,6 +340,7 @@
     },
     {
       "slug": "fzf-zsh-mac",
+      "category": "shell",
       "date": null,
       "keyword": "fzf",
       "en": {
@@ -329,6 +354,7 @@
     },
     {
       "slug": "yazi-file-manager",
+      "category": "shell",
       "date": null,
       "keyword": "yazi",
       "en": {
