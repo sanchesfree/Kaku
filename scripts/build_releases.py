@@ -459,7 +459,8 @@ def patch_html(path: Path, text: str) -> str:
         else:
             raise SystemExit(f"{path.relative_to(ROOT)} has nowhere to put the feed link")
     dest = changelog_href(path)
-    footer = f'href="{dest}">Changelog</a>'
+    label = "更新日志" if dest.startswith("/zh/") else "Changelog"
+    footer = f'href="{dest}">{label}</a>'
     if FOOTER_OLD in text:
         text = text.replace(FOOTER_OLD, footer)
     elif footer not in text:
