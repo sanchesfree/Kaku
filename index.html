@@ -24,6 +24,7 @@
   <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh">
   <link rel="alternate" hreflang="x-default" href="https://kaku.fun/">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/remote-browser.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -221,7 +222,7 @@
           <figure class="shot" id="shot-ai-together" role="tabpanel" aria-labelledby="tab-ai-together" tabindex="0"><a href="/shots/ai-together.webp"><picture><source media="(max-width: 560px)" srcset="/shots/ai-claude.webp" width="900" height="900"><img src="/shots/ai-together.webp" width="3000" height="1680" fetchpriority="high" alt="Claude Code and Codex, ready to work"></picture></a></figure>
           <figure class="shot" id="shot-assistant" role="tabpanel" aria-labelledby="tab-assistant" tabindex="0" hidden><a href="/shots/assistant.webp"><picture><img src="/shots/assistant.webp" width="2200" height="1540" loading="lazy" alt="Ask about commands, right here"></picture></a></figure>
           <figure class="shot" id="shot-commands" role="tabpanel" aria-labelledby="tab-commands" tabindex="0" hidden><a href="/shots/commands.webp"><picture><img src="/shots/commands.webp" width="2200" height="1540" loading="lazy" alt="Describe a command, then review it"></picture></a></figure>
-          <figure class="shot" id="shot-remote" role="tabpanel" aria-labelledby="tab-remote" tabindex="0" hidden><a href="/shots/remote.webp"><picture><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="Your Mac session, in a browser"></picture></a></figure>
+          <figure class="shot" id="shot-remote" role="tabpanel" aria-labelledby="tab-remote" tabindex="0" hidden><a class="remote-preview-link" href="/shots/remote.webp"><span class="remote-browser"><span class="remote-browser-bar" aria-hidden="true"><span class="remote-browser-controls"><i></i><i></i><i></i></span><span class="remote-browser-address">remote.example.com</span></span><picture><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="Your Mac session, in a browser"></picture></span></a></figure>
           <figure class="shot" id="shot-tools-dark" role="tabpanel" aria-labelledby="tab-tools-dark" tabindex="0" hidden><a href="/shots/tools-dark.webp"><picture><img src="/shots/tools-dark.webp" width="2200" height="1540" loading="lazy" alt="Browse files with built-in tools"></picture></a></figure>
           <figure class="shot" id="shot-tools-light" role="tabpanel" aria-labelledby="tab-tools-light" tabindex="0" hidden><a href="/shots/tools-light.webp"><picture><img src="/shots/tools-light.webp" width="2200" height="1540" loading="lazy" alt="The same workspace in a light theme"></picture></a></figure>
           <figure class="shot" id="shot-settings" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden><a href="/shots/settings.webp"><picture><img src="/shots/settings.webp" width="2200" height="1540" loading="lazy" alt="Fonts, themes, and window settings"></picture></a></figure>
@@ -231,9 +232,9 @@
           <p class="showcase-caption" aria-live="polite">Claude Code and Codex, ready to work</p>
           <div class="shot-tabs" role="tablist" aria-label="Product screenshots" hidden>
             <button id="tab-ai-together" type="button" role="tab" aria-selected="true" aria-controls="shot-ai-together" data-caption="Claude Code and Codex, ready to work">AI coding</button>
-            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" data-caption="Ask about commands, right here" tabindex="-1">Kaku AI</button>
-            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" data-caption="Describe a command, then review it" tabindex="-1">Commands</button>
-            <button id="tab-remote" type="button" role="tab" aria-selected="false" aria-controls="shot-remote" data-caption="Your Mac session, in a browser" tabindex="-1">Remote</button>
+            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" data-caption="Press Cmd + L to ask about output and files" tabindex="-1">Kaku AI</button>
+            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" data-caption="Type # to describe a command, then review it" tabindex="-1">Commands</button>
+            <button id="tab-remote" type="button" role="tab" aria-selected="false" aria-controls="shot-remote" data-caption="Run kaku remote to continue in a browser" tabindex="-1">Remote</button>
             <button id="tab-tools-dark" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-dark" data-caption="Browse files with built-in tools" tabindex="-1">Files</button>
             <button id="tab-tools-light" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-light" data-caption="The same workspace in a light theme" tabindex="-1">Light</button>
             <button id="tab-settings" type="button" role="tab" aria-selected="false" aria-controls="shot-settings" data-caption="Fonts, themes, and window settings" tabindex="-1">Settings</button>
@@ -241,16 +242,6 @@
           </div>
         </div>
       </div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head"><span class="section-num">Remote</span><h2>Your Mac terminal, in a browser</h2><p>Run <code>kaku remote</code> on your Mac and pair a browser with the generated link. Continue your running terminal and AI sessions, with tabs, splits, and file transfers. Keep your Mac awake and online. Content is end-to-end encrypted between the browser and Kaku.</p><p><a href="/docs/features#features-remote-access">Explore Remote</a></p></div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head"><span class="section-num">Kaku AI</span><h2>A little help, right at the prompt</h2><p>Press <span class="sk">Cmd + L</span> to open built-in chat. Ask about terminal output or project files, with syntax-highlighted code in the reply.</p><p><a href="/docs/features#features-kaku-assistant">Set up the assistant</a></p></div>
-      <div class="assistant-actions"><article><span class="sk">Cmd + L</span><h3>Ask in context</h3><p>Chat about terminal output and project files. Tools that require permission ask for your approval.</p></article><article><span class="sk">Cmd + Shift + E</span><h3>Fix a failed command</h3><p>Get a suggested fix and paste it at the prompt. You decide whether to run it.</p></article><article><span class="sk">#</span><h3>Describe a command</h3><p>Type # followed by what you want to do. Review the generated command before running it.</p></article></div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head"><span class="section-num">Everyday use</span><h2>Tabs and splits with the shortcuts you already know</h2><p>⌘T opens a tab, ⌘D splits, ⌘1 to ⌘9 switches. Right-click to copy, paste, search, or open AI chat. Quit and reopen Kaku, and your windows, panes, and working directories are right where you left them.</p><p><a href="/docs/keybindings">See all shortcuts</a></p></div>
     </div></section>
     <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Defaults</span><h2>Ready when you open it</h2><p>Fonts, themes, shortcuts, and shell integration come set up, so there is no config file to write first.</p></div><div class="feature-grid"><a class="feature" href="/docs/keybindings"><span class="mark">01</span><strong>Tabs &amp; Panes</strong><span>Native shortcuts you already know. Restores windows on launch.</span></a><a class="feature" href="/docs/configuration"><span class="mark">02</span><strong>Fonts &amp; Themes</strong><span>Crisp Retina typography. Dark by default, with Light and Auto options.</span></a><a class="feature" href="/docs/features"><span class="mark">03</span><strong>Fast &amp; Light</strong><span>GPU-accelerated rendering with native windows and shortcuts.</span></a><a class="feature" href="/docs/features"><span class="mark">04</span><strong>Small Touches</strong><span>Copy on select, and long URLs stay clickable across line wraps.</span></a><a class="feature" href="/docs/features"><span class="mark">05</span><strong>Built-in Tools</strong><span>Comes with a terminal file manager, Git diffs, and smart tab completion.</span></a><a class="feature" href="/docs/features"><span class="mark">06</span><strong>AI Assistant</strong><span>Fixes broken commands and writes shell syntax from plain English.</span></a><a class="feature" href="/docs/configuration"><span class="mark">07</span><strong>Lua Config</strong><span>Fully configurable in Lua. Drop in your existing settings.</span></a></div></div></section>
     <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Get started</span><h2>First steps</h2><p>Install it and go. Set up AI and the rest when you need them.</p></div><div class="workflow-list"><article class="workflow-item"><span class="mark">01</span><h3>Install</h3><p>Grab the DMG or run <code>brew install --cask kaku</code>, then run <code>kaku doctor</code> once to check the app, PATH, and shell integration.</p></article><article class="workflow-item"><span class="mark">02</span><h3>AI setup</h3><p>Run <code>kaku ai</code> to use your Codex connection or configure an API service, then press <span class="sk">Cmd + L</span> to open chat.</p></article><article class="workflow-item"><span class="mark">03</span><h3>Tools</h3><p><span class="sk">Cmd + Shift + G</span> for Lazygit, <span class="sk">Cmd + Shift + Y</span> for Yazi, and <span class="sk">Cmd + Shift + R</span> to mount remote files in an SSH session.</p></article><article class="workflow-item"><span class="mark">04</span><h3>Config</h3><p>Run <code>kaku config</code> to change font size, opacity, Smart Tab, close confirmation, and shortcuts right in the terminal. Anything deeper goes in Lua.</p></article></div></div></section>
@@ -272,16 +263,12 @@
           <span class="section-num">Questions</span>
           <h2>Common questions</h2>
         </div>
-        <dl class="faq">
-          <dt>How do I install Kaku?</dt>
-          <dd>Download the DMG from <a href="https://github.com/tw93/Kaku/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a>, or install with Homebrew: <code>brew install --cask kaku</code>.</dd>
-          <dt>How does it compare with iTerm2, Warp, Ghostty, and WezTerm?</dt>
-          <dd>In short, fonts, themes, and shell tools are set up out of the box, there is no account, and AI runs on your own service. The <a href="/compare">comparison page</a> covers each one in detail.</dd>
-          <dt>Is Kaku paid?</dt>
-          <dd>No, Kaku is an MIT-licensed open source project.</dd>
-          <dt>Does Kaku run on Windows or Linux?</dt>
-          <dd>Not yet. For now the focus is making it great on the Mac.</dd>
-        </dl>
+        <div class="faq">
+          <details class="faq-item"><summary><h3>How do I install Kaku?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Download the DMG from <a href="https://github.com/tw93/Kaku/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a>, or install with Homebrew: <code>brew install --cask kaku</code>.</div></details>
+          <details class="faq-item"><summary><h3>How does it compare with iTerm2, Warp, Ghostty, and WezTerm?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">In short, fonts, themes, and shell tools are set up out of the box, there is no account, and AI runs on your own service. The <a href="/compare">comparison page</a> covers each one in detail.</div></details>
+          <details class="faq-item"><summary><h3>Is Kaku paid?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">No, Kaku is an MIT-licensed open source project.</div></details>
+          <details class="faq-item"><summary><h3>Does Kaku run on Windows or Linux?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Not yet. For now the focus is making it great on the Mac.</div></details>
+        </div>
       </div>
     </section>
   </main>

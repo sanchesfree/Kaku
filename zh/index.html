@@ -23,6 +23,7 @@
   <link rel="alternate" hreflang="en" href="https://kaku.fun/">
   <link rel="alternate" hreflang="x-default" href="https://kaku.fun/">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/remote-browser.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -255,7 +256,7 @@
           <figure class="shot" id="shot-ai-together" role="tabpanel" aria-labelledby="tab-ai-together" tabindex="0"><a href="/shots/ai-together.webp"><picture><source media="(max-width: 560px)" srcset="/shots/ai-claude.webp" width="900" height="900"><img src="/shots/ai-together.webp" width="3000" height="1680" fetchpriority="high" alt="在 Kaku 里用 Claude Code 和 Codex"></picture></a></figure>
           <figure class="shot" id="shot-assistant" role="tabpanel" aria-labelledby="tab-assistant" tabindex="0" hidden><a href="/shots/assistant.webp"><picture><img src="/shots/assistant.webp" width="2200" height="1540" loading="lazy" alt="不用离开终端，直接问 AI"></picture></a></figure>
           <figure class="shot" id="shot-commands" role="tabpanel" aria-labelledby="tab-commands" tabindex="0" hidden><a href="/shots/commands.webp"><picture><img src="/shots/commands.webp" width="2200" height="1540" loading="lazy" alt="说清楚想做什么，确认命令后再执行"></picture></a></figure>
-          <figure class="shot" id="shot-remote" role="tabpanel" aria-labelledby="tab-remote" tabindex="0" hidden><a href="/shots/remote.webp"><picture><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="在浏览器里接着用 Mac 上的会话"></picture></a></figure>
+          <figure class="shot" id="shot-remote" role="tabpanel" aria-labelledby="tab-remote" tabindex="0" hidden><a class="remote-preview-link" href="/shots/remote.webp"><span class="remote-browser"><span class="remote-browser-bar" aria-hidden="true"><span class="remote-browser-controls"><i></i><i></i><i></i></span><span class="remote-browser-address">remote.example.com</span></span><picture><img src="/shots/remote.webp" width="2200" height="1400" loading="lazy" alt="在浏览器里接着用 Mac 上的会话"></picture></span></a></figure>
           <figure class="shot" id="shot-tools-dark" role="tabpanel" aria-labelledby="tab-tools-dark" tabindex="0" hidden><a href="/shots/tools-dark.webp"><picture><img src="/shots/tools-dark.webp" width="2200" height="1540" loading="lazy" alt="在终端里浏览文件和代码"></picture></a></figure>
           <figure class="shot" id="shot-tools-light" role="tabpanel" aria-labelledby="tab-tools-light" tabindex="0" hidden><a href="/shots/tools-light.webp"><picture><img src="/shots/tools-light.webp" width="2200" height="1540" loading="lazy" alt="换成浅色主题，浏览文件和代码"></picture></a></figure>
           <figure class="shot" id="shot-settings" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden><a href="/shots/settings.webp"><picture><img src="/shots/settings.webp" width="2200" height="1540" loading="lazy" alt="字体、主题和窗口，按自己的习惯来"></picture></a></figure>
@@ -265,9 +266,9 @@
           <p class="showcase-caption" aria-live="polite">在 Kaku 里用 Claude Code 和 Codex</p>
           <div class="shot-tabs" role="tablist" aria-label="功能截图" hidden>
             <button id="tab-ai-together" type="button" role="tab" aria-selected="true" aria-controls="shot-ai-together" data-caption="在 Kaku 里用 Claude Code 和 Codex">AI 编程</button>
-            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" data-caption="不用离开终端，直接问 AI" tabindex="-1">AI 聊天</button>
-            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" data-caption="说清楚想做什么，确认命令后再执行" tabindex="-1">一句话命令</button>
-            <button id="tab-remote" type="button" role="tab" aria-selected="false" aria-controls="shot-remote" data-caption="在浏览器里接着用 Mac 上的会话" tabindex="-1">Remote</button>
+            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" data-caption="按 Cmd + L，不用离开终端直接问 AI" tabindex="-1">AI 聊天</button>
+            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" data-caption="输入 # 说清楚想做什么，确认命令后再执行" tabindex="-1">一句话命令</button>
+            <button id="tab-remote" type="button" role="tab" aria-selected="false" aria-controls="shot-remote" data-caption="运行 kaku remote，在浏览器里接着用 Mac 上的会话" tabindex="-1">Remote</button>
             <button id="tab-tools-dark" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-dark" data-caption="在终端里浏览文件和代码" tabindex="-1">文件管理</button>
             <button id="tab-tools-light" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-light" data-caption="换成浅色主题，浏览文件和代码" tabindex="-1">浅色主题</button>
             <button id="tab-settings" type="button" role="tab" aria-selected="false" aria-controls="shot-settings" data-caption="字体、主题和窗口，按自己的习惯来" tabindex="-1">设置</button>
@@ -275,21 +276,6 @@
           </div>
         </div>
       </div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head"><span class="section-num">Remote</span><h2>离开 Mac，也能接着用</h2><p>在 Mac 上运行 <code>kaku remote</code>，用生成的链接配对浏览器，就能继续操作正在运行的终端和 AI 会话，标签、分屏和文件传输也都在。Mac 需保持开机联网，浏览器与 Kaku 之间的内容经过端到端加密。</p><p><a href="/zh/docs/features#features-remote-access">了解 Remote</a></p></div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head"><span class="section-num">Kaku AI</span><h2>问一句、改个错，不用离开终端</h2><p>按 <span class="sk">Cmd + L</span> 打开内置对话，带上终端输出或项目文件一起问，回答里的代码也有语法高亮。</p><p><a href="/zh/docs/features#features-kaku-assistant">设置内置助手</a></p></div>
-      <div class="assistant-actions"><article><span class="sk">Cmd + L</span><h3>边看边问</h3><p>围绕终端输出和项目文件对话，需要授权的工具操作会先征求你的同意。</p></article><article><span class="sk">Cmd + Shift + E</span><h3>报错后改一下</h3><p>失败的命令会给出修复建议，按快捷键放回命令行，由你决定是否执行。</p></article><article><span class="sk">#</span><h3>一句话说命令</h3><p>输入 # 加一句描述，把想做的事变成命令，确认后再运行。</p></article></div>
-    </div></section>
-    <section class="section section-compact"><div class="wide">
-      <div class="section-head">
-          <span class="section-num">日常使用</span>
-          <h2>标签和分屏，还是 Mac 上那套快捷键</h2>
-          <p>⌘T 开标签，⌘D 分屏，⌘1 到 ⌘9 切换；右键可快速复制、粘贴、搜索或发起 AI 对话。退出后再打开 Kaku，窗口、分屏和工作目录都会原样恢复。</p>
-          <p><a href="/zh/docs/keybindings">查看全部快捷键</a></p>
-        </div>
     </div></section>
     <section class="section">
       <div class="wide">
@@ -342,16 +328,12 @@
           <span class="section-num">问答</span>
           <h2>常见问题</h2>
         </div>
-        <dl class="faq">
-          <dt>怎么安装？</dt>
-          <dd>从 <a href="https://github.com/tw93/Kaku/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a> 下载 DMG，或用 Homebrew 安装：<code>brew install --cask kaku</code>。</dd>
-          <dt>和 iTerm2、Warp、Ghostty、WezTerm 比有什么不同？</dt>
-          <dd>简单说就是字体、主题和 Shell 工具开箱配齐，无需注册账号，AI 服务直连你自己的配置；每一款的具体差别写在<a href="/zh/compare">对比页</a>里。</dd>
-          <dt>Kaku 收费吗？</dt>
-          <dd>不收费，Kaku 是 MIT 协议的开源项目。</dd>
-          <dt>支持 Windows 或 Linux 吗？</dt>
-          <dd>暂时不支持，眼下先把 Mac 上的体验做好。</dd>
-        </dl>
+        <div class="faq">
+          <details class="faq-item"><summary><h3>怎么安装？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">从 <a href="https://github.com/tw93/Kaku/releases/latest" target="_blank" rel="noopener noreferrer">GitHub Releases</a> 下载 DMG，或用 Homebrew 安装：<code>brew install --cask kaku</code>。</div></details>
+          <details class="faq-item"><summary><h3>和 iTerm2、Warp、Ghostty、WezTerm 比有什么不同？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">简单说就是字体、主题和 Shell 工具开箱配齐，无需注册账号，AI 服务直连你自己的配置；每一款的具体差别写在<a href="/zh/compare">对比页</a>里。</div></details>
+          <details class="faq-item"><summary><h3>Kaku 收费吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">不收费，Kaku 是 MIT 协议的开源项目。</div></details>
+          <details class="faq-item"><summary><h3>支持 Windows 或 Linux 吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">暂时不支持，眼下先把 Mac 上的体验做好。</div></details>
+        </div>
       </div>
     </section>
   </main>

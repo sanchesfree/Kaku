@@ -23,14 +23,15 @@ Serif-first, matching the family. English pages use Charter with Georgia / Palat
 
 ## Components
 
-Buttons are pill-shaped (999px radius), at least 44px tall, with a filled ink-blue primary or an ink-blue outline secondary. Cards are parchment blocks with hairline borders and no decorative shadows. Terminal windows keep dark chrome but no extra visual effects.
+Buttons are pill-shaped (999px radius), at least 44px tall, with a filled slate primary and a slate outline secondary, so a hero pair reads as one color (a green outline beside the slate fill clashed, 2026-10-18). Cards are parchment blocks with hairline borders and no decorative shadows. Terminal windows keep dark chrome but no extra visual effects.
 
 ## Layout
 
 The chrome aligns with the mole-mac (Kami) site so the two feel like one series:
 
-- A top eyebrow strip, not a sticky nav bar: wordmark plus version (mono) on the left, Docs plus the language toggle plus GitHub/X icons on the right, in small serif.
-- A left-aligned big-serif hero (near-black `Kaku 書` with a blur-in rise), a serif tagline, and a single dotted trust row in place of stat and tag clutter. 書 is the family's one Traditional character per product (Mole 鼴, MiaoYan 語, Pake 殼, Hina 賞); beside it a small near-black pencil floats and taps twice now and then, at mole.fit's quiet orbiting-dot scale. Rejected 2026-10-18: Mole's orbiting dot (that is Mole's planet language), a green pen drawing a stroke under 書 (too much), and a green wordmark.
+- The family's sticky nav pill (hina.fun, mole.fit): a translucent ivory track with a hairline border and no shadow, the app mark plus near-black wordmark and version (mono) on the left, Docs and Blog as quiet pill links, the language toggle plus GitHub/X icons on the right. It is CSS only, so every page's shared nav markup stays as is.
+- A left-aligned big-serif hero (near-black `Kaku 書` with a blur-in rise), a serif tagline, and a single dotted trust row in place of stat and tag clutter. 書 is the family's one Traditional character per product (Mole 鼴, MiaoYan 語, Pake 殼, Hina 賞); a 5px near-black dot at 40% opacity orbits it, as on every family site, each with its own ellipse, tilt, speed and direction (Kaku: level, 12s clockwise). Rejected 2026-10-18: a green pen drawing a stroke under 書 (too much), a floating pencil or any other small icon (ugly), and a green wordmark.
+- The showcase carries what used to be separate Remote, Kaku AI and Everyday use sections: each tab's caption names the command or shortcut, and the tabs sit bottom right. The FAQ is the family's details accordion.
 - Sections separated by generous vertical rhythm (96px) rather than divider lines; only the hero keeps a bottom rule.
 - A footer that carries the `Kaku · 書` serif wordmark and an italic ethos line. Because Kaku is a multi-page doc site, the footer keeps its Product / Docs / Community / Project link columns rather than collapsing to mole's single-page colophon.
 
