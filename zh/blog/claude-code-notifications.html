@@ -175,6 +175,7 @@
 </table>
 <p>Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本什么都不用改，再设成 <code>ghostty</code> 反而会多出一条重复通知，更早的版本只需要改这一行：</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+<p>版本用 <code>claude --version</code> 看，stable 渠道比 latest 晚几个版本，Homebrew 的 <code>claude-code</code> cask 跟的就是它，2026 年 10 月中旬还停在 2.1.292，所以用 stable 的话先留着这一行，等它到 2.1.295 再删。</p>
 <h2 id="codex-的快速修法">Codex 的快速修法</h2>
 <p>Codex 在 Kaku 里不用改，它默认需要你的时候会响终端铃声，Kaku 会把后台窗口里的铃声变成一条通知，只是内容比较笼统，取的是上一条命令或者窗格标题。想看到 Codex 自己写的消息，就在 <code>~/.codex/config.toml</code> 里换成 OSC 9 序列：</p>
 <pre><code class="language-toml"><span class="tok-k">[tui]</span>

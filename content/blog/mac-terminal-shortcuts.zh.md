@@ -4,20 +4,20 @@ Mac 终端里真正省时间的快捷键分在两层，一层归终端 App 管�
 
 zsh 和 bash 默认都是 emacs 模式，所以命令行上怎么移动、怎么删字，跟外面套的是哪个终端没有关系，下面这张表是 macOS 上两个 shell 的默认绑定，可以用 `zsh -fc 'bindkey'` 和 `bash -ic 'bind -p'` 自己核对：
 
-| 按键 | zsh | bash |
-|---|---|---|
-| `Ctrl + A` / `Ctrl + E` | 跳到行首 / 行尾 | 一样 |
-| `Ctrl + W` | 删掉前一个词 | 删到前一个空格 |
-| `Ctrl + U` | 删掉整行 | 从光标删到行首 |
-| `Ctrl + K` | 从光标删到行尾 | 一样 |
-| `Ctrl + Y` | 把刚删掉的内容贴回来 | 一样 |
-| `Ctrl + _` | 撤销上一步编辑 | 一样 |
-| `Alt + B` / `Alt + F` | 往回 / 往前跳一个词 | 一样 |
-| `Alt + D` | 删掉后一个词 | 一样 |
-| `Alt + Backspace` | 删掉前一个词 | 一样 |
-| `Alt + .` | 插入上一条命令的最后一个参数 | 一样 |
+| 按键 | 作用 |
+|---|---|
+| `Ctrl + A` / `Ctrl + E` | 跳到行首 / 行尾 |
+| `Ctrl + W` | 删掉前一个词，bash 里是删到前一个空格 |
+| `Ctrl + U` | 删掉整行，bash 里是从光标删到行首 |
+| `Ctrl + K` | 从光标删到行尾 |
+| `Ctrl + Y` | 把刚删掉的内容贴回来 |
+| `Ctrl + _` | 撤销上一步编辑 |
+| `Alt + B` / `Alt + F` | 往回 / 往前跳一个词 |
+| `Alt + D` | 删掉后一个词 |
+| `Alt + Backspace` | 删掉前一个词 |
+| `Alt + .` | 插入上一条命令的最后一个参数 |
 
-两个 shell 不一样的地方有两行。一行是 `Ctrl + U`，zsh 里它是 `kill-whole-line`，光标后面的字也会一起删掉，bash 的 `unix-line-discard` 只删到光标为止。另一行是 `Ctrl + W`，zsh 里它是 `backward-kill-word`，词由字母、数字和 `$WORDCHARS` 里的字符组成，这个变量默认带着 `/`，所以一整段路径按一下就没了，把 `/` 从里面去掉之后就能一段一段删，bash 的 `unix-word-rubout` 则是简单地删到上一个空格。两边来回切的话，其他差别可以看 [zsh 和 bash 的区别](/zh/blog/zsh-vs-bash)。
+两个 shell 不一样的地方有两个键。一行是 `Ctrl + U`，zsh 里它是 `kill-whole-line`，光标后面的字也会一起删掉，bash 的 `unix-line-discard` 只删到光标为止。另一行是 `Ctrl + W`，zsh 里它是 `backward-kill-word`，词由字母、数字和 `$WORDCHARS` 里的字符组成，这个变量默认带着 `/`，所以一整段路径按一下就没了，把 `/` 从里面去掉之后就能一段一段删，bash 的 `unix-word-rubout` 则是简单地删到上一个空格。两边来回切的话，其他差别可以看 [zsh 和 bash 的区别](/zh/blog/zsh-vs-bash)。
 
 删掉的内容其实没丢，一条很长的命令敲到一半想先跑点别的，按 `Ctrl + U` 把它收起来，跑完再按 `Ctrl + Y` 就能原样贴回来，相当于给命令行临时找了个地方先放一放。
 

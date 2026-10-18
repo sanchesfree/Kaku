@@ -24,6 +24,8 @@ Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本什么都不用改�
 { "preferredNotifChannel": "ghostty" }
 ```
 
+版本用 `claude --version` 看，stable 渠道比 latest 晚几个版本，Homebrew 的 `claude-code` cask 跟的就是它，2026 年 10 月中旬还停在 2.1.292，所以用 stable 的话先留着这一行，等它到 2.1.295 再删。
+
 ## Codex 的快速修法
 
 Codex 在 Kaku 里不用改，它默认需要你的时候会响终端铃声，Kaku 会把后台窗口里的铃声变成一条通知，只是内容比较笼统，取的是上一条命令或者窗格标题。想看到 Codex 自己写的消息，就在 `~/.codex/config.toml` 里换成 OSC 9 序列：

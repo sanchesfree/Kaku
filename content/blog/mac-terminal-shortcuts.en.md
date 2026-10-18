@@ -2,22 +2,22 @@ The shortcuts that save the most time in a Mac terminal live in two layers. The 
 
 ## Line editing that works everywhere
 
-zsh and bash both start in emacs mode, so the same keys move and delete on the command line no matter which terminal draws it. These are the defaults, checked with `zsh -fc 'bindkey'` and `bash -ic 'bind -p'` on macOS:
+zsh and bash both start in emacs mode, so the same keys move and delete on the command line no matter which terminal draws it. These are the defaults in both shells, checked with `zsh -fc 'bindkey'` and `bash -ic 'bind -p'` on macOS:
 
-| Key | zsh | bash |
-|---|---|---|
-| `Ctrl + A` / `Ctrl + E` | Start / end of line | Same |
-| `Ctrl + W` | Delete the previous word | Delete back to the previous space |
-| `Ctrl + U` | Delete the whole line | Delete from the cursor back to the start |
-| `Ctrl + K` | Delete from the cursor to the end | Same |
-| `Ctrl + Y` | Paste what the last delete removed | Same |
-| `Ctrl + _` | Undo the last edit | Same |
-| `Alt + B` / `Alt + F` | Back / forward one word | Same |
-| `Alt + D` | Delete the next word | Same |
-| `Alt + Backspace` | Delete the previous word | Same |
-| `Alt + .` | Insert the last argument of the previous command | Same |
+| Key | What it does |
+|---|---|
+| `Ctrl + A` / `Ctrl + E` | Start / end of line |
+| `Ctrl + W` | Delete the previous word (bash: back to the previous space) |
+| `Ctrl + U` | Delete the whole line (bash: from the cursor back to the start) |
+| `Ctrl + K` | Delete from the cursor to the end |
+| `Ctrl + Y` | Paste what the last delete removed |
+| `Ctrl + _` | Undo the last edit |
+| `Alt + B` / `Alt + F` | Back / forward one word |
+| `Alt + D` | Delete the next word |
+| `Alt + Backspace` | Delete the previous word |
+| `Alt + .` | Insert the last argument of the previous command |
 
-Two rows differ between the shells. In zsh, `Ctrl + U` is `kill-whole-line`, so it also removes text after the cursor, while bash's `unix-line-discard` stops at the cursor. In zsh, `Ctrl + W` is `backward-kill-word`, where a word is letters, digits and the characters in `$WORDCHARS`. That variable includes `/` by default, so a path goes in one press; removing `/` from it makes `Ctrl + W` delete one path segment at a time. Bash's `unix-word-rubout` simply deletes back to the last space. If you switch between the two, [zsh vs bash](/blog/zsh-vs-bash) covers the other differences.
+Two keys differ between the shells. In zsh, `Ctrl + U` is `kill-whole-line`, so it also removes text after the cursor, while bash's `unix-line-discard` stops at the cursor. In zsh, `Ctrl + W` is `backward-kill-word`, where a word is letters, digits and the characters in `$WORDCHARS`. That variable includes `/` by default, so a path goes in one press; removing `/` from it makes `Ctrl + W` delete one path segment at a time. Bash's `unix-word-rubout` simply deletes back to the last space. If you switch between the two, [zsh vs bash](/blog/zsh-vs-bash) covers the other differences.
 
 The deletes are not lost. `Ctrl + U` on a long command and then `Ctrl + Y` later puts it back, which is a quick way to park a half-typed line, run something else, and paste it back.
 

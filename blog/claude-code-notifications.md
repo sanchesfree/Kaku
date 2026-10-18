@@ -24,6 +24,8 @@ Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs nothing, and settin
 { "preferredNotifChannel": "ghostty" }
 ```
 
+Check your version with `claude --version`. The stable channel, which Homebrew's `claude-code` cask follows, trails latest by a few releases and was still at 2.1.292 in mid October 2026, so on stable keep this line until it reaches 2.1.295.
+
 ## The quick fix for Codex
 
 Codex works in Kaku without changes. With its default settings it rings the terminal bell when it needs you, and Kaku turns a bell in a background window into a notification. The text of that notification is generic, built from the last command or the pane title. To see Codex's own message instead, switch it to the OSC 9 sequence in `~/.codex/config.toml`:
