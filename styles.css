@@ -47,6 +47,8 @@
      take the slate of its disc. */
   --kaku-slate: #2C2F39;
   --kaku-slate-light: #3E414C;
+  --foot-ink: #f4f2ec;
+  --section-gap: 84px;
   --green: #0d7d4d;
   --green-bright: #5fbf85;
   --red: #a04545;
@@ -76,6 +78,8 @@ html[lang="en"] {
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* Short pages: main takes the spare height so the dark footer meets the viewport bottom. */
+body > main { flex: 1 0 auto; }
 body {
   margin: 0;
   min-width: 320px;
@@ -127,11 +131,11 @@ button, input { font: inherit; }
 }
 .skip-link:focus { transform: translateY(0); }
 
-.wide { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
-.hero-wrap { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
-.section { padding: 0; margin-bottom: 72px; }
+/* mole.fit's page: 1120px with 64px gutters, a 992px column. */
+.wide { max-width: 1120px; margin: 0 auto; padding: 0 64px; }
+.hero-wrap { max-width: 1120px; margin: 0 auto; padding: 0 64px; }
+.section { padding: 0; margin-bottom: 84px; }
 .section-tight { padding: 0; margin-bottom: 54px; }
-.hero + .section { padding-top: 48px; }
 .label {
   color: var(--stone);
   font-family: var(--ui);
@@ -153,19 +157,20 @@ button, input { font: inherit; }
   gap: 10px;
   margin-bottom: 24px;
 }
+/* Section titles and ledes use mole.fit's 32px dark-warm title and 16px olive lede. */
 .section-head h2 {
   margin: 0;
-  color: var(--near-black);
-  font-size: clamp(28px, 4vw, 42px);
+  color: var(--dark-warm);
+  font-size: clamp(28px, 4vw, 32px);
   font-weight: 500;
-  line-height: 1.18;
-  letter-spacing: 0;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
 }
 .section-head p {
   margin: 0;
-  color: var(--dark-warm);
-  font-size: 17px;
-  line-height: 1.7;
+  color: var(--olive);
+  font-size: 16px;
+  line-height: 1.55;
 }
 .section-num {
   display: block;
@@ -185,12 +190,12 @@ button, input { font: inherit; }
   gap: 8px;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--brand);
-  padding: 12px 26px;
+  padding: 13px 28px;
   font-family: var(--serif);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.2px;
-  line-height: 1;
+  line-height: 1.55;
   text-decoration: none;
   transition: transform 160ms var(--ease), background-color 160ms var(--ease), border-color 160ms var(--ease), color 160ms var(--ease);
   touch-action: manipulation;
@@ -224,7 +229,7 @@ button, input { font: inherit; }
   display: flex;
   align-items: center;
   gap: 0;
-  max-width: 1180px;
+  max-width: 1020px;
   min-height: 52px;
   margin: 0 auto;
   padding: 8px 13px;
@@ -347,21 +352,23 @@ button, input { font: inherit; }
 }
 .nav-icon:hover { color: var(--brand); }
 
+/* As on mole.fit, the hairline under the hero stays inside the column. */
+.hero > .hero-wrap::after { content: ""; display: block; margin-top: 28px; border-bottom: 1px solid var(--border-soft); }
 .hero {
   min-height: auto;
-  padding: 52px 0 52px;
-  border-bottom: 1px solid var(--border-soft);
+  padding: 60px 0 0;
+  margin-bottom: var(--section-gap);
   background: var(--parchment);
   overflow: hidden;
   text-align: left;
 }
 .hero-centered {
-  max-width: 1280px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 64px;
 }
 .hero h1 {
-  margin: 0 0 18px;
+  margin: 0 0 40px;
   color: var(--near-black);
   font-family: var(--serif);
   font-size: clamp(58px, 9vw, 96px);
@@ -378,8 +385,8 @@ button, input { font: inherit; }
 }
 .hero-sub {
   max-width: none;
-  margin: 0 0 28px;
-  color: var(--dark-warm);
+  margin: 0 0 32px;
+  color: var(--olive);
   font-size: clamp(18px, 2.3vw, 21px);
   line-height: 1.4;
   letter-spacing: 0;
@@ -801,17 +808,18 @@ button, input { font: inherit; }
   min-width: 0;
   color: var(--dark-warm);
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16px;
+  line-height: 1.65;
 }
 .doc-content > :first-child { margin-top: 0; }
 /* Sidebar-less prose pages (about, compare, contact, privacy) reuse
    .doc-content and span the same width as their page hero. */
 .prose-doc { max-width: none; }
 .doc-content .shot { margin: 28px 0 36px; }
+/* Headings keep mole.fit's dark-warm 500; sizes step down one notch for long references. */
 .doc-content h2, .doc-content h3, .doc-content h4 {
   position: relative;
-  color: var(--near-black);
+  color: var(--dark-warm);
   font-family: var(--serif);
   font-weight: 500;
   letter-spacing: 0;
@@ -819,9 +827,8 @@ button, input { font: inherit; }
   scroll-margin-top: 90px;
 }
 .doc-content h2 {
-  margin: 68px 0 16px;
-  font-size: 24px;
-  font-weight: 600;
+  margin: 56px 0 12px;
+  font-size: 22px;
 }
 .doc-content > h2:first-child {
   margin-top: 0;
@@ -832,11 +839,11 @@ button, input { font: inherit; }
 }
 .doc-content h3 {
   margin: 32px 0 8px;
-  font-size: 18px;
+  font-size: 19px;
 }
 .doc-content h4 {
-  margin: 28px 0 8px;
-  font-size: 16px;
+  margin: 26px 0 8px;
+  font-size: 17px;
 }
 .doc-content .anchor {
   position: absolute;
@@ -1169,19 +1176,20 @@ button, input { font: inherit; }
 }
 /* Footer: hina.day's ivory band closed off by a hairline, the name and
    language links on the left, small titled link columns on the right. */
-.site-footer { background: var(--ivory); border-top: 1px solid var(--line-faint); color: var(--stone); }
-.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 40px; padding-bottom: 44px; font-family: var(--serif); font-size: 14px; }
-.foot-brand .name { margin: 0 0 8px; color: var(--near-black); font-size: 20px; font-weight: 500; line-height: 1.1; }
+/* mole.fit's dark footer band in Kaku's slate, with Mole's text steps. */
+.site-footer { background: var(--kaku-slate); color: color-mix(in srgb, var(--foot-ink) 62%, transparent); }
+.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 60px; padding-bottom: 48px; font-family: var(--serif); font-size: 14px; }
+.foot-brand .name { margin: 0 0 8px; color: #fff; font-size: 20px; font-weight: 500; line-height: 1.1; }
 .foot-mark { font-family: "Kaku Mark", "Kaku Serif SC", "Songti TC", serif; font-weight: 400; }
-.foot-lang { margin: 12px 0 0; font-size: 13px; color: var(--stone); }
-.foot-lang a { color: var(--olive); }
-.foot-lang a[aria-current] { color: var(--near-black); }
+.foot-lang { margin: 12px 0 0; font-size: 13px; }
+.foot .foot-lang a { color: color-mix(in srgb, var(--foot-ink) 62%, transparent); }
+.foot .foot-lang a[aria-current] { color: #fff; }
 .foot-links { display: flex; gap: 44px; }
-.foot-links div { display: grid; gap: 10px; align-content: start; }
-.foot-links b { margin-bottom: 2px; color: var(--near-black); font-size: 12px; font-weight: 600; letter-spacing: 0.2px; }
+.foot-links div { display: grid; gap: 12px; align-content: start; }
+.foot-links b { margin-bottom: 2px; color: color-mix(in srgb, #fff 92%, transparent); font-size: 12px; font-weight: 600; letter-spacing: 0.2px; }
 html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
-.foot a { color: var(--olive); }
-@media (hover: hover) { .foot a:hover { color: var(--brand); text-decoration: none; } }
+.foot a { color: color-mix(in srgb, var(--foot-ink) 68%, transparent); }
+@media (hover: hover) { .foot a:hover { color: #fff; text-decoration: none; } }
 
 @media (hover: hover) {
   .method:hover, .quick-card:hover {
@@ -1214,7 +1222,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .workflow-item p, .feature span:last-child { grid-column: 2; }
   .section { margin-bottom: 54px; }
   .section-tight { margin-bottom: 42px; }
-  .hero { min-height: auto; padding: 40px 0 44px; }
+  .hero { min-height: auto; padding: 40px 0 0; }
   .hero h1 .cn { margin-left: 12px; }
   .cn-orbit::after { left: calc(50% + 6px); }
   .hero-sub { font-size: 18px; }
@@ -1235,8 +1243,8 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .brand strong { font-size: 15px; }
   .section { margin-bottom: 42px; }
   .section-tight { margin-bottom: 33px; }
-  .hero { padding: 32px 0 40px; }
-  .hero h1 { font-size: 56px; }
+  .hero { padding: 32px 0 0; }
+  .hero h1 { font-size: 56px; margin-bottom: 24px; }
   .hero-actions { flex-wrap: wrap; gap: 12px; }
   .btn { padding: 12px 22px; font-size: 15px; }
   .feature-grid, .quick-grid, .doc-grid, .doc-pager, .gallery { grid-template-columns: 1fr; }
