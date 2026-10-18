@@ -38,9 +38,13 @@
   --near-black: #141413;
   --dark-warm: #3d3d3a;
   --stone: #6b6a64;
-  --brand: #1B365D;
-  --brand-light: #2D5A8A;
-  --brand-tint: #EEF2F7;
+  --brand: #287A3D;
+  --brand-light: #2C7D40;
+  --brand-tint: #EDF4ED;
+  /* The logo's two colors: links and tints take its green, solid fills
+     take the slate of its disc. */
+  --kaku-slate: #2C2F39;
+  --kaku-slate-light: #3E414C;
   --green: #0d7d4d;
   --green-bright: #5fbf85;
   --red: #a04545;
@@ -112,7 +116,7 @@ button, input { font: inherit; }
   z-index: 999;
   transform: translateY(-140%);
   border-radius: var(--radius-pill);
-  background: var(--brand);
+  background: var(--kaku-slate);
   color: var(--ivory);
   padding: 8px 14px;
   font-family: var(--ui);
@@ -193,11 +197,12 @@ button, input { font: inherit; }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
 .btn:active { transform: scale(0.98); }
 .btn-primary {
-  background: var(--brand);
+  background: var(--kaku-slate);
+  border-color: var(--kaku-slate);
   color: var(--ivory);
   box-shadow: none;
 }
-.btn-primary:hover { background: var(--brand-light); border-color: var(--brand-light); color: var(--ivory); }
+.btn-primary:hover { background: var(--kaku-slate-light); border-color: var(--kaku-slate-light); color: var(--ivory); }
 .btn-secondary {
   background: transparent;
   border-color: var(--brand);

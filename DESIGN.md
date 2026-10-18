@@ -11,7 +11,8 @@ Token names are Kami's, shared by every family site (`python3 ~/www/Kata/scripts
 - `#f5f4ed` parchment page background (`--parchment`)
 - `#faf9f5` elevated and card surface (`--ivory`); `#e8e6dc` warm sand (`--warm-sand`)
 - `#141413` primary text (`--near-black`); `#3d3d3a` dim (`--dark-warm`), `#6b6a64` muted (`--stone`)
-- `#1B365D` ink-blue brand and actions (`--brand`); `#2D5A8A` hover (`--brand-light`); `#EEF2F7` tint
+- `#287A3D` the light logo's green for links, tags, outlines and tints (`--brand`); `#2C7D40` hover (`--brand-light`); `#EDF4ED` tint (`--brand-tint`)
+- `#2C2F39` the logo disc's slate for solid fills, the primary button and skip link (`--kaku-slate`); `#3E414C` hover (`--kaku-slate-light`). Chosen 2026-10-18 from rendered candidates: the logo's own two colors, not a single purple
 - `#0d7d4d` green for command-success accents only
 - `#141318` terminal canvas (`--term`); `#e7e4d9` terminal text
 - `#d8d5c8` warm line/divider (`--line`); `#e5e3d8` soft line (`--border-soft`); `#edebe1` faint line (`--line-faint`, shared with mole.fit and hina.day)
