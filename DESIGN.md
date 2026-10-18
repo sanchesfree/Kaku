@@ -14,7 +14,7 @@ Token names are Kami's, shared by every family site (`python3 ~/www/Kata/scripts
 - `#1B365D` ink-blue brand and actions (`--brand`); `#2D5A8A` hover (`--brand-light`); `#EEF2F7` tint
 - `#0d7d4d` green for command-success accents only
 - `#141318` terminal canvas (`--term`); `#e7e4d9` terminal text
-- `#d8d5c8` warm line/divider (`--line`); `#e5e3d8` soft line (`--border-soft`); `#ebe9e0` faint line (`--line-faint`)
+- `#d8d5c8` warm line/divider (`--line`); `#e5e3d8` soft line (`--border-soft`); `#edebe1` faint line (`--line-faint`, shared with mole.fit and hina.day)
 
 ## Typography
 
