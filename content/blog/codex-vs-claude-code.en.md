@@ -75,7 +75,7 @@ Both can edit the same checkout. Claude Code opens a git worktree for `--worktre
 
 ## Side by side in Kaku
 
-[Kaku](https://kaku.fun/docs/ai-coding) runs both CLIs as ordinary programs. `kaku ai` configures Claude Code, Codex, and other external tools, shows plan usage, writes a setting only when you edit it there, and does not add hooks or instructions on its own.
+[Kaku](/docs/ai-coding) runs both CLIs as ordinary programs. `kaku ai` configures Claude Code, Codex, and other external tools, shows plan usage, writes a setting only when you edit it there, and does not add hooks or instructions on its own.
 
 `Cmd + D` splits side by side, `Cmd + Shift + D` top and bottom, and `Cmd + Shift + Enter` zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground. After a restart, those panes keep their last screen.
 

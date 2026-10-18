@@ -75,7 +75,7 @@ git diff main --name-only | claude -p "review these changed files for security i
 
 ## 在 Kaku 里并排
 
-[Kaku](https://kaku.fun/zh/docs/ai-coding) 把这两个 CLI 当普通程序来跑，`kaku ai` 能配置 Claude Code、Codex 和其他外部工具，显示套餐用量，只在你在那里改了某项设置时才写这一项，不会自己去加 hooks 或指令。
+[Kaku](/zh/docs/ai-coding) 把这两个 CLI 当普通程序来跑，`kaku ai` 能配置 Claude Code、Codex 和其他外部工具，显示套餐用量，只在你在那里改了某项设置时才写这一项，不会自己去加 hooks 或指令。
 
 `Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，`Cmd + Shift + Enter` 把你正在看的窗格放大。前台正跑着 Claude Code、Codex 或其他要跑很久的程序时，关窗格或标签会先问一声。重启之后，这些窗格留着最后一屏。
 

@@ -49,7 +49,7 @@ brew install --cask kaku
 
 ## 如果主要用来跑 Claude Code 或 Codex
 
-这里的每个终端都能跑 AI 编程命令行工具，差别要在长时间会话里才看得出来。`Shift + Enter` 能不能换行，agent 停下来时你能不能收到通知，重启之后会话还在不在，[Claude Code 用什么终端最好](https://kaku.fun/zh/blog/best-terminal-for-claude-code)那篇一项项讲过。
+这里的每个终端都能跑 AI 编程命令行工具，差别要在长时间会话里才看得出来。`Shift + Enter` 能不能换行，agent 停下来时你能不能收到通知，重启之后会话还在不在，[Claude Code 用什么终端最好](/zh/blog/best-terminal-for-claude-code)那篇一项项讲过。
 
 ## 常见问题
 

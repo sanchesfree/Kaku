@@ -77,11 +77,11 @@ Plan mode controls which actions can run. Extended thinking and the effort level
 
 ## Shift + Tab in Kaku
 
-Kaku's default terminal shortcuts do not include `Shift + Tab`. It is not on the [keybindings](https://kaku.fun/docs/keybindings) page, so in a pane the shortcut reaches Claude Code.
+Kaku's default terminal shortcuts do not include `Shift + Tab`. It is not on the [keybindings](/docs/keybindings) page, so in a pane the shortcut reaches Claude Code.
 
 If the status bar never changes, open `~/.config/kaku/kaku.lua` and check `config.keys`. Insert into that table rather than assigning a new one, as assigning a new table replaces the defaults. A `Tab` entry with a Shift modifier intercepts the shortcut before Claude Code sees it. Any other terminal that swallows `Shift + Tab` needs the same check.
 
-The AI chat panel is separate. `Cmd + L` opens it, and when Simple Model and Deep Model differ, `Shift + Tab` there switches between them, as [Features](https://kaku.fun/docs/features) describes. That switch does not cycle Claude Code's permission modes.
+The AI chat panel is separate. `Cmd + L` opens it, and when Simple Model and Deep Model differ, `Shift + Tab` there switches between them, as [Features](/docs/features) describes. That switch does not cycle Claude Code's permission modes.
 
 ## FAQ
 

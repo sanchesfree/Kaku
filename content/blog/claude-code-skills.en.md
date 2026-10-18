@@ -79,7 +79,7 @@ A rule for every edit belongs in a [hook](/blog/claude-code-hooks). `hooks` in f
 
 ## Open a pane for a long job
 
-[Kaku's CLI](https://kaku.fun/docs/cli) drives the multiplexer from a script or another tool. A skill can open a pane for a long build, test, or log:
+[Kaku's CLI](/docs/cli) drives the multiplexer from a script or another tool. A skill can open a pane for a long build, test, or log:
 
 ```bash
 kaku cli split-pane -- bash -c "echo hello"

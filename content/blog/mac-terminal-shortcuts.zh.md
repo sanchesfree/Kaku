@@ -88,7 +88,7 @@ bindkey '^[[1;3C' forward-word
 
 Kaku 自带的配置把左边的 Option 当成 Meta，右边的 Option 留给打组合字符，所以 `Alt + B`、`Alt + F` 和 `Alt + .` 第一次打开就能用，不用去设置里找。它还把 Option + Left 和 Option + Right 映射成 `Alt + B` 和 `Alt + F`，Cmd + Left 和 Cmd + Right 映射成 `Ctrl + A` 和 `Ctrl + E`，Option + Backspace 映射成 `Ctrl + W`，Cmd + Backspace 映射成 `Ctrl + U`。Kaku 的 zsh 集成又把 `Ctrl + U` 改绑到了 `backward-kill-line`，所以 Cmd + Backspace 跟 Mac 输入框里一样只删到行首，不会把整行都删掉。上下方向键默认也是前缀搜索，如果 atuin 这类工具已经占了上键，Kaku 就不去动它。
 
-标签、分屏、搜索和 AI 这几块的默认快捷键如下，都是对着自带的按键表和[快捷键文档](https://kaku.fun/zh/docs/keybindings)核对过的：
+标签、分屏、搜索和 AI 这几块的默认快捷键如下，都是对着自带的按键表和[快捷键文档](/zh/docs/keybindings)核对过的：
 
 | 操作 | 快捷键 |
 |---|---|

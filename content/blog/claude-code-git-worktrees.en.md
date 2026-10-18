@@ -89,11 +89,11 @@ claude --worktree feature-auth --resume
 
 [[figure:claude-code-git-worktrees|Three worktree folders of one repository, each on its own branch and open in its own Kaku tab running an agent|All three folders share one .git directory, so a commit made in one tab is visible from the others.]]
 
-[New tab](https://kaku.fun/docs/keybindings) is `Cmd + T`. New tabs and splits inherit the current directory (`config.tab_inherit_working_directory` and `config.split_pane_inherit_working_directory` default to true), so `cd ../repo-feature` or run `claude --worktree` from the repo. `Cmd + Shift + I` or a double-click renames the tab, and a hand-set name stays when `config.tab_title_use_pane_title` shows Claude Code's title. Automatic titles show the directory. `Cmd + Shift + O` opens the Tab Navigator.
+[New tab](/docs/keybindings) is `Cmd + T`. New tabs and splits inherit the current directory (`config.tab_inherit_working_directory` and `config.split_pane_inherit_working_directory` default to true), so `cd ../repo-feature` or run `claude --worktree` from the repo. `Cmd + Shift + I` or a double-click renames the tab, and a hand-set name stays when `config.tab_title_use_pane_title` shows Claude Code's title. Automatic titles show the directory. `Cmd + Shift + O` opens the Tab Navigator.
 
 `Cmd + D` splits side by side, `Cmd + Shift + D` top and bottom, and `Cmd + Shift + Enter` zooms the pane. Closing a pane or tab asks first while Claude Code is in the foreground. Bundled `tab_close_confirmation` and `pane_close_confirmation` are `SmartPrompt`, and `Cmd + W` closes the active pane when the tab has several.
 
-[`kaku start --new-tab`](https://kaku.fun/docs/cli) adds a tab to the current window. `kaku cli split-pane` splits the current pane and can run a command in the new one:
+[`kaku start --new-tab`](/docs/cli) adds a tab to the current window. `kaku cli split-pane` splits the current pane and can run a command in the new one:
 
 ```bash
 kaku cli split-pane -- bash -c "claude --worktree feature-auth"

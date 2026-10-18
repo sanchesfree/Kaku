@@ -88,7 +88,7 @@ In Terminal.app, holding Option while you move the pointer repositions the inser
 
 Kaku's bundled config sets left Option to act as Meta and keeps right Option for composed characters, so `Alt + B`, `Alt + F` and `Alt + .` work on first launch without a setting. It also maps Option + Left and Option + Right to `Alt + B` and `Alt + F`, Cmd + Left and Cmd + Right to `Ctrl + A` and `Ctrl + E`, Option + Backspace to `Ctrl + W`, and Cmd + Backspace to `Ctrl + U`. Its zsh integration rebinds `Ctrl + U` to `backward-kill-line`, so Cmd + Backspace deletes to the start of the line the way it does in a Mac text field, not the whole line, and Up and Down do prefix history search unless a tool like atuin already owns them.
 
-For tabs, splits, search and the assistant, these are the defaults, read from the bundled key table and the [keybindings page](https://kaku.fun/docs/keybindings):
+For tabs, splits, search and the assistant, these are the defaults, read from the bundled key table and the [keybindings page](/docs/keybindings):
 
 | Action | Shortcut |
 |---|---|

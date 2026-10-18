@@ -48,7 +48,7 @@ return config
 
 ## 通知
 
-三个都能把转义序列变成 macOS 通知，但 AI 编程工具对它们并不一视同仁。Claude Code 默认的 `auto` 通道在 Ghostty 里直接能用，在 iTerm2 里要先在设置里打开转义序列提醒，在 WezTerm 里则一声不吭，直到你把 `preferredNotifChannel` 设成 `terminal_bell` 或者加一个 hook。每种情况的细节在这篇[通知指南](https://kaku.fun/zh/blog/claude-code-notifications)里。
+三个都能把转义序列变成 macOS 通知，但 AI 编程工具对它们并不一视同仁。Claude Code 默认的 `auto` 通道在 Ghostty 里直接能用，在 iTerm2 里要先在设置里打开转义序列提醒，在 WezTerm 里则一声不吭，直到你把 `preferredNotifChannel` 设成 `terminal_bell` 或者加一个 hook。每种情况的细节在这篇[通知指南](/zh/blog/claude-code-notifications)里。
 
 ## 重启之后
 

@@ -48,7 +48,7 @@ Most modern tools that show images in the terminal speak the Kitty protocol, so 
 
 ## Notifications
 
-All three can turn an escape sequence into a macOS notification, but AI coding tools do not treat them alike. Claude Code's default `auto` channel works in Ghostty, and in iTerm2 once you enable escape sequence alerts in its settings, while in WezTerm it stays silent until you set `preferredNotifChannel` to `terminal_bell` or add a hook. The [notification guide](https://kaku.fun/blog/claude-code-notifications) has the details for each.
+All three can turn an escape sequence into a macOS notification, but AI coding tools do not treat them alike. Claude Code's default `auto` channel works in Ghostty, and in iTerm2 once you enable escape sequence alerts in its settings, while in WezTerm it stays silent until you set `preferredNotifChannel` to `terminal_bell` or add a hook. The [notification guide](/blog/claude-code-notifications) has the details for each.
 
 ## Restarting
 

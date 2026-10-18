@@ -65,9 +65,9 @@ plan mode 决定哪些动作能跑，扩展思考和 effort（思考强度）决
 
 ## Kaku 里的 Shift + Tab
 
-Kaku 默认的终端快捷键里没有 `Shift + Tab`，[快捷键](https://kaku.fun/zh/docs/keybindings)那一页也没列，所以在窗格里这个键会送到 Claude Code。状态栏一直不变的话，打开 `~/.config/kaku/kaku.lua` 看 `config.keys`，往这张表里插入，直接赋一张新表会把默认快捷键换掉。要是里面有一条绑了 Shift 的 `Tab`，这个键在 Claude Code 看到之前就被吞掉了，别的终端把 `Shift + Tab` 吞掉，也是查同一处。
+Kaku 默认的终端快捷键里没有 `Shift + Tab`，[快捷键](/zh/docs/keybindings)那一页也没列，所以在窗格里这个键会送到 Claude Code。状态栏一直不变的话，打开 `~/.config/kaku/kaku.lua` 看 `config.keys`，往这张表里插入，直接赋一张新表会把默认快捷键换掉。要是里面有一条绑了 Shift 的 `Tab`，这个键在 Claude Code 看到之前就被吞掉了，别的终端把 `Shift + Tab` 吞掉，也是查同一处。
 
-AI 聊天面板是分开的，`Cmd + L` 打开它，Simple Model 和 Deep Model 不一样时，在那个面板里按 `Shift + Tab` 是在两个模型之间切换，[功能特性](https://kaku.fun/zh/docs/features)里写了，这个切换不碰 Claude Code 的权限模式。
+AI 聊天面板是分开的，`Cmd + L` 打开它，Simple Model 和 Deep Model 不一样时，在那个面板里按 `Shift + Tab` 是在两个模型之间切换，[功能特性](/zh/docs/features)里写了，这个切换不碰 Claude Code 的权限模式。
 
 ## 常见问题
 

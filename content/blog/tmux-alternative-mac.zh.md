@@ -40,7 +40,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-`allow-passthrough` 让通知序列能传到外层的终端，另外两个让 `Shift + Enter` 作为单独的按键传进来，而不是变成普通的回车，改完用 `tmux source-file ~/.tmux.conf` 重新加载，这些通知最后是怎么走到 macOS 的，可以看这篇[通知指南](https://kaku.fun/zh/blog/claude-code-notifications)。
+`allow-passthrough` 让通知序列能传到外层的终端，另外两个让 `Shift + Enter` 作为单独的按键传进来，而不是变成普通的回车，改完用 `tmux source-file ~/.tmux.conf` 重新加载，这些通知最后是怎么走到 macOS 的，可以看这篇[通知指南](/zh/blog/claude-code-notifications)。
 
 装了 tmux 的话，`kaku init` 还会在 `~/.tmux.conf` 里加一行 `source-file`，指向一个由 Kaku 管理的小文件，它打开鼠标支持，让你从 Kaku attach 之后新开的窗格也保留 Kaku 的提示符，还让 `Shift` 加滚轮直接进入 tmux 的回滚。上面那三个设置还是要你自己加。
 

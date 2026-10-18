@@ -79,7 +79,7 @@ User scope 装给你自己，这台电脑上每个项目都能用，Project scop
 
 ## 给耗时任务开一个窗格
 
-[Kaku 的 CLI](https://kaku.fun/zh/docs/cli) 能从脚本或别的工具里控制 Kaku 的标签和窗格，一个 skill 可以给很长的构建、测试或日志开一个窗格：
+[Kaku 的 CLI](/zh/docs/cli) 能从脚本或别的工具里控制 Kaku 的标签和窗格，一个 skill 可以给很长的构建、测试或日志开一个窗格：
 
 ```bash
 kaku cli split-pane -- bash -c "echo hello"

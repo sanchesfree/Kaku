@@ -2,7 +2,7 @@ Cursor is an editor with a coding agent inside it. Claude Code is an agent that 
 
 ## How each one works
 
-[Cursor](https://cursor.com/docs) describes itself as an AI editor and a coding agent. You use it to understand a repo, plan and build features with Plan Mode, fix bugs, and review changes by inspecting diffs and running checks before you merge. Plugins, skills, MCPs, and rules are added from one place.
+[Cursor](https://cursor.com/docs/models-and-pricing) describes itself as an AI editor and a coding agent. You use it to understand a repo, plan and build features with Plan Mode, fix bugs, and review changes by inspecting diffs and running checks before you merge. Plugins, skills, MCPs, and rules are added from one place.
 
 [Claude Code](https://code.claude.com/docs/en/overview) runs in the terminal, in IDE extensions, in a desktop app, and in the browser. They share one engine, so a project's `CLAUDE.md`, settings, and MCP servers apply across all of them. In a project:
 
@@ -23,7 +23,7 @@ Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Ma
 
 ## Context and models
 
-Cursor lists each model with a default context window and, for many, a larger maximum. That table changes as models are added, so check the current numbers on the [models page](https://cursor.com/docs) rather than trusting a copy.
+Cursor lists each model with a default context window and, for many, a larger maximum. That table changes as models are added, so check the current numbers on the [models page](https://cursor.com/docs/models-and-pricing) rather than trusting a copy.
 
 Claude Code's docs give no fixed context window size. The extension shows how full the window is. Claude compacts when it needs to, and `/compact` does it on request. An `@` directory reference adds only the list of files, not their contents. Click the model name to switch, or type `/model` on Claude Code v2.1.284 or later.
 
@@ -60,7 +60,7 @@ Open the integrated terminal with Command and backtick, then run `claude`. The C
 
 ## Side by side in Kaku
 
-In [Kaku](https://kaku.fun/docs/ai-coding), `Cmd + D` splits side by side and `Cmd + Shift + D` top and bottom, so Claude Code can sit next to a shell or next to Codex. `Cmd + Shift + Enter` zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground.
+In [Kaku](/docs/ai-coding), `Cmd + D` splits side by side and `Cmd + Shift + D` top and bottom, so Claude Code can sit next to a shell or next to Codex. `Cmd + Shift + Enter` zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground.
 
 `restore_previous_session` is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit restores that layout. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with `claude --resume`. Resuming Codex in the other pane is covered in [the Codex CLI post](/blog/codex-cli-setup).
 

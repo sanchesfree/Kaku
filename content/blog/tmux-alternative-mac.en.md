@@ -40,7 +40,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-`allow-passthrough` lets notification sequences reach the outer terminal, and the other two let `Shift + Enter` arrive as its own key instead of plain Enter. Reload with `tmux source-file ~/.tmux.conf`. The [notification guide](https://kaku.fun/blog/claude-code-notifications) explains how those notifications reach macOS.
+`allow-passthrough` lets notification sequences reach the outer terminal, and the other two let `Shift + Enter` arrive as its own key instead of plain Enter. Reload with `tmux source-file ~/.tmux.conf`. The [notification guide](/blog/claude-code-notifications) explains how those notifications reach macOS.
 
 When tmux is installed, `kaku init` also adds one `source-file` line to `~/.tmux.conf` for a small managed file: it turns on the mouse, keeps the Kaku prompt in panes opened after you attach from Kaku, and makes `Shift` plus the scroll wheel enter tmux's scrollback. The three settings above are still yours to add.
 

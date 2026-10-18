@@ -49,7 +49,7 @@ brew install --cask kaku
 
 ## If you mostly run Claude Code or Codex
 
-Any of these terminals can run an AI coding CLI. The differences show up over long sessions: whether `Shift + Enter` adds a line, whether you get notified when the agent stops, and whether the session survives a restart. [The best terminal for Claude Code](https://kaku.fun/blog/best-terminal-for-claude-code) goes through those one by one.
+Any of these terminals can run an AI coding CLI. The differences show up over long sessions: whether `Shift + Enter` adds a line, whether you get notified when the agent stops, and whether the session survives a restart. [The best terminal for Claude Code](/blog/best-terminal-for-claude-code) goes through those one by one.
 
 ## FAQ
 

@@ -61,7 +61,7 @@ Kaku 运行时会定时保存窗口布局，再启动时把标签和分屏都恢
 
 ## 在另一台电脑上接着用
 
-有时候会话跑在桌上那台 Mac 里，人却不在旁边。Anthropic 自己提供了 Remote Control，付费套餐可以在 claude.ai 或 Claude App 里操作一个正在跑的 Claude Code 会话，还有跑在 Anthropic 机器上的云端会话。Kaku 这边是 `kaku remote`，可以在另一台电脑的桌面浏览器里打开这台 Mac 的终端，正在跑 Claude Code 的窗格也都在里面，配对方法见[命令参考](https://kaku.fun/zh/docs/cli#cli-kaku-remote)。
+有时候会话跑在桌上那台 Mac 里，人却不在旁边。Anthropic 自己提供了 Remote Control，付费套餐可以在 claude.ai 或 Claude App 里操作一个正在跑的 Claude Code 会话，还有跑在 Anthropic 机器上的云端会话。Kaku 这边是 `kaku remote`，可以在另一台电脑的桌面浏览器里打开这台 Mac 的终端，正在跑 Claude Code 的窗格也都在里面，配对方法见[命令参考](/zh/docs/cli#cli-kaku-remote)。
 
 ## 常见终端对比
 

@@ -68,7 +68,7 @@ notification_method = "osc9"
 
 Codex 默认在做完或者等你批准时响一下终端铃声，而且只在终端没获得焦点时响，这一声能不能变成桌面通知要看终端。Kaku 会把后台窗口里的铃声变成通知，设成 `notification_method = "osc9"` 之后，通知里显示的是 Codex 自己写的消息，而不是笼统的一句。`tui.notification_condition = "always"` 则是终端在前台也提醒。
 
-如果什么都没收到，可以看这篇[通知指南](https://kaku.fun/zh/blog/claude-code-notifications)，里面讲了会挡住通知的 macOS 权限和 tmux 设置。
+如果什么都没收到，可以看这篇[通知指南](/zh/blog/claude-code-notifications)，里面讲了会挡住通知的 macOS 权限和 tmux 设置。
 
 ## 接着上次的会话
 

@@ -89,11 +89,11 @@ claude --worktree feature-auth --resume
 
 [[figure:claude-code-git-worktrees|同一个仓库的三个 worktree 文件夹，各在自己的分支上，各开在一个跑着 agent 的 Kaku 标签里|三个文件夹共用同一个 .git 目录，所以在一个标签里提交的改动，另外两个标签里也看得到。]]
 
-[新建标签](https://kaku.fun/zh/docs/keybindings) 是 `Cmd + T`，新标签和分屏会继承当前目录，`config.tab_inherit_working_directory` 和 `config.split_pane_inherit_working_directory` 默认都是 true，所以可以 `cd ../repo-feature`，也可以直接在仓库里跑 `claude --worktree`。`Cmd + Shift + I` 或者双击能改标签名，手动改过的名字会留着，`config.tab_title_use_pane_title` 让标签显示 Claude Code 的标题时也不会被换掉，自动标题显示的是目录，`Cmd + Shift + O` 打开 Tab Navigator。
+[新建标签](/zh/docs/keybindings) 是 `Cmd + T`，新标签和分屏会继承当前目录，`config.tab_inherit_working_directory` 和 `config.split_pane_inherit_working_directory` 默认都是 true，所以可以 `cd ../repo-feature`，也可以直接在仓库里跑 `claude --worktree`。`Cmd + Shift + I` 或者双击能改标签名，手动改过的名字会留着，`config.tab_title_use_pane_title` 让标签显示 Claude Code 的标题时也不会被换掉，自动标题显示的是目录，`Cmd + Shift + O` 打开 Tab Navigator。
 
 `Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，`Cmd + Shift + Enter` 放大当前窗格，窗格或标签前面正跑着 Claude Code 时，关掉之前会先问，内置的 `tab_close_confirmation` 和 `pane_close_confirmation` 都是 `SmartPrompt`，一个标签里有好几个窗格时，`Cmd + W` 关的是当前窗格。
 
-[`kaku start --new-tab`](https://kaku.fun/zh/docs/cli) 往当前窗口加一个标签，`kaku cli split-pane` 拆开当前窗格，还可以在新窗格里跑一条命令：
+[`kaku start --new-tab`](/zh/docs/cli) 往当前窗口加一个标签，`kaku cli split-pane` 拆开当前窗格，还可以在新窗格里跑一条命令：
 
 ```bash
 kaku cli split-pane -- bash -c "claude --worktree feature-auth"

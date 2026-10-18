@@ -61,7 +61,7 @@ Once one session works, the next step is two: one agent refactoring while anothe
 
 ## Picking up from another computer
 
-Sometimes the session is on the Mac at your desk and you are not. Anthropic offers Remote Control, which lets you steer a running Claude Code session from claude.ai or the Claude app on a paid plan, and cloud sessions that run on Anthropic's machines instead of yours. Kaku has `kaku remote`, which opens the Mac's terminals in a desktop browser on another computer, including every pane that is already running Claude Code. The [CLI reference](https://kaku.fun/docs/cli#cli-kaku-remote) covers pairing.
+Sometimes the session is on the Mac at your desk and you are not. Anthropic offers Remote Control, which lets you steer a running Claude Code session from claude.ai or the Claude app on a paid plan, and cloud sessions that run on Anthropic's machines instead of yours. Kaku has `kaku remote`, which opens the Mac's terminals in a desktop browser on another computer, including every pane that is already running Claude Code. The [CLI reference](/docs/cli#cli-kaku-remote) covers pairing.
 
 ## How common terminals compare
 

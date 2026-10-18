@@ -2,7 +2,7 @@ Cursor 是一个编辑器，coding agent 装在里面，Claude Code 是一个 ag
 
 ## 各自怎么工作
 
-[Cursor](https://cursor.com/docs) 的文档把它写成 AI 编辑器，也写成 coding agent，你用它看懂一个仓库，用 Plan Mode 规划功能、把功能做出来，修 bug，合并前看 diff、跑检查，插件、skills、MCP 和 rules 都从同一个地方加。
+[Cursor](https://cursor.com/docs/models-and-pricing) 的文档把它写成 AI 编辑器，也写成 coding agent，你用它看懂一个仓库，用 Plan Mode 规划功能、把功能做出来，修 bug，合并前看 diff、跑检查，插件、skills、MCP 和 rules 都从同一个地方加。
 
 [Claude Code](https://code.claude.com/docs/en/overview) 跑在终端、IDE 扩展、桌面 App 和浏览器里，这几处共用一个引擎，所以项目里的 `CLAUDE.md`、设置和 MCP 服务器在每一处都生效。到项目目录里这样启动。
 
@@ -21,7 +21,7 @@ Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、
 
 ## 上下文和模型
 
-Cursor 给每个模型标了默认上下文，很多还有更高的上限，这张表会随着新模型上线一直变，具体数字以[模型页面](https://cursor.com/docs)上的为准。
+Cursor 给每个模型标了默认上下文，很多还有更高的上限，这张表会随着新模型上线一直变，具体数字以[模型页面](https://cursor.com/docs/models-and-pricing)上的为准。
 
 文档里没写固定的上下文窗口大小，扩展里能看到窗口填了多少，Claude 需要时会自己压缩，想现在就压就跑 `/compact`。`@` 引用目录时只放进文件列表，不放内容。点一下模型名字就能换，Claude Code v2.1.284 及以后，只打 `/model` 也会弹出模型列表。
 
@@ -58,7 +58,7 @@ Claude Code 的 [plan mode](/zh/blog/claude-code-plan-mode) 只读仓库，你�
 
 ## 在 Kaku 里并排
 
-在 [Kaku](https://kaku.fun/zh/docs/ai-coding) 里，`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，Claude Code 可以挨着一个 shell，也可以挨着 Codex，`Cmd + Shift + Enter` 把你正在看的窗格放大。关掉窗格或标签时，如果前台正跑着 Claude Code、Codex 或其他要跑很久的程序，会先问一声。
+在 [Kaku](/zh/docs/ai-coding) 里，`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，Claude Code 可以挨着一个 shell，也可以挨着 Codex，`Cmd + Shift + Enter` 把你正在看的窗格放大。关掉窗格或标签时，如果前台正跑着 Claude Code、Codex 或其他要跑很久的程序，会先问一声。
 
 `restore_previous_session` 默认开着，启动时会重新打开上次的标签和窗格，窗口、标签或窗格一开一关，一分钟内会把布局存下来，所以崩溃或强制退出也能把那份布局带回来。重启之后，原来跑着 Claude Code 或 Codex 的窗格留着最后一屏，Claude Code 用 `claude --resume` 接上，另一个窗格里的 Codex 怎么接上写在 [Codex CLI 那篇](/zh/blog/codex-cli-setup)。
 

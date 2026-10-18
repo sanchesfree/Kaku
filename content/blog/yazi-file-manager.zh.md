@@ -133,7 +133,7 @@ edit = [
 
 ## 在 Kaku 里用 Yazi
 
-[Kaku](https://kaku.fun/zh/docs/features) 的 shell 配置里带了一整套 Yazi 设置，但不自带 Yazi 本体。`kaku init` 在交互式 shell 里会先问你，再用 Homebrew 装上缺的工具，Yazi 也在其中，不过只装 `yazi` 这一个，上面那些预览工具还是要自己补。shell 集成给 zsh 和 fish 都定义了同样的 `y` 函数，按 `Cmd + Shift + Y` 会往当前窗格里敲一个 `y`，所以按 `q` 退出后，shell 已经停在你选的那个目录里。
+[Kaku](/zh/docs/features) 的 shell 配置里带了一整套 Yazi 设置，但不自带 Yazi 本体。`kaku init` 在交互式 shell 里会先问你，再用 Homebrew 装上缺的工具，Yazi 也在其中，不过只装 `yazi` 这一个，上面那些预览工具还是要自己补。shell 集成给 zsh 和 fish 都定义了同样的 `y` 函数，按 `Cmd + Shift + Y` 会往当前窗格里敲一个 `y`，所以按 `q` 退出后，shell 已经停在你选的那个目录里。
 
 `~/.config/yazi/` 下缺哪个文件，Kaku 就写一份起步配置，`yazi.toml` 里把预览栏放宽到 `ratio = [3, 3, 10]`，再加上前面那个 `edit` opener，`keymap.toml` 里把 `e` 和 `o` 绑成打开，`Enter` 改成进入目录，0.25.0 起还有一个 `init.lua`，在路径和文件栏之间留出一行。已经有 `yazi.toml` 的话，zsh 的配置只在缺的时候补上预览尺寸（`max_width`、`max_height`）和 `edit` opener，其他已有的文件不会去动。Kaku 还装了 `kaku-dark` 和 `kaku-light` 两个 flavor，在 `theme.toml` 里维护一段带标记的 `[flavor]`，跟着当前配色是 Kaku Dark 还是 Kaku Light 走，每次启动 Yazi 前都会对一遍。你自己写了 `[flavor]` 的话 Kaku 会原样保留。它写的都是 `#:schema` 注释，也会把 `theme.toml`、`keymap.toml` 和 `yazi.toml` 里旧的 `$schema` 键改过来，上面说的 26.5.6 那个坑就不用自己处理了。
 

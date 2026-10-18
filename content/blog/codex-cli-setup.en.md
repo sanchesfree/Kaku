@@ -68,7 +68,7 @@ The two settings that decide how much Codex does on its own are worth understand
 
 By default, Codex rings the terminal bell when it finishes or needs approval, and only while the terminal is not focused. Whether that bell becomes a desktop notification depends on the terminal. Kaku turns a bell from a background window into a desktop notification, and with `notification_method = "osc9"` the notification carries Codex's own message instead of a generic alert. `tui.notification_condition = "always"` notifies even when the terminal is in the foreground.
 
-If nothing shows up, the [notification guide](https://kaku.fun/blog/claude-code-notifications) covers the macOS permissions and tmux settings that can block them.
+If nothing shows up, the [notification guide](/blog/claude-code-notifications) covers the macOS permissions and tmux settings that can block them.
 
 ## Picking a session back up
 
