@@ -24,7 +24,7 @@ Kaku 把设置和 AI 数据放在 `~/.config/kaku/` 下，包括 `kaku.lua`（�
 
 ## 关于本站
 
-kaku.fun 是静态站点，不设 cookie，不跑统计和追踪脚本，不嵌第三方组件，也没有登录，字体、脚本和图片都从本域名加载，不走第三方 CDN。站点托管在 Vercel，Vercel 作为基础设施会照常保留访问日志（IP、User-Agent、请求路径）用于运维。点出去的 GitHub、X 等外链，适用对方自己的政策。
+kaku.fun 是静态站点，用 Google Analytics 统计访问量，不写入 cookie，不嵌第三方组件，也没有登录，除了 Google Analytics 的脚本，字体、脚本和图片都从本域名加载。站点托管在 Vercel，Vercel 作为基础设施会照常保留访问日志（IP、User-Agent、请求路径）用于运维。点出去的 GitHub、X 等外链，适用对方自己的政策。
 
 ## 疑问与变更
 

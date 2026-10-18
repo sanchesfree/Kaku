@@ -24,7 +24,7 @@ Kaku keeps your settings and AI data in `~/.config/kaku/`. That includes `kaku.l
 
 ## This website
 
-kaku.fun is a static site. It sets no cookies, runs no analytics or tracking scripts, embeds no third-party widgets, and has no login. Fonts, scripts, and images all load from this domain, not from a third-party CDN. The site is hosted on Vercel, which keeps standard request logs (IP address, user agent, requested path) to run its service. Links to GitHub, X, and other sites fall under those sites' own policies.
+kaku.fun is a static site. It counts visits with Google Analytics and writes no cookies, embeds no third-party widgets, and has no login. Apart from the Google Analytics script, fonts, scripts, and images all load from this domain. The site is hosted on Vercel, which keeps standard request logs (IP address, user agent, requested path) to run its service. Links to GitHub, X, and other sites fall under those sites' own policies.
 
 ## Questions and changes
 
