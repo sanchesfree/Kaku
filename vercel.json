@@ -3,6 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.kaku.fun" }],
+      "destination": "https://kaku.fun/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.kaku.fun" }],
       "destination": "https://kaku.fun/:path*",
