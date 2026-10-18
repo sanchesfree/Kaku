@@ -43,6 +43,9 @@ User-facing docs are public. Do not copy feature claims from a subagent summary 
    - Bump: nav `>v0.X.Y</a>` (every page), JSON-LD `"softwareVersion"` (both `index.html`), AppleScript `get version` example, `llms-full.txt` `Latest version:`, and the version in `agent.json`.
    - Leave alone: roadmap narrative ("V0.X.0 is out", "after V0.X.0") and any "this version added" history.
    - Confirm the release is actually public first (`gh release list`), or the site will document an unreleased default.
+   - Also bump the version cell in the Compare table (`compare.html`, `compare.md` and the `zh/` pair), then rerun `scripts/build_releases.py` and `scripts/build_blog.py`: blog pages carry the nav version, so `build_blog.py --check` fails until they are regenerated.
+   - Reread the blog posts that give per-version Kaku advice (the Claude Code notification posts) and mark the advice that the release makes obsolete, with `modified` set in `content/blog/index.json`. Keep the app docs, the site docs and the posts saying the same thing.
+   - Doc changes for features in the release can be written ahead, but push them together with the version bump once the release is public, because pushing `vercel` is the deploy.
 6. **Verify before declaring done**: run the checks listed in `AGENTS.md` (regenerate markdown and feed, then every `--check`, `check_public_facts.py`, `check_sitemap.py`), plus:
    - Internal links resolve under `cleanUrls` (every `/docs/x` has `docs/x.html`); new/edited HTML is well-formed.
    - EN and ZH parity: same sections, same anchors, same tables.
