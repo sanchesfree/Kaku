@@ -30,7 +30,7 @@ Buttons are pill-shaped (999px radius), at least 44px tall, with a filled ink-bl
 The chrome aligns with the mole-mac (Kami) site so the two feel like one series:
 
 - A top eyebrow strip, not a sticky nav bar: wordmark plus version (mono) on the left, Docs plus the language toggle plus GitHub/X icons on the right, in small serif.
-- A left-aligned big-serif hero (near-black `Kaku 書` with a blur-in rise), a serif tagline, and a single dotted trust row in place of stat and tag clutter. 書 is the family's one Traditional character per product (Mole 鼴, MiaoYan 妙, Pake 包, Hina 月); beside it a small near-black pencil floats and taps twice now and then, at mole.fit's quiet orbiting-dot scale. Rejected 2026-10-18: Mole's orbiting dot (that is Mole's planet language), a green pen drawing a stroke under 書 (too much), and a green wordmark.
+- A left-aligned big-serif hero (near-black `Kaku 書` with a blur-in rise), a serif tagline, and a single dotted trust row in place of stat and tag clutter. 書 is the family's one Traditional character per product (Mole 鼴, MiaoYan 語, Pake 殼, Hina 賞); beside it a small near-black pencil floats and taps twice now and then, at mole.fit's quiet orbiting-dot scale. Rejected 2026-10-18: Mole's orbiting dot (that is Mole's planet language), a green pen drawing a stroke under 書 (too much), and a green wordmark.
 - Sections separated by generous vertical rhythm (96px) rather than divider lines; only the hero keeps a bottom rule.
 - A footer that carries the `Kaku · 書` serif wordmark and an italic ethos line. Because Kaku is a multi-page doc site, the footer keeps its Product / Docs / Community / Project link columns rather than collapsing to mole's single-page colophon.
 
