@@ -1269,6 +1269,9 @@ button, input { font: inherit; }
   .wide, .hero-wrap, .hero-centered { padding: 0 28px; }
   .site-nav { padding-inline: 14px; }
 }
+@media (max-width: 360px) {
+  .site-nav .version-link, .site-nav .eyebrow-sep { display: none; }
+}
 @media (max-width: 560px) {
   .wide, .hero-wrap, .hero-centered { padding: 0 16px; }
   .site-nav { padding: 12px 5px 0; }
