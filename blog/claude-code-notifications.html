@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Notifications Not Showing? How to Fix Them on Mac · Kaku Blog</title>
+  <meta name="description" content="Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.">
+  <meta property="og:title" content="Claude Code Notifications Not Showing? How to Fix Them on Mac · Kaku Blog">
+  <meta property="og:description" content="Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-notifications.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Notifications Not Showing? How to Fix Them on Mac">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-notifications">
+  <meta property="article:published_time" content="2026-10-18">
+  <meta property="article:modified_time" content="2026-10-18">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-notifications.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-notifications"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-notifications">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-notifications">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-notifications">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-notifications.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Notifications Not Showing? How to Fix Them on Mac",
+          "item": "https://kaku.fun/blog/claude-code-notifications"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-notifications#article",
+      "headline": "Claude Code Notifications Not Showing? How to Fix Them on Mac",
+      "description": "Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.",
+      "url": "https://kaku.fun/blog/claude-code-notifications",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-notifications",
+      "datePublished": "2026-10-18",
+      "dateModified": "2026-10-18",
+      "inLanguage": "en",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-notifications.webp",
+      "timeRequired": "PT5M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-notifications.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does Claude Code send notifications in iTerm2 but not in my terminal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With preferredNotifChannel left at auto, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example ghostty in Kaku or terminal_bell elsewhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Claude Code notifications work over SSH?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The sequence travels back through the SSH connection to the terminal on your Mac, which shows the notification, as long as that terminal understands the channel you picked."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I also play a sound when Claude needs me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with a Notification hook in ~/.claude/settings.json. Hooks run alongside the built-in notification:\n{\n  \"hooks\": {\n    \"Notification\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }] }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do I get notifications for the window I'm looking at?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some terminals show every notification. In Kaku the default AlwaysShow only shows them while the window is in the background; the Suppress options also cover tabs and panes you are not looking at."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><a class="nav-pill" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">中</a><a class="nav-pill" aria-current="page" href="/blog/claude-code-notifications" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Notifications Not Showing? How to Fix Them on Mac</h1><p class="blog-meta"><span>Published <time datetime="2026-10-18">Oct 18, 2026</time></span><span>5 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-notifications.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>If Claude Code never tells you it finished or that it is waiting for permission, the cause is almost always the same: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.</p>
+<h2 id="the-quick-fix-for-claude-code">The quick fix for Claude Code</h2>
+<p>Open <code>~/.claude/settings.json</code> and set <code>preferredNotifChannel</code> to a channel your terminal understands. The values Claude Code accepts are <code>auto</code>, <code>terminal_bell</code>, <code>iterm2</code>, <code>iterm2_with_bell</code>, <code>kitty</code>, <code>ghostty</code> and <code>notifications_disabled</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Terminal</th>
+<th>What to set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iTerm2</td>
+<td>Nothing in Claude Code. In iTerm2, open Settings &gt; Profiles &gt; Terminal, check Notification Center Alerts, then under Filter Alerts enable Send escape sequence-generated alerts</td>
+</tr>
+<tr>
+<td>Ghostty, Kitty</td>
+<td>Nothing, <code>auto</code> already works</td>
+</tr>
+<tr>
+<td>Kaku</td>
+<td><code>"ghostty"</code></td>
+</tr>
+<tr>
+<td>Terminal.app</td>
+<td><code>auto</code> rings the bell only when the audible bell is off; <code>/terminal-setup</code> turns it off for you</td>
+</tr>
+<tr>
+<td>WezTerm, Warp, VS Code</td>
+<td><code>"terminal_bell"</code>, or a Notification hook</td>
+</tr>
+</tbody>
+</table>
+<p>For Kaku the whole change is one line:</p>
+<pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+<h2 id="the-quick-fix-for-codex">The quick fix for Codex</h2>
+<p>Codex works in Kaku without changes. With its default settings it rings the terminal bell when it needs you, and Kaku turns a bell in a background window into a notification. The text of that notification is generic, built from the last command or the pane title. To see Codex's own message instead, switch it to the OSC 9 sequence in <code>~/.codex/config.toml</code>:</p>
+<pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+<p><code>notification_method</code> takes <code>auto</code>, <code>osc9</code> or <code>bel</code>. Two neighbours are worth knowing: <code>notifications</code> turns them on or off, or limits them to certain events, and <code>notification_condition</code> decides whether they fire only while the terminal is unfocused, the default, or always.</p>
+<h2 id="when-nothing-shows-up-at-all">When nothing shows up at all</h2>
+<p>If the setting is right and still nothing appears, macOS is the next suspect. A notification from a terminal is shown by the terminal app, so the terminal itself needs permission. In System Settings &gt; Notifications, find your terminal and turn on Allow Notifications. In Kaku the same page is one click away under Kaku &gt; Notification Settings.</p>
+<p>macOS only asks for that permission once. If you clicked Don't Allow at some point, it never asks again, and every later notification is dropped without a trace. Kaku checks for that case and, after a notification was dropped, tells you the next time you switch back to it.</p>
+<p>Two more causes are common:</p>
+<ul>
+<li><strong>tmux.</strong> tmux swallows the sequences unless you add <code>set -g allow-passthrough on</code> to <code>~/.tmux.conf</code> and reload it with <code>tmux source-file ~/.tmux.conf</code>.</li>
+<li><strong>You were looking at it.</strong> Most terminals, Kaku included, suppress notifications from the window in front of you, and Codex by default only notifies while the terminal is unfocused. Test with the window in the background.</li>
+</ul>
+<h2 id="how-a-notification-gets-from-the-agent-to-macos">How a notification gets from the agent to macOS</h2>
+<p>Neither Claude Code nor Codex talks to Notification Center. They write a short escape sequence into the terminal, the same way they write colors, and the terminal decides what to do with it.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-notifications-mobile.webp" width="340" height="496"><img src="/img/blog/claude-code-notifications.webp" width="654" height="368" loading="lazy" alt="Claude Code, Codex and your own scripts send sequences or a bell to Kaku, which turns them into a macOS notification only while Kaku is in the background"></picture><figcaption>Every source ends up in the same place: a sequence the terminal reads and turns into a notification.</figcaption></figure>
+
+<p>There are a few sequences in use. OSC 9, which started in iTerm2, carries one line of text. OSC 777 carries a title and a body. The plain bell character carries nothing but the fact that something happened. Ghostty and Kaku handle both OSC 9 and OSC 777, while Kitty uses its own OSC 99. That spread is why Claude Code keeps a list of channels instead of one switch.</p>
+<p>In Kaku all three paths meet in one place. The <code>notification_handling</code> setting decides which ones become notifications:</p>
+<pre><code class="language-lua"><span class="tok-c">-- Default: only while the Kaku window is in the background</span>
+config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
+<span class="tok-c">-- Also notify for tabs or panes you are not looking at:</span>
+<span class="tok-c">-- config.notification_handling = "SuppressFromFocusedTab"</span>
+<span class="tok-c">-- config.notification_handling = "SuppressFromFocusedPane"</span>
+<span class="tok-c">-- Never:</span>
+<span class="tok-c">-- config.notification_handling = "NeverShow"</span></code></pre>
+<p>A bell in a background window becomes a notification too, and bells also add to the badge on Kaku's Dock icon, so you can see that something rang even after the notification is gone.</p>
+<h2 id="notifications-for-your-own-scripts">Notifications for your own scripts</h2>
+<p>Because a notification is just a sequence, any script can send one. This is handy at the end of a long build or test run:</p>
+<pre><code class="language-bash"><span class="tok-c"># One line of text (OSC 9)
+</span><span class="tok-b">printf</span> <span class="tok-s">'\e]9;%s\a'</span> <span class="tok-s">"Tests finished"</span>
+
+<span class="tok-c"># Title and body (OSC 777)
+</span><span class="tok-b">printf</span> <span class="tok-s">'\e]777;notify;%s;%s\a'</span> <span class="tok-s">"Build"</span> <span class="tok-s">"Release build finished"</span></code></pre>
+<p>Run it with the terminal in the background and it arrives like any other notification. Inside tmux the passthrough setting above still applies.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-does-claude-code-send-notifications-in-iterm2-but-not-in-my-terminal">Why does Claude Code send notifications in iTerm2 but not in my terminal?</h3>
+<p>With <code>preferredNotifChannel</code> left at <code>auto</code>, Claude Code only sends desktop notifications to iTerm2, Ghostty and Kitty. Set the channel explicitly, for example <code>ghostty</code> in Kaku or <code>terminal_bell</code> elsewhere.</p>
+<h3 id="do-claude-code-notifications-work-over-ssh">Do Claude Code notifications work over SSH?</h3>
+<p>Yes. The sequence travels back through the SSH connection to the terminal on your Mac, which shows the notification, as long as that terminal understands the channel you picked.</p>
+<h3 id="can-i-also-play-a-sound-when-claude-needs-me">Can I also play a sound when Claude needs me?</h3>
+<p>Yes, with a <a href="https://code.claude.com/docs/en/terminal-config#play-a-sound-with-a-notification-hook" target="_blank" rel="noopener noreferrer">Notification hook</a> in <code>~/.claude/settings.json</code>. Hooks run alongside the built-in notification:</p>
+<pre><code class="language-json">{
+  "hooks": {
+    "Notification": [
+      { "hooks": [{ "type": <span class="tok-s">"command"</span>, "command": <span class="tok-s">"afplay /System/Library/Sounds/Glass.aiff"</span> }] }
+    ]
+  }
+}</code></pre>
+<h3 id="why-do-i-get-notifications-for-the-window-im-looking-at">Why do I get notifications for the window I'm looking at?</h3>
+<p>Some terminals show every notification. In Kaku the default <code>AlwaysShow</code> only shows them while the window is in the background; the <code>Suppress</code> options also cover tabs and panes you are not looking at.</p>
+          <aside class="blog-cta"><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/best-terminal-for-claude-code"><span class="blog-related-name">The Best Terminal for Claude Code: What Actually Matters</span><time class="blog-related-meta" datetime="2026-10-17">Oct 17, 2026</time></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">An AI-friendly Mac terminal, ready out of the box.</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/about">About</a> · <a href="/compare">Compare</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/roadmap">Roadmap</a> · <a href="/changelog">Changelog</a> · <a href="/blog">Blog</a> · <a href="/docs">Docs</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">Less time fighting the terminal · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>

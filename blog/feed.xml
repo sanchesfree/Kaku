@@ -7,6 +7,14 @@
     <description>Guides and notes on Mac terminals, Claude Code, Codex and shell setup, and how Kaku is built.</description>
     <language>en</language>
     <item>
+      <title>Claude Code Notifications Not Showing? How to Fix Them on Mac</title>
+      <link>https://kaku.fun/blog/claude-code-notifications</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-notifications</guid>
+      <pubDate>Sun, 18 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.</description>
+    </item>
+    <item>
       <title>The Best Terminal for Claude Code: What Actually Matters</title>
       <link>https://kaku.fun/blog/best-terminal-for-claude-code</link>
       <guid isPermaLink="true">https://kaku.fun/blog/best-terminal-for-claude-code</guid>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code 通知不弹出，在 Mac 上怎么修 · Kaku 博客</title>
+  <meta name="description" content="为什么 Claude Code 和 Codex 在大多数终端里不发通知，每种情况该改哪个设置，以及终端通知序列是怎么走到 macOS 的。">
+  <meta property="og:title" content="Claude Code 通知不弹出，在 Mac 上怎么修 · Kaku 博客">
+  <meta property="og:description" content="为什么 Claude Code 和 Codex 在大多数终端里不发通知，每种情况该改哪个设置，以及终端通知序列是怎么走到 macOS 的。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-notifications.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code 通知不弹出，在 Mac 上怎么修">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/claude-code-notifications">
+  <meta property="article:published_time" content="2026-10-18">
+  <meta property="article:modified_time" content="2026-10-18">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-notifications.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/claude-code-notifications"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-notifications">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-notifications">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-notifications">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/claude-code-notifications.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code 通知不弹出，在 Mac 上怎么修",
+          "item": "https://kaku.fun/zh/blog/claude-code-notifications"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/claude-code-notifications#article",
+      "headline": "Claude Code 通知不弹出，在 Mac 上怎么修",
+      "description": "为什么 Claude Code 和 Codex 在大多数终端里不发通知，每种情况该改哪个设置，以及终端通知序列是怎么走到 macOS 的。",
+      "url": "https://kaku.fun/zh/blog/claude-code-notifications",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/claude-code-notifications",
+      "datePublished": "2026-10-18",
+      "dateModified": "2026-10-18",
+      "inLanguage": "zh-CN",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-notifications.webp",
+      "timeRequired": "PT3M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/claude-code-notifications.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "preferredNotifChannel 保持 auto 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 ghostty，其他终端可以用 terminal_bell。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "通过 SSH 跑的 Claude Code 也能通知吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，序列会沿着 SSH 连接回到你 Mac 上的终端，由它弹出通知，前提是这个终端认识你选的通道。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "能不能在 Claude 等我的时候也放个声音？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，在 ~/.claude/settings.json 里加一个 Notification hook，它会和自带的通知同时运行：\n{\n  \"hooks\": {\n    \"Notification\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"afplay /System/Library/Sounds/Glass.aiff\" }] }\n    ]\n  }\n}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么正在看的窗口也会弹通知？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "有些终端每条都弹，Kaku 默认的 AlwaysShow 只在窗口处于后台时提醒，Suppress 开头的几个选项会把没在看的标签和窗格也算进去。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><span class="eyebrow-sep">·</span><a class="version-link" href="https://github.com/tw93/Kaku/releases" target="_blank" rel="noopener noreferrer">v0.24.0</a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><a class="nav-pill" aria-current="page" href="/zh/blog/claude-code-notifications" hreflang="zh-CN">中</a><a class="nav-pill" href="/blog/claude-code-notifications" hreflang="en">EN</a><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 通知不弹出，在 Mac 上怎么修</h1><p class="blog-meta"><span>发布于 <time datetime="2026-10-18">2026年10月18日</time></span><span>3 分钟读完</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-notifications.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。</p>
+<h2 id="claude-code-的快速修法">Claude Code 的快速修法</h2>
+<p>打开 <code>~/.claude/settings.json</code>，把 <code>preferredNotifChannel</code> 设成你的终端认识的通道，Claude Code 接受的值有 <code>auto</code>、<code>terminal_bell</code>、<code>iterm2</code>、<code>iterm2_with_bell</code>、<code>kitty</code>、<code>ghostty</code> 和 <code>notifications_disabled</code>。</p>
+<table>
+<thead>
+<tr>
+<th>终端</th>
+<th>怎么设</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iTerm2</td>
+<td>Claude Code 里不用改，在 iTerm2 的 Settings &gt; Profiles &gt; Terminal 里勾上 Notification Center Alerts，再在 Filter Alerts 里打开 Send escape sequence-generated alerts</td>
+</tr>
+<tr>
+<td>Ghostty、Kitty</td>
+<td>不用改，<code>auto</code> 就能用</td>
+</tr>
+<tr>
+<td>Kaku</td>
+<td><code>"ghostty"</code></td>
+</tr>
+<tr>
+<td>Terminal.app</td>
+<td><code>auto</code> 只在关掉提示音时响铃，<code>/terminal-setup</code> 会帮你关掉</td>
+</tr>
+<tr>
+<td>WezTerm、Warp、VS Code</td>
+<td><code>"terminal_bell"</code>，或者加一个 Notification hook</td>
+</tr>
+</tbody>
+</table>
+<p>Kaku 只需要改这一行：</p>
+<pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
+<h2 id="codex-的快速修法">Codex 的快速修法</h2>
+<p>Codex 在 Kaku 里不用改，它默认需要你的时候会响终端铃声，Kaku 会把后台窗口里的铃声变成一条通知，只是内容比较笼统，取的是上一条命令或者窗格标题。想看到 Codex 自己写的消息，就在 <code>~/.codex/config.toml</code> 里换成 OSC 9 序列：</p>
+<pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+<p><code>notification_method</code> 可以是 <code>auto</code>、<code>osc9</code> 或 <code>bel</code>，旁边还有两个值得知道的设置，<code>notifications</code> 控制开关，也可以只对某几类事件开，<code>notification_condition</code> 决定只在终端没获得焦点时提醒，也就是默认值，还是任何时候都提醒。</p>
+<h2 id="一条都收不到的时候">一条都收不到的时候</h2>
+<p>设置没问题还是什么都没有，下一个要怀疑的就是 macOS。终端发出的通知是由终端这个 App 来显示的，所以得给终端本身授权，在系统设置 &gt; 通知里找到你的终端，打开允许通知，Kaku 里点 Kaku &gt; Notification Settings 就能直接跳到这一页。</p>
+<p>这个权限 macOS 只问一次，如果哪次点了不允许，之后它不会再问，后面的每条通知都会被悄无声息地丢掉。Kaku 会检查这种情况，有通知因此被丢掉时，下次你切回 Kaku 会提示一句。</p>
+<p>还有两个常见原因：</p>
+<ul>
+<li><strong>tmux。</strong> 不在 <code>~/.tmux.conf</code> 里加上 <code>set -g allow-passthrough on</code> 并用 <code>tmux source-file ~/.tmux.conf</code> 重新加载，tmux 会把这些序列吞掉。</li>
+<li><strong>你正看着它。</strong> 大部分终端包括 Kaku 都不会对眼前这个窗口弹通知，Codex 默认也只在终端没获得焦点时提醒，测试时记得把窗口放到后台。</li>
+</ul>
+<h2 id="通知是怎么从-agent-走到-macos-的">通知是怎么从 agent 走到 macOS 的</h2>
+<p>Claude Code 和 Codex 都不直接跟通知中心打交道，它们往终端里写一小段转义序列，跟输出颜色是一个路子，接下来怎么处理由终端决定。</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-notifications-mobile.webp" width="340" height="496"><img src="/img/blog/claude-code-notifications.webp" width="654" height="368" loading="lazy" alt="Claude Code、Codex 和你自己的脚本把序列或铃声发给 Kaku，Kaku 只在处于后台时把它变成 macOS 通知"></picture><figcaption>不管从哪来，最后都是一段终端读得懂的序列，再由终端变成通知。</figcaption></figure>
+
+<p>常用的序列有几种，OSC 9 最早出自 iTerm2，只带一行文字，OSC 777 带标题和正文，单独一个铃声字符则什么内容都不带，只表示有事发生。Ghostty 和 Kaku 两种都认，Kitty 用的是自己的 OSC 99，各家不统一，这也是为什么 Claude Code 要维护一串通道而不是一个开关。</p>
+<p>在 Kaku 里这几条路最后汇到同一个地方，哪些会变成通知由 <code>notification_handling</code> 决定：</p>
+<pre><code class="language-lua"><span class="tok-c">-- 默认：只在 Kaku 窗口处于后台时提醒</span>
+config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
+<span class="tok-c">-- 没在看的标签或窗格也提醒：</span>
+<span class="tok-c">-- config.notification_handling = "SuppressFromFocusedTab"</span>
+<span class="tok-c">-- config.notification_handling = "SuppressFromFocusedPane"</span>
+<span class="tok-c">-- 从不提醒：</span>
+<span class="tok-c">-- config.notification_handling = "NeverShow"</span></code></pre>
+<p>后台窗口里的铃声同样会变成通知，还会累加到 Dock 图标的角标上，通知消失了也能看出刚才有东西响过。</p>
+<h2 id="给自己的脚本加通知">给自己的脚本加通知</h2>
+<p>既然通知只是一段序列，任何脚本都能发，长时间的构建或测试跑完时提醒一下很好用：</p>
+<pre><code class="language-bash"><span class="tok-c"># 一行文字（OSC 9）
+</span><span class="tok-b">printf</span> <span class="tok-s">'\e]9;%s\a'</span> <span class="tok-s">"Tests finished"</span>
+
+<span class="tok-c"># 标题加正文（OSC 777）
+</span><span class="tok-b">printf</span> <span class="tok-s">'\e]777;notify;%s;%s\a'</span> <span class="tok-s">"Build"</span> <span class="tok-s">"Release build finished"</span></code></pre>
+<p>把终端放到后台再跑，就会像其他通知一样弹出来，在 tmux 里同样要打开上面说的 passthrough。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="为什么-claude-code-在-iterm2-里有通知在我的终端里没有">为什么 Claude Code 在 iTerm2 里有通知，在我的终端里没有？</h3>
+<p><code>preferredNotifChannel</code> 保持 <code>auto</code> 时，Claude Code 只给 iTerm2、Ghostty 和 Kitty 发桌面通知，把通道明确设上就行，Kaku 里用 <code>ghostty</code>，其他终端可以用 <code>terminal_bell</code>。</p>
+<h3 id="通过-ssh-跑的-claude-code-也能通知吗">通过 SSH 跑的 Claude Code 也能通知吗？</h3>
+<p>可以，序列会沿着 SSH 连接回到你 Mac 上的终端，由它弹出通知，前提是这个终端认识你选的通道。</p>
+<h3 id="能不能在-claude-等我的时候也放个声音">能不能在 Claude 等我的时候也放个声音？</h3>
+<p>可以，在 <code>~/.claude/settings.json</code> 里加一个 <a href="https://code.claude.com/docs/en/terminal-config#play-a-sound-with-a-notification-hook" target="_blank" rel="noopener noreferrer">Notification hook</a>，它会和自带的通知同时运行：</p>
+<pre><code class="language-json">{
+  "hooks": {
+    "Notification": [
+      { "hooks": [{ "type": <span class="tok-s">"command"</span>, "command": <span class="tok-s">"afplay /System/Library/Sounds/Glass.aiff"</span> }] }
+    ]
+  }
+}</code></pre>
+<h3 id="为什么正在看的窗口也会弹通知">为什么正在看的窗口也会弹通知？</h3>
+<p>有些终端每条都弹，Kaku 默认的 <code>AlwaysShow</code> 只在窗口处于后台时提醒，<code>Suppress</code> 开头的几个选项会把没在看的标签和窗格也算进去。</p>
+          <aside class="blog-cta"><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/best-terminal-for-claude-code"><span class="blog-related-name">Claude Code 用什么终端最好，真正影响体验的五件事</span><time class="blog-related-meta" datetime="2026-10-17">2026年10月17日</time></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide footer-inner"><div class="footer-mark"><img src="/img/kaku-mark.png" width="64" height="64" alt="Kaku" loading="lazy"><div><p class="wm-name">Kaku · 書</p><p class="wm-sub">开箱即用、默认好用、AI 友好的 Mac 终端。</p></div></div><div class="footer-colophon"><p class="footer-links"><a href="/zh/about">关于</a> · <a href="/zh/compare">对比</a> · <a href="/zh/contact">联系</a> · <a href="/zh/privacy">隐私</a> · <a href="/zh/roadmap">Roadmap</a> · <a href="/zh/changelog">Changelog</a> · <a href="/zh/blog">博客</a> · <a href="/zh/docs">文档</a> · <a href="https://github.com/tw93/Kaku">GitHub</a> · <a href="https://github.com/tw93/Kaku/issues">Issues</a> · <a href="https://twitter.com/HiTw93">X</a></p><p class="footer-ethos">少和终端较劲 · Built on WezTerm · MIT · © 2026</p></div></div></footer>
+</body>
+</html>
