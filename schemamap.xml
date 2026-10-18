@@ -17,7 +17,7 @@
   <!-- Stable releases: version, date, codename, changelog items, download. -->
   <url>
     <loc>https://kaku.fun/feeds/releases.json</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <!-- Structured product, install, CLI, and docs view of the homepage. -->
   <url>
