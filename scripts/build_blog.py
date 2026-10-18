@@ -179,9 +179,6 @@ def chrome(lang: str, en_path: str, zh_path: str) -> tuple[str, str]:
     nav = re.search(r'<a class="skip-link".*?</nav>', src, re.S).group(0)
     foot = re.search(r'<footer class="site-footer">.*?</footer>', src, re.S).group(0)
     nav = nav.replace('href="/zh/compare"', f'href="{zh_path}"').replace('href="/compare"', f'href="{en_path}"')
-    # The footer's language links point at this page too; its column links stay.
-    foot = re.sub(r'<p class="foot-lang">.*?</p>', lambda m: m.group(0).replace('href="/zh/compare"', f'href="{zh_path}"')
-                  .replace('href="/compare"', f'href="{en_path}"'), foot, flags=re.S)
     p = UI[lang]["prefix"]
     nav = re.sub(r'<div class="nav-links">.*?</div>',
                  f'<div class="nav-links"><a href="{p}/docs">{UI[lang]["docs"]}</a>'

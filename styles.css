@@ -1174,16 +1174,14 @@ button, input { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .faq-chevron, .faq-item::details-content { transition: none; }
 }
-/* Footer: hina.day's ivory band closed off by a hairline, the name and
-   language links on the left, small titled link columns on the right. */
-/* mole.fit's dark footer band in Kaku's slate, with Mole's text steps. */
+/* mole.fit's dark footer band in Kaku's slate, with Mole's text steps: the
+   name and a one-line description on the left, small titled link columns on
+   the right. Languages switch only in the nav. */
 .site-footer { background: var(--kaku-slate); color: color-mix(in srgb, var(--foot-ink) 62%, transparent); }
 .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 60px; padding-bottom: 48px; font-family: var(--serif); font-size: 14px; }
 .foot-brand .name { margin: 0 0 8px; color: #fff; font-size: 20px; font-weight: 500; line-height: 1.1; }
 .foot-mark { font-family: "Kaku Mark", "Kaku Serif SC", "Songti TC", serif; font-weight: 400; }
-.foot-lang { margin: 12px 0 0; font-size: 13px; }
-.foot .foot-lang a { color: color-mix(in srgb, var(--foot-ink) 62%, transparent); }
-.foot .foot-lang a[aria-current] { color: #fff; }
+.foot-sub { margin: 8px 0 0; font-size: 14px; line-height: 1.5; }
 .foot-links { display: flex; gap: 44px; }
 .foot-links div { display: grid; gap: 12px; align-content: start; }
 .foot-links b { margin-bottom: 2px; color: color-mix(in srgb, #fff 92%, transparent); font-size: 12px; font-weight: 600; letter-spacing: 0.2px; }

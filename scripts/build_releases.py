@@ -355,8 +355,6 @@ def render_page(donor: str, releases: list[dict], zh: bool) -> str:
         return nav
 
     page = re.sub(r'<nav class="site-nav".*?</nav>', retarget, page, count=1, flags=re.S)
-    # The footer's language links follow the page too; its column links stay.
-    page = re.sub(r'<p class="foot-lang">.*?</p>', retarget, page, count=1, flags=re.S)
     blocks = ["<hr>\n" + release_html(row, zh) if index else release_html(row, zh) for index, row in enumerate(releases)]
     main = (
         '<main id="main-content"><section class="section"><div class="wide release-doc">\n'
