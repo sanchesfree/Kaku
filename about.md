@@ -4,7 +4,7 @@ An AI-friendly Mac terminal with sensible defaults, developed and maintained by 
 
 ## What Kaku is
 
-Kaku is a Mac terminal based on [WezTerm](https://wezterm.org), with JetBrains Mono, automatic dark and light themes, and familiar shortcuts for tabs and split panes. Shell completion, syntax highlighting, and directory jumping come configured. Lazygit and Yazi install on demand, and Lua covers anything else you want to change.
+Kaku is a Mac terminal based on [WezTerm](https://wezterm.org), with JetBrains Mono, dark and light themes, and familiar shortcuts for tabs and split panes. Shell completion, syntax highlighting, and directory jumping come configured. Lazygit and Yazi install on demand, and Lua covers anything else you want to change.
 
 The name comes from 書く (*kaku*), the Japanese verb for writing. It is one of a few small tools by the same author. Kaku writes code, [Waza](https://github.com/tw93/Waza) (技) drills habits, and [Kami](https://github.com/tw93/Kami) (紙) ships documents.
 
@@ -14,7 +14,7 @@ Kaku is built by Tw93, an independent developer who also created [Pake](https://
 
 ## Principles and boundaries
 
-- **No Kaku account.** There is no sign-up, no login, and no cloud relay. Install the app and it works.
+- **No Kaku account.** There is no sign-up or login. Install the app and it works.
 - **No usage analytics.** Kaku collects nothing, and every network request the app makes is listed in [Privacy](https://kaku.fun/privacy).
 - **Your own AI service.** Connect your own AI service with `kaku ai`. Kaku does not provide or relay one.
 - **macOS only.** Windows and Linux are not supported, and no date is promised.

@@ -20,13 +20,11 @@ Kaku 是基于 WezTerm 的 macOS 终端，字体、主题、标签、分屏与 s
 
 ## 怎么开半透明窗口？
 
-在 `~/.config/kaku/kaku.lua` 里加：
+在 `~/.config/kaku/kaku.lua` 的 `return config` 前加：
 
 ```lua
-local config = require("kaku").config
 config.window_background_opacity = 0.92
 config.macos_window_background_blur = 20  -- 可选模糊度，0–100
-return config
 ```
 
 ## 怎么关掉「选中即复制」？

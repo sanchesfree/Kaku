@@ -62,7 +62,7 @@
   ],
   "notApplicable": [
     "Windows and Linux: Kaku is macOS only and no date is promised.",
-    "Remote or hosted use: there is no Kaku API, SDK, MCP server, or server-side product.",
+    "Hosted terminals without a Mac: remote access requires Kaku running on your Mac. There is no public Kaku API, SDK, or MCP server.",
     "Billing and accounts: Kaku is free, MIT licensed, and has no account system."
   ]
 }

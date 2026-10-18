@@ -88,11 +88,9 @@
           <h2 id="faq-what-should-i-run-after-installing"><a class="anchor" href="#faq-what-should-i-run-after-installing" aria-label="链接到「安装后先跑什么」">#</a>安装后先跑什么？</h2><p>先打开一次 Kaku，再运行 <code>kaku doctor</code>。如果 shell 找不到 <code>kaku</code>，运行 <code>/Applications/Kaku.app/Contents/MacOS/kaku init --update-only</code>，再用 <code>exec zsh -l</code> 重启 shell。</p>
           <h2 id="faq-is-there-a-windows-or-linux-version"><a class="anchor" href="#faq-is-there-a-windows-or-linux-version" aria-label="链接到「有 Windows 或 Linux 版本吗」">#</a>有 Windows 或 Linux 版本吗？</h2><p>暂时没有。Kaku 目前专注于 macOS 体验的打磨，Windows 和 Linux 暂无具体时间表。</p>
           <h2 id="faq-how-is-kaku-different-from-iterm2-warp-ghostty-or-wezterm"><a class="anchor" href="#faq-how-is-kaku-different-from-iterm2-warp-ghostty-or-wezterm" aria-label="链接到「Kaku 和 iTerm2、Warp、Ghostty、WezTerm 有什么区别」">#</a>Kaku 和 iTerm2、Warp、Ghostty、WezTerm 有什么区别？</h2><p>Kaku 是基于 WezTerm 的 macOS 终端，字体、主题、标签、分屏与 shell 套件开箱即用，并内建可选的 AI 助手（直连你自己的服务）。iTerm2 和 WezTerm 通常需要繁琐的手动配置；Warp 是云端 Agent 托管型终端；Ghostty 则是纯粹轻快、预设较少的 GPU 终端。详细差异与选型建议可参考<a href="/zh/compare">对比页</a>。</p>
-          <h2 id="faq-can-i-use-a-transparent-window"><a class="anchor" href="#faq-can-i-use-a-transparent-window" aria-label="链接到「开半透明窗口」">#</a>怎么开半透明窗口？</h2><p>在 <code>~/.config/kaku/kaku.lua</code> 里加：</p>
-          <pre><code class="language-lua"><span class="tok-k">local</span> config = <span class="tok-b">require</span>(<span class="tok-s">"kaku"</span>).config
-config.window_background_opacity = <span class="tok-n">0.92</span>
-config.macos_window_background_blur = <span class="tok-n">20</span>  <span class="tok-c">-- 可选模糊度，0–100</span>
-<span class="tok-k">return</span> config</code></pre>
+          <h2 id="faq-can-i-use-a-transparent-window"><a class="anchor" href="#faq-can-i-use-a-transparent-window" aria-label="链接到「开半透明窗口」">#</a>怎么开半透明窗口？</h2><p>在 <code>~/.config/kaku/kaku.lua</code> 的 <code>return config</code> 前加：</p>
+          <pre><code class="language-lua">config.window_background_opacity = <span class="tok-n">0.92</span>
+config.macos_window_background_blur = <span class="tok-n">20</span>  <span class="tok-c">-- 可选模糊度，0–100</span></code></pre>
           <h2 id="faq-how-do-i-turn-off-copy-on-select"><a class="anchor" href="#faq-how-do-i-turn-off-copy-on-select" aria-label="链接到「关掉选中即复制」">#</a>怎么关掉「选中即复制」？</h2><pre><code class="language-lua">config.copy_on_select = <span class="tok-b">false</span></code></pre>
           <h2 id="faq-how-do-i-customize-keybindings"><a class="anchor" href="#faq-how-do-i-customize-keybindings" aria-label="链接到「自定义快捷键」">#</a>怎么自定义快捷键？</h2><p>追加到 <code>config.keys</code>，不要整体覆盖：</p>
           <pre><code class="language-lua">config.keys[#config.keys + <span class="tok-n">1</span>] = {

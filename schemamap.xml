@@ -22,12 +22,12 @@
   <!-- Structured product, install, CLI, and docs view of the homepage. -->
   <url>
     <loc>https://kaku.fun/agent.json</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <!-- Capability index: what Kaku can do and which doc backs each capability. -->
   <url>
     <loc>https://kaku.fun/.well-known/agent-skills/index.json</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <!-- Prose context for language models. -->
   <url>
@@ -36,6 +36,6 @@
   </url>
   <url>
     <loc>https://kaku.fun/llms-full.txt</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
 </urlset>

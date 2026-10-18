@@ -8,7 +8,7 @@ Kaku 想做的是装好就能用的 Mac 终端，这页写它和几款常见终�
 
 ## Kaku 的优势
 
-- **打开就能用。**JetBrains Mono、macOS 字体渲染、跟随系统的深浅色、选中即复制，还有 Mac 风格的标签和分屏快捷键，都已经配好。
+- **打开就能用。**JetBrains Mono、macOS 字体渲染、深浅色主题、选中即复制，还有 Mac 风格的标签和分屏快捷键，都已经配好。
 - **标签和分屏重开还在。**Cmd + T 开标签，Cmd + D 分屏，Cmd + Shift + O 打开 Tab Navigator 查找分屏。关掉再打开 Kaku，窗口、分屏和目录都会恢复；右键还能快速复制、粘贴、搜索、发起 AI 对话，或直接拆分当前分屏。
 - **自带一套 shell 工具。**补全、语法高亮和 `z` 跳目录在 Kaku 里直接能用，Cmd + Shift + G 开 Lazygit，Cmd + Shift + Y 开 Yazi，Cmd + Shift + R 挂载当前 SSH 主机的文件。
 - **AI 可选，用你自己的服务。**命令报错时给出修复建议，输入 `#` 加一句话生成命令，Cmd + L 与 `kaku chat` 共享同一份对话记录。所有建议只填入命令行供你确认，绝不自动执行；Kaku 本身无需账号，也不提供或中转模型。
@@ -49,7 +49,7 @@ Warp 目前定位为 Agent 驱动的开发环境，Agent 是其核心产品。�
 
 ## Kaku 和 Ghostty
 
-Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、跟随系统的深浅色主题、智能补全与 `z` 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。
+Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、深浅色主题、智能补全与 `z` 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。
 
 ![在 Kaku 里运行的 Lazygit 提交记录](https://kaku.fun/shots/compare-lazygit.webp)Cmd + Shift + G 在当前仓库打开 Lazygit
 
@@ -70,7 +70,7 @@ Kaku 衍生自 WezTerm，完整保留了其成熟的 Lua 配置体系与渲染�
 ## 什么时候不要用 Kaku
 
 - **Windows 或 Linux。**不支持，也不承诺时间表。
-- **托管或浏览器终端。**Kaku 是本地 Mac 应用。
+- **不需要 Mac 的云端终端。**Kaku 运行在你的 Mac 上，[`kaku remote`](https://kaku.fun/zh/docs/cli#cli-kaku-remote) 可以让浏览器连上它。
 - **API、SDK 或 MCP server。**都没有，自动化用本地的 `kaku` 命令。
 - **完整复刻 iTerm2 或 WezTerm。**有些功能是故意没做的。
 

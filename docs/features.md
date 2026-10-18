@@ -137,7 +137,7 @@ Press `Cmd + Shift + R` to mount the current SSH session's remote filesystem wit
 
 Kaku picks up the SSH target from the active pane and mounts it at `~/Library/Caches/dev.kaku/sshfs/<host>`.
 
-Requirements: `sshfs` installed (`brew install macfuse sshfs`) and key-based SSH auth to the remote host.
+Install the macOS [SSHFS cask](https://formulae.brew.sh/cask/sshfs-mac) with `brew install --cask sshfs-mac`, complete [macFUSE setup](https://github.com/macfuse/macfuse/wiki/Getting-Started), and configure key-based SSH authentication to the remote host.
 
 ## Remote Access
 

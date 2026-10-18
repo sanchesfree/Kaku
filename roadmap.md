@@ -1,6 +1,6 @@
 # Roadmap
 
-Kaku is on the 0.22.x line. V0.22.0 shipped touch-friendly tab bar controls, smoother background session saves, app-reported tab titles, Kitty keyboard protocol support, and bundled diagnostics export; this cycle focuses on settings discoverability, AI sandbox tightening, and the macOS install experience.
+V0.22.0 shipped touch-friendly tab bar controls, smoother background session saves, app-reported tab titles, Kitty keyboard protocol support, and bundled diagnostics export; this cycle focuses on settings discoverability, AI sandbox tightening, and the macOS install experience.
 
 ## Now
 

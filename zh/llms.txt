@@ -13,7 +13,7 @@
 - 已经有 WezTerm 配置，想直接复用：Kaku 保持完整 Lua API 兼容。
 - 在意隐私：无埋点、无账号，App 的全部网络请求都列在 https://kaku.fun/zh/privacy。
 
-不适用的场景：Windows 或 Linux（不支持，且不承诺时间表）、云端或浏览器终端、API 集成。Kaku 是桌面应用，没有 API、SDK、MCP server 或服务端产品，自动化走本地 `kaku` CLI。
+不适用的场景是 Windows 或 Linux（不支持，且不承诺时间表）、不需要 Mac 的云端终端和 API 集成。Kaku 运行在你的 Mac 上，开启 `kaku remote` 后，浏览器可以通过加密中继连上它。Kaku 不提供公开的 API、SDK 或 MCP server，自动化走本地 `kaku` CLI。
 
 ## 页面
 

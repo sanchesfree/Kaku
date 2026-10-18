@@ -52,7 +52,7 @@ The site serves a machine-readable twin of itself so AI agents do not have to sc
 - **Hand-maintained.** `llms.txt` (plus the scoped `docs/llms.txt` and `zh/llms.txt`), `agent.json` (served at `/?mode=agent`), and `.well-known/agent-skills/index.json`. Keep the version number, CLI surface, and docs list in these in step with the docs when they change.
 - **JSON-LD.** The homepages carry a `@graph` with `SoftwareApplication`, `Organization`, `WebSite`, and a `WebPage` with `speakable`. Every other content page carries `BreadcrumbList` plus `TechArticle`. New pages need both, and a `<link rel="alternate" type="text/markdown">` in `<head>`.
 
-Kaku has no API, no SDK, and no hosted service. Do not add OpenAPI specs, OAuth metadata, MCP server cards, or `auth.md`: they would describe endpoints that do not exist.
+Kaku has no public API, SDK, or standalone cloud terminal. Optional remote access connects browsers to a running Mac through a relay. Do not add OpenAPI specs, OAuth metadata, MCP server cards, or `auth.md`: they would describe endpoints that do not exist.
 
 ## Verification
 

@@ -26,7 +26,7 @@ Kaku uses WezTerm's Lua configuration system. Some upstream features differ; rev
 
 - Mouse actions: right-click inside a pane to paste, search, open AI chat or the command palette, split, or close that pane. Right-click a tab for New Tab, Tab Navigator, and Close Tab; the + button opens a new tab. Cmd+Click opens URLs and file paths, keeping automatically wrapped URLs intact.
 - Tabs and panes: new tab (Cmd+T), close (Cmd+W), switch (Cmd+1 to Cmd+9), find any tab or pane with Tab Navigator (Cmd+Shift+O), split panes (Cmd+D and Cmd+Shift+D), and navigate panes (Cmd+Option+arrows). Reopening Kaku restores windows, panes, and each pane's directory. Pane input broadcast was removed in v0.19.0 for safety; its old key assignments now do nothing.
-- Preset defaults: JetBrains Mono, macOS-quality font rendering, and automatic dark and light themes that follow the system.
+- Preset defaults: JetBrains Mono, macOS-quality font rendering, and Kaku Dark by default, with Light and Auto options.
 - Rendering: GPU-accelerated terminal text and graphics.
 - Built-in AI assistant: when a command fails, Kaku drafts a fix for review. Press Cmd+Shift+E to paste the suggestion at the prompt; nothing runs on its own. Type `#` followed by a sentence to turn plain language into a command. Press Cmd+L to open AI chat once the assistant is configured.
 - Curated shell suite: Lazygit (Cmd+Shift+G), Yazi file manager (Cmd+Shift+Y), remote files (Cmd+Shift+R), plus z, completion, and syntax highlighting preconfigured.
@@ -50,7 +50,7 @@ Run `kaku ai` to enable Kaku Assistant, choose Auth Type (`codex` to reuse a Cod
 
 Full page: https://kaku.fun/compare
 
-Kaku is strongest when the job is a usable Mac terminal on day one: JetBrains Mono, automatic themes, Mac tab and pane shortcuts, session restore, a shell suite (completions, highlighting, z, Lazygit, Yazi, remote files), `kaku doctor`, and optional AI on the provider you configure. Suggestions never auto-run.
+Kaku is strongest when the job is a usable Mac terminal on day one: JetBrains Mono, dark and light themes, Mac tab and pane shortcuts, session restore, a shell suite (completions, highlighting, z, Lazygit, Yazi, remote files), `kaku doctor`, and optional AI on the provider you configure. Suggestions never auto-run.
 
 - vs iTerm2: Kaku includes preset fonts, themes, shell integration, and Mac shortcuts, with an optional assistant connected to your own AI service. Stay on iTerm2 if a large existing config is doing real work.
 - vs Warp: Kaku is MIT licensed and requires no Kaku account. You configure your own AI service, and can customize the terminal with Lua. Warp's client is AGPL open source, but its agents run on Warp's servers and paid plans start at $20 a month.

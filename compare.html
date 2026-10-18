@@ -89,7 +89,7 @@
 
           <h2 id="compare-what-kaku-is-good-at">What Kaku is good at</h2>
           <ul>
-            <li><strong>Works on first launch.</strong> JetBrains Mono, macOS font rendering, light and dark themes that follow the system, copy on select, and Mac-style tab and pane shortcuts are all set.</li>
+            <li><strong>Works on first launch.</strong> JetBrains Mono, macOS font rendering, dark and light themes, copy on select, and Mac-style tab and pane shortcuts are all set.</li>
             <li><strong>Tabs and panes that survive a relaunch.</strong> <span class="sk">Cmd + T</span> opens a tab, <span class="sk">Cmd + D</span> splits, and <span class="sk">Cmd + Shift + O</span> opens Tab Navigator to find a pane. Quit and reopen, and your windows, panes, and directories are still there. Right-click to copy, paste, search, open chat, or split the pane under the cursor.</li>
             <li><strong>Shell tools built in.</strong> Completions, syntax highlighting, and <code>z</code> for jumping between directories work in every Kaku session. <span class="sk">Cmd + Shift + G</span> opens Lazygit, <span class="sk">Cmd + Shift + Y</span> opens Yazi, and <span class="sk">Cmd + Shift + R</span> mounts files from the current SSH host.</li>
             <li><strong>Optional AI on your own service.</strong> Failed commands come back with a suggested fix, <code>#</code> plus a sentence becomes a command, and <span class="sk">Cmd + L</span> and <code>kaku chat</code> share one conversation. Suggestions land at the prompt for you to review and never run on their own. There is no Kaku account and no Kaku-hosted model.</li>
@@ -207,7 +207,7 @@
           <p>Pick Warp if you want a hosted AI product in your terminal. Pick Kaku if you want an open-source Mac terminal where AI is optional and runs on your own setup.</p>
 
           <h2 id="compare-ghostty">Kaku vs Ghostty</h2>
-          <p>Ghostty is a fast, MIT-licensed GPU terminal with native macOS tabs and splits, a Quick Terminal that drops down from the menu bar, and window restore. It is a great choice if you already have your own shell tools, fonts, and workflow. Kaku also renders on the GPU, and the difference is what comes already hooked up: JetBrains Mono, automatic themes, completions and <code>z</code>, Lazygit, Yazi, remote files, and the optional assistant.</p>
+          <p>Ghostty is a fast, MIT-licensed GPU terminal with native macOS tabs and splits, a Quick Terminal that drops down from the menu bar, and window restore. It is a great choice if you already have your own shell tools, fonts, and workflow. Kaku also renders on the GPU, and the difference is what comes already hooked up: JetBrains Mono, dark and light themes, completions and <code>z</code>, Lazygit, Yazi, remote files, and the optional assistant.</p>
           <figure class="shot"><img src="/shots/compare-lazygit.webp" width="1920" height="1200" loading="lazy" alt="Lazygit commit log running inside Kaku"><figcaption><span class="sk">Cmd + Shift + G</span> opens Lazygit in the current repository</figcaption></figure>
           <p>Stay on Ghostty if you want something leaner and like your current setup. Try Kaku if what you are missing is the out-of-the-box suite, not another config file.</p>
 
@@ -222,7 +222,7 @@
           <h2 id="compare-when-not">When not to use Kaku</h2>
           <ul>
             <li><strong>Windows or Linux.</strong> Unsupported, and no date is promised.</li>
-            <li><strong>A hosted or browser terminal.</strong> Kaku is a local Mac app.</li>
+            <li><strong>A hosted terminal without a Mac.</strong> Kaku runs on your Mac; <a href="/docs/cli#cli-kaku-remote"><code>kaku remote</code></a> lets a browser connect to it.</li>
             <li><strong>An API, SDK, or MCP server.</strong> There is none. Automation goes through the local <code>kaku</code> CLI.</li>
             <li><strong>A full iTerm2 or WezTerm replica.</strong> Some features are left out on purpose.</li>
           </ul>

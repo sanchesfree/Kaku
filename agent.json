@@ -4,7 +4,7 @@
   "product": {
     "name": "Kaku",
     "tagline": "An AI-friendly Mac terminal with sensible defaults, ready out of the box.",
-    "description": "Kaku is a macOS-native terminal emulator derived from WezTerm and tuned for AI-assisted terminal work. It ships practical defaults on day one (JetBrains Mono, macOS font rendering, automatic dark and light themes), fast tabs and split panes on native macOS shortcuts, a curated shell suite (Lazygit, Yazi, remote files, z, completion, syntax highlighting), and a built-in assistant that drafts a fix when a command fails and turns plain language into commands. It uses WezTerm's Lua configuration system for terminal customization.",
+    "description": "Kaku is a macOS-native terminal emulator derived from WezTerm and tuned for AI-assisted terminal work. It ships practical defaults on day one (JetBrains Mono, macOS font rendering, dark and light themes), fast tabs and split panes on native macOS shortcuts, a curated shell suite (Lazygit, Yazi, remote files, z, completion, syntax highlighting), and a built-in assistant that drafts a fix when a command fails and turns plain language into commands. It uses WezTerm's Lua configuration system for terminal customization.",
     "category": "DeveloperApplication",
     "type": "desktop-application",
     "version": "0.24.0",
@@ -32,7 +32,7 @@
   ],
   "api": {
     "available": false,
-    "reason": "Kaku is a local macOS application, not a service. There is no HTTP API, no SDK, no MCP server, and no server-side product. Automation goes through the local `kaku` command."
+    "reason": "Kaku runs on your Mac. Optional `kaku remote` connects a browser to it through an encrypted relay. There is no public HTTP API, SDK, or MCP server. Automation goes through the local `kaku` command."
   },
   "authentication": {
     "required": false,

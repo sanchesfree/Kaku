@@ -20,13 +20,11 @@ Kaku is a WezTerm-based Mac terminal with fonts, themes, tabs, panes, and shell 
 
 ## Can I use a transparent window?
 
-Yes. Add to `~/.config/kaku/kaku.lua`:
+Yes. Add these lines before `return config` in `~/.config/kaku/kaku.lua`:
 
 ```lua
-local config = require("kaku").config
 config.window_background_opacity = 0.92
 config.macos_window_background_blur = 20  -- optional blur, 0–100
-return config
 ```
 
 ## How do I turn off copy on select?

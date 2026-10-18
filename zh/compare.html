@@ -89,7 +89,7 @@
 
           <h2 id="compare-what-kaku-is-good-at">Kaku 的优势</h2>
           <ul>
-            <li><strong>打开就能用。</strong>JetBrains Mono、macOS 字体渲染、跟随系统的深浅色、选中即复制，还有 Mac 风格的标签和分屏快捷键，都已经配好。</li>
+            <li><strong>打开就能用。</strong>JetBrains Mono、macOS 字体渲染、深浅色主题、选中即复制，还有 Mac 风格的标签和分屏快捷键，都已经配好。</li>
             <li><strong>标签和分屏重开还在。</strong><span class="sk">Cmd + T</span> 开标签，<span class="sk">Cmd + D</span> 分屏，<span class="sk">Cmd + Shift + O</span> 打开 Tab Navigator 查找分屏。关掉再打开 Kaku，窗口、分屏和目录都会恢复；右键还能快速复制、粘贴、搜索、发起 AI 对话，或直接拆分当前分屏。</li>
             <li><strong>自带一套 shell 工具。</strong>补全、语法高亮和 <code>z</code> 跳目录在 Kaku 里直接能用，<span class="sk">Cmd + Shift + G</span> 开 Lazygit，<span class="sk">Cmd + Shift + Y</span> 开 Yazi，<span class="sk">Cmd + Shift + R</span> 挂载当前 SSH 主机的文件。</li>
             <li><strong>AI 可选，用你自己的服务。</strong>命令报错时给出修复建议，输入 <code>#</code> 加一句话生成命令，<span class="sk">Cmd + L</span> 与 <code>kaku chat</code> 共享同一份对话记录。所有建议只填入命令行供你确认，绝不自动执行；Kaku 本身无需账号，也不提供或中转模型。</li>
@@ -207,7 +207,7 @@
           <p>想要终端里一整套托管的 AI 产品，选 Warp，想要开源、AI 可选而且只走你自己配置的 Mac 终端，选 Kaku。</p>
 
           <h2 id="compare-ghostty">Kaku 和 Ghostty</h2>
-          <p>Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、跟随系统的深浅色主题、智能补全与 <code>z</code> 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。</p>
+          <p>Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、深浅色主题、智能补全与 <code>z</code> 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。</p>
           <figure class="shot"><img src="/shots/compare-lazygit.webp" width="1920" height="1200" loading="lazy" alt="在 Kaku 里运行的 Lazygit 提交记录"><figcaption><span class="sk">Cmd + Shift + G</span> 在当前仓库打开 Lazygit</figcaption></figure>
           <p>想要更轻的终端，现有配置也顺手，就继续用 Ghostty，缺的是开箱那一套、又不想再写一份配置，可以试试 Kaku。</p>
 
@@ -222,7 +222,7 @@
           <h2 id="compare-when-not">什么时候不要用 Kaku</h2>
           <ul>
             <li><strong>Windows 或 Linux。</strong>不支持，也不承诺时间表。</li>
-            <li><strong>托管或浏览器终端。</strong>Kaku 是本地 Mac 应用。</li>
+            <li><strong>不需要 Mac 的云端终端。</strong>Kaku 运行在你的 Mac 上，<a href="/zh/docs/cli#cli-kaku-remote"><code>kaku remote</code></a> 可以让浏览器连上它。</li>
             <li><strong>API、SDK 或 MCP server。</strong>都没有，自动化用本地的 <code>kaku</code> 命令。</li>
             <li><strong>完整复刻 iTerm2 或 WezTerm。</strong>有些功能是故意没做的。</li>
           </ul>

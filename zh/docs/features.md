@@ -137,7 +137,7 @@ git 仓库里有未提交的改动、而你还没在这个目录用过 lazygit �
 
 Kaku 从当前分屏自动识别 SSH 目标，挂载在 `~/Library/Caches/dev.kaku/sshfs/<host>`。
 
-前置条件：装好 `sshfs`（`brew install macfuse sshfs`），远端主机配好基于密钥的 SSH 登录。
+先运行 `brew install --cask sshfs-mac` 安装 macOS 版 [SSHFS](https://formulae.brew.sh/cask/sshfs-mac)，按 [macFUSE 说明](https://github.com/macfuse/macfuse/wiki/Getting-Started)完成设置，并给远端主机配好密钥登录。
 
 ## 远程访问
 
