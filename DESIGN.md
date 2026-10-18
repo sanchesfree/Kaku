@@ -33,7 +33,8 @@ The chrome aligns with the mole-mac (Kami) site so the two feel like one series:
 - A left-aligned big-serif hero (near-black `Kaku 書` with a blur-in rise), a serif tagline, and a single dotted trust row in place of stat and tag clutter. 書 is the family's one Traditional character per product (Mole 鼴, MiaoYan 語, Pake 殼, Hina 賞); a 5px near-black dot at 40% opacity orbits it, as on every family site, each with its own ellipse, tilt, speed and direction (Kaku: level, 12s clockwise). Rejected 2026-10-18: a green pen drawing a stroke under 書 (too much), a floating pencil or any other small icon (ugly), and a green wordmark.
 - The showcase carries what used to be separate Remote, Kaku AI and Everyday use sections: each tab's caption names the command or shortcut, and the tabs sit bottom right. The FAQ is the family's details accordion.
 - Sections separated by generous vertical rhythm (96px) rather than divider lines; only the hero keeps a bottom rule.
-- A footer that carries the `Kaku · 書` serif wordmark and an italic ethos line. Because Kaku is a multi-page doc site, the footer keeps its Product / Docs / Community / Project link columns rather than collapsing to mole's single-page colophon.
+- The family footer shared with hina.day and pake: an ivory band under a hairline, `Kaku · 書` with English / 简体中文 links on the left (each pointing at the current page's counterpart), and Product / Project / Contact link columns on the right. Every page carries the same block; the blog and changelog generators retarget its language links.
+- Page heads (`.page-hero h1`) use mole.fit's 32px / 500 dark-warm title and a 16px olive lead, on docs, prose pages and the blog alike.
 
 Inner content widths stay close to the blog: about 760px for prose and 1120px for page sections.
 
@@ -41,7 +42,7 @@ Sidebar-less prose pages (`/about`, `/compare`, `/contact`, `/privacy`) reuse th
 
 ## Blog
 
-`/blog` and `/zh/blog` follow mole.fit's blog on Kaku's tokens: an index of parchment cards with the cover flush on top, and an article page with the page hero (breadcrumb, title, date and reading time), a cover cropped to 16:7 on desktop and 16:9 on phones, a 760px prose column, one quiet install card, and three related posts. Search intent picks the topics, and every post opens with the direct answer before Kaku's part.
+`/blog` and `/zh/blog` follow mole.fit's blog on Kaku's tokens: an index of parchment cards with the cover flush on top, and an article page with the page hero (breadcrumb, title, date and reading time), a cover cropped to 16:7 on desktop and 16:9 on phones, a 760px prose column, one quiet install card (40px app mark, sentence, primary pill) and three "Keep reading" cards; card and related meta are a mono date plus reading time. Search intent picks the topics, and every post opens with the direct answer before Kaku's part.
 
 - **Covers** are illustrations from an image model (the Codex CLI's image tool), not screenshots: matte paper cutouts on `#F5F4ED` parchment, navy `#1B365D`, pale grey-blue `#DCE3EE` and `#EEF2F7`, off-white, at most one small muted green `#0D7D4D` accent, with no text, logos, real UI or window chrome. Keep the subject between y 100 and 800 of the 1600x900 canvas, measured with a threshold mask rather than `-trim` because the paper grain defeats it. Convert with `magick in.png -resize 1600x900^ -gravity center -extent 1600x900` and `cwebp -q 86`.
 - **Diagrams** explain a mechanism only. Each one is data in `scripts/build_blog_diagrams.py`, drawn as a desktop layout and a stacked `-mobile` layout in JetBrains Mono, saved at 2x and shown at their own width up to the column, so a narrow diagram is never stretched. Labels stay English and short; the caption carries the explanation in each language.

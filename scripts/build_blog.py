@@ -75,7 +75,7 @@ UI = {
         "index_desc": "关于 Mac 终端、Claude Code、Codex、shell 配置的指南，以及 Kaku 是怎么做出来的。",
         "published": "发布于",
         "updated": "更新于",
-        "read": "{n} 分钟读完",
+        "read": "约 {n} 分钟",
         "related": "继续阅读",
         "faq": "常见问题",
         "cta": "Kaku 是一个免费开源的 Mac 终端。",
@@ -179,6 +179,9 @@ def chrome(lang: str, en_path: str, zh_path: str) -> tuple[str, str]:
     nav = re.search(r'<a class="skip-link".*?</nav>', src, re.S).group(0)
     foot = re.search(r'<footer class="site-footer">.*?</footer>', src, re.S).group(0)
     nav = nav.replace('href="/zh/compare"', f'href="{zh_path}"').replace('href="/compare"', f'href="{en_path}"')
+    # The footer's language links point at this page too; its column links stay.
+    foot = re.sub(r'<p class="foot-lang">.*?</p>', lambda m: m.group(0).replace('href="/zh/compare"', f'href="{zh_path}"')
+                  .replace('href="/compare"', f'href="{en_path}"'), foot, flags=re.S)
     p = UI[lang]["prefix"]
     nav = re.sub(r'<div class="nav-links">.*?</div>',
                  f'<div class="nav-links"><a href="{p}/docs">{UI[lang]["docs"]}</a>'
@@ -237,6 +240,10 @@ def cover_url(slug: str) -> str:
 
 # ---------------------------------------------------------------- pages
 
+def post_minutes(p: dict, lang: str) -> int:
+    return reading_minutes((SRC / f"{p['slug']}.{lang}.md").read_text(encoding="utf-8"), lang)
+
+
 def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
     meta = p[lang]
     slug = p["slug"]
@@ -289,7 +296,7 @@ def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
     if related:
         items = "".join(
             f'<li><a href="{url(lang, r["slug"])}"><span class="blog-related-name">{html.escape(r[lang]["title"])}</span>'
-            f'<time class="blog-related-meta" datetime="{r["date"]}">{fmt_date(r["date"], lang)}</time></a></li>'
+            f'<span class="blog-related-meta"><time datetime="{r["date"]}">{fmt_date(r["date"], lang)}</time> · {ui["read"].format(n=post_minutes(r, lang))}</span></a></li>'
             for r in related)
         rel_html = (f'\n          <nav class="blog-related" aria-label="{ui["related"]}">'
                     f'<h2 class="blog-related-title">{ui["related"]}</h2><ul class="blog-related-list">{items}</ul></nav>')
@@ -303,7 +310,7 @@ def post_page(p: dict, lang: str, live: list[dict]) -> tuple[str, str]:
         <article class="doc-content blog-article">
           <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/{slug}.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
 {body}
-          <aside class="blog-cta"><p>{ui['cta']}</p><a class="btn btn-primary" href="{p_}/docs">{ui['cta_btn']}</a></aside>{rel_html}
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>{ui['cta']}</p><a class="btn btn-primary" href="{p_}/docs">{ui['cta_btn']}</a></aside>{rel_html}
         </article>
       </div>
     </section>
@@ -354,7 +361,7 @@ def index_page(lang: str, live: list[dict]) -> str:
         f'<span class="blog-card-media"><img src="/img/blog/cards/{p["slug"]}.webp" width="1600" height="900" alt="" loading="lazy"></span>'
         f'<span class="blog-card-body"><span class="blog-card-title">{html.escape(p[lang]["title"])}</span>'
         f'<span class="blog-card-desc">{html.escape(p[lang]["description"])}</span>'
-        f'<time class="blog-card-date" datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time></span></a></li>'
+        f'<span class="blog-card-date"><time datetime="{p["date"]}">{fmt_date(p["date"], lang)}</time> · {UI[lang]["read"].format(n=post_minutes(p, lang))}</span></span></a></li>'
         for p in live)
     out += f"""<body>
   {nav}
