@@ -22,7 +22,7 @@ claude --settings '{"disableAllHooks": true}'
 
 [[figure:claude-code-hooks-lifecycle|先是 PreToolUse，然后是工具调用和 PostToolUse，Claude 回答完时是 Stop|一轮回答里每调用一次工具，PreToolUse、工具本身和 PostToolUse 就走一遍，Stop 只在回答结束时触发一次，Notification 则在 Claude Code 需要你的时候触发。]]
 
-hooks 参考里列出的事件比这多，后文从 SessionStart 一直讲到 Stop，会碰到的就是下面六个。
+hooks 参考里列的事件比这多，平时会碰到的就是下面六个，按触发先后从 SessionStart 排到 Stop。
 
 | 事件 | 什么时候触发 |
 |---|---|
@@ -59,13 +59,13 @@ hooks 参考里列出的事件比这多，后文从 SessionStart 一直讲到 St
 }
 ```
 
-`jq` 负责读出路径，找不到命令时会报 `jq: command not found`，用 `brew install jq` 装上，退出码 0 的输出不会进对话。指南里是这样核对的，在 JavaScript 文件里放一个单引号字符串，Prettier 的默认配置会把它改成双引号。
+`jq` 负责读出路径，找不到命令时会报 `jq: command not found`，用 `brew install jq` 装上，退出码 0 的输出不会进对话。
 
-用 `Bash` 改写文件不会触发 `Edit|Write`，不管文件是谁写的，hook 都要看见时，指南用的是 `FileChanged`。
+用 `Bash` 改写文件不会触发 `Edit|Write`，想让 hook 不管文件是谁改的都能看到，指南里用的是 `FileChanged`。
 
 ## 命令跑之前拦住
 
-`PreToolUse` 在参数已经齐了、工具还没跑、权限模式也还没检查时跑一次，退出码 2 拦住这次调用，Claude 把 stderr 读成原因，退出码 0 时原来的权限流程照旧走，并不等于批准这次调用，2026 年 10 月核对过。
+`PreToolUse` 在参数已经齐了、工具还没跑、权限模式也还没检查时跑一次，退出码 2 拦住这次调用，Claude 把 stderr 读成原因，退出码 0 时原来的权限流程照旧走，并不等于批准这次调用。
 
 存成 `.claude/hooks/no-rm.sh`，再 `chmod +x`，它会拦住以 `rm` 开头的 Bash 命令。
 
@@ -120,9 +120,9 @@ exit 0
 
 `Stop` 在每次回答结束时触发，不只是任务做完那一次，你中途打断就不出声，退出码 2 会让 Claude 继续，用来提醒的 hook 以 0 退出。
 
-序列写在 `terminalSequence` 里，hook 没有 `/dev/tty`，这段序列由 Claude Code 写，tmux 和 GNU screen 里也一样，只有交互会话还留在屏幕上时才写，允许的值是 OSC 0、1、2、9、99、777，以及铃声。OSC 9 是 iTerm2、ConEmu、Windows Terminal 和 WezTerm 的通知，OSC 777 是 urxvt、Ghostty 和 Warp 的通知，别的都会被丢掉。
+序列要写在 `terminalSequence` 里，因为 hook 没有 `/dev/tty`，由 Claude Code 替它写出去，tmux 和 GNU screen 里也一样，而且只在交互会话还留在屏幕上时才写。允许的值是 OSC 0、1、2、9、99、777，以及铃声。OSC 9 是 iTerm2、ConEmu、Windows Terminal 和 WezTerm 的通知，OSC 777 是 urxvt、Ghostty 和 Warp 的通知，别的都会被丢掉。
 
-参考文档用 `printf` 拼出这段 OSC 777，再交给 `jq -nc`，`last_assistant_message` 是整段回复，所以脚本发的是固定一行：
+输入里的 `last_assistant_message` 是整段回复，没法直接当通知文字，所以脚本只发固定的一行，用 `printf` 拼出 OSC 777，再用 `jq -nc` 包成 JSON：
 
 ```bash
 #!/bin/bash
@@ -153,7 +153,7 @@ jq -nc --arg seq "$seq" '{terminalSequence: $seq}'
 
 ## 看 hook 到底跑了什么
 
-`/hooks` 里看得到这条 hook，它却一次都不跑，多半是 matcher 没对上工具名，`Ctrl+O` 打开 transcript 之后，成功是空白，拦住了会把原因写出来。退出码不是 0 也不是 2 时，通常是不拦截的错误，动作照样继续，输出里带着 `Failed with non-blocking status code:` 和 stderr 的第一行。
+`/hooks` 里看得到这条 hook，它却一次都不跑，多半是 matcher 没对上工具名，`Ctrl + O` 打开 transcript 之后，成功是空白，拦住了会把原因写出来。退出码不是 0 也不是 2 时，通常是不拦截的错误，动作照样继续，输出里带着 `Failed with non-blocking status code:` 和 stderr 的第一行。
 
 ```bash
 echo '{"tool_name":"Bash","tool_input":{"command":"ls"}}' | ./.claude/hooks/no-rm.sh
@@ -164,7 +164,7 @@ echo $?
 
 ## hook 用的是你的权限
 
-`"type": "command"` 的 hook 以你的用户身份跑，账号能读、能改、能删的文件它都能动，挂上每次工具调用之前，先把脚本读一遍，要展开的变量都加上引号。
+`"type": "command"` 的 hook 以你的用户身份跑，账号能读、能改、能删的文件它都能动，要让它在每次工具调用前都跑，先把脚本从头读一遍，要展开的变量都加上引号。
 
 交互会话会先等你确认信任这个工作区，然后才跑任何设置文件里的 hook，`~/.claude/settings.json` 里的也在内。`claude -p` 跳过这个对话框，把当前目录当成已信任，提交在仓库里的 `.claude/settings.json` hook 就会直接跑。仓库要不是你写的，先把 `.claude/` 读一遍，或者带上 `--settings '{"disableAllHooks": true}'`。
 
@@ -172,15 +172,9 @@ echo $?
 
 Kaku 不会往你的 agent 里加 hook，也不会加指令，`kaku ai` 只有你在那里改某个工具的设置时才会动它，你自己写的字段会留着。
 
-Claude Code 自带的提醒是另一路开关，在 0.25.0 之前的 Kaku 里它不认识 Kaku，`preferredNotifChannel` 留在 `auto` 就什么都不发，改成它发给 Ghostty 的那段序列就行：
+Claude Code 自带的提醒是另一路开关，Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要在 `~/.claude/settings.json` 里设上 `"preferredNotifChannel": "ghostty"`，见[Claude Code 通知](/zh/blog/claude-code-notifications)。
 
-```json
-{ "preferredNotifChannel": "ghostty" }
-```
-
-Kaku 0.25.0 及以上还能直接读到 Claude Code 2.1.295 及以上自己上报的工作中、等你和已完成状态，两边都是新版本时把通道留在 `auto` 就行，不然每条通知会弹两次。
-
-Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 在后台时才显示通知，你正看着的窗格不会弹，一条都没有就点 Kaku > Notification Settings...，打开允许通知，通道怎么设写在 [Claude Code 通知](/zh/blog/claude-code-notifications) 里。OSC 9 也在允许的那几种里，Codex 设了 `notification_method = "osc9"` 时，Kaku 会把它显示成工具自己写的那条消息。
+Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上时，Claude 做完 Kaku 本来就会提醒，再挂这个 Stop hook 会多出一条通知，所以它适合更早的版本或者别的终端。OSC 9 也在允许的那几种里，Codex 设了 `notification_method = "osc9"` 时，Kaku 会把它显示成工具自己写的那条消息。
 
 ## 常见问题
 
@@ -194,7 +188,7 @@ Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也
 
 ### 为什么 Stop hook 之后 Claude 还在继续？
 
-退出码 2，或者 `{"decision": "block", "reason": "..."}`，都是让 Claude 继续，连续拦住八次，中间没有工具调用，Claude Code 会结束这一轮。只想通知的时候以 0 退出，真要拦住的话，等 `stop_hook_active` 已经是 `true`，再以 0 退出。
+退出码 2，或者 `{"decision": "block", "reason": "..."}`，都是让 Claude 继续，连续拦住八次，中间没有工具调用，Claude Code 会结束这一轮。只想通知的时候以 0 退出，真要拦住的话，脚本先看 `stop_hook_active`，已经是 `true` 就以 0 退出，免得一直拦下去。
 
 ### 我正在用的这个窗口能看到通知吗？
 
@@ -202,4 +196,4 @@ Kaku 在后台时才显示，你正看着的窗格不会弹，`terminalSequence`
 
 ### 这些 hook 是 Kaku 装的吗？
 
-不会，这些 hook 得你自己写进 Claude Code 的设置，Kaku 不会自己加 hook 或指令，`kaku ai` 会留着你写过的字段。
+不是，这些 hook 得你自己写进 Claude Code 的设置，Kaku 不会自己加 hook 或指令，`kaku ai` 会留着你写过的字段。

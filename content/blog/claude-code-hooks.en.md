@@ -59,13 +59,13 @@ The reference lists more events. These six are the ones used below:
 }
 ```
 
-`jq` reads the path. Install it with `brew install jq` if the hook reports `jq: command not found`. Exit 0 prints nothing in the conversation. The guide's check is a single-quoted string in a JavaScript file: Prettier's defaults turn it into double quotes.
+`jq` reads the path. Install it with `brew install jq` if the hook reports `jq: command not found`. Exit 0 prints nothing in the conversation.
 
 A `Bash` command that rewrites a file does not fire an `Edit|Write` hook. The guide uses `FileChanged` when the hook has to see the file whatever wrote it.
 
 ## Block a command before it runs
 
-`PreToolUse` runs once the arguments exist, before the tool, and before the permission-mode check. Exit 2 blocks the call, and Claude reads stderr as the reason. Exit 0 leaves the normal permission flow in place. It does not approve the call. Checked October 2026.
+`PreToolUse` runs once the arguments exist, before the tool, and before the permission-mode check. Exit 2 blocks the call, and Claude reads stderr as the reason. Exit 0 leaves the normal permission flow in place. It does not approve the call.
 
 Save this as `.claude/hooks/no-rm.sh`, then `chmod +x` it. It blocks a Bash command that starts with `rm`.
 
@@ -122,7 +122,7 @@ To decide in JSON, exit 0 and print this object alone. `permissionDecision` belo
 
 Put the sequence in `terminalSequence`. Hooks have no `/dev/tty`, so Claude Code writes it, including inside tmux and GNU screen, only while an interactive session is on screen. Allowed values are OSC 0, 1, 2, 9, 99, 777, and the bell. OSC 9 is the iTerm2, ConEmu, Windows Terminal, and WezTerm notification. OSC 777 is the urxvt, Ghostty, and Warp notification. Anything else is dropped.
 
-The reference builds that OSC 777 value with `printf`, then `jq -nc`. `last_assistant_message` is the whole reply, so the script sends a fixed line:
+`last_assistant_message` in the input is the whole reply, too long for a notification, so the script sends a fixed line, built with `printf` and wrapped in JSON by `jq -nc`:
 
 ```bash
 #!/bin/bash
@@ -153,7 +153,7 @@ A `Notification` hook can return the same field, and `preferredNotifChannel` set
 
 ## See what a hook did
 
-If `/hooks` lists the hook and it never runs, the matcher missed the tool name. `Ctrl+O` opens the transcript. Success is blank, a block shows the reason, and any exit other than 0 or 2 is usually a non-blocking error: the action continues, with `Failed with non-blocking status code:` and the first stderr line.
+If `/hooks` lists the hook and it never runs, the matcher missed the tool name. `Ctrl + O` opens the transcript. Success is blank, a block shows the reason, and any exit other than 0 or 2 is usually a non-blocking error: the action continues, with `Failed with non-blocking status code:` and the first stderr line.
 
 ```bash
 echo '{"tool_name":"Bash","tool_input":{"command":"ls"}}' | ./.claude/hooks/no-rm.sh
@@ -172,15 +172,9 @@ An interactive session waits for the workspace trust dialog before running hooks
 
 Kaku never adds hooks or instructions to your agents. `kaku ai` changes a tool's settings only when you edit them there, and it keeps the fields you wrote yourself.
 
-Claude Code's own alerts are a separate switch. On Kaku before 0.25.0, Claude Code does not recognize Kaku, so `preferredNotifChannel` left at `auto` sends nothing, and the fix is the sequence Claude Code sends to Ghostty:
+Claude Code's own alerts are a separate switch: Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs no setting, and older versions need `"preferredNotifChannel": "ghostty"` in `~/.claude/settings.json`, as [Claude Code notifications](/blog/claude-code-notifications) explains.
 
-```json
-{ "preferredNotifChannel": "ghostty" }
-```
-
-Kaku 0.25.0 and later also reads the working, waiting and done status that Claude Code 2.1.295 and later reports on its own, so with both of those, leave the channel at `auto`, or each notification arrives twice.
-
-The Stop script is separate from that channel. It asks Claude Code to write OSC 777, the Ghostty notification on the allowlist. Kaku shows notifications while it is in the background, not for the pane you are looking at. If none appear, choose Kaku > Notification Settings... and turn on Allow Notifications. See [Claude Code notifications](/blog/claude-code-notifications) for the channel. OSC 9 is allowlisted too, and Kaku shows it as the tool's own message when Codex has `notification_method = "osc9"`.
+The Stop script is separate from that channel. It asks Claude Code to write OSC 777, the Ghostty notification on the allowlist. On Kaku 0.25.0 or later with Claude Code 2.1.295 or later, Kaku already notifies when Claude finishes, so the Stop hook above adds a second notification there, and it is meant for older versions or another terminal. OSC 9 is allowlisted too, and Kaku shows it as the tool's own message when Codex has `notification_method = "osc9"`.
 
 ## FAQ
 
@@ -194,7 +188,7 @@ No. Exit 0 on `PreToolUse` leaves the normal permission check in place. Print `"
 
 ### Why does Claude keep working after a Stop hook?
 
-Exit 2, or `{"decision": "block", "reason": "..."}`, tells Claude to continue. After eight blocks in a row with no tool call in between, Claude Code ends the turn. Exit 0 to notify. If you do mean to block, exit 0 when `stop_hook_active` is already `true`.
+Exit 2, or `{"decision": "block", "reason": "..."}`, tells Claude to continue. After eight blocks in a row with no tool call in between, Claude Code ends the turn. Exit 0 to notify. If you do mean to block, check `stop_hook_active` first and exit 0 when it is already `true`, so the hook does not block forever.
 
 ### Will I see the notification in the window I am using?
 

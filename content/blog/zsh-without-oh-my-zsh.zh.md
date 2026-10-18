@@ -100,4 +100,4 @@ Kaku 自带这一套，在你的 `.zshrc` 里加两行来加载，一行管 `PAT
 
 ### Kaku 的 zsh 配置能和我自己的 Starship 配置一起用吗？
 
-可以，Kaku 只在没有 `~/.config/starship.toml` 的时候才写一份，你自己写的配置不会被动。
+可以，Kaku 只在没有 `~/.config/starship.toml`，或者它和 Kaku 0.10.0 到 0.22.0 带的那份一个字节都没差时才写入，你自己写的或软链接的配置不会被动。

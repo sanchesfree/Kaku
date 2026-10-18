@@ -76,7 +76,7 @@ To stop the background check on a native or npm install, set `DISABLE_AUTOUPDATE
 }
 ```
 
-`claude doctor` should then show `disabled (set by env: DISABLE_AUTOUPDATER)` on the Auto-updates line. `claude update` and `claude install` still work. Set `DISABLE_UPDATES` to block those as well. Checked October 2026.
+`claude doctor` should then show `disabled (set by env: DISABLE_AUTOUPDATER)` on the Auto-updates line. `claude update` and `claude install` still work. Set `DISABLE_UPDATES` to block those as well.
 
 ## Uninstall, or move from npm to the native installer
 
@@ -93,29 +93,11 @@ To move from npm to the native installer, uninstall the npm package, run `curl -
 
 ## Newlines and notifications
 
-Enter submits the prompt. Ctrl+J, or `\` then Enter, inserts a newline in every terminal. Shift+Enter does too, with no setup, in Ghostty, Kitty, iTerm2, WezTerm, Warp, and Apple Terminal. Terminals on the kitty keyboard protocol, including Alacritty 0.16 or later, do the same on Claude Code v2.1.269 or later. VS Code, Cursor, Devin Desktop, Alacritty before 0.16, and Zed need `/terminal-setup` once, outside tmux or screen. In VS Code, Cursor, and Devin Desktop, `/terminal-setup` also sets `terminal.integrated.gpuAcceleration` to `"off"`. Set it back to `"auto"` and reload the window to undo it. JetBrains IDEs have no Shift+Enter newline. Checked October 2026.
-
-By default, a desktop notification is sent only in Ghostty, Kitty, and iTerm2, when a task finishes or Claude Code pauses for permission and you appear to be away. In other terminals, set `preferredNotifChannel` to `terminal_bell`, or, in Kaku, to `ghostty` as shown in the next section. Inside tmux, Shift+Enter submits and notifications do not reach the outer terminal until `~/.tmux.conf` sets `allow-passthrough`, `extended-keys`, and `terminal-features` and you run `tmux source-file ~/.tmux.conf`. The [terminal configuration page](https://code.claude.com/docs/en/terminal-config) lists those lines.
-
-```json
-{
-  "preferredNotifChannel": "terminal_bell"
-}
-```
-
-iTerm2 also needs Settings > Profiles > Terminal: check Notification Center Alerts, click Filter Alerts, and enable Send escape sequence-generated alerts. The notification can come back over SSH. A `Notification` hook can play a sound alongside it. See [Claude Code notifications](/blog/claude-code-notifications).
+Enter submits the prompt, and `Ctrl + J`, or `\` then Enter, inserts a newline in every terminal. [The best terminal for Claude Code](/blog/best-terminal-for-claude-code) lists where `Shift + Enter` works with no setup and where `/terminal-setup` has to run once, and in VS Code, Cursor and Devin Desktop that command also sets `terminal.integrated.gpuAcceleration` to `"off"`, which you undo by setting it back to `"auto"` and reloading the window. By default a desktop notification is sent only in Ghostty, Kitty and iTerm2, and [Claude Code notifications](/blog/claude-code-notifications) covers the setting for other terminals, the iTerm2 alert option, SSH and [tmux](/blog/tmux-alternative-mac).
 
 ## In Kaku
 
-On Kaku before 0.25.0, Claude Code does not recognize Kaku, so the default `auto` channel sends nothing. Kaku understands the sequence Claude Code sends to Ghostty, so add this to `~/.claude/settings.json`:
-
-```json
-{ "preferredNotifChannel": "ghostty" }
-```
-
-Kaku 0.25.0 and later also reads the working, waiting and done status that Claude Code 2.1.295 and later reports on its own, so with both of those, leave the channel at `auto`, or each notification arrives twice.
-
-Notifications appear while Kaku is in the background, not for the pane you are looking at. If none appear, choose Kaku > Notification Settings... and turn on Allow Notifications. macOS never asks again after a denial. When a notification is dropped for that reason, Kaku tells you the next time you switch back to it.
+Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs no notification setting, and Kaku before 0.25.0 needs `"preferredNotifChannel": "ghostty"` in `~/.claude/settings.json`. [Claude Code notifications](/blog/claude-code-notifications) explains why, and what to check when none appear.
 
 `Shift + Enter` and `Cmd + Enter` insert a newline in the prompt.
 
@@ -139,9 +121,9 @@ No. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`. Set `CL
 
 Open a new terminal and run `claude --version`. The native launcher is `~/.local/bin/claude`.
 
-### Shift+Enter sends the message. How do I insert a newline?
+### Shift + Enter sends the message. How do I insert a newline?
 
-Ctrl+J, or `\` then Enter, works in every terminal. Where Shift+Enter does not, run `/terminal-setup` once outside tmux. That covers VS Code, Cursor, Devin Desktop, Alacritty before 0.16, and Zed.
+`Ctrl + J`, or `\` then Enter, works in every terminal. Where `Shift + Enter` does not, run `/terminal-setup` once outside tmux. That covers VS Code, Cursor, Devin Desktop, Alacritty before 0.16, and Zed.
 
 ### How do I stop Claude Code from updating itself?
 

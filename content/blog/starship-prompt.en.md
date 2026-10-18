@@ -1,4 +1,4 @@
-To use Starship on a Mac, run `brew install starship`, add `eval "$(starship init zsh)"` to the end of `~/.zshrc`, and open a new shell. Everything else lives in one TOML file, `~/.config/starship.toml`, where you pick the modules, their format and their style, or start from one of the community presets. Keeping it fast comes down to two timeouts, `scan_timeout` and `command_timeout`, and to how much work the Git modules do in large repositories.
+To use Starship on a Mac, run `brew install starship`, add `eval "$(starship init zsh)"` to `~/.zshrc`, and open a new shell. Everything else lives in one TOML file, `~/.config/starship.toml`, where you pick the modules, their format and their style, or start from one of the community presets. Keeping it fast comes down to two timeouts, `scan_timeout` and `command_timeout`, and to how much work the Git modules do in large repositories.
 
 ## Install and turn it on
 
@@ -8,7 +8,7 @@ The [Starship guide](https://starship.rs/guide/) lists several ways to install o
 brew install starship
 ```
 
-`cargo install starship --locked`, `port install starship` and the official install script also work. Then add the init line for your shell, at the end of its config file:
+`cargo install starship --locked`, `port install starship` and the official install script also work. Then add the init line for your shell to its config file, near the end and before syntax highlighting:
 
 ```bash
 # ~/.zshrc
@@ -148,7 +148,7 @@ The left format is written out instead of using `$all`, because `$all` already i
 
 Kaku's shell setup (`kaku init`, also offered on first launch) installs Starship through Homebrew when it is missing, and starts it only inside Kaku, which includes tmux sessions started from Kaku: the managed `kaku.zsh` checks `TERM_PROGRAM=Kaku`, or `$TMUX` together with the `KAKU_SESSION` variable a Kaku shell exports, and the fish setup uses the same test. Other terminals keep the prompt you already had. To use Kaku's Starship in every terminal, add `export KAKU_PROMPT_EVERYWHERE=1` before the Kaku line in `.zshrc`, or `set -gx KAKU_PROMPT_EVERYWHERE 1` in `config.fish`. Icons render without installing a Nerd Font, because Kaku bundles Symbols Nerd Font Mono and appends it as a fallback to whatever font you set.
 
-There is no separate Kaku prompt config. Kaku does not set `STARSHIP_CONFIG`, so Starship reads the normal `~/.config/starship.toml`, and Kaku copies its own file there only when none exists. If you already have one, it is left alone. The single exception is a file byte-identical to the one Kaku V0.10.0 to V0.22.0 shipped with its icons stripped, which is replaced with the current version, while an edited or symlinked file always stays. The copied file is an ordinary config you can edit: it uses a short explicit `format` instead of `$all`, sets `command_timeout = 2000` so a large repository's Git status has room, and turns on `ignore_submodules` for `git_status`.
+There is no separate Kaku prompt config. Kaku does not set `STARSHIP_CONFIG`, so Starship reads the normal `~/.config/starship.toml`, and Kaku copies its own file there only when none exists. If you already have one, it is left alone. The single exception is a file byte-identical to the one Kaku 0.10.0 to 0.22.0 shipped with its icons stripped, which is replaced with the current version, while an edited or symlinked file always stays. The copied file is an ordinary config you can edit: it uses a short explicit `format` instead of `$all`, sets `command_timeout = 2000` so a large repository's Git status has room, and turns on `ignore_submodules` for `git_status`.
 
 ## FAQ
 

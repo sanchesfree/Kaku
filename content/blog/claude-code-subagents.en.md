@@ -4,7 +4,7 @@ A [Claude Code subagent](https://code.claude.com/docs/en/sub-agents) is a helper
 
 A [skill](/blog/claude-code-skills) runs in the main conversation. It is a reusable procedure that Claude loads into the context you are already in. A subagent starts fresh: it does not see your conversation history, the skills you invoked or the files Claude already read. Claude writes it a delegation message, the subagent works from that, and it returns one result. The two meet in both directions. A skill with `context: fork` runs its body as a subagent's task, and a subagent with a `skills` field preloads the full content of those skills at startup.
 
-[Agent teams](https://code.claude.com/docs/en/agent-teams) are a third thing: several Claude Code sessions, one acting as lead, with teammates that message each other directly and share a task list. They are experimental and off by default (checked October 2026). You turn them on with `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, and once they are on, a subagent that Claude gives a name launches as a teammate instead. Each teammate is a separate Claude instance, so token use grows with every active teammate.
+[Agent teams](https://code.claude.com/docs/en/agent-teams) are a third thing: several Claude Code sessions, one acting as lead, with teammates that message each other directly and share a task list. Checked October 2026, they are experimental and off by default. You turn them on with `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, and once they are on, a subagent that Claude gives a name launches as a teammate instead. The docs are direct about the trade-off: a subagent hands a summary back to its caller and costs less, while each teammate is a separate Claude instance, so token use grows with every active teammate.
 
 | | Runs in | Sees your conversation | Returns |
 |---|---|---|---|
@@ -19,9 +19,9 @@ You already use subagents without defining any. Claude Code ships these:
 - **Explore**: read-only, for file discovery and code search. Claude asks it for a thoroughness level of quick, medium or very thorough.
 - **Plan**: read-only research during [plan mode](/blog/claude-code-plan-mode), so exploration stays out of the main context while you review the plan.
 - **general-purpose**: every tool available to subagents, for tasks that need both exploration and edits.
-- **claude**, **statusline-setup** and **claude-code-guide**: helpers Claude calls on its own.
+- **claude**, **statusline-setup** and **claude-code-guide**: helpers Claude calls on its own, for catch-all tasks, for `/statusline`, and for questions about Claude Code itself.
 
-Explore and Plan start without your `CLAUDE.md` files and the git status snapshot, which keeps them fast. They are also one-shot: they return no agent ID, so Claude cannot resume them later.
+Explore and Plan start without your `CLAUDE.md` files and the git status snapshot, which keeps research fast and inexpensive. They are also one-shot: they return no agent ID, so Claude cannot resume them later.
 
 ## Defining your own
 
@@ -58,7 +58,7 @@ The fields worth knowing:
 
 Field names are camelCase and must match exactly, because Claude Code ignores an unrecognized field without an error. A file with no `description`, or with YAML that does not parse, is skipped silently. `claude --debug` writes the reason to the debug log.
 
-About `/agents`: on current releases it only prints a reminder to ask Claude or edit the two directories yourself. On v2.1.197 and earlier it opened a wizard with Running and Library tabs (checked October 2026). Now you describe the subagent to Claude, say where to save it, and read the file it writes.
+About `/agents`: on current releases it only prints a reminder to ask Claude or edit the two directories yourself. On v2.1.197 and earlier it opened a wizard with Running and Library tabs. Now you describe the subagent to Claude, say where to save it, and read the file it writes.
 
 To call one, name it in your prompt and Claude usually delegates, or `@`-mention it to guarantee that subagent runs. `claude --agent code-reviewer` runs the whole session as that agent, with its tools, model and system prompt.
 
@@ -66,9 +66,9 @@ To call one, name it in your prompt and Claude usually delegates, or `@`-mention
 
 The docs single out three patterns where the output is big and the answer is small.
 
-**Search and research.** Ask a subagent to find where a config value is read, or to research the auth, database and API modules in parallel with one subagent each. The file reads stay in the subagents' windows, and you get back a short answer.
+**Search and research.** Ask a subagent to find where a config value is read, or to research the auth, database and API modules in parallel with one subagent each. The file reads stay in the subagents' windows, and you get back a short answer, as long as the research paths do not depend on each other.
 
-**Review.** A read-only reviewer with `tools: Read, Glob, Grep, Bash` cannot edit anything, so you can let it loose on a diff.
+**Review.** A read-only reviewer with `tools: Read, Glob, Grep, Bash` cannot edit anything, so you can let it loose on a diff. You can also chain them: a reviewer finds performance issues, then another subagent fixes them, with Claude passing the relevant findings along.
 
 **Test runs and logs.** "Use a subagent to run the test suite and report only the failing tests with their error messages" is the clearest case. Thousands of lines of test output stay out of your context, and two lines of failures come back.
 
@@ -87,15 +87,15 @@ A subagent saves context, not money. It sends its own requests, which count towa
 A few levers:
 
 - Set `model: haiku` for exploration-heavy subagents. A user or project subagent named `Explore` overrides the built-in, so you can move the default search agent to a cheaper model.
-- Keep descriptions short. They sit in context so Claude can route, and past 15,000 tokens of combined custom descriptions Claude Code warns at startup (checked October 2026).
+- Keep descriptions short. They sit in context so Claude can route, and past 15,000 tokens of combined custom descriptions Claude Code warns at startup.
 - Use a fork when the task needs the whole conversation. `/subtask draft unit tests for the parser changes so far` starts a subagent that inherits your history and reuses the parent's prompt cache, so it costs less than a fresh subagent that needs the same background.
-- Know the ceilings: subagents can nest three layers below the main conversation, and 20 running at once is the default concurrency limit, set with `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (checked October 2026).
+- Know the ceilings: subagents can nest three layers below the main conversation, and 20 running at once is the default concurrency limit, set with `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`.
 
 ## Watching parallel work in Kaku
 
-Background subagents show up in the panel under Claude Code's prompt, and `/tasks` lists them. When one needs a permission, the prompt surfaces in the main session and names the subagent that asked, so the session waits on you. When you run more than one Claude Code session, put each in its own [Kaku](https://kaku.fun/docs/ai-coding) tab, or split with `Cmd + D` and `Cmd + Shift + D` and zoom the one you are reading with `Cmd + Shift + Enter`. Agent teams' split-pane display needs tmux or iTerm2, so in Kaku without tmux, teammates stay in the in-process panel.
+Background subagents show up in the panel under Claude Code's prompt, and `/tasks` lists them. When one needs a permission, the prompt surfaces in the main session and names the subagent that asked, so the session waits on you. When you run more than one Claude Code session, put each in its own [Kaku](https://kaku.fun/docs/ai-coding) tab, or split with `Cmd + D` and `Cmd + Shift + D` and zoom the one you are reading with `Cmd + Shift + Enter`. Agent teams' split-pane display needs tmux or iTerm2, so in Kaku without tmux, teammates show in Claude Code's own in-process panel.
 
-On Kaku 0.25.0 and later with Claude Code 2.1.295 or newer, a background tab shows a dot when Claude Code waits on you, finishes or fails, and Kaku turns that into a notification, so leave `preferredNotifChannel` at `auto`, or notifications arrive twice. On Kaku before 0.25.0, set Claude Code's `"preferredNotifChannel": "ghostty"`. Notifications appear while Kaku is in the background, and [Claude Code notifications](/blog/claude-code-notifications) covers the rest.
+Claude Code needs no setting for notifications on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and before that it needs `"preferredNotifChannel": "ghostty"` in `~/.claude/settings.json`; [Claude Code notifications](/blog/claude-code-notifications) explains why. The tab dot follows the same split: before 0.25.0 the `ghostty` channel lit it when Claude Code waited or finished, and 0.25.0 lights it with no setup and adds the failed state.
 
 ## FAQ
 
@@ -105,7 +105,7 @@ On Kaku 0.25.0 and later with Claude Code 2.1.295 or newer, a background tab sho
 
 ### Can a subagent see my conversation?
 
-No. It gets its own system prompt, Claude's delegation message, your `CLAUDE.md` files and a git status snapshot. Only a fork, started with `/subtask`, inherits the history.
+No. It gets its own system prompt, Claude's delegation message, your `CLAUDE.md` files (except Explore, Plan and subagents with `omitClaudeMd`), a git status snapshot and any preloaded skills. Only a fork, started with `/subtask`, inherits the history.
 
 ### Do subagents make Claude Code cheaper?
 
@@ -113,7 +113,7 @@ Not by themselves. Each one spends its own tokens against the same usage limits.
 
 ### Should I use a subagent or an agent team?
 
-A subagent when only the result matters. An agent team when workers need to share findings and challenge each other, and you accept the extra tokens and the experimental flag.
+A subagent when only the result matters. An agent team when teammates need to share findings and challenge each other, and you accept the extra tokens and the experimental flag.
 
 ### Why is Claude not using my subagent?
 

@@ -1,4 +1,4 @@
-Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，其中通知需要在 Claude Code 里改一项设置，下面一项项讲，你也可以拿来对照自己现在用的终端。
+Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 `Cmd + W` 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置，下面一项项讲，你也可以拿来对照自己现在用的终端。
 
 [[figure:claude-code-session-loop|Claude Code 会话的循环：写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在|终端会在这五个地方帮上忙，或者添乱。]]
 
@@ -16,7 +16,7 @@ Claude Code 自己的文档列了哪些终端里 `Shift + Enter` 不用设置就
 
 Claude Code 的 `preferredNotifChannel` 默认是 `auto`，而 `auto` 只会在 iTerm2、Ghostty 和 Kitty 里发桌面通知，在 Terminal.app 里是响一下铃，还得是关掉了提示音才响，其他终端里它什么都不做，这就是为什么用 WezTerm、Warp 或者 Claude Code 不认识的终端时，一条通知都收不到。
 
-Kaku 0.25.0 配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里加一行就行：
+Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里加一行就行：
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -67,13 +67,13 @@ Kaku 运行时会定时保存窗口布局，再启动时把标签和分屏都恢
 | Kitty | 可以 | 可以 |
 | WezTerm | 可以 | 不行，要设 `terminal_bell` 或加 hook |
 | Warp | 可以 | 不行，要设 `terminal_bell` 或加 hook |
-| Kaku | 可以，`Cmd + Enter` 也行 | 可以，设成 `ghostty` 通道后 |
+| Kaku | 可以，`Cmd + Enter` 也行 | 可以，0.25.0 配 Claude Code 2.1.295 及以上，更早的版本设成 `ghostty` 通道 |
 
 ## 常见问题
 
 ### 为什么收不到 Claude Code 的通知？
 
-默认的 `auto` 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端要在 `~/.claude/settings.json` 里把 `preferredNotifChannel` 设成终端认识的通道，比如 0.25.0 之前的 Kaku 用 `ghostty`，或者用 `terminal_bell`，在 tmux 里还要执行 `set -g allow-passthrough on`。
+默认的 `auto` 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端都要在 `~/.claude/settings.json` 里设好 `preferredNotifChannel`，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用设。每个终端该设成什么，tmux 里要加哪一行，[Claude Code 通知](/zh/blog/claude-code-notifications)那篇都列了。
 
 ### 还能在 tmux 里用 Claude Code 吗？
 

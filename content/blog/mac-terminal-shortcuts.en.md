@@ -1,4 +1,4 @@
-The shortcuts that save the most time in a Mac terminal live in two layers. The terminal app owns tabs, splits, search and scrollback, and those keys differ between Terminal.app, Ghostty and Kaku. The shell owns line editing, Ctrl+A, Ctrl+E, Ctrl+W, Ctrl+U, Ctrl+K, Ctrl+R and the Alt word keys, and those work in every terminal once Option is set to act as Meta.
+The shortcuts that save the most time in a Mac terminal live in two layers. The terminal app owns tabs, splits, search and scrollback, and those keys differ between Terminal.app, Ghostty and Kaku. The shell owns line editing, Ctrl + A, Ctrl + E, Ctrl + W, Ctrl + U, Ctrl + K, Ctrl + R and the Alt word keys, and those work in every terminal once Option is set to act as Meta.
 
 ## Line editing that works everywhere
 
@@ -6,26 +6,28 @@ zsh and bash both start in emacs mode, so the same keys move and delete on the c
 
 | Key | zsh | bash |
 |---|---|---|
-| `Ctrl+A` / `Ctrl+E` | Start / end of line | Same |
-| `Ctrl+W` | Delete the previous word | Delete back to the previous space |
-| `Ctrl+U` | Delete the whole line | Delete from the cursor back to the start |
-| `Ctrl+K` | Delete from the cursor to the end | Same |
-| `Ctrl+Y` | Paste what the last delete removed | Same |
-| `Ctrl+_` | Undo the last edit | Same |
-| `Alt+B` / `Alt+F` | Back / forward one word | Same |
-| `Alt+D` | Delete the next word | Same |
-| `Alt+Backspace` | Delete the previous word | Same |
-| `Alt+.` | Insert the last argument of the previous command | Same |
+| `Ctrl + A` / `Ctrl + E` | Start / end of line | Same |
+| `Ctrl + W` | Delete the previous word | Delete back to the previous space |
+| `Ctrl + U` | Delete the whole line | Delete from the cursor back to the start |
+| `Ctrl + K` | Delete from the cursor to the end | Same |
+| `Ctrl + Y` | Paste what the last delete removed | Same |
+| `Ctrl + _` | Undo the last edit | Same |
+| `Alt + B` / `Alt + F` | Back / forward one word | Same |
+| `Alt + D` | Delete the next word | Same |
+| `Alt + Backspace` | Delete the previous word | Same |
+| `Alt + .` | Insert the last argument of the previous command | Same |
 
-Two rows differ between the shells. In zsh, `Ctrl+U` is `kill-whole-line`, so it also removes text after the cursor, while bash's `unix-line-discard` stops at the cursor. In zsh, `Ctrl+W` is `backward-kill-word`, where a word is letters, digits and the characters in `$WORDCHARS`. That variable includes `/` by default, so a path goes in one press; removing `/` from it makes `Ctrl+W` delete one path segment at a time. Bash's `unix-word-rubout` simply deletes back to the last space. If you switch between the two, [zsh vs bash](/blog/zsh-vs-bash) covers the other differences.
+Two rows differ between the shells. In zsh, `Ctrl + U` is `kill-whole-line`, so it also removes text after the cursor, while bash's `unix-line-discard` stops at the cursor. In zsh, `Ctrl + W` is `backward-kill-word`, where a word is letters, digits and the characters in `$WORDCHARS`. That variable includes `/` by default, so a path goes in one press; removing `/` from it makes `Ctrl + W` delete one path segment at a time. Bash's `unix-word-rubout` simply deletes back to the last space. If you switch between the two, [zsh vs bash](/blog/zsh-vs-bash) covers the other differences.
 
-The deletes are not lost. `Ctrl+U` on a long command and then `Ctrl+Y` later puts it back, which is a quick way to park a half-typed line, run something else, and paste it back.
+The deletes are not lost. `Ctrl + U` on a long command and then `Ctrl + Y` later puts it back, which is a quick way to park a half-typed line, run something else, and paste it back.
 
-## Option as Meta: why Alt+B and Alt+F fail on a Mac
+## Option as Meta: why Alt + B and Alt + F fail on a Mac
 
-A Mac has no Alt key. Option plus a letter types a character, so on a U.S. layout Option+B gives `∫` instead of moving back a word, and every `Alt+` row in the table above prints junk until the terminal sends Option as Meta. Each terminal has its own switch.
+A Mac has no Alt key. Option plus a letter types a character, so on a U.S. layout Option + B gives `∫` instead of moving back a word, and every `Alt` row in the table above prints junk until the terminal sends Option as Meta. Each terminal has its own switch.
 
-**Terminal.app.** Turn on Use Option as Meta key in Terminal > Settings > Profiles > Keyboard, or toggle it for the current window with `Cmd+Option+O`. Apple's [shortcut list](https://support.apple.com/guide/terminal/keyboard-shortcuts-trmlshtcts/mac) notes that Option-D for deleting a word only works with this setting on.
+**Terminal.app.** Turn on Use Option as Meta key in Terminal > Settings > Profiles > Keyboard, or toggle it for the current window with `Cmd + Option + O`. Apple's [shortcut list](https://support.apple.com/guide/terminal/keyboard-shortcuts-trmlshtcts/mac) notes that Option + D for deleting a word only works with this setting on.
+
+**iTerm2.** In Settings > Profiles > Keys, set Left Option key to Esc+, which the [iTerm2 docs](https://iterm2.com/documentation-preferences-profiles-keys.html) call the right choice for most users.
 
 **Ghostty.** The [`macos-option-as-alt`](https://ghostty.org/docs/config/reference#macos-option-as-alt) key takes `true`, `false`, `left` or `right`. When unset it follows your keyboard layout, `true` on U.S. Standard and U.S. International and `false` on others, so on a German or French layout you set it yourself:
 
@@ -39,7 +41,7 @@ Using `left` keeps the right Option key for accented letters and symbols, which 
 
 ## History search
 
-`Ctrl+R` is the shortcut most worth learning. It opens an incremental search backward through history (`history-incremental-search-backward` in zsh, `reverse-search-history` in bash): type a few letters of an old command, press `Ctrl+R` again to step to older matches, press Enter to run the one shown, or press `Ctrl+G` to put the line back the way it was.
+`Ctrl + R` is the shortcut most worth learning. It opens an incremental search backward through history (`history-incremental-search-backward` in zsh, `reverse-search-history` in bash): type a few letters of an old command, press `Ctrl + R` again to step to older matches, press Enter to run the one shown, or press `Ctrl + G` to put the line back the way it was.
 
 Prefix search on the Up arrow is the other common setup. You type `git push` and Up only cycles through commands that start with it. zsh ships the widgets but does not bind them; these lines in `~/.zshrc` turn them on:
 
@@ -51,7 +53,7 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 ```
 
-For fuzzy matching across the whole history, fzf replaces `Ctrl+R` with a filtered list, and a minimal zsh with it is in [zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh).
+fzf can replace `Ctrl + R` with a fuzzy list of your whole history.
 
 ## Terminal.app shortcuts
 
@@ -59,21 +61,21 @@ Apple publishes the full list. These are the ones that come up every day:
 
 | Action | Shortcut |
 |---|---|
-| New tab / new window | `Cmd+T` / `Cmd+N` |
-| Next / previous tab | `Ctrl+Tab` / `Ctrl+Shift+Tab` |
-| Split window into two panes | `Cmd+D` |
-| Close split pane | `Cmd+Shift+D` |
-| Find / find next | `Cmd+F` / `Cmd+G` |
-| Jump to previous / next mark | `Cmd+Up` / `Cmd+Down` |
-| Clear to start | `Cmd+K` |
-| Reverse search history | `Ctrl+R` |
-| Toggle Use Option as Meta key | `Cmd+Option+O` |
+| New tab / new window | `Cmd + T` / `Cmd + N` |
+| Next / previous tab | `Ctrl + Tab` / `Ctrl + Shift + Tab` |
+| Split window into two panes | `Cmd + D` |
+| Close split pane | `Cmd + Shift + D` |
+| Find / find next | `Cmd + F` / `Cmd + G` |
+| Jump to previous / next mark | `Cmd + Up` / `Cmd + Down` |
+| Clear to start | `Cmd + K` |
+| Reverse search history | `Ctrl + R` |
+| Toggle Use Option as Meta key | `Cmd + Option + O` |
 
-Marks are the underrated one. `Cmd+Return` marks a command line as you run it, and `Cmd+Up` and `Cmd+Down` jump between marks, so you land on the start of a long output instead of scrolling for it. Terminal.app has no shortcut for moving between split panes in that list, and if you want several shells side by side with keys to move and resize them, [the best terminal for Mac](/blog/best-terminal-for-mac) compares the options.
+Marks are the underrated one. `Cmd + Return` marks a command line as you run it, and `Cmd + Up` and `Cmd + Down` jump between marks, so you land on the start of a long output instead of scrolling for it. Terminal.app has no shortcut for moving between split panes in that list, and if you want several shells side by side with keys to move and resize them, [the best terminal for Mac](/blog/best-terminal-for-mac) compares the options.
 
-## Moving between words with Option+Arrow
+## Moving between words with Option + Arrow
 
-Option+Left and Option+Right moving by word is the Mac habit most people bring from text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for that key, though. When Option+Left prints `[1;3D` or `;3D` instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send `Esc b` and `Esc f`, or bind the codes in zsh:
+Option + Left and Option + Right moving by word is the Mac habit most people bring from text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for that key, though. When Option + Left prints `[1;3D` or `;3D` instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send `Esc b` and `Esc f`, or bind the codes in zsh:
 
 ```bash
 bindkey '^[[1;3D' backward-word
@@ -84,44 +86,44 @@ In Terminal.app, holding Option while you move the pointer repositions the inser
 
 ## Kaku shortcuts
 
-Kaku's bundled config sets left Option to act as Meta and keeps right Option for composed characters, so `Alt+B`, `Alt+F` and `Alt+.` work on first launch without a setting. It also maps Option+Left and Option+Right to `Alt+B` and `Alt+F`, Cmd+Left and Cmd+Right to `Ctrl+A` and `Ctrl+E`, Option+Backspace to `Ctrl+W`, and Cmd+Backspace to `Ctrl+U`. Its zsh integration rebinds `Ctrl+U` to `backward-kill-line`, so Cmd+Backspace deletes to the start of the line the way it does in a Mac text field, not the whole line, and Up and Down do prefix history search unless a tool like atuin already owns them.
+Kaku's bundled config sets left Option to act as Meta and keeps right Option for composed characters, so `Alt + B`, `Alt + F` and `Alt + .` work on first launch without a setting. It also maps Option + Left and Option + Right to `Alt + B` and `Alt + F`, Cmd + Left and Cmd + Right to `Ctrl + A` and `Ctrl + E`, Option + Backspace to `Ctrl + W`, and Cmd + Backspace to `Ctrl + U`. Its zsh integration rebinds `Ctrl + U` to `backward-kill-line`, so Cmd + Backspace deletes to the start of the line the way it does in a Mac text field, not the whole line, and Up and Down do prefix history search unless a tool like atuin already owns them.
 
 For tabs, splits, search and the assistant, these are the defaults, read from the bundled key table and the [keybindings page](https://kaku.fun/docs/keybindings):
 
 | Action | Shortcut |
 |---|---|
-| New tab | `Cmd+T` |
-| Switch to tab 1 to 9 | `Cmd+1` to `Cmd+9` |
-| Previous / next tab | `Cmd+Shift+[` / `Cmd+Shift+]` |
-| Tab Navigator | `Cmd+Shift+O` |
-| Split side by side / top and bottom | `Cmd+D` / `Cmd+Shift+D` |
-| Move between panes | `Cmd+Option+Arrows` |
-| Zoom the current pane | `Cmd+Shift+Enter` |
-| Search the pane | `Cmd+F` |
-| Command Palette | `Cmd+Shift+P` |
-| AI Chat | `Cmd+L` |
-| Apply the Kaku Assistant suggestion | `Cmd+Shift+E` |
-| AI settings | `Cmd+Shift+A` |
+| New tab | `Cmd + T` |
+| Switch to tab 1 to 9 | `Cmd + 1` to `Cmd + 9` |
+| Previous / next tab | `Cmd + Shift + [` / `Cmd + Shift + ]` |
+| Tab Navigator | `Cmd + Shift + O` |
+| Split side by side / top and bottom | `Cmd + D` / `Cmd + Shift + D` |
+| Move between panes | `Cmd + Option + Arrows` |
+| Zoom the current pane | `Cmd + Shift + Enter` |
+| Search the pane | `Cmd + F` |
+| Command Palette | `Cmd + Shift + P` |
+| AI Chat | `Cmd + L` |
+| Apply the Kaku Assistant suggestion | `Cmd + Shift + E` |
+| AI settings | `Cmd + Shift + A` |
 
-The zoom key is the one to pair with an agent. Run Claude Code in one pane and tests in another, then press `Cmd+Shift+Enter` to give the agent the full window while you read a long diff, and again to bring the split back. Tab Navigator filters tabs by name, which beats counting to `Cmd+7` once you have more than a handful open. To add your own key, append to `config.keys` in `~/.config/kaku/kaku.lua` rather than replacing the table, or Kaku's defaults are gone.
+The zoom key is the one to pair with an agent. Run Claude Code in one pane and tests in another, then press `Cmd + Shift + Enter` to give the agent the full window while you read a long diff, and again to bring the split back. Tab Navigator filters tabs by name, which beats counting to `Cmd + 7` once you have more than a handful open. To add your own key, append to `config.keys` in `~/.config/kaku/kaku.lua` rather than replacing the table, or Kaku's defaults are gone.
 
 ## FAQ
 
-### Why does Option+B type ∫ instead of moving back a word?
+### Why does Option + B type ∫ instead of moving back a word?
 
 The terminal is sending Option as a character key. Turn on Use Option as Meta key in Terminal.app, set `macos-option-as-alt` in Ghostty, or set `send_composed_key_when_left_alt_is_pressed = false` in WezTerm. Kaku already does this for the left Option key.
 
-### What does Ctrl+U do in zsh compared with bash?
+### What does Ctrl + U do in zsh compared with bash?
 
-In zsh it deletes the whole line, including text after the cursor. In bash it deletes from the cursor back to the start of the line. `Ctrl+Y` pastes the deleted text back in both.
+In zsh it deletes the whole line, including text after the cursor. In bash it deletes from the cursor back to the start of the line. `Ctrl + Y` pastes the deleted text back in both.
 
 ### How do I search command history on a Mac?
 
-Press `Ctrl+R` and type part of the command, press `Ctrl+R` again for older matches, Enter to run it, or `Ctrl+G` to cancel. It is a shell feature, so it works in any terminal.
+Press `Ctrl + R` and type part of the command, press `Ctrl + R` again for older matches, Enter to run it, or `Ctrl + G` to cancel. It is a shell feature, so it works in any terminal.
 
 ### How do I clear the terminal with a shortcut?
 
-`Cmd+K` clears to the start in Terminal.app and clears the screen and scrollback in Kaku. `Ctrl+L` is the shell's `clear-screen` and works in any terminal, redrawing the prompt at the top.
+`Cmd + K` clears to the start in Terminal.app and clears the screen and scrollback in Kaku. `Ctrl + L` is the shell's `clear-screen` and works in any terminal, redrawing the prompt at the top.
 
 ### Can I keep accented characters and still use Option as Meta?
 

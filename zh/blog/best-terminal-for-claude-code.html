@@ -98,7 +98,7 @@
           "name": "为什么收不到 Claude Code 的通知？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "默认的 auto 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端要在 ~/.claude/settings.json 里把 preferredNotifChannel 设成终端认识的通道，比如 0.25.0 之前的 Kaku 用 ghostty，或者用 terminal_bell，在 tmux 里还要执行 set -g allow-passthrough on。"
+            "text": "默认的 auto 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端都要在 ~/.claude/settings.json 里设好 preferredNotifChannel，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用设。每个终端该设成什么，tmux 里要加哪一行，Claude Code 通知那篇都列了。"
           }
         },
         {
@@ -124,7 +124,7 @@
       <div class="wide">
         <article class="doc-content blog-article">
           <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/best-terminal-for-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
-<p>Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 <code>Cmd + W</code> 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，其中通知需要在 Claude Code 里改一项设置，下面一项项讲，你也可以拿来对照自己现在用的终端。</p>
+<p>Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样：长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 <code>Cmd + W</code> 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置，下面一项项讲，你也可以拿来对照自己现在用的终端。</p>
 <figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-session-loop-mobile.webp" width="340" height="517"><img src="/img/blog/claude-code-session-loop.webp" width="873" height="231" loading="lazy" alt="Claude Code 会话的循环：写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在"></picture><figcaption>终端会在这五个地方帮上忙，或者添乱。</figcaption></figure>
 
 <h2 id="提示词要能分行写">提示词要能分行写</h2>
@@ -134,7 +134,7 @@
 <h2 id="claude-在等你的时候要能知道">Claude 在等你的时候要能知道</h2>
 <p>一个 agent 会话里最浪费的往往是这一分钟，Claude 问了一个问题，你却在另一个窗口里，桌面通知能解决这件事，前提是终端和 Claude Code 对怎么发通知有共识。</p>
 <p>Claude Code 的 <code>preferredNotifChannel</code> 默认是 <code>auto</code>，而 <code>auto</code> 只会在 iTerm2、Ghostty 和 Kitty 里发桌面通知，在 Terminal.app 里是响一下铃，还得是关掉了提示音才响，其他终端里它什么都不做，这就是为什么用 WezTerm、Warp 或者 Claude Code 不认识的终端时，一条通知都收不到。</p>
-<p>Kaku 0.25.0 配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里加一行就行：</p>
+<p>Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里加一行就行：</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
 <p>通知只在 Kaku 处于后台时出现，正在看的那个窗格不会再弹一次，如果一条都收不到，打开 Kaku &gt; Notification Settings 把 Allow Notifications 打开。</p>
 <h2 id="它打印出来的东西要能点开">它打印出来的东西要能点开</h2>
@@ -196,13 +196,13 @@
 <tr>
 <td>Kaku</td>
 <td>可以，<code>Cmd + Enter</code> 也行</td>
-<td>可以，设成 <code>ghostty</code> 通道后</td>
+<td>可以，0.25.0 配 Claude Code 2.1.295 及以上，更早的版本设成 <code>ghostty</code> 通道</td>
 </tr>
 </tbody>
 </table>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="为什么收不到-claude-code-的通知">为什么收不到 Claude Code 的通知？</h3>
-<p>默认的 <code>auto</code> 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端要在 <code>~/.claude/settings.json</code> 里把 <code>preferredNotifChannel</code> 设成终端认识的通道，比如 0.25.0 之前的 Kaku 用 <code>ghostty</code>，或者用 <code>terminal_bell</code>，在 tmux 里还要执行 <code>set -g allow-passthrough on</code>。</p>
+<p>默认的 <code>auto</code> 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端都要在 <code>~/.claude/settings.json</code> 里设好 <code>preferredNotifChannel</code>，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用设。每个终端该设成什么，tmux 里要加哪一行，<a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>那篇都列了。</p>
 <h3 id="还能在-tmux-里用-claude-code-吗">还能在 tmux 里用 Claude Code 吗？</h3>
 <p>可以，tmux 里要让 Shift + Enter 生效需要 <code>set -s extended-keys on</code> 和 <code>set -as terminal-features 'xterm*:extkeys'</code>，通知还需要 <code>set -g allow-passthrough on</code>。</p>
           <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>

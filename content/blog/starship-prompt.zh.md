@@ -1,4 +1,4 @@
-在 Mac 上用 Starship，装好只要三步，`brew install starship`，在 `~/.zshrc` 末尾加一行 `eval "$(starship init zsh)"`，再开一个新的 shell 就能看到新提示符了。之后所有的定制都写在 `~/.config/starship.toml` 这一个 TOML 文件里，显示哪些模块、每个模块长什么样、用什么颜色都在这里改，也可以直接拿社区的预设当起点。想让它一直够快，要盯的主要是 `scan_timeout` 和 `command_timeout` 这两个超时，以及 Git 相关模块在大仓库里到底干了多少活。
+在 Mac 上用 Starship，装好只要三步，`brew install starship`，在 `~/.zshrc` 里加一行 `eval "$(starship init zsh)"`，再开一个新的 shell 就能看到新提示符了。之后所有的定制都写在 `~/.config/starship.toml` 这一个 TOML 文件里，显示哪些模块、每个模块长什么样、用什么颜色都在这里改，也可以直接拿社区的预设当起点。想让它一直够快，要盯的主要是 `scan_timeout` 和 `command_timeout` 这两个超时，以及 Git 相关模块在大仓库里到底干了多少活。
 
 ## 安装并启用
 
@@ -8,7 +8,7 @@
 brew install starship
 ```
 
-装好之后在对应 shell 的配置文件末尾加上初始化那一行，zsh、bash 和 fish 的写法各不一样：
+装好之后在对应 shell 的配置文件里加上初始化那一行，放在靠后的位置、语法高亮之前，zsh、bash 和 fish 的写法各不一样：
 
 ```bash
 # ~/.zshrc
@@ -113,11 +113,11 @@ style = 'bold mustard'
 | Pastel Powerline、Tokyo Night、Gruvbox Rainbow、Catppuccin Powerline | Powerline 风格的彩色分段 |
 | Jetpack | 偏极简的一款 |
 
-页面上还提到 No Nerd Fonts 会在以后的版本里成为默认。预设其实不是一种模式，它就是一份写好的 `starship.toml`，换上之后和你自己写的配置没有区别，照样一行行改，所以替换之前先把现在的文件另存一份，后悔了还能换回来。`starship` 自己也能打印内置的预设，`starship preset --list` 列出名字，`starship preset tokyo-night -o ~/.config/starship.toml` 直接写成配置文件。
+页面上还提到 No Nerd Fonts 会在以后的版本里成为默认。预设不是一个开关，它就是一份写好的 `starship.toml`，换上之后和你自己写的配置没有区别，照样一行行改，所以替换之前先把现在的文件另存一份，后悔了还能换回来。`starship` 自己也能打印内置的预设，`starship preset --list` 列出名字，`starship preset tokyo-night -o ~/.config/starship.toml` 直接写成配置文件。
 
 ## 让它保持够快
 
-提示符画出来之前你是没法打字的，所以它里面任何一点慢，每按一次回车都会被感觉到，大部分情况下动这三个地方就够了。
+提示符画出来之前你是没法打字的，所以它里面任何一点慢，每按一次回车都感觉得到，大部分情况下动这三个地方就够了。
 
 `scan_timeout` 限制 Starship 扫描当前目录文件的时间，各个语言模块就是靠这一步判断你是不是在 Node.js 或 Python 项目里，默认是 30 ms。`command_timeout` 限制模块调用的每一条外部命令，比如 `git` 或 `node --version`，默认是 500 ms，在特别大的仓库里 Git 的状态可能要算更久，经常待在这种仓库里就把它调高一点，宁可少显示点信息也不想等的话就保持低一些：
 
@@ -146,9 +146,9 @@ disabled = false
 
 ## Kaku 里的 Starship
 
-Kaku 的 shell 配置（`kaku init`，首次打开时也会问你要不要装）会在没装 Starship 时用 Homebrew 装上，但只在 Kaku 里启动它，从 Kaku 里开的 tmux 会话也算在内，托管的 `kaku.zsh` 判断的是 `TERM_PROGRAM=Kaku`，或者同时有 `$TMUX` 和 Kaku shell 导出的 `KAKU_SESSION`，fish 那边用的是同一套判断，其他终端还是你原来的提示符。想让所有终端都用 Kaku 的 Starship，在 `.zshrc` 里 Kaku 那行之前加上 `export KAKU_PROMPT_EVERYWHERE=1`，fish 则在 `config.fish` 里写 `set -gx KAKU_PROMPT_EVERYWHERE 1`。图标也不用另装 Nerd Font，Kaku 自带 Symbols Nerd Font Mono，会接在你设的字体后面当回退。
+Kaku 的 shell 配置会在没装 Starship 时用 Homebrew 装上，`kaku init` 和首次打开时都会先问你，但它只在 Kaku 里启动 Starship，从 Kaku 里开的 tmux 会话也算。托管的 `kaku.zsh` 判断的是 `TERM_PROGRAM=Kaku`，或者同时有 `$TMUX` 和 Kaku shell 导出的 `KAKU_SESSION`，fish 那边是同一套判断，其他终端还是你原来的提示符。想让所有终端都用 Kaku 的 Starship，在 `.zshrc` 里 Kaku 那行之前加上 `export KAKU_PROMPT_EVERYWHERE=1`，fish 则在 `config.fish` 里写 `set -gx KAKU_PROMPT_EVERYWHERE 1`。图标也不用另装 Nerd Font，Kaku 自带 Symbols Nerd Font Mono，会接在你设的字体后面当回退。
 
-Kaku 没有另外一份提示符配置，它不设 `STARSHIP_CONFIG`，所以 Starship 读的就是正常的 `~/.config/starship.toml`，Kaku 只在这个文件不存在时才把自己那份拷过去，你已经有的话就不会动。唯一的例外是和 Kaku V0.10.0 到 V0.22.0 带的、图标被剥掉的那份逐字节一模一样的文件，这种会被换成当前版本，改过的或者是软链接的文件一律保留。拷过去的那份就是普通配置，随便改，它用一条很短的显式 `format` 代替了 `$all`，把 `command_timeout` 设成 2000 给大仓库里的 Git 状态留出余量，还给 `git_status` 打开了 `ignore_submodules`。
+Kaku 没有另外一份提示符配置，它不设 `STARSHIP_CONFIG`，所以 Starship 读的就是正常的 `~/.config/starship.toml`，Kaku 只在这个文件不存在时才把自己那份拷过去，你已经有的话就不会动。唯一的例外是 Kaku 0.10.0 到 0.22.0 拷过去的那份去掉了图标的旧配置，你的文件要是和它一个字节都没差，Kaku 会换成当前版本，改过的或者是软链接的都原样保留。拷过去的那份就是普通配置，随便改，它用一条很短的显式 `format` 代替了 `$all`，把 `command_timeout` 设成 2000 给大仓库里的 Git 状态留出余量，还给 `git_status` 打开了 `ignore_submodules`。
 
 ## 常见问题
 

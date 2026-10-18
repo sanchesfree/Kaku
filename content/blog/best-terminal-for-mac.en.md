@@ -13,7 +13,7 @@ There is no single best terminal for Mac, but the choice gets simple once you kn
 | Warp | Rolling | AGPL-3.0 client | Free plan, paid plans from $20 a month | Settings window | Yes |
 | Kitty | 0.49.2 | GPL-3.0 | Free | Text file | Yes |
 | Alacritty | 0.17.0 | Apache-2.0 | Free | TOML file | No |
-| Kaku | 0.24.0 | MIT | Free | Lua | Yes |
+| Kaku | 0.25.0 | MIT | Free | Lua | Yes |
 
 ## Terminal.app
 
@@ -41,7 +41,7 @@ Both are fast, keyboard-driven and configured with text files. Kitty adds tabs, 
 
 ## Kaku
 
-Kaku is a fork of WezTerm that keeps its engine and Lua config, and changes what you get before writing any config. It ships JetBrains Mono, Kaku Dark and Kaku Light themes that can follow the system appearance, and a zsh setup with autosuggestions, syntax highlighting and a Starship prompt that is two lines in your `.zshrc`. The parts aimed at AI coding CLIs mostly work without setup: `Cmd + Click` on paths that opens your editor at the right line, a confirmation before closing a pane that is running an agent, and tabs, splits and last screens that come back after a restart. Claude Code notifications take one setting, the `ghostty` channel. It is macOS only, which is the trade-off for fitting in there.
+Kaku is a fork of WezTerm that keeps its engine and Lua config, and changes what you get before writing any config. It ships JetBrains Mono, Kaku Dark and Kaku Light themes that can follow the system appearance, and a zsh setup with autosuggestions, syntax highlighting and a Starship prompt that is two lines in your `.zshrc`. The parts aimed at AI coding CLIs mostly work without setup: `Cmd + Click` on paths that opens your editor at the right line, a confirmation before closing a pane that is running an agent, and tabs, splits and last screens that come back after a restart. Claude Code notifications need no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and older versions set the `ghostty` channel, as [Claude Code notifications](/blog/claude-code-notifications) explains. It is macOS only, which is the trade-off for fitting in there.
 
 ```bash
 brew install --cask kaku

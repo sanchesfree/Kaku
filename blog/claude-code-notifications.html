@@ -140,7 +140,7 @@
       <div class="wide">
         <article class="doc-content blog-article">
           <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-notifications.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
-<p>If Claude Code never tells you it finished or that it is waiting for permission, the cause is almost always the same: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.</p>
+<p>If Claude Code never tells you it finished or that it is waiting for permission, the cause is almost always the same: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use, except in Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs no setting. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.</p>
 <h2 id="the-quick-fix-for-claude-code">The quick fix for Claude Code</h2>
 <p>Open <code>~/.claude/settings.json</code> and set <code>preferredNotifChannel</code> to a channel your terminal understands. The values Claude Code accepts are <code>auto</code>, <code>terminal_bell</code>, <code>iterm2</code>, <code>iterm2_with_bell</code>, <code>kitty</code>, <code>ghostty</code> and <code>notifications_disabled</code>.</p>
 <table>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td>Kaku</td>
-<td>Nothing on 0.25.0 with Claude Code 2.1.295 or later, <code>"ghostty"</code> before that</td>
+<td>Nothing on 0.25.0 or later with Claude Code 2.1.295 or later, <code>"ghostty"</code> before that</td>
 </tr>
 <tr>
 <td>Terminal.app</td>
@@ -173,7 +173,7 @@
 </tr>
 </tbody>
 </table>
-<p>Kaku 0.25.0 with Claude Code 2.1.295 or later needs nothing, and setting <code>ghostty</code> there would make Claude Code post a second notification. On older versions the whole change is one line:</p>
+<p>Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs nothing, and setting <code>ghostty</code> there would make Claude Code post a second notification. On older versions the whole change is one line:</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
 <h2 id="the-quick-fix-for-codex">The quick fix for Codex</h2>
 <p>Codex works in Kaku without changes. With its default settings it rings the terminal bell when it needs you, and Kaku turns a bell in a background window into a notification. The text of that notification is generic, built from the last command or the pane title. To see Codex's own message instead, switch it to the OSC 9 sequence in <code>~/.codex/config.toml</code>:</p>
@@ -192,8 +192,8 @@ notification_method = <span class="tok-s">"osc9"</span></code></pre>
 <p>Neither Claude Code nor Codex talks to Notification Center. They write a short escape sequence into the terminal, the same way they write colors, and the terminal decides what to do with it.</p>
 <figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-notifications-mobile.webp" width="340" height="496"><img src="/img/blog/claude-code-notifications.webp" width="654" height="368" loading="lazy" alt="Claude Code, Codex and your own scripts send sequences or a bell to Kaku, which turns them into a macOS notification only while Kaku is in the background"></picture><figcaption>Every source ends up in the same place: a sequence the terminal reads and turns into a notification.</figcaption></figure>
 
-<p>There are a few sequences in use. OSC 9, which started in iTerm2, carries one line of text. OSC 777 carries a title and a body. The plain bell character carries nothing but the fact that something happened. Ghostty and Kaku handle both OSC 9 and OSC 777, while Kitty uses its own OSC 99. That spread is why Claude Code keeps a list of channels instead of one switch.</p>
-<p>In Kaku all three paths meet in one place. The <code>notification_handling</code> setting decides which ones become notifications:</p>
+<p>There are a few sequences in use. OSC 9, which started in iTerm2, carries one line of text. OSC 777 carries a title and a body. The plain bell character carries nothing but the fact that something happened. Ghostty and Kaku handle both OSC 9 and OSC 777, while Kitty uses its own OSC 99. That spread is why Claude Code keeps a list of channels instead of one switch. Kaku 0.25.0 or later also reads OSC 7501, the status report Claude Code 2.1.295 and later sends when it is waiting, done or failed, which is why it needs no channel.</p>
+<p>In Kaku, OSC 9 and OSC 777 notifications go through the <code>notification_handling</code> setting:</p>
 <pre><code class="language-lua"><span class="tok-c">-- Default: only while the Kaku window is in the background</span>
 config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
 <span class="tok-c">-- Also notify for tabs or panes you are not looking at:</span>
@@ -201,7 +201,7 @@ config.notification_handling = <span class="tok-s">"AlwaysShow"</span>
 <span class="tok-c">-- config.notification_handling = "SuppressFromFocusedPane"</span>
 <span class="tok-c">-- Never:</span>
 <span class="tok-c">-- config.notification_handling = "NeverShow"</span></code></pre>
-<p>A bell in a background window becomes a notification too, and bells also add to the badge on Kaku's Dock icon, so you can see that something rang even after the notification is gone.</p>
+<p>A bell does not go through <code>notification_handling</code>, it always becomes a notification while the Kaku window is in the background, and bells also add to the badge on Kaku's Dock icon, so you can see that something rang even after the notification is gone.</p>
 <h2 id="notifications-for-your-own-scripts">Notifications for your own scripts</h2>
 <p>Because a notification is just a sequence, any script can send one. This is handy at the end of a long build or test run:</p>
 <pre><code class="language-bash"><span class="tok-c"># One line of text (OSC 9)

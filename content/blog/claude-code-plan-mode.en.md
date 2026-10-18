@@ -34,7 +34,7 @@ The same flag works with `-p`. To start in plan mode by default, save this in th
 
 A project or managed value outranks the user file. `auto` and `bypassPermissions` do not take effect from `.claude/settings.json` or `.claude/settings.local.json`, and `plan` does. The VS Code extension ignores that project file for the starting mode. Set `claudeCode.initialPermissionMode` to `plan` in VS Code user settings.
 
-Checked October 2026. From Claude Code v2.1.283, interactive terminal sessions start in auto mode. Before that, auto is the built-in start on Pro, Max, and Team plans when the session fetches feature flags, from v2.1.228 on macOS, Linux, and WSL and from v2.1.233 on native Windows. Other built-in cases start in Manual. A flag or `permissions.defaultMode` overrides that. If auto is selected and unavailable, the session starts in Manual. The first session after an install or upgrade can differ, before feature flags arrive.
+From Claude Code v2.1.283, interactive terminal sessions start in auto mode. Before that, auto is the built-in start on Pro, Max, and Team plans when the session fetches feature flags, from v2.1.228 on macOS, Linux, and WSL and from v2.1.233 on native Windows. Other built-in cases start in Manual. A flag or `permissions.defaultMode` overrides that. If auto is selected and unavailable, the session starts in Manual. The first session after an install or upgrade can differ, before feature flags arrive.
 
 After you approve a plan, `Shift + Tab` or a prompt that starts with `/plan` plans again.
 
@@ -47,7 +47,7 @@ Name the change, what must stay the same, and what the plan should list.
 Keep the current error type. List every file you would change, the test command you would run, and anything you would leave alone.
 ```
 
-`@src/auth/user.ts` includes that file when it fits the Read tool limit, 25,000 tokens by default. A text file larger than 256KB is not included. Checked October 2026. `Ctrl + J`, or a backslash followed by Enter, inserts a newline in any terminal.
+`@src/auth/user.ts` includes that file when it fits the Read tool limit, 25,000 tokens by default. A text file larger than 256KB is not included. `Ctrl + J`, or a backslash followed by Enter, inserts a newline in any terminal, and the [terminal comparison](/blog/best-terminal-for-claude-code) lists where `Shift + Enter` works without setup.
 
 ## Approving and editing the plan
 

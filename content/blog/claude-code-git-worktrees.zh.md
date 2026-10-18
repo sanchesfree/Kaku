@@ -1,10 +1,10 @@
-`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。Claude Code 自己也能建这份检出，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。这篇讲两个会话为什么不能共用一棵工作树，`git worktree` 怎么添加、列出和删除，`--worktree` 怎么建、退出时怎么清，以及一个标签放一棵工作树，flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
+`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。这篇讲两个会话为什么不能共用一棵工作树，`git worktree` 怎么添加、列出和删除，`--worktree` 怎么建、退出时怎么清，以及一个标签放一棵工作树，flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
 
 ## 为什么两个 agent 不能共用一个检出目录
 
 一个仓库只有一棵主工作树，两个 `claude` 进程从这里启动的话，工作树、index 和文件全是同一份，每次写入都落在同一个地方。
 
-`git worktree add` 会拒绝别的工作树已经检出的分支，除非加上 `--force`，所以每个会话都要有自己的分支和目录。Claude Code 用 worktree 把文件隔开，子 agent 是在同一次会话里把活拆开，多个 Claude 会话要一起配合，文档里用的是 agent teams。
+`git worktree add` 会拒绝别的工作树已经检出的分支，除非加上 `--force`，所以每个会话都要有自己的分支和目录。Claude Code 用 worktree 把文件隔开，subagent 是在同一次会话里把活拆开，多个 Claude 会话要一起配合，文档里用的是 agent teams。
 
 ## 添加、列出和删除 worktree
 
@@ -24,11 +24,11 @@ git worktree list
 git worktree remove ../repo-feature
 ```
 
-`remove` 不会动主工作树，链接工作树里有未跟踪文件，或者已跟踪文件被改过，它也会拒绝，不干净的工作树要加 `--force`，带子模块的也一样，锁定的工作树得把 `--force` 加两次。目录如果是你亲手删的，管理文件会留到 `git worktree prune`，或者留到 `gc.worktreePruneExpire`。Git 把同一仓库的多份检出放在试验阶段，子模块的支持也不完整。
+`remove` 不会动主工作树，链接工作树里有未跟踪文件，或者已跟踪文件被改过，它也会拒绝，不干净的工作树要加 `--force`，带子模块的也一样，锁定的工作树得把 `--force` 加两次。目录如果是你亲手删的，管理文件会留到 `git worktree prune`，或者留到 `gc.worktreePruneExpire`。Git 手册里说，同一仓库多份检出这个功能还算试验性的，子模块的支持也不完整。
 
 ## 让 Claude Code 自己建 worktree
 
-在仓库目录里，`--worktree` 和 `-w` 是同一个 flag，第二个终端得换一个名字，名字空着的时候 Claude 会自己起一个，比如 `bright-running-fox`，把 `.claude/worktrees/` 加进 `.gitignore`。
+在仓库目录里，`--worktree` 和 `-w` 是同一个 flag，第二个终端得换一个名字，名字空着的时候 Claude 会自己起一个，比如 `bright-running-fox`，`.claude/worktrees/` 要你自己加进 `.gitignore`。
 
 ```bash
 claude --worktree feature-auth
@@ -36,7 +36,7 @@ claude --worktree feature-auth
 
 仓库里得先有一次提交，不然会报 `Failed to resolve base branch "HEAD": git rev-parse failed`，某个目录第一次跑交互式 `claude`，还得先接受工作区信任，否则 `--worktree` 会报错退出，`claude -p --worktree` 会跳过这次检查，退出时留下那棵工作树，以及它加上的 `git worktree lock`。
 
-新建的工作树从远端默认分支分出来，一般是 `main`，也就是 `worktree.baseRef` 为 `"fresh"` 的时候，距离上次 fetch 超过 24 小时的话，Claude Code 会再 fetch 这个分支，最多等 5 秒。设成 `"head"` 就从当前本地 `HEAD` 开始，还没 push 的提交也会带上，这个设置不能写成某个分支名，已有的分支得先用 git 把工作树建好，`cd` 进去再跑 `claude`。
+`worktree.baseRef` 默认是 `"fresh"`，新建的工作树从远端默认分支分出来，一般是 `main`，距离上次 fetch 超过 24 小时的话，Claude Code 会再 fetch 这个分支，最多等 5 秒。设成 `"head"` 就从当前本地 `HEAD` 开始，还没 push 的提交也会带上，这个设置不能写成某个分支名，已有的分支得先用 git 把工作树建好，`cd` 进去再跑 `claude`。
 
 ```json
 {
@@ -46,13 +46,13 @@ claude --worktree feature-auth
 }
 ```
 
-`claude --worktree "#1234"` 会从 `origin` 把这个 pull request 取到 `.claude/worktrees/pr-<number>/`，`#` 要加引号，这个名字的目录已经在的话，会重新打开那棵工作树。`"fresh"` 下面，还停在 Claude 那个分支上、而且是干净的工作树，如果自己没有提交，或者 pull request 已经合并、远端分支也删了，会重置到默认分支。
+`claude --worktree "#1234"` 会从 `origin` 把这个 pull request 取到 `.claude/worktrees/pr-<number>/`，`#` 要加引号，这个名字的目录已经在的话，会重新打开那棵工作树。在 `"fresh"` 下，一棵工作树如果还停在 Claude 建的那条分支上、也是干净的，并且自己一次提交都没有，或者对应的 pull request 已经合并、远端分支也删了，重新打开时会被重置到默认分支。
 
-让 Claude 到某棵工作树里干活时会调用 `EnterWorktree`，子 agent 要单独一棵的话，在 `.claude/agents/` 里写 `isolation: worktree`，干净做完会删掉，还留着改动的会留到 `cleanupPeriodDays` 那次清理，只有确认不会丢掉这些改动才会删。
+让 Claude 到某棵工作树里干活时会调用 `EnterWorktree`，subagent 要单独一棵的话，在 `.claude/agents/` 里写 `isolation: worktree`，干净做完会删掉，还留着改动的会留到 `cleanupPeriodDays` 那次清理，只有确认不会丢掉这些改动才会删。
 
 退出时 Claude 会看有没有改动、未跟踪文件、子模块里还没提交的内容，以及新提交，没有会话名而且工作树是干净的，目录和分支就一起删掉，会话有名字就会先问。工作树里还有要留的内容，目录和分支都保留，Claude 会打印 `claude --worktree <name> --resume`，选择删除就把目录、分支和这些内容一起去掉。状态如果核对不了，就改成询问，不会直接删。
 
-`git worktree remove` 遇到锁定的工作树会拒绝，得先 `git worktree unlock`。改主工作树里的文件会被拦住，在主工作树里跑的 shell 命令，以及把 git 指到那边的命令也会被拦住，包括 `git -C`、`--git-dir`、`GIT_DIR`、`GIT_WORK_TREE` 和 `cd`，`cp` 进主工作树不在这些检查里。在 [hooks](/zh/blog/claude-code-hooks) 里，`${CLAUDE_PROJECT_DIR}` 一直是启动时的项目根，hook 的 `cwd` 才是这棵工作树。
+`git worktree remove` 遇到锁定的工作树会拒绝，得先 `git worktree unlock`。在 worktree 会话里，Claude 改主工作树里的文件会被拦住，在主工作树里跑的 shell 命令，以及把 git 指到那边的命令也会被拦住，包括 `git -C`、`--git-dir`、`GIT_DIR`、`GIT_WORK_TREE` 和 `cd`，`cp` 进主工作树不在这些检查里。在 [hooks](/zh/blog/claude-code-hooks) 里，`${CLAUDE_PROJECT_DIR}` 一直是启动时的项目根，hook 的 `cwd` 才是这棵工作树。
 
 ## 每一份检出要单独配
 
@@ -66,7 +66,7 @@ claude --worktree feature-auth
 config/secrets.json
 ```
 
-`--worktree`、子 agent 的工作树和桌面 App 都会照这个文件复制，`WorktreeCreate` hook 会跳过这次复制，SVN、Perforce 或 Mercurial 换掉 git 的时候也跳过，`.env` 就得由这个 hook 自己复制。`git lfs install --local` 之后，还要在工作树里跑 `git lfs pull`，Claude Code 不会跑仓库本地的这个 filter。
+`--worktree`、subagent 的工作树和桌面 App 都会照这个文件复制，`WorktreeCreate` hook 会跳过这次复制，用 SVN、Perforce 或 Mercurial 代替 git 建工作树时也会跳过，`.env` 就得由这个 hook 自己复制。`git lfs install --local` 之后，还要在工作树里跑 `git lfs pull`，Claude Code 不会跑仓库本地的这个 filter。
 
 ## 先合并分支，再删掉 worktree
 
@@ -91,7 +91,7 @@ claude --worktree feature-auth --resume
 
 [新建标签](https://kaku.fun/zh/docs/keybindings) 是 `Cmd + T`，新标签和分屏会继承当前目录，`config.tab_inherit_working_directory` 和 `config.split_pane_inherit_working_directory` 默认都是 true，所以可以 `cd ../repo-feature`，也可以直接在仓库里跑 `claude --worktree`。`Cmd + Shift + I` 或者双击能改标签名，手动改过的名字会留着，`config.tab_title_use_pane_title` 让标签显示 Claude Code 的标题时也不会被换掉，自动标题显示的是目录，`Cmd + Shift + O` 打开 Tab Navigator。
 
-`Cmd + D` 垂直分屏，`Cmd + Shift + D` 水平分屏，`Cmd + Shift + Enter` 放大当前窗格，窗格或标签前面正跑着 Claude Code 时，关掉之前会先问，内置的 `tab_close_confirmation` 和 `pane_close_confirmation` 都是 `SmartPrompt`，一个标签里有好几个窗格时，`Cmd + W` 关的是当前窗格。
+`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，`Cmd + Shift + Enter` 放大当前窗格，窗格或标签前面正跑着 Claude Code 时，关掉之前会先问，内置的 `tab_close_confirmation` 和 `pane_close_confirmation` 都是 `SmartPrompt`，一个标签里有好几个窗格时，`Cmd + W` 关的是当前窗格。
 
 [`kaku start --new-tab`](https://kaku.fun/zh/docs/cli) 往当前窗口加一个标签，`kaku cli split-pane` 拆开当前窗格，还可以在新窗格里跑一条命令：
 
@@ -99,7 +99,7 @@ claude --worktree feature-auth --resume
 kaku cli split-pane -- bash -c "claude --worktree feature-auth"
 ```
 
-`config.restore_previous_session` 默认是 true，下次打开会把标签和窗格带回来，窗口、标签或窗格一打开或关掉，一分钟内会把布局存下来，崩溃或者强制退出也在这个范围里。跑着 Claude Code 的窗格回来时还留着最后一屏，能看出对话停在哪里，在 Kaku 0.25.0 及以上，配合 Claude Code 2.1.295 及以上，Claude Code 在等你、做完了或者失败了，后台标签上还会出现一个点，更早的版本就靠[通知](/zh/blog/claude-code-notifications)来提醒。
+`config.restore_previous_session` 默认是 true，下次打开会把标签和窗格带回来，窗口、标签或窗格一打开或关掉，一分钟内会把布局存下来，崩溃或者强制退出也在这个范围里。跑着 Claude Code 的窗格回来时还留着最后一屏，能看出对话停在哪里。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，Claude Code 在等你、做完了或者失败了，后台标签上都会出现一个点，更早的版本把[通知渠道](/zh/blog/claude-code-notifications)设成 `ghostty`，等你和做完这两种状态也会点亮同一个点。
 
 ## 常见问题
 

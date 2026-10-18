@@ -2,7 +2,7 @@ Since macOS 10.15, zsh is the default login shell and interactive shell, and it 
 
 ## What changed in macOS 10.15
 
-Apple documents the default and the ways to change it in [Use zsh as the default shell on Mac](https://support.apple.com/en-us/102360), published June 15, 2026. From macOS 10.15, zsh is the default login shell and the default interactive shell, and it is the default for every user account created on that release or later. macOS 10.14 and earlier defaulted to bash. Those older releases can use zsh as the default too.
+Apple documents the default and the ways to change it in [Use zsh as the default shell on Mac](https://support.apple.com/en-us/102360). From macOS 10.15, zsh is the default login shell and the default interactive shell, and it is the default for every user account created on that release or later. macOS 10.14 and earlier defaulted to bash. Those older releases can use zsh as the default too.
 
 zsh is already on the system at `/bin/zsh`, and `/bin/bash` stays selectable. If you start bash while the account uses another shell, macOS prints a message that the default interactive shell is now zsh. Hide that message with a line in `~/.bash_profile` or `~/.profile`:
 
@@ -68,7 +68,7 @@ The Login shell menu changes the same account default as `chsh`. To use another 
 
 ## If you use Kaku
 
-Kaku's shell setup is built for zsh and fish. `kaku init` adds one line to your shell config that loads zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, and it offers to install Starship, Delta, Lazygit and Yazi through Homebrew. The Starship prompt and Smart Tab only start inside Kaku, so other terminals keep the prompt they already had. `kaku doctor` checks the zsh and fish integration.
+Kaku's shell setup is built for zsh and fish. `kaku init` adds two lines to `~/.zshrc`, one for PATH and one that sources Kaku's shell integration, which loads zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, and it offers to install Starship, Delta, Lazygit and Yazi through Homebrew. The Starship prompt and Smart Tab only start inside Kaku, so other terminals keep the prompt they already had. `kaku doctor` checks the zsh and fish integration.
 
 On bash, Kaku only wraps `ssh` and `mosh` so they fall back to `xterm-256color` when a remote host has no `kaku` terminfo entry, the same wrapper zsh and fish get. If you would rather assemble the zsh pieces yourself, [Zsh without Oh My Zsh](/blog/zsh-without-oh-my-zsh) walks through the same setup in a `.zshrc` you own.
 

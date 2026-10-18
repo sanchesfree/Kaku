@@ -2,7 +2,7 @@
 
 ## macOS 10.15 改了什么
 
-Apple 的说明页是[在 Mac 上将 zsh 用作默认 Shell](https://support.apple.com/zh-cn/102360)，里面写了默认 shell 和改法，发布于 2026 年 6 月 15 日。从 macOS 10.15 起，zsh 是默认的登录 shell，也是默认的交互式 shell，在这个版本或之后创建的账户都默认用它，macOS 10.14 和更早默认是 bash，那些旧系统也可以把 zsh 设成默认。
+Apple 的说明页是[在 Mac 上将 zsh 用作默认 Shell](https://support.apple.com/zh-cn/102360)，开头那几条都出自这一页，旧系统也可以把 zsh 设成默认。
 
 系统里本来就有 `/bin/zsh`，`/bin/bash` 也还能选，账户默认是别的 shell 时去开 bash，macOS 会打出一行提示，说默认的交互式 shell 现在是 zsh。不想看这行提示，把下面这一行写进 `~/.bash_profile` 或 `~/.profile`：
 
@@ -36,7 +36,7 @@ export PS1="\[\e[92;40m\]\h\[\e[m\]:\[\e[93m\]\W\[\e[m\] \\$ "
 export PS1="%10F%m%f:%11F%1~%f \$ "
 ```
 
-这些占位符，还有 zsh 的命令行补全，Apple 让你在终端里看 `man zsh`，自己要一份加载按历史给的建议、语法高亮、额外补全和提示符的 `.zshrc`，就在[不用 Oh My Zsh，把 zsh 配得又快又好用](/zh/blog/zsh-without-oh-my-zsh)。
+这些占位符和 zsh 的命令行补全怎么写，Apple 让你在终端里看 `man zsh`，想要一份现成的 `.zshrc`，把按历史给建议、语法高亮、额外补全和提示符都配好，可以看[不用 Oh My Zsh 配好 zsh](/zh/blog/zsh-without-oh-my-zsh)。
 
 ## 脚本
 
@@ -62,13 +62,13 @@ chsh -s /bin/zsh
 chsh -s /bin/bash
 ```
 
-macOS 13 或更新的系统，从苹果菜单打开系统设置，点用户与群组，在右边的列表里按住 Control 键点按你的用户名或头像，选高级选项，输入用户名和密码，从登录Shell菜单里选一个 shell，点「好」。更早的 macOS，从苹果菜单打开系统偏好设置，点用户与群组，点锁形图标，输入用户名和密码，在左边按住 Control 键点按你的用户名，选高级选项，从登录Shell菜单里选一个 shell，点「好」。
+macOS 13 或更新的系统，从苹果菜单打开系统设置，点用户与群组，在右边的列表里按住 Control 键点按你的用户名或头像，选高级选项，输入用户名和密码，从登录 Shell 菜单里选一个 shell，点「好」。更早的 macOS，从苹果菜单打开系统偏好设置，点用户与群组，点锁形图标，输入用户名和密码，在左边按住 Control 键点按你的用户名，选高级选项，从登录 Shell 菜单里选一个 shell，点「好」。
 
-登录Shell菜单改的和 `chsh` 是同一个账户默认值，只想让新的终端窗口和标签页用另一个 shell，这个默认值留着不动。从终端菜单里选设置，更早的系统里这一项叫偏好设置，到通用面板里选命令（完整的路径），再填一个 `/etc/shells` 里的路径，比如 `/bin/zsh` 或 `/bin/bash`。
+登录 Shell 菜单改的和 `chsh` 是同一个账户默认值，只想让新的终端窗口和标签页用另一个 shell，这个默认值留着不动。从 终端 > 设置 打开，更早的系统里叫偏好设置，在通用面板里选 命令（完整的路径），再填一个 `/etc/shells` 里的路径，比如 `/bin/zsh` 或 `/bin/bash`。
 
 ## 如果你用 Kaku
 
-Kaku 的 shell 集成是给 zsh 和 fish 做的，`kaku init` 会在 shell 配置里加一行，加载 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，还会问你要不要用 Homebrew 装上 Starship、Delta、Lazygit 和 Yazi。Starship 提示符和 Smart Tab 只在 Kaku 里启动，别的终端还是原来的提示符，`kaku doctor` 会检查 zsh 和 fish 的集成是否正常。
+Kaku 的 shell 集成是给 zsh 和 fish 做的，`kaku init` 会在 `~/.zshrc` 里加两行，一行管 PATH，一行 source Kaku 的 shell 集成，由它加载 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，还会问你要不要用 Homebrew 装上 Starship、Delta、Lazygit 和 Yazi。Starship 提示符和 Smart Tab 只在 Kaku 里启动，别的终端还是原来的提示符，`kaku doctor` 会检查 zsh 和 fish 的集成是否正常。
 
 在 bash 里，Kaku 只包了一层 `ssh` 和 `mosh`，远程主机没有 `kaku` 的 terminfo 时退回 `xterm-256color`，zsh 和 fish 里也是同一层包装。想自己在 `.zshrc` 里一样样配起来的话，可以看[不用 Oh My Zsh 配好 zsh](/zh/blog/zsh-without-oh-my-zsh)。
 
@@ -80,7 +80,7 @@ Kaku 的 shell 集成是给 zsh 和 fish 做的，`kaku init` 会在 shell 配�
 
 ### 怎么把默认 shell 换成 zsh，或者换回 bash？
 
-跑 `chsh -s /bin/zsh` 或 `chsh -s /bin/bash`，路径得在 `/etc/shells` 里，macOS 13 或更新的系统上，系统设置里的用户与群组、高级选项、登录Shell，就是同一个选项。只想改新的终端窗口和标签页，就把终端的通用面板设成命令（完整的路径），账户的默认 shell 留着不动。
+跑 `chsh -s /bin/zsh` 或 `chsh -s /bin/bash`，路径得在 `/etc/shells` 里，macOS 13 或更新的系统上，系统设置里的用户与群组、高级选项、登录 Shell，就是同一个选项。只想改新的终端窗口和标签页，就把终端的通用面板设成命令（完整的路径），账户的默认 shell 留着不动。
 
 ### `.bash_profile` 和 `.bashrc` 里的设置放哪？
 

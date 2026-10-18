@@ -100,4 +100,4 @@ Usually because the completion directory was added to `fpath` after `compinit` r
 
 ### Can I use Kaku's zsh setup with my own Starship config?
 
-Yes. Kaku only writes `~/.config/starship.toml` when there is none, so a config you wrote stays as it is.
+Yes. Kaku only writes `~/.config/starship.toml` when there is none, or when it is a byte-identical copy of the file Kaku 0.10.0 to 0.22.0 shipped, so a config you wrote or symlinked stays as it is.

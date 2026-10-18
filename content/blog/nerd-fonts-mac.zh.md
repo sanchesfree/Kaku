@@ -1,4 +1,4 @@
-提示符、文件列表和状态栏里的图标，只有终端用的字体里有这个字形才画得出来，没有的话就是一个个空方块或问号。解决办法有两个，一是装一套 [Nerd Font](https://www.nerdfonts.com/)，也就是打过补丁、塞进了几千个图标的编程字体，二是保留你现在的字体，再把只含图标的 Nerd Font 加成回退字体。有些终端自带这份回退，WezTerm 和 Kaku 都是，那就什么都不用装。
+提示符、文件列表和状态栏里的图标，只有终端用的字体里有这个字形才画得出来，没有的话就是一个个空方块或问号。解决办法有两个，一是装一套 [Nerd Font](https://www.nerdfonts.com/)，也就是打过补丁、塞进了几千个图标的编程字体，二是保留你现在的字体，再把只含图标的 Nerd Font 加成回退字体。有些终端自带这份回退，WezTerm、Ghostty 和 Kaku 都是，那就什么都不用装。
 
 ## Nerd Font 是什么
 
@@ -10,7 +10,7 @@
 
 一个字体只画得出它自己有的字符，缺字的时候终端会顺着回退列表往下找，再去找系统字体，就像在英文字体里打中文照样能显示出来。但 Nerd Fonts 的图标放在私用区，系统字体里都没有，整条链上找不到一个 Nerd Font，最后就只能画成方块。
 
-在 WezTerm 里可以用 `wezterm ls-fonts --text` 加一小段文字，看每个字符是哪个字体画出来的，这是分清「没装字体」还是「配置写错」最快的办法。
+在 WezTerm 里可以用 `wezterm ls-fonts --text` 加一小段文字，看每个字符是哪个字体画出来的，这是分清到底没装字体还是配置写错最快的办法。
 
 ## 装补丁字体
 
@@ -40,7 +40,7 @@ config.font = wezterm.font_with_fallback {
 }
 ```
 
-[Ghostty](https://ghostty.org/docs/config/reference) 的回退是多写几行 `font-family`，第一行是主字体，后面几行补主字体里缺的码位，所以符号字体单独占一行，具体名字用 `ghostty +list-fonts` 查，写一行空的 `font-family = ""` 可以清掉文件前面设过的字体。Ghostty 1.2.0 起还有 `adjust-icon-height`，能调 Nerd Font 图标的最大高度，Powerline 和制表符字形不受影响。
+[Ghostty](https://ghostty.org/docs/config/reference) 也不需要装，它内嵌了 JetBrains Mono，Nerd Font 图标也是内置的。它的回退是多写几行 `font-family`，第一行是主字体，后面几行补主字体里缺的码位，想换一份别的符号字体，就让它单独占一行，具体名字用 `ghostty +list-fonts` 查，写一行空的 `font-family = ""` 可以清掉文件前面设过的字体。Ghostty 1.2.0 起还有 `adjust-icon-height`，能调 Nerd Font 图标的最大高度，Powerline 和制表符字形不受影响。
 
 README 里也说了，回退来的符号在缩放和位置上不一定对得齐，如果图标和文字放在一起看着有点歪，换成同一字体族的补丁版会更稳。Mac 上 WezTerm 的整套配置可以看 [Mac 版 WezTerm 配置](/zh/blog/wezterm-config-for-mac)。
 
@@ -51,7 +51,7 @@ README 里也说了，回退来的符号在缩放和位置上不一定对得齐�
 | 版本 | 图标宽度 | 什么时候用 |
 |---|---|---|
 | `Nerd Font` | 尽量做成双宽 | 终端允许图标伸进下一格 |
-| `Nerd Font Mono` | 只占一格 | 图标压到文字上，或者把列对不齐 |
+| `Nerd Font Mono` | 只占一格 | 图标压到文字上，或者让列对不齐了 |
 | `Nerd Font Propo` | 按比例 | 在终端外面用，比如编辑器的界面 |
 
 在终端里用 Mono 最稳，每个图标都只占一格，表格和状态栏的列不会乱。
@@ -94,7 +94,7 @@ Kaku 跟着主题调字重这件事只对默认的 JetBrains Mono 生效，你�
 
 ### 在 Ghostty 里怎么加符号回退？
 
-先装 `font-symbols-only-nerd-font`，用 `ghostty +list-fonts` 查到它的名字，再在主字体后面加一行 `font-family`。
+不用加，Ghostty 已经内置了 Nerd Font 图标，只有想换一份别的符号字体时，才需要先装好它，用 `ghostty +list-fonts` 查到名字，再在主字体后面加一行 `font-family`。
 
 ### 在 Kaku 里需要装 Nerd Font 吗？
 

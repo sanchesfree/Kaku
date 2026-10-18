@@ -1,4 +1,4 @@
-Icons in a prompt, a file listing or a status line only show up when the terminal has a font that contains them, and when it does not you get empty boxes or question marks. There are two fixes: install a [Nerd Font](https://www.nerdfonts.com/), a programming font patched with thousands of icons, or keep your font and add the symbols-only Nerd Font as a fallback. Some terminals, WezTerm and Kaku among them, already ship that fallback, so there is nothing to install.
+Icons in a prompt, a file listing or a status line only show up when the terminal has a font that contains them, and when it does not you get empty boxes or question marks. There are two fixes: install a [Nerd Font](https://www.nerdfonts.com/), a programming font patched with thousands of icons, or keep your font and add the symbols-only Nerd Font as a fallback. Some terminals, WezTerm, Ghostty and Kaku among them, already ship that fallback, so there is nothing to install.
 
 ## What Nerd Fonts are
 
@@ -40,7 +40,7 @@ config.font = wezterm.font_with_fallback {
 }
 ```
 
-[Ghostty](https://ghostty.org/docs/config/reference) treats fallback as a repeated `font-family`. The first value is the main face and later values fill the code points it lacks, so the symbols font goes on its own line. `ghostty +list-fonts` prints the exact name to use, and an empty `font-family = ""` clears any families set earlier in the file. Since Ghostty 1.2.0, `adjust-icon-height` changes the maximum height of Nerd Font icons without touching Powerline and box-drawing glyphs.
+[Ghostty](https://ghostty.org/docs/config/reference) does not need it either, because it embeds JetBrains Mono and has built-in Nerd Font symbols. Fallback there is a repeated `font-family`: the first value is the main face and later values fill the code points it lacks, so if you want a different symbols font, it goes on its own line. `ghostty +list-fonts` prints the exact name to use, and an empty `font-family = ""` clears any families set earlier in the file. Since Ghostty 1.2.0, `adjust-icon-height` changes the maximum height of Nerd Font icons without touching Powerline and box-drawing glyphs.
 
 The README notes that scaling and placement of fallback symbols can be hit or miss, so if icons look slightly off next to your text, a patched font of the same family is the more consistent choice. A Mac WezTerm setup is covered in [WezTerm on Mac](/blog/wezterm-config-for-mac).
 
@@ -94,7 +94,7 @@ Only in icon width. The plain variant lets icons be double-width, Mono keeps eac
 
 ### How do I add a symbols fallback in Ghostty?
 
-Install `font-symbols-only-nerd-font`, run `ghostty +list-fonts` to get its name, and add it as a second `font-family` line after your main font.
+You do not need one, because Ghostty has built-in Nerd Font symbols. Only to use a different symbols font, install it, run `ghostty +list-fonts` to get its name, and add it as a second `font-family` line after your main font.
 
 ### Do I need a Nerd Font in Kaku?
 

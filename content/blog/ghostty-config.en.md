@@ -38,11 +38,10 @@ config-file = ?local.ghostty
 
 ```ini
 font-family = "JetBrains Mono"
-font-family = "Symbols Nerd Font Mono"
 font-size = 14
 ```
 
-Because repeated lines append, a theme or included file can leave families you did not expect. Start with `font-family = ""` to clear the list before you set it. Bold and italic come from the same family unless you set `font-family-bold` or `font-family-italic`. `font-size` is in points and accepts halves such as `13.5`. The [Nerd Fonts guide](/blog/nerd-fonts-mac) covers which icon font to add.
+Because repeated lines append, a theme or included file can leave families you did not expect. Start with `font-family = ""` to clear the list before you set it. Bold and italic come from the same family unless you set `font-family-bold` or `font-family-italic`. `font-size` is in points and accepts halves such as `13.5`. Ghostty already bundles Nerd Font symbols, so a symbols font such as Symbols Nerd Font Mono only needs its own `font-family` line if you want a different face for the icons, and the [Nerd Fonts guide](/blog/nerd-fonts-mac) covers that case.
 
 Themes ship with the app, and `ghostty +list-themes` lists them. To follow the macOS light and dark appearance, give both in one line:
 

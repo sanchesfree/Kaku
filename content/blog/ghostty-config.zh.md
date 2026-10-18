@@ -38,13 +38,12 @@ config-file = ?local.ghostty
 
 ```ini
 font-family = "JetBrains Mono"
-font-family = "Symbols Nerd Font Mono"
 font-size = 14
 ```
 
-因为重复写是往后追加，主题或者引入的文件里可能藏着你不知道的字体，稳妥的做法是先写一行 `font-family = ""` 把列表清空再重新设。粗体和斜体默认从同一个字体家族里找，除非你单独设了 `font-family-bold` 或 `font-family-italic`，`font-size` 的单位是 point，可以写 `13.5` 这样的半号，图标字体该装哪个可以看 [Nerd Fonts 那篇](/zh/blog/nerd-fonts-mac)。
+因为重复写是往后追加，主题或者引入的文件里可能藏着你不知道的字体，稳妥的做法是先写一行 `font-family = ""` 把列表清空再重新设。粗体和斜体默认从同一个字体家族里找，除非你单独设了 `font-family-bold` 或 `font-family-italic`，`font-size` 的单位是 point，可以写 `13.5` 这样的半号。Ghostty 已经内置了 Nerd Font 图标，只有想给图标换一种字形时，才需要再加一行 `font-family` 指向 Symbols Nerd Font Mono 这类图标字体，这种情况可以看 [Nerd Fonts 那篇](/zh/blog/nerd-fonts-mac)。
 
-主题是跟着 app 一起装好的，`ghostty +list-themes` 能看到全部，想跟着 macOS 的深色浅色自动切换，一行里把两个都写上：
+主题是跟着 App 一起装好的，`ghostty +list-themes` 能看到全部，想跟着 macOS 的深色浅色自动切换，一行里把两个都写上：
 
 ```ini
 theme = light:Rose Pine Dawn,dark:Rose Pine
@@ -100,7 +99,7 @@ shell-integration-features = no-cursor,ssh-terminfo
 
 ## Quick terminal
 
-quick terminal 是一个从屏幕边上滑出来、盖在当前 app 上面的终端窗口，它没有默认快捷键，要自己用 `global:` 前缀把 `toggle_quick_terminal` 绑上：
+quick terminal 是一个从屏幕边上滑出来、盖在当前 App 上面的终端窗口，它没有默认快捷键，要自己用 `global:` 前缀把 `toggle_quick_terminal` 绑上：
 
 ```ini
 keybind = global:ctrl+backquote=toggle_quick_terminal
@@ -113,7 +112,7 @@ quick-terminal-screen = mouse
 
 ## 把 Ghostty 的配置搬到 Kaku
 
-Kaku 用 Lua 配置，文件在 `~/.config/kaku/kaku.lua`，它先加载自带的默认配置再叠上你写的那几行，保存后会自动重新加载，上面这些设置里有好几项已经默认配好了。默认字体是 JetBrains Mono，中文回退到 PingFang SC，Symbols Nerd Font Mono 是打包在 app 里的，不管你换成什么字体都会排在后面当回退，左 Option 发 Meta、右 Option 照常打组合字符，相当于 Ghostty 的 `macos-option-as-alt = left`，`Cmd + Opt + Ctrl + K` 从屏幕顶部拉下一个 Kaku 窗口，用起来跟 quick terminal 差不多，想换键改 `config.macos_global_hotkey`。新装的 Kaku 默认是 Kaku Dark，配置里没有 `config.color_scheme` 这一行时会跟着 macOS 的深浅色走，在 `kaku config` 里选 Auto 就是帮你设成这样。
+Kaku 用 Lua 配置，文件在 `~/.config/kaku/kaku.lua`，它先加载自带的默认配置再叠上你写的那几行，保存后会自动重新加载，上面有好几项已经默认配好了。字体默认是 JetBrains Mono，中文回退到 PingFang SC，打包在 App 里的 Symbols Nerd Font Mono 不管你换什么字体都排在后面当回退。左 Option 发 Meta、右 Option 照常打组合字符，相当于 Ghostty 的 `macos-option-as-alt = left`，`Cmd + Opt + Ctrl + K` 从屏幕顶部拉下一个 Kaku 窗口，用起来跟 quick terminal 差不多，想换键改 `config.macos_global_hotkey`。新装的 Kaku 默认是 Kaku Dark，配置里没有 `config.color_scheme` 这一行时会跟着 macOS 的深浅色走，在 `kaku config` 里选 Auto 就是帮你设成这样。
 
 剩下的基本可以一行对一行地改过去：
 

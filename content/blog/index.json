@@ -46,7 +46,7 @@
       "date": null,
       "keyword": "claude code remote",
       "en": {
-        "title": "Using Claude Code Remotely: Three Ways to Reach a Running Session",
+        "title": "Claude Code Remote: Three Ways to Reach a Running Session",
         "description": "Anthropic's Remote Control, cloud sessions, and opening your Mac's terminal from another computer with kaku remote: what each needs and where it runs."
       },
       "zh": {
@@ -124,7 +124,7 @@
       "date": null,
       "keyword": "tmux alternative",
       "en": {
-        "title": "Do You Still Need tmux on a Mac?",
+        "title": "tmux Alternative on Mac: Do You Still Need tmux?",
         "description": "What tmux gives you that a terminal does not, what native splits and session restore already cover, and when to keep tmux for remote work."
       },
       "zh": {
@@ -137,25 +137,12 @@
       "date": null,
       "keyword": "install claude code",
       "en": {
-        "title": "How to Install and Update Claude Code on Mac",
+        "title": "Install Claude Code on Mac: Installer, Homebrew and Updates",
         "description": "Install Claude Code with the native installer, Homebrew or npm, sign in, check it with claude doctor, and control updates and release channels."
       },
       "zh": {
         "title": "在 Mac 上安装和更新 Claude Code",
         "description": "用原生安装脚本、Homebrew 或 npm 装好 Claude Code，登录后用 claude doctor 检查，再管好自动更新和发布渠道。"
-      }
-    },
-    {
-      "slug": "cursor-vs-claude-code",
-      "date": null,
-      "keyword": "cursor vs claude code",
-      "en": {
-        "title": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
-        "description": "How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together."
-      },
-      "zh": {
-        "title": "Cursor 和 Claude Code 怎么选",
-        "description": "Cursor 和 Claude Code 在哪里看改动、怎么收费、上下文、并行会话上有什么不同，以及两者怎么一起用。"
       }
     },
     {
@@ -177,11 +164,11 @@
       "keyword": "zsh vs bash",
       "en": {
         "title": "Zsh vs Bash on Mac: Which Shell Should You Use",
-        "description": "Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch."
+        "description": "Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch with chsh or Terminal settings."
       },
       "zh": {
         "title": "Mac 上用 zsh 还是 bash",
-        "description": "macOS 为什么换成 zsh，日常用起来有哪些差别，脚本该用哪个 shell 写，以及怎么切换。"
+        "description": "macOS 为什么换成 zsh，日常用起来有哪些差别，脚本该用哪个 shell 写，以及怎么用 chsh 或终端设置切换。"
       }
     },
     {
@@ -216,11 +203,11 @@
       "keyword": "git worktree",
       "en": {
         "title": "Run Several Claude Code Sessions at Once with Git Worktrees",
-        "description": "Give each Claude Code session its own checkout with git worktree, set each one up, merge the work back and clean up."
+        "description": "Give each Claude Code session its own checkout with git worktree or claude --worktree, set each one up, merge the work back and clean up."
       },
       "zh": {
         "title": "用 git worktree 同时跑多个 Claude Code",
-        "description": "用 git worktree 给每个 Claude Code 会话一份独立的检出，配好环境，再把改动合回去并清理干净。"
+        "description": "用 git worktree 或 claude --worktree 给每个 Claude Code 会话一份独立的检出，配好环境，再把改动合回去并清理干净。"
       }
     },
     {
@@ -242,11 +229,24 @@
       "keyword": "claude code plan mode",
       "en": {
         "title": "Claude Code Plan Mode: When and How to Use It",
-        "description": "What plan mode allows, how to turn it on with Shift+Tab or a flag, how to review the plan, and when to skip it."
+        "description": "What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it."
       },
       "zh": {
         "title": "Claude Code 的 plan mode 什么时候用、怎么用",
-        "description": "plan mode 允许做什么，怎么用 Shift+Tab 或命令行参数打开，怎么审计划，以及什么时候不用它。"
+        "description": "plan mode 允许做什么，怎么用 Shift+Tab、/plan 或命令行参数打开，怎么审和改计划，以及什么时候不用它。"
+      }
+    },
+    {
+      "slug": "cursor-vs-claude-code",
+      "date": null,
+      "keyword": "cursor vs claude code",
+      "en": {
+        "title": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
+        "description": "How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together."
+      },
+      "zh": {
+        "title": "Cursor 和 Claude Code 怎么选",
+        "description": "Cursor 和 Claude Code 在哪里看改动、怎么收费、上下文、并行会话上有什么不同，以及两者怎么一起用。"
       }
     },
     {
@@ -294,11 +294,11 @@
       "keyword": "starship prompt",
       "en": {
         "title": "Starship Prompt on Mac: Install, Configure and Keep It Fast",
-        "description": "Install Starship for zsh or fish, configure starship.toml and presets, and find the modules that make a prompt slow."
+        "description": "Install Starship for zsh or fish, configure starship.toml, format strings and presets, and find the modules and timeouts that make a prompt slow."
       },
       "zh": {
         "title": "在 Mac 上用 Starship 提示符，安装、配置和保持够快",
-        "description": "给 zsh 或 fish 装好 Starship，配置 starship.toml 和预设，找出拖慢提示符的模块。"
+        "description": "给 zsh 或 fish 装好 Starship，配置 starship.toml、格式字符串和预设，找出拖慢提示符的模块和超时设置。"
       }
     },
     {

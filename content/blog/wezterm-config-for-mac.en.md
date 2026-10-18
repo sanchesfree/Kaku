@@ -96,7 +96,7 @@ Most of this post is already in that bundled layer:
 | Ligatures | Off |
 | Left / right Option | Meta / compose characters |
 | Splits | `Cmd + D` / `Cmd + Shift + D` |
-| Window | Integrated buttons, 40px padding, native fullscreen |
+| Window | Integrated buttons, 40px padding (26px on a low-resolution screen), native fullscreen |
 | Tab bar | At the bottom, hidden with one tab |
 | Colors | Kaku Dark and Kaku Light |
 | Rendering | WebGpu, LowPower, 60 fps |

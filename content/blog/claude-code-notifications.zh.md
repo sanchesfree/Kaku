@@ -1,4 +1,4 @@
-如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
+如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
 
 ## Claude Code 的快速修法
 
@@ -8,11 +8,11 @@
 |---|---|
 | iTerm2 | Claude Code 里不用改，在 iTerm2 的 Settings > Profiles > Terminal 里勾上 Notification Center Alerts，再在 Filter Alerts 里打开 Send escape sequence-generated alerts |
 | Ghostty、Kitty | 不用改，`auto` 就能用 |
-| Kaku | 0.25.0 配 Claude Code 2.1.295 及以上不用改，更早的版本设成 `"ghostty"` |
+| Kaku | 0.25.0 及以上配 Claude Code 2.1.295 及以上不用改，更早的版本设成 `"ghostty"` |
 | Terminal.app | `auto` 只在关掉提示音时响铃，`/terminal-setup` 会帮你关掉 |
 | WezTerm、Warp、VS Code | `"terminal_bell"`，或者加一个 Notification hook |
 
-Kaku 0.25.0 配 Claude Code 2.1.295 及以上版本什么都不用改，再设成 `ghostty` 反而会多出一条重复通知，更早的版本只需要改这一行：
+Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本什么都不用改，再设成 `ghostty` 反而会多出一条重复通知，更早的版本只需要改这一行：
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -46,9 +46,9 @@ Claude Code 和 Codex 都不直接跟通知中心打交道，它们往终端里�
 
 [[figure:claude-code-notifications|Claude Code、Codex 和你自己的脚本把序列或铃声发给 Kaku，Kaku 只在处于后台时把它变成 macOS 通知|不管从哪来，最后都是一段终端读得懂的序列，再由终端变成通知。]]
 
-常用的序列有几种，OSC 9 最早出自 iTerm2，只带一行文字，OSC 777 带标题和正文，单独一个铃声字符则什么内容都不带，只表示有事发生。Ghostty 和 Kaku 两种都认，Kitty 用的是自己的 OSC 99，各家不统一，这也是为什么 Claude Code 要维护一串通道而不是一个开关。
+常用的序列有几种，OSC 9 最早出自 iTerm2，只带一行文字，OSC 777 带标题和正文，单独一个铃声字符则什么内容都不带，只表示有事发生。Ghostty 和 Kaku 两种都认，Kitty 用的是自己的 OSC 99，各家不统一，这也是为什么 Claude Code 要维护一串通道而不是一个开关。Kaku 0.25.0 及以上还认 OSC 7501，也就是 Claude Code 2.1.295 及以上在等你、做完或出错时发出的状态报告，所以不用设通道。
 
-在 Kaku 里这几条路最后汇到同一个地方，哪些会变成通知由 `notification_handling` 决定：
+在 Kaku 里，OSC 9 和 OSC 777 的通知要经过 `notification_handling` 这项设置：
 
 ```lua
 -- 默认：只在 Kaku 窗口处于后台时提醒
@@ -60,7 +60,7 @@ config.notification_handling = "AlwaysShow"
 -- config.notification_handling = "NeverShow"
 ```
 
-后台窗口里的铃声同样会变成通知，还会累加到 Dock 图标的角标上，通知消失了也能看出刚才有东西响过。
+铃声不经过 `notification_handling`，只要 Kaku 窗口在后台，它就一定会变成通知，还会累加到 Dock 图标的角标上，通知消失了也能看出刚才有东西响过。
 
 ## 给自己的脚本加通知
 

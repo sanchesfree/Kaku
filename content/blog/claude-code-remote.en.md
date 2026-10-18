@@ -77,7 +77,7 @@ A local session, including one under Remote Control, stops when the Mac sleeps. 
 
 ### Can I SSH into my Mac and run Claude Code instead?
 
-Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. Notifications travel back to the terminal you connected from, as long as tmux has `allow-passthrough` on.
+Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. [Notifications](/blog/claude-code-notifications) travel back to the terminal you connected from, as long as tmux has `allow-passthrough` on.
 
 ### Does kaku remote work with Codex and other CLI tools?
 

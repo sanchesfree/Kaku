@@ -2,7 +2,7 @@ plan mode 让 Claude Code 读仓库、写一份计划，在你批准之前不改
 
 ## plan mode 允许什么、拦住什么
 
-[常见工作流](https://code.claude.com/docs/zh-CN/common-workflows)用 plan mode，在改动写进磁盘之前先看一遍，规则以[权限模式](https://code.claude.com/docs/en/iam)为准。交互式终端里已经能用 bypass permissions 时，Claude 仍被交代只写计划、不改文件，可它在规划期间一旦真的改文件或跑 shell，就不会再问。ask 规则还是会问，关键路径上的 `rm` 或 `rmdir` 也一样，文件系统根目录、你的主目录、当前工作目录都算关键路径。
+[常见工作流](https://code.claude.com/docs/zh-CN/common-workflows)里，plan mode 用来在改动写进磁盘之前先看一遍，规则以[权限模式](https://code.claude.com/docs/en/iam)为准。交互式终端里已经能用 bypass permissions 时，Claude 收到的指令仍然是只写计划、不改文件，可它在规划期间一旦真的改文件或跑 shell，就不会再问。ask 规则还是会问，关键路径上的 `rm` 或 `rmdir` 也一样，文件系统根目录、你的主目录、当前工作目录都算关键路径。
 
 规划期间的 shell 命令按下面的顺序，命中第一条就照那一条办，2026 年 10 月核对过。
 
@@ -10,7 +10,7 @@ plan mode 让 Claude Code 读仓库、写一份计划，在你批准之前不改
 - **auto mode 可用，并且 `useAutoModeDuringPlan` 开着，这是默认**，除了关键路径上的删除，其余 shell 命令交给分类器，放行的就执行，拒绝的就拦住。
 - **auto mode 不可用，或者 `useAutoModeDuringPlan` 关着**，内置只读集合以外的命令都会问，sandbox auto-allow 开着也一样。
 
-auto mode 可用时，模式表里 plan mode 这一行是读，再加上分类器放行的命令，能不能用取决于 Claude Code 的版本、当前模型，还有组织的设置。`.git`、`.claude`、`.zshrc` 这些受保护路径不会自动放行，规划期间 auto mode 可用就交给分类器，不可用就问你。`~/.claude/plans/` 下的计划文件，或者你设的 `plansDirectory`，不在这条限制里。
+auto mode 可用时，权限模式那张表里，plan mode 这一行能做的是读文件，外加分类器放行的命令，能不能用取决于 Claude Code 的版本、当前模型，还有组织的设置。`.git`、`.claude`、`.zshrc` 这些受保护路径不会自动放行，规划期间 auto mode 可用就交给分类器，不可用就问你。`~/.claude/plans/` 下的计划文件，或者你设的 `plansDirectory`，不在这条限制里。
 
 ## 怎么进入 plan mode
 
@@ -32,7 +32,7 @@ claude --permission-mode plan
 
 项目或托管设置里的值优先于用户文件 `~/.claude/settings.json`，`auto` 和 `bypassPermissions` 写在项目的 `.claude/settings.json` 或 `.claude/settings.local.json` 里不会生效，`plan` 会。VS Code 扩展决定起始模式时不看项目里的 `.claude/settings.json`，要在 VS Code 的用户设置里把 `claudeCode.initialPermissionMode` 设成 `plan`。
 
-2026 年 10 月核对过，Claude Code v2.1.283 起，交互式终端会话一开始就是 auto mode。更早的版本里，Pro、Max 和 Team 在会话取到 feature flag 时，内置起点也是 auto，macOS、Linux 和 WSL 从 v2.1.228 起，原生 Windows 从 v2.1.233 起，不到这些版本或其他内置情况就从 Manual 开始。命令行参数或 `permissions.defaultMode` 会盖过这个起点，选了 auto 但当时不可用，会话就从 Manual 开始。刚安装或刚升级后的第一次会话，feature flag 还没到，起点可能不一样。
+Claude Code v2.1.283 起，交互式终端会话一开始就是 auto mode。更早的版本里，Pro、Max 和 Team 的会话取到 feature flag 时也从 auto 起步，前提是 macOS、Linux 和 WSL 上不低于 v2.1.228，原生 Windows 不低于 v2.1.233，其他情况都从 Manual 开始。命令行参数或 `permissions.defaultMode` 会盖过这个起点，选了 auto 但当时不可用，会话就从 Manual 开始。刚安装或刚升级后的第一次会话，feature flag 还没到，起点可能不一样。
 
 计划批准之后，再按 `Shift + Tab`，或者发一条以 `/plan` 开头的提示词，会再进一次 plan mode。
 
@@ -45,7 +45,7 @@ claude --permission-mode plan
 Keep the current error type. List every file you would change, the test command you would run, and anything you would leave alone.
 ```
 
-`@src/auth/user.ts` 会把这个文件的内容带上，只要没超过 Read 工具的上限，默认 25,000 token，文本文件大于 256KB 就不会带上，2026 年 10 月核对过。任何终端里按 `Ctrl + J` 都会插入换行，先打一个 `\` 再按回车也一样。
+`@src/auth/user.ts` 会把这个文件的内容带上，只要没超过 Read 工具的上限，默认 25,000 token，文本文件大于 256KB 就不会带上。任何终端里按 `Ctrl + J` 都会插入换行，先打一个 `\` 再按回车也一样，哪些终端不用设置就能用 `Shift + Enter` 换行，[终端对比](/zh/blog/best-terminal-for-claude-code)那篇列过。
 
 ## 批准，或者接着改计划
 
@@ -59,13 +59,13 @@ Keep the current error type. List every file you would change, the test command 
 
 任务比较长、方向也信得过的时候用 auto mode，它在后台做安全检查，日常的确认会少一些，但不保证安全。
 
-## plan mode 和思考强度
+## plan mode 和 effort
 
-plan mode 决定哪些动作能跑，扩展思考和 effort 决定一条请求想多深。macOS 按 `Option + T`，Windows 和 Linux 按 `Alt + T`，用来开关扩展思考，macOS 不用把 Option 配成 Meta 也能用。Opus 5.5、Sonnet 5.5、Haiku 5.5 和 Fable 这几个模型不受这个开关影响，它们一直开着扩展思考。`/effort` 改的是 effort，一发出去，Claude Code 就执行，如果弹出缓存警告，确认之后，新的档位用在当前这一轮的下一条请求上。
+plan mode 决定哪些动作能跑，扩展思考和 effort（思考强度）决定一条请求想多深。macOS 按 `Option + T`，Windows 和 Linux 按 `Alt + T`，用来开关扩展思考，macOS 不用把 Option 配成 Meta 也能用。Opus 5.5、Sonnet 5.5、Haiku 5.5 和 Fable 这几个模型不受这个开关影响，它们一直开着扩展思考。`/effort` 改的是 effort，一发出去就生效，要是弹出缓存警告，确认之后，新的档位从这一轮的下一条请求开始用。
 
 ## Kaku 里的 Shift + Tab
 
-Kaku 默认的终端快捷键里没有 `Shift + Tab`，[快捷键](https://kaku.fun/zh/docs/keybindings)那一页也没列，所以在窗格里这个键会送到 Claude Code。状态栏一直不变的话，打开 `~/.config/kaku/kaku.lua` 看 `config.keys`，往这张表里插入，直接赋一张新表会把默认快捷键换掉。有一条 `Tab` 绑了 Shift，这个键在 Claude Code 看到之前就被吞掉，别的终端把 `Shift + Tab` 吞掉，也是查同一处。
+Kaku 默认的终端快捷键里没有 `Shift + Tab`，[快捷键](https://kaku.fun/zh/docs/keybindings)那一页也没列，所以在窗格里这个键会送到 Claude Code。状态栏一直不变的话，打开 `~/.config/kaku/kaku.lua` 看 `config.keys`，往这张表里插入，直接赋一张新表会把默认快捷键换掉。要是里面有一条绑了 Shift 的 `Tab`，这个键在 Claude Code 看到之前就被吞掉了，别的终端把 `Shift + Tab` 吞掉，也是查同一处。
 
 AI 聊天面板是分开的，`Cmd + L` 打开它，Simple Model 和 Deep Model 不一样时，在那个面板里按 `Shift + Tab` 是在两个模型之间切换，[功能特性](https://kaku.fun/zh/docs/features)里写了，这个切换不碰 Claude Code 的权限模式。
 
@@ -89,4 +89,4 @@ AI 聊天面板是分开的，`Cmd + L` 打开它，Simple Model 和 Deep Model 
 
 ### 为什么 Shift + Tab 没有反应？
 
-在 Kaku 里，到 `~/.config/kaku/kaku.lua` 的 `config.keys` 下面找带 Shift 的 `Tab`，AI 聊天面板在 Simple Model 和 Deep Model 不同时，用同一个快捷键切换这两个模型。从 auto mode 按第一下，状态栏显示的是 `manual mode on`。
+在 Kaku 里，先到 `~/.config/kaku/kaku.lua` 的 `config.keys` 下面找有没有绑了 Shift 的 `Tab`。还要看是在哪里按的，AI 聊天面板里 Simple Model 和 Deep Model 不同时，这个键是在两个模型之间切换。另外从 auto mode 按第一下，状态栏显示的是 `manual mode on`，不是没反应。

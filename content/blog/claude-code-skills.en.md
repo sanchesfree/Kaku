@@ -6,7 +6,7 @@ A [Claude Code skill](https://code.claude.com/docs/en/skills) is a folder with a
 
 `.claude/commands/deploy.md` still creates `/deploy`. Custom commands have been merged into skills, so `.claude/skills/deploy/SKILL.md` creates the same command. A [slash command](https://code.claude.com/docs/en/slash-commands) file accepts the same frontmatter except `name` and `paths`. A skill adds supporting files, and Claude can load it when the description matches.
 
-A [subagent](https://code.claude.com/docs/en/sub-agents) has its own context window, system prompt, tools, and permissions, and returns a summary. Files live in `~/.claude/agents/` or `.claude/agents/`. Claude delegates from each `description`. Custom descriptions, built-ins excluded, warn at startup past 15,000 tokens (checked October 2026). `context: fork` runs the skill body as the task, and that subagent does not see the conversation. Omit `agent` and the type is `general-purpose`.
+A [subagent](https://code.claude.com/docs/en/sub-agents) has its own context window, system prompt, tools, and permissions, and returns a summary. Files live in `~/.claude/agents/` or `.claude/agents/`. Claude delegates from each `description`. Custom descriptions, built-ins excluded, warn at startup past 15,000 tokens. `context: fork` runs the skill body as the task, and that subagent does not see the conversation. Omit `agent` and the type is `general-purpose`.
 
 | | Path | Loaded up front | Runs when |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Together they are cut at 1,536 characters, which `skillListingMaxDescChars` sets
 
 ## Scripts and reference files
 
-Keep `SKILL.md` under 500 lines. Once invoked, the text stays in the conversation and is not read from disk again. After auto-compaction, each skill can keep the first 5,000 tokens of its latest run, from a shared 25,000 token budget that fills newest first (checked October 2026).
+Keep `SKILL.md` under 500 lines. Once invoked, the text stays in the conversation and is not read from disk again. After auto-compaction, each skill can keep the first 5,000 tokens of its latest run, from a shared 25,000 token budget that fills newest first.
 
 Point `SKILL.md` at a reference file and Claude reads that file when the instructions say to. A script is executed, not loaded into the prompt. `${CLAUDE_SKILL_DIR}` is the `SKILL.md` directory. Use it in the body and in `allowed-tools`, as in `Bash(${CLAUDE_SKILL_DIR}/scripts/render.sh *)`, so the grant matches the command. Workspace trust does not gate the field, including `claude -p` in a folder you have never trusted.
 
@@ -67,7 +67,7 @@ A marketplace is a repository with `.claude-plugin/marketplace.json`. Claude Cod
 /plugin install skill-creator@claude-plugins-official
 ```
 
-User scope is you, in every project on this computer. Project scope is the committed `.claude/settings.json`, and each collaborator still installs the plugin. Local scope is you, in this repository. The plugin then loads in every session. For a skill Claude can invoke, the name and description are in context every turn and count toward usage. The body loads when the skill runs. Official-marketplace plugins show a Context cost on the Marketplaces tab before install (checked October 2026). `skillOverrides` does not affect plugin skills. Disable one with `/plugin` or `claude plugin disable`.
+User scope is you, in every project on this computer. Project scope is the committed `.claude/settings.json`, and each collaborator still installs the plugin. Local scope is you, in this repository. The plugin then loads in every session. For a skill Claude can invoke, the name and description are in context every turn and count toward usage. The body loads when the skill runs. Official-marketplace plugins show a Context cost on the Marketplaces tab before install. `skillOverrides` does not affect plugin skills. Disable one with `/plugin` or `claude plugin disable`.
 
 ## Common mistakes
 
@@ -75,7 +75,7 @@ Repeating `CLAUDE.md` in a description spends the listing on every turn. Leave t
 
 When `/name` works and Claude never selects the skill, the description missed the listing. `claude --debug` shows a YAML error. `claude plugin validate ~/.claude/skills` finds frontmatter that does not parse (v2.1.233 or later). Outside a plugin, `<`, a zero-width space, or a leading or trailing space in the folder name keeps the skill from loading.
 
-A rule for every edit belongs in a hook. `hooks` in frontmatter starts when the skill runs and lasts the session. In the body, write a standing instruction such as "Run the tests after every edit", because later turns do not re-read the file. After compaction, invoke the skill again. Only the start of it is kept.
+A rule for every edit belongs in a [hook](/blog/claude-code-hooks). `hooks` in frontmatter starts when the skill runs and lasts the session. In the body, write a standing instruction such as "Run the tests after every edit", because later turns do not re-read the file. After compaction, invoke the skill again. Only the start of it is kept.
 
 ## Open a pane for a long job
 

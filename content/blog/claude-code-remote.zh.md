@@ -77,7 +77,7 @@ kaku remote --reset        # 移除所有已配对的浏览器
 
 ### 能不能直接 SSH 到 Mac 上跑 Claude Code？
 
-可以，前提是你配好了 SSH，也有办法连到这台 Mac，最好在 tmux 里跑，断线了会话还在，tmux 打开了 `allow-passthrough` 的话，通知也会回到你连过去的那个终端。
+可以，前提是你配好了 SSH，也有办法连到这台 Mac，最好在 tmux 里跑，断线了会话还在，tmux 打开了 `allow-passthrough` 的话，[通知](/zh/blog/claude-code-notifications)也会回到你连过去的那个终端。
 
 ### kaku remote 能用 Codex 和别的命令行工具吗？
 

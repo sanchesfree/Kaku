@@ -39,8 +39,6 @@ With a status line set, Claude Code hides most footer hints, including `esc to i
 
 ## What the JSON contains
 
-Field names checked October 2026:
-
 | Field | What it is |
 |---|---|
 | `model.display_name`, `model.id` | Current model name and identifier |
@@ -54,9 +52,9 @@ Field names checked October 2026:
 
 [[figure:claude-code-statusline|Session JSON goes to the script on stdin, and the printed line is what shows under the input|The branch is not in that JSON. The script asks git for it.]]
 
-`used_percentage` sums `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`, and leaves out `output_tokens`. Both token totals are `0` before the first API response. `current_usage` is `null` before the first call and again after `/compact`, until the next call. `// 0` covers a null percentage. A row that shows `--` after several messages needs a restart. `/context` can read higher because it estimates messages added since that response.
+`used_percentage` sums `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`, and leaves out `output_tokens`. `total_input_tokens` and `total_output_tokens` are both `0` before the first API response. `current_usage` is `null` before the first call and again after `/compact`, until the next call. `// 0` covers a null percentage. A row that shows `--` after several messages needs a restart. `/context` can read higher because it estimates messages added since that response.
 
-`cost.total_cost_usd` is a client-side list-price estimate, unless a [`modelPricing`](https://code.claude.com/docs/en/settings-reference#modelpricing) table applies, and it can differ from the bill. `/clear` resets it to $0. Before v2.1.211 it carried over. `total_duration_ms` accumulates across resumes, skips time the session is not running. `total_api_duration_ms` is API wait time. The script spends no tokens.
+`cost.total_cost_usd` is a client-side list-price estimate, unless a [`modelPricing`](https://code.claude.com/docs/en/settings-reference#modelpricing) table applies, and it can differ from the bill. `/clear` resets it to $0. Before v2.1.211 it carried over. `total_duration_ms` accumulates across resumes and skips time the session is not running. `total_api_duration_ms` is API wait time. The script spends no tokens.
 
 No field is the checked-out branch. `workspace.git_worktree` names a linked worktree from `git worktree add`. `worktree.branch` exists only in a worktree session.
 
@@ -149,7 +147,7 @@ If plan usage is all you want on screen, `kaku ai` already shows it for Claude C
 
 ### Why is the status line blank?
 
-Make the script executable, print to stdout, and exit 0. Before workspace trust, `claude --debug` logs `Status line command skipped: workspace trust not accepted`. A `statusLine` runs a shell command under the hook trust rule. `disableAllHooks` set to `true` outside managed settings leaves only a managed status line. `allowManagedHooksOnly` drops yours.
+Make the script executable, print to stdout, and exit 0. Before workspace trust, `claude --debug` logs `Status line command skipped: workspace trust not accepted`. A `statusLine` runs a shell command under the [hook](/blog/claude-code-hooks) trust rule. `disableAllHooks` set to `true` outside managed settings leaves only a managed status line. `allowManagedHooksOnly` drops yours.
 
 ### Why does the percentage disagree with /context?
 
@@ -157,7 +155,7 @@ The status line uses the last API response. `/context` estimates messages added 
 
 ### Does the status line cost money?
 
-No. The script spends no API tokens. `cost.total_cost_usd` is a list-price estimate, reset to $0 by `/clear`. Before v2.1.211 that total carried over. Checked October 2026.
+No. The script spends no API tokens. `cost.total_cost_usd` is a list-price estimate, reset to $0 by `/clear`. Before v2.1.211 that total carried over.
 
 ### How do I show the 5-hour and 7-day limits?
 

@@ -23,7 +23,7 @@ brew install --cask claude-code
 brew install --cask claude-code@latest
 ```
 
-npm 装的是同一份原生二进制，它要 Node.js 22 或更高，更老的 Node 会打出 `EBADENGINE`，安装照样完成，因为 `claude` 并不跑在 Node 上。可选依赖得允许装上，别用 `sudo npm install -g`，权限和安全都会出问题。
+npm 装的是同一份原生二进制，它要 Node.js 22 或更高，更老的 Node 会打出 `EBADENGINE`，安装照样完成，因为 `claude` 并不跑在 Node 上。装的时候别关掉 npm 的可选依赖，也别用 `sudo npm install -g`，权限和安全都会出问题。
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -33,13 +33,13 @@ shell 说找不到 `claude`，是安装目录还没进 `PATH`，原生启动器 
 
 ## 登录
 
-`claude` 在当前目录启动，第一次会把你带到浏览器。免费的 claude.ai 方案不含 Claude Code，Pro、Max、Team、Enterprise 和 Console 才有。Console 是用预付额度的 API 访问，第一次用 Console 登录会建一个名叫「Claude Code」的工作区。Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 也能用。
+`claude` 在当前目录启动，第一次会把你带到浏览器。免费的 claude.ai 方案不含 Claude Code，Pro、Max、Team、Enterprise 和 Console 才有。Console 账号走的是 API，花的是预付的额度，第一次用 Console 登录会建一个名叫「Claude Code」的工作区。Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 也能用。
 
 设了 `ANTHROPIC_API_KEY`，问到时确认用这把密钥，登录提示就会跳过。`claude auth login --console` 走 Console 计费，不走订阅，会话里用 `/login` 换账号，登录之后凭据会存下来，细节见[快速入门](https://code.claude.com/docs/zh-CN/quickstart)。
 
 ## 确认装好了
 
-`claude doctor` 不进入会话，会打印安装是否正常、设置文件校验出的错误、可以怎么改，以及上次尝试更新的结果。会话里的 `/doctor` 能直接把这些改法加上。
+`claude doctor` 不进入会话，会打印安装是否正常、设置文件校验出的错误、可以怎么改，以及上次尝试更新的结果。会话里跑 `/doctor`，它能直接按这些建议帮你改好。
 
 ## 更新和发布渠道
 
@@ -76,7 +76,7 @@ npm 在全局目录可写时会自己更新，目录不可写就在启动时提�
 }
 ```
 
-这时 `claude doctor` 的 Auto-updates 那一行应该显示 `disabled (set by env: DISABLE_AUTOUPDATER)`。`claude update` 和 `claude install` 还能用，把 `DISABLE_UPDATES` 也设上，这两条才会一起停，2026 年 10 月核对过。
+这时 `claude doctor` 的 Auto-updates 那一行应该显示 `disabled (set by env: DISABLE_AUTOUPDATER)`。`claude update` 和 `claude install` 还能用，把 `DISABLE_UPDATES` 也设上，这两条才会一起停。
 
 ## 卸载，或从 npm 换到原生安装程序
 
@@ -89,33 +89,15 @@ rm -rf ~/.local/share/claude
 
 Homebrew 用 `brew uninstall --cask claude-code`，装的是 latest 那个 cask 就用 `brew uninstall --cask claude-code@latest`，npm 用 `npm uninstall -g @anthropic-ai/claude-code`。
 
-从 npm 换到原生安装程序，先卸掉 npm 包，再跑 `curl -fsSL https://claude.ai/install.sh | bash`，然后新开一个终端跑 `claude --version`，`~/.claude` 留着，设置和会话历史都还在。删掉 `~/.claude` 和 `~/.claude.json`，设置、允许的工具、MCP 服务器配置和会话历史会一起清掉。VS Code 扩展、JetBrains 插件和 Desktop app 下次跑起来会把这个目录再建出来。`claude` 还能启动的话，多半还有第二份安装，或者 shell 里留着别名。
+从 npm 换到原生安装程序，先卸掉 npm 包，再跑 `curl -fsSL https://claude.ai/install.sh | bash`，然后新开一个终端跑 `claude --version`，`~/.claude` 留着，设置和会话历史都还在。要是想彻底清干净，再删掉 `~/.claude` 和 `~/.claude.json`，设置、允许的工具、MCP 服务器配置和会话历史会一起清掉。VS Code 扩展、JetBrains 插件和 Desktop app 下次跑起来会把这个目录再建出来。`claude` 还能启动的话，多半还有第二份安装，或者 shell 里留着别名。
 
 ## 换行和通知
 
-按 Enter 会把当前输入发出去，Ctrl+J，或者先输入 `\` 再按 Enter，在每个终端里都是插入换行。Shift+Enter 在 Ghostty、Kitty、iTerm2、WezTerm、Warp 和 Apple Terminal 里不用设置也是换行。走 kitty 键盘协议的终端也是换行，包括 Alacritty 0.16 及以后，这要 Claude Code v2.1.269 及以后。VS Code、Cursor、Devin Desktop、0.16 之前的 Alacritty 和 Zed，要在 tmux 或 screen 外面跑一次 `/terminal-setup`。在 VS Code、Cursor 和 Devin Desktop 里，`/terminal-setup` 还会把 `terminal.integrated.gpuAcceleration` 设成 `"off"`，改回 `"auto"` 再重载窗口就能撤掉。JetBrains 的 IDE 没有 Shift+Enter 换行，2026 年 10 月核对过。
-
-桌面通知默认只在 Ghostty、Kitty 和 iTerm2 里发，任务做完，或者 Claude Code 停下来等你授权，并且你看起来不在跟前，才会发。其他终端把 `preferredNotifChannel` 设成 `terminal_bell`，Kaku 用 `ghostty`。tmux 里 Shift+Enter 会变成发送，通知也到不了外面那层终端，要在 `~/.tmux.conf` 里设上 `allow-passthrough`、`extended-keys` 和 `terminal-features`，再跑 `tmux source-file ~/.tmux.conf`，这几行见[终端配置](https://code.claude.com/docs/zh-CN/terminal-config)。
-
-```json
-{
-  "preferredNotifChannel": "terminal_bell"
-}
-```
-
-iTerm2 还要在 Settings > Profiles > Terminal 里勾上 Notification Center Alerts，再在 Filter Alerts 里打开 Send escape sequence-generated alerts。通知可以沿着 SSH 回到你 Mac 上的终端，`Notification` hook 可以同时放一个声音，见[通知指南](/zh/blog/claude-code-notifications)。
+按 Enter 会把当前输入发出去，`Ctrl + J`，或者先输入 `\` 再按 Enter，在每个终端里都是插入换行。哪些终端里 `Shift + Enter` 不用设置就能换行，哪些要先跑一次 `/terminal-setup`，[Claude Code 用什么终端最好](/zh/blog/best-terminal-for-claude-code)那篇都列了，在 VS Code、Cursor 和 Devin Desktop 里 `/terminal-setup` 还会把 `terminal.integrated.gpuAcceleration` 设成 `"off"`，改回 `"auto"` 再重载窗口就能撤掉。桌面通知默认只在 Ghostty、Kitty 和 iTerm2 里发，其他终端怎么设，iTerm2 要打开哪个选项，SSH 和 [tmux](/zh/blog/tmux-alternative-mac) 里是什么情况，[通知指南](/zh/blog/claude-code-notifications)里都写了。
 
 ## 在 Kaku 里
 
-在 0.25.0 之前的 Kaku 里，Claude Code 认不出 Kaku，默认的 `auto` 通道什么都不发，好在 Kaku 认得 Claude Code 发给 Ghostty 的那串序列，在 `~/.claude/settings.json` 里加上：
-
-```json
-{ "preferredNotifChannel": "ghostty" }
-```
-
-Kaku 0.25.0 及以上还能直接读到 Claude Code 2.1.295 及以上自己上报的工作中、等你和已完成状态，两边都是新版本时把通道留在 `auto` 就行，不然每条通知会弹两次。
-
-通知在 Kaku 处于后台时才会出现，你正看着的那个窗格不会弹，一条都没有的话，点 Kaku > Notification Settings...，打开允许通知。macOS 在你点过不允许之后不会再问，通知因此被丢掉时，下次切回 Kaku 它会告诉你。
+Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，0.25.0 之前的 Kaku 要在 `~/.claude/settings.json` 里设上 `"preferredNotifChannel": "ghostty"`，为什么这样，以及一条都收不到时该查什么，见[通知指南](/zh/blog/claude-code-notifications)。
 
 `Shift + Enter` 和 `Cmd + Enter` 在输入框里插入换行。
 
@@ -139,9 +121,9 @@ kaku ai
 
 新开一个终端跑 `claude --version`，原生启动器是 `~/.local/bin/claude`。
 
-### Shift+Enter 把消息发出去了，换行怎么打？
+### Shift + Enter 把消息发出去了，换行怎么打？
 
-Ctrl+J，或者 `\` 然后 Enter，每个终端都能用。Shift+Enter 不能换行的地方，在 tmux 外面跑一次 `/terminal-setup`，VS Code、Cursor、Devin Desktop、0.16 之前的 Alacritty 和 Zed 都是这样。
+`Ctrl + J`，或者 `\` 然后 Enter，每个终端都能用。`Shift + Enter` 不能换行的地方，在 tmux 外面跑一次 `/terminal-setup`，VS Code、Cursor、Devin Desktop、0.16 之前的 Alacritty 和 Zed 都是这样。
 
 ### 怎么让 Claude Code 不再自己更新？
 

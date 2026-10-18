@@ -1,4 +1,4 @@
-Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, with one Claude Code setting needed for notifications, and this post walks through each one so you can check whatever terminal you use now.
+Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no setting. This post walks through each one so you can check whatever terminal you use now.
 
 [[figure:claude-code-session-loop|A Claude Code session as a loop: you write a prompt, Claude works, it asks for input or finishes, you read the result and open files, and the session survives a restart|The five places where the terminal either helps a Claude Code session or gets in its way.]]
 
@@ -16,7 +16,7 @@ The most expensive minute in an agent session is the one where Claude asked a qu
 
 Claude Code's `preferredNotifChannel` setting defaults to `auto`, and `auto` only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it rings the bell, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.
 
-Kaku 0.25.0 needs no setting with Claude Code 2.1.295 or later: Claude Code tells Kaku when it is waiting on you or done, and Kaku turns that into a notification. On older versions, Kaku understands the sequence Claude Code sends to Ghostty, so one line in `~/.claude/settings.json` is enough:
+Kaku 0.25.0 or later needs no setting with Claude Code 2.1.295 or later: Claude Code tells Kaku when it is waiting on you or done, and Kaku turns that into a notification. On older versions, Kaku understands the sequence Claude Code sends to Ghostty, so one line in `~/.claude/settings.json` is enough:
 
 ```json
 { "preferredNotifChannel": "ghostty" }
@@ -67,13 +67,13 @@ Checked on 2026-10-17 against Claude Code's terminal docs.
 | Kitty | Works | Yes |
 | WezTerm | Works | No, set `terminal_bell` or add a hook |
 | Warp | Works | No, set `terminal_bell` or add a hook |
-| Kaku | Works, `Cmd + Enter` too | Yes, after setting the `ghostty` channel |
+| Kaku | Works, `Cmd + Enter` too | Yes on 0.25.0 with Claude Code 2.1.295 or later, `ghostty` channel before that |
 
 ## FAQ
 
 ### Why don't Claude Code notifications show up?
 
-With the default `auto` channel Claude Code only notifies iTerm2, Ghostty and Kitty. In other terminals set `preferredNotifChannel` in `~/.claude/settings.json` to a channel the terminal understands, such as `ghostty` in Kaku before 0.25.0, or `terminal_bell`. Inside tmux, also run `set -g allow-passthrough on`.
+With the default `auto` channel Claude Code only notifies iTerm2, Ghostty and Kitty, so other terminals need `preferredNotifChannel` set in `~/.claude/settings.json`, except Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs nothing. [Claude Code notifications](/blog/claude-code-notifications) lists the value for each terminal and the tmux line.
 
 ### Can I keep using tmux with Claude Code?
 

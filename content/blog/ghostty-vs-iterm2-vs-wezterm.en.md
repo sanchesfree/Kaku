@@ -1,4 +1,4 @@
-Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is a settings window with more features than either of the others, Ghostty is a text file of `key = value` lines on a fast native app, and WezTerm is a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds.
+Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is a settings window with more features than either of the others, Ghostty is a text file of `key = value` lines on a fast native app, and WezTerm is a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds. Warp, Kitty, Alacritty and Terminal.app are covered in [the best terminal for Mac](/blog/best-terminal-for-mac).
 
 [[figure:terminal-config-models|iTerm2 is configured in a settings window saved to a plist, Ghostty in a text file of key = value lines, WezTerm in a Lua script with hot reload|The configuration model decides more about daily use than any single feature.]]
 
@@ -6,7 +6,7 @@ Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference betw
 
 **iTerm2** keeps everything in a settings window, saved to a property list. Profiles let one app hold several setups, and almost every behavior has a checkbox somewhere. That depth is its strength, and keeping it in sync across machines means exporting profiles or pointing iTerm2 at a folder of saved preferences.
 
-**Ghostty** reads `~/.config/ghostty/config`, a plain list of settings:
+**Ghostty** reads `~/.config/ghostty/config.ghostty` (named `config` before 1.2.3), a plain list of settings:
 
 ```ini
 font-family = JetBrains Mono
@@ -60,7 +60,7 @@ iTerm2 and Ghostty ship regular releases. WezTerm's last stable release is from 
 
 ## Running Claude Code and Codex
 
-All three support `Shift + Enter` for a new line in Claude Code without setup, and all three ask before closing a pane with a running program, so the differences come down to notifications, as above, and how much setup each needs before a long agent session feels right.
+All three support `Shift + Enter` for a new line in Claude Code without setup, and all three ask before closing a pane with a running program, so the differences come down to notifications, as above, and how much setup each needs before a long agent session feels right, which [the best terminal for Claude Code](/blog/best-terminal-for-claude-code) goes through in more detail.
 
 Kaku sits next to WezTerm here. It is a fork that keeps the Lua config and the engine, sets up the parts AI coding CLIs use, such as `Cmd + Click` on `path:line` and an agent's last screen after a restart, and ships them as regular macOS releases instead of nightly builds. If you like WezTerm's model but want it ready for Claude Code and Codex, it is worth a try.
 
@@ -69,10 +69,6 @@ Kaku sits next to WezTerm here. It is a fork that keeps the Lua config and the e
 ### Is Ghostty faster than iTerm2?
 
 Ghostty is built around GPU rendering and generally feels lighter. iTerm2 also renders with Metal, and for most daily work both are fast enough that features matter more than speed.
-
-### Can I use my WezTerm config in Kaku?
-
-Mostly, yes. Kaku keeps WezTerm's Lua API, so most settings carry over. Kaku's config lives at `~/.config/kaku/kaku.lua` and starts from Kaku's own defaults instead of WezTerm's.
 
 ### Which of the three works best with tmux?
 

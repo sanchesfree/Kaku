@@ -13,7 +13,7 @@ Mac 上没有哪个终端对所有人都是最好的，但只要想清楚自己�
 | Warp | 滚动更新 | 客户端 AGPL-3.0 | 有免费档，付费从每月 20 美元起 | 设置窗口 | 支持 |
 | Kitty | 0.49.2 | GPL-3.0 | 免费 | 文本文件 | 支持 |
 | Alacritty | 0.17.0 | Apache-2.0 | 免费 | TOML 文件 | 不支持 |
-| Kaku | 0.24.0 | MIT | 免费 | Lua | 支持 |
+| Kaku | 0.25.0 | MIT | 免费 | Lua | 支持 |
 
 ## Terminal.app
 
@@ -41,7 +41,7 @@ Warp 围绕 block 重新设计了终端，每条命令和它的输出算一个�
 
 ## Kaku
 
-Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换，还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来，Claude Code 的通知只需要设一下 `ghostty` 通道。它只支持 macOS，这是为了在这一个平台上做得更贴合换来的。
+Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换，还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来，Claude Code 的通知在 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本设成 `ghostty` 通道，见[Claude Code 通知](/zh/blog/claude-code-notifications)。它只支持 macOS，这是为了在这一个平台上做得更贴合换来的。
 
 ```bash
 brew install --cask kaku

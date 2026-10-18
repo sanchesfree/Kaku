@@ -96,7 +96,7 @@ Kaku 保留了 WezTerm 的引擎和 Lua API，上面这些设置在 Kaku 里同�
 | 连字 | 关闭 |
 | 左 / 右 Option | Meta / 组合字符 |
 | 分屏 | `Cmd + D` / `Cmd + Shift + D` |
-| 窗口 | 按钮放进标签栏，40px 内边距，原生全屏 |
+| 窗口 | 按钮放进标签栏，40px 内边距，低分辨率屏上 26px，原生全屏 |
 | 标签栏 | 在底部，只有一个标签时隐藏 |
 | 配色 | Kaku Dark 和 Kaku Light |
 | 渲染 | WebGpu，LowPower，60 fps |

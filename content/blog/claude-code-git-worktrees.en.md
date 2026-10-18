@@ -91,7 +91,7 @@ claude --worktree feature-auth --resume
 
 [New tab](https://kaku.fun/docs/keybindings) is `Cmd + T`. New tabs and splits inherit the current directory (`config.tab_inherit_working_directory` and `config.split_pane_inherit_working_directory` default to true), so `cd ../repo-feature` or run `claude --worktree` from the repo. `Cmd + Shift + I` or a double-click renames the tab, and a hand-set name stays when `config.tab_title_use_pane_title` shows Claude Code's title. Automatic titles show the directory. `Cmd + Shift + O` opens the Tab Navigator.
 
-`Cmd + D` splits vertically, `Cmd + Shift + D` splits horizontally, and `Cmd + Shift + Enter` zooms the pane. Closing a pane or tab with Claude Code in front asks first. Bundled `tab_close_confirmation` and `pane_close_confirmation` are `SmartPrompt`, and `Cmd + W` closes the active pane when the tab has several.
+`Cmd + D` splits side by side, `Cmd + Shift + D` top and bottom, and `Cmd + Shift + Enter` zooms the pane. Closing a pane or tab with Claude Code in front asks first. Bundled `tab_close_confirmation` and `pane_close_confirmation` are `SmartPrompt`, and `Cmd + W` closes the active pane when the tab has several.
 
 [`kaku start --new-tab`](https://kaku.fun/docs/cli) adds a tab to the current window. `kaku cli split-pane` splits the current pane and can run a command in the new one:
 
@@ -99,7 +99,7 @@ claude --worktree feature-auth --resume
 kaku cli split-pane -- bash -c "claude --worktree feature-auth"
 ```
 
-`config.restore_previous_session` defaults to true, so the next launch reopens the tabs and panes. The layout is saved within a minute of opening or closing a window, tab, or pane, which covers a crash or force quit. A Claude Code pane comes back with its last screen, which shows where the conversation stopped. On Kaku 0.25.0 and later, with Claude Code 2.1.295 or later, a background tab also shows a dot when Claude Code is waiting, finished, or failed; on earlier versions, set up [notifications](/blog/claude-code-notifications) to hear about it.
+`config.restore_previous_session` defaults to true, so the next launch reopens the tabs and panes. The layout is saved within a minute of opening or closing a window, tab, or pane, which covers a crash or force quit. A Claude Code pane comes back with its last screen, which shows where the conversation stopped. On Kaku 0.25.0 or later with Claude Code 2.1.295 or later, a background tab shows a dot when Claude Code is waiting, finished, or failed, with no setup. On earlier versions, the `ghostty` [notification channel](/blog/claude-code-notifications) lights the same dot for waiting and finished.
 
 ## FAQ
 
