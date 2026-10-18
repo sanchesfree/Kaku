@@ -89,7 +89,7 @@
           <p>运行 <code>kaku ai</code> 会打开 AI 设置面板，可以配置 Claude Code、Codex、Gemini CLI、Copilot CLI、Kimi Code 这些外部编程工具，看它们的套餐用量，也可以设置 Kaku Assistant。只有在这里修改时 Kaku 才会改对应工具的配置，你自己写的字段会保留，Kaku 不会主动往 agent 里加 hook 或指令。</p>
           <pre><code class="language-bash">kaku ai</code></pre>
           <h2 id="ai-coding-notifications"><a class="anchor" href="#ai-coding-notifications" aria-label="Link to 通知">#</a>通知</h2>
-          <p>Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 <code>auto</code> 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里这样设置就行：</p>
+          <p>Claude Code 2.1.295 及以后会告诉 Kaku 自己是在干活、在等你还是已经跑完，Kaku 0.25.0 及以上不用任何设置就会提醒你，<code>preferredNotifChannel</code> 保持默认的 <code>auto</code> 就好，改成 <code>ghostty</code> 会让 Claude Code 再发一条重复的通知。Claude Code 更旧或者 Kaku 早于 0.25.0 时，<code>auto</code> 通道在这里什么都不会发，在 <code>~/.claude/settings.json</code> 里这样设置：</p>
           <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
           <p>Codex 不用改，它会响终端铃声，Kaku 把铃声转成通知。想看到 Codex 自己的消息而不是一条通用提醒，在 <code>~/.codex/config.toml</code> 里加上：</p>
           <pre><code class="language-toml"><span class="tok-k">[tui]</span>

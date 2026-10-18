@@ -12,7 +12,7 @@ kaku ai
 
 ## 通知
 
-Claude Code 只给它认识的终端发通知，目前还不认识 Kaku，所以默认的 `auto` 通道在这里什么都不会发。Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里这样设置就行：
+Claude Code 2.1.295 及以后会告诉 Kaku 自己是在干活、在等你还是已经跑完，Kaku 0.25.0 及以上不用任何设置就会提醒你，`preferredNotifChannel` 保持默认的 `auto` 就好，改成 `ghostty` 会让 Claude Code 再发一条重复的通知。Claude Code 更旧或者 Kaku 早于 0.25.0 时，`auto` 通道在这里什么都不会发，在 `~/.claude/settings.json` 里这样设置：
 
 ```json
 { "preferredNotifChannel": "ghostty" }

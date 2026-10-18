@@ -89,7 +89,7 @@
           <p>Run <code>kaku ai</code> to open the AI settings panel. It configures external coding tools such as Claude Code, Codex, Gemini CLI, Copilot CLI and Kimi Code, shows their plan usage, and sets up Kaku Assistant. Kaku only changes a tool&#39;s settings when you edit them there, and keeps the fields you wrote yourself. It never adds hooks or instructions to your agents on its own.</p>
           <pre><code class="language-bash">kaku ai</code></pre>
           <h2 id="ai-coding-notifications"><a class="anchor" href="#ai-coding-notifications" aria-label="Link to Notifications">#</a>Notifications</h2>
-          <p>Claude Code only notifies terminals it recognizes and does not recognize Kaku yet, so its default <code>auto</code> channel sends nothing here. Kaku understands the sequence Claude Code sends to Ghostty, so set this in <code>~/.claude/settings.json</code>:</p>
+          <p>Claude Code 2.1.295 and later tell Kaku whether they are working, waiting on you or done, so Kaku 0.25.0 or later notifies you with no setting. Leave <code>preferredNotifChannel</code> at its default <code>auto</code>, since <code>ghostty</code> there makes Claude Code post a second notification. With an older Claude Code or Kaku before 0.25.0, the <code>auto</code> channel sends nothing here, so set this in <code>~/.claude/settings.json</code>:</p>
           <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
           <p>Codex works without changes: it rings the terminal bell and Kaku turns that into a notification. To see Codex&#39;s own message instead of a generic one, add this to <code>~/.codex/config.toml</code>:</p>
           <pre><code class="language-toml"><span class="tok-k">[tui]</span>

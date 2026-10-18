@@ -12,7 +12,7 @@ kaku ai
 
 ## Notifications
 
-Claude Code only notifies terminals it recognizes and does not recognize Kaku yet, so its default `auto` channel sends nothing here. Kaku understands the sequence Claude Code sends to Ghostty, so set this in `~/.claude/settings.json`:
+Claude Code 2.1.295 and later tell Kaku whether they are working, waiting on you or done, so Kaku 0.25.0 or later notifies you with no setting. Leave `preferredNotifChannel` at its default `auto`, since `ghostty` there makes Claude Code post a second notification. With an older Claude Code or Kaku before 0.25.0, the `auto` channel sends nothing here, so set this in `~/.claude/settings.json`:
 
 ```json
 { "preferredNotifChannel": "ghostty" }
