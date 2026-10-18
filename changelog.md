@@ -438,7 +438,7 @@ Thanks to @GavinRiver for the contribution. If you find Kaku helpful, feel free 
 13. **Bar Cursor**: Changed from block to bar cursor, more common in modern terminals. Supports Vim mode cursor switching between normal and insert modes. Cursor blinking behavior is restored with a tuned default blink rate (`500ms`) and improved inactive-pane cursor rendering.
 14. **Clearer Split Labels**: Menu now shows `Split Pane Top/Bottom` and `Split Pane Left/Right` instead of confusing `Vertically/Horizontally`.
 15. **Safer `kaku update`**: Prevents upgrading the wrong Homebrew package and only probes caskroom-managed installs.
-16. **\[color\_scheme\](cci:1://file:///Users/tw93/www/Kaku/config/src/config.rs:1469:4-1525:5) Override Fix**: User-defined \[color\_scheme\](cci:1://file:///Users/tw93/www/Kaku/config/src/config.rs:1469:4-1525:5) now correctly overrides the bundled `Kaku` theme.
+16. **color\_scheme Override Fix**: User-defined color\_scheme now correctly overrides the bundled `Kaku` theme.
 17. **Lower GPU Usage**: Disabled window shadow by default to reduce GPU overhead on macOS, and the window looks even cleaner.
 
 [GitHub](https://github.com/tw93/Kaku/releases/tag/V0.3.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.3.0/Kaku.dmg)

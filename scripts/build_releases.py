@@ -55,6 +55,7 @@ SKIP_HTML = {"kaku-site-overview.html"}
 
 
 def clean(text: str) -> str:
+    text = re.sub(r"\[([^\]]+)\]\((?:cci|file|vscode):[^)]+\)", r"\1", text)
     text = text.replace(" \u2014 ", ", ")
     text = text.replace("\u2014", ", ")
     return re.sub(r" {2,}", " ", text).strip()
