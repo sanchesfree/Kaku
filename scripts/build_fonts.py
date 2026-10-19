@@ -4,7 +4,8 @@
 iOS has no Chinese serif, so a stack of system names set every iPhone's
 Chinese pages in PingFang, a sans, beside the serif Latin. The site carries
 TsangerJinKai02, Kaku's declared face, subsetted to exactly the CJK characters
-its pages use, including the hero's 書 on the English pages. Its license is
+its pages use. The hero's 書 is a one-glyph cut of Source Han Serif TC, the face
+every family site uses for its mark. TsangerJinKai02's license is
 free for non-commercial use, which covers Kaku (MIT); a paid product's site
 uses Source Han Serif instead.
 
@@ -77,10 +78,17 @@ def charset():
     return chars
 
 
-# The hero's 書 is the only Chinese the English pages set in this face. It gets
-# a one-glyph file so English visitors do not download the whole subset.
+# The hero's 書 comes from Source Han Serif TC like the siblings' marks (Mole 鼴,
+# Pake 殼): TsangerJinKai02's heavier strokes read far darker than theirs. A
+# one-glyph file also keeps English visitors off the whole subset.
 MARK = "書"
+MARK_SOURCE = "SourceHanSerifTC-Regular.otf"
 MARK_FILE = FONT_DIR / "kaku-mark.woff2"
+MARK_CACHES = [
+    pathlib.Path(os.environ["KAKU_FONT_CACHE"]) if os.environ.get("KAKU_FONT_CACHE") else None,
+    root / ".fontcache",
+    root.parent / "mole-mac" / "site" / ".fontcache",
+]
 
 
 def subset_path(weight):
@@ -117,8 +125,13 @@ def regenerate():
                 f"--output-file={out}",
             ], check=True)
             print(f"  fonts/{out.name}  {len(chars)} glyphs  {out.stat().st_size / 1024:.0f} KB")
+        mark_cache = next((p for p in MARK_CACHES if p and (p / MARK_SOURCE).exists()), None)
+        if mark_cache is None:
+            print(f"missing {MARK_SOURCE}: put it in .fontcache "
+                  "(https://github.com/adobe-fonts/source-han-serif/releases)", file=sys.stderr)
+            return 1
         subprocess.run([
-            sys.executable, "-m", "fontTools.subset", str(cache / SUBSETS[0][1]),
+            sys.executable, "-m", "fontTools.subset", str(mark_cache / MARK_SOURCE),
             f"--text={MARK}", "--flavor=woff2", "--no-hinting", "--desubroutinize",
             f"--output-file={MARK_FILE}",
         ], check=True)
