@@ -198,14 +198,6 @@
       },
       {
         "@type": "Question",
-        "name": "和 iTerm2、Warp、Ghostty、WezTerm 比有什么不同？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "简单说就是字体、主题和 Shell 工具开箱配齐，无需注册账号，AI 服务直连你自己的配置；每一款的具体差别写在对比页里：https://kaku.fun/zh/compare"
-        }
-      },
-      {
-        "@type": "Question",
         "name": "Kaku 收费吗？",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -246,33 +238,28 @@
           <a class="btn btn-primary" href="https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg">下载 Kaku</a>
           <a class="btn btn-secondary" href="/zh/docs">安装指南</a>
         </div>
-        <p class="hero-more"><a href="/zh/compare">对比 iTerm2、Warp、Ghostty 和 WezTerm</a></p>
       </div>
     </section>
     <section class="section showcase-section" aria-label="Kaku 截图"><div class="wide">
-      <div class="screenshot-gallery">
-        <div class="showcase-frame">
-          <figure class="shot" id="shot-ai-together" role="tabpanel" aria-labelledby="tab-ai-together" tabindex="0"><a href="/shots/ai-together.webp?v=45f0a13b1c1c"><img src="/shots/ai-together.webp?v=45f0a13b1c1c" width="2200" height="1540" fetchpriority="high" alt="在 Kaku 里用 Claude Code 和 Codex"></a></figure>
-          <figure class="shot" id="shot-remote" role="tabpanel" aria-labelledby="tab-remote" tabindex="0" hidden><a href="/shots/remote.webp?v=e96eef702323"><img src="/shots/remote.webp?v=e96eef702323" width="2200" height="1540" loading="lazy" alt="在浏览器里接着用 Mac 上的会话"></a></figure>
-          <figure class="shot" id="shot-assistant" role="tabpanel" aria-labelledby="tab-assistant" tabindex="0" hidden><a href="/shots/assistant.webp"><img src="/shots/assistant.webp" width="2200" height="1540" loading="lazy" alt="不用离开终端，直接问 AI"></a></figure>
-          <figure class="shot" id="shot-commands" role="tabpanel" aria-labelledby="tab-commands" tabindex="0" hidden><a href="/shots/commands.webp"><img src="/shots/commands.webp" width="2200" height="1540" loading="lazy" alt="说清楚想做什么，确认命令后再执行"></a></figure>
-          <figure class="shot" id="shot-tools-dark" role="tabpanel" aria-labelledby="tab-tools-dark" tabindex="0" hidden><a href="/shots/tools-dark.webp"><img src="/shots/tools-dark.webp" width="2200" height="1540" loading="lazy" alt="在终端里浏览文件和代码"></a></figure>
-          <figure class="shot" id="shot-tools-light" role="tabpanel" aria-labelledby="tab-tools-light" tabindex="0" hidden><a href="/shots/tools-light.webp"><img src="/shots/tools-light.webp" width="2200" height="1540" loading="lazy" alt="换成浅色主题，浏览文件和代码"></a></figure>
-          <figure class="shot" id="shot-settings" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden><a href="/shots/settings.webp"><img src="/shots/settings.webp" width="2200" height="1540" loading="lazy" alt="字体、主题和窗口，按自己的习惯来"></a></figure>
-          <figure class="shot" id="shot-management" role="tabpanel" aria-labelledby="tab-management" tabindex="0" hidden><a href="/shots/management.webp"><img src="/shots/management.webp" width="2200" height="1540" loading="lazy" alt="用 kaku 管理配置、检查运行状态"></a></figure>
+      <div class="gallery" data-gallery>
+        <div class="gallery-frame">
+          <figure class="gallery-panel is-active" id="shot-ai" role="tabpanel" aria-labelledby="tab-ai"><a href="/shots/home/ai.webp?v=ca1374cd3185" tabindex="-1"><img src="/shots/home/ai-1980w.webp?v=ca1374cd3185" srcset="/shots/home/ai-1080w.webp?v=ca1374cd3185 1080w, /shots/home/ai-1980w.webp?v=ca1374cd3185 1980w, /shots/home/ai.webp?v=ca1374cd3185 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" fetchpriority="high" decoding="async" alt="Claude Code 在项目里干活，窗口右上角显示它正在做什么"></a></figure>
+          <figure class="gallery-panel" id="shot-assistant" role="tabpanel" aria-labelledby="tab-assistant" aria-hidden="true"><a href="/shots/home/assistant.webp?v=abd83af602f3" tabindex="-1"><img src="/shots/home/assistant-1980w.webp?v=abd83af602f3" srcset="/shots/home/assistant-1080w.webp?v=abd83af602f3 1080w, /shots/home/assistant-1980w.webp?v=abd83af602f3 1980w, /shots/home/assistant.webp?v=abd83af602f3 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="按 Cmd + L 直接问，回答里的命令可以复制或插入"></a></figure>
+          <figure class="gallery-panel" id="shot-commands" role="tabpanel" aria-labelledby="tab-commands" aria-hidden="true"><a href="/shots/home/commands.webp?v=b7734a4016c7" tabindex="-1"><img src="/shots/home/commands-1980w.webp?v=b7734a4016c7" srcset="/shots/home/commands-1080w.webp?v=b7734a4016c7 1080w, /shots/home/commands-1980w.webp?v=b7734a4016c7 1980w, /shots/home/commands.webp?v=b7734a4016c7 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="输入 ## 加一句话，给出几条命令供你挑"></a></figure>
+          <figure class="gallery-panel" id="shot-files-dark" role="tabpanel" aria-labelledby="tab-files-dark" aria-hidden="true"><a href="/shots/home/files-dark.webp?v=fce983ac5f46" tabindex="-1"><img src="/shots/home/files-dark-1980w.webp?v=fce983ac5f46" srcset="/shots/home/files-dark-1080w.webp?v=fce983ac5f46 1080w, /shots/home/files-dark-1980w.webp?v=fce983ac5f46 1980w, /shots/home/files-dark.webp?v=fce983ac5f46 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="按 Cmd + Shift + Y 用 Yazi 浏览文件和代码"></a></figure>
+          <figure class="gallery-panel" id="shot-files-light" role="tabpanel" aria-labelledby="tab-files-light" aria-hidden="true"><a href="/shots/home/files-light.webp?v=52bc7579f3dd" tabindex="-1"><img src="/shots/home/files-light-1980w.webp?v=52bc7579f3dd" srcset="/shots/home/files-light-1080w.webp?v=52bc7579f3dd 1080w, /shots/home/files-light-1980w.webp?v=52bc7579f3dd 1980w, /shots/home/files-light.webp?v=52bc7579f3dd 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="同一个工作区换成 Kaku Light"></a></figure>
+          <figure class="gallery-panel" id="shot-settings" role="tabpanel" aria-labelledby="tab-settings" aria-hidden="true"><a href="/shots/home/settings.webp?v=f4a44ffaa78b" tabindex="-1"><img src="/shots/home/settings-1980w.webp?v=f4a44ffaa78b" srcset="/shots/home/settings-1080w.webp?v=f4a44ffaa78b 1080w, /shots/home/settings-1980w.webp?v=f4a44ffaa78b 1980w, /shots/home/settings.webp?v=f4a44ffaa78b 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="运行 kaku config 调整字体、主题和窗口"></a></figure>
+          <figure class="gallery-panel" id="shot-cli" role="tabpanel" aria-labelledby="tab-cli" aria-hidden="true"><a href="/shots/home/cli.webp?v=98a227a12d86" tabindex="-1"><img src="/shots/home/cli-1980w.webp?v=98a227a12d86" srcset="/shots/home/cli-1080w.webp?v=98a227a12d86 1080w, /shots/home/cli-1980w.webp?v=98a227a12d86 1980w, /shots/home/cli.webp?v=98a227a12d86 2584w" sizes="(max-width: 1120px) calc(100vw - 32px), 992px" width="2584" height="1741" loading="lazy" decoding="async" alt="运行 kaku，聊天、AI 配置、自检和更新都在这里"></a></figure>
         </div>
-        <div class="showcase-footer">
-          <p class="showcase-caption" aria-live="polite">在 Kaku 里用 Claude Code 和 Codex</p>
-          <div class="shot-tabs" role="tablist" aria-label="功能截图" hidden>
-            <button id="tab-ai-together" type="button" role="tab" aria-selected="true" aria-controls="shot-ai-together" data-caption="在 Kaku 里用 Claude Code 和 Codex">AI 编程</button>
-            <button id="tab-remote" type="button" role="tab" aria-selected="false" aria-controls="shot-remote" data-caption="运行 kaku remote，在浏览器里接着用 Mac 上的会话" tabindex="-1">Remote</button>
-            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" data-caption="按 Cmd + L，不用离开终端直接问 AI" tabindex="-1">AI 聊天</button>
-            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" data-caption="输入 # 说清楚想做什么，确认命令后再执行" tabindex="-1">一句话命令</button>
-            <button id="tab-tools-dark" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-dark" data-caption="在终端里浏览文件和代码" tabindex="-1">文件管理</button>
-            <button id="tab-tools-light" type="button" role="tab" aria-selected="false" aria-controls="shot-tools-light" data-caption="换成浅色主题，浏览文件和代码" tabindex="-1">浅色主题</button>
-            <button id="tab-settings" type="button" role="tab" aria-selected="false" aria-controls="shot-settings" data-caption="字体、主题和窗口，按自己的习惯来" tabindex="-1">设置</button>
-            <button id="tab-management" type="button" role="tab" aria-selected="false" aria-controls="shot-management" data-caption="用 kaku 管理配置、检查运行状态" tabindex="-1">kaku</button>
-          </div>
+        <div class="gallery-caption" aria-live="polite"><p class="title" data-gallery-title>AI 编程</p><p class="line" data-gallery-line>Claude Code 在项目里干活，窗口右上角显示它正在做什么</p></div>
+        <div class="gallery-tabs" role="tablist" aria-label="选择一张 Kaku 截图">
+            <button id="tab-ai" type="button" role="tab" class="is-active" aria-selected="true" aria-controls="shot-ai" data-title="AI 编程" data-line="Claude Code 在项目里干活，窗口右上角显示它正在做什么">AI 编程</button>
+            <button id="tab-assistant" type="button" role="tab" aria-selected="false" aria-controls="shot-assistant" tabindex="-1" data-title="AI 聊天" data-line="按 Cmd + L 直接问，回答里的命令可以复制或插入">AI 聊天</button>
+            <button id="tab-commands" type="button" role="tab" aria-selected="false" aria-controls="shot-commands" tabindex="-1" data-title="一句话命令" data-line="输入 ## 加一句话，给出几条命令供你挑">一句话命令</button>
+            <button id="tab-files-dark" type="button" role="tab" aria-selected="false" aria-controls="shot-files-dark" tabindex="-1" data-title="文件管理" data-line="按 Cmd + Shift + Y 用 Yazi 浏览文件和代码">文件管理</button>
+            <button id="tab-files-light" type="button" role="tab" aria-selected="false" aria-controls="shot-files-light" tabindex="-1" data-title="浅色主题" data-line="同一个工作区换成 Kaku Light">浅色主题</button>
+            <button id="tab-settings" type="button" role="tab" aria-selected="false" aria-controls="shot-settings" tabindex="-1" data-title="设置" data-line="运行 kaku config 调整字体、主题和窗口">设置</button>
+            <button id="tab-cli" type="button" role="tab" aria-selected="false" aria-controls="shot-cli" tabindex="-1" data-title="命令行" data-line="运行 kaku，聊天、AI 配置、自检和更新都在这里">命令行</button>
         </div>
       </div>
     </div></section>
@@ -294,6 +281,7 @@
         </div>
       </div>
     </section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">对比</span><h2>和常见终端对比</h2><p>iTerm2、Warp、Ghostty 和 WezTerm 各有长处，这里只看几处关键差别。</p></div><div class="home-compare"><table><thead><tr><td></td><th scope="col">Kaku</th><th scope="col">iTerm2</th><th scope="col">Warp</th><th scope="col">Ghostty</th><th scope="col">WezTerm</th></tr></thead><tbody><tr><th scope="row">默认值</th><td>开箱即用</td><td>自己拼</td><td>产品默认</td><td>快，预设少</td><td>自己拼</td></tr><tr><th scope="row">AI</th><td>可选，用你的服务</td><td>可选插件，用你的 key</td><td>内置，跑在 Warp 的服务器上</td><td>没有内置</td><td>没有内置</td></tr><tr><th scope="row">Shell 工具</th><td>Kaku 会话里自带</td><td>自己加</td><td>产品自带</td><td>自己加</td><td>自己加</td></tr><tr><th scope="row">账号</th><td>无</td><td>无</td><td>可选</td><td>无</td><td>无</td></tr><tr><th scope="row">协议</th><td>MIT</td><td>GPL</td><td>客户端 AGPL，后端闭源</td><td>MIT</td><td>MIT</td></tr><tr><th scope="row">平台</th><td>仅 macOS</td><td>macOS</td><td>macOS、Linux、Windows</td><td>macOS 和 Linux</td><td>macOS、Linux、Windows</td></tr></tbody></table></div><p class="section-more"><a href="/zh/compare">完整对比，含 cmux 和系统终端</a></p></div></section>
     <section class="section">
       <div class="wide">
         <div class="section-head">
@@ -317,7 +305,6 @@
         </div>
         <div class="section-body prose">
           <p>我工作和生活里的事大多在命令行里完成。之前用了很久 Alacritty，但它没有多标签，做 AI 编码时很不方便；其他几款也试过，总有字体渲染、窗口细节或强制登录这类小遗憾。我想要一个开箱即用、不用先写一堆配置的终端，于是做了 Kaku。</p>
-          <p>Tw93 · <a href="https://twitter.com/HiTw93" target="_blank" rel="noopener noreferrer">@HiTw93</a></p>
         </div>
       </div>
     </section>
@@ -329,7 +316,6 @@
         </div>
         <div class="faq">
           <details class="faq-item"><summary><h3>怎么安装？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer"><a href="https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg">下载 DMG</a>，或用 Homebrew 安装：<code>brew install --cask kaku</code>。</div></details>
-          <details class="faq-item"><summary><h3>和 iTerm2、Warp、Ghostty、WezTerm 比有什么不同？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">简单说就是字体、主题和 Shell 工具开箱配齐，无需注册账号，AI 服务直连你自己的配置；每一款的具体差别写在<a href="/zh/compare">对比页</a>里。</div></details>
           <details class="faq-item"><summary><h3>Kaku 收费吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">不收费，Kaku 是 MIT 协议的开源项目。</div></details>
           <details class="faq-item"><summary><h3>支持 Windows 或 Linux 吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">暂时不支持，眼下先把 Mac 上的体验做好。</div></details>
         </div>
