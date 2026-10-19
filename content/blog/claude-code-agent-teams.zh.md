@@ -2,9 +2,9 @@
 
 ## 什么时候值得开一队
 
-[subagent](/zh/blog/claude-code-subagents) 干完把一份总结交回调用方，队友则直接给 lead 和其他队友发消息，会话里有 Task 工具时，还会从一份共享任务列表里认领工作。文档把队伍放在需要互相核对的活上，比如几个人同时审同一处改动，一个模块拆给不同的人，一个 bug 用互相冲突的假设去追，或者一次改动同时跨前端、后端和测试。
+[subagent](https://code.claude.com/docs/zh-CN/sub-agents) 干完把一份总结交回调用方，队友则直接给 lead 和其他队友发消息，会话里有 Task 工具时，还会从一份共享任务列表里认领工作。文档把队伍放在需要互相核对的活上，比如几个人同时审同一处改动，一个模块拆给不同的人，一个 bug 用互相冲突的假设去追，或者一次改动同时跨前端、后端和测试。
 
-前后依赖很密的活、大家改同一批文件的活、一步接一步的活，留在一个会话里，或者交给 subagent 更合适。你想自己开几个会话、每人一份检出，用 [git worktree](/zh/blog/claude-code-git-worktrees)，不用 lead 来派任务。
+前后依赖很密的活、大家改同一批文件的活、一步接一步的活，留在一个会话里，或者交给 subagent 更合适。你想自己开几个会话、每人一份检出，用 [git worktree](https://code.claude.com/docs/zh-CN/worktrees)，不用 lead 来派任务。
 
 ## 把开关打开
 
@@ -44,7 +44,7 @@ lead 通过 Agent 工具带上 `name` 来启动队友，Claude Code 不会先问
 
 Kaku 0.25.0 给自己启动的 shell 设置 `TERM_PROGRAM=Kaku`，Kaku 也不在文档点名的分屏后端里，所以在 Kaku 里分屏要走 tmux。`teammateMode` 的默认值是 `"in-process"`。`"auto"` 只在你已经处于 tmux 里，或者终端是 iTerm2 且 `PATH` 上有 `it2` 或装了 tmux 时，才改用分屏，其他情况留在进程内。`"tmux"` 要求分屏，再按当前终端在 tmux 和 iTerm2 之间选。`"iterm2"` 用 `it2` 去开 iTerm2 自己的窗格，找不到 `it2` 时会报错，并给出安装命令。`claude --teammate-mode auto` 只覆盖这一次会话。这个参数是实验性的，`claude --help` 里没有。
 
-在 Kaku 里要分屏队友，把 `teammateMode` 设成 `auto` 或 `tmux`，再在 tmux 里运行 `claude`。`which tmux` 用来确认 `PATH`。不带参数运行 `tmux` 会建一个只有一个窗口的会话。Claude Code 退出后若 tmux 会话还在，`tmux ls` 能列出来，`tmux kill-session -t <session-name>` 把它结束。什么时候还值得在 Mac 上留着 tmux，写在 [tmux 那篇](/zh/blog/tmux-alternative-mac) 里。
+在 Kaku 里要分屏队友，把 `teammateMode` 设成 `auto` 或 `tmux`，再在 tmux 里运行 `claude`。`which tmux` 用来确认 `PATH`。不带参数运行 `tmux` 会建一个只有一个窗口的会话。Claude Code 退出后若 tmux 会话还在，`tmux ls` 能列出来，`tmux kill-session -t <session-name>` 把它结束。
 
 [AI 编程这一页](/zh/docs/ai-coding) 上的 `Cmd + D` 是垂直分屏，`Cmd + Shift + D` 是水平分屏，`Cmd + Shift + Enter` 放大正在看的窗格。这些是 Kaku 自己的窗格，Claude Code 不会把队友放进去，适合你自己另开的会话。
 

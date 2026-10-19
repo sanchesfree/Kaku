@@ -113,7 +113,7 @@ Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更�
 
 ### 该用 subagent 还是 agent team？
 
-只关心结果时用 subagent，几个队友之间需要互相分享发现、互相挑刺时才用 agent team，前提是你能接受多出来的 token 和那个实验开关。
+只关心结果时用 subagent，几个队友之间需要互相分享发现、互相挑刺时才用 agent team，前提是你能接受多出来的 token 和那个实验开关，怎么打开、队友在 Kaku 里显示在哪，见 [Claude Code agent teams](/zh/blog/claude-code-agent-teams)。
 
 ### Claude 为什么不调我写的 subagent？
 

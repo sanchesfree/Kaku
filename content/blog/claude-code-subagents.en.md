@@ -113,7 +113,7 @@ Not by themselves. Each one spends its own tokens against the same usage limits.
 
 ### Should I use a subagent or an agent team?
 
-A subagent when only the result matters. An agent team when teammates need to share findings and challenge each other, and you accept the extra tokens and the experimental flag.
+A subagent when only the result matters. An agent team when teammates need to share findings and challenge each other, and you accept the extra tokens and the experimental flag. [Claude Code agent teams](/blog/claude-code-agent-teams) covers turning them on and where teammates show up in Kaku.
 
 ### Why is Claude not using my subagent?
 

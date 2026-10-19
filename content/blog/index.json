@@ -101,6 +101,20 @@
       }
     },
     {
+      "slug": "claude-code-agent-teams",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code agent teams",
+      "en": {
+        "title": "Claude Code Agent Teams: Turn Them On and Where They Show Up",
+        "description": "Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on."
+      },
+      "zh": {
+        "title": "Claude Code agent teams 怎么打开，在 Kaku 里显示在哪",
+        "description": "agent teams 默认关着，要设 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1，在 Kaku 里分屏要走 tmux。"
+      }
+    },
+    {
       "slug": "zsh-without-oh-my-zsh",
       "category": "shell",
       "date": null,
@@ -364,20 +378,6 @@
       "zh": {
         "title": "在 Mac 上用 Yazi，快速的终端文件管理器",
         "description": "在 macOS 上装好 Yazi 和预览依赖，记住常用按键，加上退出时切换目录的 y 包装函数，再做些配置。"
-      }
-    },
-    {
-      "slug": "claude-code-agent-teams",
-      "category": "agents",
-      "date": null,
-      "keyword": "claude code agent teams",
-      "en": {
-        "title": "Claude Code Agent Teams: Turn Them On and Where They Show Up",
-        "description": "Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on."
-      },
-      "zh": {
-        "title": "Claude Code agent teams 怎么打开，在 Kaku 里显示在哪",
-        "description": "agent teams 默认关着，要设 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1，在 Kaku 里分屏要走 tmux。"
       }
     }
   ]

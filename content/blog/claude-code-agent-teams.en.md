@@ -2,9 +2,9 @@ Checked in October 2026, Claude Code agent teams are experimental and stay off u
 
 ## When a team earns the tokens
 
-A [subagent](/blog/claude-code-subagents) returns a summary to the caller. A teammate messages the lead and the other teammates directly, and, when the session has the Task tools, claims work from a shared task list. The docs put teams on jobs where the workers need to compare notes: several reviewers on one change, a module split across owners, a bug chased with competing hypotheses, or a change that spans frontend, backend, and tests.
+A [subagent](https://code.claude.com/docs/en/sub-agents) returns a summary to the caller. A teammate messages the lead and the other teammates directly, and, when the session has the Task tools, claims work from a shared task list. The docs put teams on jobs where the workers need to compare notes: several reviewers on one change, a module split across owners, a bug chased with competing hypotheses, or a change that spans frontend, backend, and tests.
 
-Sequential work, edits to the same files, and tasks with lots of dependencies fit one session or a subagent better. Separate checkouts that you drive yourself belong in [git worktrees](/blog/claude-code-git-worktrees).
+Sequential work, edits to the same files, and tasks with lots of dependencies fit one session or a subagent better. Separate checkouts that you drive yourself belong in [git worktrees](https://code.claude.com/docs/en/worktrees).
 
 ## Turn teams on
 
@@ -44,7 +44,7 @@ Split panes need tmux, or iTerm2 with the [`it2` CLI](https://github.com/mkusaka
 
 Kaku 0.25.0 sets `TERM_PROGRAM` to `Kaku`, and Kaku is not one of the split-pane backends the docs name, so in Kaku split panes go through tmux. `teammateMode` defaults to `"in-process"`. `"auto"` splits only when you are already inside tmux, or when the terminal is iTerm2 with `it2` on `PATH` or with tmux installed. `"tmux"` requests split panes and picks tmux or iTerm2 from the terminal. `"iterm2"` uses `it2` and errors with the install command if `it2` is missing. `claude --teammate-mode auto` overrides the file for one session. The flag is experimental and is absent from `claude --help`.
 
-In Kaku, set `teammateMode` to `auto` or `tmux`, then run `claude` inside tmux. `which tmux` checks `PATH`. `tmux` with no arguments creates a one-window session. `tmux ls` lists a session left behind, and `tmux kill-session -t <session-name>` ends it. The [tmux post](/blog/tmux-alternative-mac) covers when tmux is still worth running on a Mac.
+In Kaku, set `teammateMode` to `auto` or `tmux`, then run `claude` inside tmux. `which tmux` checks `PATH`. `tmux` with no arguments creates a one-window session. `tmux ls` lists a session left behind, and `tmux kill-session -t <session-name>` ends it.
 
 `Cmd + D`, `Cmd + Shift + D`, and `Cmd + Shift + Enter` on the [AI coding page](/docs/ai-coding) split and zoom Kaku panes. Claude Code does not place teammates in them. They are for sessions you start yourself.
 
