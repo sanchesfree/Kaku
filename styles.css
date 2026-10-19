@@ -447,31 +447,20 @@ button, input { font: inherit; }
 
 .feature-grid {
   display: grid;
-  gap: 1px;
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 32px;
 }
 .feature {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 0.34fr) minmax(0, 0.66fr);
-  gap: 24px;
-  align-items: baseline;
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 0 24px;
   border-top: 1px solid var(--border-soft);
-  transition: color 160ms var(--ease);
-}
-.feature:first-child { border-top: 0; }
-.feature .mark {
-  color: var(--stone);
-  font-family: var(--ui);
-  font-size: 13px;
-  letter-spacing: 0.3px;
   transition: color 160ms var(--ease);
 }
 .feature strong { color: var(--near-black); font-size: 18px; font-weight: 500; line-height: 1.28; }
 .feature span { color: var(--dark-warm); font-family: var(--serif); font-size: 16px; line-height: 1.6; }
 .feature:hover strong { color: var(--brand); }
-.feature:hover .mark { color: var(--brand); }
 
 .split {
   display: grid;
@@ -1210,7 +1199,11 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
 .faq-item[open]::details-content { height: auto; opacity: 1; }
 .faq-answer {
   max-width: 46em;
-  margin: 12px 0 4px;
+  /* Padding, not margin: the open/close transition animates the height of
+     ::details-content, and margins sit outside it, so they used to snap 12px
+     in on the first frame and 12px out on the last. */
+  margin: 0;
+  padding: 12px 0 4px;
   color: var(--stone);
   font-family: var(--serif);
   font-size: 16px;
@@ -1270,8 +1263,8 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .section-toc { display: none; }
   .section-toc p { grid-column: 1 / -1; }
   .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .workflow-item, .feature { grid-template-columns: 48px minmax(0, 1fr); gap: 10px 18px; }
-  .workflow-item p, .feature span:last-child { grid-column: 2; }
+  .workflow-item { grid-template-columns: 48px minmax(0, 1fr); gap: 10px 18px; }
+  .workflow-item p { grid-column: 2; }
   .section { margin-bottom: 54px; }
   .section-tight { margin-bottom: 42px; }
   .hero { min-height: auto; padding: 40px 0 0; }
@@ -1280,6 +1273,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .hero-sub { font-size: 18px; }
 }
 @media (max-width: 880px) {
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .wide, .hero-wrap, .hero-centered { padding: 0 28px; }
   .site-nav { padding-inline: 14px; }
   .section-head h2 { font-size: 26px; }
@@ -1324,8 +1318,8 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
     border-left-color: transparent;
     border-bottom-color: var(--brand);
   }
-  .workflow-item, .feature, .doc-card { grid-template-columns: 1fr; gap: 8px; }
-  .workflow-item p, .feature span:last-child { grid-column: auto; }
+  .workflow-item, .doc-card { grid-template-columns: 1fr; gap: 8px; }
+  .workflow-item p { grid-column: auto; }
   .doc-content { font-size: 16px; }
   .doc-content .anchor { display: none; }
   .doc-content h2 { font-size: 22px; }

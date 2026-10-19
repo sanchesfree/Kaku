@@ -187,6 +187,30 @@
           "@type": "Answer",
           "text": "Not yet. For now the focus is making it great on the Mac."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to use the AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if you want it. The AI features run on your own Codex connection or an API service you set up in kaku ai, and the rest of the terminal works the same without them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring my WezTerm config?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mostly. Kaku keeps WezTerm's Lua config, though a few options behave differently, so check the configuration guide."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I update Kaku?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run kaku update or choose Check for Updates in the app menu. If you installed with Homebrew, brew upgrade --cask kaku works too."
+        }
       }
     ]
   }
@@ -233,8 +257,8 @@
         </div>
       </div>
     </div></section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Defaults</span><h2>Ready when you open it</h2><p>Fonts, themes, shortcuts, and shell integration come set up, so there is no config file to write first.</p></div><div class="feature-grid"><a class="feature" href="/docs/keybindings"><span class="mark">01</span><strong>Tabs &amp; Panes</strong><span>Native shortcuts you already know. Restores windows on launch.</span></a><a class="feature" href="/docs/configuration"><span class="mark">02</span><strong>Fonts &amp; Themes</strong><span>Crisp Retina typography. Dark by default, with Light and Auto options.</span></a><a class="feature" href="/docs/features"><span class="mark">03</span><strong>Fast &amp; Light</strong><span>GPU-accelerated rendering with native windows and shortcuts.</span></a><a class="feature" href="/docs/features"><span class="mark">04</span><strong>Small Touches</strong><span>Copy on select, and long URLs stay clickable across line wraps.</span></a><a class="feature" href="/docs/features"><span class="mark">05</span><strong>Built-in Tools</strong><span>Comes with a terminal file manager, Git diffs, and smart tab completion.</span></a><a class="feature" href="/docs/features"><span class="mark">06</span><strong>AI Assistant</strong><span>Fixes broken commands and writes shell syntax from plain English.</span></a><a class="feature" href="/docs/configuration"><span class="mark">07</span><strong>Lua Config</strong><span>Fully configurable in Lua. Drop in your existing settings.</span></a></div></div></section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Compare</span><h2>How it compares</h2><p>iTerm2, Warp, Ghostty, and WezTerm each do something well. Here is where Kaku differs.</p></div><div class="home-compare"><table><thead><tr><td></td><th scope="col">Kaku</th><th scope="col">iTerm2</th><th scope="col">Warp</th><th scope="col">Ghostty</th><th scope="col">WezTerm</th></tr></thead><tbody><tr><th scope="row">Defaults</th><td>Set up on day one</td><td>You assemble them</td><td>Product defaults</td><td>Fast, fewer presets</td><td>You assemble them</td></tr><tr><th scope="row">AI</th><td>Optional, your provider</td><td>Optional plugin, your key</td><td>Built in, runs on Warp's servers</td><td>None built in</td><td>None built in</td></tr><tr><th scope="row">Shell tools</th><td>In the Kaku session</td><td>You add them</td><td>Product set</td><td>You add them</td><td>You add them</td></tr><tr><th scope="row">Account</th><td>None</td><td>None</td><td>Optional</td><td>None</td><td>None</td></tr><tr><th scope="row">License</th><td>MIT</td><td>GPL</td><td>AGPL client, closed backend</td><td>MIT</td><td>MIT</td></tr><tr><th scope="row">Platform</th><td>macOS only</td><td>macOS</td><td>macOS, Linux, Windows</td><td>macOS and Linux</td><td>macOS, Linux, Windows</td></tr></tbody></table></div><p class="section-more"><a href="/compare">Full comparison, including cmux and Terminal.app</a></p></div></section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Defaults</span><h2>Ready when you open it</h2><p>Fonts, themes, shortcuts, and shell integration come set up, so there is no config file to write first.</p></div><div class="feature-grid"><a class="feature" href="/docs/keybindings"><strong>Tabs and panes</strong><span>Cmd + T opens a tab, Cmd + D splits, and windows come back after a restart.</span></a><a class="feature" href="/docs/configuration"><strong>Fonts and themes</strong><span>JetBrains Mono with Kaku Dark and Light, switching with the system.</span></a><a class="feature" href="/docs/features"><strong>Fast rendering</strong><span>Draws on the GPU through Metal, in native Mac windows.</span></a><a class="feature" href="/docs/features"><strong>Shell ready</strong><span>Completions, syntax highlighting and z work in every Kaku shell.</span></a><a class="feature" href="/docs/features"><strong>Small touches</strong><span>Copy on select, and paths and long URLs stay clickable across wraps.</span></a><a class="feature" href="/docs/configuration"><strong>Config when you want it</strong><span>kaku config covers common settings, Lua the rest, and most WezTerm configs carry over.</span></a></div></div></section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Compare</span><h2>How it compares</h2><p>iTerm2, Warp, Ghostty, and WezTerm each do something well. Here is where Kaku differs.</p></div><div class="home-compare"><table><thead><tr><td></td><th scope="col">Kaku</th><th scope="col">iTerm2</th><th scope="col">Warp</th><th scope="col">Ghostty</th><th scope="col">WezTerm</th></tr></thead><tbody><tr><th scope="row">Out of the box</th><td>Fonts, themes and shell tools set up</td><td>Plain until you theme it</td><td>Polished, its own interface</td><td>Clean native look, add your own tools</td><td>Plain until you configure it</td></tr><tr><th scope="row">Updates</th><td>About once a week</td><td>Last stable Sep 2026</td><td>Weekly builds</td><td>Last stable Mar 2026</td><td>Last stable Feb 2024, then nightly</td></tr><tr><th scope="row">AI</th><td>Optional, your provider</td><td>Optional plugin, your key</td><td>Built in, runs on Warp&#x27;s servers</td><td>None built in</td><td>None built in</td></tr><tr><th scope="row">Account</th><td>None</td><td>None</td><td>Optional</td><td>None</td><td>None</td></tr><tr><th scope="row">License</th><td>MIT</td><td>GPL</td><td>AGPL client, closed backend</td><td>MIT</td><td>MIT</td></tr><tr><th scope="row">Platform</th><td>macOS only</td><td>macOS</td><td>macOS, Linux, Windows</td><td>macOS and Linux</td><td>macOS, Linux, Windows</td></tr></tbody></table></div><p class="section-more"><a href="/compare">Full comparison, including cmux and Terminal.app</a></p></div></section>
     <section class="section"><div class="wide"><div class="section-head"><span class="section-num">Get started</span><h2>First steps</h2><p>Install it and go. Set up AI and the rest when you need them.</p></div><div class="workflow-list"><article class="workflow-item"><span class="mark">01</span><h3>Install</h3><p>Grab the DMG or run <code>brew install --cask kaku</code>, then open Kaku and start working.</p></article><article class="workflow-item"><span class="mark">02</span><h3>AI setup</h3><p>When you need AI, run <code>kaku ai</code> to use your Codex connection or configure an API service, then press <span class="sk">Cmd + L</span> to open chat.</p></article><article class="workflow-item"><span class="mark">03</span><h3>Tools</h3><p><span class="sk">Cmd + Shift + G</span> for Lazygit, <span class="sk">Cmd + Shift + Y</span> for Yazi, and <span class="sk">Cmd + Shift + R</span> to mount remote files in an SSH session.</p></article><article class="workflow-item"><span class="mark">04</span><h3>Config</h3><p>Run <code>kaku config</code> to change font size, opacity, Smart Tab, close confirmation, and shortcuts right in the terminal. Anything deeper goes in Lua.</p></article></div></div></section>
     <section class="section-tight">
       <div class="wide">
@@ -257,6 +281,9 @@
           <details class="faq-item"><summary><h3>How do I install Kaku?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer"><a href="https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg">Download the DMG</a>, or install with Homebrew: <code>brew install --cask kaku</code>.</div></details>
           <details class="faq-item"><summary><h3>Is Kaku paid?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">No, Kaku is an MIT-licensed open source project.</div></details>
           <details class="faq-item"><summary><h3>Does Kaku run on Windows or Linux?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Not yet. For now the focus is making it great on the Mac.</div></details>
+          <details class="faq-item"><summary><h3>Do I have to use the AI?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Only if you want it. The AI features run on your own Codex connection or an API service you set up in <code>kaku ai</code>, and the rest of the terminal works the same without them.</div></details>
+          <details class="faq-item"><summary><h3>Can I bring my WezTerm config?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Mostly. Kaku keeps WezTerm's Lua config, though a few options behave differently, so check the <a href="/docs/configuration">configuration guide</a>.</div></details>
+          <details class="faq-item"><summary><h3>How do I update Kaku?</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">Run <code>kaku update</code> or choose Check for Updates in the app menu. If you installed with Homebrew, <code>brew upgrade --cask kaku</code> works too.</div></details>
         </div>
       </div>
     </section>

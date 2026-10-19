@@ -211,6 +211,30 @@
           "@type": "Answer",
           "text": "暂时不支持，眼下先把 Mac 上的体验做好。"
         }
+      },
+      {
+        "@type": "Question",
+        "name": "一定要用 AI 吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "不用。AI 功能跑在你自己的 Codex 连接或在 kaku ai 里配好的 API 服务上，不配的话终端其他部分照常用。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "能用我的 WezTerm 配置吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "大多可以，Kaku 沿用 WezTerm 的 Lua 配置，少数选项表现不同，可以先看配置文档。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "怎么更新？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "运行 kaku update，或在菜单里点 Check for Updates，用 Homebrew 装的也可以运行 brew upgrade --cask kaku。"
+        }
       }
     ]
   }
@@ -275,17 +299,16 @@
           <p>字体、主题、快捷键和 Shell 集成都提前配好了，不用先去改配置文件。</p>
         </div>
         <div class="feature-grid">
-          <a class="feature" href="/zh/docs/keybindings"><span class="mark">01</span><strong>标签分屏</strong><span>熟悉的 Mac 快捷键，重开自动恢复会话与目录</span></a>
-          <a class="feature" href="/zh/docs/configuration"><span class="mark">02</span><strong>字体主题</strong><span>精调等宽字体，默认深色，可选浅色或 Auto</span></a>
-          <a class="feature" href="/zh/docs/features"><span class="mark">03</span><strong>快而轻量</strong><span>GPU 加速渲染，原生窗口与快捷键</span></a>
-          <a class="feature" href="/zh/docs/features"><span class="mark">04</span><strong>小细节</strong><span>选中文本直接复制，长网址折行也能直接点</span></a>
-          <a class="feature" href="/zh/docs/features"><span class="mark">05</span><strong>内置工具</strong><span>自带终端文件管家、Git 界面和命令自动补全</span></a>
-          <a class="feature" href="/zh/docs/features"><span class="mark">06</span><strong>AI 助手</strong><span>报错一键给修复建议，用大白话也能直接写命令</span></a>
-          <a class="feature" href="/zh/docs/configuration"><span class="mark">07</span><strong>自由配置</strong><span>按键与外观随心定制，现成配置直接拷来用</span></a>
+          <a class="feature" href="/zh/docs/keybindings"><strong>标签和分屏</strong><span>Cmd + T 开标签，Cmd + D 分屏，重启后窗口和目录都还在</span></a>
+          <a class="feature" href="/zh/docs/configuration"><strong>字体和主题</strong><span>JetBrains Mono 配 Kaku 深浅两套主题，跟着系统切换</span></a>
+          <a class="feature" href="/zh/docs/features"><strong>渲染快</strong><span>用 Metal 走 GPU 渲染，窗口是原生的 Mac 窗口</span></a>
+          <a class="feature" href="/zh/docs/features"><strong>Shell 配好了</strong><span>补全、语法高亮和 z 跳目录，每个 Kaku 会话里都有</span></a>
+          <a class="feature" href="/zh/docs/features"><strong>小细节</strong><span>选中即复制，路径和折行的长网址都能直接点</span></a>
+          <a class="feature" href="/zh/docs/configuration"><strong>想改再改</strong><span>常用设置用 kaku config，其余写 Lua，WezTerm 的配置大多能直接用</span></a>
         </div>
       </div>
     </section>
-    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">对比</span><h2>和常见终端对比</h2><p>iTerm2、Warp、Ghostty 和 WezTerm 各有长处，这里只看几处关键差别。</p></div><div class="home-compare"><table><thead><tr><td></td><th scope="col">Kaku</th><th scope="col">iTerm2</th><th scope="col">Warp</th><th scope="col">Ghostty</th><th scope="col">WezTerm</th></tr></thead><tbody><tr><th scope="row">默认值</th><td>开箱即用</td><td>自己拼</td><td>产品默认</td><td>快，预设少</td><td>自己拼</td></tr><tr><th scope="row">AI</th><td>可选，用你的服务</td><td>可选插件，用你的 key</td><td>内置，跑在 Warp 的服务器上</td><td>没有内置</td><td>没有内置</td></tr><tr><th scope="row">Shell 工具</th><td>Kaku 会话里自带</td><td>自己加</td><td>产品自带</td><td>自己加</td><td>自己加</td></tr><tr><th scope="row">账号</th><td>无</td><td>无</td><td>可选</td><td>无</td><td>无</td></tr><tr><th scope="row">协议</th><td>MIT</td><td>GPL</td><td>客户端 AGPL，后端闭源</td><td>MIT</td><td>MIT</td></tr><tr><th scope="row">平台</th><td>仅 macOS</td><td>macOS</td><td>macOS、Linux、Windows</td><td>macOS 和 Linux</td><td>macOS、Linux、Windows</td></tr></tbody></table></div><p class="section-more"><a href="/zh/compare">完整对比，含 cmux 和系统终端</a></p></div></section>
+    <section class="section"><div class="wide"><div class="section-head"><span class="section-num">对比</span><h2>和常见终端对比</h2><p>iTerm2、Warp、Ghostty 和 WezTerm 各有长处，这里只看几处关键差别。</p></div><div class="home-compare"><table><thead><tr><td></td><th scope="col">Kaku</th><th scope="col">iTerm2</th><th scope="col">Warp</th><th scope="col">Ghostty</th><th scope="col">WezTerm</th></tr></thead><tbody><tr><th scope="row">开箱效果</th><td>字体、主题和 Shell 工具都配好</td><td>朴素，主题自己配</td><td>精致，自成一套界面</td><td>干净的原生外观，工具自己加</td><td>朴素，要自己配</td></tr><tr><th scope="row">更新</th><td>大约每周一版</td><td>上次正式版 2026 年 9 月</td><td>每周构建</td><td>上次正式版 2026 年 3 月</td><td>上次正式版 2024 年 2 月，之后只有 nightly</td></tr><tr><th scope="row">AI</th><td>可选，用你的服务</td><td>可选插件，用你的 key</td><td>内置，跑在 Warp 的服务器上</td><td>没有内置</td><td>没有内置</td></tr><tr><th scope="row">账号</th><td>无</td><td>无</td><td>可选</td><td>无</td><td>无</td></tr><tr><th scope="row">协议</th><td>MIT</td><td>GPL</td><td>客户端 AGPL，后端闭源</td><td>MIT</td><td>MIT</td></tr><tr><th scope="row">平台</th><td>仅 macOS</td><td>macOS</td><td>macOS、Linux、Windows</td><td>macOS 和 Linux</td><td>macOS、Linux、Windows</td></tr></tbody></table></div><p class="section-more"><a href="/zh/compare">完整对比，含 cmux 和系统终端</a></p></div></section>
     <section class="section">
       <div class="wide">
         <div class="section-head">
@@ -322,6 +345,9 @@
           <details class="faq-item"><summary><h3>怎么安装？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer"><a href="https://github.com/tw93/Kaku/releases/latest/download/Kaku.dmg">下载 DMG</a>，或用 Homebrew 安装：<code>brew install --cask kaku</code>。</div></details>
           <details class="faq-item"><summary><h3>Kaku 收费吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">不收费，Kaku 是 MIT 协议的开源项目。</div></details>
           <details class="faq-item"><summary><h3>支持 Windows 或 Linux 吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">暂时不支持，眼下先把 Mac 上的体验做好。</div></details>
+          <details class="faq-item"><summary><h3>一定要用 AI 吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">不用。AI 功能跑在你自己的 Codex 连接或在 <code>kaku ai</code> 里配好的 API 服务上，不配的话终端其他部分照常用。</div></details>
+          <details class="faq-item"><summary><h3>能用我的 WezTerm 配置吗？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">大多可以，Kaku 沿用 WezTerm 的 Lua 配置，少数选项表现不同，可以先看<a href="/zh/docs/configuration">配置文档</a>。</div></details>
+          <details class="faq-item"><summary><h3>怎么更新？</h3><span class="faq-chevron" aria-hidden="true"></span></summary><div class="faq-answer">运行 <code>kaku update</code>，或在菜单里点 Check for Updates，用 Homebrew 装的也可以运行 <code>brew upgrade --cask kaku</code>。</div></details>
         </div>
       </div>
     </section>
