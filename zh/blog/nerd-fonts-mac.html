@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Mac 上的 Nerd Font，装补丁字体还是用符号回退 · Kaku 博客</title>
+  <meta name="description" content="提示符和终端工具里的图标为什么变成方块，怎么用 Homebrew 装补丁版 Nerd Font，什么时候只靠符号回退就够了。">
+  <meta property="og:title" content="Mac 上的 Nerd Font，装补丁字体还是用符号回退 · Kaku 博客">
+  <meta property="og:description" content="提示符和终端工具里的图标为什么变成方块，怎么用 Homebrew 装补丁版 Nerd Font，什么时候只靠符号回退就够了。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Mac 上的 Nerd Font，装补丁字体还是用符号回退">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/nerd-fonts-mac">
+  <meta property="article:published_time" content="2026-10-08">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/nerd-fonts-mac"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/nerd-fonts-mac">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/nerd-fonts-mac">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/nerd-fonts-mac">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/nerd-fonts-mac.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mac 上的 Nerd Font，装补丁字体还是用符号回退",
+          "item": "https://kaku.fun/zh/blog/nerd-fonts-mac"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/nerd-fonts-mac#article",
+      "headline": "Mac 上的 Nerd Font，装补丁字体还是用符号回退",
+      "description": "提示符和终端工具里的图标为什么变成方块，怎么用 Homebrew 装补丁版 Nerd Font，什么时候只靠符号回退就够了。",
+      "url": "https://kaku.fun/zh/blog/nerd-fonts-mac",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/nerd-fonts-mac",
+      "datePublished": "2026-10-08",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "终端",
+      "image": "https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp",
+      "timeRequired": "PT4M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/nerd-fonts-mac.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "在 WezTerm 里换了字体，图标还在吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在。wezterm.font_with_fallback 会把你的字体放在前面，WezTerm 再把自带的回退接在后面，其中就有 Nerd Font Symbols，用 wezterm ls-fonts 能看到整条链。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Nerd Font、Nerd Font Mono 和 Nerd Font Propo 有什么区别？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只差在图标宽度上，普通版允许图标占两格，Mono 每个图标只占一格，Propo 按比例排，在终端里用 Mono 不会压到文字。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "在 Ghostty 里怎么加符号回退？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不用加，Ghostty 已经内置了 Nerd Font 图标，只有想换一份别的符号字体时，才需要先装好它，用 ghostty +list-fonts 查到名字，再在主字体后面加一行 font-family。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "在 Kaku 里需要装 Nerd Font 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要，Kaku 自带 Symbols Nerd Font Mono，接在你的字体后面当回退，你在 kaku.lua 里自己设的字体也一样。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Nerd Fonts 没提供的字体能自己打补丁吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能，先用 brew install fontforge 装好 FontForge，从最新发布里下载 FontPatcher.zip，再运行 fontforge -script font-patcher PATH_TO_FONT --complete，生成的字体族名是原名加上 Nerd Font。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/nerd-fonts-mac" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/nerd-fonts-mac" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Mac 上的 Nerd Font，装补丁字体还是用符号回退</h1><p class="blog-meta"><span><a href="/zh/blog#topic-terminal">终端</a></span><span>发布于 <time datetime="2026-10-08">2026年10月8日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 4 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/nerd-fonts-mac.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>提示符、文件列表和状态栏里的图标，只有终端用的字体里有这个字形才画得出来，没有的话就是一个个空方块或问号。解决办法有两个，一是装一套 <a href="https://www.nerdfonts.com/" target="_blank" rel="noopener noreferrer">Nerd Font</a>，也就是打过补丁、塞进了几千个图标的编程字体，二是保留你现在的字体，再把只含图标的 Nerd Font 加成回退字体。有些终端自带这份回退，WezTerm、Ghostty 和 Kaku 都是，那就什么都不用装。</p>
+<h2 id="nerd-font-是什么">Nerd Font 是什么</h2>
+<p><a href="https://github.com/ryanoasis/nerd-fonts" target="_blank" rel="noopener noreferrer">Nerd Fonts</a> 拿 JetBrains Mono、Fira Code、Hack 这类编程字体，往里面加上几套图标字体的字形，包括 Powerline 符号、Font Awesome、Material Design Icons、Devicons、Octicons、Codicons 等。Starship 这样的提示符、Yazi 和 lazygit 这样的终端工具，还有很多状态栏，画分支、文件夹和语言图标时用的就是这些码位。</p>
+<p>这个项目还发布了只含图标的 <code>SymbolsOnly</code> 字体，用途是让你保留喜欢的字体，你的字体里缺的字符，终端再去这份符号字体里找。</p>
+<h2 id="字形缺了会怎样">字形缺了会怎样</h2>
+<p>一个字体只画得出它自己有的字符，缺字的时候终端会顺着回退列表往下找，再去找系统字体，就像在英文字体里打中文照样能显示出来。但 Nerd Fonts 的图标放在私用区，系统字体里都没有，整条链上找不到一个 Nerd Font，最后就只能画成方块。</p>
+<p>在 WezTerm 里可以用 <code>wezterm ls-fonts --text</code> 加一小段文字，看每个字符是哪个字体画出来的，这是分清到底没装字体还是配置写错最快的办法。</p>
+<h2 id="装补丁字体">装补丁字体</h2>
+<p>每一套补丁字体都是一个 Homebrew cask，在 Mac 上不加 <code>--cask</code> 也能找到：</p>
+<pre><code class="language-bash">brew install font-jetbrains-mono-nerd-font
+brew install font-hack-nerd-font</code></pre>
+<p>补丁版的字体名是原名去掉空格再加上 <code>Nerd Font</code>，JetBrains Mono 就变成 <code>JetBrainsMono Nerd Font</code>，终端字体设置里要填的是这个名字，原版的 <code>JetBrains Mono</code> 是另一个字体族。不想用 Homebrew 的话，<a href="https://github.com/ryanoasis/nerd-fonts/releases/latest" target="_blank" rel="noopener noreferrer">发布页</a>上每个字体族都有一个压缩包，解开后双击每个 <code>.ttf</code> 安装就行。</p>
+<h2 id="保留原字体加一份符号回退">保留原字体，加一份符号回退</h2>
+<p>只含图标的那份字体也是 cask：</p>
+<pre><code class="language-bash">brew install font-symbols-only-nerd-font</code></pre>
+<p>怎么加要看终端。<a href="https://wezterm.org/config/fonts.html" target="_blank" rel="noopener noreferrer">WezTerm</a> 不需要装，它自带 JetBrains Mono、Nerd Font Symbols 和 Noto Color Emoji，并且会接在你设的字体列表后面：</p>
+<pre><code class="language-lua">config.font = wezterm.font_with_fallback {
+  <span class="tok-s">'Fira Code'</span>,
+  <span class="tok-s">'DengXian'</span>,
+}</code></pre>
+<p><a href="https://ghostty.org/docs/config/reference" target="_blank" rel="noopener noreferrer">Ghostty</a> 也不需要装，它内嵌了 JetBrains Mono，Nerd Font 图标也是内置的。它的回退是多写几行 <code>font-family</code>，第一行是主字体，后面几行补主字体里缺的码位，想换一份别的符号字体，就让它单独占一行，具体名字用 <code>ghostty +list-fonts</code> 查，写一行空的 <code>font-family = ""</code> 可以清掉文件前面设过的字体。Ghostty 1.2.0 起还有 <code>adjust-icon-height</code>，能调 Nerd Font 图标的最大高度，Powerline 和制表符字形不受影响。</p>
+<p>README 里也说了，回退来的符号在缩放和位置上不一定对得齐，如果图标和文字放在一起看着有点歪，换成同一字体族的补丁版会更稳。Mac 上 WezTerm 的整套配置可以看 <a href="/zh/blog/wezterm-config-for-mac">Mac 版 WezTerm 配置</a>。</p>
+<h2 id="monopropo-和默认宽度">Mono、Propo 和默认宽度</h2>
+<p>每套补丁字体都有三种图标宽度，区别只在图标上，字母本身不变：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>图标宽度</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Nerd Font</code></td>
+<td>尽量做成双宽</td>
+<td>终端允许图标伸进下一格</td>
+</tr>
+<tr>
+<td><code>Nerd Font Mono</code></td>
+<td>只占一格</td>
+<td>图标压到文字上，或者让列对不齐了</td>
+</tr>
+<tr>
+<td><code>Nerd Font Propo</code></td>
+<td>按比例</td>
+<td>在终端外面用，比如编辑器的界面</td>
+</tr>
+</tbody>
+</table>
+<p>在终端里用 Mono 最稳，每个图标都只占一格，表格和状态栏的列不会乱。</p>
+<h2 id="选哪个基础字体">选哪个基础字体</h2>
+<p>以下按 Nerd Fonts README 整理，2026 年 10 月核对过：</p>
+<table>
+<thead>
+<tr>
+<th>补丁字体族</th>
+<th>原字体</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JetBrainsMono Nerd Font</td>
+<td>JetBrains Mono</td>
+<td>命名规则和原版一致</td>
+</tr>
+<tr>
+<td>FiraCode Nerd Font</td>
+<td>Fira Code</td>
+<td>带连字</td>
+</tr>
+<tr>
+<td>Hack Nerd Font</td>
+<td>Hack</td>
+<td>README 自己举的例子</td>
+</tr>
+<tr>
+<td>Iosevka Nerd Font</td>
+<td>Iosevka</td>
+<td>字窄，一屏放得下更多列</td>
+</tr>
+<tr>
+<td>CaskaydiaCove Nerd Font</td>
+<td>Cascadia Code</td>
+<td>原名是保留字体名，所以改了名</td>
+</tr>
+</tbody>
+</table>
+<p>所有图标都能在 <a href="https://www.nerdfonts.com/cheat-sheet" target="_blank" rel="noopener noreferrer">cheat sheet</a> 里搜到，还能直接复制码位。</p>
+<h2 id="kaku-里的字体">Kaku 里的字体</h2>
+<p>Kaku 不用另装 Nerd Font，默认字体是 JetBrains Mono，中文用 PingFang SC，同时自带 Symbols Nerd Font Mono，并把它接在你用的字体后面当回退，所以 Starship、lazygit、Yazi 和状态栏的图标第一次打开就能正常显示。</p>
+<p>在 <code>~/.config/kaku/kaku.lua</code> 里换了字体，这份回退也还在，换成什么字体图标都不会丢：</p>
+<pre><code class="language-lua">config.font = wezterm.<span class="tok-f">font</span>(<span class="tok-s">"Fira Code"</span>)</code></pre>
+<p>Kaku 跟着主题调字重这件事只对默认的 JetBrains Mono 生效，你自己设了字体之后，Kaku 就不再去动它的字重。Starship 在内的 shell 那一侧怎么配，可以看<a href="/zh/blog/zsh-without-oh-my-zsh">不用 Oh My Zsh 配好 zsh</a>。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="在-wezterm-里换了字体图标还在吗">在 WezTerm 里换了字体，图标还在吗？</h3>
+<p>在。<code>wezterm.font_with_fallback</code> 会把你的字体放在前面，WezTerm 再把自带的回退接在后面，其中就有 Nerd Font Symbols，用 <code>wezterm ls-fonts</code> 能看到整条链。</p>
+<h3 id="nerd-fontnerd-font-mono-和-nerd-font-propo-有什么区别">Nerd Font、Nerd Font Mono 和 Nerd Font Propo 有什么区别？</h3>
+<p>只差在图标宽度上，普通版允许图标占两格，Mono 每个图标只占一格，Propo 按比例排，在终端里用 Mono 不会压到文字。</p>
+<h3 id="在-ghostty-里怎么加符号回退">在 Ghostty 里怎么加符号回退？</h3>
+<p>不用加，Ghostty 已经内置了 Nerd Font 图标，只有想换一份别的符号字体时，才需要先装好它，用 <code>ghostty +list-fonts</code> 查到名字，再在主字体后面加一行 <code>font-family</code>。</p>
+<h3 id="在-kaku-里需要装-nerd-font-吗">在 Kaku 里需要装 Nerd Font 吗？</h3>
+<p>不需要，Kaku 自带 Symbols Nerd Font Mono，接在你的字体后面当回退，你在 <code>kaku.lua</code> 里自己设的字体也一样。</p>
+<h3 id="nerd-fonts-没提供的字体能自己打补丁吗">Nerd Fonts 没提供的字体能自己打补丁吗？</h3>
+<p>能，先用 <code>brew install fontforge</code> 装好 FontForge，从最新发布里下载 <code>FontPatcher.zip</code>，再运行 <code>fontforge -script font-patcher PATH_TO_FONT --complete</code>，生成的字体族名是原名加上 <code>Nerd Font</code>。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/best-terminal-for-mac"><span class="blog-related-cat">终端</span><span class="blog-related-name">2026 年 Mac 上的终端怎么选</span><span class="blog-related-meta"><time datetime="2026-09-21">2026年9月21日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/tmux-alternative-mac"><span class="blog-related-cat">终端</span><span class="blog-related-name">在 Mac 上还需要 tmux 吗</span><span class="blog-related-meta"><time datetime="2026-10-01">2026年10月1日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/ghostty-config"><span class="blog-related-cat">终端</span><span class="blog-related-name">Ghostty 配置指南，Mac 上值得改的几项设置</span><span class="blog-related-meta"><time datetime="2026-10-10">2026年10月10日</time> · 约 6 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

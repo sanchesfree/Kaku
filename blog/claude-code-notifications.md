@@ -2,7 +2,7 @@
 
 > Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.
 
-Published 2026-10-18 · Tw93 · https://kaku.fun/blog/claude-code-notifications
+Published 2026-09-20 · Tw93 · https://kaku.fun/blog/claude-code-notifications
 
 If Claude Code never tells you it finished or that it is waiting for permission, the cause is almost always the same: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use, except in Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs no setting. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.
 

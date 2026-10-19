@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录 · Kaku 博客</title>
+  <meta name="description" content="安装 fzf，打开它在 zsh 里搜历史、找文件、跳目录的快捷键，解决 Mac 上 Alt+C 不生效的问题，再加上预览和 fzf-tab。">
+  <meta property="og:title" content="在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录 · Kaku 博客">
+  <meta property="og:description" content="安装 fzf，打开它在 zsh 里搜历史、找文件、跳目录的快捷键，解决 Mac 上 Alt+C 不生效的问题，再加上预览和 fzf-tab。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/fzf-zsh-mac">
+  <meta property="article:published_time" content="2026-10-14">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/fzf-zsh-mac"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/fzf-zsh-mac">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/fzf-zsh-mac">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/fzf-zsh-mac">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/fzf-zsh-mac.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录",
+          "item": "https://kaku.fun/zh/blog/fzf-zsh-mac"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/fzf-zsh-mac#article",
+      "headline": "在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录",
+      "description": "安装 fzf，打开它在 zsh 里搜历史、找文件、跳目录的快捷键，解决 Mac 上 Alt+C 不生效的问题，再加上预览和 fzf-tab。",
+      "url": "https://kaku.fun/zh/blog/fzf-zsh-mac",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/fzf-zsh-mac",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "Shell 与命令行工具",
+      "image": "https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp",
+      "timeRequired": "PT5M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/fzf-zsh-mac.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "为什么按 Alt + C 打出一个奇怪的字符，而不是跳目录？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因为终端把 Option 当成了输入字符的修饰键，在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 macos-option-as-alt = left 就好了。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么 fzf 不理我设的 FZF_DEFAULT_COMMAND？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "shell 集成本来就不读这个变量，Ctrl + T 要设 FZF_CTRL_T_COMMAND，Alt + C 要设 FZF_ALT_C_COMMAND，**<Tab> 则是定义 _fzf_compgen_path 和 _fzf_compgen_dir 两个函数。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎么关掉其中一个快捷键？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 source fzf 的那一行里把对应变量设成空字符串，比如 FZF_ALT_C_COMMAND= source <(fzf --zsh)，写到 source 那行后面是不起作用的。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "fzf-tab 会取代 **<Tab> 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "它管得更宽，每一次 Tab 补全都会走 fzf，不过两者可以并存，把 fzf-tab 放在 source <(fzf --zsh) 后面加载，让它成为最后一个绑定 Tab 的插件就行。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "用 fzf 一定要装 fd 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不用，fzf 自带 walker，不装别的工具也能列文件，--walker-skip 也能跳过那几个常见的大目录。只有在你别处已经依赖 fd 的过滤规则、想让 fzf 列出同样的结果时，才值得把 fd 接进来。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/fzf-zsh-mac" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/fzf-zsh-mac" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>在 Mac 上给 zsh 配好 fzf，搜历史、找文件、跳目录</h1><p class="blog-meta"><span><a href="/zh/blog#topic-shell">Shell 与命令行工具</a></span><span>发布于 <time datetime="2026-10-14">2026年10月14日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 5 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/fzf-zsh-mac.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>在 Mac 上给 zsh 配 fzf，先 <code>brew install fzf</code>，再往 <code>~/.zshrc</code> 里加一行 <code>source &lt;(fzf --zsh)</code>。新开一个 shell 就能用上三个快捷键，Ctrl + R 搜历史命令，Ctrl + T 把文件和目录贴到命令行上，Alt + C 直接跳进某个目录。前两个装好就能用，Alt + C 在 Mac 上要多一步，得让终端把 Option 键当成 Meta 发出去，而大多数终端默认都没开这个。</p>
+<h2 id="安装和启用">安装和启用</h2>
+<p><a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener noreferrer">fzf</a> 只有一个二进制文件，在 Mac 上用 Homebrew 装最省事：</p>
+<pre><code class="language-bash">brew install fzf</code></pre>
+<p>然后在 <code>~/.zshrc</code> 里加一行：</p>
+<pre><code class="language-bash"><span class="tok-c"># 启用 fzf 的快捷键和模糊补全
+</span><span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<p><code>--zsh</code> 会打印出给 zsh 用的集成脚本，source 之后快捷键和 <code>**&lt;Tab&gt;</code> 模糊补全就一起配好了。这个参数只在比较新的 fzf 里才有，shell 报错的话先看一眼 <code>fzf --version</code>，再用 <code>brew update; brew upgrade fzf</code> 升级，2026 年 10 月 Homebrew 上的版本是 0.74.5。</p>
+<p>只想要其中几个快捷键的话，在同一行里把对应的 <code>*_COMMAND</code> 变量设成空字符串，放到 source 之后再设是不起作用的：</p>
+<pre><code class="language-bash">FZF_CTRL_R_COMMAND= FZF_ALT_C_COMMAND= <span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<h2 id="三个快捷键">三个快捷键</h2>
+<p><strong>Ctrl + R 搜历史。</strong> 它在历史命令里模糊搜索，选中的那条会贴到命令行上但不会直接执行。再按一次 Ctrl + R 可以在按相关度和按时间排序之间切换，<code>TAB</code> 能一次选好几条，Alt + R 进入 raw 模式，匹配项周围的几行也会留在列表里，这时用 Ctrl + N 和 Ctrl + P 只在匹配项之间跳。</p>
+<p><strong>Ctrl + T 找文件。</strong> 它列出当前目录下的文件和目录，把选中的路径贴到光标位置，比如先敲 <code>vim</code> 再按 Ctrl + T，挑完路径就直接落在 vim 后面。列表来自 fzf 自带的 walker，参数是 <code>--walker file,dir,follow,hidden</code>，所以隐藏文件也会列出来。</p>
+<p><strong>Alt + C 跳目录。</strong> 它只列目录，用的是 <code>--walker dir,follow,hidden</code>，选中哪个就 <code>cd</code> 进哪个。在一个层级很深的仓库里找某个子目录时，比一层层敲 <code>cd</code> 加 Tab 快不少。</p>
+<p>在搜索框里，Ctrl + K 和 Ctrl + J（或者 Ctrl + P 和 Ctrl + N）上下移动，回车确认，Ctrl + C、Ctrl + G 或 Esc 退出。输入默认是模糊匹配，空格分开多个词，<code>'wild</code> 是精确匹配，<code>^music</code> 匹配开头，<code>.mp3$</code> 匹配结尾，<code>!fire</code> 排除，想整个切到精确模式就给 fzf 加 <code>-e</code>。</p>
+<p>同一份集成脚本还带了模糊补全，词尾敲 <code>**</code> 再按 Tab 就会弹出 fzf：</p>
+<pre><code class="language-bash">vim **&lt;Tab&gt;      <span class="tok-c"># 当前目录下的文件
+</span><span class="tok-b">cd</span> ~/github/**&lt;Tab&gt;
+<span class="tok-b">kill</span> -9 **&lt;Tab&gt;  <span class="tok-c"># 选一个进程
+</span>ssh **&lt;Tab&gt;      <span class="tok-c"># 来自 /etc/hosts 和 ~/.ssh/config 的主机
+</span></code></pre>
+<h2 id="mac-上的坑alt-c-和-option-键">Mac 上的坑：Alt + C 和 Option 键</h2>
+<p>zsh 眼里的 Alt + C 是 Esc 后面跟一个 <code>c</code>，得让终端把 Option 当成 Meta 发出去才能用，而 Mac 默认按 Option 加字母只会打出一个字符。Kaku 的左 Option 默认就当 Meta 用，Terminal.app、iTerm2、Ghostty 和 WezTerm 怎么设可以看 <a href="/zh/blog/mac-terminal-shortcuts">Mac 终端里最省时间的快捷键</a>。</p>
+<h2 id="用-fd-和-bat-调一调默认行为">用 fd 和 bat 调一调默认行为</h2>
+<p>自带的 walker 在大多数项目里已经够快，剩下要调的一般就两类，一是跳过 <code>node_modules</code> 这类文件特别多的目录，二是加一个预览窗。每个快捷键都有自己的 <code>*_OPTS</code> 变量，写在 source 那一行之前：</p>
+<pre><code class="language-bash">brew install bat tree
+
+<span class="tok-c"># Ctrl + T：跳过构建目录，用 bat 预览文件，Ctrl + / 切换预览窗
+</span><span class="tok-b">export</span> FZF_CTRL_T_OPTS=<span class="tok-s">"
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"</span>
+
+<span class="tok-c"># Alt + C：用树形结构预览目录
+</span><span class="tok-b">export</span> FZF_ALT_C_OPTS=<span class="tok-s">"
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"</span>
+
+<span class="tok-c"># Ctrl + R：Ctrl + Y 把命令复制到剪贴板
+</span><span class="tok-b">export</span> FZF_CTRL_R_OPTS=<span class="tok-s">"
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"</span>
+
+<span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<p>如果你平时已经在用 <a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener noreferrer">fd</a>，想让 fzf 列出来的东西和 fd 一模一样，就把 <code>**&lt;Tab&gt;</code> 补全用的两个辅助函数换成 fd，快捷键那边也指过去：</p>
+<pre><code class="language-bash">brew install fd
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude <span class="tok-s">".git"</span> . <span class="tok-s">"</span>$1<span class="tok-s">"</span>
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude <span class="tok-s">".git"</span> . <span class="tok-s">"</span>$1<span class="tok-s">"</span>
+}
+<span class="tok-b">export</span> FZF_CTRL_T_COMMAND=<span class="tok-s">'fd --hidden --follow --exclude .git'</span>
+<span class="tok-b">export</span> FZF_ALT_C_COMMAND=<span class="tok-s">'fd --type d --hidden --follow --exclude .git'</span></code></pre>
+<p><code>FZF_DEFAULT_COMMAND</code>（比如 <code>fd --type f</code>）只管直接敲 <code>fzf</code> 时列什么，README 里写明了 shell 集成不读它，所以几个快捷键才各有各的变量。想处处生效的选项，比如 <code>--height 40% --layout reverse --border</code>，放进 <code>FZF_DEFAULT_OPTS</code> 就行。</p>
+<h2 id="用-fzf-tab-接管所有补全">用 fzf-tab 接管所有补全</h2>
+<p><code>**&lt;Tab&gt;</code> 只有敲了触发符才会出来，<a href="https://github.com/Aloxaf/fzf-tab" target="_blank" rel="noopener noreferrer">fzf-tab</a> 则把 zsh 整个补全菜单换成 fzf。在 <code>git checkout</code>、<code>kill</code> 或者变量名后面直接按 Tab 就是一个模糊列表，它自己不做补全，只是把 zsh 原生补全系统的结果拿来展示，所以你原来那些补全配置大都还能用。</p>
+<pre><code class="language-bash">git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab</code></pre>
+<pre><code class="language-bash">autoload -U compinit; compinit
+<span class="tok-b">source</span> &lt;(fzf --zsh)
+<span class="tok-b">source</span> ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
+zstyle <span class="tok-s">':completion:*:descriptions'</span> format <span class="tok-s">'[%d]'</span>
+zstyle <span class="tok-s">':completion:*'</span> menu no
+zstyle <span class="tok-s">':fzf-tab:complete:cd:*'</span> fzf-preview <span class="tok-s">'eza -1 --color=always $realpath'</span></code></pre>
+<p>最后一行是在补全 <code>cd</code> 时用 eza 预览目录内容，没装的话 <code>brew install eza</code>，或者直接删掉这一行。</p>
+<p>最容易出问题的是加载顺序。fzf-tab 要放在 <code>compinit</code> 之后，又得在 zsh-autosuggestions、fast-syntax-highlighting 这类会包装 widget 的插件之前。同时它还必须是最后一个绑定 Tab 的，而 fzf 自己的补全也绑了 Tab，所以上面 fzf-tab 排在 <code>source &lt;(fzf --zsh)</code> 后面。跑起来之后有两个键值得记一下，Ctrl + Space 多选，<code>/</code> 在补很深的路径时可以一路连着补下去。不用插件管理器、其余顺序也都排好的 <code>.zshrc</code> 可以参考<a href="/zh/blog/zsh-without-oh-my-zsh">不用 Oh My Zsh 配好 zsh</a>。</p>
+<h2 id="在-kaku-里用-fzf">在 Kaku 里用 fzf</h2>
+<p>Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，如果 zoxide 已经定义了 <code>z</code>，zsh-z 会自动跳过，所以 <code>source &lt;(fzf --zsh)</code> 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，<code>kaku init</code> 又是把它的 source 行追加到 <code>.zshrc</code> 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，<code>**&lt;Tab&gt;</code> 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，<code>**</code> 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。</p>
+<p>要用 fzf-tab，就在 <code>~/.config/kaku/kaku.lua</code> 里写 <code>config.smart_tab_mode = 'off'</code>，新开的 shell 会带上 <code>KAKU_SMART_TAB_DISABLE=1</code>。再把 <code>compinit</code>、fzf 那行和 fzf-tab 都放在 Kaku 那行上面，补全已经初始化过的话 Kaku 会跳过自己的 <code>compinit</code>，autosuggestions 则排在 fzf-tab 之后加载，正好是 fzf-tab 要求的顺序。Alt + C 在 Kaku 里不用额外设置，自带配置把左 Option 当 Meta 发，右 Option 留着打组合字符。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="为什么按-alt-c-打出一个奇怪的字符而不是跳目录">为什么按 Alt + C 打出一个奇怪的字符，而不是跳目录？</h3>
+<p>因为终端把 Option 当成了输入字符的修饰键，在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 <code>macos-option-as-alt = left</code> 就好了。</p>
+<h3 id="为什么-fzf-不理我设的-fzf_default_command">为什么 fzf 不理我设的 FZF_DEFAULT_COMMAND？</h3>
+<p>shell 集成本来就不读这个变量，Ctrl + T 要设 <code>FZF_CTRL_T_COMMAND</code>，Alt + C 要设 <code>FZF_ALT_C_COMMAND</code>，<code>**&lt;Tab&gt;</code> 则是定义 <code>_fzf_compgen_path</code> 和 <code>_fzf_compgen_dir</code> 两个函数。</p>
+<h3 id="怎么关掉其中一个快捷键">怎么关掉其中一个快捷键？</h3>
+<p>在 source fzf 的那一行里把对应变量设成空字符串，比如 <code>FZF_ALT_C_COMMAND= source &lt;(fzf --zsh)</code>，写到 source 那行后面是不起作用的。</p>
+<h3 id="fzf-tab-会取代-tab-吗">fzf-tab 会取代 <code>**&lt;Tab&gt;</code> 吗？</h3>
+<p>它管得更宽，每一次 Tab 补全都会走 fzf，不过两者可以并存，把 fzf-tab 放在 <code>source &lt;(fzf --zsh)</code> 后面加载，让它成为最后一个绑定 Tab 的插件就行。</p>
+<h3 id="用-fzf-一定要装-fd-吗">用 fzf 一定要装 fd 吗？</h3>
+<p>不用，fzf 自带 walker，不装别的工具也能列文件，<code>--walker-skip</code> 也能跳过那几个常见的大目录。只有在你别处已经依赖 fd 的过滤规则、想让 fzf 列出同样的结果时，才值得把 fd 接进来。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/zsh-without-oh-my-zsh"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">不用 Oh My Zsh，把 zsh 配得又快又好用</span><span class="blog-related-meta"><time datetime="2026-09-27">2026年9月27日</time> · 约 3 分钟</span></a></li><li><a href="/zh/blog/starship-prompt"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">在 Mac 上用 Starship 提示符，安装、配置和保持够快</span><span class="blog-related-meta"><time datetime="2026-10-12">2026年10月12日</time> · 约 7 分钟</span></a></li><li><a href="/zh/blog/yazi-file-manager"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">在 Mac 上用 Yazi，快速的终端文件管理器</span><span class="blog-related-meta"><time datetime="2026-10-15">2026年10月15日</time> · 约 5 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

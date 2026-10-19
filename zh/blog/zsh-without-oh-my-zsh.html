@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>不用 Oh My Zsh，把 zsh 配得又快又好用 · Kaku 博客</title>
+  <meta name="description" content="用原生 zsh 配好自动建议、语法高亮、补全和 Starship 提示符，讲清楚保持启动快的加载顺序，以及怎么测。">
+  <meta property="og:title" content="不用 Oh My Zsh，把 zsh 配得又快又好用 · Kaku 博客">
+  <meta property="og:description" content="用原生 zsh 配好自动建议、语法高亮、补全和 Starship 提示符，讲清楚保持启动快的加载顺序，以及怎么测。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="不用 Oh My Zsh，把 zsh 配得又快又好用">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/zsh-without-oh-my-zsh">
+  <meta property="article:published_time" content="2026-09-27">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/zsh-without-oh-my-zsh"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/zsh-without-oh-my-zsh.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "不用 Oh My Zsh，把 zsh 配得又快又好用",
+          "item": "https://kaku.fun/zh/blog/zsh-without-oh-my-zsh"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/zsh-without-oh-my-zsh#article",
+      "headline": "不用 Oh My Zsh，把 zsh 配得又快又好用",
+      "description": "用原生 zsh 配好自动建议、语法高亮、补全和 Starship 提示符，讲清楚保持启动快的加载顺序，以及怎么测。",
+      "url": "https://kaku.fun/zh/blog/zsh-without-oh-my-zsh",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/zsh-without-oh-my-zsh",
+      "datePublished": "2026-09-27",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "Shell 与命令行工具",
+      "image": "https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp",
+      "timeRequired": "PT3M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/zsh-without-oh-my-zsh.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Oh My Zsh 慢吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "要看你加载了多少插件、用的哪个主题，用 time zsh -i -c exit 测一下自己的启动时间，再和一份只加载你真正在用的组件的 .zshrc 比一比。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "用 zsh-syntax-highlighting 还是 fast-syntax-highlighting？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "两个都会在你打字时给命令行上色，zsh-syntax-highlighting 用的人更多，fast-syntax-highlighting 是另一个项目，有自己的主题，Kaku 带的是后者，不管用哪个，都放在 .zshrc 最后。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "zsh 补全为什么不出来？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "通常是补全目录在 compinit 跑完之后才加进 fpath，或者缓存的 .zcompdump 比它还旧，把 fpath 那行挪到 compinit 上面，再跑一次 rm ~/.zcompdump; exec zsh。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kaku 的 zsh 配置能和我自己的 Starship 配置一起用吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，Kaku 只在没有 ~/.config/starship.toml，或者它和 Kaku 0.10.0 到 0.22.0 带的那份一个字节都没差时才写入，你自己写的或软链接的配置不会被改动。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/zsh-without-oh-my-zsh" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/zsh-without-oh-my-zsh" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>不用 Oh My Zsh，把 zsh 配得又快又好用</h1><p class="blog-meta"><span><a href="/zh/blog#topic-shell">Shell 与命令行工具</a></span><span>发布于 <time datetime="2026-09-27">2026年9月27日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 3 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/zsh-without-oh-my-zsh.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>想要一个好用的 zsh，其实不需要 Oh My Zsh，大多数人装它图的那些东西，四个组件就够了。zsh-autosuggestions 根据历史给出灰色的建议，语法高亮在你打字时给命令上色，zsh-completions 补上额外的补全定义，Starship 负责提示符。按正确的顺序直接在 <code>.zshrc</code> 里加载，再给补全加上缓存，启动快，也一眼能看懂。这篇给出一份这样的 <code>.zshrc</code>，讲清楚顺序为什么重要、怎么测，最后说说 Kaku 是怎么用两行把同一套东西装好的。</p>
+<h2 id="装好这几个组件">装好这几个组件</h2>
+<p>用 Homebrew：</p>
+<pre><code class="language-bash">brew install zsh-autosuggestions zsh-syntax-highlighting zsh-completions starship</code></pre>
+<p>依赖就这些，没有要更新的框架，启动时也不会跑任何你没要求的东西。</p>
+<h2 id="按顺序加载的-zshrc">按顺序加载的 .zshrc</h2>
+<pre><code class="language-bash"><span class="tok-c"># 补全定义要在 compinit 之前放进 fpath
+</span>fpath=(<span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-completions $fpath)
+
+<span class="tok-c"># 补全缓存最多一天完整检查一次
+# (#q...) 需要 EXTENDED_GLOB，不开的话这个判断永远为真
+</span>setopt EXTENDED_GLOB
+autoload -Uz compinit
+<span class="tok-k">if</span> [[ -n <span class="tok-s">${</span>ZDOTDIR<span class="tok-k">:-</span>$HOME<span class="tok-s">}</span>/.zcompdump(<span class="tok-c">#qN.mh+24) ]]; then
+</span>  compinit &amp;&amp; touch <span class="tok-s">"${</span>ZDOTDIR<span class="tok-k">:-</span>$HOME<span class="tok-s">}/.zcompdump"</span>
+<span class="tok-k">else</span>
+  compinit -C
+<span class="tok-k">fi</span>
+
+<span class="tok-c"># 历史
+</span>HISTSIZE=<span class="tok-n">50000</span>
+SAVEHIST=<span class="tok-n">50000</span>
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
+
+<span class="tok-c"># 提示符
+</span><span class="tok-b">eval</span> <span class="tok-s">"</span><span class="tok-k">$(</span>starship init zsh<span class="tok-k">)</span><span class="tok-s">"</span>
+
+<span class="tok-c"># 根据历史给建议
+</span><span class="tok-b">source</span> <span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+<span class="tok-c"># 语法高亮必须放在最后
+</span><span class="tok-b">source</span> <span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</code></pre>
+<p><code>HOMEBREW_PREFIX</code> 由 <code>brew shellenv</code> 设置，后面的默认值对应 Apple Silicon 的默认路径，把路径直接写出来而不是调用 <code>$(brew --prefix)</code>，每开一个 shell 就少起一个进程。</p>
+<h2 id="顺序为什么重要">顺序为什么重要</h2>
+<p>大部分问题由三条规则决定：</p>
+<ul>
+<li><strong>补全要在 <code>compinit</code> 之前。</strong> <code>compinit</code> 只扫一次 <code>fpath</code>，之后才加进去的，要等下次重建才看得到。</li>
+<li><strong>大多数时候用 <code>compinit -C</code>。</strong> 完整的 <code>compinit</code> 会检查每一个补全文件，加上 <code>-C</code> 就直接信任缓存的 <code>.zcompdump</code>，上面那个判断会在缓存超过 24 小时后完整检查一次，需要时才重建，成功后更新缓存时间，在 M5 Pro 上完整跑一次是 29.3 ms，走缓存是 16.2 ms。<code>(#q...)</code> 这个判断只有开了 <code>EXTENDED_GLOB</code> 才生效，不开的话这串字符根本不会被当成通配，判断永远为真，每个 shell 都会悄悄完整检查一遍。</li>
+<li><strong>语法高亮放最后。</strong> 它是靠包住 zsh 行编辑器的 widget 来工作的，在它之后定义的 widget，包括 autosuggestions 的，都不会被高亮，它自己的文档也要求放在最后加载。</li>
+</ul>
+<h2 id="别猜测一下">别猜，测一下</h2>
+<pre><code class="language-bash"><span class="tok-b">time</span> zsh -i -c <span class="tok-b">exit</span></code></pre>
+<p>想要更稳的数字，用 <code>hyperfine</code> 多跑几次：</p>
+<pre><code class="language-bash">brew install hyperfine
+hyperfine --warmup <span class="tok-n">5</span> <span class="tok-s">'zsh -i -c exit'</span></code></pre>
+<p><code>zsh -i -c exit</code> 测的是直到第一个提示符出现前的所有耗时，挂在提示符上的那部分不算，拿来每次对比一处改动正合适，哪个数字突然变大，就注释掉一半再测。</p>
+<h2 id="kaku-是怎么做的">Kaku 是怎么做的</h2>
+<p>Kaku 自带这一套，在你的 <code>.zshrc</code> 里加两行来加载，一行管 <code>PATH</code>，一行 source <code>~/.config/kaku/zsh/kaku.zsh</code>，里面带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions，以及用来跳到常去目录的 zsh-z，提示符用 Starship。</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/kaku-zsh-load-order-mobile.webp" width="340" height="444"><img src="/img/blog/kaku-zsh-load-order.webp" width="362" height="622" loading="lazy" alt="Kaku 的 zsh 配置按顺序分六步：PATH 和 Kaku 检测，用缓存的 init 启动 Starship 提示符，历史和按键，每天最多完整检查一次的 compinit -C，z 和 autosuggestions 以你自己的为准，语法高亮推迟到第一个提示符"></picture><figcaption>规则和上面一样，多了缓存的提示符 init，以及推迟到第一个提示符的高亮。</figcaption></figure>
+
+<p>在上面几条规则之外，它还多做了三件事：</p>
+<ul>
+<li><strong>缓存 Starship 的 init 脚本</strong>，热启动时提示符不用再起额外的进程。</li>
+<li><strong>把语法高亮推迟</strong>到第一个提示符快要出现的时候，它还是最后一个加载，但不拖慢前面那一段。</li>
+<li><strong>用 <code>zcompile</code> 编译整个文件</strong>，zsh 读的是字节码，不用每次重新解析。</li>
+</ul>
+<p>它也会给你自己的配置让路，如果你的 <code>.zshrc</code> 已经加载了 autosuggestions、高亮插件，或者 zoxide 这类目录跳转工具，Kaku 就跳过自己那份，补全已经初始化过的话也会跳过 <code>compinit</code>。</p>
+<p>在 M5 Pro 上用 <code>hyperfine</code> 各跑 30 次，空的 <code>.zshrc</code> 启动是 10.8 ms，完整的 Kaku 配置是 43.3 ms。</p>
+<p>常见的两个顾虑各有一个开关，<code>KAKU_SKIP_TOOL_BOOTSTRAP=1 kaku init</code> 只配好 shell，不装那几个可选的 Homebrew 工具，<code>kaku reset</code> 会把 Kaku 管理的那几行和文件再删掉，你自己写的东西都留着。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="oh-my-zsh-慢吗">Oh My Zsh 慢吗？</h3>
+<p>要看你加载了多少插件、用的哪个主题，用 <code>time zsh -i -c exit</code> 测一下自己的启动时间，再和一份只加载你真正在用的组件的 <code>.zshrc</code> 比一比。</p>
+<h3 id="用-zsh-syntax-highlighting-还是-fast-syntax-highlighting">用 zsh-syntax-highlighting 还是 fast-syntax-highlighting？</h3>
+<p>两个都会在你打字时给命令行上色，zsh-syntax-highlighting 用的人更多，fast-syntax-highlighting 是另一个项目，有自己的主题，Kaku 带的是后者，不管用哪个，都放在 <code>.zshrc</code> 最后。</p>
+<h3 id="zsh-补全为什么不出来">zsh 补全为什么不出来？</h3>
+<p>通常是补全目录在 <code>compinit</code> 跑完之后才加进 <code>fpath</code>，或者缓存的 <code>.zcompdump</code> 比它还旧，把 <code>fpath</code> 那行挪到 <code>compinit</code> 上面，再跑一次 <code>rm ~/.zcompdump; exec zsh</code>。</p>
+<h3 id="kaku-的-zsh-配置能和我自己的-starship-配置一起用吗">Kaku 的 zsh 配置能和我自己的 Starship 配置一起用吗？</h3>
+<p>可以，Kaku 只在没有 <code>~/.config/starship.toml</code>，或者它和 Kaku 0.10.0 到 0.22.0 带的那份一个字节都没差时才写入，你自己写的或软链接的配置不会被改动。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/lazygit-and-delta"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">Lazygit 加 delta，在终端里用好 git</span><span class="blog-related-meta"><time datetime="2026-09-24">2026年9月24日</time> · 约 3 分钟</span></a></li><li><a href="/zh/blog/zsh-vs-bash"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">Mac 上用 zsh 还是 bash</span><span class="blog-related-meta"><time datetime="2026-10-04">2026年10月4日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/starship-prompt"><span class="blog-related-cat">Shell 与命令行工具</span><span class="blog-related-name">在 Mac 上用 Starship 提示符，安装、配置和保持够快</span><span class="blog-related-meta"><time datetime="2026-10-12">2026年10月12日</time> · 约 7 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

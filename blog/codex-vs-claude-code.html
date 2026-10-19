@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Codex CLI vs Claude Code: A Practical Comparison · Kaku Blog</title>
+  <meta name="description" content="Codex CLI and Claude Code compared on install, sign-in, config files, approvals, extension points and notifications, and how to run both on one repo.">
+  <meta property="og:title" content="Codex CLI vs Claude Code: A Practical Comparison · Kaku Blog">
+  <meta property="og:description" content="Codex CLI and Claude Code compared on install, sign-in, config files, approvals, extension points and notifications, and how to run both on one repo.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Codex CLI vs Claude Code: A Practical Comparison">
+  <meta property="og:url" content="https://kaku.fun/blog/codex-vs-claude-code">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/codex-vs-claude-code"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/codex-vs-claude-code">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/codex-vs-claude-code">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/codex-vs-claude-code">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/codex-vs-claude-code.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Codex CLI vs Claude Code: A Practical Comparison",
+          "item": "https://kaku.fun/blog/codex-vs-claude-code"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/codex-vs-claude-code#article",
+      "headline": "Codex CLI vs Claude Code: A Practical Comparison",
+      "description": "Codex CLI and Claude Code compared on install, sign-in, config files, approvals, extension points and notifications, and how to run both on one repo.",
+      "url": "https://kaku.fun/blog/codex-vs-claude-code",
+      "mainEntityOfPage": "https://kaku.fun/blog/codex-vs-claude-code",
+      "datePublished": "2026-10-09",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/codex-vs-claude-code.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I run both in one repository?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Put shared instructions in AGENTS.md. Codex writes it with /init, and Claude Code can read it in place of a CLAUDE.md. Start the Claude Code session with --worktree when the two should not edit the same files. In Kaku, Cmd + D puts the CLIs in adjacent panes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which one costs less?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Codex is included in every ChatGPT plan, but the CLI starts at Plus ($20 a month), since Free and Go list only the desktop app, and an OpenAI API key also works. Claude Code needs a Pro, Max, Team, or Enterprise subscription or a Console account. Check the Codex pricing page and claude.com/pricing for the latest rates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does only one of them notify me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Kaku, Codex's bell already becomes a notification while the window is in the background. Claude Code needs no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and before that it needs \"preferredNotifChannel\": \"ghostty\", as Claude Code notifications explains. Kaku also needs Allow Notifications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do both have hooks and MCP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Codex uses features.hooks with hooks.json or [hooks], and codex mcp for servers. Claude Code uses a hooks object in settings.json and stores MCP servers in ~/.claude.json. Shared event names include PreToolUse, PostToolUse, SessionStart, and Stop."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/codex-vs-claude-code" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/codex-vs-claude-code" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Codex CLI vs Claude Code: A Practical Comparison</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-09">Oct 9, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/codex-vs-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Codex CLI and Claude Code are both terminal coding agents. Each one reads a repository, edits files, and runs commands on your machine. They differ in accounts and pricing, how the sandbox and approval prompts work, and configuration formats: TOML for Codex, JSON for Claude Code. Both support skills, hooks, and MCP, and many developers keep both installed.</p>
+<h2 id="comparison">Comparison</h2>
+<p>Checked October 2026, against the <a href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">Codex CLI</a> page, the <a href="https://developers.openai.com/codex/config-reference" target="_blank" rel="noopener noreferrer">config reference</a>, the <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">Codex pricing page</a>, and the Claude Code <a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">overview</a>, <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener noreferrer">settings</a>, and <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener noreferrer">hooks guide</a>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Codex CLI</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Install</td>
+<td>macOS/Linux: <code>curl -fsSL https://chatgpt.com/codex/install.sh \| sh</code>. The page also has Windows, npm, and Homebrew tabs</td>
+<td><code>curl -fsSL https://claude.ai/install.sh \| bash</code>, or <code>brew install --cask claude-code</code></td>
+</tr>
+<tr>
+<td>Login</td>
+<td>Run <code>codex</code>, then Sign in with ChatGPT or another method</td>
+<td><code>claude</code> asks you to log in. An approved <code>ANTHROPIC_API_KEY</code> skips the prompt</td>
+</tr>
+<tr>
+<td>Config file</td>
+<td><code>~/.codex/config.toml</code>, and <code>.codex/config.toml</code> in a trusted project</td>
+<td><code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code></td>
+</tr>
+<tr>
+<td>Sandbox and approvals</td>
+<td><code>sandbox_mode</code>: <code>read-only</code>, <code>workspace-write</code>, <code>danger-full-access</code>. <code>approval_policy</code>: <code>on-request</code> or <code>never</code>. <code>/permissions</code> shows the sandbox</td>
+<td><code>allow</code>, <code>ask</code>, <code>deny</code>. Enter plan mode with <code>Shift + Tab</code>, <code>/plan</code> or <code>--permission-mode plan</code>. <code>auto</code> and <code>bypassPermissions</code> from user or managed settings, or <code>--permission-mode</code></td>
+</tr>
+<tr>
+<td>Models</td>
+<td><code>model</code>, for example <code>gpt-6.1-sol</code>. <code>/model</code> sets the model and reasoning effort</td>
+<td><code>/model</code> switches mid-session. <code>--model</code> applies to a single session. Examples on the settings page: <code>claude-sonnet-5</code>, <code>claude-opus-5-5</code></td>
+</tr>
+<tr>
+<td>MCP</td>
+<td><code>codex mcp</code></td>
+<td>Servers stored in <code>~/.claude.json</code></td>
+</tr>
+<tr>
+<td>Hooks</td>
+<td><code>hooks.json</code> or <code>[hooks]</code>, with <code>features.hooks</code> on</td>
+<td><code>hooks</code> in a settings file. <code>/hooks</code> lists them</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td><code>tui.notification_method</code>: <code>auto</code> (default), <code>osc9</code>, <code>bel</code>. Condition defaults to <code>unfocused</code></td>
+<td><code>preferredNotifChannel</code> in <code>~/.claude/settings.json</code>, or a <code>Notification</code> hook</td>
+</tr>
+<tr>
+<td>Resume</td>
+<td><code>codex resume</code></td>
+<td><code>claude --continue</code> or <code>claude --resume</code>. <code>claude --teleport</code> brings a web or mobile task into the terminal (claude.ai subscription)</td>
+</tr>
+</tbody>
+</table>
+<p>The native Claude Code install updates itself. Homebrew does not: <code>claude-code</code> is the stable cask, about a week behind, and <code>claude-code@latest</code> is current. <code>claude --version</code> prints the version once <code>claude</code> is on <code>PATH</code>. Settings files are strict JSON.</p>
+<p>A project <code>.codex/config.toml</code> loads only after you trust the project, and it cannot set notifications, so <code>notification_method</code> stays in <code>~/.codex/config.toml</code>. <code>approval_policy = "untrusted"</code> is unsupported, <code>on-failure</code> is deprecated, and the docs advise against combining permission profiles (<code>:read-only</code>, <code>:workspace</code>, <code>:danger-full-access</code>) with <code>sandbox_mode</code>.</p>
+<pre><code class="language-toml">model = <span class="tok-s">"gpt-6.1-sol"</span>
+sandbox_mode = <span class="tok-s">"workspace-write"</span>
+approval_policy = <span class="tok-s">"on-request"</span></code></pre>
+<p>Claude Code's example for lint and tests, while blocking <code>.env</code>, goes in <code>~/.claude/settings.json</code>:</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "allow": [
+      <span class="tok-s">"Bash(npm run lint)"</span>,
+      <span class="tok-s">"Bash(npm run test *)"</span>
+    ],
+    "deny": [
+      <span class="tok-s">"Read(./.env)"</span>,
+      <span class="tok-s">"Read(./.env.*)"</span>
+    ]
+  }
+}</code></pre>
+<p><code>/status</code> confirms what loaded. Commit <code>.claude/settings.json</code> for the whole team, and keep personal overrides in <code>.claude/settings.local.json</code>. <code>permissions.allow</code> merges across those files. <code>ANTHROPIC_MODEL</code> overrides <code>model</code>, and <code>--model</code> overrides both for one session.</p>
+<h2 id="accounts-and-prices">Accounts and prices</h2>
+<p>Per OpenAI's <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">pricing page</a>, Codex is included in every ChatGPT plan, but the Free and Go plans list only the desktop app; the CLI, IDE extension, and web start at Plus. An OpenAI API key also works. It is billed at API rates and does not include cloud features such as GitHub code review and Slack.</p>
+<p>Plus and Pro can buy credits after the included usage runs out, and a turn already running can finish, subject to fair use. Plan prices and per-model usage limits are on the <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">pricing page</a>.</p>
+<p>Claude Code runs on a <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claude subscription</a> (Pro, Max, Team, or Enterprise) or an <a href="https://platform.claude.com/" target="_blank" rel="noopener noreferrer">Anthropic Console</a> account billed per use. The terminal, VS Code, and JetBrains also support third-party providers. The desktop app needs a paid subscription. More details are on <a href="https://code.claude.com/" target="_blank" rel="noopener noreferrer">code.claude.com</a>.</p>
+<h2 id="where-each-one-fits">Where each one fits</h2>
+<p><code>codex exec</code> is the non-interactive command for scripts and CI. <code>/review</code> checks uncommitted changes, a commit, or a base branch, and leaves the working tree unchanged. <code>/init</code> writes <code>AGENTS.md</code>. Skills hold repeatable instructions, and plugins connect external tools.</p>
+<p>Claude Code handles these workflows through <code>claude</code>, and <code>claude -p</code> accepts a one-shot prompt or a pipe:</p>
+<pre><code class="language-bash">git diff main --name-only | claude -p <span class="tok-s">"review these changed files for security issues"</span></code></pre>
+<p><a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener noreferrer"><code>CLAUDE.md</code></a> at the project root is read at every session start. Skills are shared commands such as <code>/review-pr</code>. A <code>PreToolUse</code> hook that returns deny still blocks the tool in <code>bypassPermissions</code> mode and with <code>--dangerously-skip-permissions</code>. Claude Code also runs prompt hooks and agent hooks. Codex runs command hooks and MCP tool hooks, and skips prompt and agent handlers after parsing them.</p>
+<p><a href="/blog/claude-code-plan-mode">Plan mode</a> keeps Claude Code from editing until you approve, and a <a href="/blog/claude-code-hooks">hook</a> can block a tool call in any mode.</p>
+<h2 id="one-repository-both-agents">One repository, both agents</h2>
+<p>Shared instructions can live in <code>AGENTS.md</code>. Codex creates it with <code>/init</code>. If that file is already in the repo, Claude Code can read it in place of a <code>CLAUDE.md</code>. Any <code>CLAUDE.md</code> you add is still loaded at the start of a Claude Code session. <code>model_instructions_file</code> replaces Codex's built-in instructions instead of <code>AGENTS.md</code>.</p>
+<p>Both can edit the same checkout. Claude Code opens a git worktree for <code>--worktree</code>, for <code>isolation: "worktree"</code>, and for a background session (<code>WorktreeCreate</code>). Cleanup is covered in <a href="/blog/claude-code-git-worktrees">git worktrees</a>. Codex CLI has no matching flag. Install notes: <a href="/blog/codex-cli-setup">Codex CLI setup</a>, <a href="/blog/install-claude-code-mac">install Claude Code</a>.</p>
+<h2 id="side-by-side-in-kaku">Side by side in Kaku</h2>
+<p><a href="/docs/ai-coding">Kaku</a> runs both CLIs as ordinary programs. <code>kaku ai</code> configures Claude Code, Codex, and other external tools, shows plan usage, writes a setting only when you edit it there, and does not add hooks or instructions on its own.</p>
+<p><code>Cmd + D</code> splits side by side, <code>Cmd + Shift + D</code> top and bottom, and <code>Cmd + Shift + Enter</code> zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground. After a restart, those panes keep their last screen.</p>
+<p>Codex needs no notification setting in Kaku. It rings the terminal bell, and Kaku turns that into a notification while Kaku is in the background. For Codex's own text, set the method in <code>~/.codex/config.toml</code>:</p>
+<pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+<p><code>auto</code> is the default, <code>osc9</code> carries one line, and <code>bel</code> is the bell. <code>tui.notification_condition</code> is <code>unfocused</code> unless you set <code>always</code>.</p>
+<p>Claude Code needs no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and before that it needs <code>"preferredNotifChannel": "ghostty"</code> in <code>~/.claude/settings.json</code>; <a href="/blog/claude-code-notifications">Claude Code notifications</a> explains why. If nothing shows, click Kaku &gt; Notification Settings and turn on Allow Notifications in System Settings.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="can-i-run-both-in-one-repository">Can I run both in one repository?</h3>
+<p>Yes. Put shared instructions in <code>AGENTS.md</code>. Codex writes it with <code>/init</code>, and Claude Code can read it in place of a <code>CLAUDE.md</code>. Start the Claude Code session with <code>--worktree</code> when the two should not edit the same files. In Kaku, <code>Cmd + D</code> puts the CLIs in adjacent panes.</p>
+<h3 id="which-one-costs-less">Which one costs less?</h3>
+<p>Codex is included in every ChatGPT plan, but the CLI starts at Plus ($20 a month), since Free and Go list only the desktop app, and an OpenAI API key also works. Claude Code needs a Pro, Max, Team, or Enterprise subscription or a Console account. Check the <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">Codex pricing page</a> and <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">claude.com/pricing</a> for the latest rates.</p>
+<h3 id="why-does-only-one-of-them-notify-me">Why does only one of them notify me?</h3>
+<p>In Kaku, Codex's bell already becomes a notification while the window is in the background. Claude Code needs no setting on Kaku 0.25.0 or later with Claude Code 2.1.295 or later, and before that it needs <code>"preferredNotifChannel": "ghostty"</code>, as <a href="/blog/claude-code-notifications">Claude Code notifications</a> explains. Kaku also needs Allow Notifications.</p>
+<h3 id="do-both-have-hooks-and-mcp">Do both have hooks and MCP?</h3>
+<p>Yes. Codex uses <code>features.hooks</code> with <code>hooks.json</code> or <code>[hooks]</code>, and <code>codex mcp</code> for servers. Claude Code uses a <code>hooks</code> object in <code>settings.json</code> and stores MCP servers in <code>~/.claude.json</code>. Shared event names include <code>PreToolUse</code>, <code>PostToolUse</code>, <code>SessionStart</code>, and <code>Stop</code>.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-git-worktrees"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Run Several Claude Code Sessions at Once with Git Worktrees</span><span class="blog-related-meta"><time datetime="2026-10-07">Oct 7, 2026</time> · 7 min read</span></a></li><li><a href="/blog/claude-code-subagents"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Subagents: What They Are and When They Help</span><span class="blog-related-meta"><time datetime="2026-10-11">Oct 11, 2026</time> · 9 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

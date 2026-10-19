@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Subagents: What They Are and When They Help · Kaku Blog</title>
+  <meta name="description" content="How subagents differ from skills and agent teams, how to define one, which jobs they suit, and what they cost in context and tokens.">
+  <meta property="og:title" content="Claude Code Subagents: What They Are and When They Help · Kaku Blog">
+  <meta property="og:description" content="How subagents differ from skills and agent teams, how to define one, which jobs they suit, and what they cost in context and tokens.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-subagents.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Subagents: What They Are and When They Help">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-subagents">
+  <meta property="article:published_time" content="2026-10-11">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-subagents.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-subagents"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-subagents">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-subagents">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-subagents">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-subagents.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Subagents: What They Are and When They Help",
+          "item": "https://kaku.fun/blog/claude-code-subagents"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-subagents#article",
+      "headline": "Claude Code Subagents: What They Are and When They Help",
+      "description": "How subagents differ from skills and agent teams, how to define one, which jobs they suit, and what they cost in context and tokens.",
+      "url": "https://kaku.fun/blog/claude-code-subagents",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-subagents",
+      "datePublished": "2026-10-11",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-subagents.webp",
+      "timeRequired": "PT9M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-subagents.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where do subagent files go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "~/.claude/agents/ for every project on your machine, .claude/agents/ for one repository. Both are scanned recursively, so subfolders are fine, and identity comes from the name field, not the filename."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a subagent see my conversation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It gets its own system prompt, Claude's delegation message, your CLAUDE.md files (except Explore, Plan and subagents with omitClaudeMd), a git status snapshot and any preloaded skills. Only a fork, started with /subtask, inherits the history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do subagents make Claude Code cheaper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by themselves. Each one spends its own tokens against the same usage limits. Routing search to model: haiku and keeping summaries short lower the bill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use a subagent or an agent team?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A subagent when only the result matters. An agent team when teammates need to share findings and challenge each other, and you accept the extra tokens and the experimental flag. Claude Code agent teams covers turning them on and where teammates show up in Kaku."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Claude not using my subagent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude routes on the description. Make it specific, add \"use proactively\" if you want it picked without asking, and check that the file has both name and description and that the YAML parses correctly. @-mentioning the subagent forces it."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-subagents" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-subagents" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Subagents: What They Are and When They Help</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-11">Oct 11, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>9 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-subagents.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>A <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener noreferrer">Claude Code subagent</a> is a helper with its own system prompt, tool list and context window. You define one as a Markdown file in <code>~/.claude/agents/</code> or <code>.claude/agents/</code>, Claude hands it a task, and only its summary comes back. This keeps search results, logs and file dumps out of your main conversation.</p>
+<h2 id="subagents-skills-and-agent-teams">Subagents, skills and agent teams</h2>
+<p>A <a href="/blog/claude-code-skills">skill</a> runs in the main conversation. It is a reusable procedure that Claude loads into your current context. A subagent starts fresh: it does not see your conversation history, the skills you invoked or the files Claude already read. Claude writes it a delegation message, the subagent works from that, and it returns one result. They also connect in both directions: a skill with <code>context: fork</code> runs its body as a subagent's task, and a subagent with a <code>skills</code> field preloads the full content of those skills at startup.</p>
+<p><a href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener noreferrer">Agent teams</a> are a third approach: several Claude Code sessions, one acting as lead, with teammates that message each other directly and share a task list. Checked October 2026, they are experimental and off by default. You turn them on with <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>, and once they are on, a subagent that Claude names launches as a teammate instead. The docs are direct about the trade-off: a subagent hands a summary back to its caller and costs less, while each teammate is a separate Claude instance, so token use grows with every active teammate.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Runs in</th>
+<th>Sees your conversation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skill</td>
+<td>Main conversation</td>
+<td>Yes</td>
+<td>Nothing separate</td>
+</tr>
+<tr>
+<td>Subagent</td>
+<td>Its own context window</td>
+<td>No, only Claude's delegation message</td>
+<td>A summary</td>
+</tr>
+<tr>
+<td>Agent team</td>
+<td>Separate sessions</td>
+<td>No</td>
+<td>Teammates coordinate among themselves</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-built-in-subagents">The built-in subagents</h2>
+<p>You already use subagents without defining any. Claude Code ships these:</p>
+<ul>
+<li><strong>Explore</strong>: read-only, for file discovery and code search. Claude asks it for a thoroughness level of quick, medium or very thorough.</li>
+<li><strong>Plan</strong>: read-only research during <a href="/blog/claude-code-plan-mode">plan mode</a>, so exploration stays out of the main context while you review the plan.</li>
+<li><strong>general-purpose</strong>: every tool available to subagents, for tasks that need both exploration and edits.</li>
+<li><strong>claude</strong>, <strong>statusline-setup</strong> and <strong>claude-code-guide</strong>: helpers Claude calls on its own, for catch-all tasks, for <code>/statusline</code>, and for questions about Claude Code itself.</li>
+</ul>
+<p>Explore and Plan start without your <code>CLAUDE.md</code> files or the git status snapshot, which keeps research fast and inexpensive. They are also one-shot: they return no agent ID, so Claude cannot resume them later.</p>
+<h2 id="defining-your-own">Defining your own</h2>
+<p>A subagent is a Markdown file with YAML frontmatter. Only <code>name</code> and <code>description</code> are required, and the body becomes the system prompt:</p>
+<pre><code class="language-markdown">---
+name: code-reviewer
+description: Reviews code for quality and best practices. Use proactively after code changes.
+tools: Read, Glob, Grep, Bash
+model: sonnet
+---
+
+You are a code reviewer. Run git diff, focus on the modified files,
+and report issues ordered by priority with a suggested fix for each.</code></pre>
+<p>Save it in <code>~/.claude/agents/</code> to use it in every project, or in <code>.claude/agents/</code> to commit it with one repository. If two files share a name, the project file takes precedence over the user file. Claude Code watches both directories, so an edit takes effect on the next delegation without a restart. The exception is a directory that did not exist when the session started: create the first file, then restart.</p>
+<p>The fields worth knowing:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools</code></td>
+<td>Allowlist. Omit it and the subagent inherits every tool available to subagents</td>
+</tr>
+<tr>
+<td><code>disallowedTools</code></td>
+<td>Denylist, applied before <code>tools</code></td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>sonnet</code>, <code>opus</code>, <code>haiku</code>, <code>fable</code>, a full model ID, or <code>inherit</code></td>
+</tr>
+<tr>
+<td><code>permissionMode</code></td>
+<td><code>default</code>, <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code> or <code>plan</code></td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td>Stops the subagent after that many agentic turns</td>
+</tr>
+<tr>
+<td><code>skills</code></td>
+<td>Skills to preload in full at startup</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td><code>user</code>, <code>project</code> or <code>local</code>, a directory that survives across conversations</td>
+</tr>
+<tr>
+<td><code>background</code></td>
+<td><code>true</code> keeps it in the background even when Claude asks for the foreground</td>
+</tr>
+<tr>
+<td><code>isolation</code></td>
+<td><code>worktree</code> runs it in a temporary git worktree</td>
+</tr>
+<tr>
+<td><code>hooks</code></td>
+<td>Hooks that run only while this subagent is active</td>
+</tr>
+</tbody>
+</table>
+<p>Field names are camelCase and must match exactly, because Claude Code ignores unrecognized fields without an error. A file with no <code>description</code>, or with YAML that does not parse, is skipped silently. <code>claude --debug</code> writes the reason to the debug log.</p>
+<p>The <code>/agents</code> command in current releases only prints a reminder to ask Claude or edit the two directories yourself. On v2.1.197 and earlier, it opened a wizard with Running and Library tabs. Now you describe the subagent to Claude, say where to save it, and review the file it writes.</p>
+<p>To call one, name it in your prompt and Claude usually delegates, or <code>@</code>-mention it to guarantee that the subagent runs. <code>claude --agent code-reviewer</code> runs the whole session as that agent, with its tools, model and system prompt.</p>
+<h2 id="where-they-help">Where they help</h2>
+<p>The docs single out three patterns where the output is big and the answer is small.</p>
+<p><strong>Search and research.</strong> Ask a subagent to find where a config value is read, or to research the auth, database and API modules in parallel with one subagent each. The file reads stay in the subagents' context windows, and you get back a short answer, as long as the research paths do not depend on each other.</p>
+<p><strong>Review.</strong> A read-only reviewer with <code>tools: Read, Glob, Grep, Bash</code> cannot edit anything, so you can let it loose on a diff. You can also chain them: a reviewer finds performance issues, then another subagent fixes them, with Claude passing the relevant findings along.</p>
+<p><strong>Test runs and logs.</strong> "Use a subagent to run the test suite and report only the failing tests with their error messages" is the clearest case. Thousands of lines of test output stay out of your context, and two lines of failures come back.</p>
+<p>For edits that might collide with your own work, <code>isolation: worktree</code> gives the subagent its own copy of the repository, branched from your default branch. The worktree is removed if it makes no changes. The <a href="/blog/claude-code-git-worktrees">worktrees post</a> covers running whole sessions that way.</p>
+<h2 id="where-they-get-in-the-way">Where they get in the way</h2>
+<p>Stay in the main conversation when the task needs frequent back-and-forth, when planning, implementation and testing share a lot of context, or when it is a quick targeted change. A subagent starts with only Claude's summary of the task, so it may spend its first turns rediscovering what you know. If a rule in your <code>CLAUDE.md</code> must reach it, such as "ignore the <code>vendor/</code> directory", say it again when you delegate, since a subagent with <code>omitClaudeMd</code> or the built-in Explore and Plan never see it.</p>
+<p>For a question about something already in the conversation, use <code>/btw</code>: it sees your full context, has no tools, and stays out of history.</p>
+<h2 id="cost-and-context">Cost and context</h2>
+<p>A subagent saves context, not money. It sends its own requests, which count toward the same usage limits as your main conversation. The docs warn that many subagents each returning detailed results can still fill your main context while each spends its own tokens.</p>
+<p>A few levers:</p>
+<ul>
+<li>Set <code>model: haiku</code> for exploration-heavy subagents. A user or project subagent named <code>Explore</code> overrides the built-in, so you can move the default search agent to a cheaper model.</li>
+<li>Keep descriptions short. They sit in context so Claude can route, and Claude Code warns at startup if combined custom descriptions exceed 15,000 tokens.</li>
+<li>Use a fork when the task needs the whole conversation. <code>/subtask draft unit tests for the parser changes so far</code> starts a subagent that inherits your history and reuses the parent's prompt cache, so it costs less than a fresh subagent that needs the same background.</li>
+<li>Know the ceilings: subagents can nest three layers below the main conversation, and 20 running at once is the default concurrency limit, set with <code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code>.</li>
+</ul>
+<h2 id="watching-parallel-work-in-kaku">Watching parallel work in Kaku</h2>
+<p>Background subagents show up in the panel under Claude Code's prompt, and <code>/tasks</code> lists them. When one needs permission, the prompt surfaces in the main session and names the subagent that asked, so the session waits on you. When you run more than one Claude Code session, put each in its own <a href="/docs/ai-coding">Kaku</a> tab, or split with <code>Cmd + D</code> and <code>Cmd + Shift + D</code> and zoom the one you are reading with <code>Cmd + Shift + Enter</code>. Agent teams' split-pane display needs tmux or iTerm2, so in Kaku without tmux, teammates show in Claude Code's own in-process panel.</p>
+<p>Notifications require no extra configuration on Kaku 0.25.0 or later with Claude Code 2.1.295 or later. Earlier versions require <code>"preferredNotifChannel": "ghostty"</code> in <code>~/.claude/settings.json</code>; <a href="/blog/claude-code-notifications">Claude Code notifications</a> explains why. The tab status dot follows the same version cutoff: before 0.25.0, the <code>ghostty</code> channel lit it when Claude Code waited or finished, while 0.25.0 lights it without setup and adds the failed state.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="where-do-subagent-files-go">Where do subagent files go?</h3>
+<p><code>~/.claude/agents/</code> for every project on your machine, <code>.claude/agents/</code> for one repository. Both are scanned recursively, so subfolders are fine, and identity comes from the <code>name</code> field, not the filename.</p>
+<h3 id="can-a-subagent-see-my-conversation">Can a subagent see my conversation?</h3>
+<p>No. It gets its own system prompt, Claude's delegation message, your <code>CLAUDE.md</code> files (except Explore, Plan and subagents with <code>omitClaudeMd</code>), a git status snapshot and any preloaded skills. Only a fork, started with <code>/subtask</code>, inherits the history.</p>
+<h3 id="do-subagents-make-claude-code-cheaper">Do subagents make Claude Code cheaper?</h3>
+<p>Not by themselves. Each one spends its own tokens against the same usage limits. Routing search to <code>model: haiku</code> and keeping summaries short lower the bill.</p>
+<h3 id="should-i-use-a-subagent-or-an-agent-team">Should I use a subagent or an agent team?</h3>
+<p>A subagent when only the result matters. An agent team when teammates need to share findings and challenge each other, and you accept the extra tokens and the experimental flag. <a href="/blog/claude-code-agent-teams">Claude Code agent teams</a> covers turning them on and where teammates show up in Kaku.</p>
+<h3 id="why-is-claude-not-using-my-subagent">Why is Claude not using my subagent?</h3>
+<p>Claude routes on the <code>description</code>. Make it specific, add "use proactively" if you want it picked without asking, and check that the file has both <code>name</code> and <code>description</code> and that the YAML parses correctly. <code>@</code>-mentioning the subagent forces it.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/codex-vs-claude-code"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Codex CLI vs Claude Code: A Practical Comparison</span><span class="blog-related-meta"><time datetime="2026-10-09">Oct 9, 2026</time> · 7 min read</span></a></li><li><a href="/blog/claude-code-mcp-servers"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code MCP Servers: Add, Scope and Approve Them</span><span class="blog-related-meta"><time datetime="2026-10-19">Oct 19, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

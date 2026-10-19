@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Agent Teams: Turn Them On and Where They Show Up · Kaku Blog</title>
+  <meta name="description" content="Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on.">
+  <meta property="og:title" content="Claude Code Agent Teams: Turn Them On and Where They Show Up · Kaku Blog">
+  <meta property="og:description" content="Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-agent-teams.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Agent Teams: Turn Them On and Where They Show Up">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-agent-teams">
+  <meta property="article:published_time" content="2026-09-26">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-agent-teams.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-agent-teams"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-agent-teams">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-agent-teams">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-agent-teams">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-agent-teams.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Agent Teams: Turn Them On and Where They Show Up",
+          "item": "https://kaku.fun/blog/claude-code-agent-teams"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-agent-teams#article",
+      "headline": "Claude Code Agent Teams: Turn Them On and Where They Show Up",
+      "description": "Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on.",
+      "url": "https://kaku.fun/blog/claude-code-agent-teams",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-agent-teams",
+      "datePublished": "2026-09-26",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-agent-teams.webp",
+      "timeRequired": "PT9M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-agent-teams.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Kaku draw a pane for each teammate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get the in-process panel. A pane per teammate comes from tmux inside that Kaku pane with teammateMode set to auto or tmux, or from iTerm2 with it2."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does claude --help list teammate mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "--teammate-mode is experimental and absent from claude --help. claude --teammate-mode auto still overrides teammateMode for that session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is there no shared task list?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On models newer than Opus 4.7, Sonnet 4.6, and Haiku 4.5, the Task tools stay off unless you opt in, for example by starting Claude Code with CLAUDE_CODE_ENABLE_TODO_TOOLS=1. The team then coordinates by mailbox messages."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-agent-teams" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-agent-teams" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Agent Teams: Turn Them On and Where They Show Up</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-09-26">Sep 26, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>9 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-agent-teams.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Checked in October 2026, Claude Code agent teams are experimental and stay off until you set <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS</code> to <code>1</code> in <code>~/.claude/settings.json</code> or in your shell. You then ask that interactive session to spawn named teammates: it remains the lead, each teammate is a separate Claude Code instance with its own context window, and token use grows with every teammate you leave running. In Kaku they show up in the in-process panel under the prompt. A pane per teammate means running Claude Code inside tmux with <code>teammateMode</code> set to <code>auto</code> or <code>tmux</code>. The split-pane backends the docs name are tmux and iTerm2 with the <code>it2</code> CLI, and Kaku's <code>Cmd + D</code> opens a second pane that you control.</p>
+<h2 id="when-a-team-earns-the-tokens">When a team earns the tokens</h2>
+<p>A <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener noreferrer">subagent</a> returns a summary to the caller. A teammate messages the lead and the other teammates directly, and, when the session has the Task tools, claims work from a shared task list. The docs put teams on jobs where the workers need to compare notes: several reviewers on one change, a module split across owners, a bug chased with competing hypotheses, or a change that spans frontend, backend, and tests.</p>
+<p>Sequential work, edits to the same files, and tasks with lots of dependencies fit one session or a subagent better. Separate checkouts that you drive yourself belong in <a href="https://code.claude.com/docs/en/worktrees" target="_blank" rel="noopener noreferrer">git worktrees</a>.</p>
+<h2 id="turn-teams-on">Turn teams on</h2>
+<p>Put the variable in the <code>env</code> block of <code>~/.claude/settings.json</code>, or export it in the shell. Without it, Claude Code sets up no team at session start, writes no team directories, and does not spawn or propose teammates.</p>
+<pre><code class="language-json">{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": <span class="tok-s">"1"</span>
+  }
+}</code></pre>
+<p>Enabling teams changes ordinary delegation. Claude names subagents on its own so it can message them later, and in an interactive session a named subagent launches as a teammate, including when you never asked for a team. A fork, or an Agent-tool call that passes <code>isolation</code>, stays a subagent. <code>claude -p</code> and Agent SDK sessions do not spawn teammates at all.</p>
+<p>Set the variable to <code>0</code> in <code>~/.claude/settings.json</code> and the next named subagent is a subagent again. Saving reapplies <code>env</code> values, so you do not need a new session. A <code>0</code> in the user file overrides a shell export. Project settings, local settings, a <code>--settings</code> payload, and managed settings can still set <code>1</code>. Managed settings apply last.</p>
+<p>While the session is open, <code>~/.claude/teams/session-XXXXXXXX/config.json</code> should exist. The eight characters are the start of the session ID, the lead's <code>members</code> entry has agent type <code>team-lead</code>, and the file holds runtime state such as tmux pane IDs, so the next state update overwrites any hand edit. Claude Code deletes that directory when the session ends. <code>~/.claude/tasks/session-XXXXXXXX/</code> stays until <code>cleanupPeriodDays</code> removes it, 30 days by default. <code>.claude/teams/teams.json</code> in a project is an ordinary file.</p>
+<h2 id="how-a-team-works">How a team works</h2>
+<p>The lead starts a teammate by calling the Agent tool with a <code>name</code>, and Claude Code does not ask you to confirm. The teammate loads <code>CLAUDE.md</code>, MCP servers, and skills like a normal session, or the same restricted list if you started the lead with <code>--setting-sources</code>. The lead's conversation does not carry over, so paths, constraints, and the names you will use later have to be in the spawn prompt.</p>
+<p>Each mailbox is <code>~/.claude/teams/{team-name}/inboxes/{agent-name}.json</code>. A message counts as sent only after that write succeeds, so a full disk or an unwritable directory returns an error and delivers nothing. The receiver is told the message came from another Claude session, which means a teammate cannot approve a permission prompt for you or relay a denied action to another teammate.</p>
+<p>The task list is a second channel, and newer models do not get it unless you opt in. From Claude Code v2.1.268, <code>TaskCreate</code>, <code>TaskGet</code>, <code>TaskList</code>, and <code>TaskUpdate</code> are on by default only for Opus 4.7, Sonnet 4.6, Haiku 4.5, and earlier models. On later models, or an unrecognized model ID, start with <code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code>. An in-process teammate follows the lead. A split-pane teammate is its own process, so its own model decides. Without the tools, coordination is messages only. With them, unfinished dependencies block a claim, and file locking stops two teammates taking the same task.</p>
+<p>A session has one team. Only its lead can spawn teammates, and the lead role stays with that session. An in-process teammate's own subagents run in the foreground, because its background work cannot outlive the lead's process: a definition with <code>background: true</code> returns an error, and a <code>run_in_background: true</code> request errors or runs in the foreground.</p>
+<h2 id="where-teammates-show-up-in-kaku">Where teammates show up in Kaku</h2>
+<p>In the panel under the prompt, Up and Down select a row and Enter opens that transcript, so typing reaches the teammate. Escape clears the selection, and with a transcript open it interrupts the teammate's turn. <code>x</code> stops the selected teammate. <code>Ctrl+T</code> toggles the task list.</p>
+<p>Once every row is idle, idle rows hide after 30 seconds and return on the next turn. The teammate is still running, and a message by name brings the row back. Past three idle teammates, the extras collapse into one row such as <code>2 idle agents</code>, which Enter expands.</p>
+<p>Split panes need tmux, or iTerm2 with the <a href="https://github.com/mkusaka/it2" target="_blank" rel="noopener noreferrer"><code>it2</code> CLI</a> and the Python API enabled under Settings, General, Magic. The docs also exclude VS Code's integrated terminal, Windows Terminal, and Ghostty. <code>tmux -CC</code> is the iTerm2 entrypoint they suggest.</p>
+<p>Kaku 0.25.0 sets <code>TERM_PROGRAM</code> to <code>Kaku</code>, and Kaku is not one of the split-pane backends the docs name, so in Kaku split panes go through tmux. <code>teammateMode</code> defaults to <code>"in-process"</code>. <code>"auto"</code> splits only when you are already inside tmux, or when the terminal is iTerm2 with <code>it2</code> on <code>PATH</code> or with tmux installed. <code>"tmux"</code> requests split panes and picks tmux or iTerm2 from the terminal. <code>"iterm2"</code> uses <code>it2</code> and errors with the install command if <code>it2</code> is missing. <code>claude --teammate-mode auto</code> overrides the file for one session. The flag is experimental and is absent from <code>claude --help</code>.</p>
+<p>In Kaku, set <code>teammateMode</code> to <code>auto</code> or <code>tmux</code>, then run <code>claude</code> inside tmux. <code>which tmux</code> checks <code>PATH</code>. <code>tmux</code> with no arguments creates a one-window session. <code>tmux ls</code> lists a session left behind, and <code>tmux kill-session -t &lt;session-name&gt;</code> ends it.</p>
+<p><code>Cmd + D</code>, <code>Cmd + Shift + D</code>, and <code>Cmd + Shift + Enter</code> on the <a href="/docs/ai-coding">AI coding page</a> split and zoom Kaku panes. Claude Code does not place teammates in them. They are for sessions you start yourself.</p>
+<p>With a transcript open, plain text and skills go to that teammate, and built-in commands go to the lead. <code>/compact</code>, <code>/clear</code>, and <code>/rewind</code> affect the lead, so Claude Code asks first. <code>/model</code> and <code>/fast</code> do not run here. Model and fast mode are fixed at spawn, so name the model in the prompt. Otherwise <code>CLAUDE_CODE_SUBAGENT_MODEL</code> applies when it is not <code>inherit</code>. A leftover <code>teammateDefaultModel</code> is ignored since v2.1.234.</p>
+<h2 id="steer-the-lead">Steer the lead</h2>
+<p>Name the roles in the prompt so later messages have a stable address:</p>
+<pre><code class="language-text">Spawn three teammates for this PR: security, performance, and test coverage.
+Name them security, perf, and tests. Use Sonnet for each.</code></pre>
+<p>A subagent type works as a teammate if you name it: "Spawn a teammate using the security-reviewer agent type." The definition's <code>skills</code> field is not applied. In-process, the body is appended to the default system prompt and <code>SendMessage</code> is added. In a split pane, the body replaces the default system prompt.</p>
+<p>Teammates inherit the lead's permission mode, except <code>dontAsk</code>. <code>--dangerously-skip-permissions</code> on the lead applies to every teammate. You can change a mode after spawn, and you cannot set a different mode per teammate at spawn time. Permission prompts arrive in the lead session. With the lead already in <a href="/blog/claude-code-plan-mode">plan mode</a>, Claude Code approves the teammate's plan as soon as the request arrives, and later edits still prompt.</p>
+<p>To stop one, tell the lead to ask that teammate to shut down. It may reject with an explanation, and it finishes the current tool call first.</p>
+<h2 id="what-goes-wrong">What goes wrong</h2>
+<p>Subagents use the same panel, so a populated panel is not proof of a team. If Claude spawned subagents, ask again and say agent team. The config file above is the check.</p>
+<p><code>/resume</code> and <code>/rewind</code> do not restore in-process teammates. The lead may then message teammates that no longer exist. Tell it to spawn new ones.</p>
+<p>A task left in progress blocks anything that depends on it, even when the files are already changed. Tell the lead to update the task or nudge the teammate. If the lead starts editing before the teammates finish, tell it to wait.</p>
+<p>Two teammates writing one file overwrite each other, so give each a different set of files. Pre-approve common commands before you spawn, or every permission prompt stops the lead. A teammate that hits an error may stop where it is. Open the transcript, or spawn a replacement. Exit code 2 from <code>TeammateIdle</code>, <code>TaskCreated</code>, or <code>TaskCompleted</code> sends feedback and blocks that idle transition, creation, or completion.</p>
+<h2 id="what-you-pay-for">What you pay for</h2>
+<p>Start with 3 to 5 teammates and 5 to 6 tasks each. Research, review, and new features usually earn the extra tokens, and a routine edit stays cheaper as one session.</p>
+<p>An in-process teammate's requests sit outside the main conversation's cache bucket and hold for five minutes by default, including on a Claude subscription. <code>subagentPromptCacheTtl</code> set to <code>1h</code> keeps the cache for an hour, and the API bills those writes at a higher rate. The key needs Claude Code v2.1.242 or later.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="does-kaku-draw-a-pane-for-each-teammate">Does Kaku draw a pane for each teammate?</h3>
+<p>You get the in-process panel. A pane per teammate comes from tmux inside that Kaku pane with <code>teammateMode</code> set to <code>auto</code> or <code>tmux</code>, or from iTerm2 with <code>it2</code>.</p>
+<h3 id="does-claude-help-list-teammate-mode">Does <code>claude --help</code> list teammate mode?</h3>
+<p><code>--teammate-mode</code> is experimental and absent from <code>claude --help</code>. <code>claude --teammate-mode auto</code> still overrides <code>teammateMode</code> for that session.</p>
+<h3 id="why-is-there-no-shared-task-list">Why is there no shared task list?</h3>
+<p>On models newer than Opus 4.7, Sonnet 4.6, and Haiku 4.5, the Task tools stay off unless you opt in, for example by starting Claude Code with <code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code>. The team then coordinates by mailbox messages.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/cursor-vs-claude-code"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Cursor vs Claude Code: Editor Agent or Terminal Agent</span><span class="blog-related-meta"><time datetime="2026-09-25">Sep 25, 2026</time> · 7 min read</span></a></li><li><a href="/blog/codex-cli-setup"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Setting Up Codex CLI on Mac: Install, Login and Config</span><span class="blog-related-meta"><time datetime="2026-09-29">Sep 29, 2026</time> · 5 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

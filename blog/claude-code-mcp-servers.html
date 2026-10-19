@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code MCP Servers: Add, Scope and Approve Them · Kaku Blog</title>
+  <meta name="description" content="Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.">
+  <meta property="og:title" content="Claude Code MCP Servers: Add, Scope and Approve Them · Kaku Blog">
+  <meta property="og:description" content="Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-mcp-servers.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code MCP Servers: Add, Scope and Approve Them">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-mcp-servers">
+  <meta property="article:published_time" content="2026-10-19">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-mcp-servers.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-mcp-servers"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-mcp-servers">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-mcp-servers">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-mcp-servers">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-mcp-servers.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code MCP Servers: Add, Scope and Approve Them",
+          "item": "https://kaku.fun/blog/claude-code-mcp-servers"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-mcp-servers#article",
+      "headline": "Claude Code MCP Servers: Add, Scope and Approve Them",
+      "description": "Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.",
+      "url": "https://kaku.fun/blog/claude-code-mcp-servers",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-mcp-servers",
+      "datePublished": "2026-10-19",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-mcp-servers.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-mcp-servers.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I import servers from Claude Desktop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On macOS and WSL, claude mcp add-from-claude-desktop reads that config and lets you pick. A name that is not just letters, numbers, hyphens and underscores is skipped. A duplicate is saved as server_1 or a similar suffix."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does /mcp list a tool Claude never calls?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A full name longer than 128 characters is left out of the request. The API would reject the whole request if that tool were included. /mcp shows the full name when you select the tool."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a server stop and ask me for input?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Elicitation opens a dialog on its own. Form mode shows the server's fields. URL mode asks whether to open a browser."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-mcp-servers" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-mcp-servers" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code MCP Servers: Add, Scope and Approve Them</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-19">Oct 19, 2026</time></span><span>8 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-mcp-servers.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Add a server with <code>claude mcp add</code>, then approve it before Claude calls its tools. A remote service is an HTTP URL. A program on your machine is a stdio command placed after <code>--</code>. Local and user servers stay in <code>~/.claude.json</code> on your machine, and a project <code>.mcp.json</code> is committed with the repo, so a token belongs in an environment variable rather than in that file.</p>
+<p>The commands follow Claude Code's <a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener noreferrer">MCP docs</a>, checked in October 2026. <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer">MCP</a> is the open protocol those servers speak.</p>
+<h2 id="how-claude-code-talks-to-a-server">How Claude Code talks to a server</h2>
+<p>Claude Code is the MCP host. It opens one client per server, and that client keeps the connection. The messages are JSON-RPC. After it connects, Claude Code asks what the server offers, including <code>tools/list</code>, <code>prompts/list</code> and <code>resources/list</code>. Tools are functions Claude can call, resources are data you attach with <code>@</code>, and prompts show up as <code>/servername:promptname (MCP)</code>.</p>
+<p>Stdio starts a process on your machine and uses its standard input and output. Claude Code sets <code>CLAUDE_PROJECT_DIR</code> in that process to the project root. HTTP is the transport the docs recommend for a remote service. In JSON, <code>streamable-http</code> is an alias for <code>http</code>. An entry with a <code>url</code> and no <code>type</code> is read as stdio and skipped.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-mcp-servers-mobile.webp" width="340" height="440"><img src="/img/blog/claude-code-mcp-servers.webp" width="1102" height="246" loading="lazy" alt="Claude Code opens one MCP client per server, and that client talks to a local process over stdin and stdout or to a remote server over HTTP, both of which answer tools/list"></picture><figcaption>Each server gets its own client, which uses stdio or HTTP to fetch the tool list.</figcaption></figure>
+
+<h2 id="add-an-http-server-and-a-stdio-server">Add an HTTP server and a stdio server</h2>
+<p><a href="https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/set-up-the-github-mcp-server" target="_blank" rel="noopener noreferrer">GitHub's remote MCP server</a> is <code>https://api.githubcopilot.com/mcp/</code>. Claude Code's example passes a personal access token as a header. The command stores the entry and does not check the token, so a placeholder is accepted and fails later:</p>
+<pre><code class="language-bash">claude mcp add --transport http github https://api.githubcopilot.com/mcp/ <span class="tok-s">\
+</span>  --header <span class="tok-s">"Authorization: Bearer YOUR_GITHUB_PAT"</span></code></pre>
+<p><code>Added</code> means the entry was written. <code>/mcp</code> shows whether it connected, and a bad token fails with a status such as 401. Keep this header on a local or user server. A committed file should use <code>${GITHUB_PAT}</code>.</p>
+<p>Sentry is the docs' no-header example. Sign in from <code>/mcp</code>, or with <code>claude mcp login sentry</code>, before a <code>claude -p</code> run. The same name at the same scope fails with <code>MCP server sentry already exists in local config</code>.</p>
+<pre><code class="language-bash">claude mcp add --transport http sentry https://mcp.sentry.dev/mcp</code></pre>
+<p>The docs' Airtable example is stdio. Keep another option between <code>--env</code> and the name, and put the process after <code>--</code>:</p>
+<pre><code class="language-bash">claude mcp add --env AIRTABLE_API_KEY=YOUR_KEY --transport stdio airtable <span class="tok-s">\
+</span>  -- npx -y airtable-mcp-server</code></pre>
+<p>Without <code>--</code>, a flag such as <code>--port</code> is parsed as a Claude Code option. Names can contain only letters, numbers, hyphens and underscores.</p>
+<h2 id="local-project-and-user-scope">Local, project and user scope</h2>
+<p>Leave <code>--scope</code> off and the server is local. Local is not <code>.claude/settings.local.json</code>. It is an entry under one project path in <code>~/.claude.json</code>, so another checkout does not see it.</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Loads in</th>
+<th>Shared</th>
+<th>Stored in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local</code> (default)</td>
+<td>This project, for you</td>
+<td>No</td>
+<td><code>~/.claude.json</code>, under that project's path</td>
+</tr>
+<tr>
+<td><code>project</code></td>
+<td>This project</td>
+<td>Yes, if you commit it</td>
+<td><code>.mcp.json</code> in the project root</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>All your projects</td>
+<td>No</td>
+<td><code>~/.claude.json</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>--scope user</code> or <code>--scope project</code> picks the scope, as in <code>claude mcp add --transport http sentry --scope user https://mcp.sentry.dev/mcp</code>. A server defined in more than one place connects once, using the whole entry from the highest source: local, then project, then user, then a plugin, then a claude.ai connector. Scopes are matched by name, plugins and connectors by URL or command. <code>managedMcpServers</code> ranks above that list on Claude Code v2.1.259 or later. The desktop app's Code tab loads the user stdio entry when <code>.mcp.json</code> uses the same name.</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "github": {
+      "type": <span class="tok-s">"http"</span>,
+      "url": <span class="tok-s">"https://api.githubcopilot.com/mcp/"</span>,
+      "headers": {
+        "Authorization": <span class="tok-s">"Bearer ${GITHUB_PAT}"</span>
+      }
+    }
+  }
+}</code></pre>
+<p><code>${VAR}</code> and <code>${VAR:-default}</code> expand in <code>command</code>, <code>args</code>, <code>env</code>, <code>url</code> and <code>headers</code>. With no default, the server still loads and the literal <code>${VAR}</code> text is sent. <code>claude mcp list</code> names the missing variable and shows the name, not the secret. <code>ANTHROPIC_API_KEY</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, <code>AWS_BEARER_TOKEN_BEDROCK</code>, <code>HTTPS_PROXY</code> and <code>NPM_TOKEN</code> are blanked in a remote URL or header, default included, which usually returns 401. Copy the value into a name of your own.</p>
+<h2 id="list-approve-and-remove">List, approve and remove</h2>
+<pre><code class="language-bash">claude mcp list
+claude mcp get github
+claude mcp remove github</code></pre>
+<p><code>Failed to connect</code> means that server did not connect, while the list command itself succeeds. <code>claude mcp get</code> repeats the text on an <code>Issue:</code> line, with secrets and the expanded URL removed. <code>Connection error</code> prints no detail. <code>Needs authentication</code> still needs a login.</p>
+<p>A <code>.mcp.json</code> server stays at <code>Pending approval</code> until you run <code>claude</code> and accept it. <code>claude mcp reset-project-choices</code> clears those answers. <code>claude -p</code>, the Agent SDK and cloud sessions load project servers with no prompt unless you block them. A committed <code>enableAllProjectMcpServers</code> or <code>enabledMcpjsonServers</code> is ignored until the workspace is trusted. <code>disabledMcpjsonServers</code> blocks a project server in every mode. Turning one off in <code>/mcp</code> writes <code>disabledMcpServers</code> instead, keeps the config, and stops the connection.</p>
+<p>Removing a remote server also deletes the OAuth tokens and client registration stored for it. When one name points at different endpoints in two scopes, pass <code>--scope</code> so the other entry stays.</p>
+<h2 id="when-a-tool-call-needs-approval">When a tool call needs approval</h2>
+<p>Approving the server does not approve its tools. Manual mode, the default, prompts the first time each tool is used. The name is <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, and a dot or space in the server name becomes <code>_</code>, so <code>list_issues</code> on <code>github</code> is <code>mcp__github__list_issues</code>. <code>mcp__github</code> and <code>mcp__github__*</code> match every tool from that server. An allow rule may use <code>*</code> only after <code>mcp__&lt;server&gt;__</code>. <code>mcp__*</code> as an allow rule is skipped. As a deny rule it removes every MCP tool from context. Deny is checked before ask, and ask before allow.</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "allow": [<span class="tok-s">"mcp__github__*"</span>]
+  }
+}</code></pre>
+<p>User rules go in <code>~/.claude/settings.json</code>. Project rules go in <code>.claude/settings.json</code>. <code>/permissions</code> shows which file each rule came from. <code>acceptEdits</code> covers file edits and common filesystem commands, and does not auto-approve MCP tools. <code>bypassPermissions</code> skips ordinary MCP prompts along with most other prompts. A tool whose <code>tools/list</code> entry sets <code>_meta["anthropic/requiresUserInteraction"]</code> to <code>true</code> still asks every time, with no "don't ask again", including in <code>bypassPermissions</code>.</p>
+<p>A <a href="/blog/claude-code-subagents">subagent</a> <code>tools</code> field, a <a href="/blog/claude-code-skills">skill</a> <code>allowed-tools</code> list and a <a href="/blog/claude-code-hooks">hook</a> matcher need that full name.</p>
+<h2 id="when-a-server-will-not-start">When a server will not start</h2>
+<p>A 401 on a header you wrote does not fall through to OAuth. Fix the header. For Sentry, finish login with <code>/mcp</code> or <code>claude mcp login sentry</code>.</p>
+<p>If a stdio process exits immediately, run the command after <code>--</code> in a shell. Claude Code does not reconnect stdio. A dropped remote server is retried, and an authentication failure is not. <code>/mcp reconnect all</code> retries failed rows on Claude Code v2.1.284 or later.</p>
+<p><code>MCP_TIMEOUT=10000 claude</code> allows 10 seconds to start. A server <code>"timeout"</code>, in milliseconds, limits each tool call, and a value below 1000 is ignored. <code>claude mcp add</code> rejects the reserved names <code>workspace</code>, <code>claude-in-chrome</code>, <code>computer-use</code>, <code>Claude Preview</code> and <code>Claude Browser</code>.</p>
+<h2 id="what-a-long-tool-list-costs">What a long tool list costs</h2>
+<p>Tool search is on by default for current Claude models. The session starts with names and server instructions, and loads a definition when Claude searches. There is no per-server cap. <code>ENABLE_TOOL_SEARCH=false</code>, an <code>ANTHROPIC_BASE_URL</code> that points to a non-Anthropic host, and models earlier than Opus 4 and Sonnet 4 load every definition up front. <code>"alwaysLoad": true</code> does that for one server.</p>
+<p>Claude Code warns above 10,000 tokens. Past the default cap of 25,000, the text is saved under <code>tool-results</code> in <code>~/.claude/projects/</code>, and the conversation keeps that path. <code>MAX_MCP_OUTPUT_TOKENS</code> raises the cap.</p>
+<h2 id="in-a-kaku-tab">In a Kaku tab</h2>
+<p>Kaku 0.25.0 does not add MCP servers. <code>kaku ai</code> edits Claude Code's Model in <code>~/.claude/settings.json</code> as <code>model</code>. Base URL and API Key appear only when that file already has <code>env.ANTHROPIC_BASE_URL</code> or a token, and save as <code>env.ANTHROPIC_BASE_URL</code> and <code>env.ANTHROPIC_AUTH_TOKEN</code>. Auth is shown and not edited. The panel does not touch <code>~/.claude.json</code> or <code>.mcp.json</code>, and it does not add hooks or instructions on its own. <a href="/docs/ai-coding">AI coding in Kaku</a> describes the panel.</p>
+<p><code>ANTHROPIC_AUTH_TOKEN</code> will not expand in a remote header, so copy that key into another variable before <code>.mcp.json</code> references it. claude.ai connectors load only for a subscription login, not when <code>ANTHROPIC_API_KEY</code>, <code>ANTHROPIC_AUTH_TOKEN</code> or <code>apiKeyHelper</code> is the active credential. <code>/status</code> shows which one is active.</p>
+<p><code>Cmd + T</code> opens a tab, <code>Cmd + D</code> or <code>Cmd + Shift + D</code> puts a shell beside it, and <code>Cmd + Shift + Enter</code> zooms the pane. Closing asks first. Ending the session signals a stdio server with <code>SIGINT</code>, <code>SIGTERM</code> 100 milliseconds later, then <code>SIGKILL</code> after another 400. <code>Cmd + Click</code> opens file paths Claude Code prints. Claude Code 2.1.295 or later reports working, waiting and done to Kaku 0.25.0 with no extra setting. Leave <code>preferredNotifChannel</code> at <code>auto</code>.</p>
+<h2 id="when-a-server-is-the-wrong-tool">When a server is the wrong tool</h2>
+<p>Claude Code can already read the repo, edit files and run a shell, so a filesystem server pointed at the same checkout mostly adds another process. A reused checklist is a <a href="/blog/claude-code-skills">skill</a>. A command that must be blocked is a <a href="/blog/claude-code-hooks">hook</a>. MCP is the connection to some other system, such as GitHub or Sentry. Instructions from another client are still a URL, a command after <code>--</code>, or one <code>mcpServers</code> entry passed to <code>claude mcp add-json</code>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="can-i-import-servers-from-claude-desktop">Can I import servers from Claude Desktop?</h3>
+<p>On macOS and WSL, <code>claude mcp add-from-claude-desktop</code> reads that config and lets you pick. A name that is not just letters, numbers, hyphens and underscores is skipped. A duplicate is saved as <code>server_1</code> or a similar suffix.</p>
+<h3 id="why-does-mcp-list-a-tool-claude-never-calls">Why does /mcp list a tool Claude never calls?</h3>
+<p>A full name longer than 128 characters is left out of the request. The API would reject the whole request if that tool were included. <code>/mcp</code> shows the full name when you select the tool.</p>
+<h3 id="can-a-server-stop-and-ask-me-for-input">Can a server stop and ask me for input?</h3>
+<p>Elicitation opens a dialog on its own. Form mode shows the server's fields. URL mode asks whether to open a browser.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-subagents"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Subagents: What They Are and When They Help</span><span class="blog-related-meta"><time datetime="2026-10-11">Oct 11, 2026</time> · 9 min read</span></a></li><li><a href="/blog/codex-vs-claude-code"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Codex CLI vs Claude Code: A Practical Comparison</span><span class="blog-related-meta"><time datetime="2026-10-09">Oct 9, 2026</time> · 7 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

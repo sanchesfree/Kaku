@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Codex CLI 和 Claude Code 对比 · Kaku 博客</title>
+  <meta name="description" content="从安装、登录、配置文件、审批、扩展方式和通知几方面对比 Codex CLI 和 Claude Code，以及在同一个仓库里一起用。">
+  <meta property="og:title" content="Codex CLI 和 Claude Code 对比 · Kaku 博客">
+  <meta property="og:description" content="从安装、登录、配置文件、审批、扩展方式和通知几方面对比 Codex CLI 和 Claude Code，以及在同一个仓库里一起用。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Codex CLI 和 Claude Code 对比">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/codex-vs-claude-code">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/codex-vs-claude-code"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/codex-vs-claude-code">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/codex-vs-claude-code">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/codex-vs-claude-code">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/codex-vs-claude-code.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Codex CLI 和 Claude Code 对比",
+          "item": "https://kaku.fun/zh/blog/codex-vs-claude-code"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/codex-vs-claude-code#article",
+      "headline": "Codex CLI 和 Claude Code 对比",
+      "description": "从安装、登录、配置文件、审批、扩展方式和通知几方面对比 Codex CLI 和 Claude Code，以及在同一个仓库里一起用。",
+      "url": "https://kaku.fun/zh/blog/codex-vs-claude-code",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/codex-vs-claude-code",
+      "datePublished": "2026-10-09",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "Claude Code 与 Codex",
+      "image": "https://kaku.fun/img/blog/cards/codex-vs-claude-code.webp",
+      "timeRequired": "PT5M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/codex-vs-claude-code.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "能不能在一个仓库里同时跑两个？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能，共用的指令放进 AGENTS.md，Codex 用 /init 写出它，Claude Code 可以拿它代替 CLAUDE.md。两个不该改同一批文件时，Claude Code 会话用 --worktree 启动，在 Kaku 里 Cmd + D 就能把两个 CLI 放进相邻的窗格。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "哪个更便宜？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每个 ChatGPT 方案都包含 Codex，但 Free 和 Go 只列了桌面 App，CLI 从每月 $20 的 Plus 起才有，用 OpenAI 的 API key 也行。Claude Code 要 Pro、Max、Team 或 Enterprise 订阅，或者一个 Console 账号，具体以 Codex 价格页和 claude.com/pricing 上的为准，用之前再看一眼。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么只有一个会提醒我？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 Kaku 里窗口处于后台时，Codex 的铃声本来就会变成通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要设 \"preferredNotifChannel\": \"ghostty\"，原因写在 Claude Code 通知那篇，Kaku 还要打开允许通知。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "两个都有 hooks 和 MCP 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "都有，Codex 用 features.hooks 配 hooks.json 或 [hooks]，服务器用 codex mcp 管。Claude Code 用 settings.json 里的 hooks 对象，MCP 服务器存在 ~/.claude.json，两边共有的事件名包括 PreToolUse、PostToolUse、SessionStart 和 Stop。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/codex-vs-claude-code" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/codex-vs-claude-code" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Codex CLI 和 Claude Code 对比</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-10-09">2026年10月9日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 5 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/codex-vs-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Codex CLI 和 Claude Code 都是跑在终端里的 coding agent，都会读仓库、改文件、在你的机器上跑命令，区别在账号和价格，在沙箱和授权提示怎么工作，也在配置文件上，Codex 用 TOML，Claude Code 用 JSON。两边都有 skills、hooks 和 MCP，很多人干脆两个都装着。</p>
+<h2 id="对比">对比</h2>
+<p>2026 年 10 月核对过，对照的是 <a href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">Codex CLI</a> 页面、<a href="https://developers.openai.com/codex/config-reference" target="_blank" rel="noopener noreferrer">配置参考</a>、<a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">Codex 价格页</a>，以及 Claude Code 的<a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">概述</a>、<a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener noreferrer">设置</a>和 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener noreferrer">hooks 指南</a>。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Codex CLI</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安装</td>
+<td>macOS/Linux 用 <code>curl -fsSL https://chatgpt.com/codex/install.sh \| sh</code>，页面上还有 Windows、npm 和 Homebrew 几个标签</td>
+<td><code>curl -fsSL https://claude.ai/install.sh \| bash</code>，或者 <code>brew install --cask claude-code</code></td>
+</tr>
+<tr>
+<td>登录</td>
+<td>跑 <code>codex</code>，再选 Sign in with ChatGPT 或别的方式</td>
+<td><code>claude</code> 会让你登录，有一个已批准的 <code>ANTHROPIC_API_KEY</code> 就跳过这一步</td>
+</tr>
+<tr>
+<td>配置文件</td>
+<td><code>~/.codex/config.toml</code>，受信任的项目里还有 <code>.codex/config.toml</code></td>
+<td><code>~/.claude/settings.json</code>、<code>.claude/settings.json</code>、<code>.claude/settings.local.json</code></td>
+</tr>
+<tr>
+<td>沙箱和授权</td>
+<td><code>sandbox_mode</code> 有 <code>read-only</code>、<code>workspace-write</code>、<code>danger-full-access</code>，<code>approval_policy</code> 是 <code>on-request</code> 或 <code>never</code>，<code>/permissions</code> 显示当前沙箱</td>
+<td><code>allow</code>、<code>ask</code>、<code>deny</code>，用 <code>Shift + Tab</code>、<code>/plan</code> 或 <code>--permission-mode plan</code> 进 plan mode，<code>auto</code> 和 <code>bypassPermissions</code> 来自用户设置或托管设置，或者 <code>--permission-mode</code></td>
+</tr>
+<tr>
+<td>模型</td>
+<td><code>model</code>，比如 <code>gpt-6.1-sol</code>，<code>/model</code> 设置模型和推理强度</td>
+<td><code>/model</code> 在会话中途切换，<code>--model</code> 只管这一次会话，设置页上的例子是 <code>claude-sonnet-5</code>、<code>claude-opus-5-5</code></td>
+</tr>
+<tr>
+<td>MCP</td>
+<td><code>codex mcp</code></td>
+<td>服务器存在 <code>~/.claude.json</code></td>
+</tr>
+<tr>
+<td>Hooks</td>
+<td><code>hooks.json</code> 或 <code>[hooks]</code>，要打开 <code>features.hooks</code></td>
+<td>设置文件里的 <code>hooks</code>，<code>/hooks</code> 列出来</td>
+</tr>
+<tr>
+<td>通知</td>
+<td><code>tui.notification_method</code> 可以是 <code>auto</code>（默认）、<code>osc9</code>、<code>bel</code>，触发条件默认是 <code>unfocused</code></td>
+<td><code>~/.claude/settings.json</code> 里的 <code>preferredNotifChannel</code>，或者一个 <code>Notification</code> hook</td>
+</tr>
+<tr>
+<td>接着上次</td>
+<td><code>codex resume</code></td>
+<td><code>claude --continue</code> 或 <code>claude --resume</code>，<code>claude --teleport</code> 把网页或手机上的任务拉进终端（需要 claude.ai 订阅）</td>
+</tr>
+</tbody>
+</table>
+<p>原生安装的 Claude Code 会自己更新，Homebrew 装的不会，<code>claude-code</code> 是稳定版 cask，大概落后一周，<code>claude-code@latest</code> 才是最新的。<code>claude</code> 进了 <code>PATH</code> 之后，<code>claude --version</code> 会打印版本号，设置文件是严格的 JSON。</p>
+<p>项目里的 <code>.codex/config.toml</code> 只有在你信任这个项目之后才加载，而且它设不了通知，所以 <code>notification_method</code> 只能留在 <code>~/.codex/config.toml</code>。<code>approval_policy = "untrusted"</code> 不支持，<code>on-failure</code> 已经废弃，文档还说不要把权限 profile（<code>:read-only</code>、<code>:workspace</code>、<code>:danger-full-access</code>）和 <code>sandbox_mode</code> 混在一起用。</p>
+<pre><code class="language-toml">model = <span class="tok-s">"gpt-6.1-sol"</span>
+sandbox_mode = <span class="tok-s">"workspace-write"</span>
+approval_policy = <span class="tok-s">"on-request"</span></code></pre>
+<p>Claude Code 放行 lint 和测试、同时挡住 <code>.env</code> 的例子，写在 <code>~/.claude/settings.json</code> 里：</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "allow": [
+      <span class="tok-s">"Bash(npm run lint)"</span>,
+      <span class="tok-s">"Bash(npm run test *)"</span>
+    ],
+    "deny": [
+      <span class="tok-s">"Read(./.env)"</span>,
+      <span class="tok-s">"Read(./.env.*)"</span>
+    ]
+  }
+}</code></pre>
+<p><code>/status</code> 能确认加载了什么，<code>.claude/settings.json</code> 提交进仓库给整个团队用，个人的覆盖放在 <code>.claude/settings.local.json</code>，这几个文件里的 <code>permissions.allow</code> 会合并。<code>ANTHROPIC_MODEL</code> 覆盖 <code>model</code>，<code>--model</code> 在这一次会话里又同时覆盖这两者。</p>
+<h2 id="账号和价格">账号和价格</h2>
+<p>按 OpenAI 的<a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">价格页</a>，每个 ChatGPT 方案都包含 Codex，不过 Free 和 Go 只列了桌面 App，CLI、IDE 扩展和网页从 Plus 起才有，用 OpenAI 的 API key 也行，按 API 价格计费，不含 GitHub 代码审查和 Slack 这类云端功能。</p>
+<p>Plus 和 Pro 用完包含的额度还可以再买，额度用完时正在跑的那一轮允许跑完，前提是用量合理，各档价格和每个模型的用量上限都在<a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">价格页</a>上。</p>
+<p>Claude Code 用的是 <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claude 订阅</a>（Pro、Max、Team 或 Enterprise），或者按用量计费的 <a href="https://platform.claude.com/" target="_blank" rel="noopener noreferrer">Anthropic Console</a> 账号。终端、VS Code 和 JetBrains 也支持第三方提供方，桌面 App 要付费订阅，更多在 <a href="https://code.claude.com/" target="_blank" rel="noopener noreferrer">code.claude.com</a>。</p>
+<h2 id="各自适合干什么">各自适合干什么</h2>
+<p><code>codex exec</code> 是给脚本和 CI 用的非交互命令，<code>/review</code> 检查未提交的改动、某一次提交或者一个基准分支，不动工作区。<code>/init</code> 会写出 <code>AGENTS.md</code>，skills 存可以重复用的指令，plugins 接外部工具。</p>
+<p>Claude Code 这些事都从 <code>claude</code> 这一条命令进去，<code>claude -p</code> 接一次性的提示词，也接管道：</p>
+<pre><code class="language-bash">git diff main --name-only | claude -p <span class="tok-s">"review these changed files for security issues"</span></code></pre>
+<p>项目根目录的 <a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener noreferrer"><code>CLAUDE.md</code></a> 每次会话开始都会读，skills 是 <code>/review-pr</code> 这类大家共用的命令。返回 deny 的 <code>PreToolUse</code> hook 在 <code>bypassPermissions</code> 模式下、加了 <code>--dangerously-skip-permissions</code> 时照样能挡住工具。Claude Code 还会跑 prompt hook 和 agent hook，Codex 跑的是 command hook 和 MCP tool hook，prompt 和 agent 这两类处理器解析完就跳过不跑。</p>
+<p><a href="/zh/blog/claude-code-plan-mode">plan mode</a> 让 Claude Code 在你批准之前不改文件，<a href="/zh/blog/claude-code-hooks">hook</a> 在任何模式下都能挡住一次工具调用。</p>
+<h2 id="一个仓库两个-agent">一个仓库，两个 agent</h2>
+<p>共用的指令可以放在 <code>AGENTS.md</code>，Codex 用 <code>/init</code> 生成它，仓库里已经有这份文件的话，Claude Code 可以拿它代替 <code>CLAUDE.md</code>，你自己加的 <code>CLAUDE.md</code> 在 Claude Code 会话开始时照样会加载。<code>model_instructions_file</code> 替换的是 Codex 的内置指令，不是 <code>AGENTS.md</code>。</p>
+<p>两个都可以改同一份检出，Claude Code 在 <code>--worktree</code>、<code>isolation: "worktree"</code> 和后台会话（<code>WorktreeCreate</code>）这几种情况下会开一个 git worktree。清理写在 <a href="/zh/blog/claude-code-git-worktrees">git worktrees</a> 那篇，Codex CLI 没有对应的参数。安装可以看 <a href="/zh/blog/codex-cli-setup">Codex CLI 配置</a>和<a href="/zh/blog/install-claude-code-mac">安装 Claude Code</a>。</p>
+<h2 id="在-kaku-里并排">在 Kaku 里并排</h2>
+<p><a href="/zh/docs/ai-coding">Kaku</a> 把这两个 CLI 当普通程序来跑，<code>kaku ai</code> 能配置 Claude Code、Codex 和其他外部工具，显示套餐用量，只在你在那里改了某项设置时才写这一项，不会自己去加 hooks 或指令。</p>
+<p><code>Cmd + D</code> 左右分屏，<code>Cmd + Shift + D</code> 上下分屏，<code>Cmd + Shift + Enter</code> 把你正在看的窗格放大。前台正跑着 Claude Code、Codex 或其他要跑很久的程序时，关窗格或标签会先问一声。重启之后，这些窗格留着最后一屏。</p>
+<p>Codex 在 Kaku 里不用设通知，它会响终端铃声，Kaku 在后台时会把铃声变成一条通知。想看到 Codex 自己写的文字，就在 <code>~/.codex/config.toml</code> 里设好方式：</p>
+<pre><code class="language-toml"><span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+<p><code>auto</code> 是默认值，<code>osc9</code> 带一行文字，<code>bel</code> 就是铃声，<code>tui.notification_condition</code> 是 <code>unfocused</code>，除非你设成 <code>always</code>。</p>
+<p>Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要在 <code>~/.claude/settings.json</code> 里设 <code>"preferredNotifChannel": "ghostty"</code>，原因写在 <a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>那篇。还是什么都没有的话，点 Kaku &gt; Notification Settings，在系统设置里打开允许通知。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="能不能在一个仓库里同时跑两个">能不能在一个仓库里同时跑两个？</h3>
+<p>能，共用的指令放进 <code>AGENTS.md</code>，Codex 用 <code>/init</code> 写出它，Claude Code 可以拿它代替 <code>CLAUDE.md</code>。两个不该改同一批文件时，Claude Code 会话用 <code>--worktree</code> 启动，在 Kaku 里 <code>Cmd + D</code> 就能把两个 CLI 放进相邻的窗格。</p>
+<h3 id="哪个更便宜">哪个更便宜？</h3>
+<p>每个 ChatGPT 方案都包含 Codex，但 Free 和 Go 只列了桌面 App，CLI 从每月 $20 的 Plus 起才有，用 OpenAI 的 API key 也行。Claude Code 要 Pro、Max、Team 或 Enterprise 订阅，或者一个 Console 账号，具体以 <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noopener noreferrer">Codex 价格页</a>和 <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">claude.com/pricing</a> 上的为准，用之前再看一眼。</p>
+<h3 id="为什么只有一个会提醒我">为什么只有一个会提醒我？</h3>
+<p>在 Kaku 里窗口处于后台时，Codex 的铃声本来就会变成通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要设 <code>"preferredNotifChannel": "ghostty"</code>，原因写在 <a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>那篇，Kaku 还要打开允许通知。</p>
+<h3 id="两个都有-hooks-和-mcp-吗">两个都有 hooks 和 MCP 吗？</h3>
+<p>都有，Codex 用 <code>features.hooks</code> 配 <code>hooks.json</code> 或 <code>[hooks]</code>，服务器用 <code>codex mcp</code> 管。Claude Code 用 <code>settings.json</code> 里的 <code>hooks</code> 对象，MCP 服务器存在 <code>~/.claude.json</code>，两边共有的事件名包括 <code>PreToolUse</code>、<code>PostToolUse</code>、<code>SessionStart</code> 和 <code>Stop</code>。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/claude-code-git-worktrees"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">用 git worktree 同时跑多个 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-07">2026年10月7日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/claude-code-subagents"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Claude Code subagents 是什么，什么时候用</span><span class="blog-related-meta"><time datetime="2026-10-11">2026年10月11日</time> · 约 7 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

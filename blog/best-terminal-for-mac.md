@@ -2,7 +2,7 @@
 
 > Terminal.app, iTerm2, Ghostty, WezTerm, Warp, Kitty, Alacritty and Kaku compared on setup, configuration, AI tools and price, checked October 2026.
 
-Published 2026-10-19 · Tw93 · https://kaku.fun/blog/best-terminal-for-mac
+Published 2026-09-21 · Tw93 · https://kaku.fun/blog/best-terminal-for-mac
 
 There is no single best terminal for Mac, but the choice gets simple once you know what you want from it. If you want nothing to install, keep Terminal.app. If you want every feature behind a settings window, use iTerm2. Ghostty is the fast, native pick with a plain text config, WezTerm suits people who want to script their terminal in Lua on every platform, and Warp builds an agent into the terminal. Kaku, which I make, is WezTerm reshaped for macOS and AI coding CLIs, set up from the first launch. The rest of this post explains each one and where it falls short, with versions and prices checked on 2026-10-17.
 

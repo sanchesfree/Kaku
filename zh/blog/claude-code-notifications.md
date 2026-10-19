@@ -2,7 +2,7 @@
 
 > 为什么 Claude Code 和 Codex 在大多数终端里不发通知，每种情况该改哪个设置，以及终端通知序列是怎么走到 macOS 的。
 
-发布于 2026-10-18 · Tw93 · https://kaku.fun/zh/blog/claude-code-notifications
+发布于 2026-09-20 · Tw93 · https://kaku.fun/zh/blog/claude-code-notifications
 
 如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
 

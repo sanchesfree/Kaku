@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code subagents 是什么，什么时候用 · Kaku 博客</title>
+  <meta name="description" content="subagent 和 skill、agent teams 有什么区别，怎么定义一个，适合什么活，以及在上下文和 token 上的代价。">
+  <meta property="og:title" content="Claude Code subagents 是什么，什么时候用 · Kaku 博客">
+  <meta property="og:description" content="subagent 和 skill、agent teams 有什么区别，怎么定义一个，适合什么活，以及在上下文和 token 上的代价。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-subagents.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code subagents 是什么，什么时候用">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/claude-code-subagents">
+  <meta property="article:published_time" content="2026-10-11">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-subagents.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/claude-code-subagents"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-subagents">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-subagents">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-subagents">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/claude-code-subagents.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code subagents 是什么，什么时候用",
+          "item": "https://kaku.fun/zh/blog/claude-code-subagents"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/claude-code-subagents#article",
+      "headline": "Claude Code subagents 是什么，什么时候用",
+      "description": "subagent 和 skill、agent teams 有什么区别，怎么定义一个，适合什么活，以及在上下文和 token 上的代价。",
+      "url": "https://kaku.fun/zh/blog/claude-code-subagents",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/claude-code-subagents",
+      "datePublished": "2026-10-11",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "Claude Code 与 Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-subagents.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/claude-code-subagents.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "subagent 文件放在哪？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "放在 ~/.claude/agents/ 里每个项目都能用，放在 .claude/agents/ 里只给这一个仓库用，两个目录都会递归扫描，建子文件夹没问题，认的是 name 字段，跟文件名无关。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "subagent 能看到我的对话吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "看不到，它拿到的是自己的系统提示词、Claude 写的委派说明、你的 CLAUDE.md（Explore、Plan 和设了 omitClaudeMd 的除外）、一份 git 状态快照，以及预装的 skill，只有用 /subtask 启动的 fork 才会继承对话历史。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "用 subagent 会让 Claude Code 更便宜吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "单靠它不会，它能让主上下文保持精简，但每个 subagent 都在同一份用量额度里花自己的 token，真正能把开销降下来的是把搜索交给 model: haiku，再让它交回来的总结尽量短。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "该用 subagent 还是 agent team？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只关心结果时用 subagent，几个队友之间需要互相分享发现、互相挑刺时才用 agent team，前提是你能接受多出来的 token 和那个实验开关，怎么打开、队友在 Kaku 里显示在哪，见 Claude Code agent teams。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude 为什么不调我写的 subagent？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude 是按 description 来路由的，写得具体一些，想让它不问就主动用，可以加上 use proactively，再检查文件里 name 和 description 都在、YAML 能正常解析，实在不行就用 @ 点名，这样一定会跑它。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/claude-code-subagents" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/claude-code-subagents" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code subagents 是什么，什么时候用</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-10-11">2026年10月11日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 7 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-subagents.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p><a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener noreferrer">Claude Code 的 subagent</a> 是一个单独写了系统提示词的帮手，有自己的工具列表和自己的上下文窗口。定义它只要在 <code>~/.claude/agents/</code> 或 <code>.claude/agents/</code> 里放一个 Markdown 文件，Claude 把任务交给它，它干完只把总结带回来。用它的目的就是让搜索结果、日志和整页整页的文件内容别堆进你的主对话里。</p>
+<h2 id="subagentskill-和-agent-teams-的区别">subagent、skill 和 agent teams 的区别</h2>
+<p><a href="/zh/blog/claude-code-skills">skill</a> 跑在主对话里，是一段可以反复用的流程，Claude 把它加载进你当前所在的上下文。subagent 则是从零开始，看不到你的对话历史，看不到你调用过的 skill，也看不到 Claude 已经读过的文件，Claude 给它写一段委派说明，它照着这段说明干活，最后交回一个结果。两者在两个方向上会碰到一起，带 <code>context: fork</code> 的 skill 会把自己的正文当成一个 subagent 的任务来跑，而写了 <code>skills</code> 字段的 subagent 会在启动时把这些 skill 的完整内容预先装进来。</p>
+<p><a href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener noreferrer">agent teams</a> 是第三种东西，几个 Claude Code 会话一起干活，其中一个当 lead，队友之间可以直接发消息，还共用一份任务列表。2026 年 10 月核对过，它目前是实验功能，默认关着，要用 <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code> 打开。打开之后，Claude 委派时只要给 subagent 起了名字，它就会作为队友启动，而不是普通的 subagent。文档对取舍说得很直白，subagent 把总结交回调用方，花得少，每个队友却是一个单独的 Claude 实例，token 消耗随着活跃队友的数量一起涨。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>跑在哪</th>
+<th>能不能看到你的对话</th>
+<th>交回什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skill</td>
+<td>主对话</td>
+<td>能</td>
+<td>不单独交回</td>
+</tr>
+<tr>
+<td>Subagent</td>
+<td>自己的上下文窗口</td>
+<td>不能，只看到 Claude 的委派说明</td>
+<td>一份总结</td>
+</tr>
+<tr>
+<td>Agent team</td>
+<td>各自独立的会话</td>
+<td>不能</td>
+<td>队友之间自己协调</td>
+</tr>
+</tbody>
+</table>
+<h2 id="自带的几个-subagent">自带的几个 subagent</h2>
+<p>就算一个都没定义，你其实已经在用 subagent 了，Claude Code 自带下面这几个：</p>
+<ul>
+<li><strong>Explore</strong>：只读，用来找文件和搜代码，Claude 调它时会指定 quick、medium 或 very thorough 三种细致程度之一。</li>
+<li><strong>Plan</strong>：只读，在 <a href="/zh/blog/claude-code-plan-mode">plan mode</a> 里帮 Claude 做调研，让探索的输出留在另一个上下文窗口里，你看方案时主对话还是干净的。</li>
+<li><strong>general-purpose</strong>：subagent 能用的工具它都有，适合既要探索又要改代码的任务。</li>
+<li><strong>claude</strong>、<strong>statusline-setup</strong> 和 <strong>claude-code-guide</strong>：Claude 自己会去调的辅助角色，分别兜底杂项任务、处理 <code>/statusline</code>、回答 Claude Code 本身的用法问题。</li>
+</ul>
+<p>Explore 和 Plan 启动时不带你的 <code>CLAUDE.md</code>，也不带 git 状态快照，这样调研又快又便宜，它们还是一次性的，不返回 agent ID，所以 Claude 之后没法让它们接着干。</p>
+<h2 id="自己写一个">自己写一个</h2>
+<p>subagent 就是一个带 YAML frontmatter 的 Markdown 文件，必填的只有 <code>name</code> 和 <code>description</code>，正文会变成它的系统提示词：</p>
+<pre><code class="language-markdown">---
+name: code-reviewer
+description: Reviews code for quality and best practices. Use proactively after code changes.
+tools: Read, Glob, Grep, Bash
+model: sonnet
+---
+
+You are a code reviewer. Run git diff, focus on the modified files,
+and report issues ordered by priority with a suggested fix for each.</code></pre>
+<p>放在 <code>~/.claude/agents/</code> 里每个项目都能用，放在 <code>.claude/agents/</code> 里就跟着这个仓库一起提交，两边重名时项目里的那个优先。Claude Code 会盯着这两个目录，改完文件下一次委派就用上新定义，不用重启，唯一例外是会话启动时如果 <code>agents</code> 目录原本不存在，那就先建好第一个文件，再重启一次。</p>
+<p>值得知道的字段大概是这些：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools</code></td>
+<td>允许清单，不写就继承 subagent 能用的全部工具</td>
+</tr>
+<tr>
+<td><code>disallowedTools</code></td>
+<td>禁止清单，先于 <code>tools</code> 生效</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td><code>sonnet</code>、<code>opus</code>、<code>haiku</code>、<code>fable</code>、完整模型 ID，或者 <code>inherit</code></td>
+</tr>
+<tr>
+<td><code>permissionMode</code></td>
+<td><code>default</code>、<code>acceptEdits</code>、<code>auto</code>、<code>dontAsk</code>、<code>bypassPermissions</code> 或 <code>plan</code></td>
+</tr>
+<tr>
+<td><code>maxTurns</code></td>
+<td>跑到这么多轮就停下</td>
+</tr>
+<tr>
+<td><code>skills</code></td>
+<td>启动时完整预装的 skill</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td><code>user</code>、<code>project</code> 或 <code>local</code>，一个跨对话保留下来的目录</td>
+</tr>
+<tr>
+<td><code>background</code></td>
+<td>设成 <code>true</code>，Claude 想放到前台也照样留在后台</td>
+</tr>
+<tr>
+<td><code>isolation</code></td>
+<td>设成 <code>worktree</code>，在一个临时的 git worktree 里跑</td>
+</tr>
+<tr>
+<td><code>hooks</code></td>
+<td>只在这个 subagent 运行期间生效的 hook</td>
+</tr>
+</tbody>
+</table>
+<p>多个单词的字段名用 camelCase，必须一字不差，Claude Code 碰到不认识的字段会直接忽略，不报错，没有 <code>description</code> 或者 YAML 解析不了的文件也会被悄悄跳过，想知道原因就用 <code>claude --debug</code> 启动，原因会写进 debug 日志。</p>
+<p>再说 <code>/agents</code>，现在的版本里它只会打印一句提示，让你去问 Claude 或者直接改那两个目录，v2.1.197 及更早的版本里它才是一个带 Running 和 Library 两个标签的向导，所以眼下最快的办法是把想要的 subagent 描述给 Claude，告诉它存到哪，再打开它写出来的文件看一遍。</p>
+<p>要用的时候，在提示词里点它的名字，Claude 一般就会委派过去，想确保一定是它，就输入 <code>@</code> 从补全里选，<code>claude --agent code-reviewer</code> 则会让整个会话都以这个 agent 的身份跑，工具、模型和系统提示词都换成它的。</p>
+<h2 id="用得上的地方">用得上的地方</h2>
+<p>文档里特别挑出来的有三种场景，共同点都是过程输出很多，真正要的答案很短。</p>
+<p><strong>搜索和调研。</strong> 让 subagent 去找某个配置值在哪里被读取，或者让三个 subagent 各管一块，同时去调研 auth、database 和 API 这几个模块，读过的文件都留在它们各自的窗口里，回到你这边的只是一段简短的结论，前提是这几条调研路线互相不依赖。</p>
+<p><strong>代码审查。</strong> 一个只给了 <code>tools: Read, Glob, Grep, Bash</code> 的 reviewer 什么都改不了，丢一份 diff 给它看很放心，也可以串起来用，先让 reviewer 找性能问题，再让另一个 subagent 去修，中间由 Claude 把相关的发现传过去。</p>
+<p><strong>跑测试和看日志。</strong> <code>Use a subagent to run the test suite and report only the failing tests with their error messages</code> 是最典型的例子，几千行测试输出留在 subagent 那边，回到主对话的只有两行失败信息。</p>
+<p>要是担心它的改动跟你手上的活撞在一起，<code>isolation: worktree</code> 会给它一份单独的仓库副本，默认从你的默认分支拉出来，它什么都没改的话这个 worktree 会自动清掉，整个会话都这样跑的做法写在 <a href="/zh/blog/claude-code-git-worktrees">worktree 那篇</a> 里。</p>
+<h2 id="反而碍事的时候">反而碍事的时候</h2>
+<p>任务需要你来回调整好几轮，或者规划、实现和测试几个阶段共用大量上下文，又或者只是一个很快的小改动，这些情况都留在主对话里更好，subagent 启动时手里只有 Claude 对任务的那段总结，前几轮很可能在重新摸索你早就知道的东西，这部分时间是白花的。<code>CLAUDE.md</code> 里有哪条规则必须让它知道，比如 <code>ignore the vendor/ directory</code>，委派时就再说一遍，因为设了 <code>omitClaudeMd</code> 的 subagent 和自带的 Explore、Plan 都看不到它。</p>
+<p>如果只是想问一个对话里已经有的东西，用 <code>/btw</code> 更合适，它能看到你完整的上下文，但没有任何工具权限，答案也不会写进历史。</p>
+<h2 id="成本和上下文">成本和上下文</h2>
+<p>subagent 省的是上下文，不是钱，它自己发请求，跟主对话算在同一份用量额度里，文档也提醒过，开很多个 subagent、每个都交回很详细的结果，照样会把主上下文塞满，而且每个 subagent 跑的时候都在花自己的 token。</p>
+<p>能调的地方有这么几处：</p>
+<ul>
+<li>偏重探索的 subagent 设 <code>model: haiku</code>，用户级或项目级里放一个名字叫 <code>Explore</code> 的 subagent 会覆盖自带的那个，这样默认的搜索 agent 也能换到更便宜的模型上。</li>
+<li><code>description</code> 写短一些，它们一直待在上下文里给 Claude 做路由用，自定义 subagent 的描述加起来超过 15,000 token，Claude Code 启动时会给出警告。</li>
+<li>任务确实需要整段对话时用 fork，<code>/subtask draft unit tests for the parser changes so far</code> 会启动一个继承你全部历史的 subagent，还能复用父会话的 prompt cache，比一个需要同样背景的新 subagent 花得少。</li>
+<li>心里有个上限，subagent 最多能往下嵌套三层，同时在跑的默认上限是 20 个，可以用 <code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> 改。</li>
+</ul>
+<h2 id="在-kaku-里盯着并行的活">在 Kaku 里盯着并行的活</h2>
+<p>后台 subagent 会出现在 Claude Code 输入框下面的面板里，<code>/tasks</code> 也能列出来，其中哪个需要权限时，提示会出现在主会话里，并写明是哪个 subagent 在问，这时候主会话就停下来等你了。同时开好几个 Claude Code 会话时，可以每个放进 <a href="/zh/docs/ai-coding">Kaku</a> 的一个标签，或者用 <code>Cmd + D</code> 和 <code>Cmd + Shift + D</code> 分屏，正在看的那个用 <code>Cmd + Shift + Enter</code> 放大，agent teams 的分屏显示需要 tmux 或 iTerm2，所以在不开 tmux 的 Kaku 里，队友会显示在 Claude Code 自己的那个面板里。</p>
+<p>Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要在 <code>~/.claude/settings.json</code> 里设 <code>"preferredNotifChannel": "ghostty"</code>，原因写在 <a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>那篇。标签上的小点也是这样分的，0.25.0 之前靠 <code>ghostty</code> 通道在 Claude Code 等你或做完时亮起，0.25.0 起不用设置就会亮，还多了出错这一种状态。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="subagent-文件放在哪">subagent 文件放在哪？</h3>
+<p>放在 <code>~/.claude/agents/</code> 里每个项目都能用，放在 <code>.claude/agents/</code> 里只给这一个仓库用，两个目录都会递归扫描，建子文件夹没问题，认的是 <code>name</code> 字段，跟文件名无关。</p>
+<h3 id="subagent-能看到我的对话吗">subagent 能看到我的对话吗？</h3>
+<p>看不到，它拿到的是自己的系统提示词、Claude 写的委派说明、你的 <code>CLAUDE.md</code>（Explore、Plan 和设了 <code>omitClaudeMd</code> 的除外）、一份 git 状态快照，以及预装的 skill，只有用 <code>/subtask</code> 启动的 fork 才会继承对话历史。</p>
+<h3 id="用-subagent-会让-claude-code-更便宜吗">用 subagent 会让 Claude Code 更便宜吗？</h3>
+<p>单靠它不会，它能让主上下文保持精简，但每个 subagent 都在同一份用量额度里花自己的 token，真正能把开销降下来的是把搜索交给 <code>model: haiku</code>，再让它交回来的总结尽量短。</p>
+<h3 id="该用-subagent-还是-agent-team">该用 subagent 还是 agent team？</h3>
+<p>只关心结果时用 subagent，几个队友之间需要互相分享发现、互相挑刺时才用 agent team，前提是你能接受多出来的 token 和那个实验开关，怎么打开、队友在 Kaku 里显示在哪，见 <a href="/zh/blog/claude-code-agent-teams">Claude Code agent teams</a>。</p>
+<h3 id="claude-为什么不调我写的-subagent">Claude 为什么不调我写的 subagent？</h3>
+<p>Claude 是按 <code>description</code> 来路由的，写得具体一些，想让它不问就主动用，可以加上 <code>use proactively</code>，再检查文件里 <code>name</code> 和 <code>description</code> 都在、YAML 能正常解析，实在不行就用 <code>@</code> 点名，这样一定会跑它。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/codex-vs-claude-code"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Codex CLI 和 Claude Code 对比</span><span class="blog-related-meta"><time datetime="2026-10-09">2026年10月9日</time> · 约 5 分钟</span></a></li><li><a href="/zh/blog/claude-code-mcp-servers"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">配置 Claude Code 的 MCP 服务器</span><span class="blog-related-meta"><time datetime="2026-10-19">2026年10月19日</time> · 约 7 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

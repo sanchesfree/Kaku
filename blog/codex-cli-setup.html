@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Setting Up Codex CLI on Mac: Install, Login and Config · Kaku Blog</title>
+  <meta name="description" content="Install OpenAI&#x27;s Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions.">
+  <meta property="og:title" content="Setting Up Codex CLI on Mac: Install, Login and Config · Kaku Blog">
+  <meta property="og:description" content="Install OpenAI&#x27;s Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/codex-cli-setup.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Setting Up Codex CLI on Mac: Install, Login and Config">
+  <meta property="og:url" content="https://kaku.fun/blog/codex-cli-setup">
+  <meta property="article:published_time" content="2026-09-29">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/codex-cli-setup.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/codex-cli-setup"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/codex-cli-setup">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/codex-cli-setup">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/codex-cli-setup">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/codex-cli-setup.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Setting Up Codex CLI on Mac: Install, Login and Config",
+          "item": "https://kaku.fun/blog/codex-cli-setup"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/codex-cli-setup#article",
+      "headline": "Setting Up Codex CLI on Mac: Install, Login and Config",
+      "description": "Install OpenAI's Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions.",
+      "url": "https://kaku.fun/blog/codex-cli-setup",
+      "mainEntityOfPage": "https://kaku.fun/blog/codex-cli-setup",
+      "datePublished": "2026-09-29",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/codex-cli-setup.webp",
+      "timeRequired": "PT5M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/codex-cli-setup.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Codex CLI free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The CLI is open source, but using it requires either a ChatGPT plan that includes Codex or an OpenAI API key billed per use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is the Codex config file on Mac?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "~/.codex/config.toml for your user settings, and .codex/config.toml in a repository for project settings. Set CODEX_HOME to move the user directory somewhere else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I change the model in Codex CLI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use /model inside a session, codex -m <model> for one run, or set model in ~/.codex/config.toml for every session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I continue a Codex session after closing the terminal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run codex resume --last in the same project, or codex resume to choose from a list."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/codex-cli-setup" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/codex-cli-setup" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Setting Up Codex CLI on Mac: Install, Login and Config</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-09-29">Sep 29, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>5 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/codex-cli-setup.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Setting up Codex CLI on a Mac takes three commands: install it with <code>brew install --cask codex</code>, sign in with <code>codex login</code>, then run <code>codex</code> inside a project. Everything after that lives in one file, <code>~/.codex/config.toml</code>, which decides the model, how much Codex may do without asking, and how it tells you it needs you. This post walks through each step, the settings worth changing first, and how a session picks up where it left off. It was checked against Codex CLI 0.163.0 in October 2026.</p>
+<h2 id="install">Install</h2>
+<p>Pick one of the three official ways:</p>
+<pre><code class="language-bash"><span class="tok-c"># Homebrew
+</span>brew install --cask codex
+
+<span class="tok-c"># The install script
+</span>curl -fsSL https://chatgpt.com/codex/install.sh | sh
+
+<span class="tok-c"># npm
+</span>npm install -g @openai/codex</code></pre>
+<p>Check it with <code>codex --version</code>, and update it later with the same tool you installed it with. If something looks wrong, <code>codex doctor</code> checks the installation, config, login and runtime in one go.</p>
+<h2 id="sign-in">Sign in</h2>
+<p><code>codex login</code> opens a browser and signs you in with your ChatGPT account, which is the usual choice if your plan includes Codex. To use an API key instead, pipe it in rather than pasting it on the command line, so it does not land in your shell history:</p>
+<pre><code class="language-bash">printenv OPENAI_API_KEY | codex login --with-api-key</code></pre>
+<p>On a machine without a browser, <code>codex login --device-auth</code> gives you a code to enter on another device. With file-based storage, credentials go in <code>auth.json</code> under <code>CODEX_HOME</code> (by default <code>~/.codex</code>); <a href="https://learn.chatgpt.com/docs/config-file/config-reference" target="_blank" rel="noopener noreferrer"><code>cli_auth_credentials_store</code></a> can also select the system keyring or memory-only storage. <code>codex login status</code> shows which account is active, and <code>codex logout</code> removes it.</p>
+<h2 id="where-the-settings-come-from">Where the settings come from</h2>
+<p>Codex reads its settings in layers, and a setting closer to the current run wins.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/codex-config-layers-mobile.webp" width="340" height="378"><img src="/img/blog/codex-config-layers.webp" width="502" height="412" loading="lazy" alt="Four layers of Codex settings, from command line flags at the top through project config and user config to built-in defaults"></picture><figcaption>A flag on the command line beats the project file, which beats your user file.</figcaption></figure>
+
+<ul>
+<li><strong>Built-in defaults</strong> apply when nothing else sets a value.</li>
+<li><strong><code>~/.codex/config.toml</code></strong> is your user config and applies to every session.</li>
+<li><strong><code>.codex/config.toml</code></strong> inside a repository overrides it for that project.</li>
+<li><strong>Flags</strong> such as <code>-m</code>, <code>-s</code>, <code>-a</code> and <code>-c key=value</code> override everything for one run.</li>
+</ul>
+<p><code>-c</code> takes any key from the config file, with dots for nested tables, so <code>codex -c tui.notification_method=osc9</code> lets you test a setting before saving it to your config file. You can also use named profiles: <code>codex -p work</code> layers <code>~/.codex/work.config.toml</code> on top of the user config.</p>
+<h2 id="the-settings-worth-changing-first">The settings worth changing first</h2>
+<p>A small user config covers most needs:</p>
+<pre><code class="language-toml">model_reasoning_effort = <span class="tok-s">"medium"</span>
+approval_policy = <span class="tok-s">"on-request"</span>
+sandbox_mode = <span class="tok-s">"workspace-write"</span>
+
+<span class="tok-k">[tui]</span>
+notification_method = <span class="tok-s">"osc9"</span></code></pre>
+<p>Leave <code>model</code> out to use the default, or set it to one of the names <code>/model</code> lists inside a session, since the list depends on your account. <code>/model</code> also switches models for the current session without editing the file.</p>
+<p>The two settings that decide how much Codex does on its own are worth understanding before you change them:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Values</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sandbox_mode</code></td>
+<td><code>read-only</code>, <code>workspace-write</code>, <code>danger-full-access</code></td>
+<td>What commands Codex runs may touch. <code>workspace-write</code> allows writes inside the project and keeps the rest of the disk read-only</td>
+</tr>
+<tr>
+<td><code>approval_policy</code></td>
+<td><code>on-request</code>, <code>never</code></td>
+<td><code>on-request</code> lets the model ask before stepping outside the sandbox; <code>never</code> never asks and returns failures straight to the model</td>
+</tr>
+</tbody>
+</table>
+<p><code>workspace-write</code> with <code>on-request</code> is a sensible start. <code>danger-full-access</code> with <code>never</code> removes both guards, which is meant for machines that are already isolated, not for your laptop.</p>
+<h2 id="notifications">Notifications</h2>
+<p>By default, Codex rings the terminal bell when it finishes or needs approval, and only while the terminal is not focused. Whether that bell becomes a desktop notification depends on the terminal. Kaku turns a bell from a background window into a desktop notification, and with <code>notification_method = "osc9"</code> the notification carries Codex's own message instead of a generic alert. <code>tui.notification_condition = "always"</code> notifies even when the terminal is in the foreground.</p>
+<p>If nothing shows up, the <a href="/blog/claude-code-notifications">notification guide</a> covers the macOS permissions and tmux settings that can block them.</p>
+<h2 id="picking-a-session-back-up">Picking a session back up</h2>
+<p>Codex records every interactive session, so closing the terminal does not lose the conversation:</p>
+<pre><code class="language-bash">codex resume          <span class="tok-c"># pick from recent sessions
+</span>codex resume --last   <span class="tok-c"># continue the most recent one
+</span>codex fork --last     <span class="tok-c"># branch off the most recent one, leaving it intact
+</span></code></pre>
+<p>The terminal side is separate. In Kaku, the tabs and splits you had open come back after a restart, and a pane that was running Codex keeps its last screen, so you can see where each session stopped before you resume it.</p>
+<h2 id="using-your-codex-login-inside-kaku">Using your Codex login inside Kaku</h2>
+<p>Kaku has its own assistant for <code>#</code> command generation and <code>Cmd + L</code> chat. Instead of a second API key, it can reuse your existing Codex connection: run <code>kaku ai</code>, choose Kaku Assistant, and set Auth Type to <code>codex</code>. Kaku then reads the user-level Codex config, including a ChatGPT login or API key and the selected provider. The Codex entry on the same screen shows Codex's own model and login state.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-codex-cli-free">Is Codex CLI free?</h3>
+<p>The CLI is open source, but using it requires either a ChatGPT plan that includes Codex or an OpenAI API key billed per use.</p>
+<h3 id="where-is-the-codex-config-file-on-mac">Where is the Codex config file on Mac?</h3>
+<p><code>~/.codex/config.toml</code> for your user settings, and <code>.codex/config.toml</code> in a repository for project settings. Set <code>CODEX_HOME</code> to move the user directory somewhere else.</p>
+<h3 id="how-do-i-change-the-model-in-codex-cli">How do I change the model in Codex CLI?</h3>
+<p>Use <code>/model</code> inside a session, <code>codex -m &lt;model&gt;</code> for one run, or set <code>model</code> in <code>~/.codex/config.toml</code> for every session.</p>
+<h3 id="how-do-i-continue-a-codex-session-after-closing-the-terminal">How do I continue a Codex session after closing the terminal?</h3>
+<p>Run <code>codex resume --last</code> in the same project, or <code>codex resume</code> to choose from a list.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-agent-teams"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Agent Teams: Turn Them On and Where They Show Up</span><span class="blog-related-meta"><time datetime="2026-09-26">Sep 26, 2026</time> · 9 min read</span></a></li><li><a href="/blog/claude-code-remote"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Remote: Three Ways to Reach a Running Session</span><span class="blog-related-meta"><time datetime="2026-09-30">Sep 30, 2026</time> · 5 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

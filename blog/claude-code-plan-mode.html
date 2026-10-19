@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Plan Mode: When and How to Use It · Kaku Blog</title>
+  <meta name="description" content="What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it.">
+  <meta property="og:title" content="Claude Code Plan Mode: When and How to Use It · Kaku Blog">
+  <meta property="og:description" content="What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-plan-mode.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Plan Mode: When and How to Use It">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-plan-mode">
+  <meta property="article:published_time" content="2026-09-23">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-plan-mode.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-plan-mode"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-plan-mode">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-plan-mode">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-plan-mode">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-plan-mode.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Plan Mode: When and How to Use It",
+          "item": "https://kaku.fun/blog/claude-code-plan-mode"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-plan-mode#article",
+      "headline": "Claude Code Plan Mode: When and How to Use It",
+      "description": "What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it.",
+      "url": "https://kaku.fun/blog/claude-code-plan-mode",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-plan-mode",
+      "datePublished": "2026-09-23",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-plan-mode.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-plan-mode.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many Shift + Tab presses reach plan mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three from auto mode, two from Manual mode. Stop when the status bar shows plan mode on. claude --permission-mode plan, or a prompt starting with /plan, skips the presses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Claude edit files while plan mode is on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Edits stay blocked until you approve, except in an interactive terminal that already has bypass permissions. Ask rules and critical-path rm or rmdir still prompt. Other shell commands follow the three cases above."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I change the plan before Claude starts editing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Press Ctrl + G to open the proposed plan in your default text editor. \"No, keep planning\" stays in plan mode. Another Shift + Tab leaves without approving."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a higher effort level replace plan mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Option + T toggles extended thinking, and /effort changes the effort level for the next request. Approving the plan is what exits plan mode and starts the edits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Shift + Tab do nothing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Kaku, look for Tab with Shift under config.keys in ~/.config/kaku/kaku.lua. The AI chat panel uses the same shortcut to switch Simple Model and Deep Model when the two differ. From auto mode, the first press shows manual mode on."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-plan-mode" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-plan-mode" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Plan Mode: When and How to Use It</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-09-23">Sep 23, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-plan-mode.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Plan mode lets Claude Code read the repo and write a plan, and blocks edits to your source until you approve that plan, except in an interactive terminal session that already has bypass permissions available. Cycle to it with <code>Shift + Tab</code>, prefix one prompt with <code>/plan</code>, or start with <code>claude --permission-mode plan</code>. Approving the plan exits plan mode and continues in the permission mode specified by that option.</p>
+<h2 id="what-plan-mode-does-and-does-not-allow">What plan mode does and does not allow</h2>
+<p><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener noreferrer">Common workflows</a> uses plan mode to review a change before it touches disk. The rules below are from <a href="https://code.claude.com/docs/en/iam" target="_blank" rel="noopener noreferrer">permission modes</a>. In an interactive terminal with bypass permissions available, Claude is still instructed to plan without editing, but any file edit or shell command it attempts during planning runs without a prompt. An ask rule still prompts, and so does <code>rm</code> or <code>rmdir</code> on a critical path, such as the filesystem root, your home directory, or the working directory.</p>
+<p>Shell commands during planning follow the first matching case. Checked October 2026:</p>
+<ul>
+<li>Bypass permissions available, in an interactive terminal: neither the classifier nor a prompt applies to planning commands.</li>
+<li>Auto mode available and <code>useAutoModeDuringPlan</code> on, the default: the classifier reviews shell commands other than critical-path removals. Approved commands run, and rejected ones are blocked.</li>
+<li>Auto mode unavailable, or <code>useAutoModeDuringPlan</code> off: commands outside the built-in read-only set prompt, including when sandbox auto-allow is on.</li>
+</ul>
+<p>With auto mode available, the mode table lists plan mode as reads plus classifier-approved commands. Availability depends on the Claude Code version, the model, and organization settings. Protected paths, including <code>.git</code>, <code>.claude</code>, and <code>.zshrc</code>, are not auto-approved: they go to the classifier when auto mode is available during planning, and prompt when it is not. Plan files under <code>~/.claude/plans/</code>, or the <code>plansDirectory</code> you set, are exempt.</p>
+<h2 id="turning-it-on">Turning it on</h2>
+<p><code>Shift + Tab</code> cycles permission modes, one per press. From <code>auto</code>, one press selects Manual (<code>default</code>), the next <code>acceptEdits</code>, and the next <code>plan</code>. The status bar shows <code>manual mode on</code>, <code>accept edits on</code>, or <code>plan mode on</code>.</p>
+<p>Optional modes slot in after <code>plan</code>, <code>bypassPermissions</code> first and <code>auto</code> last. <code>dontAsk</code> is outside the cycle. On Windows, when the Node or Bun runtime has not enabled VT input mode, <code>Alt + M</code> cycles instead. Another <code>Shift + Tab</code> leaves plan mode without approving.</p>
+<pre><code class="language-bash">claude --permission-mode plan</code></pre>
+<p>The same flag works with <code>-p</code>. To start in plan mode by default, save this in the project's <code>.claude/settings.json</code> for terminal sessions there, or in <code>~/.claude/settings.json</code> for every terminal session on the machine:</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "defaultMode": <span class="tok-s">"plan"</span>
+  }
+}</code></pre>
+<p>A project or managed value outranks the user file. <code>auto</code> and <code>bypassPermissions</code> do not take effect from <code>.claude/settings.json</code> or <code>.claude/settings.local.json</code>, but <code>plan</code> does. The VS Code extension ignores that project file for its starting mode. Set <code>claudeCode.initialPermissionMode</code> to <code>plan</code> in VS Code user settings instead.</p>
+<p>From Claude Code v2.1.283, interactive terminal sessions start in auto mode. Before that, auto is the built-in start on Pro, Max, and Team plans when the session fetches feature flags, from v2.1.228 on macOS, Linux, and WSL and from v2.1.233 on native Windows. Other built-in cases start in Manual. A flag or <code>permissions.defaultMode</code> overrides that. If auto is selected and unavailable, the session starts in Manual. The first session after an install or upgrade can differ, before feature flags arrive.</p>
+<p>After you approve a plan, pressing <code>Shift + Tab</code> or starting a prompt with <code>/plan</code> enters plan mode again.</p>
+<h2 id="a-good-plan-prompt">A good plan prompt</h2>
+<p>Name the change, what must stay the same, and what the plan should list.</p>
+<pre><code class="language-text">/plan Add a null check in src/auth/user.ts before the profile lookup.
+Keep the current error type. List every file you would change, the test command you would run, and anything you would leave alone.</code></pre>
+<p><code>@src/auth/user.ts</code> includes that file when it fits within the Read tool limit, 25,000 tokens by default. A text file larger than 256KB is not included. <code>Ctrl + J</code>, or a backslash followed by Enter, inserts a newline in any terminal, and the <a href="/blog/best-terminal-for-claude-code">terminal comparison</a> lists where <code>Shift + Enter</code> works without setup.</p>
+<h2 id="approving-and-editing-the-plan">Approving and editing the plan</h2>
+<p>When the plan is ready, Claude asks how to proceed.</p>
+<p>"Yes, and use auto mode" approves the plan and continues in auto mode. If auto mode is not available, the option reads "Yes, auto-accept edits". If the session started with bypass permissions, it reads "Yes, and switch to BYPASS PERMISSIONS (no further prompts) for this session". "Yes, manually approve edits" approves the plan and lets you review each edit. "No, keep planning" stays in plan mode so you can say what to change.</p>
+<p>Approving exits plan mode and switches to the permission mode described by that option. <code>Ctrl + G</code> opens the proposed plan in your default text editor before Claude proceeds.</p>
+<h2 id="when-to-skip-it">When to skip it</h2>
+<p>Use plan mode for a change you want to read before it touches disk, or to explore a codebase before changing it.</p>
+<p>In Manual mode, reads run without a prompt. The status bar shows <code>manual mode on</code>. Start with <code>claude --permission-mode default</code>, or <code>manual</code>, which the CLI accepts as an alias.</p>
+<p><code>acceptEdits</code> fits edits you will review with <code>git diff</code>. From Manual mode, pressing <code>Shift + Tab</code> once enters it, or start with <code>claude --permission-mode acceptEdits</code>. The status bar shows <code>accept edits on</code>. It auto-approves file edits, plus <code>mkdir</code>, <code>touch</code>, <code>rm</code>, <code>rmdir</code>, <code>mv</code>, <code>cp</code>, and <code>sed</code>, inside the working directory or <code>additionalDirectories</code>, including commands with a prefix such as <code>LANG=C</code> or a wrapper such as <code>timeout</code>. Other shell commands, protected-path writes, and critical-path <code>rm</code> or <code>rmdir</code> still prompt.</p>
+<p>Auto mode fits a long task where you trust the direction. It runs the work under background safety checks and reduces routine prompts. It does not guarantee safety.</p>
+<h2 id="plan-mode-vs-thinking-effort">Plan mode vs thinking effort</h2>
+<p>Plan mode controls which actions can run. Extended thinking and the effort level change how deeply Claude reasons through a request.</p>
+<p><code>Option + T</code> on macOS, or <code>Alt + T</code> on Windows and Linux, toggles extended thinking. It has no effect on Opus 5.5, Sonnet 5.5, Haiku 5.5, or the Fable models, which always use extended thinking. On macOS it works without configuring Option as Meta.</p>
+<p><code>/effort</code> changes the effort level. Claude Code applies it as soon as you send it. Once you confirm the cache warning, if one is shown, the new level applies to the next request in the current turn.</p>
+<h2 id="shift-tab-in-kaku">Shift + Tab in Kaku</h2>
+<p>Kaku's default terminal shortcuts do not include <code>Shift + Tab</code>. It is not on the <a href="/docs/keybindings">keybindings</a> page, so in a pane the shortcut reaches Claude Code.</p>
+<p>If the status bar never changes, open <code>~/.config/kaku/kaku.lua</code> and check <code>config.keys</code>. Insert into that table rather than assigning a new one, as assigning a new table replaces the defaults. A <code>Tab</code> entry with a Shift modifier intercepts the shortcut before Claude Code sees it. Any other terminal that swallows <code>Shift + Tab</code> needs the same check.</p>
+<p>The AI chat panel is separate. <code>Cmd + L</code> opens it, and when Simple Model and Deep Model differ, <code>Shift + Tab</code> there switches between them, as <a href="/docs/features">Features</a> describes. That switch does not cycle Claude Code's permission modes.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="how-many-shift-tab-presses-reach-plan-mode">How many Shift + Tab presses reach plan mode?</h3>
+<p>Three from auto mode, two from Manual mode. Stop when the status bar shows <code>plan mode on</code>. <code>claude --permission-mode plan</code>, or a prompt starting with <code>/plan</code>, skips the presses.</p>
+<h3 id="can-claude-edit-files-while-plan-mode-is-on">Can Claude edit files while plan mode is on?</h3>
+<p>Edits stay blocked until you approve, except in an interactive terminal that already has bypass permissions. Ask rules and critical-path <code>rm</code> or <code>rmdir</code> still prompt. Other shell commands follow the three cases above.</p>
+<h3 id="how-do-i-change-the-plan-before-claude-starts-editing">How do I change the plan before Claude starts editing?</h3>
+<p>Press <code>Ctrl + G</code> to open the proposed plan in your default text editor. "No, keep planning" stays in plan mode. Another <code>Shift + Tab</code> leaves without approving.</p>
+<h3 id="does-a-higher-effort-level-replace-plan-mode">Does a higher effort level replace plan mode?</h3>
+<p><code>Option + T</code> toggles extended thinking, and <code>/effort</code> changes the effort level for the next request. Approving the plan is what exits plan mode and starts the edits.</p>
+<h3 id="why-does-shift-tab-do-nothing">Why does Shift + Tab do nothing?</h3>
+<p>In Kaku, look for <code>Tab</code> with Shift under <code>config.keys</code> in <code>~/.config/kaku/kaku.lua</code>. The AI chat panel uses the same shortcut to switch Simple Model and Deep Model when the two differ. From auto mode, the first press shows <code>manual mode on</code>.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-notifications"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Notifications Not Showing? How to Fix Them on Mac</span><span class="blog-related-meta"><time datetime="2026-09-20">Sep 20, 2026</time> · 6 min read</span></a></li><li><a href="/blog/cursor-vs-claude-code"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Cursor vs Claude Code: Editor Agent or Terminal Agent</span><span class="blog-related-meta"><time datetime="2026-09-25">Sep 25, 2026</time> · 7 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

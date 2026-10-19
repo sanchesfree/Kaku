@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Zsh vs Bash on Mac: Which Shell Should You Use · Kaku Blog</title>
+  <meta name="description" content="Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch with chsh or Terminal settings.">
+  <meta property="og:title" content="Zsh vs Bash on Mac: Which Shell Should You Use · Kaku Blog">
+  <meta property="og:description" content="Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch with chsh or Terminal settings.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/zsh-vs-bash.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Zsh vs Bash on Mac: Which Shell Should You Use">
+  <meta property="og:url" content="https://kaku.fun/blog/zsh-vs-bash">
+  <meta property="article:published_time" content="2026-10-04">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/zsh-vs-bash.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/zsh-vs-bash"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/zsh-vs-bash">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/zsh-vs-bash">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/zsh-vs-bash">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/zsh-vs-bash.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Zsh vs Bash on Mac: Which Shell Should You Use",
+          "item": "https://kaku.fun/blog/zsh-vs-bash"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/zsh-vs-bash#article",
+      "headline": "Zsh vs Bash on Mac: Which Shell Should You Use",
+      "description": "Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch with chsh or Terminal settings.",
+      "url": "https://kaku.fun/blog/zsh-vs-bash",
+      "mainEntityOfPage": "https://kaku.fun/blog/zsh-vs-bash",
+      "datePublished": "2026-10-04",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Shell and tools",
+      "image": "https://kaku.fun/img/blog/cards/zsh-vs-bash.webp",
+      "timeRequired": "PT6M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/zsh-vs-bash.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is bash still available on macOS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. /bin/bash is one of the shells in /etc/shells, and it was the default through macOS 10.14. Starting bash while the account default is another shell prints a message that the default interactive shell is now zsh. export BASH_SILENCE_DEPRECATION_WARNING=1 in ~/.bash_profile or ~/.profile hides that message."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I switch the default shell to zsh or back to bash?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run chsh -s /bin/zsh or chsh -s /bin/bash. The path has to be listed in /etc/shells. On macOS 13 or later the same choice is under System Settings, Users & Groups, Advanced Options, Login shell. To change only new Terminal windows and tabs, set Terminal's General pane to \"Command (complete path)\" and leave the account default alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do .bash_profile and .bashrc settings go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Login settings, including ones that should apply over SSH, go in .zprofile, which corresponds to .bash_profile. Settings for each new Terminal session go in .zshrc, which corresponds to .bashrc. export lines can be copied as they are. The prompt uses zsh specifiers, so use the zsh PS1 above in .zprofile or .zshrc, and see man zsh for the rest. A POSIX .profile can be sourced from .zprofile with emulate sh."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I test a script against sh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On macOS 10.15 or later, change /var/select/sh to /bin/bash, /bin/dash, or /bin/zsh. If that path points to a shell other than bash, scripts that use bashisms may not work properly. zsh --emulate sh runs zsh in sh emulation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Kaku set up bash the way it sets up zsh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "kaku init sets up zsh, fish, or both. The zsh plugins and Smart Tab belong to the zsh setup, and the Starship prompt is available to zsh and fish inside Kaku. The bash integration wraps ssh and mosh so they fall back to xterm-256color when the remote host has no kaku terminfo entry, and the zsh and fish integrations do the same."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/zsh-vs-bash" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/zsh-vs-bash" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Zsh vs Bash on Mac: Which Shell Should You Use</h1><p class="blog-meta"><span><a href="/blog#topic-shell">Shell and tools</a></span><span>Published <time datetime="2026-10-04">Oct 4, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>6 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/zsh-vs-bash.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Since macOS 10.15, zsh is the default login shell and interactive shell, and it is the default for every newly created user account (checked October 2026). bash was the default in macOS 10.14 and earlier, and <code>/bin/bash</code> is still a shell you can select. Use zsh for the shell you type in. For scripts, zsh is highly compatible with the Bourne shell (sh) and mostly compatible with bash, with some differences, so write portable scripts for sh, and use bash when the script depends on bash-only syntax.</p>
+<h2 id="what-changed-in-macos-1015">What changed in macOS 10.15</h2>
+<p>Apple documents the default and the ways to change it in <a href="https://support.apple.com/en-us/102360" target="_blank" rel="noopener noreferrer">Use zsh as the default shell on Mac</a>. From macOS 10.15, zsh is the default login shell and the default interactive shell, and it is the default for every user account created on that release or later. macOS 10.14 and earlier defaulted to bash. Those older releases can use zsh as the default too.</p>
+<p>zsh is already on the system at <code>/bin/zsh</code>, and <code>/bin/bash</code> stays selectable. If you start bash while the account uses another shell, macOS prints a message that the default interactive shell is now zsh. Hide that message with a line in <code>~/.bash_profile</code> or <code>~/.profile</code>:</p>
+<pre><code class="language-bash"><span class="tok-b">export</span> BASH_SILENCE_DEPRECATION_WARNING=<span class="tok-n">1</span></code></pre>
+<h2 id="startup-files-the-prompt-and-completion">Startup files, the prompt, and completion</h2>
+<p><code>.zprofile</code> corresponds to <code>.bash_profile</code> and runs at login, including over SSH. <code>.zshrc</code> corresponds to <code>.bashrc</code> and runs for each new Terminal session. Environment variable exports can be copied from the bash file as written:</p>
+<pre><code class="language-bash"><span class="tok-b">export</span> MY_SETTING=<span class="tok-n">1</span></code></pre>
+<p>A POSIX <code>.profile</code> can be sourced from <code>.zprofile</code>:</p>
+<pre><code class="language-bash">[[ -e ~/.profile ]] &amp;&amp; emulate sh -c <span class="tok-s">'source ~/.profile'</span></code></pre>
+<p>zsh recognizes a different set of prompt specifiers than bash, and its color syntax does not need ANSI escape sequences. Apple's page converts this bash prompt from <code>.bash_profile</code>:</p>
+<pre><code class="language-bash"><span class="tok-b">export</span> PS1=<span class="tok-s">"\[\e[92;40m\]\h\[\e[m\]:\[\e[93m\]\W\[\e[m\] \\</span>$<span class="tok-s"> "</span></code></pre>
+<p>into this zsh prompt for <code>.zprofile</code> or <code>.zshrc</code>:</p>
+<pre><code class="language-bash"><span class="tok-b">export</span> PS1=<span class="tok-s">"%10F%m%f:%11F%1~%f \$ "</span></code></pre>
+<p><code>man zsh</code> in Terminal is where Apple sends you for those specifiers, and for zsh's command-line completion system. For a <code>.zshrc</code> that loads history suggestions, syntax highlighting, extra completions, and a prompt on its own, see <a href="/blog/zsh-without-oh-my-zsh">Zsh without Oh My Zsh</a>.</p>
+<h2 id="scripts">Scripts</h2>
+<p>On macOS 10.15 or later, you can test Bourne-compatible scripts by changing <code>/var/select/sh</code> to <code>/bin/bash</code>, <code>/bin/dash</code>, or <code>/bin/zsh</code>. If you point <code>/var/select/sh</code> at a shell other than bash, scripts that use bashisms (bash-only syntax) may not work properly.</p>
+<p>For a single test, run zsh in sh emulation:</p>
+<pre><code class="language-bash">zsh --emulate sh</code></pre>
+<h2 id="how-to-switch-shells">How to switch shells</h2>
+<p><code>chsh -s</code> changes the account's default login shell. Run it in Terminal, and pass a path listed in <code>/etc/shells</code>, such as <code>/bin/zsh</code>, <code>/bin/bash</code>, <code>/bin/csh</code>, <code>/bin/dash</code>, <code>/bin/ksh</code>, <code>/bin/sh</code>, or <code>/bin/tcsh</code>.</p>
+<pre><code class="language-bash">chsh -s /bin/zsh</code></pre>
+<p>To make bash the default again:</p>
+<pre><code class="language-bash">chsh -s /bin/bash</code></pre>
+<p>On macOS 13 or later, open System Settings from the Apple menu, click Users &amp; Groups, Control-click your user name or picture in the list on the right, and choose Advanced Options. Enter your user name and password, choose a shell from the Login shell menu, and click OK. On earlier macOS, open System Preferences, click Users &amp; Groups, click the lock, enter your user name and password, Control-click your user name on the left, choose Advanced Options, pick a shell from the Login shell menu, and click OK.</p>
+<p>The Login shell menu changes the same account default as <code>chsh</code>. To use another shell only in new Terminal windows and tabs, leave that default in place. From the Terminal menu, choose Settings (or Preferences). On the General pane, select "Command (complete path)", and enter a path from <code>/etc/shells</code>, such as <code>/bin/zsh</code> or <code>/bin/bash</code>.</p>
+<h2 id="if-you-use-kaku">If you use Kaku</h2>
+<p>Kaku's shell setup is built for zsh and fish. <code>kaku init</code> adds two lines to <code>~/.zshrc</code>, one for PATH and one that sources Kaku's shell integration, which loads zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, and it offers to install Starship, Delta, Lazygit and Yazi through Homebrew. The Starship prompt and Smart Tab only start inside Kaku, so other terminals keep the prompt they already had. <code>kaku doctor</code> checks the zsh and fish integration.</p>
+<p>On bash, Kaku only wraps <code>ssh</code> and <code>mosh</code> so they fall back to <code>xterm-256color</code> when a remote host has no <code>kaku</code> terminfo entry, the same wrapper zsh and fish get. If you would rather assemble the zsh pieces yourself, <a href="/blog/zsh-without-oh-my-zsh">Zsh without Oh My Zsh</a> walks through the same setup in a <code>.zshrc</code> you own.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-bash-still-available-on-macos">Is bash still available on macOS?</h3>
+<p>Yes. <code>/bin/bash</code> is one of the shells in <code>/etc/shells</code>, and it was the default through macOS 10.14. Starting bash while the account default is another shell prints a message that the default interactive shell is now zsh. <code>export BASH_SILENCE_DEPRECATION_WARNING=1</code> in <code>~/.bash_profile</code> or <code>~/.profile</code> hides that message.</p>
+<h3 id="how-do-i-switch-the-default-shell-to-zsh-or-back-to-bash">How do I switch the default shell to zsh or back to bash?</h3>
+<p>Run <code>chsh -s /bin/zsh</code> or <code>chsh -s /bin/bash</code>. The path has to be listed in <code>/etc/shells</code>. On macOS 13 or later the same choice is under System Settings, Users &amp; Groups, Advanced Options, Login shell. To change only new Terminal windows and tabs, set Terminal's General pane to "Command (complete path)" and leave the account default alone.</p>
+<h3 id="where-do-bash_profile-and-bashrc-settings-go">Where do <code>.bash_profile</code> and <code>.bashrc</code> settings go?</h3>
+<p>Login settings, including ones that should apply over SSH, go in <code>.zprofile</code>, which corresponds to <code>.bash_profile</code>. Settings for each new Terminal session go in <code>.zshrc</code>, which corresponds to <code>.bashrc</code>. <code>export</code> lines can be copied as they are. The prompt uses zsh specifiers, so use the zsh <code>PS1</code> above in <code>.zprofile</code> or <code>.zshrc</code>, and see <code>man zsh</code> for the rest. A POSIX <code>.profile</code> can be sourced from <code>.zprofile</code> with <code>emulate sh</code>.</p>
+<h3 id="how-do-i-test-a-script-against-sh">How do I test a script against sh?</h3>
+<p>On macOS 10.15 or later, change <code>/var/select/sh</code> to <code>/bin/bash</code>, <code>/bin/dash</code>, or <code>/bin/zsh</code>. If that path points to a shell other than bash, scripts that use bashisms may not work properly. <code>zsh --emulate sh</code> runs zsh in sh emulation.</p>
+<h3 id="does-kaku-set-up-bash-the-way-it-sets-up-zsh">Does Kaku set up bash the way it sets up zsh?</h3>
+<p><code>kaku init</code> sets up zsh, fish, or both. The zsh plugins and Smart Tab belong to the zsh setup, and the Starship prompt is available to zsh and fish inside Kaku. The bash integration wraps <code>ssh</code> and <code>mosh</code> so they fall back to <code>xterm-256color</code> when the remote host has no <code>kaku</code> terminfo entry, and the zsh and fish integrations do the same.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/zsh-without-oh-my-zsh"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">A Fast Zsh Setup Without Oh My Zsh</span><span class="blog-related-meta"><time datetime="2026-09-27">Sep 27, 2026</time> · 4 min read</span></a></li><li><a href="/blog/starship-prompt"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Starship Prompt on Mac: Install, Configure and Keep It Fast</span><span class="blog-related-meta"><time datetime="2026-10-12">Oct 12, 2026</time> · 8 min read</span></a></li><li><a href="/blog/lazygit-and-delta"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Lazygit and Delta: A Terminal Git Workflow on Mac</span><span class="blog-related-meta"><time datetime="2026-09-24">Sep 24, 2026</time> · 4 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>A Fast Zsh Setup Without Oh My Zsh · Kaku Blog</title>
+  <meta name="description" content="Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it.">
+  <meta property="og:title" content="A Fast Zsh Setup Without Oh My Zsh · Kaku Blog">
+  <meta property="og:description" content="Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="A Fast Zsh Setup Without Oh My Zsh">
+  <meta property="og:url" content="https://kaku.fun/blog/zsh-without-oh-my-zsh">
+  <meta property="article:published_time" content="2026-09-27">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/zsh-without-oh-my-zsh"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/zsh-without-oh-my-zsh">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/zsh-without-oh-my-zsh.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "A Fast Zsh Setup Without Oh My Zsh",
+          "item": "https://kaku.fun/blog/zsh-without-oh-my-zsh"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/zsh-without-oh-my-zsh#article",
+      "headline": "A Fast Zsh Setup Without Oh My Zsh",
+      "description": "Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it.",
+      "url": "https://kaku.fun/blog/zsh-without-oh-my-zsh",
+      "mainEntityOfPage": "https://kaku.fun/blog/zsh-without-oh-my-zsh",
+      "datePublished": "2026-09-27",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Shell and tools",
+      "image": "https://kaku.fun/img/blog/cards/zsh-without-oh-my-zsh.webp",
+      "timeRequired": "PT4M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/zsh-without-oh-my-zsh.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Oh My Zsh slow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on how many plugins and which theme you load. Measure your own startup with time zsh -i -c exit and compare it with a .zshrc that loads only the pieces you use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use zsh-syntax-highlighting or fast-syntax-highlighting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both color the command line as you type. zsh-syntax-highlighting is the more common one, fast-syntax-highlighting is a separate project with its own themes, and Kaku bundles the latter. Either one goes last in .zshrc."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do my zsh completions not show up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually because the completion directory was added to fpath after compinit ran, or because a cached .zcompdump predates it. Move the fpath line above compinit and run rm ~/.zcompdump; exec zsh once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Kaku's zsh setup with my own Starship config?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Kaku only writes ~/.config/starship.toml when there is none, or when it is a byte-identical copy of the file Kaku 0.10.0 to 0.22.0 shipped, so a config you wrote or symlinked stays as it is."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/zsh-without-oh-my-zsh" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/zsh-without-oh-my-zsh" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>A Fast Zsh Setup Without Oh My Zsh</h1><p class="blog-meta"><span><a href="/blog#topic-shell">Shell and tools</a></span><span>Published <time datetime="2026-09-27">Sep 27, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>4 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/zsh-without-oh-my-zsh.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>You do not need Oh My Zsh to get a good zsh. Four pieces cover what most people install it for: zsh-autosuggestions for the grey suggestion from your history, a syntax highlighter that colors commands as you type, zsh-completions for extra completion definitions, and Starship for the prompt. Loaded directly from your <code>.zshrc</code> in the right order, with completion caching, they start fast and stay easy to understand. This post gives you a <code>.zshrc</code> that does that, explains why the order matters, and shows how to measure it, then how Kaku ships the same setup in two lines.</p>
+<h2 id="install-the-pieces">Install the pieces</h2>
+<p>With Homebrew:</p>
+<pre><code class="language-bash">brew install zsh-autosuggestions zsh-syntax-highlighting zsh-completions starship</code></pre>
+<p>That is the whole dependency list. There is no framework to update and nothing runs at startup that you did not ask for.</p>
+<h2 id="a-zshrc-that-loads-them-in-order">A .zshrc that loads them in order</h2>
+<pre><code class="language-bash"><span class="tok-c"># Completion definitions go on fpath before compinit
+</span>fpath=(<span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-completions $fpath)
+
+<span class="tok-c"># Check the completion cache at most once a day.
+# (#q...) needs EXTENDED_GLOB, without it the test is always true.
+</span>setopt EXTENDED_GLOB
+autoload -Uz compinit
+<span class="tok-k">if</span> [[ -n <span class="tok-s">${</span>ZDOTDIR<span class="tok-k">:-</span>$HOME<span class="tok-s">}</span>/.zcompdump(<span class="tok-c">#qN.mh+24) ]]; then
+</span>  compinit &amp;&amp; touch <span class="tok-s">"${</span>ZDOTDIR<span class="tok-k">:-</span>$HOME<span class="tok-s">}/.zcompdump"</span>
+<span class="tok-k">else</span>
+  compinit -C
+<span class="tok-k">fi</span>
+
+<span class="tok-c"># History
+</span>HISTSIZE=<span class="tok-n">50000</span>
+SAVEHIST=<span class="tok-n">50000</span>
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
+
+<span class="tok-c"># Prompt
+</span><span class="tok-b">eval</span> <span class="tok-s">"</span><span class="tok-k">$(</span>starship init zsh<span class="tok-k">)</span><span class="tok-s">"</span>
+
+<span class="tok-c"># Suggestions from history
+</span><span class="tok-b">source</span> <span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+<span class="tok-c"># Syntax highlighting must come last
+</span><span class="tok-b">source</span> <span class="tok-s">${</span>HOMEBREW_PREFIX<span class="tok-k">:-</span>/opt/homebrew<span class="tok-s">}</span>/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</code></pre>
+<p><code>HOMEBREW_PREFIX</code> is set by <code>brew shellenv</code>, and the fallback covers Apple Silicon's default path. Writing the path out instead of calling <code>$(brew --prefix)</code> saves starting a process on every shell.</p>
+<h2 id="why-the-order-matters">Why the order matters</h2>
+<p>Three rules decide most of it:</p>
+<ul>
+<li><strong>Completions before <code>compinit</code>.</strong> <code>compinit</code> scans <code>fpath</code> once. Anything added later is not seen until the next rebuild.</li>
+<li><strong><code>compinit -C</code> most of the time.</strong> A full <code>compinit</code> checks every completion file. With <code>-C</code> it trusts the cached <code>.zcompdump</code>, and the check above runs a full check when the cache is more than 24 hours old, rebuilding it if needed and refreshing its timestamp only after success. On an M5 Pro the full run took 29.3 ms and the cached one 16.2 ms. The <code>(#q...)</code> test only works with <code>EXTENDED_GLOB</code> on; without it the string is never treated as a glob, the test is always true, and every shell quietly does the full check.</li>
+<li><strong>Syntax highlighting last.</strong> It works by wrapping zsh's line editor widgets, so widgets defined after it, autosuggestions included, would not be highlighted. Its documentation advises sourcing it at the end.</li>
+</ul>
+<h2 id="measure-it-instead-of-guessing">Measure it instead of guessing</h2>
+<pre><code class="language-bash"><span class="tok-b">time</span> zsh -i -c <span class="tok-b">exit</span></code></pre>
+<p>For steadier numbers, <code>hyperfine</code> runs it many times:</p>
+<pre><code class="language-bash">brew install hyperfine
+hyperfine --warmup <span class="tok-n">5</span> <span class="tok-s">'zsh -i -c exit'</span></code></pre>
+<p><code>zsh -i -c exit</code> measures everything up to the first prompt except work hooked onto the prompt itself, so it is a good way to compare one change at a time. If a number jumps, comment out half the file and measure again.</p>
+<h2 id="how-kaku-does-the-same-thing">How Kaku does the same thing</h2>
+<p>Kaku ships this setup and loads it from two lines it adds to your <code>.zshrc</code>, one for <code>PATH</code> and one that sources <code>~/.config/kaku/zsh/kaku.zsh</code>. The bundled pieces are zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z for jumping to directories you visit often, with Starship for the prompt.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/kaku-zsh-load-order-mobile.webp" width="340" height="444"><img src="/img/blog/kaku-zsh-load-order.webp" width="362" height="622" loading="lazy" alt="The six steps of Kaku&#x27;s zsh setup in order: PATH and Kaku check, Starship prompt from a cached init, history and keys, compinit -C with a full check once a day, z and autosuggestions where yours win, and syntax highlighting after the first prompt"></picture><figcaption>The same rules as above, plus a cached prompt init and highlighting deferred to the first prompt.</figcaption></figure>
+
+<p>On top of the rules above, it does three more things:</p>
+<ul>
+<li><strong>Caches Starship's init script</strong>, so a warm start runs no extra process for the prompt.</li>
+<li><strong>Defers syntax highlighting</strong> until the first prompt is about to appear, keeping it last without slowing down earlier startup steps.</li>
+<li><strong>Compiles the whole file</strong> with <code>zcompile</code>, so zsh reads bytecode instead of parsing it again.</li>
+</ul>
+<p>It also steps aside for your own setup. If your <code>.zshrc</code> already loads autosuggestions, a highlighter or a directory jumper such as zoxide, Kaku skips its own copy, and if completion is already initialized it skips <code>compinit</code>.</p>
+<p>Measured on an M5 Pro with <code>hyperfine</code>, 30 runs each, an empty <code>.zshrc</code> starts in 10.8 ms and the full Kaku setup in 43.3 ms.</p>
+<p>Two switches cover the common objections. <code>KAKU_SKIP_TOOL_BOOTSTRAP=1 kaku init</code> sets up the shell without installing the optional Homebrew tools, and <code>kaku reset</code> removes the Kaku-managed lines and files again while keeping everything you wrote yourself.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-oh-my-zsh-slow">Is Oh My Zsh slow?</h3>
+<p>It depends on how many plugins and which theme you load. Measure your own startup with <code>time zsh -i -c exit</code> and compare it with a <code>.zshrc</code> that loads only the pieces you use.</p>
+<h3 id="should-i-use-zsh-syntax-highlighting-or-fast-syntax-highlighting">Should I use zsh-syntax-highlighting or fast-syntax-highlighting?</h3>
+<p>Both color the command line as you type. zsh-syntax-highlighting is the more common one, fast-syntax-highlighting is a separate project with its own themes, and Kaku bundles the latter. Either one goes last in <code>.zshrc</code>.</p>
+<h3 id="why-do-my-zsh-completions-not-show-up">Why do my zsh completions not show up?</h3>
+<p>Usually because the completion directory was added to <code>fpath</code> after <code>compinit</code> ran, or because a cached <code>.zcompdump</code> predates it. Move the <code>fpath</code> line above <code>compinit</code> and run <code>rm ~/.zcompdump; exec zsh</code> once.</p>
+<h3 id="can-i-use-kakus-zsh-setup-with-my-own-starship-config">Can I use Kaku's zsh setup with my own Starship config?</h3>
+<p>Yes. Kaku only writes <code>~/.config/starship.toml</code> when there is none, or when it is a byte-identical copy of the file Kaku 0.10.0 to 0.22.0 shipped, so a config you wrote or symlinked stays as it is.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/lazygit-and-delta"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Lazygit and Delta: A Terminal Git Workflow on Mac</span><span class="blog-related-meta"><time datetime="2026-09-24">Sep 24, 2026</time> · 4 min read</span></a></li><li><a href="/blog/zsh-vs-bash"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Zsh vs Bash on Mac: Which Shell Should You Use</span><span class="blog-related-meta"><time datetime="2026-10-04">Oct 4, 2026</time> · 6 min read</span></a></li><li><a href="/blog/starship-prompt"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Starship Prompt on Mac: Install, Configure and Keep It Fast</span><span class="blog-related-meta"><time datetime="2026-10-12">Oct 12, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

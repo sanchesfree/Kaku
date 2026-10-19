@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Hooks: A Practical Guide with Examples · Kaku Blog</title>
+  <meta name="description" content="Where hooks live, the events that matter, and three working examples: format after an edit, block a command, and notify when Claude finishes.">
+  <meta property="og:title" content="Claude Code Hooks: A Practical Guide with Examples · Kaku Blog">
+  <meta property="og:description" content="Where hooks live, the events that matter, and three working examples: format after an edit, block a command, and notify when Claude finishes.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-hooks.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Hooks: A Practical Guide with Examples">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-hooks">
+  <meta property="article:published_time" content="2026-10-03">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-hooks.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-hooks"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-hooks">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-hooks">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-hooks">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-hooks.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Hooks: A Practical Guide with Examples",
+          "item": "https://kaku.fun/blog/claude-code-hooks"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-hooks#article",
+      "headline": "Claude Code Hooks: A Practical Guide with Examples",
+      "description": "Where hooks live, the events that matter, and three working examples: format after an edit, block a command, and notify when Claude finishes.",
+      "url": "https://kaku.fun/blog/claude-code-hooks",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-hooks",
+      "datePublished": "2026-10-03",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-hooks.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-hooks.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does exit code 0 allow the command?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Exit 0 on PreToolUse leaves the normal permission check in place. Print \"permissionDecision\": \"allow\" inside hookSpecificOutput, and exit 0, to skip the prompt. Deny rules still apply."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did the formatter miss a file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Edit|Write runs only after the Edit or Write tool. A Bash rewrite does not fire it, and PostToolUse cannot undo a write that already finished."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Claude keep working after a Stop hook?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exit 2, or {\"decision\": \"block\", \"reason\": \"...\"}, tells Claude to continue. After eight blocks in a row with no tool call in between, Claude Code ends the turn. Exit 0 to notify. If you do mean to block, check stop_hook_active first and exit 0 when it is already true, so the hook does not block forever."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I see the notification in the window I am using?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kaku shows them while it is in the background, not for the pane you are looking at. terminalSequence is written only while an interactive session is on screen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Kaku install these hooks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kaku never adds hooks or instructions on its own. You write the hooks object in Claude Code's settings, and kaku ai keeps fields you wrote yourself."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-hooks" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-hooks" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Hooks: A Practical Guide with Examples</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-03">Oct 3, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-hooks.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>A Claude Code hook is a shell command Claude Code runs when a session event fires, taken from the <code>hooks</code> object in a settings JSON file. The useful ones are PreToolUse, which can block or allow a tool call before it runs, PostToolUse, which runs after a tool succeeds, Notification, which runs when Claude Code sends a notification, and Stop, which runs when Claude finishes responding. Exit codes, matchers, and JSON fields below follow the <a href="https://code.claude.com/docs/en/hooks-guide" target="_blank" rel="noopener noreferrer">hooks guide</a> and the <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener noreferrer">hooks reference</a>, checked October 2026.</p>
+<h2 id="where-a-hook-lives">Where a hook lives</h2>
+<p>A hook names an event, a matcher, and a handler. <code>"type": "command"</code> runs a shell command with the event JSON on stdin.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Scope</th>
+<th>Share it?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.claude/settings.json</code></td>
+<td>Every project on this machine</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>.claude/settings.json</code></td>
+<td>This project</td>
+<td>Yes, commit it</td>
+</tr>
+<tr>
+<td><code>.claude/settings.local.json</code></td>
+<td>This project</td>
+<td>No. Gitignored when Claude Code saves a setting to it</td>
+</tr>
+</tbody>
+</table>
+<p>User, project, and local hooks are added together, and a managed policy hook still runs unless <code>disableAllHooks</code> is set in managed settings too. For one run:</p>
+<pre><code class="language-bash">claude --settings <span class="tok-s">'{"disableAllHooks": true}'</span></code></pre>
+<p><code>/hooks</code> lists them read-only, labeled user, project, local, or plugin. If a saved hook is missing, look for a trailing comma or a comment. Settings JSON allows neither.</p>
+<h2 id="the-events-that-matter">The events that matter</h2>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-hooks-lifecycle-mobile.webp" width="340" height="390"><img src="/img/blog/claude-code-hooks-lifecycle.webp" width="831" height="151" loading="lazy" alt="PreToolUse, then the tool, then PostToolUse, and Stop when Claude finishes"></picture><figcaption>PreToolUse, the tool and PostToolUse repeat for every tool call in a turn. Stop fires once, when the response ends, and Notification fires whenever Claude Code needs you.</figcaption></figure>
+
+<p>The reference lists more events. These six are the ones used below:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>When it fires</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SessionStart</code></td>
+<td>A session begins or resumes</td>
+</tr>
+<tr>
+<td><code>UserPromptSubmit</code></td>
+<td>A prompt is submitted, before Claude processes it</td>
+</tr>
+<tr>
+<td><code>PreToolUse</code></td>
+<td>Before a tool call. Can block it</td>
+</tr>
+<tr>
+<td><code>PostToolUse</code></td>
+<td>After a tool call succeeds</td>
+</tr>
+<tr>
+<td><code>Notification</code></td>
+<td>Claude Code sends a notification</td>
+</tr>
+<tr>
+<td><code>Stop</code></td>
+<td>Claude finishes responding</td>
+</tr>
+</tbody>
+</table>
+<p><code>Stop</code> stays quiet if you interrupt the turn. An API error fires <code>StopFailure</code> instead.</p>
+<p><code>PreToolUse</code> and <code>PostToolUse</code> match the tool name. <code>Edit|Write</code> and <code>Edit, Write</code> are the same case-sensitive list. Any character outside letters, digits, <code>_</code>, <code>-</code>, spaces, commas, and <code>|</code> is an unanchored regular expression, so <code>Edit.*</code> also matches <code>NotebookEdit</code>. <code>Stop</code> ignores a matcher. An empty matcher, <code>"*"</code>, or none at all fires every time. Edit and Write pass an absolute <code>tool_input.file_path</code>. Bash passes <code>tool_input.command</code>.</p>
+<h2 id="format-a-file-after-an-edit">Format a file after an edit</h2>
+<p><code>PostToolUse</code> runs after a successful tool call, so the write has already happened. This Prettier hook formats the file from the project's <code>.claude/settings.json</code>:</p>
+<pre><code class="language-json">{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": <span class="tok-s">"Edit|Write"</span>,
+        "hooks": [
+          {
+            "type": <span class="tok-s">"command"</span>,
+            "command": <span class="tok-s">"jq -r '.tool_input.file_path' | xargs npx prettier --write"</span>
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p><code>jq</code> reads the path. Install it with <code>brew install jq</code> if the hook reports <code>jq: command not found</code>. Exit 0 prints nothing in the conversation.</p>
+<p>A <code>Bash</code> command that rewrites a file does not fire an <code>Edit|Write</code> hook. The guide uses <code>FileChanged</code> when the hook has to see the file regardless of what wrote it.</p>
+<h2 id="block-a-command-before-it-runs">Block a command before it runs</h2>
+<p><code>PreToolUse</code> runs once the arguments exist, before the tool, and before the permission-mode check. Exit 2 blocks the call, and Claude reads stderr as the reason. Exit 0 leaves the normal permission flow in place. It does not approve the call.</p>
+<p>Save this as <code>.claude/hooks/no-rm.sh</code>, then <code>chmod +x</code> it. It blocks a Bash command that starts with <code>rm</code>.</p>
+<pre><code class="language-bash"><span class="tok-c">#!/bin/bash
+</span>input=<span class="tok-k">$(</span>cat<span class="tok-k">)</span>
+command=<span class="tok-k">$(</span>jq -r <span class="tok-s">'.tool_input.command'</span> &lt;&lt;&lt;<span class="tok-s">"</span>$input<span class="tok-s">"</span><span class="tok-k">)</span>
+
+<span class="tok-k">if</span> [[ <span class="tok-s">"</span>$command<span class="tok-s">"</span> == rm* ]]; <span class="tok-k">then</span>
+  <span class="tok-b">echo</span> <span class="tok-s">"Blocked: rm commands are not allowed"</span> &gt;&amp;<span class="tok-n">2</span>
+  <span class="tok-b">exit</span> <span class="tok-n">2</span>
+<span class="tok-k">fi</span>
+
+<span class="tok-b">exit</span> <span class="tok-n">0</span></code></pre>
+<pre><code class="language-json">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": <span class="tok-s">"Bash"</span>,
+        "hooks": [
+          {
+            "type": <span class="tok-s">"command"</span>,
+            "command": <span class="tok-s">"\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/no-rm.sh"</span>
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p><code>$CLAUDE_PROJECT_DIR</code> is the project root from session start. A command has to start with <code>rm</code>, so <code>npm test &amp;&amp; rm -rf dist</code> gets through.</p>
+<p>To decide in JSON, exit 0 and print this object alone. <code>permissionDecision</code> belongs inside <code>hookSpecificOutput</code>. At the top level, Claude Code ignores it and shows no error.</p>
+<pre><code class="language-json">{
+  "hookSpecificOutput": {
+    "hookEventName": <span class="tok-s">"PreToolUse"</span>,
+    "permissionDecision": <span class="tok-s">"deny"</span>,
+    "permissionDecisionReason": <span class="tok-s">"Destructive command blocked by hook"</span>
+  }
+}</code></pre>
+<p><code>"deny"</code> cancels the call. <code>"allow"</code> skips the prompt, and deny and ask rules, including managed deny lists, still apply. <code>"ask"</code> shows the prompt. Exit 2 still blocks even if the JSON says <code>"allow"</code>, and <code>"deny"</code> still blocks in bypass permissions mode. Matching hooks run in parallel. The strictest answer wins: deny, then defer, then ask, then allow.</p>
+<h2 id="notify-when-claude-finishes">Notify when Claude finishes</h2>
+<p><code>Stop</code> fires whenever a response ends, not only when the task is done, and stays quiet if you interrupt. Exit 2 tells Claude to keep going. A notification hook exits 0.</p>
+<p>Put the sequence in <code>terminalSequence</code>. Hooks have no <code>/dev/tty</code>, so Claude Code writes it, including inside tmux and GNU screen, only while an interactive session is on screen. Allowed values are OSC 0, 1, 2, 9, 99, 777, and the bell. OSC 9 is the iTerm2, ConEmu, Windows Terminal, and WezTerm notification. OSC 777 is the urxvt, Ghostty, and Warp notification. Anything else is dropped.</p>
+<p><code>last_assistant_message</code> in the input is the whole reply, too long for a notification, so the script sends a fixed line, built with <code>printf</code> and wrapped in JSON by <code>jq -nc</code>:</p>
+<pre><code class="language-bash"><span class="tok-c">#!/bin/bash
+</span>seq=<span class="tok-k">$(</span><span class="tok-b">printf</span> <span class="tok-s">'\033]777;notify;%s;%s\007'</span> <span class="tok-s">"Claude Code"</span> <span class="tok-s">"Finished"</span><span class="tok-k">)</span>
+jq -nc --arg seq <span class="tok-s">"</span>$seq<span class="tok-s">"</span> <span class="tok-s">'{terminalSequence: $seq}'</span></code></pre>
+<p><code>Stop</code> has no matcher. Register the script without one:</p>
+<pre><code class="language-json">{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": <span class="tok-s">"command"</span>,
+            "command": <span class="tok-s">"\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/notify-stop.sh"</span>
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p>A <code>Notification</code> hook can return the same field, and <code>preferredNotifChannel</code> set to <code>notifications_disabled</code> does not stop it. The input includes <code>message</code> and <code>notification_type</code>. <code>permission_prompt</code> waits about six seconds without typing. <code>idle_prompt</code> waits about 60 seconds after the response if you have not typed.</p>
+<h2 id="see-what-a-hook-did">See what a hook did</h2>
+<p>If <code>/hooks</code> lists the hook but it never runs, the matcher missed the tool name. <code>Ctrl + O</code> opens the transcript. Success is blank, a block shows the reason, and any exit other than 0 or 2 is usually a non-blocking error: the action continues, with <code>Failed with non-blocking status code:</code> and the first stderr line.</p>
+<pre><code class="language-bash"><span class="tok-b">echo</span> <span class="tok-s">'{"tool_name":"Bash","tool_input":{"command":"ls"}}'</span> | ./.claude/hooks/no-rm.sh
+<span class="tok-b">echo</span> $?</code></pre>
+<p><code>claude --debug</code> writes <code>~/.claude/debug/&lt;session-id&gt;.txt</code> and prints nothing in the terminal. <code>claude --debug-file /tmp/claude.log</code> picks the path, and <code>/debug</code> turns logging on mid-session. <code>Hook output does not start with {</code> means stdout was not one JSON object, often because a shell profile line printed first, so the JSON never applies. <code>Hook JSON output had unrecognized keys</code> means a field was at the wrong level.</p>
+<h2 id="hooks-run-with-your-permissions">Hooks run with your permissions</h2>
+<p>A command hook runs as your user and can read, change, or delete any file your account can. Read it before it sits on every tool call, and quote every variable you expand.</p>
+<p>An interactive session waits for the workspace trust dialog before running hooks from any settings file, including <code>~/.claude/settings.json</code>. <code>claude -p</code> skips the dialog and treats the folder as trusted, so a committed <code>.claude/settings.json</code> hook runs. On a repository you did not write, read <code>.claude/</code> first, or pass <code>--settings '{"disableAllHooks": true}'</code>.</p>
+<h2 id="hooks-and-kaku">Hooks and Kaku</h2>
+<p>Kaku never adds hooks or instructions to your agents. <code>kaku ai</code> changes a tool's settings only when you edit them there, and it keeps the fields you wrote yourself.</p>
+<p>Claude Code's own alerts are a separate switch: Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs no setting, and older versions need <code>"preferredNotifChannel": "ghostty"</code> in <code>~/.claude/settings.json</code>, as <a href="/blog/claude-code-notifications">Claude Code notifications</a> explains.</p>
+<p>The Stop script is separate from that channel. It asks Claude Code to write OSC 777, the Ghostty notification on the allowlist. On Kaku 0.25.0 or later with Claude Code 2.1.295 or later, Kaku already notifies when Claude finishes, so the Stop hook above adds a second notification there. It is meant for older versions or another terminal. OSC 9 is allowlisted too, and Kaku shows it as the tool's own message when Codex has <code>notification_method = "osc9"</code>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="does-exit-code-0-allow-the-command">Does exit code 0 allow the command?</h3>
+<p>No. Exit 0 on <code>PreToolUse</code> leaves the normal permission check in place. Print <code>"permissionDecision": "allow"</code> inside <code>hookSpecificOutput</code>, and exit 0, to skip the prompt. Deny rules still apply.</p>
+<h3 id="why-did-the-formatter-miss-a-file">Why did the formatter miss a file?</h3>
+<p><code>Edit|Write</code> runs only after the Edit or Write tool. A <code>Bash</code> rewrite does not fire it, and <code>PostToolUse</code> cannot undo a write that already finished.</p>
+<h3 id="why-does-claude-keep-working-after-a-stop-hook">Why does Claude keep working after a Stop hook?</h3>
+<p>Exit 2, or <code>{"decision": "block", "reason": "..."}</code>, tells Claude to continue. After eight blocks in a row with no tool call in between, Claude Code ends the turn. Exit 0 to notify. If you do mean to block, check <code>stop_hook_active</code> first and exit 0 when it is already <code>true</code>, so the hook does not block forever.</p>
+<h3 id="will-i-see-the-notification-in-the-window-i-am-using">Will I see the notification in the window I am using?</h3>
+<p>Kaku shows them while it is in the background, not for the pane you are looking at. <code>terminalSequence</code> is written only while an interactive session is on screen.</p>
+<h3 id="does-kaku-install-these-hooks">Does Kaku install these hooks?</h3>
+<p>No. Kaku never adds hooks or instructions on its own. You write the <code>hooks</code> object in Claude Code's settings, and <code>kaku ai</code> keeps fields you wrote yourself.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-statusline"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Status Line: Show Model, Context and Git Branch</span><span class="blog-related-meta"><time datetime="2026-10-05">Oct 5, 2026</time> · 7 min read</span></a></li><li><a href="/blog/claude-code-remote"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Remote: Three Ways to Reach a Running Session</span><span class="blog-related-meta"><time datetime="2026-09-30">Sep 30, 2026</time> · 5 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

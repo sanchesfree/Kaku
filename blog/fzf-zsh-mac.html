@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Set Up fzf with Zsh on Mac: History, Files and Directories · Kaku Blog</title>
+  <meta name="description" content="Install fzf, turn on its zsh key bindings for history, files and directories, fix Alt+C on a Mac, and add previews and fzf-tab.">
+  <meta property="og:title" content="Set Up fzf with Zsh on Mac: History, Files and Directories · Kaku Blog">
+  <meta property="og:description" content="Install fzf, turn on its zsh key bindings for history, files and directories, fix Alt+C on a Mac, and add previews and fzf-tab.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Set Up fzf with Zsh on Mac: History, Files and Directories">
+  <meta property="og:url" content="https://kaku.fun/blog/fzf-zsh-mac">
+  <meta property="article:published_time" content="2026-10-14">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/fzf-zsh-mac"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/fzf-zsh-mac">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/fzf-zsh-mac">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/fzf-zsh-mac">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/fzf-zsh-mac.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Set Up fzf with Zsh on Mac: History, Files and Directories",
+          "item": "https://kaku.fun/blog/fzf-zsh-mac"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/fzf-zsh-mac#article",
+      "headline": "Set Up fzf with Zsh on Mac: History, Files and Directories",
+      "description": "Install fzf, turn on its zsh key bindings for history, files and directories, fix Alt+C on a Mac, and add previews and fzf-tab.",
+      "url": "https://kaku.fun/blog/fzf-zsh-mac",
+      "mainEntityOfPage": "https://kaku.fun/blog/fzf-zsh-mac",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Shell and tools",
+      "image": "https://kaku.fun/img/blog/cards/fzf-zsh-mac.webp",
+      "timeRequired": "PT6M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/fzf-zsh-mac.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does Alt + C type a strange character instead of changing directory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your terminal is sending Option as a text modifier. Turn on Use Option as Meta key in Terminal.app, set Left Option Key to Esc+ in iTerm2, or set macos-option-as-alt = left in Ghostty."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does fzf ignore my FZF_DEFAULT_COMMAND?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shell integration does not use it. Set FZF_CTRL_T_COMMAND for Ctrl + T and FZF_ALT_C_COMMAND for Alt + C, or define _fzf_compgen_path and _fzf_compgen_dir for **<Tab>."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I turn off one of the bindings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Set the matching variable to an empty string on the line that sources fzf, for example FZF_ALT_C_COMMAND= source <(fzf --zsh). Setting it after the source line has no effect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does fzf-tab replace **<Tab>?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It covers more ground, since every Tab completion goes through fzf, but the two can live together. Load fzf-tab after source <(fzf --zsh) so it is the last plugin to bind Tab."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need fd for fzf?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. fzf ships its own walker and lists files without any extra tools, and --walker-skip covers the usual noisy folders. fd is an option when you already rely on its filtering elsewhere and want the same list in fzf."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/fzf-zsh-mac" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/fzf-zsh-mac" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Set Up fzf with Zsh on Mac: History, Files and Directories</h1><p class="blog-meta"><span><a href="/blog#topic-shell">Shell and tools</a></span><span>Published <time datetime="2026-10-14">Oct 14, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>6 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/fzf-zsh-mac.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>To set up fzf with zsh on a Mac, run <code>brew install fzf</code> and add <code>source &lt;(fzf --zsh)</code> to your <code>~/.zshrc</code>. Open a new shell and you get three key bindings: Ctrl + R searches your history, Ctrl + T pastes files and directories onto the command line, and Alt + C jumps into a directory. On a Mac, Alt + C only works once your terminal sends the Option key as Meta, which most terminals do not do out of the box.</p>
+<h2 id="install-and-enable">Install and enable</h2>
+<p><a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener noreferrer">fzf</a> is a single binary, and Homebrew is the simplest way to get it:</p>
+<pre><code class="language-bash">brew install fzf</code></pre>
+<p>Then add one line to <code>~/.zshrc</code>:</p>
+<pre><code class="language-bash"><span class="tok-c"># Set up fzf key bindings and fuzzy completion
+</span><span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<p>The <code>--zsh</code> flag prints the integration script for zsh, and sourcing it sets up both the key bindings and the <code>**&lt;Tab&gt;</code> fuzzy completion. It only exists in recent fzf releases, so if the shell complains, check <code>fzf --version</code> and upgrade with <code>brew update; brew upgrade fzf</code>. Homebrew shipped 0.74.5 in October 2026.</p>
+<p>If you only want some of the bindings, set the matching <code>*_COMMAND</code> variable to an empty string on the same line. Setting it afterwards has no effect:</p>
+<pre><code class="language-bash">FZF_CTRL_R_COMMAND= FZF_ALT_C_COMMAND= <span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<h2 id="the-three-key-bindings">The three key bindings</h2>
+<p><strong>Ctrl + R, history.</strong> It searches your history and pastes the command you pick onto the command line without running it. Press Ctrl + R again to switch between relevance and chronological order, <code>TAB</code> to select several commands, and Alt + R for raw mode, where the lines around each match stay visible and Ctrl + N and Ctrl + P jump between matches.</p>
+<p><strong>Ctrl + T, files.</strong> It lists files and directories under the current directory and pastes the ones you pick at the cursor, so <code>vim</code> then Ctrl + T opens a picker and drops the path in place. The list comes from fzf's built-in walker with <code>--walker file,dir,follow,hidden</code>, so hidden files are included.</p>
+<p><strong>Alt + C, directories.</strong> It lists directories only, built with <code>--walker dir,follow,hidden</code>, and runs <code>cd</code> into the one you choose.</p>
+<p>Inside the finder, Ctrl + K and Ctrl + J (or Ctrl + P and Ctrl + N) move up and down, Enter accepts, and Ctrl + C, Ctrl + G or Esc cancels. Typing is fuzzy by default, and spaces separate terms: <code>'wild</code> matches exactly, <code>^music</code> anchors the start, <code>.mp3$</code> the end, and <code>!fire</code> excludes. The <code>-e</code> option switches the whole search to exact mode.</p>
+<p>The same integration also adds fuzzy completion. End a word with <code>**</code> and press Tab:</p>
+<pre><code class="language-bash">vim **&lt;Tab&gt;      <span class="tok-c"># files under the current directory
+</span><span class="tok-b">cd</span> ~/github/**&lt;Tab&gt;
+<span class="tok-b">kill</span> -9 **&lt;Tab&gt;  <span class="tok-c"># pick a process
+</span>ssh **&lt;Tab&gt;      <span class="tok-c"># hosts from /etc/hosts and ~/.ssh/config
+</span></code></pre>
+<h2 id="mac-gotcha-alt-c-and-the-option-key">Mac gotcha: Alt + C and the Option key</h2>
+<p>zsh sees Alt + C as Esc followed by <code>c</code>, so it only works when the terminal sends Option as Meta. By default, a Mac types a character for Option plus a letter instead. Kaku's left Option key already acts as Meta, and <a href="/blog/mac-terminal-shortcuts">Mac terminal shortcuts</a> covers the setting in Terminal.app, iTerm2, Ghostty and WezTerm.</p>
+<h2 id="better-defaults-with-fd-and-bat">Better defaults with fd and bat</h2>
+<p>The built-in walker is fast enough for most projects, and two kinds of tweaks cover the rest: skip noisy directories, and add a preview. Each binding has its own <code>*_OPTS</code> variable, set before the <code>source</code> line:</p>
+<pre><code class="language-bash">brew install bat tree
+
+<span class="tok-c"># Ctrl + T: skip build folders, preview files with bat, Ctrl + / toggles the preview
+</span><span class="tok-b">export</span> FZF_CTRL_T_OPTS=<span class="tok-s">"
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"</span>
+
+<span class="tok-c"># Alt + C: show the directory as a tree
+</span><span class="tok-b">export</span> FZF_ALT_C_OPTS=<span class="tok-s">"
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"</span>
+
+<span class="tok-c"># Ctrl + R: Ctrl + Y copies the command to the clipboard
+</span><span class="tok-b">export</span> FZF_CTRL_R_OPTS=<span class="tok-s">"
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"</span>
+
+<span class="tok-b">source</span> &lt;(fzf --zsh)</code></pre>
+<p>If you already use <a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener noreferrer">fd</a> and want fzf to list exactly what fd lists, define the two helper functions fzf uses for <code>**&lt;Tab&gt;</code> completion and point the key bindings at fd as well:</p>
+<pre><code class="language-bash">brew install fd
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude <span class="tok-s">".git"</span> . <span class="tok-s">"</span>$1<span class="tok-s">"</span>
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude <span class="tok-s">".git"</span> . <span class="tok-s">"</span>$1<span class="tok-s">"</span>
+}
+<span class="tok-b">export</span> FZF_CTRL_T_COMMAND=<span class="tok-s">'fd --hidden --follow --exclude .git'</span>
+<span class="tok-b">export</span> FZF_ALT_C_COMMAND=<span class="tok-s">'fd --type d --hidden --follow --exclude .git'</span></code></pre>
+<p><code>FZF_DEFAULT_COMMAND</code> (for example <code>fd --type f</code>) only changes what plain <code>fzf</code> lists. The README says shell integration does not use it, which is why the key bindings have their own variables. Options that should apply everywhere, such as <code>--height 40% --layout reverse --border</code>, go in <code>FZF_DEFAULT_OPTS</code>.</p>
+<h2 id="fzf-tab-for-every-completion">fzf-tab for every completion</h2>
+<p><code>**&lt;Tab&gt;</code> only kicks in when you type the trigger. <a href="https://github.com/Aloxaf/fzf-tab" target="_blank" rel="noopener noreferrer">fzf-tab</a> replaces zsh's whole completion menu with fzf, so a plain Tab after <code>git checkout</code>, <code>kill</code> or a variable name opens a fuzzy list. It does not complete anything itself. It shows the results of zsh's own completion system, so your existing completion settings keep working.</p>
+<pre><code class="language-bash">git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab</code></pre>
+<pre><code class="language-bash">autoload -U compinit; compinit
+<span class="tok-b">source</span> &lt;(fzf --zsh)
+<span class="tok-b">source</span> ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
+zstyle <span class="tok-s">':completion:*:descriptions'</span> format <span class="tok-s">'[%d]'</span>
+zstyle <span class="tok-s">':completion:*'</span> menu no
+zstyle <span class="tok-s">':fzf-tab:complete:cd:*'</span> fzf-preview <span class="tok-s">'eza -1 --color=always $realpath'</span></code></pre>
+<p>The last line previews a directory with eza while you complete <code>cd</code>, so install it with <code>brew install eza</code> or drop the line.</p>
+<p>Loading order is where setups usually break. fzf-tab needs to load after <code>compinit</code> but before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting. It also has to be the last thing that binds Tab, and fzf's own completion binds Tab too, which is why fzf-tab comes after <code>source &lt;(fzf --zsh)</code> above. Two keys worth knowing once it runs: Ctrl + Space selects several entries, and <code>/</code> starts continuous completion for deep paths. For a plugin-manager-free <code>.zshrc</code> that already gets the rest of this order right, see <a href="/blog/zsh-without-oh-my-zsh">zsh without Oh My Zsh</a>.</p>
+<h2 id="using-fzf-in-kaku">Using fzf in Kaku</h2>
+<p>Kaku does not install or configure fzf. Its optional Homebrew bootstrap installs starship, delta, lazygit and yazi (zoxide only for fish), and for zsh it bundles zsh-autosuggestions, fast-syntax-highlighting, zsh-completions and zsh-z, so the <code>source &lt;(fzf --zsh)</code> line is still yours to add. zsh-z is skipped when zoxide already defines <code>z</code>. Inside Kaku, Smart Tab binds Tab, and <code>kaku init</code> appends its source line to the end of <code>.zshrc</code>, so the order of the two lines matters. With <code>source &lt;(fzf --zsh)</code> below the Kaku line, <code>**&lt;Tab&gt;</code> keeps working, because fzf hands every other Tab press back to Smart Tab. With it above, Tab stays with Smart Tab and <code>**</code> no longer opens fzf. Ctrl + T, Ctrl + R and Alt + C remain bound to fzf either way.</p>
+<p>For fzf-tab, set <code>config.smart_tab_mode = 'off'</code> in <code>~/.config/kaku/kaku.lua</code>, which exports <code>KAKU_SMART_TAB_DISABLE=1</code> to new shells, and keep <code>compinit</code>, the fzf line and fzf-tab above the Kaku line. Kaku skips its own <code>compinit</code> when completion is already initialized and loads autosuggestions after fzf-tab, which matches the order fzf-tab asks for. Alt + C needs no extra setting here: the bundled config sends the left Option key as Meta and keeps the right one for composed characters.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-does-alt-c-type-a-strange-character-instead-of-changing-directory">Why does Alt + C type a strange character instead of changing directory?</h3>
+<p>Your terminal is sending Option as a text modifier. Turn on Use Option as Meta key in Terminal.app, set Left Option Key to Esc+ in iTerm2, or set <code>macos-option-as-alt = left</code> in Ghostty.</p>
+<h3 id="why-does-fzf-ignore-my-fzf_default_command">Why does fzf ignore my FZF_DEFAULT_COMMAND?</h3>
+<p>Shell integration does not use it. Set <code>FZF_CTRL_T_COMMAND</code> for Ctrl + T and <code>FZF_ALT_C_COMMAND</code> for Alt + C, or define <code>_fzf_compgen_path</code> and <code>_fzf_compgen_dir</code> for <code>**&lt;Tab&gt;</code>.</p>
+<h3 id="how-do-i-turn-off-one-of-the-bindings">How do I turn off one of the bindings?</h3>
+<p>Set the matching variable to an empty string on the line that sources fzf, for example <code>FZF_ALT_C_COMMAND= source &lt;(fzf --zsh)</code>. Setting it after the <code>source</code> line has no effect.</p>
+<h3 id="does-fzf-tab-replace-tab">Does fzf-tab replace <code>**&lt;Tab&gt;</code>?</h3>
+<p>It covers more ground, since every Tab completion goes through fzf, but the two can live together. Load fzf-tab after <code>source &lt;(fzf --zsh)</code> so it is the last plugin to bind Tab.</p>
+<h3 id="do-i-need-fd-for-fzf">Do I need fd for fzf?</h3>
+<p>No. fzf ships its own walker and lists files without any extra tools, and <code>--walker-skip</code> covers the usual noisy folders. fd is an option when you already rely on its filtering elsewhere and want the same list in fzf.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/zsh-without-oh-my-zsh"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">A Fast Zsh Setup Without Oh My Zsh</span><span class="blog-related-meta"><time datetime="2026-09-27">Sep 27, 2026</time> · 4 min read</span></a></li><li><a href="/blog/starship-prompt"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Starship Prompt on Mac: Install, Configure and Keep It Fast</span><span class="blog-related-meta"><time datetime="2026-10-12">Oct 12, 2026</time> · 8 min read</span></a></li><li><a href="/blog/yazi-file-manager"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Yazi on Mac: A Fast Terminal File Manager Setup</span><span class="blog-related-meta"><time datetime="2026-10-15">Oct 15, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

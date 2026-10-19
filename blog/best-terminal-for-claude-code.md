@@ -2,7 +2,7 @@
 
 > Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.
 
-Published 2026-10-17 · Tw93 · https://kaku.fun/blog/best-terminal-for-claude-code
+Published 2026-09-19 · Tw93 · https://kaku.fun/blog/best-terminal-for-claude-code
 
 Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no configuration. This post walks through each one so you can check whatever terminal you use now.
 

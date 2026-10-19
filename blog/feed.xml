@@ -7,10 +7,234 @@
     <description>Guides and notes on Mac terminals, Claude Code, Codex and shell setup, and how Kaku is built.</description>
     <language>en</language>
     <item>
+      <title>Claude Code MCP Servers: Add, Scope and Approve Them</title>
+      <link>https://kaku.fun/blog/claude-code-mcp-servers</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-mcp-servers</guid>
+      <pubDate>Mon, 19 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.</description>
+    </item>
+    <item>
+      <title>SSH Config on Mac: Hosts, Keys and the Keychain</title>
+      <link>https://kaku.fun/blog/ssh-config-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/ssh-config-mac</guid>
+      <pubDate>Sun, 18 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh.</description>
+    </item>
+    <item>
+      <title>Shell Integration: What OSC 7, 133 and 9 Tell the Terminal</title>
+      <link>https://kaku.fun/blog/shell-integration-osc</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/shell-integration-osc</guid>
+      <pubDate>Sat, 17 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>How OSC 7, 133, 9 and 8 reach a terminal, which ones Kaku 0.25.0 emits for zsh and fish, and printf checks for directory, prompts and notifications.</description>
+    </item>
+    <item>
+      <title>How Terminal Emulators Work</title>
+      <link>https://kaku.fun/blog/how-terminal-emulators-work</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/how-terminal-emulators-work</guid>
+      <pubDate>Fri, 16 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>A terminal owns the pty and the cell grid. The shell is a child that writes bytes. Follow that path from those bytes to pixels.</description>
+    </item>
+    <item>
+      <title>Yazi on Mac: A Fast Terminal File Manager Setup</title>
+      <link>https://kaku.fun/blog/yazi-file-manager</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/yazi-file-manager</guid>
+      <pubDate>Thu, 15 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install Yazi and its preview tools on macOS, learn the keys that matter, add the y wrapper that changes directory on quit, and configure it.</description>
+    </item>
+    <item>
+      <title>Set Up fzf with Zsh on Mac: History, Files and Directories</title>
+      <link>https://kaku.fun/blog/fzf-zsh-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/fzf-zsh-mac</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install fzf, turn on its zsh key bindings for history, files and directories, fix Alt+C on a Mac, and add previews and fzf-tab.</description>
+    </item>
+    <item>
+      <title>Mac Terminal Shortcuts That Save the Most Time</title>
+      <link>https://kaku.fun/blog/mac-terminal-shortcuts</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/mac-terminal-shortcuts</guid>
+      <pubDate>Tue, 13 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>The shell line-editing keys that work in every terminal, how to make Option act as Meta, and the app shortcuts for tabs, splits and search.</description>
+    </item>
+    <item>
+      <title>Starship Prompt on Mac: Install, Configure and Keep It Fast</title>
+      <link>https://kaku.fun/blog/starship-prompt</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/starship-prompt</guid>
+      <pubDate>Mon, 12 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install Starship for zsh or fish, configure starship.toml, format strings and presets, and find the modules and timeouts that make a prompt slow.</description>
+    </item>
+    <item>
+      <title>Claude Code Subagents: What They Are and When They Help</title>
+      <link>https://kaku.fun/blog/claude-code-subagents</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-subagents</guid>
+      <pubDate>Sun, 11 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>How subagents differ from skills and agent teams, how to define one, which jobs they suit, and what they cost in context and tokens.</description>
+    </item>
+    <item>
+      <title>Ghostty Config Guide: The Settings Worth Changing on Mac</title>
+      <link>https://kaku.fun/blog/ghostty-config</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/ghostty-config</guid>
+      <pubDate>Sat, 10 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Where Ghostty&#x27;s config lives, its syntax, and the font, theme, window, keybind and Option key settings worth changing on a Mac.</description>
+    </item>
+    <item>
+      <title>Codex CLI vs Claude Code: A Practical Comparison</title>
+      <link>https://kaku.fun/blog/codex-vs-claude-code</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/codex-vs-claude-code</guid>
+      <pubDate>Fri, 09 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Codex CLI and Claude Code compared on install, sign-in, config files, approvals, extension points and notifications, and how to run both on one repo.</description>
+    </item>
+    <item>
+      <title>Nerd Fonts on Mac: Install Them or Use a Symbols Fallback</title>
+      <link>https://kaku.fun/blog/nerd-fonts-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/nerd-fonts-mac</guid>
+      <pubDate>Thu, 08 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Why prompts and TUIs show boxes instead of icons, how to install a patched Nerd Font with Homebrew, and when a symbols-only fallback is enough.</description>
+    </item>
+    <item>
+      <title>Run Several Claude Code Sessions at Once with Git Worktrees</title>
+      <link>https://kaku.fun/blog/claude-code-git-worktrees</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-git-worktrees</guid>
+      <pubDate>Wed, 07 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Give each Claude Code session its own checkout with git worktree or claude --worktree, set each one up, merge the work back and clean up.</description>
+    </item>
+    <item>
+      <title>Claude Code Skills: How to Write and Use Them</title>
+      <link>https://kaku.fun/blog/claude-code-skills</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-skills</guid>
+      <pubDate>Tue, 06 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>What a skill is next to CLAUDE.md, commands and subagents, how to write SKILL.md and its description, and how to share skills.</description>
+    </item>
+    <item>
+      <title>Claude Code Status Line: Show Model, Context and Git Branch</title>
+      <link>https://kaku.fun/blog/claude-code-statusline</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-statusline</guid>
+      <pubDate>Mon, 05 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Set up a Claude Code status line, read the session JSON it receives, and show the model, context use and git branch without slowing it down.</description>
+    </item>
+    <item>
+      <title>Zsh vs Bash on Mac: Which Shell Should You Use</title>
+      <link>https://kaku.fun/blog/zsh-vs-bash</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/zsh-vs-bash</guid>
+      <pubDate>Sun, 04 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Why macOS moved to zsh, the differences you notice day to day, which shell to write scripts in, and how to switch with chsh or Terminal settings.</description>
+    </item>
+    <item>
+      <title>Claude Code Hooks: A Practical Guide with Examples</title>
+      <link>https://kaku.fun/blog/claude-code-hooks</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-hooks</guid>
+      <pubDate>Sat, 03 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Where hooks live, the events that matter, and three working examples: format after an edit, block a command, and notify when Claude finishes.</description>
+    </item>
+    <item>
+      <title>Install Claude Code on Mac: Installer, Homebrew and Updates</title>
+      <link>https://kaku.fun/blog/install-claude-code-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/install-claude-code-mac</guid>
+      <pubDate>Fri, 02 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install Claude Code with the native installer, Homebrew or npm, sign in, check it with claude doctor, and control updates and release channels.</description>
+    </item>
+    <item>
+      <title>tmux Alternative on Mac: Do You Still Need tmux?</title>
+      <link>https://kaku.fun/blog/tmux-alternative-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/tmux-alternative-mac</guid>
+      <pubDate>Thu, 01 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>What tmux gives you that a terminal does not, what native splits and session restore already cover, and when to keep tmux for remote work.</description>
+    </item>
+    <item>
+      <title>Claude Code Remote: Three Ways to Reach a Running Session</title>
+      <link>https://kaku.fun/blog/claude-code-remote</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-remote</guid>
+      <pubDate>Wed, 30 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Anthropic&#x27;s Remote Control, cloud sessions, and opening your Mac&#x27;s terminal from another computer with kaku remote: what each needs and where it runs.</description>
+    </item>
+    <item>
+      <title>Setting Up Codex CLI on Mac: Install, Login and Config</title>
+      <link>https://kaku.fun/blog/codex-cli-setup</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/codex-cli-setup</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install OpenAI&#x27;s Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions.</description>
+    </item>
+    <item>
+      <title>A Practical WezTerm Config for Mac, and What Kaku Changes</title>
+      <link>https://kaku.fun/blog/wezterm-config-for-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/wezterm-config-for-mac</guid>
+      <pubDate>Mon, 28 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>The WezTerm settings that matter most on macOS, from fonts and line height to keys and rendering, and which defaults Kaku picked and why.</description>
+    </item>
+    <item>
+      <title>A Fast Zsh Setup Without Oh My Zsh</title>
+      <link>https://kaku.fun/blog/zsh-without-oh-my-zsh</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/zsh-without-oh-my-zsh</guid>
+      <pubDate>Sun, 27 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it.</description>
+    </item>
+    <item>
+      <title>Claude Code Agent Teams: Turn Them On and Where They Show Up</title>
+      <link>https://kaku.fun/blog/claude-code-agent-teams</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-agent-teams</guid>
+      <pubDate>Sat, 26 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Agent teams stay off until CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1. In Kaku, teammates stay in one panel unless you run Claude Code in tmux with split panes on.</description>
+    </item>
+    <item>
+      <title>Cursor vs Claude Code: Editor Agent or Terminal Agent</title>
+      <link>https://kaku.fun/blog/cursor-vs-claude-code</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/cursor-vs-claude-code</guid>
+      <pubDate>Fri, 25 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together.</description>
+    </item>
+    <item>
+      <title>Lazygit and Delta: A Terminal Git Workflow on Mac</title>
+      <link>https://kaku.fun/blog/lazygit-and-delta</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/lazygit-and-delta</guid>
+      <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Install lazygit and delta, wire delta into git and into lazygit&#x27;s diff view, and the shortcuts that make reviewing an agent&#x27;s changes quick.</description>
+    </item>
+    <item>
+      <title>Claude Code Plan Mode: When and How to Use It</title>
+      <link>https://kaku.fun/blog/claude-code-plan-mode</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-plan-mode</guid>
+      <pubDate>Wed, 23 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it.</description>
+    </item>
+    <item>
+      <title>Ghostty vs iTerm2 vs WezTerm: Which One Fits You</title>
+      <link>https://kaku.fun/blog/ghostty-vs-iterm2-vs-wezterm</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/ghostty-vs-iterm2-vs-wezterm</guid>
+      <pubDate>Tue, 22 Sep 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Three popular Mac terminals compared on configuration, splits and tmux, images, notifications, release cadence and running AI coding tools.</description>
+    </item>
+    <item>
       <title>The Best Terminal for Mac in 2026: Eight Options Compared</title>
       <link>https://kaku.fun/blog/best-terminal-for-mac</link>
       <guid isPermaLink="true">https://kaku.fun/blog/best-terminal-for-mac</guid>
-      <pubDate>Mon, 19 Oct 2026 09:00:00 +0800</pubDate>
+      <pubDate>Mon, 21 Sep 2026 09:00:00 +0800</pubDate>
       <dc:creator>Tw93</dc:creator>
       <description>Terminal.app, iTerm2, Ghostty, WezTerm, Warp, Kitty, Alacritty and Kaku compared on setup, configuration, AI tools and price, checked October 2026.</description>
     </item>
@@ -18,7 +242,7 @@
       <title>Claude Code Notifications Not Showing? How to Fix Them on Mac</title>
       <link>https://kaku.fun/blog/claude-code-notifications</link>
       <guid isPermaLink="true">https://kaku.fun/blog/claude-code-notifications</guid>
-      <pubDate>Sun, 18 Oct 2026 09:00:00 +0800</pubDate>
+      <pubDate>Sun, 20 Sep 2026 09:00:00 +0800</pubDate>
       <dc:creator>Tw93</dc:creator>
       <description>Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.</description>
     </item>
@@ -26,7 +250,7 @@
       <title>The Best Terminal for Claude Code: What Actually Matters</title>
       <link>https://kaku.fun/blog/best-terminal-for-claude-code</link>
       <guid isPermaLink="true">https://kaku.fun/blog/best-terminal-for-claude-code</guid>
-      <pubDate>Sat, 17 Oct 2026 09:00:00 +0800</pubDate>
+      <pubDate>Sat, 19 Sep 2026 09:00:00 +0800</pubDate>
       <dc:creator>Tw93</dc:creator>
       <description>Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.</description>
     </item>

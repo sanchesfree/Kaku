@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Status Line: Show Model, Context and Git Branch · Kaku Blog</title>
+  <meta name="description" content="Set up a Claude Code status line, read the session JSON it receives, and show the model, context use and git branch without slowing it down.">
+  <meta property="og:title" content="Claude Code Status Line: Show Model, Context and Git Branch · Kaku Blog">
+  <meta property="og:description" content="Set up a Claude Code status line, read the session JSON it receives, and show the model, context use and git branch without slowing it down.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-statusline.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Status Line: Show Model, Context and Git Branch">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-statusline">
+  <meta property="article:published_time" content="2026-10-05">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-statusline.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-statusline"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-statusline">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-statusline">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-statusline">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-statusline.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Status Line: Show Model, Context and Git Branch",
+          "item": "https://kaku.fun/blog/claude-code-statusline"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-statusline#article",
+      "headline": "Claude Code Status Line: Show Model, Context and Git Branch",
+      "description": "Set up a Claude Code status line, read the session JSON it receives, and show the model, context use and git branch without slowing it down.",
+      "url": "https://kaku.fun/blog/claude-code-statusline",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-statusline",
+      "datePublished": "2026-10-05",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-statusline.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-statusline.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is the status line blank?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ensure the script is executable, prints to stdout, and exits with code 0. Before workspace trust is accepted, claude --debug logs Status line command skipped: workspace trust not accepted. A statusLine runs a shell command under the hook trust rule. Setting disableAllHooks to true outside managed settings permits only managed status lines, while allowManagedHooksOnly drops your custom command."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the percentage disagree with /context?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The status line reflects data from the most recent API response, whereas /context includes estimates for messages added since that response. used_percentage excludes output_tokens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the status line cost money?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The script spends no API tokens. cost.total_cost_usd is a list-price estimate, reset to $0 by /clear. Before v2.1.211 that total carried over."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I show the 5-hour and 7-day limits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "claude.ai Pro and Max subscribers, as well as Claude apps gateways with a spend limit, receive rate_limits after the first API response. five_hour.used_percentage and seven_day.used_percentage range from 0 to 100, and resets_at is in Unix seconds. A missing window or one past resets_at is omitted from the JSON. Read the value with jq -r '.rate_limits.five_hour.used_percentage // empty'."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the branch sit still while a subagent works?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trigger events pause while the main session is idle, including when a coordinator waits on subagents. Set refreshInterval to at least 1, keeping the session_id cache in place so git does not run on every tick."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-statusline" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-statusline" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Status Line: Show Model, Context and Git Branch</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-05">Oct 5, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-statusline.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Set <code>statusLine</code> in <code>~/.claude/settings.json</code> to a shell command. Claude Code pipes the current session to that command as JSON on stdin, and prints the script's stdout at the bottom of the screen, in a row above the footer badges. <code>/statusline</code> can generate the script and write the setting. Checked October 2026 against the <a href="https://code.claude.com/docs/en/statusline" target="_blank" rel="noopener noreferrer">status line docs</a>.</p>
+<h2 id="set-it-up">Set it up</h2>
+<p><code>/statusline</code> writes a script under <code>~/.claude/</code> and updates your settings. Approve the file-edit prompts if it asks.</p>
+<pre><code class="language-text">/statusline show model name and context percentage with a progress bar</code></pre>
+<p>You can also edit <code>~/.claude/settings.json</code> or <a href="https://code.claude.com/docs/en/settings#where-settings-live" target="_blank" rel="noopener noreferrer">project settings</a>. Set <code>type</code> to <code>"command"</code>. The <code>command</code> field accepts a script path or an inline shell command, and <code>padding</code> adds extra characters of indentation, defaulting to <code>0</code>.</p>
+<pre><code class="language-json">{
+  "statusLine": {
+    "type": <span class="tok-s">"command"</span>,
+    "command": <span class="tok-s">"~/.claude/statusline.sh"</span>,
+    "padding": <span class="tok-n">2</span>
+  }
+}</code></pre>
+<p>With <a href="https://jqlang.org/" target="_blank" rel="noopener noreferrer"><code>jq</code></a> on your <code>PATH</code>, an inline command requires no script file:</p>
+<pre><code class="language-json">{
+  "statusLine": {
+    "type": <span class="tok-s">"command"</span>,
+    "command": <span class="tok-s">"jq -r '\"[\\(.model.display_name)] \\(.context_window.used_percentage // 0)% context\"'"</span>
+  }
+}</code></pre>
+<p><code>refreshInterval</code> runs the command every N seconds, with a minimum of <code>1</code>. Setting <code>hideVimModeIndicator</code> to <code>true</code> hides the built-in <code>-- INSERT --</code> line when your script prints <code>vim.mode</code> (<code>NORMAL</code>, <code>INSERT</code>, <code>VISUAL</code>, or <code>VISUAL LINE</code>). The <code>vim</code> object exists only while vim mode is active.</p>
+<p>Saving the file reloads settings and runs the command immediately. To remove the status line, run <code>/statusline delete</code>, <code>/statusline clear</code>, or <code>/statusline remove it</code>.</p>
+<p>With a status line configured, Claude Code hides most footer hints, including <code>esc to interrupt</code>, <code>? for shortcuts</code>, and <code>hold space to speak</code>. It also hides the status row during the help menu and permission prompts. <a href="https://github.com/sirmalloc/ccstatusline" target="_blank" rel="noopener noreferrer">ccstatusline</a> and <a href="https://github.com/martinemde/starship-claude" target="_blank" rel="noopener noreferrer">starship-claude</a> provide pre-built configurations.</p>
+<h2 id="what-the-json-contains">What the JSON contains</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model.display_name</code>, <code>model.id</code></td>
+<td>Current model name and identifier</td>
+</tr>
+<tr>
+<td><code>workspace.current_dir</code></td>
+<td>Working directory. <code>cwd</code> matches it. Prefer <code>workspace.current_dir</code></td>
+</tr>
+<tr>
+<td><code>workspace.project_dir</code></td>
+<td>Directory where Claude Code was launched</td>
+</tr>
+<tr>
+<td><code>context_window.used_percentage</code></td>
+<td>Context used. May be <code>null</code> early</td>
+</tr>
+<tr>
+<td><code>context_window.context_window_size</code></td>
+<td>Max tokens: 200000, or 1000000 with extended context</td>
+</tr>
+<tr>
+<td><code>cost.total_cost_usd</code></td>
+<td>Estimated session cost in USD</td>
+</tr>
+<tr>
+<td><code>cost.total_duration_ms</code></td>
+<td>Wall-clock milliseconds the session has been running</td>
+</tr>
+<tr>
+<td><code>session_id</code></td>
+<td>Stable id for this session</td>
+</tr>
+</tbody>
+</table>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-statusline-mobile.webp" width="340" height="350"><img src="/img/blog/claude-code-statusline.webp" width="657" height="231" loading="lazy" alt="Session JSON goes to the script on stdin, and the printed line is what shows under the input"></picture><figcaption>The branch is not in that JSON. The script asks git for it.</figcaption></figure>
+
+<p><code>used_percentage</code> sums <code>input_tokens</code>, <code>cache_creation_input_tokens</code>, and <code>cache_read_input_tokens</code>, excluding <code>output_tokens</code>. Both <code>total_input_tokens</code> and <code>total_output_tokens</code> are <code>0</code> before the first API response. <code>current_usage</code> is <code>null</code> before the first call and again after <code>/compact</code>, until the next call. Using <code>// 0</code> provides a fallback for a null percentage. If the row displays <code>--</code> after several messages, restart the session. <code>/context</code> can report a higher number because it estimates messages added since that response.</p>
+<p><code>cost.total_cost_usd</code> is a client-side list-price estimate, unless a <a href="https://code.claude.com/docs/en/settings-reference#modelpricing" target="_blank" rel="noopener noreferrer"><code>modelPricing</code></a> table applies, and can differ from the actual bill. <code>/clear</code> resets this total to $0. Before v2.1.211, it carried over. <code>total_duration_ms</code> accumulates across resumed sessions and excludes time when the session is not running. <code>total_api_duration_ms</code> measures API wait time. The script consumes no tokens.</p>
+<p>No field contains the checked-out branch. <code>workspace.git_worktree</code> names a linked worktree from <code>git worktree add</code>, while <code>worktree.branch</code> exists only in a worktree session.</p>
+<h2 id="model-context-and-git-branch">Model, context, and git branch</h2>
+<p>The script prints the model, folder, context percentage, and git branch. Running <code>wc -l</code> on <code>git diff --cached --numstat</code> and <code>git diff --numstat</code> counts staged and modified tracked files. <code>\033[32m</code> formats a green <code>+</code>, <code>\033[33m</code> formats a yellow <code>~</code>, and <code>\033[0m</code> resets formatting. <code>echo -e</code> enables the escape sequences.</p>
+<p>Cache git status for 5 seconds at <code>/tmp/statusline-git-cache-$SESSION_ID</code>. The <code>session_id</code> stays the same for the whole session, while <code>$$</code> changes on every run and would never hit the cache. Run <code>stat -c %Y</code> (Linux) before <code>stat -f %m</code> (macOS): on Linux, the macOS syntax prints a filesystem report before failing. Git commands run in the script's directory, as these examples do not <code>cd</code> to <code>workspace.current_dir</code>. If <code>git branch --show-current</code> returns empty, the branch is omitted.</p>
+<pre><code class="language-bash"><span class="tok-c">#!/bin/bash
+</span>input=<span class="tok-k">$(</span>cat<span class="tok-k">)</span>
+
+MODEL=<span class="tok-k">$(</span><span class="tok-b">echo</span> <span class="tok-s">"</span>$input<span class="tok-s">"</span> | jq -r <span class="tok-s">'.model.display_name'</span><span class="tok-k">)</span>
+DIR=<span class="tok-k">$(</span><span class="tok-b">echo</span> <span class="tok-s">"</span>$input<span class="tok-s">"</span> | jq -r <span class="tok-s">'.workspace.current_dir'</span><span class="tok-k">)</span>
+SESSION_ID=<span class="tok-k">$(</span><span class="tok-b">echo</span> <span class="tok-s">"</span>$input<span class="tok-s">"</span> | jq -r <span class="tok-s">'.session_id'</span><span class="tok-k">)</span>
+PCT=<span class="tok-k">$(</span><span class="tok-b">echo</span> <span class="tok-s">"</span>$input<span class="tok-s">"</span> | jq -r <span class="tok-s">'.context_window.used_percentage // 0'</span> | cut -d. -f1<span class="tok-k">)</span>
+
+GREEN=<span class="tok-s">'\033[32m'</span>
+YELLOW=<span class="tok-s">'\033[33m'</span>
+RESET=<span class="tok-s">'\033[0m'</span>
+
+CACHE_FILE=<span class="tok-s">"/tmp/statusline-git-cache-</span>$SESSION_ID<span class="tok-s">"</span>
+CACHE_MAX_AGE=<span class="tok-n">5</span>
+
+cache_is_stale() {
+  [ ! -f <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span> ] || <span class="tok-s">\
+</span>  [ <span class="tok-k">$(($(</span>date +%s<span class="tok-k">)</span> - <span class="tok-k">$(</span>stat -c %Y <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span> <span class="tok-n">2</span>&gt;/dev/null || stat -f %m <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span> <span class="tok-n">2</span>&gt;/dev/null || <span class="tok-b">echo</span> <span class="tok-n">0</span><span class="tok-k">)))</span> -gt $CACHE_MAX_AGE ]
+}
+
+<span class="tok-k">if</span> cache_is_stale; <span class="tok-k">then</span>
+  <span class="tok-k">if</span> git rev-parse --git-dir &gt; /dev/null <span class="tok-n">2</span>&gt;&amp;<span class="tok-n">1</span>; <span class="tok-k">then</span>
+    BRANCH=<span class="tok-k">$(</span>git branch --show-current <span class="tok-n">2</span>&gt;/dev/null<span class="tok-k">)</span>
+    STAGED=<span class="tok-k">$(</span>git diff --cached --numstat <span class="tok-n">2</span>&gt;/dev/null | wc -l | tr -d <span class="tok-s">' '</span><span class="tok-k">)</span>
+    MODIFIED=<span class="tok-k">$(</span>git diff --numstat <span class="tok-n">2</span>&gt;/dev/null | wc -l | tr -d <span class="tok-s">' '</span><span class="tok-k">)</span>
+    <span class="tok-b">echo</span> <span class="tok-s">"</span>$BRANCH<span class="tok-s">|</span>$STAGED<span class="tok-s">|</span>$MODIFIED<span class="tok-s">"</span> &gt; <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span>
+  <span class="tok-k">else</span>
+    <span class="tok-b">echo</span> <span class="tok-s">"||"</span> &gt; <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span>
+  <span class="tok-k">fi</span>
+<span class="tok-k">fi</span>
+
+IFS=<span class="tok-s">'|'</span> <span class="tok-b">read</span> -r BRANCH STAGED MODIFIED &lt; <span class="tok-s">"</span>$CACHE_FILE<span class="tok-s">"</span>
+
+<span class="tok-k">if</span> [ -n <span class="tok-s">"</span>$BRANCH<span class="tok-s">"</span> ]; <span class="tok-k">then</span>
+  GIT_STATUS=<span class="tok-s">""</span>
+  [ <span class="tok-s">"</span>$STAGED<span class="tok-s">"</span> -gt <span class="tok-n">0</span> ] &amp;&amp; GIT_STATUS=<span class="tok-s">"${</span>GREEN<span class="tok-s">}+${</span>STAGED<span class="tok-s">}${</span>RESET<span class="tok-s">}"</span>
+  [ <span class="tok-s">"</span>$MODIFIED<span class="tok-s">"</span> -gt <span class="tok-n">0</span> ] &amp;&amp; GIT_STATUS=<span class="tok-s">"${</span>GIT_STATUS<span class="tok-s">}${</span>YELLOW<span class="tok-s">}~${</span>MODIFIED<span class="tok-s">}${</span>RESET<span class="tok-s">}"</span>
+  <span class="tok-b">echo</span> -e <span class="tok-s">"[</span>$MODEL<span class="tok-s">] ${</span>DIR##*/<span class="tok-s">} | ${</span>PCT<span class="tok-s">}% | </span>$BRANCH<span class="tok-s"> </span>$GIT_STATUS<span class="tok-s">"</span>
+<span class="tok-k">else</span>
+  <span class="tok-b">echo</span> <span class="tok-s">"[</span>$MODEL<span class="tok-s">] ${</span>DIR##*/<span class="tok-s">} | ${</span>PCT<span class="tok-s">}%"</span>
+<span class="tok-k">fi</span></code></pre>
+<p><code>${DIR##*/}</code> extracts the folder name, and <code>cut -d. -f1</code> drops the decimal fraction. Save the script to <code>~/.claude/statusline.sh</code> and make it executable with <code>chmod +x</code>.</p>
+<pre><code class="language-bash"><span class="tok-b">echo</span> <span class="tok-s">'{"model":{"display_name":"Opus"},"workspace":{"current_dir":"/home/user/project"},"context_window":{"used_percentage":25},"session_id":"test-session-abc"}'</span> | ./statusline.sh</code></pre>
+<p>This outputs <code>[Opus] project | 25%</code>, plus the branch if <code>git rev-parse --git-dir</code> succeeds in the script's directory. Terminal width comes from <code>$COLUMNS</code> and <code>$LINES</code>. <code>tput cols</code> cannot inspect the terminal because stdout is captured.</p>
+<h2 id="colors-and-icons">Colors and icons</h2>
+<p>A common pattern colors the context percentage green under 70%, yellow from 70% through 89%, and red from 90% (<code>\033[31m</code>), with the model name in cyan (<code>\033[36m</code>). Each <code>echo</code> outputs a separate row, so two <code>echo</code> lines create a two-row status line. A 10-character bar can be built by padding with <code>printf -v</code> and replacing spaces with <code>▓</code> and <code>░</code>. These styles require a terminal with ANSI color support, and an emoji or Nerd Font icon renders only when an active font includes that glyph.</p>
+<p>To print a clickable link, format an OSC 8 escape sequence (<code>\e]8;;URL\a</code>, the text label, and <code>\e]8;;\a</code>) with <code>printf '%b'</code>. On macOS, open the link with Cmd-click. iTerm2, Kitty, and WezTerm support OSC 8 hyperlinks, while Terminal.app does not. Set <code>FORCE_HYPERLINK=1</code> if the label is not clickable. SSH and tmux may strip escape sequences. When not in fullscreen, MCP errors, automatic updates, and low-context warnings can truncate this row.</p>
+<h2 id="how-often-it-runs">How often it runs</h2>
+<p>The status line runs at session start, including when resuming, and whenever:</p>
+<ul>
+<li>A new assistant message arrives</li>
+<li><code>/compact</code> finishes</li>
+<li>The permission mode changes</li>
+<li>Vim mode toggles</li>
+<li><code>statusLine.command</code> changes</li>
+<li><code>refreshInterval</code> elapses, if set</li>
+<li>A rate-limit window in the last JSON reaches <code>resets_at</code></li>
+<li>A warm prompt cache in that JSON reaches <code>expires_at</code></li>
+</ul>
+<p>Script execution is debounced by 300ms, though updating <code>command</code> bypasses debounce. A newer update cancels any in-flight script. Edits to the script file take effect on the next trigger, whereas saving settings runs the command immediately. Displaying the row requires an exit code of 0 and output on stdout. Running <code>claude --debug</code> logs stderr on every run and records the first exit code. Idle periods, including a coordinator waiting on subagents, pause these trigger events, which is what <code>refreshInterval</code> is for.</p>
+<h2 id="icons-and-plan-usage-in-kaku">Icons and plan usage in Kaku</h2>
+<p>Kaku renders Nerd Font icons without requiring a patched font. It bundles Symbols Nerd Font Mono as a fallback after your primary font, so status lines printing branch or folder glyphs render in both the default JetBrains Mono and any font configured in <code>kaku.lua</code>.</p>
+<p>If plan usage is all you need on screen, <code>kaku ai</code> already displays it for Claude Code, Codex, Gemini CLI, Copilot CLI, and Kimi Code. Kaku modifies a tool's settings only when you edit them in that panel, and never installs a status line or hooks automatically.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-is-the-status-line-blank">Why is the status line blank?</h3>
+<p>Ensure the script is executable, prints to stdout, and exits with code 0. Before workspace trust is accepted, <code>claude --debug</code> logs <code>Status line command skipped: workspace trust not accepted</code>. A <code>statusLine</code> runs a shell command under the <a href="/blog/claude-code-hooks">hook</a> trust rule. Setting <code>disableAllHooks</code> to <code>true</code> outside managed settings permits only managed status lines, while <code>allowManagedHooksOnly</code> drops your custom command.</p>
+<h3 id="why-does-the-percentage-disagree-with-context">Why does the percentage disagree with /context?</h3>
+<p>The status line reflects data from the most recent API response, whereas <code>/context</code> includes estimates for messages added since that response. <code>used_percentage</code> excludes <code>output_tokens</code>.</p>
+<h3 id="does-the-status-line-cost-money">Does the status line cost money?</h3>
+<p>No. The script spends no API tokens. <code>cost.total_cost_usd</code> is a list-price estimate, reset to $0 by <code>/clear</code>. Before v2.1.211 that total carried over.</p>
+<h3 id="how-do-i-show-the-5-hour-and-7-day-limits">How do I show the 5-hour and 7-day limits?</h3>
+<p>claude.ai Pro and Max subscribers, as well as Claude apps gateways with a spend limit, receive <code>rate_limits</code> after the first API response. <code>five_hour.used_percentage</code> and <code>seven_day.used_percentage</code> range from 0 to 100, and <code>resets_at</code> is in Unix seconds. A missing window or one past <code>resets_at</code> is omitted from the JSON. Read the value with <code>jq -r '.rate_limits.five_hour.used_percentage // empty'</code>.</p>
+<h3 id="why-does-the-branch-sit-still-while-a-subagent-works">Why does the branch sit still while a subagent works?</h3>
+<p>Trigger events pause while the main session is idle, including when a coordinator waits on subagents. Set <code>refreshInterval</code> to at least <code>1</code>, keeping the <code>session_id</code> cache in place so git does not run on every tick.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-hooks"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Hooks: A Practical Guide with Examples</span><span class="blog-related-meta"><time datetime="2026-10-03">Oct 3, 2026</time> · 7 min read</span></a></li><li><a href="/blog/claude-code-skills"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Skills: How to Write and Use Them</span><span class="blog-related-meta"><time datetime="2026-10-06">Oct 6, 2026</time> · 7 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>用 git worktree 同时跑多个 Claude Code · Kaku 博客</title>
+  <meta name="description" content="用 git worktree 或 claude --worktree 给每个 Claude Code 会话一份独立的检出，配好环境，再把改动合回去并清理干净。">
+  <meta property="og:title" content="用 git worktree 同时跑多个 Claude Code · Kaku 博客">
+  <meta property="og:description" content="用 git worktree 或 claude --worktree 给每个 Claude Code 会话一份独立的检出，配好环境，再把改动合回去并清理干净。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-git-worktrees.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="用 git worktree 同时跑多个 Claude Code">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/claude-code-git-worktrees">
+  <meta property="article:published_time" content="2026-10-07">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-git-worktrees.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/claude-code-git-worktrees"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-git-worktrees">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-git-worktrees">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-git-worktrees">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/claude-code-git-worktrees.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "用 git worktree 同时跑多个 Claude Code",
+          "item": "https://kaku.fun/zh/blog/claude-code-git-worktrees"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/claude-code-git-worktrees#article",
+      "headline": "用 git worktree 同时跑多个 Claude Code",
+      "description": "用 git worktree 或 claude --worktree 给每个 Claude Code 会话一份独立的检出，配好环境，再把改动合回去并清理干净。",
+      "url": "https://kaku.fun/zh/blog/claude-code-git-worktrees",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/claude-code-git-worktrees",
+      "datePublished": "2026-10-07",
+      "dateModified": "2026-10-19",
+      "inLanguage": "zh-CN",
+      "articleSection": "Claude Code 与 Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-git-worktrees.webp",
+      "timeRequired": "PT6M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/claude-code-git-worktrees.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "两个 worktree 能检出同一个分支吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "git worktree add 会拒绝已经检出的分支，--force 可以强行检出，-b 和 claude --worktree 都是新建一条分支，不会再去占用已经检出的那条。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "新 worktree 里为什么没有 .env？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "检出里只有已跟踪的文件，写在 .gitignore 里的 .env 只有 .worktreeinclude 写了它才会复制过去，而且只对 Claude Code 用 git 建出来的工作树生效。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Failed to resolve base branch \"HEAD\" 是什么意思？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "仓库里还一次提交都没有，先在主工作树里提交一次，再跑 claude --worktree，这条报错记在常见工作流程里。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "删掉 worktree 会把分支也删掉吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude 自己的删除会把目录和分支一起删掉，git worktree remove 会留下分支，所以先从主工作树把分支合并进来，锁还留着的话，用 git worktree unlock 解开。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "isolation 会拦住写进主工作树的每一次写入吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主工作树上的 Edit、Write 和 NotebookEdit 会被拦住，在那里跑的 shell 命令，以及把 git 指过去的命令也会被拦住，cp 进主工作树不在这些检查里。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/claude-code-git-worktrees" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/claude-code-git-worktrees" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>用 git worktree 同时跑多个 Claude Code</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-10-07">2026年10月7日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 6 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-git-worktrees.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p><code>git worktree add ../repo-feature -b feature</code> 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 <code>claude --worktree feature-auth</code>，目录在 <code>.claude/worktrees/feature-auth/</code>，分支名叫 <code>worktree-feature-auth</code>。这篇讲两个会话为什么不能共用一棵工作树，<code>git worktree</code> 怎么添加、列出和删除，<code>--worktree</code> 怎么建、退出时怎么清理，以及一个标签放一棵工作树。文中的 flag 和清理行为是 2026 年 10 月对着 <a href="https://git-scm.com/docs/git-worktree/zh_HANS-CN" target="_blank" rel="noopener noreferrer">git worktree 手册</a>、Claude Code 的<a href="https://code.claude.com/docs/zh-CN/common-workflows" target="_blank" rel="noopener noreferrer">常见工作流程</a>和 <a href="https://code.claude.com/docs/zh-CN/worktrees" target="_blank" rel="noopener noreferrer">worktrees</a> 页核对过的。</p>
+<h2 id="为什么两个-agent-不能共用一个检出目录">为什么两个 agent 不能共用一个检出目录</h2>
+<p>一个仓库只有一棵主工作树，两个 <code>claude</code> 进程从这里启动的话，工作树、index 和文件全是同一份，每次写入都落在同一个地方。</p>
+<p><code>git worktree add</code> 会拒绝别的工作树已经检出的分支，除非加上 <code>--force</code>，所以每个会话都要有自己的分支和目录。Claude Code 用 worktree 把文件隔开，subagent 是在同一次会话里把活拆开，多个 Claude 会话要一起配合，文档里用的是 agent teams。</p>
+<h2 id="添加列出和删除-worktree">添加、列出和删除 worktree</h2>
+<p><a href="https://git-scm.com/docs/git-worktree/zh_HANS-CN" target="_blank" rel="noopener noreferrer"><code>git worktree</code></a> 给同一个仓库再挂上一棵工作树，<code>-b</code> 会新建分支，你没写提交的时候，起点就是 <code>HEAD</code>。</p>
+<pre><code class="language-bash">git worktree add ../repo-feature -b feature
+git worktree add ../repo-bugfix fix-issue-456
+git worktree list</code></pre>
+<p>第二种写法检出的是已经存在的分支，<code>list</code> 先打印主工作树，再打印每一棵链接工作树，每行后面带着它的提交和分支。</p>
+<p>链接工作树有自己的 <code>HEAD</code> 和 index，<code>refs/</code> 下面的引用是共享的，<code>refs/bisect</code>、<code>refs/worktree</code> 和 <code>refs/rewritten</code> 除外，仓库配置也共享，这棵树里的 <code>.git</code> 是一个文件，管理数据放在主仓库的 <code>$GIT_DIR/worktrees</code> 下面。</p>
+<pre><code class="language-bash">git worktree remove ../repo-feature</code></pre>
+<p><code>remove</code> 不会动主工作树，链接工作树里有未跟踪文件，或者已跟踪文件被改过，它也会拒绝，不干净的工作树要加 <code>--force</code>，带子模块的也一样，锁定的工作树得把 <code>--force</code> 加两次。目录如果是你亲手删的，管理文件会留到 <code>git worktree prune</code>，或者留到 <code>gc.worktreePruneExpire</code>。Git 手册里说，同一仓库多份检出这个功能还算试验性的，子模块的支持也不完整。</p>
+<h2 id="让-claude-code-自己建-worktree">让 Claude Code 自己建 worktree</h2>
+<p>在仓库目录里，<code>--worktree</code> 和 <code>-w</code> 是同一个 flag，第二个终端得换一个名字，名字空着的时候 Claude 会自己起一个，比如 <code>bright-running-fox</code>，<code>.claude/worktrees/</code> 要你自己加进 <code>.gitignore</code>。</p>
+<pre><code class="language-bash">claude --worktree feature-auth</code></pre>
+<p>仓库里得先有一次提交，不然会报 <code>Failed to resolve base branch "HEAD": git rev-parse failed</code>。某个目录第一次跑交互式 <code>claude</code>，还得先接受工作区信任，否则 <code>--worktree</code> 会报错退出，<code>claude -p --worktree</code> 会跳过这次检查，退出时留下那棵工作树，以及它加上的 <code>git worktree lock</code>。</p>
+<p><code>worktree.baseRef</code> 默认是 <code>"fresh"</code>，新建的工作树从远端默认分支分出来，一般是 <code>main</code>，距离上次 fetch 超过 24 小时的话，Claude Code 会再 fetch 这个分支，最多等 5 秒。设成 <code>"head"</code> 就从当前本地 <code>HEAD</code> 开始，还没 push 的提交也会带上，这个设置不能写成某个分支名，已有的分支得先用 git 把工作树建好，<code>cd</code> 进去再跑 <code>claude</code>。</p>
+<pre><code class="language-json">{
+  "worktree": {
+    "baseRef": <span class="tok-s">"head"</span>
+  }
+}</code></pre>
+<p><code>claude --worktree "#1234"</code> 会从 <code>origin</code> 把这个 pull request 取到 <code>.claude/worktrees/pr-&lt;number&gt;/</code>，<code>#</code> 要加引号，这个名字的目录已经在的话，会重新打开那棵工作树。在 <code>"fresh"</code> 下，一棵工作树如果还停在 Claude 建的那条分支上、也是干净的，并且自己一次提交都没有，或者对应的 pull request 已经合并、远端分支也删了，重新打开时会被重置到默认分支。</p>
+<p>让 Claude 到某棵工作树里干活时会调用 <code>EnterWorktree</code>，subagent 要单独一棵的话，在 <code>.claude/agents/</code> 里写 <code>isolation: worktree</code>，干净做完会删掉，还留着改动的会留到 <code>cleanupPeriodDays</code> 那次清理，只有确认不会丢掉这些改动才会删。</p>
+<p>退出时 Claude 会看有没有改动、未跟踪文件、子模块里还没提交的内容，以及新提交，没有会话名而且工作树是干净的，目录和分支就一起删掉，会话有名字就会先问。工作树里还有要留的内容，目录和分支都保留，Claude 会打印 <code>claude --worktree &lt;name&gt; --resume</code>，选择删除就把目录、分支和这些内容一起去掉。状态如果核对不了，就改成询问，不会直接删。</p>
+<p><code>git worktree remove</code> 遇到锁定的工作树会拒绝，得先 <code>git worktree unlock</code>。在 worktree 会话里，Claude 改主工作树里的文件会被拦住，在主工作树里跑的 shell 命令，以及把 git 指到那边的命令也会被拦住，包括 <code>git -C</code>、<code>--git-dir</code>、<code>GIT_DIR</code>、<code>GIT_WORK_TREE</code> 和 <code>cd</code>，<code>cp</code> 进主工作树不在这些检查里。在 <a href="/zh/blog/claude-code-hooks">hooks</a> 里，<code>${CLAUDE_PROJECT_DIR}</code> 一直是启动时的项目根，hook 的 <code>cwd</code> 才是这棵工作树。</p>
+<h2 id="每一份检出要单独配">每一份检出要单独配</h2>
+<p>新目录里检出的是已跟踪文件，依赖在这个目录里装，也可以让 Claude 装，写在 <code>.gitignore</code> 里的 <code>.env</code> 不会跟着进这份检出。</p>
+<p>项目根上的 <code>.worktreeinclude</code> 会把 gitignore 掉的文件复制进 Claude 用 git 建出来的工作树，语法和 <code>.gitignore</code> 一样，已经跟踪的文件永远不会复制。</p>
+<pre><code class="language-text">.env
+.env.local
+config/secrets.json</code></pre>
+<p><code>--worktree</code>、subagent 的工作树和桌面 App 都会照这个文件复制，<code>WorktreeCreate</code> hook 会跳过这次复制，用 SVN、Perforce 或 Mercurial 代替 git 建工作树时也会跳过，<code>.env</code> 就得由这个 hook 自己复制。<code>git lfs install --local</code> 之后，还要在工作树里跑 <code>git lfs pull</code>，Claude Code 不会跑仓库本地的这个 filter。</p>
+<h2 id="先合并分支再删掉-worktree">先合并分支，再删掉 worktree</h2>
+<p><code>git worktree list</code> 能看到 <code>worktree-feature-auth</code>，或者你用 <code>-b</code> 传进去的那个分支，提交在这棵工作树里做完，再回到主工作树把这个分支合并进来，而且得赶在 Claude 的清理把分支删掉之前。<code>git worktree remove</code> 只删工作树，共享的分支还留在仓库里，Claude 自己的删除会连目录带分支一起删掉。</p>
+<pre><code class="language-bash">git worktree remove ../repo-feature
+git worktree remove .claude/worktrees/feature-auth</code></pre>
+<p>有未提交的改动或者未跟踪文件时加上 <code>--force</code>，git 因为锁定而拒绝的话，先对那个路径跑 <code>git worktree unlock</code> 再删，目录如果是你亲手删的，<code>git worktree prune</code> 会清掉 <code>$GIT_DIR/worktrees</code> 下面那条过期记录。</p>
+<p>想回到留下来的那棵工作树：</p>
+<pre><code class="language-bash">claude --worktree feature-auth --resume</code></pre>
+<h2 id="一个-worktree-一个标签">一个 worktree 一个标签</h2>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-git-worktrees-mobile.webp" width="340" height="509"><img src="/img/blog/claude-code-git-worktrees.webp" width="385" height="352" loading="lazy" alt="同一个仓库的三个 worktree 文件夹，各在自己的分支上，各开在一个跑着 agent 的 Kaku 标签里"></picture><figcaption>三个文件夹共用同一个 .git 目录，所以在一个标签里提交的改动，另外两个标签里也看得到。</figcaption></figure>
+
+<p><a href="/zh/docs/keybindings">新建标签</a> 是 <code>Cmd + T</code>，新标签和分屏会继承当前目录，<code>config.tab_inherit_working_directory</code> 和 <code>config.split_pane_inherit_working_directory</code> 默认都是 true，所以可以 <code>cd ../repo-feature</code>，也可以直接在仓库里跑 <code>claude --worktree</code>。<code>Cmd + Shift + I</code> 或者双击能改标签名，手动改过的名字会留着，<code>config.tab_title_use_pane_title</code> 让标签显示 Claude Code 的标题时也不会被换掉，自动标题显示的是目录，<code>Cmd + Shift + O</code> 打开 Tab Navigator。</p>
+<p><code>Cmd + D</code> 左右分屏，<code>Cmd + Shift + D</code> 上下分屏，<code>Cmd + Shift + Enter</code> 放大当前窗格，窗格或标签前面正跑着 Claude Code 时，关掉之前会先问，内置的 <code>tab_close_confirmation</code> 和 <code>pane_close_confirmation</code> 都是 <code>SmartPrompt</code>，一个标签里有好几个窗格时，<code>Cmd + W</code> 关的是当前窗格。</p>
+<p><a href="/zh/docs/cli"><code>kaku start --new-tab</code></a> 往当前窗口加一个标签，<code>kaku cli split-pane</code> 拆开当前窗格，还可以在新窗格里跑一条命令：</p>
+<pre><code class="language-bash">kaku cli split-pane -- bash -c <span class="tok-s">"claude --worktree feature-auth"</span></code></pre>
+<p><code>config.restore_previous_session</code> 默认是 true，下次打开会把标签和窗格带回来，窗口、标签或窗格一打开或关掉，一分钟内会把布局存下来，崩溃或者强制退出也在这个范围里。跑着 Claude Code 的窗格回来时还留着最后一屏，能看出对话停在哪里。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，Claude Code 在等你、做完了或者失败了，后台标签上都会出现一个点，更早的版本把<a href="/zh/blog/claude-code-notifications">通知渠道</a>设成 <code>ghostty</code>，等你和做完这两种状态也会点亮同一个点。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="两个-worktree-能检出同一个分支吗">两个 worktree 能检出同一个分支吗？</h3>
+<p><code>git worktree add</code> 会拒绝已经检出的分支，<code>--force</code> 可以强行检出，<code>-b</code> 和 <code>claude --worktree</code> 都是新建一条分支，不会再去占用已经检出的那条。</p>
+<h3 id="新-worktree-里为什么没有-env">新 worktree 里为什么没有 <code>.env</code>？</h3>
+<p>检出里只有已跟踪的文件，写在 <code>.gitignore</code> 里的 <code>.env</code> 只有 <code>.worktreeinclude</code> 写了它才会复制过去，而且只对 Claude Code 用 git 建出来的工作树生效。</p>
+<h3 id="failed-to-resolve-base-branch-head-是什么意思">Failed to resolve base branch "HEAD" 是什么意思？</h3>
+<p>仓库里还一次提交都没有，先在主工作树里提交一次，再跑 <code>claude --worktree</code>，这条报错记在<a href="https://code.claude.com/docs/zh-CN/common-workflows" target="_blank" rel="noopener noreferrer">常见工作流程</a>里。</p>
+<h3 id="删掉-worktree-会把分支也删掉吗">删掉 worktree 会把分支也删掉吗？</h3>
+<p>Claude 自己的删除会把目录和分支一起删掉，<code>git worktree remove</code> 会留下分支，所以先从主工作树把分支合并进来，锁还留着的话，用 <code>git worktree unlock</code> 解开。</p>
+<h3 id="isolation-会拦住写进主工作树的每一次写入吗">isolation 会拦住写进主工作树的每一次写入吗？</h3>
+<p>主工作树上的 <code>Edit</code>、<code>Write</code> 和 <code>NotebookEdit</code> 会被拦住，在那里跑的 shell 命令，以及把 git 指过去的命令也会被拦住，<code>cp</code> 进主工作树不在这些检查里。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 4 分钟</span></a></li><li><a href="/zh/blog/claude-code-skills"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Claude Code skills 怎么写、怎么用</span><span class="blog-related-meta"><time datetime="2026-10-06">2026年10月6日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/codex-vs-claude-code"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Codex CLI 和 Claude Code 对比</span><span class="blog-related-meta"><time datetime="2026-10-09">2026年10月9日</time> · 约 5 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

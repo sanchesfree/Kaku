@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>SSH Config on Mac: Hosts, Keys and the Keychain · Kaku Blog</title>
+  <meta name="description" content="Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh.">
+  <meta property="og:title" content="SSH Config on Mac: Hosts, Keys and the Keychain · Kaku Blog">
+  <meta property="og:description" content="Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/ssh-config-mac.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="SSH Config on Mac: Hosts, Keys and the Keychain">
+  <meta property="og:url" content="https://kaku.fun/blog/ssh-config-mac">
+  <meta property="article:published_time" content="2026-10-18">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/ssh-config-mac.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/ssh-config-mac"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/ssh-config-mac">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/ssh-config-mac">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/ssh-config-mac">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/ssh-config-mac.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SSH Config on Mac: Hosts, Keys and the Keychain",
+          "item": "https://kaku.fun/blog/ssh-config-mac"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/ssh-config-mac#article",
+      "headline": "SSH Config on Mac: Hosts, Keys and the Keychain",
+      "description": "Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh.",
+      "url": "https://kaku.fun/blog/ssh-config-mac",
+      "mainEntityOfPage": "https://kaku.fun/blog/ssh-config-mac",
+      "datePublished": "2026-10-18",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Shell and tools",
+      "image": "https://kaku.fun/img/blog/cards/ssh-config-mac.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/ssh-config-mac.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do scp, sftp and git use this file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "scp copies over ssh and passes -F through. sftp takes the same -F. git fetch and git push run ssh unless core.sshCommand or GIT_SSH_COMMAND replaces it, so a Host github.com block applies to git@github.com."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if ssh -V is not Apple's OpenSSH?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Leave UseKeychain out, or put IgnoreUnknown UseKeychain above it. AddKeysToAgent is valid upstream. ssh-add --apple-use-keychain is Apple's ssh-add, next to APPLE_SSH_ADD_BEHAVIOR in its manual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do included files sit in the match order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Include config.d/* expands in lexical order from ~/.ssh, at that line. A Host block in an included file takes the Include line's place, so a Host * above it has already kept any keyword it set."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/ssh-config-mac" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/ssh-config-mac" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>SSH Config on Mac: Hosts, Keys and the Keychain</h1><p class="blog-meta"><span><a href="/blog#topic-shell">Shell and tools</a></span><span>Published <time datetime="2026-10-18">Oct 18, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/ssh-config-mac.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p><code>~/.ssh/config</code> is the per-user file <code>/usr/bin/ssh</code> reads for host aliases, users, ports, keys and jump hosts. Put each specific <code>Host</code> block above a final <code>Host *</code> block, because ssh keeps the first value it finds for a keyword, then check with <code>ssh -G</code> before connecting. Apple's OpenSSH adds <code>UseKeychain</code>, which the OpenBSD manual and OpenSSH 10.0's keyword list omit, so that line belongs with <code>/usr/bin/ssh</code>.</p>
+<h2 id="a-config-you-can-check">A config you can check</h2>
+<p>ssh reads command-line options, then <code>~/.ssh/config</code>, then <code>/etc/ssh/ssh_config</code>. Keywords are case-insensitive and arguments are case-sensitive. A <code>#</code> line is a comment.</p>
+<p>The manual recommends that <code>~/.ssh</code> be readable, writable and executable by you and not accessible by others, and that the config be read/write for you and not writable by others. ssh ignores a private key others can read. The control socket needs a directory others cannot write:</p>
+<pre><code class="language-bash">mkdir -p ~/.ssh/sockets
+chmod <span class="tok-n">700</span> ~/.ssh ~/.ssh/sockets
+chmod <span class="tok-n">600</span> ~/.ssh/config ~/.ssh/id_ed25519</code></pre>
+<p><code>Include</code> with a relative path loads from <code>~/.ssh</code> at the line where it sits, so files in <code>~/.ssh/config.d/</code> are read before the blocks below. Specific aliases come next. <code>Host *</code> is last and only fills keywords those blocks left unset.</p>
+<pre><code>Include config.d/*
+
+Host dev
+    HostName 10.0.0.8
+    User dev
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ProxyJump jump
+
+Host jump
+    HostName jump.example.com
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentitiesOnly yes
+    ServerAliveInterval 15
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%C
+    ControlPersist 10m
+</code></pre>
+<p><code>Host</code> is the name you type. <code>HostName</code> is the address ssh connects to, defaulting to that typed name. <code>User</code> is the remote account. <code>Port</code> defaults to 22. <code>ControlPersist</code> uses the <code>sshd_config</code> time format, where <code>10m</code> is ten minutes.</p>
+<p><code>ssh -G</code> prints the configuration after Host and Match blocks and exits without connecting. It prints the keywords in lowercase:</p>
+<pre><code class="language-bash">ssh -G dev | grep -E <span class="tok-s">'^(hostname|user|port|identityfile|identitiesonly|proxyjump|controlmaster|controlpersist|serveraliveinterval|addkeystoagent) '</span></code></pre>
+<p>You want <code>hostname 10.0.0.8</code>, <code>user dev</code>, <code>port 2222</code>, <code>proxyjump jump</code>, and a single <code>identityfile</code> for <code>~/.ssh/id_ed25519</code>. <code>hostname dev</code> means the block did not match.</p>
+<h2 id="how-host-blocks-are-chosen">How Host blocks are chosen</h2>
+<p>ssh walks those three sources from top to bottom and keeps the first value for each keyword. A <code>Host *</code> at the top sets <code>User</code> for every connection, and a later <code>User</code> line never replaces it. That is the reason for specific blocks first.</p>
+<p><code>Host</code> matches the command-line name. <code>*</code> matches any run of characters, <code>?</code> matches one, and a leading exclamation mark excludes a host. <code>Host dev jump</code> matches either name. The pattern sees the typed name. It sees <code>HostName</code> only when <code>CanonicalizeHostname</code> is on, which re-reads the file. The default is <code>no</code>.</p>
+<p><code>IdentityFile</code> appends. OpenSSH 10.0 adds the default paths, including <code>~/.ssh/id_ed25519</code>, only when that list is empty, so one <code>IdentityFile</code> on <code>Host dev</code> is the whole list for <code>dev</code>. Another on <code>Host *</code> is added for every host, which is why the global block in the sample has none. <code>IdentitiesOnly yes</code> offers the configured files and skips other agent keys. With no <code>IdentityFile</code>, those configured files are the defaults.</p>
+<h2 id="keys-and-the-macos-keychain">Keys and the macOS keychain</h2>
+<p><code>IdentityFile</code> accepts a private key, or a public key path when the agent already holds the matching private key.</p>
+<p>On Apple's ssh, <code>UseKeychain</code> defaults to <code>no</code>. <code>yes</code> makes macOS search the keychain for the passphrase and store a correct one you type. <code>AddKeysToAgent</code> defaults to <code>no</code>. <code>yes</code> adds a key loaded from a file to a running agent, as <code>ssh-add</code> would, so the next connection finds it there.</p>
+<p>Store the passphrase without opening a session:</p>
+<pre><code class="language-bash">ssh-add --apple-use-keychain ~/.ssh/id_ed25519</code></pre>
+<p><code>--apple-load-keychain</code> uses a passphrase already stored. <code>-K</code> and <code>-A</code> still do this unless <code>APPLE_SSH_ADD_BEHAVIOR</code> is <code>openssh</code>. The manual says a future macOS will require that variable for those short flags, and it warns unless the variable is <code>macos</code>.</p>
+<p><code>UseKeychain</code> is in Apple's <code>ssh_config</code> and absent from the <a href="https://man.openbsd.org/ssh_config" target="_blank" rel="noopener noreferrer">OpenBSD manual</a> and from OpenSSH 10.0's keyword table. On macOS 27.0, <code>/usr/bin/ssh -V</code> reports <code>OpenSSH_10.3p1</code> with LibreSSL. Another <code>ssh</code> earlier on <code>PATH</code> can reject the keyword. <code>IgnoreUnknown</code> skips unknown options only when it appears before them:</p>
+<pre><code>IgnoreUnknown UseKeychain
+</code></pre>
+<h2 id="jump-hosts-and-connections-that-stay-open">Jump hosts and connections that stay open</h2>
+<p><code>ProxyJump jump</code> connects to that alias first, then forwards TCP to the destination. Commas separate extra hops. <code>none</code> disables it. <code>ProxyJump</code> and <code>ProxyCommand</code> compete, and the one obtained first blocks the other. Destination settings are not applied to the jump host, so <code>jump</code> has its own block for the user and the key. <code>ssh -J jump dev</code> is the command-line form, and those options apply to <code>dev</code>, not to the jump.</p>
+<p><code>ControlMaster auto</code> reuses a master when the socket exists, and opens a new connection otherwise. <code>ControlPath ~/.ssh/sockets/%C</code> keeps that socket in a directory others cannot write. <code>%C</code> hashes local host, remote host, port, user and <code>ProxyJump</code>. The manual recommends <code>%h</code>, <code>%p</code> and <code>%r</code>, or <code>%C</code>, so two destinations do not share a socket.</p>
+<p><code>ControlPersist 10m</code> leaves the master up after the first session closes and exits it after ten idle minutes. The default <code>no</code> closes it with that session. <code>yes</code> or <code>0</code> keeps it until it is killed or told to exit:</p>
+<pre><code class="language-bash">ssh -O check dev
+ssh -O <span class="tok-b">exit</span> dev</code></pre>
+<p><code>ServerAliveInterval 15</code> sends a keepalive through the encrypted channel after 15 seconds without data from the server. The default <code>0</code> sends none. <code>ServerAliveCountMax</code> defaults to 3, so this interval disconnects after about 45 seconds of silence. The manual says <code>TCPKeepAlive</code> can be spoofed because it sits outside that channel. A later <code>ssh</code>, <code>scp</code> or <code>sftp</code> can reuse the master, using the master's agent forwarding.</p>
+<h2 id="when-the-connection-still-fails">When the connection still fails</h2>
+<p>If ssh asks for a password, others may be able to read the private key, so ssh skipped it. <code>ssh-add</code> skips that file too, and <code>chmod 600</code> on the key is the fix. A config someone else owns, or one with group or world write, makes OpenSSH 10.0 exit with <code>Bad owner or permissions on</code> and the path.</p>
+<p>If the server drops the connection before the right key, the agent offered other identities first. <code>ssh -G</code> should then show <code>identitiesonly yes</code> and one <code>identityfile</code> line. If <code>ssh -O check</code> cannot reach a master, create <code>~/.ssh/sockets</code>, connect once, and check again. <code>ssh -O exit dev</code> clears a stuck master.</p>
+<h2 id="what-kaku-changes">What Kaku changes</h2>
+<p><code>ssh dev</code> in a <a href="/docs/features">Kaku</a> tab runs the <code>ssh</code> on your <code>PATH</code>, which reads this file. The tab title is an ssh glyph plus the host token from the command. <code>user@</code> is stripped, and so is a single trailing <code>:port</code> when the port is all digits, so <code>HostName 10.0.0.8</code> still leaves <code>dev</code> in the title. Kaku recognizes <code>ssh</code>, <code>mosh</code>, <code>autossh</code> and <code>et</code>.</p>
+<p><code>kaku init</code> wraps <code>ssh</code> in zsh and fish. With <code>TERM=kaku</code> the wrapper uses <code>TERM=xterm-256color</code>, since the remote host usually has no <code>kaku</code> terminfo entry. <code>KAKU_SSH_SKIP_TERM_FIX=1</code> turns that off. If <code>SSH_AUTH_SOCK</code> contains <code>1password</code> or <code>2BUA8C4S2C</code>, it adds <code>-o IdentitiesOnly=yes</code> unless you already passed <code>IdentitiesOnly</code> or set <code>KAKU_SSH_SKIP_1PASSWORD_FIX=1</code>. The zsh setup says this avoids too many authentication failures when 1Password offers every stored key. An existing <code>ssh</code> function is kept. A zsh alias becomes a function that still runs the alias command. <code>command ssh -G dev</code> skips the function.</p>
+<p><code>Cmd + Shift + R</code> mounts that session with sshfs at <code>~/Library/Caches/dev.kaku/sshfs/&lt;host&gt;</code> and opens yazi. It needs the <code>sshfs-mac</code> cask, macFUSE and the key login from <code>IdentityFile</code>. See the <a href="/blog/yazi-file-manager">Yazi setup</a>. A job that should survive a dropped link still belongs in tmux on the server, covered in <a href="/blog/tmux-alternative-mac">tmux on a Mac</a>. fzf completes <code>ssh **</code> then Tab with hosts from this file, <code>~/.ssh/known_hosts</code> and <code>/etc/hosts</code>, as in <a href="/blog/fzf-zsh-mac">fzf with zsh</a>.</p>
+<p>With <code>ssh_domains</code> unset, each literal host name in <code>~/.ssh/config</code> and <code>/etc/ssh/ssh_config</code> also becomes a domain (patterns such as <code>Host *</code> do not): <code>SSH:host</code> with multiplexing off, and <code>SSHMUX:host</code> with Kaku's multiplexer. <code>Cmd + Shift + P</code> lists <code>Attach Domain</code> plus the name until it attaches, then <code>New Tab (Domain ...)</code>. <code>SSH:host</code> uses libssh by default and reads those files. That client does not support <code>ProxyJump</code> directly and expands <code>%j</code> to an empty string. A <code>ProxyCommand</code> still runs. <code>SSHMUX:host</code> runs <code>wezterm cli --prefer-mux proxy</code> remotely unless <code>remote_wezterm_path</code> or <code>override_proxy_command</code> is set, so that machine needs a <code>wezterm</code> binary.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="do-scp-sftp-and-git-use-this-file">Do scp, sftp and git use this file?</h3>
+<p><code>scp</code> copies over ssh and passes <code>-F</code> through. <code>sftp</code> takes the same <code>-F</code>. <code>git fetch</code> and <code>git push</code> run <code>ssh</code> unless <code>core.sshCommand</code> or <code>GIT_SSH_COMMAND</code> replaces it, so a <code>Host github.com</code> block applies to <code>git@github.com</code>.</p>
+<h3 id="what-if-ssh-v-is-not-apples-openssh">What if <code>ssh -V</code> is not Apple's OpenSSH?</h3>
+<p>Leave <code>UseKeychain</code> out, or put <code>IgnoreUnknown UseKeychain</code> above it. <code>AddKeysToAgent</code> is valid upstream. <code>ssh-add --apple-use-keychain</code> is Apple's <code>ssh-add</code>, next to <code>APPLE_SSH_ADD_BEHAVIOR</code> in its manual.</p>
+<h3 id="where-do-included-files-sit-in-the-match-order">Where do included files sit in the match order?</h3>
+<p><code>Include config.d/*</code> expands in lexical order from <code>~/.ssh</code>, at that line. A <code>Host</code> block in an included file takes the <code>Include</code> line's place, so a <code>Host *</code> above it has already kept any keyword it set.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/zsh-without-oh-my-zsh"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">A Fast Zsh Setup Without Oh My Zsh</span><span class="blog-related-meta"><time datetime="2026-09-27">Sep 27, 2026</time> · 4 min read</span></a></li><li><a href="/blog/yazi-file-manager"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Yazi on Mac: A Fast Terminal File Manager Setup</span><span class="blog-related-meta"><time datetime="2026-10-15">Oct 15, 2026</time> · 8 min read</span></a></li><li><a href="/blog/fzf-zsh-mac"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Set Up fzf with Zsh on Mac: History, Files and Directories</span><span class="blog-related-meta"><time datetime="2026-10-14">Oct 14, 2026</time> · 6 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

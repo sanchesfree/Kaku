@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Nerd Fonts on Mac: Install Them or Use a Symbols Fallback · Kaku Blog</title>
+  <meta name="description" content="Why prompts and TUIs show boxes instead of icons, how to install a patched Nerd Font with Homebrew, and when a symbols-only fallback is enough.">
+  <meta property="og:title" content="Nerd Fonts on Mac: Install Them or Use a Symbols Fallback · Kaku Blog">
+  <meta property="og:description" content="Why prompts and TUIs show boxes instead of icons, how to install a patched Nerd Font with Homebrew, and when a symbols-only fallback is enough.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Nerd Fonts on Mac: Install Them or Use a Symbols Fallback">
+  <meta property="og:url" content="https://kaku.fun/blog/nerd-fonts-mac">
+  <meta property="article:published_time" content="2026-10-08">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/nerd-fonts-mac"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/nerd-fonts-mac">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/nerd-fonts-mac">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/nerd-fonts-mac">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/nerd-fonts-mac.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nerd Fonts on Mac: Install Them or Use a Symbols Fallback",
+          "item": "https://kaku.fun/blog/nerd-fonts-mac"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/nerd-fonts-mac#article",
+      "headline": "Nerd Fonts on Mac: Install Them or Use a Symbols Fallback",
+      "description": "Why prompts and TUIs show boxes instead of icons, how to install a patched Nerd Font with Homebrew, and when a symbols-only fallback is enough.",
+      "url": "https://kaku.fun/blog/nerd-fonts-mac",
+      "mainEntityOfPage": "https://kaku.fun/blog/nerd-fonts-mac",
+      "datePublished": "2026-10-08",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Terminal",
+      "image": "https://kaku.fun/img/blog/cards/nerd-fonts-mac.webp",
+      "timeRequired": "PT6M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/nerd-fonts-mac.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does WezTerm keep icon glyphs after I set my own font?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. wezterm.font_with_fallback puts your faces first, and WezTerm appends its default fallback, which includes Nerd Font Symbols. wezterm ls-fonts prints the chain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do Nerd Font, Nerd Font Mono and Nerd Font Propo differ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only in icon width. The plain variant lets icons be double-width, Mono keeps each icon in one cell, and Propo uses proportional widths. In a terminal, Mono avoids overlapping text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I add a symbols fallback in Ghostty?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do not need one, because Ghostty has built-in Nerd Font symbols. To use a different symbols font, install it, run ghostty +list-fonts to get its name, and add it as a second font-family line after your main font."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a Nerd Font in Kaku?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kaku ships Symbols Nerd Font Mono as a fallback after your font, including a font you set yourself in kaku.lua."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I patch a font Nerd Fonts does not ship?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Install FontForge with brew install fontforge, download FontPatcher.zip from the latest release, and run fontforge -script font-patcher PATH_TO_FONT --complete. The new family is named after the original plus Nerd Font."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/nerd-fonts-mac" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/nerd-fonts-mac" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Nerd Fonts on Mac: Install Them or Use a Symbols Fallback</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-08">Oct 8, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>6 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/nerd-fonts-mac.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Icons in a prompt, a file listing or a status line only show up when the terminal has a font that contains them, and when it does not, you get empty boxes or question marks. There are two fixes: install a <a href="https://www.nerdfonts.com/" target="_blank" rel="noopener noreferrer">Nerd Font</a>, a programming font patched with thousands of icons, or keep your font and add the symbols-only Nerd Font as a fallback. Some terminals, WezTerm, Ghostty and Kaku among them, already ship that fallback, so there is nothing to install.</p>
+<h2 id="what-nerd-fonts-are">What Nerd Fonts are</h2>
+<p><a href="https://github.com/ryanoasis/nerd-fonts" target="_blank" rel="noopener noreferrer">Nerd Fonts</a> takes a programming font such as JetBrains Mono, Fira Code or Hack and adds glyphs from several icon fonts: Powerline symbols, Font Awesome, Material Design Icons, Devicons, Octicons, Codicons and a few more. Prompts like Starship, file managers like Yazi and lazygit, and many status lines use those code points for branch, folder and language icons.</p>
+<p>The project also publishes <code>SymbolsOnly</code> fonts that contain just the icons. They exist so you can keep the font you like and let the terminal fall back to the symbols for anything your font lacks.</p>
+<h2 id="when-a-glyph-is-missing">When a glyph is missing</h2>
+<p>A font draws only the characters it contains. When it lacks one, the terminal walks its fallback list and then the system fonts, the same way a Chinese character typed in a Latin font still appears. An icon in the Nerd Fonts private-use range is not in any system font, so with no Nerd Font anywhere in the chain, it renders as a box.</p>
+<p>In WezTerm, you can see which font supplied each character with <code>wezterm ls-fonts --text</code> followed by a short string, which is the quickest way to tell a missing font from a misconfigured one.</p>
+<h2 id="install-a-patched-font">Install a patched font</h2>
+<p>Every patched family is a Homebrew cask, and on a Mac, Homebrew finds it without the <code>--cask</code> flag:</p>
+<pre><code class="language-bash">brew install font-jetbrains-mono-nerd-font
+brew install font-hack-nerd-font</code></pre>
+<p>The patched family name is the original name with spaces removed, plus <code>Nerd Font</code>, so JetBrains Mono becomes <code>JetBrainsMono Nerd Font</code>. That is the name to put in your terminal's font setting; the upstream <code>JetBrains Mono</code> is a different family. If you would rather not use Homebrew, the <a href="https://github.com/ryanoasis/nerd-fonts/releases/latest" target="_blank" rel="noopener noreferrer">release page</a> has an archive per family, and you install the fonts by double-clicking each <code>.ttf</code>.</p>
+<h2 id="keep-your-font-and-add-a-symbols-fallback">Keep your font and add a symbols fallback</h2>
+<p>The symbols-only font is also a cask:</p>
+<pre><code class="language-bash">brew install font-symbols-only-nerd-font</code></pre>
+<p>How you add it depends on the terminal. <a href="https://wezterm.org/config/fonts.html" target="_blank" rel="noopener noreferrer">WezTerm</a> does not need it, because it bundles JetBrains Mono, Nerd Font Symbols and Noto Color Emoji and appends them after whatever list you set:</p>
+<pre><code class="language-lua">config.font = wezterm.font_with_fallback {
+  <span class="tok-s">'Fira Code'</span>,
+  <span class="tok-s">'DengXian'</span>,
+}</code></pre>
+<p><a href="https://ghostty.org/docs/config/reference" target="_blank" rel="noopener noreferrer">Ghostty</a> does not need it either, because it embeds JetBrains Mono and has built-in Nerd Font symbols. Fallback there uses repeated <code>font-family</code> lines: the first value is the main face and later values fill the code points it lacks, so if you want a different symbols font, it goes on its own line. <code>ghostty +list-fonts</code> prints the exact name to use, and an empty <code>font-family = ""</code> clears any families set earlier in the file. Since Ghostty 1.2.0, <code>adjust-icon-height</code> changes the maximum height of Nerd Font icons without touching Powerline and box-drawing glyphs.</p>
+<p>The Nerd Fonts README notes that scaling and placement of fallback symbols can be hit or miss, so if icons look slightly off next to your text, a patched font of the same family is the more consistent choice. A Mac WezTerm setup is covered in <a href="/blog/wezterm-config-for-mac">WezTerm on Mac</a>.</p>
+<h2 id="mono-propo-and-the-default-width">Mono, Propo and the default width</h2>
+<p>Each patched family comes in three icon widths, and the difference is the icons, not the letters:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Icon width</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Nerd Font</code></td>
+<td>Double-width where possible</td>
+<td>Your terminal lets icons overflow into the next cell</td>
+</tr>
+<tr>
+<td><code>Nerd Font Mono</code></td>
+<td>Single cell</td>
+<td>Icons overlap text or break column alignment</td>
+</tr>
+<tr>
+<td><code>Nerd Font Propo</code></td>
+<td>Proportional</td>
+<td>You use the font outside a terminal, in an editor UI</td>
+</tr>
+</tbody>
+</table>
+<p>In a terminal, Mono is the safe default: every icon stays in one cell, so tables and status lines keep their columns.</p>
+<h2 id="which-base-font">Which base font</h2>
+<p>Checked October 2026 against the Nerd Fonts README:</p>
+<table>
+<thead>
+<tr>
+<th>Patched family</th>
+<th>Upstream</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JetBrainsMono Nerd Font</td>
+<td>JetBrains Mono</td>
+<td>Same name pattern as upstream</td>
+</tr>
+<tr>
+<td>FiraCode Nerd Font</td>
+<td>Fira Code</td>
+<td>Ligatures included</td>
+</tr>
+<tr>
+<td>Hack Nerd Font</td>
+<td>Hack</td>
+<td>The README's own example</td>
+</tr>
+<tr>
+<td>Iosevka Nerd Font</td>
+<td>Iosevka</td>
+<td>Narrow, fits more columns</td>
+</tr>
+<tr>
+<td>CaskaydiaCove Nerd Font</td>
+<td>Cascadia Code</td>
+<td>Renamed because of a reserved font name</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://www.nerdfonts.com/cheat-sheet" target="_blank" rel="noopener noreferrer">cheat sheet</a> lets you search every icon and copy its code point.</p>
+<h2 id="fonts-in-kaku">Fonts in Kaku</h2>
+<p>Kaku needs no Nerd Font install. Its default font is JetBrains Mono with PingFang SC for Chinese, and it ships Symbols Nerd Font Mono and adds it as a fallback after whatever font you use, so Starship, lazygit, Yazi and status line icons render on first launch.</p>
+<p>That fallback stays in place when you change the font in <code>~/.config/kaku/kaku.lua</code>, so you can pick any face and still keep the icons:</p>
+<pre><code class="language-lua">config.font = wezterm.<span class="tok-f">font</span>(<span class="tok-s">"Fira Code"</span>)</code></pre>
+<p>Kaku's theme-aware font weights only apply to the default JetBrains Mono stack, so once you set your own font, Kaku stops adjusting its weight. The shell side of the setup, Starship included, is in <a href="/blog/zsh-without-oh-my-zsh">zsh without Oh My Zsh</a>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="does-wezterm-keep-icon-glyphs-after-i-set-my-own-font">Does WezTerm keep icon glyphs after I set my own font?</h3>
+<p>Yes. <code>wezterm.font_with_fallback</code> puts your faces first, and WezTerm appends its default fallback, which includes Nerd Font Symbols. <code>wezterm ls-fonts</code> prints the chain.</p>
+<h3 id="how-do-nerd-font-nerd-font-mono-and-nerd-font-propo-differ">How do Nerd Font, Nerd Font Mono and Nerd Font Propo differ?</h3>
+<p>Only in icon width. The plain variant lets icons be double-width, Mono keeps each icon in one cell, and Propo uses proportional widths. In a terminal, Mono avoids overlapping text.</p>
+<h3 id="how-do-i-add-a-symbols-fallback-in-ghostty">How do I add a symbols fallback in Ghostty?</h3>
+<p>You do not need one, because Ghostty has built-in Nerd Font symbols. To use a different symbols font, install it, run <code>ghostty +list-fonts</code> to get its name, and add it as a second <code>font-family</code> line after your main font.</p>
+<h3 id="do-i-need-a-nerd-font-in-kaku">Do I need a Nerd Font in Kaku?</h3>
+<p>No. Kaku ships Symbols Nerd Font Mono as a fallback after your font, including a font you set yourself in <code>kaku.lua</code>.</p>
+<h3 id="can-i-patch-a-font-nerd-fonts-does-not-ship">Can I patch a font Nerd Fonts does not ship?</h3>
+<p>Yes. Install FontForge with <code>brew install fontforge</code>, download <code>FontPatcher.zip</code> from the latest release, and run <code>fontforge -script font-patcher PATH_TO_FONT --complete</code>. The new family is named after the original plus <code>Nerd Font</code>.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/best-terminal-for-mac"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">The Best Terminal for Mac in 2026: Eight Options Compared</span><span class="blog-related-meta"><time datetime="2026-09-21">Sep 21, 2026</time> · 6 min read</span></a></li><li><a href="/blog/tmux-alternative-mac"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">tmux Alternative on Mac: Do You Still Need tmux?</span><span class="blog-related-meta"><time datetime="2026-10-01">Oct 1, 2026</time> · 5 min read</span></a></li><li><a href="/blog/ghostty-config"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">Ghostty Config Guide: The Settings Worth Changing on Mac</span><span class="blog-related-meta"><time datetime="2026-10-10">Oct 10, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

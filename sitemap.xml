@@ -37,6 +37,62 @@
   <!-- blog:start -->
   <url><loc>https://kaku.fun/blog</loc><lastmod>2026-10-19</lastmod><priority>0.7</priority></url>
   <url><loc>https://kaku.fun/zh/blog</loc><lastmod>2026-10-19</lastmod><priority>0.7</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-mcp-servers</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-mcp-servers</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/ssh-config-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/ssh-config-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/shell-integration-osc</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/shell-integration-osc</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/how-terminal-emulators-work</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/how-terminal-emulators-work</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/yazi-file-manager</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/yazi-file-manager</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/fzf-zsh-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/fzf-zsh-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/mac-terminal-shortcuts</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/mac-terminal-shortcuts</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/starship-prompt</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/starship-prompt</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-subagents</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-subagents</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/ghostty-config</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/ghostty-config</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/codex-vs-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/codex-vs-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/nerd-fonts-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/nerd-fonts-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-git-worktrees</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-git-worktrees</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-skills</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-skills</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-statusline</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-statusline</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/zsh-vs-bash</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/zsh-vs-bash</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-hooks</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-hooks</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/install-claude-code-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/install-claude-code-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/tmux-alternative-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/tmux-alternative-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-remote</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-remote</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/codex-cli-setup</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/codex-cli-setup</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/wezterm-config-for-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/wezterm-config-for-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/zsh-without-oh-my-zsh</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/zsh-without-oh-my-zsh</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-agent-teams</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-agent-teams</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/cursor-vs-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/cursor-vs-claude-code</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/lazygit-and-delta</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/lazygit-and-delta</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/claude-code-plan-mode</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/claude-code-plan-mode</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/blog/ghostty-vs-iterm2-vs-wezterm</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kaku.fun/zh/blog/ghostty-vs-iterm2-vs-wezterm</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
   <url><loc>https://kaku.fun/blog/best-terminal-for-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
   <url><loc>https://kaku.fun/zh/blog/best-terminal-for-mac</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
   <url><loc>https://kaku.fun/blog/claude-code-notifications</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>

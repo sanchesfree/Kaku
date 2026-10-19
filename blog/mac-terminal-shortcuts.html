@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Mac Terminal Shortcuts That Save the Most Time · Kaku Blog</title>
+  <meta name="description" content="The shell line-editing keys that work in every terminal, how to make Option act as Meta, and the app shortcuts for tabs, splits and search.">
+  <meta property="og:title" content="Mac Terminal Shortcuts That Save the Most Time · Kaku Blog">
+  <meta property="og:description" content="The shell line-editing keys that work in every terminal, how to make Option act as Meta, and the app shortcuts for tabs, splits and search.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/mac-terminal-shortcuts.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Mac Terminal Shortcuts That Save the Most Time">
+  <meta property="og:url" content="https://kaku.fun/blog/mac-terminal-shortcuts">
+  <meta property="article:published_time" content="2026-10-13">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/mac-terminal-shortcuts.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/mac-terminal-shortcuts"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/mac-terminal-shortcuts">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/mac-terminal-shortcuts">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/mac-terminal-shortcuts">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/mac-terminal-shortcuts.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mac Terminal Shortcuts That Save the Most Time",
+          "item": "https://kaku.fun/blog/mac-terminal-shortcuts"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/mac-terminal-shortcuts#article",
+      "headline": "Mac Terminal Shortcuts That Save the Most Time",
+      "description": "The shell line-editing keys that work in every terminal, how to make Option act as Meta, and the app shortcuts for tabs, splits and search.",
+      "url": "https://kaku.fun/blog/mac-terminal-shortcuts",
+      "mainEntityOfPage": "https://kaku.fun/blog/mac-terminal-shortcuts",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Terminal",
+      "image": "https://kaku.fun/img/blog/cards/mac-terminal-shortcuts.webp",
+      "timeRequired": "PT9M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/mac-terminal-shortcuts.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does Option + B type ∫ instead of moving back a word?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The terminal is sending Option as a character key. Turn on Use Option as Meta key in Terminal.app, set macos-option-as-alt in Ghostty, or set send_composed_key_when_left_alt_is_pressed = false in WezTerm. Kaku already does this for the left Option key."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Ctrl + U do in zsh compared with bash?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In zsh it deletes the whole line, including text after the cursor. In bash it deletes from the cursor back to the start of the line. Ctrl + Y pastes the deleted text back in both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I search command history on a Mac?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Press Ctrl + R and type part of the command, press Ctrl + R again for older matches, Enter to run it, or Ctrl + G to cancel. It is a shell feature, so it works in any terminal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I clear the terminal with a shortcut?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cmd + K clears to the start in Terminal.app and clears the screen and scrollback in Kaku. Ctrl + L is the shell's clear-screen and works in any terminal, redrawing the prompt at the top."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I keep accented characters and still use Option as Meta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Make only one Option key act as Meta: macos-option-as-alt = left in Ghostty, or the left and right send_composed_key settings in WezTerm and Kaku, which is Kaku's default split."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/mac-terminal-shortcuts" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/mac-terminal-shortcuts" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Mac Terminal Shortcuts That Save the Most Time</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-13">Oct 13, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>9 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/mac-terminal-shortcuts.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>The shortcuts that save the most time in a Mac terminal live in two layers. The terminal app owns tabs, splits, search and scrollback, and those keys differ between Terminal.app, Ghostty and Kaku. The shell owns line editing, Ctrl + A, Ctrl + E, Ctrl + W, Ctrl + U, Ctrl + K, Ctrl + R and the Alt word keys, and those work in every terminal once Option is set to act as Meta.</p>
+<h2 id="line-editing-that-works-everywhere">Line editing that works everywhere</h2>
+<p>zsh and bash both start in emacs mode, so the same keys move and delete on the command line no matter which terminal draws it. These are the defaults in both shells, checked with <code>zsh -fc 'bindkey'</code> and <code>bash -ic 'bind -p'</code> on macOS:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl + A</code> / <code>Ctrl + E</code></td>
+<td>Start / end of line</td>
+</tr>
+<tr>
+<td><code>Ctrl + W</code></td>
+<td>Delete the previous word (bash: back to the previous space)</td>
+</tr>
+<tr>
+<td><code>Ctrl + U</code></td>
+<td>Delete the whole line (bash: from the cursor back to the start)</td>
+</tr>
+<tr>
+<td><code>Ctrl + K</code></td>
+<td>Delete from the cursor to the end</td>
+</tr>
+<tr>
+<td><code>Ctrl + Y</code></td>
+<td>Paste what the last delete removed</td>
+</tr>
+<tr>
+<td><code>Ctrl + _</code></td>
+<td>Undo the last edit</td>
+</tr>
+<tr>
+<td><code>Alt + B</code> / <code>Alt + F</code></td>
+<td>Back / forward one word</td>
+</tr>
+<tr>
+<td><code>Alt + D</code></td>
+<td>Delete the next word</td>
+</tr>
+<tr>
+<td><code>Alt + Backspace</code></td>
+<td>Delete the previous word</td>
+</tr>
+<tr>
+<td><code>Alt + .</code></td>
+<td>Insert the last argument of the previous command</td>
+</tr>
+</tbody>
+</table>
+<p>Two keys differ between the shells. In zsh, <code>Ctrl + U</code> is <code>kill-whole-line</code>, so it also removes text after the cursor, while bash's <code>unix-line-discard</code> stops at the cursor. In zsh, <code>Ctrl + W</code> is <code>backward-kill-word</code>, where a word is letters, digits and the characters in <code>$WORDCHARS</code>. That variable includes <code>/</code> by default, so a path goes in one press; removing <code>/</code> from it makes <code>Ctrl + W</code> delete one path segment at a time. Bash's <code>unix-word-rubout</code> simply deletes back to the last space. If you switch between the two, <a href="/blog/zsh-vs-bash">zsh vs bash</a> covers the other differences.</p>
+<p>The deletes are not lost. <code>Ctrl + U</code> on a long command and then <code>Ctrl + Y</code> later puts it back, which is a quick way to park a half-typed line, run something else, and paste it back.</p>
+<h2 id="option-as-meta-why-alt-b-and-alt-f-fail-on-a-mac">Option as Meta: why Alt + B and Alt + F fail on a Mac</h2>
+<p>A Mac has no Alt key. Option plus a letter types a character, so on a U.S. layout Option + B gives <code>∫</code> instead of moving back a word, and every <code>Alt</code> row in the table above prints junk until the terminal sends Option as Meta. Each terminal has its own switch.</p>
+<p><strong>Terminal.app.</strong> Turn on Use Option as Meta key in Terminal &gt; Settings &gt; Profiles &gt; Keyboard, or toggle it for the current window with <code>Cmd + Option + O</code>. Apple's <a href="https://support.apple.com/guide/terminal/keyboard-shortcuts-trmlshtcts/mac" target="_blank" rel="noopener noreferrer">shortcut list</a> notes that Option + D for deleting a word only works with this setting on.</p>
+<p><strong>iTerm2.</strong> In Settings &gt; Profiles &gt; Keys, set Left Option key to Esc+, which the <a href="https://iterm2.com/documentation-preferences-profiles-keys.html" target="_blank" rel="noopener noreferrer">iTerm2 docs</a> call the right choice for most users.</p>
+<p><strong>Ghostty.</strong> The <a href="https://ghostty.org/docs/config/reference#macos-option-as-alt" target="_blank" rel="noopener noreferrer"><code>macos-option-as-alt</code></a> key takes <code>true</code>, <code>false</code>, <code>left</code> or <code>right</code>. When unset it follows your keyboard layout, <code>true</code> on U.S. Standard and U.S. International and <code>false</code> on others, so on a German or French layout you set it yourself:</p>
+<pre><code>macos-option-as-alt = left
+</code></pre>
+<p>Using <code>left</code> keeps the right Option key for accented letters and symbols, which matters if you type anything other than English. More Ghostty keys are in <a href="/blog/ghostty-config">Ghostty config</a>.</p>
+<p><strong>WezTerm and Kaku.</strong> The two settings are <code>send_composed_key_when_left_alt_is_pressed</code> and <code>send_composed_key_when_right_alt_is_pressed</code>. Setting one to <code>false</code> makes that Option key act as Alt.</p>
+<h2 id="history-search">History search</h2>
+<p><code>Ctrl + R</code> is the shortcut most worth learning. It opens an incremental search backward through history (<code>history-incremental-search-backward</code> in zsh, <code>reverse-search-history</code> in bash): type a few letters of an old command, press <code>Ctrl + R</code> again to step to older matches, press Enter to run the one shown, or press <code>Ctrl + G</code> to put the line back the way it was.</p>
+<p>Prefix search on the Up arrow is the other common setup. You type <code>git push</code> and Up only cycles through commands that start with it. zsh ships the widgets but does not bind them; these lines in <code>~/.zshrc</code> turn them on:</p>
+<pre><code class="language-bash">autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey <span class="tok-s">'^[[A'</span> up-line-or-beginning-search
+bindkey <span class="tok-s">'^[[B'</span> down-line-or-beginning-search</code></pre>
+<p>fzf can replace <code>Ctrl + R</code> with a fuzzy list of your whole history.</p>
+<h2 id="terminalapp-shortcuts">Terminal.app shortcuts</h2>
+<p>Apple publishes the full list. These are the ones that come up every day:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New tab / new window</td>
+<td><code>Cmd + T</code> / <code>Cmd + N</code></td>
+</tr>
+<tr>
+<td>Next / previous tab</td>
+<td><code>Ctrl + Tab</code> / <code>Ctrl + Shift + Tab</code></td>
+</tr>
+<tr>
+<td>Split window into two panes</td>
+<td><code>Cmd + D</code></td>
+</tr>
+<tr>
+<td>Close split pane</td>
+<td><code>Cmd + Shift + D</code></td>
+</tr>
+<tr>
+<td>Find / find next</td>
+<td><code>Cmd + F</code> / <code>Cmd + G</code></td>
+</tr>
+<tr>
+<td>Jump to previous / next mark</td>
+<td><code>Cmd + Up</code> / <code>Cmd + Down</code></td>
+</tr>
+<tr>
+<td>Clear to start</td>
+<td><code>Cmd + K</code></td>
+</tr>
+<tr>
+<td>Reverse search history</td>
+<td><code>Ctrl + R</code></td>
+</tr>
+<tr>
+<td>Toggle Use Option as Meta key</td>
+<td><code>Cmd + Option + O</code></td>
+</tr>
+</tbody>
+</table>
+<p>Marks are the underrated one. <code>Cmd + Return</code> marks a command line as you run it, and <code>Cmd + Up</code> and <code>Cmd + Down</code> jump between marks, so you land on the start of a long output instead of scrolling for it. Terminal.app has no shortcut for moving between split panes in that list, and if you want several shells side by side with keys to move and resize them, <a href="/blog/best-terminal-for-mac">the best terminal for Mac</a> compares the options.</p>
+<h2 id="moving-between-words-with-option-arrow">Moving between words with Option + Arrow</h2>
+<p>Moving by word with Option + Left and Option + Right is the habit most people bring from Mac text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for those keys, though. When Option + Left prints <code>[1;3D</code> or <code>;3D</code> instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send <code>Esc b</code> and <code>Esc f</code>, or bind the codes in zsh:</p>
+<pre><code class="language-bash">bindkey <span class="tok-s">'^[[1;3D'</span> backward-word
+bindkey <span class="tok-s">'^[[1;3C'</span> forward-word</code></pre>
+<p>In Terminal.app, holding Option while you move the pointer repositions the insertion point on the command line, which is faster than any key for a long command.</p>
+<h2 id="kaku-shortcuts">Kaku shortcuts</h2>
+<p>Kaku's bundled config sets left Option to act as Meta and keeps right Option for composed characters, so <code>Alt + B</code>, <code>Alt + F</code> and <code>Alt + .</code> work on first launch without a setting. It also maps Option + Left and Option + Right to <code>Alt + B</code> and <code>Alt + F</code>, Cmd + Left and Cmd + Right to <code>Ctrl + A</code> and <code>Ctrl + E</code>, Option + Backspace to <code>Ctrl + W</code>, and Cmd + Backspace to <code>Ctrl + U</code>. Its zsh integration rebinds <code>Ctrl + U</code> to <code>backward-kill-line</code>, so Cmd + Backspace deletes to the start of the line the way it does in a Mac text field, not the whole line, and Up and Down do prefix history search unless a tool like atuin already owns them.</p>
+<p>For tabs, splits, search and the assistant, these are the defaults, read from the bundled key table and the <a href="/docs/keybindings">keybindings page</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New tab</td>
+<td><code>Cmd + T</code></td>
+</tr>
+<tr>
+<td>Switch to tab 1 to 9</td>
+<td><code>Cmd + 1</code> to <code>Cmd + 9</code></td>
+</tr>
+<tr>
+<td>Previous / next tab</td>
+<td><code>Cmd + Shift + [</code> / <code>Cmd + Shift + ]</code></td>
+</tr>
+<tr>
+<td>Tab Navigator</td>
+<td><code>Cmd + Shift + O</code></td>
+</tr>
+<tr>
+<td>Split side by side / top and bottom</td>
+<td><code>Cmd + D</code> / <code>Cmd + Shift + D</code></td>
+</tr>
+<tr>
+<td>Move between panes</td>
+<td><code>Cmd + Option + Arrows</code></td>
+</tr>
+<tr>
+<td>Zoom the current pane</td>
+<td><code>Cmd + Shift + Enter</code></td>
+</tr>
+<tr>
+<td>Search the pane</td>
+<td><code>Cmd + F</code></td>
+</tr>
+<tr>
+<td>Command Palette</td>
+<td><code>Cmd + Shift + P</code></td>
+</tr>
+<tr>
+<td>AI Chat</td>
+<td><code>Cmd + L</code></td>
+</tr>
+<tr>
+<td>Apply the Kaku Assistant suggestion</td>
+<td><code>Cmd + Shift + E</code></td>
+</tr>
+<tr>
+<td>AI settings</td>
+<td><code>Cmd + Shift + A</code></td>
+</tr>
+</tbody>
+</table>
+<p>The zoom key is the one to pair with an agent. Run Claude Code in one pane and tests in another, then press <code>Cmd + Shift + Enter</code> to give the agent the full window while you read a long diff, and again to bring the split back. Tab Navigator filters tabs by name, which beats counting to <code>Cmd + 7</code> once you have more than a handful open. To add your own key, append to <code>config.keys</code> in <code>~/.config/kaku/kaku.lua</code> rather than replacing the table, or Kaku's defaults are gone.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-does-option-b-type-instead-of-moving-back-a-word">Why does Option + B type ∫ instead of moving back a word?</h3>
+<p>The terminal is sending Option as a character key. Turn on Use Option as Meta key in Terminal.app, set <code>macos-option-as-alt</code> in Ghostty, or set <code>send_composed_key_when_left_alt_is_pressed = false</code> in WezTerm. Kaku already does this for the left Option key.</p>
+<h3 id="what-does-ctrl-u-do-in-zsh-compared-with-bash">What does Ctrl + U do in zsh compared with bash?</h3>
+<p>In zsh it deletes the whole line, including text after the cursor. In bash it deletes from the cursor back to the start of the line. <code>Ctrl + Y</code> pastes the deleted text back in both.</p>
+<h3 id="how-do-i-search-command-history-on-a-mac">How do I search command history on a Mac?</h3>
+<p>Press <code>Ctrl + R</code> and type part of the command, press <code>Ctrl + R</code> again for older matches, Enter to run it, or <code>Ctrl + G</code> to cancel. It is a shell feature, so it works in any terminal.</p>
+<h3 id="how-do-i-clear-the-terminal-with-a-shortcut">How do I clear the terminal with a shortcut?</h3>
+<p><code>Cmd + K</code> clears to the start in Terminal.app and clears the screen and scrollback in Kaku. <code>Ctrl + L</code> is the shell's <code>clear-screen</code> and works in any terminal, redrawing the prompt at the top.</p>
+<h3 id="can-i-keep-accented-characters-and-still-use-option-as-meta">Can I keep accented characters and still use Option as Meta?</h3>
+<p>Yes. Make only one Option key act as Meta: <code>macos-option-as-alt = left</code> in Ghostty, or the left and right <code>send_composed_key</code> settings in WezTerm and Kaku, which is Kaku's default split.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/best-terminal-for-mac"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">The Best Terminal for Mac in 2026: Eight Options Compared</span><span class="blog-related-meta"><time datetime="2026-09-21">Sep 21, 2026</time> · 6 min read</span></a></li><li><a href="/blog/ghostty-config"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">Ghostty Config Guide: The Settings Worth Changing on Mac</span><span class="blog-related-meta"><time datetime="2026-10-10">Oct 10, 2026</time> · 8 min read</span></a></li><li><a href="/blog/how-terminal-emulators-work"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">How Terminal Emulators Work</span><span class="blog-related-meta"><time datetime="2026-10-16">Oct 16, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Starship Prompt on Mac: Install, Configure and Keep It Fast · Kaku Blog</title>
+  <meta name="description" content="Install Starship for zsh or fish, configure starship.toml, format strings and presets, and find the modules and timeouts that make a prompt slow.">
+  <meta property="og:title" content="Starship Prompt on Mac: Install, Configure and Keep It Fast · Kaku Blog">
+  <meta property="og:description" content="Install Starship for zsh or fish, configure starship.toml, format strings and presets, and find the modules and timeouts that make a prompt slow.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/starship-prompt.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Starship Prompt on Mac: Install, Configure and Keep It Fast">
+  <meta property="og:url" content="https://kaku.fun/blog/starship-prompt">
+  <meta property="article:published_time" content="2026-10-12">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/starship-prompt.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/starship-prompt"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/starship-prompt">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/starship-prompt">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/starship-prompt">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/starship-prompt.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Starship Prompt on Mac: Install, Configure and Keep It Fast",
+          "item": "https://kaku.fun/blog/starship-prompt"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/starship-prompt#article",
+      "headline": "Starship Prompt on Mac: Install, Configure and Keep It Fast",
+      "description": "Install Starship for zsh or fish, configure starship.toml, format strings and presets, and find the modules and timeouts that make a prompt slow.",
+      "url": "https://kaku.fun/blog/starship-prompt",
+      "mainEntityOfPage": "https://kaku.fun/blog/starship-prompt",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Shell and tools",
+      "image": "https://kaku.fun/img/blog/cards/starship-prompt.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/starship-prompt.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does my Starship prompt show boxes or question marks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The terminal font has no glyphs for the Nerd Font symbols the modules use. Install a Nerd Font, add the symbols-only font as a fallback, or switch to the No Nerd Fonts or Plain Text Symbols preset."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is the Starship config file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "~/.config/starship.toml. Starship does not create it, so make it with mkdir -p ~/.config && touch ~/.config/starship.toml, or point STARSHIP_CONFIG at another path."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my prompt slow or missing Git status in a big repository?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Git commands in large repositories can run past command_timeout, which defaults to 500 ms. Raise the timeout if you want the status anyway, set ignore_submodules = true under [git_status], and disable modules you do not need."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I show the prompt on the right?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Set right_format, for example right_format = '$cmd_duration$time', and leave those modules out of the left format."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Kaku overwrite my starship.toml?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kaku writes ~/.config/starship.toml only when there is none, or when it is an untouched copy of the file older Kaku versions shipped, so a config you wrote yourself is used as it is, inside Kaku and everywhere else."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/starship-prompt" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/starship-prompt" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Starship Prompt on Mac: Install, Configure and Keep It Fast</h1><p class="blog-meta"><span><a href="/blog#topic-shell">Shell and tools</a></span><span>Published <time datetime="2026-10-12">Oct 12, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>8 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/starship-prompt.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>To use Starship on a Mac, run <code>brew install starship</code>, add <code>eval "$(starship init zsh)"</code> to <code>~/.zshrc</code>, and open a new shell. Everything else lives in one TOML file, <code>~/.config/starship.toml</code>, where you pick the modules, their format and their style, or start from one of the community presets. Keeping it fast comes down to two timeouts, <code>scan_timeout</code> and <code>command_timeout</code>, and to how much work the Git modules do in large repositories.</p>
+<h2 id="install-and-turn-it-on">Install and turn it on</h2>
+<p>The <a href="https://starship.rs/guide/" target="_blank" rel="noopener noreferrer">Starship guide</a> lists several ways to install on macOS. Homebrew is the simplest:</p>
+<pre><code class="language-bash">brew install starship</code></pre>
+<p><code>cargo install starship --locked</code>, <code>port install starship</code> and the official install script also work. Then add the init line for your shell to its config file, near the end and before syntax highlighting:</p>
+<pre><code class="language-bash"><span class="tok-c"># ~/.zshrc
+</span><span class="tok-b">eval</span> <span class="tok-s">"</span><span class="tok-k">$(</span>starship init zsh<span class="tok-k">)</span><span class="tok-s">"</span>
+
+<span class="tok-c"># ~/.bashrc
+</span><span class="tok-b">eval</span> <span class="tok-s">"</span><span class="tok-k">$(</span>starship init bash<span class="tok-k">)</span><span class="tok-s">"</span></code></pre>
+<pre><code class="language-fish"><span class="tok-c"># ~/.config/fish/config.fish
+</span>starship init <span class="tok-b">fish</span> | <span class="tok-b">source</span></code></pre>
+<p>Open a new shell and the prompt changes. If you are rebuilding your zsh setup at the same time, <a href="/blog/zsh-without-oh-my-zsh">zsh without Oh My Zsh</a> covers where the Starship line sits relative to completion, autosuggestions and syntax highlighting.</p>
+<p>The guide lists one prerequisite: a <a href="https://www.nerdfonts.com/" target="_blank" rel="noopener noreferrer">Nerd Font</a> installed and enabled in your terminal, because the default symbols for Git, languages and tools come from those glyphs. Without one you get empty boxes. <a href="/blog/nerd-fonts-mac">Nerd Fonts on Mac</a> explains how to add only the symbols as a fallback instead of switching fonts.</p>
+<h2 id="the-config-file">The config file</h2>
+<p>Starship reads nothing until you create its file:</p>
+<pre><code class="language-bash">mkdir -p ~/.config &amp;&amp; touch ~/.config/starship.toml</code></pre>
+<p>To keep it somewhere else, for example in a dotfiles repository, set <code>STARSHIP_CONFIG</code> before the init line:</p>
+<pre><code class="language-bash"><span class="tok-b">export</span> STARSHIP_CONFIG=~/dotfiles/starship.toml</code></pre>
+<p>A small file that shows the main ideas:</p>
+<pre><code class="language-toml"><span class="tok-s">"$schema"</span> = <span class="tok-s">'https://starship.rs/config-schema.json'</span>
+
+add_newline = <span class="tok-b">false</span>
+
+<span class="tok-k">[character]</span>
+success_symbol = <span class="tok-s">'[&gt;](bold green)'</span>
+error_symbol = <span class="tok-s">'[x](bold red)'</span>
+
+<span class="tok-k">[directory]</span>
+truncation_length = <span class="tok-n">2</span>
+
+<span class="tok-k">[package]</span>
+disabled = <span class="tok-b">true</span></code></pre>
+<p>The <code>$schema</code> line lets your editor complete keys from Starship's config schema. Top-level keys such as <code>add_newline</code> apply to the whole prompt, and each <code>[table]</code> configures one module. The <a href="https://starship.rs/config/" target="_blank" rel="noopener noreferrer">configuration reference</a> calls a module a component that shows information from your environment, such as <code>nodejs</code> showing the Node.js version when you are inside a Node.js project, and <code>disabled = true</code> hides any module completely.</p>
+<p>A few defaults worth knowing, checked October 2026: <code>add_newline</code> is <code>true</code>, so there is a blank line between prompts until you turn it off. <code>directory</code> truncates to three parent folders and to the root of the Git repository you are in. <code>cmd_duration</code> appears only when a command took longer than two seconds, set by <code>min_time = 2_000</code>. <code>time</code> and <code>git_metrics</code> are disabled until you set <code>disabled = false</code>.</p>
+<h2 id="format-strings">Format strings</h2>
+<p>Each module has a <code>format</code>, and the prompt has one too. A format string mixes three things:</p>
+<ul>
+<li><strong>Variables</strong> start with <code>$</code>, such as <code>$branch</code> inside <code>git_branch</code> or <code>$git_branch</code> in the prompt format.</li>
+<li><strong>Text groups</strong> are <code>[text](style)</code>. <code>'[on](red bold)'</code> prints <code>on</code> in bold red.</li>
+<li><strong>Conditional groups</strong> in <code>( )</code> render nothing when every variable inside is empty. <code>'(@$region)'</code> shows <code>@us-east-1</code> or nothing at all.</li>
+</ul>
+<p>Styles are short strings: <code>'bold fg:27'</code>, <code>'fg:green bg:blue'</code>, <code>'underline bg:#bf5700'</code>, or <code>''</code> for none. The symbols <code>$ [ ] ( )</code> have special meaning, so escape them with a backslash when you want them printed. Single-quoted TOML strings need less escaping, which is why the reference uses them in most examples.</p>
+<p>The default prompt format is <code>$all</code>, which expands to the full list of modules in a fixed order. To move one module and keep the rest, extend it rather than replace it:</p>
+<pre><code class="language-toml">format = <span class="tok-s">'$all$directory$character'</span></code></pre>
+<p>Modules you name explicitly are not repeated, so this moves the directory to the second line, next to the prompt character. To control the whole order, list only the modules you want:</p>
+<pre><code class="language-toml">format = <span class="tok-s">'$directory$git_branch$git_status$nodejs$python$character'</span></code></pre>
+<p>Colors can also be named once and reused. Set <code>palette</code> to a name and define it under <code>[palettes.&lt;name&gt;]</code>, then use the names in any style string:</p>
+<pre><code class="language-toml">palette = <span class="tok-s">'mine'</span>
+
+<span class="tok-k">[palettes.mine]</span>
+mustard = <span class="tok-s">'#af8700'</span>
+
+<span class="tok-k">[git_branch]</span>
+style = <span class="tok-s">'bold mustard'</span></code></pre>
+<h2 id="presets">Presets</h2>
+<p>The <a href="https://starship.rs/presets/" target="_blank" rel="noopener noreferrer">presets page</a> collects community configurations. Each entry links to its own page with the TOML and how to apply it. The presets listed there, checked October 2026:</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nerd Font Symbols</td>
+<td>Every module uses Nerd Font symbols</td>
+</tr>
+<tr>
+<td>No Nerd Fonts</td>
+<td>No Nerd Font symbols anywhere in the prompt</td>
+</tr>
+<tr>
+<td>Bracketed Segments</td>
+<td>Segments in brackets instead of words like "via" and "on"</td>
+</tr>
+<tr>
+<td>Plain Text Symbols</td>
+<td>Plain text symbols, for terminals without Unicode</td>
+</tr>
+<tr>
+<td>No Runtime Versions</td>
+<td>Hides language runtime versions</td>
+</tr>
+<tr>
+<td>No Empty Icons</td>
+<td>No icon when the toolset is not found</td>
+</tr>
+<tr>
+<td>Pure Prompt</td>
+<td>Emulates the Pure prompt</td>
+</tr>
+<tr>
+<td>Pastel Powerline, Tokyo Night, Gruvbox Rainbow, Catppuccin Powerline</td>
+<td>Powerline-style colored segments</td>
+</tr>
+<tr>
+<td>Jetpack</td>
+<td>A pseudo minimalist prompt</td>
+</tr>
+</tbody>
+</table>
+<p>The page notes that No Nerd Fonts will become the default in a future release. A preset is a starting point, not a mode: it becomes your <code>starship.toml</code>, and you edit it from there like any other config. Back up your current file before replacing it. The <code>starship</code> binary also prints the bundled presets, so <code>starship preset --list</code> shows their names and <code>starship preset tokyo-night -o ~/.config/starship.toml</code> writes one out.</p>
+<h2 id="keep-it-fast">Keep it fast</h2>
+<p>The prompt is drawn before you can type, so anything slow in it is felt on every Enter. Three settings do most of the work.</p>
+<p><code>scan_timeout</code> limits how long Starship spends scanning files in the current directory, which is how language modules decide whether you are in a Node.js or Python project. The default is 30 ms. <code>command_timeout</code> limits each external command a module runs, such as <code>git</code> or <code>node --version</code>, and the default is 500 ms. Git status in a very large repository can take longer than that, so raise it if you work in one, or keep it low if you would rather never wait long for a prompt:</p>
+<pre><code class="language-toml">scan_timeout = <span class="tok-n">10</span>
+command_timeout = <span class="tok-n">1000</span></code></pre>
+<p>Git is the usual cost in big repositories. <code>git_status</code> has <code>ignore_submodules</code>, which stops changes inside submodules from counting, and <code>use_git_executable</code>, which computes status with the <code>git</code> binary instead of gitoxide. <code>git_metrics</code>, which counts added and deleted lines, is off by default, so leave it off unless you read those numbers. If you never read a module, set <code>disabled = true</code> or leave it out of your <code>format</code>.</p>
+<p>A few commands help with diagnosis. <code>starship timings</code> prints how long each active module took on the current directory, which is the quickest way to find the slow one, and <code>starship explain</code> shows the description of each module, which tells you what each piece of the line is. Warnings and errors go to <code>~/.cache/starship/session_${STARSHIP_SESSION_KEY}.log</code>, one file per terminal session, and you can move that directory with <code>STARSHIP_CACHE</code>.</p>
+<h2 id="a-right-side-prompt">A right-side prompt</h2>
+<p><code>right_format</code> takes the same kind of format string as <code>format</code> and draws it on the right. It is empty by default. Moving the duration and clock there keeps the left side short:</p>
+<pre><code class="language-toml">format = <span class="tok-s">'$directory$git_branch$git_status$character'</span>
+right_format = <span class="tok-s">'$cmd_duration$time'</span>
+
+<span class="tok-k">[time]</span>
+disabled = <span class="tok-b">false</span></code></pre>
+<p>The format on the left lists modules explicitly instead of using <code>$all</code>, because <code>$all</code> already includes <code>cmd_duration</code> and <code>time</code>.</p>
+<h2 id="starship-in-kaku">Starship in Kaku</h2>
+<p>Kaku's shell setup (<code>kaku init</code>, also offered on first launch) installs Starship through Homebrew when it is missing, and starts it only inside Kaku, including tmux sessions started from Kaku. The managed <code>kaku.zsh</code> checks <code>TERM_PROGRAM=Kaku</code>, or <code>$TMUX</code> together with the <code>KAKU_SESSION</code> variable a Kaku shell exports, and the fish setup uses the same test. Other terminals keep the prompt you already had. To use Kaku's Starship in every terminal, add <code>export KAKU_PROMPT_EVERYWHERE=1</code> before the Kaku line in <code>.zshrc</code>, or <code>set -gx KAKU_PROMPT_EVERYWHERE 1</code> in <code>config.fish</code>. Icons render without installing a Nerd Font, because Kaku bundles Symbols Nerd Font Mono and appends it as a fallback to whatever font you set.</p>
+<p>There is no separate Kaku prompt config. Kaku does not set <code>STARSHIP_CONFIG</code>, so Starship reads the normal <code>~/.config/starship.toml</code>, and Kaku copies its own file there only when none exists. If you already have one, it is left alone. The single exception is a file byte-identical to the one Kaku 0.10.0 to 0.22.0 shipped with its icons stripped, which is replaced with the current version, while an edited or symlinked file always stays. The copied file is an ordinary config you can edit: it uses a short explicit <code>format</code> instead of <code>$all</code>, sets <code>command_timeout = 2000</code> so a large repository's Git status has room, and turns on <code>ignore_submodules</code> for <code>git_status</code>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-does-my-starship-prompt-show-boxes-or-question-marks">Why does my Starship prompt show boxes or question marks?</h3>
+<p>The terminal font has no glyphs for the Nerd Font symbols the modules use. Install a Nerd Font, add the symbols-only font as a fallback, or switch to the No Nerd Fonts or Plain Text Symbols preset.</p>
+<h3 id="where-is-the-starship-config-file">Where is the Starship config file?</h3>
+<p><code>~/.config/starship.toml</code>. Starship does not create it, so make it with <code>mkdir -p ~/.config &amp;&amp; touch ~/.config/starship.toml</code>, or point <code>STARSHIP_CONFIG</code> at another path.</p>
+<h3 id="why-is-my-prompt-slow-or-missing-git-status-in-a-big-repository">Why is my prompt slow or missing Git status in a big repository?</h3>
+<p>Git commands in large repositories can run past <code>command_timeout</code>, which defaults to 500 ms. Raise the timeout if you want the status anyway, set <code>ignore_submodules = true</code> under <code>[git_status]</code>, and disable modules you do not need.</p>
+<h3 id="how-do-i-show-the-prompt-on-the-right">How do I show the prompt on the right?</h3>
+<p>Set <code>right_format</code>, for example <code>right_format = '$cmd_duration$time'</code>, and leave those modules out of the left <code>format</code>.</p>
+<h3 id="does-kaku-overwrite-my-starshiptoml">Does Kaku overwrite my starship.toml?</h3>
+<p>No. Kaku writes <code>~/.config/starship.toml</code> only when there is none, or when it is an untouched copy of the file older Kaku versions shipped, so a config you wrote yourself is used as it is, inside Kaku and everywhere else.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/zsh-without-oh-my-zsh"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">A Fast Zsh Setup Without Oh My Zsh</span><span class="blog-related-meta"><time datetime="2026-09-27">Sep 27, 2026</time> · 4 min read</span></a></li><li><a href="/blog/zsh-vs-bash"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Zsh vs Bash on Mac: Which Shell Should You Use</span><span class="blog-related-meta"><time datetime="2026-10-04">Oct 4, 2026</time> · 6 min read</span></a></li><li><a href="/blog/fzf-zsh-mac"><span class="blog-related-cat">Shell and tools</span><span class="blog-related-name">Set Up fzf with Zsh on Mac: History, Files and Directories</span><span class="blog-related-meta"><time datetime="2026-10-14">Oct 14, 2026</time> · 6 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

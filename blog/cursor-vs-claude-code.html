@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Cursor vs Claude Code: Editor Agent or Terminal Agent · Kaku Blog</title>
+  <meta name="description" content="How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together.">
+  <meta property="og:title" content="Cursor vs Claude Code: Editor Agent or Terminal Agent · Kaku Blog">
+  <meta property="og:description" content="How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/cursor-vs-claude-code.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Cursor vs Claude Code: Editor Agent or Terminal Agent">
+  <meta property="og:url" content="https://kaku.fun/blog/cursor-vs-claude-code">
+  <meta property="article:published_time" content="2026-09-25">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/cursor-vs-claude-code.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/cursor-vs-claude-code"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/cursor-vs-claude-code">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/cursor-vs-claude-code">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/cursor-vs-claude-code">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/cursor-vs-claude-code.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
+          "item": "https://kaku.fun/blog/cursor-vs-claude-code"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/cursor-vs-claude-code#article",
+      "headline": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
+      "description": "How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together.",
+      "url": "https://kaku.fun/blog/cursor-vs-claude-code",
+      "mainEntityOfPage": "https://kaku.fun/blog/cursor-vs-claude-code",
+      "datePublished": "2026-09-25",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/cursor-vs-claude-code.webp",
+      "timeRequired": "PT7M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/cursor-vs-claude-code.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I run Claude Code inside Cursor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use cursor:extension/anthropic.claude-code, or run claude in the integrated terminal. claude --resume continues a panel chat. The extension does not install claude."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I stop two Claude Code sessions from editing the same files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "claude --worktree feature-auth creates another checkout on its own branch, and the next terminal uses a different name. Anthropic's worktree guide covers setup and cleanup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I pick up a Claude Code session later?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "claude --continue resumes the newest session in this directory. claude --resume or /resume opens a picker, and the extension warns you if that chat is still open somewhere else."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a Cursor subscription include Claude and GPT models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plus includes Grok models only. From Premium up, third-party models such as Claude and GPT are billed at API list price, on top of the monthly price. Claude Code is billed separately through Pro, Max, Team, Enterprise, Console, or a provider such as Bedrock."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Kaku keep after a restart?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tabs and splits. Restore is on by default and is saved within a minute of a layout change, including after a crash. A Claude Code or Codex pane keeps its last screen. Closing it still asks first while that program is in the foreground."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/cursor-vs-claude-code" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/cursor-vs-claude-code" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Cursor vs Claude Code: Editor Agent or Terminal Agent</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-09-25">Sep 25, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>7 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/cursor-vs-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Cursor is an editor with a coding agent inside it. Claude Code is an agent that reads your codebase, edits files, and runs commands in the terminal and in an IDE extension, so those files stay ordinary project files you can open in Cursor or another editor. Choose based on where you want to read diffs and how many sessions you want running at once.</p>
+<h2 id="how-each-one-works">How each one works</h2>
+<p><a href="https://cursor.com/docs/models-and-pricing" target="_blank" rel="noopener noreferrer">Cursor</a> describes itself as an AI editor and a coding agent. You use it to understand a repo, plan and build features with Plan Mode, fix bugs, and review changes by inspecting diffs and running checks before you merge. Plugins, skills, MCPs, and rules are added from one place.</p>
+<p><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">Claude Code</a> runs in the terminal, in IDE extensions, in a desktop app, and in the browser. They share one engine, so a project's <code>CLAUDE.md</code>, settings, and MCP servers apply across all of them. In a project:</p>
+<pre><code class="language-bash"><span class="tok-b">cd</span> your-project
+claude</code></pre>
+<p>It edits files, runs commands, and uses git for staging, commit messages, branches, and pull requests. <code>CLAUDE.md</code> in the project root is read at the start of every session. An existing <code>AGENTS.md</code> can stand in for it.</p>
+<h2 id="what-you-pay-for">What you pay for</h2>
+<p>Checked October 2026. The figures are on the pricing pages.</p>
+<p><a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">Cursor's pricing page</a> lists Free, Plus, Premium, Super, and Ultra, plus Teams and Enterprise. Cursor and Grok Chat, Imagine, Voice, and Bot share one usage pool. It refreshes weekly, higher tiers include a larger pool, and you can buy a top-off past the included amount. Free includes limited agent requests and limited chat requests. Plus includes Grok models only. Premium and above include Grok usage, and third-party models are billed at API list price outside that allowance, with spending caps. Cloud agents and Bugbot code reviews start at Premium. The agent is on every plan, including Free.</p>
+<p>Claude Code runs on a <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claude subscription</a> (Pro, Max, Team, or Enterprise) or an <a href="https://platform.claude.com/" target="_blank" rel="noopener noreferrer">Anthropic Console</a> account billed per use, and is also available through Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry. <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener noreferrer">Anthropic's setup guide</a> covers installing it and signing in. On a claude.ai plan, <code>/usage</code> shows usage for the current session and the week. An API key or third-party sign-in shows that session's cost and tokens. More pricing is on <a href="https://code.claude.com" target="_blank" rel="noopener noreferrer">code.claude.com</a>.</p>
+<h2 id="context-and-models">Context and models</h2>
+<p>Cursor lists each model with a default context window and, for many, a larger maximum. That table changes as models are added, so check the current numbers on the <a href="https://cursor.com/docs/models-and-pricing" target="_blank" rel="noopener noreferrer">models page</a> rather than trusting a copy.</p>
+<p>Claude Code's docs give no fixed context window size. The extension shows how full the window is. Claude compacts when it needs to, and <code>/compact</code> does it on request. An <code>@</code> directory reference adds only the list of files, not their contents. Click the model name to switch, or type <code>/model</code> on Claude Code v2.1.284 or later.</p>
+<h2 id="parallel-work-and-long-sessions">Parallel work and long sessions</h2>
+<p>A git worktree checks the repo out again in another directory on another branch, so <code>claude --worktree feature-auth</code> keeps two Claude Code tasks off the same files, and a second terminal uses another name. <a href="https://code.claude.com/docs/en/worktrees" target="_blank" rel="noopener noreferrer">Anthropic's worktree guide</a> covers setup and cleanup.</p>
+<p><strong>Open in New Tab</strong> (<code>Cmd + Shift + Esc</code> on Mac) or <strong>Open in New Window</strong> opens another conversation, with its own history and context.</p>
+<pre><code class="language-bash">claude --continue
+claude --resume</code></pre>
+<p><code>--continue</code> reopens the newest session in this directory, or prints <code>No conversation found to continue</code> and exits. <code>--resume</code>, or <code>/resume</code> inside a session, lets you pick.</p>
+<p><a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer">claude.ai/code</a> runs long browser tasks, several at once, including repos you do not have locally. The desktop app shows sessions side by side and needs a paid subscription. Routines run in the cloud with the computer off. Create one on the web, in the desktop app, or with <code>/schedule</code>.</p>
+<h2 id="reviewing-the-changes">Reviewing the changes</h2>
+<p>Cursor's review stays in the editor: inspect the diff, run checks, and catch problems before you merge.</p>
+<p>In Claude Code, <a href="/blog/claude-code-plan-mode">plan mode</a> reads the repo and writes nothing until you approve. You reach it with <code>Shift + Tab</code>, <code>/plan</code>, or <code>--permission-mode plan</code>.</p>
+<p>The extension has several permission modes. Edit writes files without asking. Auto has a classifier review most actions. Manual waits on a side-by-side diff, where you accept, reject, or correct the proposal. <strong>Accept this change</strong> and <strong>Reject this change</strong> step through hunks on Claude Code v2.1.275 or later. A diff with more than 100 changes opens without those buttons.</p>
+<p><code>claude "commit my changes with a descriptive message"</code> makes the commit. Read it with <code>git diff</code>, or in <a href="/blog/lazygit-and-delta">lazygit</a>. From a message in the extension you can fork the conversation, rewind the files, or do both.</p>
+<h2 id="using-claude-code-inside-cursor">Using Claude Code inside Cursor</h2>
+<p>The <a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">overview</a> links to install the extension in Cursor with <code>cursor:extension/anthropic.claude-code</code>, and in VS Code with <code>vscode:extension/anthropic.claude-code</code>. After that, <strong>Open in New Tab</strong> is in the Command Palette (<code>Cmd + Shift + P</code>). See <a href="https://code.claude.com/docs/en/ide-integrations" target="_blank" rel="noopener noreferrer">IDE integrations</a>. The terminal steps are from the <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener noreferrer">VS Code guide</a>.</p>
+<p>Open the integrated terminal with Command and backtick, then run <code>claude</code>. The CLI uses the editor for diffs and diagnostics. The extension does not put <code>claude</code> on <code>PATH</code>, so the terminal needs the standalone CLI. <code>/ide</code> connects an outside terminal to VS Code. <code>claude --resume</code> continues a panel chat. If it is still open elsewhere, the panel warns that two copies can mix messages. Close the other one, or choose <strong>Open here anyway</strong>.</p>
+<h2 id="side-by-side-in-kaku">Side by side in Kaku</h2>
+<p>In <a href="/docs/ai-coding">Kaku</a>, <code>Cmd + D</code> splits side by side and <code>Cmd + Shift + D</code> top and bottom, so Claude Code can sit next to a shell or next to Codex. <code>Cmd + Shift + Enter</code> zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground.</p>
+<p><code>restore_previous_session</code> is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit restores that layout. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with <code>claude --resume</code>. In the other pane, <code>codex resume</code> reopens a recent Codex chat from the same repository.</p>
+<p><code>Cmd + Click</code> opens a path such as <code>src/main.rs:42:7</code> even while the tool captures the mouse, the same reason it matters in <a href="/blog/best-terminal-for-claude-code">a terminal for Claude Code</a>. Point it at Cursor in <code>~/.config/kaku/kaku.lua</code>:</p>
+<pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"cursor --goto"</span></code></pre>
+<p><code>Cmd + Shift + G</code> opens lazygit in the pane. Kaku finds the binary on <code>PATH</code> or in the usual Homebrew locations.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="can-i-run-claude-code-inside-cursor">Can I run Claude Code inside Cursor?</h3>
+<p>Yes. Use <code>cursor:extension/anthropic.claude-code</code>, or run <code>claude</code> in the integrated terminal. <code>claude --resume</code> continues a panel chat. The extension does not install <code>claude</code>.</p>
+<h3 id="how-do-i-stop-two-claude-code-sessions-from-editing-the-same-files">How do I stop two Claude Code sessions from editing the same files?</h3>
+<p><code>claude --worktree feature-auth</code> creates another checkout on its own branch, and the next terminal uses a different name. <a href="https://code.claude.com/docs/en/worktrees" target="_blank" rel="noopener noreferrer">Anthropic's worktree guide</a> covers setup and cleanup.</p>
+<h3 id="how-do-i-pick-up-a-claude-code-session-later">How do I pick up a Claude Code session later?</h3>
+<p><code>claude --continue</code> resumes the newest session in this directory. <code>claude --resume</code> or <code>/resume</code> opens a picker, and the extension warns you if that chat is still open somewhere else.</p>
+<h3 id="does-a-cursor-subscription-include-claude-and-gpt-models">Does a Cursor subscription include Claude and GPT models?</h3>
+<p>Plus includes Grok models only. From Premium up, third-party models such as Claude and GPT are billed at API list price, on top of the monthly price. Claude Code is billed separately through Pro, Max, Team, Enterprise, Console, or a provider such as Bedrock.</p>
+<h3 id="what-does-kaku-keep-after-a-restart">What does Kaku keep after a restart?</h3>
+<p>Tabs and splits. Restore is on by default and is saved within a minute of a layout change, including after a crash. A Claude Code or Codex pane keeps its last screen. Closing it still asks first while that program is in the foreground.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-plan-mode"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Plan Mode: When and How to Use It</span><span class="blog-related-meta"><time datetime="2026-09-23">Sep 23, 2026</time> · 7 min read</span></a></li><li><a href="/blog/claude-code-agent-teams"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Agent Teams: Turn Them On and Where They Show Up</span><span class="blog-related-meta"><time datetime="2026-09-26">Sep 26, 2026</time> · 9 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

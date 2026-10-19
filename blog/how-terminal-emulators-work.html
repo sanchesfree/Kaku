@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>How Terminal Emulators Work · Kaku Blog</title>
+  <meta name="description" content="A terminal owns the pty and the cell grid. The shell is a child that writes bytes. Follow that path from those bytes to pixels.">
+  <meta property="og:title" content="How Terminal Emulators Work · Kaku Blog">
+  <meta property="og:description" content="A terminal owns the pty and the cell grid. The shell is a child that writes bytes. Follow that path from those bytes to pixels.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/how-terminal-emulators-work.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="How Terminal Emulators Work">
+  <meta property="og:url" content="https://kaku.fun/blog/how-terminal-emulators-work">
+  <meta property="article:published_time" content="2026-10-16">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/how-terminal-emulators-work.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/how-terminal-emulators-work"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/how-terminal-emulators-work">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/how-terminal-emulators-work">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/how-terminal-emulators-work">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/how-terminal-emulators-work.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How Terminal Emulators Work",
+          "item": "https://kaku.fun/blog/how-terminal-emulators-work"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/how-terminal-emulators-work#article",
+      "headline": "How Terminal Emulators Work",
+      "description": "A terminal owns the pty and the cell grid. The shell is a child that writes bytes. Follow that path from those bytes to pixels.",
+      "url": "https://kaku.fun/blog/how-terminal-emulators-work",
+      "mainEntityOfPage": "https://kaku.fun/blog/how-terminal-emulators-work",
+      "datePublished": "2026-10-16",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Terminal",
+      "image": "https://kaku.fun/img/blog/cards/how-terminal-emulators-work.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/how-terminal-emulators-work.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does tty print a device name with nothing plugged in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It prints the replica openpty allocated for this pane. That node behaves like a terminal. There is no serial port behind a /dev/ttys name."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the erase character DEL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Backspace encodes as 0x7f, the erase value in stty -a. BS (0x08) is sent for Backspace only with Control held. A remote terminfo that expects BS erases the wrong way until both sides match."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the GPU change what a program can print?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With WebGpu, Kaku draws the glyphs through Metal after the grid updates. Programs still send xterm-256color sequences. The front end does not change the pty or the parser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does scrollback go in a full-screen program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "smcup requests the alternate screen. xterm mode 1049 keeps no saved lines, and Kaku's alternate Screen has scrollback off. rmcup brings back the primary screen and its 10000 lines."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/how-terminal-emulators-work" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/how-terminal-emulators-work" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>How Terminal Emulators Work</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-16">Oct 16, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>8 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/how-terminal-emulators-work.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>A terminal emulator owns the window. It allocates a pseudoterminal, starts your shell as a child on one end of that pair, and turns the bytes the shell writes into a grid of cells and then into glyphs. The shell never touches pixels. Color, cursor motion and full-screen apps are byte sequences, so a wrong <code>TERM</code>, a stale window size or a ligature covering several cells shows up as a broken screen.</p>
+<h2 id="the-shell-is-a-child-process">The shell is a child process</h2>
+<p>Kaku creates a pseudoterminal and spawns the shell with the slave side as standard input, standard output and standard error. Before <code>exec</code>, the child calls <code>setsid</code> and then <code>ioctl(TIOCSCTTY)</code>, so the pty is its controlling terminal. The parent keeps the master and writes keystrokes there. <a href="https://man7.org/linux/man-pages/man7/pty.7.html" target="_blank" rel="noopener noreferrer">pty(7)</a> describes the same split: bytes written on the master arrive at the slave as if they had been typed, and bytes the slave writes can be read from the master.</p>
+<p>The shell can be swapped without swapping the terminal. <a href="/blog/tmux-alternative-mac">tmux</a> uses the same split the other way: tmux owns the pty, and the terminal only draws. Kaku's session restore brings the layout back and starts a new shell.</p>
+<p>On that child, Kaku sets <code>TERM</code> to <code>xterm-256color</code>, <code>COLORTERM</code> to <code>truecolor</code>, and <code>TERM_PROGRAM</code> to <code>Kaku</code>. <code>TERM_PROGRAM_VERSION</code> is the running build's version string. The bundled config keeps that <code>TERM</code> because a remote host has no <code>kaku</code> terminfo entry. The comment in that file names broken backspace and delete over SSH as what <code>config.term = 'kaku'</code> causes.</p>
+<p>On macOS, Kaku calls <code>libc::openpty</code> (<code>openpty(3)</code>). The call returns a primary descriptor and a replica, and it can set the window size at the same time. The man page names <code>/dev/ptmx</code> as the clone device and <code>/dev/ttys</code> plus three digits as the replicas. Linux pty(7) calls those ends master and slave, with slaves under <code>/dev/pts/</code>. Kaku's types are <code>UnixMasterPty</code> and <code>UnixSlavePty</code>: the terminal uses the master, and the shell sees the slave.</p>
+<p>Size goes out as a <code>winsize</code> (rows, columns, pixel width, pixel height) through <code>TIOCSWINSZ</code>. macOS tty(4) says this window size is how most full-screen programs learn the screen size. The comment beside <code>TIOCSCTTY</code> says that without a controlling terminal, <code>SIGWINCH</code> is not delivered, so those programs keep the old size. Once the slave closes, a read on the master returns <code>EIO</code>, which Kaku treats as end of file.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/how-terminal-emulators-work-mobile.webp" width="340" height="700"><img src="/img/blog/how-terminal-emulators-work.webp" width="910" height="231" loading="lazy" alt="Bytes from the shell pass through the PTY master into an escape parser that updates a cell grid, HarfBuzz shapes those cells into glyphs that the WebGPU window draws, and keystrokes travel back through the PTY master to the shell"></picture><figcaption>Output bytes move from the shell through the pty and the parser into cells, then into glyphs, while key bytes travel back the other way.</figcaption></figure>
+
+<p>Output bytes go from the shell, through the master, into the parser and the cell grid, then through HarfBuzz to the WebGPU window. Key bytes go from the window back through the master to the shell.</p>
+<h2 id="escape-sequences-update-a-grid">Escape sequences update a grid</h2>
+<p>Most bytes are text. <a href="https://man7.org/linux/man-pages/man4/console_codes.4.html" target="_blank" rel="noopener noreferrer">console_codes(4)</a> documents the VT102 and ECMA-48 controls the Linux console implements. <code>ESC</code> (<code>0x1b</code>) starts a sequence. <code>CSI</code> is <code>0x9b</code>, or the two bytes <code>ESC</code> <code>[</code>. <a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html" target="_blank" rel="noopener noreferrer">xterm ctlseqs</a>, through patch 411, treats parsing as a state machine: parameters run until a final byte, and an unexpected byte returns to the ground state.</p>
+<p>A CSI sequence is <code>ESC [</code>, optional numbers separated by semicolons, and a final character. <code>H</code> (CUP) moves the cursor to a row and column, origin at 1,1. <code>J</code> erases the display, <code>K</code> erases the line, and <code>m</code> is SGR: <code>0</code> resets, <code>1</code> is bold, <code>31</code> is red, so <code>ESC [ 1 ; 31 m</code> is bold red and <code>ESC [ 0 m</code> clears it. <code>38;2;r;g;b</code> is a 24-bit foreground. <code>COLORTERM=truecolor</code> is how Kaku tells programs to send it. A program that only trusts terminfo stays with <code>setaf</code>.</p>
+<p><code>Terminal</code> holds the parser, and each action updates terminal state. The model is a <code>Screen</code>, a deque of lines: the last <code>physical_rows</code> are visible, and earlier lines are scrollback. A cell stores a grapheme, its width and attributes such as intensity and color. Controls are stored as a space. The primary screen keeps scrollback. The alternate screen is a second <code>Screen</code> with scrollback off, matching ctlseqs, where xterm's alternate buffer is only as large as the display.</p>
+<p><code>CSI ? 1049 h</code> saves the cursor, switches to that screen and clears it. <code>CSI ? 1049 l</code> switches back. Terminfo names the strings <code>smcup</code> and <code>rmcup</code>. Full-screen programs print them on entry and exit, which is why the prompt returns. Bundled <code>scrollback_lines</code> is 10000. The struct default, before that file runs, is 3500. The alternate screen still has none. Bundled <code>line_height</code> is <code>1.28</code>, so block graphics stretch with the taller row. The <a href="/docs/configuration">configuration page</a> and the <a href="/docs/faq">FAQ</a> cover <code>1.0</code> to <code>1.1</code> when those graphics should be closer to square. A resize rewraps lines and sends <code>TIOCSWINSZ</code>. Programs that handle <code>SIGWINCH</code> redraw.</p>
+<h2 id="commands-that-show-each-layer">Commands that show each layer</h2>
+<pre><code class="language-bash">tty
+<span class="tok-b">echo</span> <span class="tok-s">"</span>$TERM<span class="tok-s">"</span>
+stty -a
+infocmp</code></pre>
+<p><code>tty</code> prints the <code>ttyname(3)</code> of stdin, or <code>not a tty</code>. In a local pane that is a replica from <code>openpty(3)</code>. <code>echo "$TERM"</code> prints <code>xterm-256color</code> unless <code>config.term</code> changed.</p>
+<p><code>stty -a</code> prints the termios state in POSIX form. Check <code>rows</code>, <code>columns</code>, <code>erase</code>, <code>intr</code>, <code>echo</code> and <code>icanon</code>. With <code>icanon</code> set, the kernel handles erase and kill before the program reads a line. Full-screen programs turn it off. <code>stty -g</code> prints a snapshot a later <code>stty</code> can restore.</p>
+<p><code>infocmp</code> prints the terminfo source for <code>$TERM</code>. The useful names are <code>cup</code>, <code>clear</code>, <code>smcup</code>, <code>rmcup</code> and <code>setaf</code>. This draws bold red, then resets:</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033[1;31mred\033[0m\n'</span></code></pre>
+<p><code>\033</code> is ESC, <code>[1;31m</code> is the SGR above, and <code>[0m</code> resets. Redirect printf to a file to see the bytes with no parsing.</p>
+<h2 id="shaping-then-the-gpu">Shaping, then the GPU</h2>
+<p>Cells are the model. Kaku then shapes runs with HarfBuzz, which WezTerm's notes describe as the ligature and OpenType step. A glyph records its fallback font, FreeType index, pixel advance and <code>num_cells</code>. The shaper comment's example is <code>!=</code> becoming one glyph, and <code>num_cells</code> keeps the cell cursor aligned with it.</p>
+<p>The bundled list is JetBrains Mono, then PingFang SC, Apple Symbols and Apple Color Emoji, and Kaku appends more fallbacks after it, including its bundled Symbols Nerd Font Mono. Light themes use Medium (SemiBold for bold), dark themes Regular (Medium for bold), and italics are drawn upright. An empty box is a code point none of these fonts contain. <a href="/blog/nerd-fonts-mac">Nerd Fonts on Mac</a> is about that gap.</p>
+<p>Ligatures are off in the shipped config:</p>
+<pre><code class="language-lua">config.harfbuzz_features = { <span class="tok-s">'calt=0'</span>, <span class="tok-s">'clig=0'</span>, <span class="tok-s">'liga=0'</span> }</code></pre>
+<p>Those are the three features WezTerm's shaping page tells you to disable. The configuration page says an empty table turns ligatures back on. The struct default, used when that bundled line is absent, is <code>kern</code>, <code>liga</code> and <code>clig</code>. The override goes in <code>~/.config/kaku/kaku.lua</code>, after the bundled defaults load. <a href="/blog/wezterm-config-for-mac">A practical WezTerm config</a> goes through the same font and spacing settings on upstream WezTerm.</p>
+<p><code>front_end</code> may be <code>OpenGL</code>, <code>WebGpu</code> or <code>Software</code>. WezTerm's documented default is <code>OpenGL</code>. <code>WebGpu</code> uses Metal on macOS, Vulkan, or DirectX 12 on Windows. <code>Software</code> rasterizes on the CPU. Kaku ships:</p>
+<pre><code class="language-lua">config.front_end = <span class="tok-s">'WebGpu'</span>
+config.webgpu_power_preference = <span class="tok-s">'LowPower'</span></code></pre>
+<p><code>LowPower</code> selects the integrated GPU and <code>HighPerformance</code> a discrete one, only when <code>front_end</code> is <code>WebGpu</code>. <code>max_fps</code> and <code>animation_fps</code> are both 60.</p>
+<h2 id="how-keys-become-bytes">How keys become bytes</h2>
+<p>A key is encoded and written to the master. The default encoding is xterm. <code>enable_csi_u_key_encoding</code> defaults off, and the Kitty keyboard protocol stays off unless <code>enable_kitty_keyboard</code> is true, which the configuration page suggests for Neovim.</p>
+<p>Newline mode starts off, so Enter sends carriage return, <code>\r</code>. If a program turns newline mode on, a line feed follows. Backspace sends DEL, <code>\x7f</code>, which the encoder treats as the usual <code>VERASE</code>. Control plus a letter uses the ASCII control map. Alt plus an ASCII letter or punctuation prefixes ESC. The bundled config makes the left Option key that Meta and the right Option key a compose key. <a href="/blog/mac-terminal-shortcuts">Mac terminal shortcuts</a> picks up once those bytes reach the shell. Until an input method commits, the preedit covers the cell under the cursor. <code>ime_preedit_rendering = "BuiltinInsert"</code> shifts the following cells instead.</p>
+<h2 id="when-the-screen-and-the-program-disagree">When the screen and the program disagree</h2>
+<p>If colors, cursor keys or a clear go wrong, print <code>TERM</code> and run <code>infocmp</code>. A remote host uses its own terminfo for the forwarded name, so leave <code>TERM</code> at <code>xterm-256color</code> unless that host has the entry.</p>
+<p>If lines wrap in the wrong place, <code>rows</code> and <code>columns</code> from <code>stty -a</code> should match the pane. They change with <code>TIOCSWINSZ</code>, and a program that ignores <code>SIGWINCH</code> will not redraw. If echo has stopped, or a crash left the alternate screen up, <code>tput reset</code> reinitializes from terminfo. A saved <code>stty -g</code> line puts the old mode flags back.</p>
+<p>Two characters drawn as one glyph means <code>calt</code>, <code>clig</code> and <code>liga</code> are no longer 0. Empty boxes are missing glyphs. A tall QR code is <code>line_height</code> at <code>1.28</code>. A pane that closes with the shell saw <code>EIO</code>. tmux keeps the process. Kaku restores the layout and the text, then starts a shell.</p>
+<p><code>openpty</code> fails with <code>EAGAIN</code> when no pseudoterminal is free, and with <code>ENXIO</code> at the <code>kern.tty.ptmx_max</code> sysctl. That limit is macOS, outside <code>kaku.lua</code>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="why-does-tty-print-a-device-name-with-nothing-plugged-in">Why does tty print a device name with nothing plugged in?</h3>
+<p>It prints the replica <code>openpty</code> allocated for this pane. That node behaves like a terminal. There is no serial port behind a <code>/dev/ttys</code> name.</p>
+<h3 id="why-is-the-erase-character-del">Why is the erase character DEL?</h3>
+<p>Backspace encodes as <code>0x7f</code>, the <code>erase</code> value in <code>stty -a</code>. BS (<code>0x08</code>) is sent for Backspace only with Control held. A remote terminfo that expects BS erases the wrong way until both sides match.</p>
+<h3 id="does-the-gpu-change-what-a-program-can-print">Does the GPU change what a program can print?</h3>
+<p>With <code>WebGpu</code>, Kaku draws the glyphs through Metal after the grid updates. Programs still send <code>xterm-256color</code> sequences. The front end does not change the pty or the parser.</p>
+<h3 id="where-does-scrollback-go-in-a-full-screen-program">Where does scrollback go in a full-screen program?</h3>
+<p><code>smcup</code> requests the alternate screen. xterm mode <code>1049</code> keeps no saved lines, and Kaku's alternate <code>Screen</code> has scrollback off. <code>rmcup</code> brings back the primary screen and its 10000 lines.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/best-terminal-for-mac"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">The Best Terminal for Mac in 2026: Eight Options Compared</span><span class="blog-related-meta"><time datetime="2026-09-21">Sep 21, 2026</time> · 6 min read</span></a></li><li><a href="/blog/mac-terminal-shortcuts"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">Mac Terminal Shortcuts That Save the Most Time</span><span class="blog-related-meta"><time datetime="2026-10-13">Oct 13, 2026</time> · 9 min read</span></a></li><li><a href="/blog/shell-integration-osc"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">Shell Integration: What OSC 7, 133 and 9 Tell the Terminal</span><span class="blog-related-meta"><time datetime="2026-10-17">Oct 17, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

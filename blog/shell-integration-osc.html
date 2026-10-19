@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Shell Integration: What OSC 7, 133 and 9 Tell the Terminal · Kaku Blog</title>
+  <meta name="description" content="How OSC 7, 133, 9 and 8 reach a terminal, which ones Kaku 0.25.0 emits for zsh and fish, and printf checks for directory, prompts and notifications.">
+  <meta property="og:title" content="Shell Integration: What OSC 7, 133 and 9 Tell the Terminal · Kaku Blog">
+  <meta property="og:description" content="How OSC 7, 133, 9 and 8 reach a terminal, which ones Kaku 0.25.0 emits for zsh and fish, and printf checks for directory, prompts and notifications.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/shell-integration-osc.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Shell Integration: What OSC 7, 133 and 9 Tell the Terminal">
+  <meta property="og:url" content="https://kaku.fun/blog/shell-integration-osc">
+  <meta property="article:published_time" content="2026-10-17">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/shell-integration-osc.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/shell-integration-osc"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/shell-integration-osc">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/shell-integration-osc">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/shell-integration-osc">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/shell-integration-osc.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Shell Integration: What OSC 7, 133 and 9 Tell the Terminal",
+          "item": "https://kaku.fun/blog/shell-integration-osc"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/shell-integration-osc#article",
+      "headline": "Shell Integration: What OSC 7, 133 and 9 Tell the Terminal",
+      "description": "How OSC 7, 133, 9 and 8 reach a terminal, which ones Kaku 0.25.0 emits for zsh and fish, and printf checks for directory, prompts and notifications.",
+      "url": "https://kaku.fun/blog/shell-integration-osc",
+      "mainEntityOfPage": "https://kaku.fun/blog/shell-integration-osc",
+      "datePublished": "2026-10-17",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Terminal",
+      "image": "https://kaku.fun/img/blog/cards/shell-integration-osc.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/shell-integration-osc.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does a new tab follow an SSH session's remote directory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A new tab is a local shell on your Mac. When the remote shell prints OSC 7, Kaku keeps only the path part of that URL, so the new tab tries the same path on the Mac. Without OSC 7 it opens where the ssh process is."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does ]133;A show up as text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The ESC byte was lost before Kaku saw the stream, so the rest printed as ordinary characters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can another program trigger an assistant fix by printing OSC 1337?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The hook sends kaku_last_cmd only with the token from ~/.config/kaku/ai_inline_capability prefixed to the command. A sequence printed by some other program does not have that token, and a missing file means the hook sends nothing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is iTerm2's Install Shell Integration the same setup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "iTerm2's menu installs its own script, which also keeps command history and can download with scp. Kaku does not ship that menu. Prompt jumping in Kaku is the ScrollToPrompt binding above."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/shell-integration-osc" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/shell-integration-osc" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Shell Integration: What OSC 7, 133 and 9 Tell the Terminal</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-17">Oct 17, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>8 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/shell-integration-osc.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>A new tab in Kaku opens in the current folder on a local Mac because the terminal can read the working directory of the process group that owns the pane, which at a prompt is the shell. OSC sequences are the other report: the shell writes a short escape sequence, and a terminal that understands it keeps the data and does not print the sequence. In Kaku 0.25.0, fish prints OSC 7 for the directory and OSC 133 to mark the prompt, while the zsh integration prints OSC 1337 user variables for the assistant and does not print OSC 7 or OSC 133. Notifications are OSC 9 and OSC 777, a separate path, and the Claude Code and Codex settings for them are in <a href="/blog/claude-code-notifications">Claude Code notifications</a>.</p>
+<h2 id="what-the-terminal-does-with-the-bytes">What the terminal does with the bytes</h2>
+<p>An OSC sequence starts with ESC and <code>]</code>, then a number, then parameters separated by semicolons, and ends with BEL (<code>\a</code>) or ST (<code>ESC \</code>). The terminal consumes the sequence. If you can read <code>]7;file://</code> in the scrollback, the ESC byte was lost before Kaku saw the stream, and the rest printed as ordinary characters.</p>
+<p>Kaku keeps each sequence on the pane. OSC 7 sets the working directory, and that value is used before the directory read from the process. OSC 133 labels later cells as prompt, input or output, and can store an exit status. OSC 1337 stores a named variable. OSC 9 and OSC 777 become a macOS notification while the window is in the background. OSC 8 marks a span of text as a link, which <code>Cmd + Click</code> opens.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/shell-integration-osc-mobile.webp" width="340" height="576"><img src="/img/blog/shell-integration-osc.webp" width="884" height="514" loading="lazy" alt="Kaku reads OSC 7 into the working directory used for a new tab, OSC 133 into prompt zones, OSC 1337 into the assistant hook, and OSC 9, OSC 777 and OSC 8 into a notification or a clickable link"></picture><figcaption>The terminal keeps each sequence as pane state, and a local Mac can also fill the directory from the process when OSC 7 never arrives.</figcaption></figure>
+
+<p>OSC 7 is the directory report. <a href="https://iterm2.com/documentation-escape-codes.html" target="_blank" rel="noopener noreferrer">iTerm2 documents it</a> as a file URL, <code>file://hostname/path</code>, a synonym for its RemoteHost and CurrentDir sequences. <a href="https://wezterm.org/shell-integration.html" target="_blank" rel="noopener noreferrer">WezTerm</a> uses that URL for new tabs, and so does Kaku. The three inherit switches default to on (<a href="/docs/configuration">configuration</a>):</p>
+<pre><code class="language-lua">config.window_inherit_working_directory = <span class="tok-b">true</span>
+config.tab_inherit_working_directory = <span class="tok-b">true</span>
+config.split_pane_inherit_working_directory = <span class="tok-b">true</span></code></pre>
+<p><code>Cmd + T</code> opens a tab in that folder, <code>Cmd + D</code> and <code>Cmd + Shift + D</code> split there, and <code>Cmd + Shift + T</code> reopens the last closed tab in the folder it had. On a local Mac, Kaku asks macOS (<code>proc_pidinfo</code>) when no OSC 7 has arrived, so the process directory is enough. Over SSH that process stays in the folder where you ran <code>ssh</code>. A remote shell that prints OSC 7 replaces it with the remote path, but a new tab is still a local shell, and Kaku reads only the path part of the URL, so that tab tries the same path on your Mac.</p>
+<p>OSC 133 is the FinalTerm prompt markup, documented by <a href="https://iterm2.com/documentation-escape-codes.html" target="_blank" rel="noopener noreferrer">iTerm2</a>. <code>133 ; A</code> starts the prompt. <code>133 ; B</code> ends the prompt and starts what you type. <code>133 ; C</code> starts the command's output. <code>133 ; D ; &lt;status&gt;</code> is the exit status. Kaku reads a missing status as 0. Kaku is built on WezTerm, and the action that scrolls to an earlier prompt zone is <code>ScrollToPrompt</code>. <a href="https://wezterm.org/config/lua/keyassignment/ScrollToPrompt.html" target="_blank" rel="noopener noreferrer">WezTerm leaves it unbound</a>, and Kaku 0.25.0 does too. iTerm2's installer draws a mark at each prompt and jumps with <code>Cmd + Shift + Up</code> and <code>Cmd + Shift + Down</code>. Kaku does not install that script.</p>
+<p>OSC 1337 <code>SetUserVar</code> is iTerm2's pane variable: a plain name and a base64 value. Kaku's assistant listens for <code>kaku_last_cmd</code> and <code>kaku_last_exit_code</code> on this channel, and a failed command can offer a fix you paste with <code>Cmd + Shift + E</code>. That is a different channel from OSC 133. Opening the chat with <code>Cmd + L</code> can also attach up to 51 rows of the last command's output, but only when marker C has recorded where the output started and marker D has recorded a non-zero status. The next <code>133 ; A</code> clears both. Fish prints A on the next prompt and never prints D, and the zsh file prints neither, so that slice stays empty.</p>
+<p>OSC 9 is iTerm2's one-line notification, <code>9 ; message</code>. OSC 777 is <code>777 ; notify ; title ; body</code>, the form <a href="https://wezterm.org/config/lua/config/notification_handling.html" target="_blank" rel="noopener noreferrer">WezTerm documents</a>. A number after <code>9 ;</code>, such as <code>9 ; 4</code>, is a ConEmu progress command, and Kaku does not treat it as a notification. OSC 8, from the <a href="https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda" target="_blank" rel="noopener noreferrer">VTE and iTerm2 proposal</a>, makes the text between <code>8 ; ; URL</code> and <code>8 ; ;</code> a link even when those words are not a URL. <code>Cmd + Click</code> opens it. Bare URLs and paths such as <code>src/main.rs:42</code> already open without OSC 8.</p>
+<h2 id="how-kaku-wires-the-shell">How Kaku wires the shell</h2>
+<p><code>kaku init</code> writes a managed file and points the shell at it. For zsh it appends two lines to <code>~/.zshrc</code>. One puts <code>~/.config/kaku/zsh/bin</code> on <code>PATH</code>. The other is:</p>
+<pre><code class="language-bash">[[ -f <span class="tok-s">"</span>$HOME<span class="tok-s">/.config/kaku/zsh/kaku.zsh"</span> ]] &amp;&amp; <span class="tok-b">source</span> <span class="tok-s">"</span>$HOME<span class="tok-s">/.config/kaku/zsh/kaku.zsh"</span> <span class="tok-c"># Kaku Shell Integration
+</span></code></pre>
+<p>For fish it writes <code>~/.config/fish/conf.d/kaku.fish</code>, which sources <code>~/.config/kaku/fish/kaku.fish</code>. <code>kaku doctor</code> checks that this integration is present. Starship and Smart Tab start only inside Kaku (<code>TERM_PROGRAM=Kaku</code>, or tmux started from a Kaku shell). The plugins those files load are covered in <a href="/blog/zsh-without-oh-my-zsh">a zsh setup without Oh My Zsh</a>.</p>
+<p>On <code>fish_prompt</code> the fish file prints OSC 7 as <code>file://</code> plus the hostname plus <code>$PWD</code>, and OSC <code>133 ; A</code>. On <code>fish_preexec</code> it prints OSC <code>133 ; C</code>. It does not print B or D. Both shells print OSC 1337 user variables only inside a Kaku pane: the spawn sets <code>WEZTERM_PANE</code>, and <code>TERM</code> stays <code>xterm-256color</code> so a remote host without a <code>kaku</code> terminfo entry still works. The value is a token from <code>~/.config/kaku/ai_inline_capability</code>, a colon, and the text, then base64. Without that token, <code>SetUserVar</code> does not start an assistant request. <code>KAKU_AUTO_DISABLE</code> turns the hooks off. Inside tmux the printf uses tmux's passthrough wrapper, which still needs <code>allow-passthrough</code>.</p>
+<p>The zsh file sends those user variables from <code>preexec</code> and <code>precmd</code> and does not print OSC 7 or OSC 133. The app bundle also contains <code>kaku.sh</code>, the WezTerm script for bash and zsh, which prints OSC 7, the A/B/C/D markers, and <code>WEZTERM_PROG</code>. <code>kaku init</code> does not source it, and it rewrites <code>PS1</code> on every prompt to add the markers.</p>
+<h2 id="check-it-with-printf">Check it with printf</h2>
+<p>Directory. From a zsh that is not already in <code>/tmp</code> (fish prints its own OSC 7 at the next prompt and overwrites the test):</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]7;file://%s/tmp\033\\'</span> <span class="tok-s">"</span><span class="tok-k">$(</span>hostname<span class="tok-k">)</span><span class="tok-s">"</span></code></pre>
+<p><code>Cmd + T</code>, then <code>pwd</code>, should print <code>/tmp</code>. zsh prints no OSC 7 of its own, so that path stays until another OSC 7 arrives. One whose value is not a URL fails to parse and clears it, and new tabs follow the shell process again:</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]7;x\033\\'</span></code></pre>
+<p>Prompt marks. Kaku reloads <code>~/.config/kaku/kaku.lua</code> on save. Append a binding. Assigning a new <code>config.keys</code> table would drop every default:</p>
+<pre><code class="language-lua"><span class="tok-b">table.insert</span>(config.keys, {
+  key = <span class="tok-s">'UpArrow'</span>,
+  mods = <span class="tok-s">'SHIFT'</span>,
+  action = wezterm.action.<span class="tok-f">ScrollToPrompt</span>(-<span class="tok-n">1</span>),
+})</code></pre>
+<p>Mark two prompts and jump:</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]133;A\a'</span>; <span class="tok-b">echo</span> first
+<span class="tok-b">printf</span> <span class="tok-s">'\033]133;A\a'</span>; <span class="tok-b">echo</span> second</code></pre>
+<p>Scroll until <code>first</code> is off the top, then press <code>Shift + Up</code>. The viewport moves to that marker. Fish already prints A at each prompt, so the key moves between real prompts there. On zsh it only hits markers something printed.</p>
+<p>Notifications. Leave the window in the background:</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\e]9;%s\a'</span> <span class="tok-s">"OSC 9"</span>
+<span class="tok-b">printf</span> <span class="tok-s">'\e]777;notify;%s;%s\a'</span> <span class="tok-s">"Build"</span> <span class="tok-s">"OSC 777"</span></code></pre>
+<p><code>notification_handling</code> defaults to <code>AlwaysShow</code>, which in Kaku still requires an unfocused window.</p>
+<p>A link whose text is not the URL:</p>
+<pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\e]8;;https://kaku.fun\e\\Kaku\e]8;;\e\\\n'</span></code></pre>
+<p><code>Cmd + Click</code> on the word Kaku opens the site.</p>
+<h2 id="what-fails-and-how-to-tell">What fails, and how to tell</h2>
+<p>tmux reads escape sequences itself and passes on only those wrapped in its passthrough form, and only when <code>~/.tmux.conf</code> contains <code>set -g allow-passthrough on</code>, reloaded with <code>tmux source-file ~/.tmux.conf</code>. Kaku's hooks wrap the OSC 1337 user variables that way. Fish's OSC 7 and OSC 133, and the printf checks above, are not wrapped, so inside tmux they stay with tmux. Kaku's <code>~/.config/kaku/tmux/kaku.tmux.conf</code> turns the mouse on and keeps <code>KAKU_SESSION</code>. It does not set passthrough. <a href="/blog/tmux-alternative-mac">tmux on a Mac</a> is still the tool for a session that must survive a dropped SSH connection, and this line is part of keeping it.</p>
+<p>A bare Enter does not repeat the last failure, because the exit code is sent only after a command that ran. Ctrl+C and a zero exit do not ask for a fix. If <code>Shift + Up</code> does nothing, no prompt zone sits above the viewport. On zsh that is normal until something prints OSC 133 A.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="does-a-new-tab-follow-an-ssh-sessions-remote-directory">Does a new tab follow an SSH session's remote directory?</h3>
+<p>No. A new tab is a local shell on your Mac. When the remote shell prints OSC 7, Kaku keeps only the path part of that URL, so the new tab tries the same path on the Mac. Without OSC 7 it opens where the <code>ssh</code> process is.</p>
+<h3 id="why-does-133a-show-up-as-text">Why does <code>]133;A</code> show up as text?</h3>
+<p>The ESC byte was lost before Kaku saw the stream, so the rest printed as ordinary characters.</p>
+<h3 id="can-another-program-trigger-an-assistant-fix-by-printing-osc-1337">Can another program trigger an assistant fix by printing OSC 1337?</h3>
+<p>The hook sends <code>kaku_last_cmd</code> only with the token from <code>~/.config/kaku/ai_inline_capability</code> prefixed to the command. A sequence printed by some other program does not have that token, and a missing file means the hook sends nothing.</p>
+<h3 id="is-iterm2s-install-shell-integration-the-same-setup">Is iTerm2's Install Shell Integration the same setup?</h3>
+<p>iTerm2's menu installs its own script, which also keeps command history and can download with scp. Kaku does not ship that menu. Prompt jumping in Kaku is the <code>ScrollToPrompt</code> binding above.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/best-terminal-for-mac"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">The Best Terminal for Mac in 2026: Eight Options Compared</span><span class="blog-related-meta"><time datetime="2026-09-21">Sep 21, 2026</time> · 6 min read</span></a></li><li><a href="/blog/how-terminal-emulators-work"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">How Terminal Emulators Work</span><span class="blog-related-meta"><time datetime="2026-10-16">Oct 16, 2026</time> · 8 min read</span></a></li><li><a href="/blog/mac-terminal-shortcuts"><span class="blog-related-cat">Terminal</span><span class="blog-related-name">Mac Terminal Shortcuts That Save the Most Time</span><span class="blog-related-meta"><time datetime="2026-10-13">Oct 13, 2026</time> · 9 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code Remote: Three Ways to Reach a Running Session · Kaku Blog</title>
+  <meta name="description" content="Anthropic&#x27;s Remote Control, cloud sessions, and opening your Mac&#x27;s terminal from another computer with kaku remote: what each needs and where it runs.">
+  <meta property="og:title" content="Claude Code Remote: Three Ways to Reach a Running Session · Kaku Blog">
+  <meta property="og:description" content="Anthropic&#x27;s Remote Control, cloud sessions, and opening your Mac&#x27;s terminal from another computer with kaku remote: what each needs and where it runs.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-remote.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code Remote: Three Ways to Reach a Running Session">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-code-remote">
+  <meta property="article:published_time" content="2026-09-30">
+  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-remote.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-code-remote"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-remote">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-remote">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-remote">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-code-remote.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code Remote: Three Ways to Reach a Running Session",
+          "item": "https://kaku.fun/blog/claude-code-remote"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-code-remote#article",
+      "headline": "Claude Code Remote: Three Ways to Reach a Running Session",
+      "description": "Anthropic's Remote Control, cloud sessions, and opening your Mac's terminal from another computer with kaku remote: what each needs and where it runs.",
+      "url": "https://kaku.fun/blog/claude-code-remote",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-code-remote",
+      "datePublished": "2026-09-30",
+      "dateModified": "2026-10-19",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-remote.webp",
+      "timeRequired": "PT5M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-code-remote.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use Claude Code from my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Start the session with claude --remote-control on your Mac, then open it in the Claude app or at claude.ai/code. Cloud sessions can also be started and followed from the app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Claude Code keep running if I close my laptop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A local session, including one under Remote Control, stops when the Mac sleeps. A cloud session runs on Anthropic's machines and keeps going."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I SSH into my Mac and run Claude Code instead?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. Notifications travel back to the terminal you connected from, as long as tmux has allow-passthrough on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does kaku remote work with Codex and other CLI tools?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It shows the terminal itself, so whatever runs in a Kaku tab, whether Claude Code, Codex, an editor or a shell, appears in the browser."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-code-remote" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-code-remote" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Claude Code Remote: Three Ways to Reach a Running Session</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-09-30">Sep 30, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>5 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-remote.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>There are three ways to keep working with Claude Code when you are away from the Mac it runs on. Anthropic's Remote Control lets you steer a session on your Mac from claude.ai/code or the Claude app on your phone. Cloud sessions move the work to Anthropic's machines, so nothing has to stay running at home. And <code>kaku remote</code> opens your Mac's terminal, every tab and split included, in a browser on another computer. They solve different problems, so this post covers what each one needs, where the code runs, and which to pick. Checked against Claude Code 2.1.302 in October 2026.</p>
+<h2 id="the-short-version">The short version</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Remote Control</th>
+<th>Cloud session</th>
+<th>kaku remote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where Claude runs</td>
+<td>Your Mac</td>
+<td>Anthropic's machines</td>
+<td>Your Mac</td>
+</tr>
+<tr>
+<td>What you see</td>
+<td>The Claude conversation</td>
+<td>The Claude conversation</td>
+<td>The whole terminal</td>
+</tr>
+<tr>
+<td>Where you use it</td>
+<td>claude.ai/code, the Claude app</td>
+<td>claude.ai/code, the Claude app, the CLI</td>
+<td>A desktop browser</td>
+</tr>
+<tr>
+<td>What it needs</td>
+<td>A paid Claude plan, the Mac awake</td>
+<td>A paid Claude plan, a GitHub repository</td>
+<td>Kaku running, the Mac awake</td>
+</tr>
+<tr>
+<td>Other programs</td>
+<td>No</td>
+<td>No</td>
+<td>Yes, any shell, editor or agent</td>
+</tr>
+</tbody>
+</table>
+<h2 id="remote-control-the-same-session-from-your-phone">Remote Control: the same session from your phone</h2>
+<p>Remote Control keeps Claude Code running on your Mac, with your files, tools and credentials, and lets you read and answer it from claude.ai/code or the Claude mobile app. Start a session with it turned on:</p>
+<pre><code class="language-bash">claude --remote-control</code></pre>
+<p>Or run <code>claude remote-control</code> in a project, and sessions you start from claude.ai/code or the app run there on your Mac; <code>claude remote-control --continue</code> reattaches to the last session started in that directory. It needs a paid Claude plan with a claude.ai login, since API keys are not supported, and the Mac has to stay awake and online for as long as you want to reach it.</p>
+<p>It is the right choice when the work depends on your machine, such as a local database, a private network, or a build that only runs there, and all you want from the phone is to approve a step or send the next instruction.</p>
+<h2 id="cloud-sessions-nothing-has-to-stay-on">Cloud sessions: nothing has to stay on</h2>
+<p>A cloud session runs Claude Code on a virtual machine Anthropic provides, against a GitHub repository. You can start one from claude.ai/code or the app, or from the terminal:</p>
+<pre><code class="language-bash">claude --cloud <span class="tok-s">"fix the flaky login test"</span></code></pre>
+<p>Because it does not run on your Mac, closing the laptop does not stop it. When you want to continue locally, <code>claude --teleport</code> pulls a cloud session into your terminal. The trade-off is the environment: the session sees the repository, not your machine, so anything that only exists locally is out of reach.</p>
+<h2 id="kaku-remote-the-whole-terminal-in-a-browser">kaku remote: the whole terminal in a browser</h2>
+<p>Both of the options above show you the Claude conversation. Sometimes you need the rest of the terminal too: the dev server log in the next split, a Codex session in another tab, or a plain shell to check something. <code>kaku remote</code> opens the terminal itself in a browser on another computer.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/remote-access-architecture-mobile.webp" width="340" height="388"><img src="/img/blog/remote-access-architecture.webp" width="657" height="231" loading="lazy" alt="A browser on another computer connects through a relay to Kaku on your Mac, with what you type and see encrypted from the browser to Kaku"></picture><figcaption>The relay passes the connection along without being able to read it.</figcaption></figure>
+
+<p>Turn it on and pair a browser:</p>
+<pre><code class="language-bash">kaku remote</code></pre>
+<p>Kaku asks before turning remote access on, then prints a pairing link. Open it in the browser you want to pair. A link works once and expires after 10 minutes, so run <code>kaku remote</code> again for each device. Once paired, bookmark the page to return to it without a new link.</p>
+<p>What you type and what you see is encrypted between that browser and Kaku, and the relay in the middle only forwards it. Kaku posts a notification on your Mac whenever a new browser pairs, so a pairing you did not make does not go unnoticed. Managing access stays on the Mac:</p>
+<pre><code class="language-bash">kaku remote devices        <span class="tok-c"># list paired browsers
+</span>kaku remote revoke &lt;id&gt;    <span class="tok-c"># remove one; its open sessions end within seconds
+</span>kaku remote off            <span class="tok-c"># turn remote access off
+</span>kaku remote --reset        <span class="tok-c"># remove every paired browser
+</span></code></pre>
+<p>The page is made for desktop browsers for now. Like Remote Control, it reaches your actual Mac, so the Mac needs to be awake with Kaku running.</p>
+<h2 id="which-one-to-use">Which one to use</h2>
+<ul>
+<li><strong>Approving a step from your phone:</strong> Remote Control.</li>
+<li><strong>Work that should continue with the laptop closed:</strong> a cloud session.</li>
+<li><strong>Using the terminal from another computer, with agents and everything else in it:</strong> <code>kaku remote</code>.</li>
+</ul>
+<p>They also combine. A session started with <code>claude --remote-control</code> inside Kaku can be answered from the phone during the day and picked up in the browser at another desk in the evening.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="can-i-use-claude-code-from-my-phone">Can I use Claude Code from my phone?</h3>
+<p>Yes. Start the session with <code>claude --remote-control</code> on your Mac, then open it in the Claude app or at claude.ai/code. Cloud sessions can also be started and followed from the app.</p>
+<h3 id="does-claude-code-keep-running-if-i-close-my-laptop">Does Claude Code keep running if I close my laptop?</h3>
+<p>A local session, including one under Remote Control, stops when the Mac sleeps. A cloud session runs on Anthropic's machines and keeps going.</p>
+<h3 id="can-i-ssh-into-my-mac-and-run-claude-code-instead">Can I SSH into my Mac and run Claude Code instead?</h3>
+<p>Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. <a href="/blog/claude-code-notifications">Notifications</a> travel back to the terminal you connected from, as long as tmux has <code>allow-passthrough</code> on.</p>
+<h3 id="does-kaku-remote-work-with-codex-and-other-cli-tools">Does kaku remote work with Codex and other CLI tools?</h3>
+<p>Yes. It shows the terminal itself, so whatever runs in a Kaku tab, whether Claude Code, Codex, an editor or a shell, appears in the browser.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/codex-cli-setup"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Setting Up Codex CLI on Mac: Install, Login and Config</span><span class="blog-related-meta"><time datetime="2026-09-29">Sep 29, 2026</time> · 5 min read</span></a></li><li><a href="/blog/claude-code-agent-teams"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Agent Teams: Turn Them On and Where They Show Up</span><span class="blog-related-meta"><time datetime="2026-09-26">Sep 26, 2026</time> · 9 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>
