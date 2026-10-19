@@ -359,12 +359,12 @@ def render_page(donor: str, releases: list[dict], zh: bool) -> str:
 
     page = re.sub(r'<nav class="site-nav".*?</nav>', retarget, page, count=1, flags=re.S)
     blocks = ["<hr>\n" + release_html(row, zh) if index else release_html(row, zh) for index, row in enumerate(releases)]
+    # Same header and column as the other prose pages (about, privacy).
     main = (
-        '<main id="main-content"><section class="section"><div class="wide release-doc">\n'
-        f"<h1>{title}</h1>\n"
-        f'<p class="release-sub">{intro}</p>\n'
+        f'<main id="main-content"><header class="page-hero"><div class="wide"><h1>{title}</h1><p>{intro}</p></div></header>\n'
+        '<section class="section"><div class="wide"><div class="release-doc">\n'
         + "\n".join(blocks)
-        + "\n</div></section></main>"
+        + "\n</div></div></section></main>"
     )
     page = re.sub(r'<main id="main-content">.*?</main>', main, page, count=1, flags=re.S)
     return page
