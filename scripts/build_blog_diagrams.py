@@ -188,26 +188,30 @@ def fits_phone(name: str, items: list[Node], width: float):
 
 # ---------------------------------------------------------------- layouts
 
-def flow(name: str, nodes: list[Node], *, back: str | None = None, both: bool = False, gap: int = 72):
+def flow(name: str, nodes: list[Node], *, back: str | None = None, both: bool = False, gap: int = 72,
+         equal_width: bool = True):
     """A left-to-right chain on desktop, top-to-bottom on phones.
 
     `back` draws a dashed return arrow from the last node to the first.
     `both` makes every link two-headed.
+    `equal_width=False` lets a long chain use each node's natural width.
     """
     f = DESK
     nw = max(max(node_w(n, f) for n in nodes), 200)
+    widths = [nw if equal_width else node_w(n, f) for n in nodes]
     nh = max(node_h(n, f) for n in nodes)
-    w = PAD * 2 + len(nodes) * nw + (len(nodes) - 1) * gap
+    w = PAD * 2 + sum(widths) + (len(nodes) - 1) * gap
     h = PAD * 2 + nh + (84 if back else 0)
     c = Canvas(w, h, DESK_COL, DESK["out"])
-    for i, n in enumerate(nodes):
-        x = PAD + i * (nw + gap)
-        draw_node(c, n, x, PAD, nw, nh, f)
+    x = PAD
+    for i, (n, width) in enumerate(zip(nodes, widths)):
+        draw_node(c, n, x, PAD, width, nh, f)
         if i < len(nodes) - 1:
-            c.arrow([(x + nw + 8, PAD + nh / 2), (x + nw + gap - 8, PAD + nh / 2)], both=both)
+            c.arrow([(x + width + 8, PAD + nh / 2), (x + width + gap - 8, PAD + nh / 2)], both=both)
+        x += width + gap
     if back:
         y0, y1 = PAD + nh, PAD + nh + 48
-        xa, xb = PAD + nw / 2, PAD + (len(nodes) - 1) * (nw + gap) + nw / 2
+        xa, xb = PAD + widths[0] / 2, w - PAD - widths[-1] / 2
         c.arrow([(xb, y0 + 6), (xb, y1), (xa, y1), (xa, y0 + 8)], color=MUTED, width=2, dash=6)
         label_w = tw(back, f["note"]) + 24
         c.box((xa + xb) / 2 - label_w / 2, y1 - 18, label_w, 36, fill=PAPER, stroke=PAPER, r=6, width=0)
@@ -331,6 +335,68 @@ def fan_in(name: str, sources: list[Node], hub: Node, out: Node, gate: str = "")
         m.text(140, gy, s, f["note"], color=GREEN, anchor="lm")
         gy += f["note"] + 10
     draw_node(m, out, 40, y + out_gap, mw - 80, heights[-1], f)
+    m.save(name + "-mobile")
+
+
+def fan_out(name: str, source: Node, rows: list[tuple[str, Node | None, str, Node | None]]):
+    """Labeled branches through optional state nodes to optional outputs."""
+    f = DESK
+    sw, sh = node_w(source, f), node_h(source, f)
+    states = [state for _, state, _, _ in rows if state]
+    outputs = [out for _, _, _, out in rows if out]
+    bw = max([node_w(n, f) for n in states] + [0])
+    ow = max([node_w(n, f) for n in outputs] + [0])
+    trunk = PAD + sw / 2
+    bx = max(PAD + sw + 64, trunk + max(tw(label, f["note"]) for label, _, _, _ in rows) + 40)
+    link = max([tw(label, f["note"]) + 32 for _, _, label, _ in rows] + [96])
+    ox = bx + bw + link
+    heights = [max(node_h(n, f) for n in (state, out) if n) for _, state, _, out in rows]
+    top, gap = PAD + sh + 64, 40
+    c = Canvas(ox + ow + PAD, top + sum(heights) + (len(rows) - 1) * gap + PAD, DESK_COL, DESK["out"])
+    draw_node(c, source, PAD, PAD, sw, sh, f)
+    c.line([(trunk, PAD + sh + 8), (trunk, c.h - PAD - heights[-1] / 2)])
+    y = top
+    for (label, state, onward, out), hh in zip(rows, heights):
+        cy, target = y + hh / 2, bx if state else ox
+        c.arrow([(trunk, cy), (target - 8, cy)])
+        c.text((trunk + target) / 2, cy - 22, label, f["note"], color=MUTED)
+        if state:
+            draw_node(c, state, bx, y, bw, hh, f)
+        if out:
+            draw_node(c, out, ox, y, ow, hh, f)
+            if state:
+                c.arrow([(bx + bw + 8, cy), (ox - 8, cy)])
+                c.text((bx + bw + ox) / 2, cy - 22, onward, f["note"], color=MUTED)
+        y += hh + gap
+    c.save(name)
+
+    f = PHONE
+    mw, left, bw, inner, between = 680, 92, 548, 64, 40
+    fits_phone(name, [source] + states + outputs, bw)
+    label_heights = [len(wrap(label, f["note"], bw)) * (f["note"] + 10) + 14 for label, _, _, _ in rows]
+    row_heights = [sum(node_h(n, f) for n in (state, out) if n) + (inner if state and out else 0)
+                   for _, state, _, out in rows]
+    mh = PAD * 2 + node_h(source, f) + sum(label_heights) + sum(row_heights) + len(rows) * between
+    m = Canvas(mw, mh, PHONE_COL)
+    sy = PAD + node_h(source, f) / 2
+    draw_node(m, source, left, PAD, bw, node_h(source, f), f)
+    y = PAD + node_h(source, f) + between
+    last = y + sum(label_heights) + sum(row_heights[:-1]) + (len(rows) - 1) * between
+    last += node_h(rows[-1][1] or rows[-1][3], f) / 2
+    m.line([(left - 8, sy), (40, sy), (40, last)])
+    for (label, state, onward, out), label_h, row_h in zip(rows, label_heights, row_heights):
+        for i, line in enumerate(wrap(label, f["note"], bw)):
+            m.text(left, y + f["note"] / 2 + i * (f["note"] + 10), line, f["note"], color=MUTED, anchor="lm")
+        y += label_h
+        first = state or out
+        hh = node_h(first, f)
+        m.arrow([(40, y + hh / 2), (left - 8, y + hh / 2)])
+        draw_node(m, first, left, y, bw, hh, f)
+        if state and out:
+            m.arrow([(left + 60, y + hh + 8), (left + 60, y + hh + inner - 8)])
+            m.text(left + 90, y + hh + inner / 2, onward, f["note"], color=MUTED, anchor="lm")
+            draw_node(m, out, left, y + hh + inner, bw, node_h(out, f), f)
+        y += row_h + between
     m.save(name + "-mobile")
 
 
@@ -505,6 +571,99 @@ def claude_code_git_worktrees(name):
         (Node("repo-feature", ["feature-auth"]), Node("Tab 2", ["claude"], "card")),
         (Node("repo-fix", ["fix-login"]), Node("Tab 3", ["codex"], "card")),
     ], head=("Worktree, branch", "Kaku tab"))
+
+
+@diagram
+def shell_integration_osc(name):
+    fan_out(name, Node("Shell or program"), [
+        ("OSC 7 / process cwd", Node("Working directory", [], "tint"), "Cmd+T", Node("New tab")),
+        ("OSC 133", Node("Prompt zones", [], "tint"), "", None),
+        ("OSC 1337", Node("Assistant hook", [], "brand"), "", None),
+        ("OSC 9 / 777", None, "", Node("macOS notification", [], "tint")),
+        ("OSC 8", None, "", Node("Clickable link", [], "tint")),
+    ])
+
+
+@diagram
+def how_terminal_emulators_work(name):
+    flow(name, [
+        Node("Shell", ["on slave", "output bytes"], "card"),
+        Node("PTY", ["master", "read"], "quiet"),
+        Node("Escape", ["parser", "text and CSI"], "tint"),
+        Node("Cell grid", ["graphemes"], "tint"),
+        Node("HarfBuzz", ["shaper", "glyphs"], "tint"),
+        Node("WebGPU", ["window"], "brand"),
+    ], back="key bytes to PTY master, then stdin to shell", gap=32, equal_width=False)
+
+
+@diagram
+def claude_code_mcp_servers(name):
+    # A fork and join needs a shared result, unlike the fan_out row outputs.
+    nodes = [
+        Node("Claude Code", [], "tint"),
+        Node("MCP client", [], "brand"),
+        Node("Stdio process"),
+        Node("HTTP server"),
+        Node("Tool list", [], "tint"),
+    ]
+    f = {**DESK, "note": DESK["title"]}
+    widths = [node_w(n, f) for n in nodes]
+    hh = max(node_h(n, f) for n in nodes)
+    server_w = max(widths[2:4])
+    branch_gap = tw("stdin and stdout", f["note"]) + 64
+    join_gap = tw("tools/list", f["note"]) + 64
+    client_x = PAD + widths[0] + 96
+    server_x = client_x + widths[1] + branch_gap
+    tool_x = server_x + server_w + join_gap
+    row_step = hh + 110
+    upper, lower = PAD + hh / 2, PAD + hh / 2 + row_step
+    cy = (upper + lower) / 2
+    c = Canvas(tool_x + widths[4] + PAD, lower + hh / 2 + PAD, DESK_COL, f["out"])
+    for i, x in [(0, PAD), (1, client_x), (4, tool_x)]:
+        draw_node(c, nodes[i], x, cy - hh / 2, widths[i], hh, f)
+    for i, y in [(2, upper), (3, lower)]:
+        draw_node(c, nodes[i], server_x, y - hh / 2, server_w, hh, f)
+
+    c.arrow([(PAD + widths[0] + 8, cy), (client_x - 8, cy)])
+    c.text((PAD + widths[0] + client_x) / 2, cy - hh / 2 - 28,
+           "one per server", f["note"], color=MUTED)
+    # Split before the two peer transports, then merge after them.
+    split_x = client_x + widths[1] + 32
+    c.line([(client_x + widths[1] + 8, cy), (split_x, cy)])
+    c.line([(split_x, upper), (split_x, lower)])
+    merge_x = server_x + server_w + 32
+    for y, label in [(upper, "stdin and stdout"), (lower, "HTTP")]:
+        c.arrow([(split_x, y), (server_x - 8, y)])
+        c.text((split_x + server_x) / 2, y - 28, label, f["note"], color=MUTED)
+        c.line([(server_x + server_w + 8, y), (merge_x, y)])
+    c.line([(merge_x, upper), (merge_x, lower)])
+    c.arrow([(merge_x, cy), (tool_x - 8, cy)])
+    c.text((merge_x + tool_x) / 2, cy - 28, "tools/list", f["note"], color=MUTED)
+    c.save(name)
+
+    f = PHONE
+    mw, left, bw = 680, 92, 496
+    fits_phone(name, nodes, bw)
+    heights = [node_h(n, f) for n in nodes]
+    gaps = [80, 100, 112, 100]
+    ys = [PAD]
+    for height, gap in zip(heights[:-1], gaps):
+        ys.append(ys[-1] + height + gap)
+    m = Canvas(mw, ys[-1] + heights[-1] + PAD, PHONE_COL)
+    for n, y, height in zip(nodes, ys, heights):
+        draw_node(m, n, left, y, bw, height, f)
+    m.arrow([(mw / 2, ys[0] + heights[0] + 8), (mw / 2, ys[1] - 8)])
+    m.text(mw / 2 + 24, (ys[0] + heights[0] + ys[1]) / 2,
+           "one per server", f["note"], color=MUTED, anchor="lm")
+    centers = [y + height / 2 for y, height in zip(ys, heights)]
+    m.line([(left - 8, centers[1]), (40, centers[1]), (40, centers[3])])
+    for i, label in [(2, "stdin and stdout"), (3, "HTTP")]:
+        m.arrow([(40, centers[i]), (left - 8, centers[i])])
+        m.text(left, ys[i] - 28, label, f["note"], color=MUTED, anchor="lm")
+        m.line([(left + bw + 8, centers[i]), (mw - 40, centers[i])])
+        m.text(left + bw, ys[i] + heights[i] + 28, "tools/list", f["note"], color=MUTED, anchor="rm")
+    m.arrow([(mw - 40, centers[2]), (mw - 40, centers[4]), (left + bw + 8, centers[4])])
+    m.save(name + "-mobile")
 
 
 def main() -> int:

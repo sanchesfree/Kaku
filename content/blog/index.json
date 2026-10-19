@@ -379,6 +379,62 @@
         "title": "在 Mac 上用 Yazi，快速的终端文件管理器",
         "description": "在 macOS 上装好 Yazi 和预览依赖，记住常用按键，加上退出时切换目录的 y 包装函数，再做些配置。"
       }
+    },
+    {
+      "slug": "how-terminal-emulators-work",
+      "category": "terminal",
+      "date": null,
+      "keyword": "how terminal emulators work",
+      "en": {
+        "title": "How Terminal Emulators Work",
+        "description": "A terminal owns the pty and the cell grid. The shell is a child that writes bytes. Follow that path from those bytes to pixels."
+      },
+      "zh": {
+        "title": "终端模拟器是怎么工作的",
+        "description": "终端管着 pty 和字符网格，shell 是写字节的子进程。顺着这条路径，字节变成格子，再变成像素。"
+      }
+    },
+    {
+      "slug": "shell-integration-osc",
+      "category": "terminal",
+      "date": null,
+      "keyword": "terminal shell integration",
+      "en": {
+        "title": "Shell Integration: What OSC 7, 133 and 9 Tell the Terminal",
+        "description": "How OSC 7, 133, 9 and 8 reach a terminal, which ones Kaku 0.25.0 emits for zsh and fish, and printf checks for directory, prompts and notifications."
+      },
+      "zh": {
+        "title": "终端 shell 集成靠 OSC 把目录和提示符交给终端",
+        "description": "OSC 7、133、9、8 各自告诉终端什么，Kaku 0.25.0 的 fish 和 zsh 实际发哪些，以及怎么用 printf 核对。"
+      }
+    },
+    {
+      "slug": "ssh-config-mac",
+      "category": "shell",
+      "date": null,
+      "keyword": "ssh config",
+      "en": {
+        "title": "SSH Config on Mac: Hosts, Keys and the Keychain",
+        "description": "Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh."
+      },
+      "zh": {
+        "title": "在 Mac 上配置 SSH config",
+        "description": "具体 Host 写在 Host * 前面，用 ssh -G 核对，钥匙串选项只留给系统自带的 ssh。"
+      }
+    },
+    {
+      "slug": "claude-code-mcp-servers",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code mcp",
+      "en": {
+        "title": "Claude Code MCP Servers: Add, Scope and Approve Them",
+        "description": "Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json."
+      },
+      "zh": {
+        "title": "配置 Claude Code 的 MCP 服务器",
+        "description": "用 claude mcp add 接 HTTP 或 stdio，分清 local、project、user，密钥放环境变量。"
+      }
     }
   ]
 }
