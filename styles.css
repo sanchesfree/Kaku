@@ -1276,7 +1276,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 }
 @media (max-width: 880px) {
   .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .wide, .hero-wrap, .hero-centered { padding: 0 28px; }
+  .wide, .hero-wrap, .hero-centered { padding-inline: 28px; }
   .site-nav { padding-inline: 14px; }
   .section-head h2 { font-size: 26px; }
 }
@@ -1285,7 +1285,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .section-head .section-num { display: none; }
 }
 @media (max-width: 560px) {
-  .wide, .hero-wrap, .hero-centered { padding: 0 16px; }
+  .wide, .hero-wrap, .hero-centered { padding-inline: 16px; }
   .site-nav { padding: 12px 5px 0; }
   .site-nav .nav-inner { min-height: 48px; padding: 6px 10px; }
   .nav-links { gap: 2px; margin-left: 6px; }
