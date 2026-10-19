@@ -160,7 +160,7 @@ button, input { font: inherit; }
 .section-head h2 {
   margin: 0;
   color: var(--dark-warm);
-  font-size: clamp(28px, 4vw, 32px);
+  font-size: 32px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.3px;
@@ -179,7 +179,7 @@ button, input { font: inherit; }
   font-weight: 500;
   letter-spacing: 0.4px;
   color: var(--stone);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .section-body { max-width: none; }
 .btn {
@@ -1288,6 +1288,11 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 @media (max-width: 880px) {
   .wide, .hero-wrap, .hero-centered { padding: 0 28px; }
   .site-nav { padding-inline: 14px; }
+  .section-head h2 { font-size: 26px; }
+}
+/* mole.fit drops section eyebrows on phones; the 404 hero keeps its label. */
+@media (max-width: 640px) {
+  .section-head .section-num { display: none; }
 }
 @media (max-width: 560px) {
   .wide, .hero-wrap, .hero-centered { padding: 0 16px; }
