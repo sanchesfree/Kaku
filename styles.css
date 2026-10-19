@@ -1010,6 +1010,18 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
   word-break: normal;
   overflow-wrap: normal;
 }
+/* A table that scrolls sideways shows a soft shadow on each side that still has
+   content to reveal. The parchment covers scroll with the content (local) and sit
+   over the shadows (scroll) at the ends, so a table that fits, or one scrolled to
+   its end, shows nothing on that side. Backgrounds paint under the text, and the
+   cells are transparent, so nothing is hidden. */
+.doc-content table, .home-compare {
+  background:
+    linear-gradient(to right, var(--parchment) 18px, transparent 40px) left / 40px 100% no-repeat local,
+    linear-gradient(to left, var(--parchment) 18px, transparent 40px) right / 40px 100% no-repeat local,
+    linear-gradient(to right, rgba(20, 19, 19, 0.10), transparent) left / 16px 100% no-repeat scroll,
+    linear-gradient(to left, rgba(20, 19, 19, 0.10), transparent) right / 16px 100% no-repeat scroll;
+}
 /* Tables carry nowrap columns, so give them a scroll container as soon as the
    docs layout reflows rather than letting a wide row clip. */
 @media (max-width: 820px) {
