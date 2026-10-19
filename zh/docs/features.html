@@ -138,7 +138,7 @@
 kaku chat</code></pre>
           <p>shell 里的版本比面板简单，只输出纯文本，支持 <code>/new</code>、<code>/resume</code>、<code>/clear</code>、<code>/status</code>、<code>/memory</code> 和 <code>/exit</code>。</p>
           <p><strong>命令失败修复</strong></p>
-          <p>命令以非零状态退出时，Kaku Assistant 会将失败命令、退出码、工作目录和当前 git 分支发送给模型，并在终端行内给出修复建议。按 <code>Cmd + Shift + E</code> 即可贴回命令行；像 <code>rm -rf</code>、<code>git reset --hard</code> 等高危操作仅填入待确认，绝不自动执行。</p>
+          <p>命令以非零状态退出时，Kaku Assistant 会将失败命令、退出码、工作目录和当前 git 分支发送给模型，并在终端行内给出修复建议。按 <code>Cmd + Shift + E</code> 会直接运行这条修复命令，像 <code>rm -rf</code>、<code>git reset --hard</code> 这类高危命令只会填进命令行，确认后再自己回车。</p>
           <p><code>Ctrl+C</code> 退出、help 参数、单独调用包管理器、git pull 冲突，以及前台不是 shell 的进程，都不会触发。</p>
           <p><strong>自然语言生成命令</strong></p>
           <p>在提示符后输入 <code># &lt;描述&gt;</code> 并回车，Kaku 会在 shell 执行前拦截该指令，连同当前目录与 git 分支一并提交给模型，并将生成的命令回填至提示符，供你核对后执行。</p>

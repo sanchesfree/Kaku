@@ -51,7 +51,7 @@ The shell version is simpler than the panel. It streams plain text and supports 
 
 **Error recovery**
 
-When a command exits with a non-zero status, Kaku Assistant sends the command, exit code, working directory, and git branch to the model and shows a suggested fix inline. Press `Cmd + Shift + E` to paste it. Dangerous commands such as `rm -rf` or `git reset --hard` are pasted but never run automatically.
+When a command exits with a non-zero status, Kaku Assistant sends the command, exit code, working directory, and git branch to the model and shows a suggested fix inline. Press `Cmd + Shift + E` to run it. Dangerous commands such as `rm -rf` or `git reset --hard` are only pasted, so you review them before pressing Return.
 
 It stays quiet for `Ctrl+C` exits, help flags, bare package manager calls, git pull conflicts, and non-shell foreground processes.
 

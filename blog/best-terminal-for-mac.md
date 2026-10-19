@@ -15,7 +15,7 @@ There is no single best terminal for Mac, but the choice gets simple once you kn
 | Terminal | Version | License | Price | Configured with | Splits |
 |---|---|---|---|---|---|
 | Terminal.app | 2.15 | Proprietary, ships with macOS | Free | Settings window | Same session only |
-| iTerm2 | 3.7.6 | GPL-2.0 | Free | Settings window | Yes |
+| iTerm2 | 3.7.6 | GPL-2.0 or later | Free | Settings window | Yes |
 | Ghostty | 1.3.1 | MIT | Free | Text file | Yes |
 | WezTerm | 20240203, then nightly builds | MIT | Free | Lua | Yes |
 | Warp | Rolling | AGPL-3.0 client | Free plan, paid plans from $20 a month | Settings window | Yes |

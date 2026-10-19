@@ -436,6 +436,65 @@ def pairs(name: str, rows: list[tuple[Node, Node]], *, head: tuple[str, str] = (
     m.save(name + "-mobile")
 
 
+def gated_flow(name: str, nodes: list[Node], stop: Node, *, stops: dict[int, str],
+               bypass: tuple[int, int, str], onward: dict[int, str]):
+    """A vertical chain with a shared stop and one bypass around a decision.
+
+    Desktop places the stop beside the chain; phones stack it below, with
+    separate outer rails for the stop and bypass so paths never cross.
+    """
+    for mobile, f in [(False, DESK), (True, PHONE)]:
+        left = 92
+        bw = 496 if mobile else max(node_w(n, f) for n in nodes)
+        if mobile:
+            fits_phone(name, nodes + [stop], bw)
+        gap = 100
+        heights = [node_h(n, f) for n in nodes]
+        ys = [PAD]
+        for hh in heights[:-1]:
+            ys.append(ys[-1] + hh + gap)
+        centers = [y + hh / 2 for y, hh in zip(ys, heights)]
+        stop_w, stop_h = (bw if mobile else node_w(stop, f)), node_h(stop, f)
+        stop_x = left if mobile else left + bw + 220
+        stop_y = ys[-1] + heights[-1] + gap if mobile else centers[max(stops)] - stop_h / 2
+        w = 680 if mobile else stop_x + stop_w + PAD
+        h = max(ys[-1] + heights[-1], stop_y + stop_h) + PAD
+        c = Canvas(w, h, PHONE_COL if mobile else DESK_COL, f["out"])
+        for i, (n, y, hh) in enumerate(zip(nodes, ys, heights)):
+            draw_node(c, n, left, y, bw, hh, f)
+            if i < len(nodes) - 1:
+                # Offset labeled links to leave room for text on phones.
+                ax = left + 120 if i in onward else left + bw / 2
+                c.arrow([(ax, y + hh + 8), (ax, ys[i + 1] - 8)])
+                if i in onward:
+                    c.text(ax + 24, y + hh + gap / 2, onward[i], f["note"],
+                           color=MUTED, anchor="lm")
+
+        start, end, label = bypass
+        # Join the destination from the left, clear of the main chain.
+        c.arrow([(left - 8, centers[start]), (40, centers[start]),
+                 (40, centers[end]), (left - 8, centers[end])])
+        c.text(left, ys[end] - 28, label, f["note"], color=MUTED, anchor="lm")
+
+        rail = w - 40 if mobile else left + bw + 180
+        stop_cy = stop_y + stop_h / 2
+        branch_ys = []
+        for i, label in stops.items():
+            # Exit near the bottom corner; label sits in the following gap.
+            by = ys[i] + heights[i] - 24
+            branch_ys.append(by)
+            c.line([(left + bw + 8, by), (rail, by)], color=MUTED)
+            c.text(left + bw if mobile else left + bw + 24,
+                   ys[i] + heights[i] + 28 if mobile else by - 22,
+                   label, f["note"], color=MUTED, anchor="rm" if mobile else "lm")
+        c.line([(rail, min(branch_ys + [stop_cy])),
+                (rail, max(branch_ys + [stop_cy]))], color=MUTED)
+        target = stop_x + stop_w + 8 if mobile else stop_x - 8
+        c.arrow([(rail, stop_cy), (target, stop_cy)], color=MUTED)
+        draw_node(c, stop, stop_x, stop_y, stop_w, stop_h, f)
+        c.save(name + ("-mobile" if mobile else ""))
+
+
 # ---------------------------------------------------------------- diagrams
 
 DIAGRAMS = {}
@@ -444,6 +503,31 @@ DIAGRAMS = {}
 def diagram(fn):
     DIAGRAMS[fn.__name__.replace("_", "-")] = fn
     return fn
+
+
+@diagram
+def claude_code_permission_layers(name):
+    gated_flow(name, [
+        Node("Tool call"),
+        Node("PreToolUse hook", ["Claude Code decides"], "tint"),
+        Node("Deny, ask, allow", ["Rules", "Claude Code decides"], "brand"),
+        Node("Permission mode", ["Claude Code decides"], "tint"),
+        Node("Bash sandbox", ["OS-level limits"], "tint"),
+        Node("Command runs"),
+    ], Node("Blocked", [], "quiet"), stops={1: "exit 2", 2: "deny"},
+        bypass=(2, 4, "allow"), onward={2: "no match", 3: "approved"})
+
+
+@diagram
+def claude_md_load_order(name):
+    fan_in(name, [
+        Node("1 Managed policy file", ["at launch"], "tint"),
+        Node("2 ~/.claude/CLAUDE.md", ["at launch"], "card"),
+        Node("3 Ancestor files", ["CLAUDE.md", "at launch"], "card"),
+        Node("4 Working directory", ["CLAUDE.md + local", "at launch"], "card"),
+        Node("Subdirectory CLAUDE.md", ["on demand", "when a file is touched"], "quiet"),
+    ], Node("Concatenated", ["all loaded files", "in load order"], "tint"),
+        Node("Claude context", [], "brand"))
 
 
 @diagram

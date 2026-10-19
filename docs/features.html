@@ -138,7 +138,7 @@
 kaku chat</code></pre>
           <p>The shell version is simpler than the panel. It streams plain text and supports <code>/new</code>, <code>/resume</code>, <code>/clear</code>, <code>/status</code>, <code>/memory</code>, and <code>/exit</code>.</p>
           <p><strong>Error recovery</strong></p>
-          <p>When a command exits with a non-zero status, Kaku Assistant sends the command, exit code, working directory, and git branch to the model and shows a suggested fix inline. Press <code>Cmd + Shift + E</code> to paste it. Dangerous commands such as <code>rm -rf</code> or <code>git reset --hard</code> are pasted but never run automatically.</p>
+          <p>When a command exits with a non-zero status, Kaku Assistant sends the command, exit code, working directory, and git branch to the model and shows a suggested fix inline. Press <code>Cmd + Shift + E</code> to run it. Dangerous commands such as <code>rm -rf</code> or <code>git reset --hard</code> are only pasted, so you review them before pressing Return.</p>
           <p>It stays quiet for <code>Ctrl+C</code> exits, help flags, bare package manager calls, git pull conflicts, and non-shell foreground processes.</p>
           <p><strong>Natural language to command</strong></p>
           <p>Type <code># &lt;description&gt;</code> at the prompt and press Enter. Kaku catches the line before the shell runs it, sends it to the model along with the current directory and git branch, and puts the resulting command back at the prompt for you to review and run.</p>

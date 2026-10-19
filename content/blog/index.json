@@ -463,6 +463,132 @@
         "title": "配置 Claude Code 的 MCP 服务器",
         "description": "用 claude mcp add 接 HTTP 或 stdio，分清 local、project、user，密钥放环境变量。"
       }
+    },
+    {
+      "slug": "claude-md-memory",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude.md",
+      "en": {
+        "title": "CLAUDE.md Explained: Memory Files, Load Order and What to Write",
+        "description": "Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory."
+      },
+      "zh": {
+        "title": "CLAUDE.md 怎么写：记忆文件、加载顺序和该写什么",
+        "description": "Claude Code 从哪读 CLAUDE.md，文件怎么叠加，引用和 rules，该写什么，以及和 AGENTS.md 的关系。"
+      }
+    },
+    {
+      "slug": "claude-code-permissions",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code dangerously skip permissions",
+      "en": {
+        "title": "Claude Code Permissions: Modes, Rules and --dangerously-skip-permissions",
+        "description": "Claude Code permission modes, allow/ask/deny rules, what bypassPermissions risks, a safer middle-ground config and a hook that blocks commands."
+      },
+      "zh": {
+        "title": "Claude Code 权限：模式、规则和跳过确认",
+        "description": "Claude Code 的权限模式、allow/ask/deny 规则，bypass 的风险，一份更稳的配置，以及拦命令的 hook。"
+      }
+    },
+    {
+      "slug": "claude-code-slash-commands",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code commands",
+      "en": {
+        "title": "Claude Code Slash Commands: The Ones That Matter and How to Write Your Own",
+        "description": "The Claude Code slash commands worth knowing, their keyboard shortcuts, and how to write custom commands with arguments, plus three to copy."
+      },
+      "zh": {
+        "title": "Claude Code 斜杠命令：常用命令和自定义命令写法",
+        "description": "Claude Code 常用斜杠命令、配套快捷键，以及带参数的自定义命令写法和三个可抄的例子。"
+      }
+    },
+    {
+      "slug": "claude-code-cost",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code pricing",
+      "en": {
+        "title": "Claude Code Cost: Pricing, /usage, ccusage and Ways to Cut It",
+        "description": "How Claude Code is billed on plans and API keys, where /usage and ccusage show spend, what drives cost, and the habits that cut it."
+      },
+      "zh": {
+        "title": "Claude Code 费用：计费方式、/usage、ccusage 和省钱做法",
+        "description": "Claude Code 的订阅与 API 计费区别，/usage 和 ccusage 怎么看花费，费用从哪来，以及怎么省。"
+      }
+    },
+    {
+      "slug": "gemini-cli-setup",
+      "category": "agents",
+      "date": null,
+      "keyword": "gemini cli",
+      "en": {
+        "title": "Gemini CLI on Mac: Install, Sign In and What Changed in 2026",
+        "description": "Install Gemini CLI with npm or Homebrew, which sign-in paths still work after June 18, 2026, GEMINI.md, settings.json, MCP, sandboxing and Kaku."
+      },
+      "zh": {
+        "title": "Mac 上安装和使用 Gemini CLI，2026 年登录方式有变化",
+        "description": "用 npm 或 Homebrew 安装，2026 年 6 月 18 日后还能用的登录方式，GEMINI.md、MCP、沙盒和 Kaku。"
+      }
+    },
+    {
+      "slug": "opencode-setup",
+      "category": "agents",
+      "date": null,
+      "keyword": "opencode",
+      "en": {
+        "title": "OpenCode Setup on Mac: Install, Providers, AGENTS.md and Permissions",
+        "description": "Install OpenCode on a Mac, connect a provider with /connect, write AGENTS.md with /init, set permissions, and use it in Kaku."
+      },
+      "zh": {
+        "title": "OpenCode 在 Mac 上怎么安装和配置",
+        "description": "在 Mac 上安装 OpenCode，用 /connect 连模型服务商，/init 生成 AGENTS.md，配权限，以及在 Kaku 里怎么用。"
+      }
+    },
+    {
+      "slug": "tmux-cheat-sheet",
+      "category": "shell",
+      "date": null,
+      "keyword": "tmux cheat sheet",
+      "en": {
+        "title": "tmux Cheat Sheet: Default Keys, Copy Mode and a Minimal Config",
+        "description": "The default tmux prefix and keys for sessions, windows, panes and copy mode, plus a minimal ~/.tmux.conf and how tmux behaves inside Kaku."
+      },
+      "zh": {
+        "title": "tmux 快捷键速查，附复制模式和最小配置",
+        "description": "tmux 默认前缀和会话、窗口、窗格、复制模式的快捷键，一份最小的 ~/.tmux.conf，以及在 Kaku 里怎么用。"
+      }
+    },
+    {
+      "slug": "warp-terminal-alternative",
+      "category": "terminal",
+      "date": null,
+      "keyword": "warp terminal",
+      "en": {
+        "title": "Warp Terminal Alternatives for Mac: What to Pick and Why",
+        "description": "Why people leave Warp, what it still does best, and how iTerm2, Ghostty, WezTerm, Kitty, Alacritty and Kaku compare on GPU, config, AI and license."
+      },
+      "zh": {
+        "title": "Warp 终端的替代品，Mac 上怎么选",
+        "description": "人们为什么离开 Warp、它仍然擅长什么，以及六个替代终端在 GPU、配置、AI 和许可证上的差别。"
+      }
+    },
+    {
+      "slug": "modern-cli-tools-mac",
+      "category": "shell",
+      "date": null,
+      "keyword": "modern cli tools",
+      "en": {
+        "title": "Modern CLI Tools for Mac: ripgrep, fd, bat, eza, zoxide, Atuin, delta",
+        "description": "What seven Rust-era tools replace, the Homebrew install, one useful command and config each, and what Kaku installs or wires for you at 0.25.0."
+      },
+      "zh": {
+        "title": "Mac 命令行工具推荐：ripgrep、fd、bat、eza、zoxide、Atuin、delta",
+        "description": "七个常用命令行工具各自替换什么、怎么用 Homebrew 安装，以及 Kaku 0.25.0 实际装了哪些。"
+      }
     }
   ]
 }
