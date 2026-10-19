@@ -352,6 +352,9 @@ def render_page(donor: str, releases: list[dict], zh: bool) -> str:
         nav = match.group(0)
         nav = nav.replace('href="/zh/roadmap"', f'href="{page_zh}"')
         nav = nav.replace('href="/roadmap"', f'href="{page_en}"')
+        # The nav links carry no class, unlike the language options, so only they match.
+        for path in (page_en, page_zh):
+            nav = nav.replace(f'<a href="{path}">', f'<a href="{path}" aria-current="page">')
         return nav
 
     page = re.sub(r'<nav class="site-nav".*?</nav>', retarget, page, count=1, flags=re.S)

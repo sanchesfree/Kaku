@@ -670,6 +670,8 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
   .gallery-tabs button { flex: 0 0 auto; padding: 8px 10px; }
 }
 @media (max-width: 560px) {
+  /* Compare and Changelog stay in the footer; the bar keeps Docs and Blog on phones. */
+  .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display: none; }
   .lang-current-code { display: inline; }
   .lang-current-name { display: none; }
 }

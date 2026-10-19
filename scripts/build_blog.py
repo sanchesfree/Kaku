@@ -51,6 +51,8 @@ UI = {
         "prefix": "",
         "blog": "Blog",
         "docs": "Docs",
+        "compare": "Compare",
+        "changelog": "Changelog",
         "index_title": "Kaku Blog",
         "index_lede": "Notes on Mac terminals, AI coding tools and how Kaku is built, by Tw93.",
         "index_desc": "Guides and notes on Mac terminals, Claude Code, Codex and shell setup, and how Kaku is built.",
@@ -70,6 +72,8 @@ UI = {
         "prefix": "/zh",
         "blog": "博客",
         "docs": "文档",
+        "compare": "对比",
+        "changelog": "更新日志",
         "index_title": "Kaku 博客",
         "index_lede": "关于 Mac 终端、AI 编程工具和 Kaku 怎么做出来的一些记录，作者 Tw93。",
         "index_desc": "关于 Mac 终端、Claude Code、Codex、shell 配置的指南，以及 Kaku 是怎么做出来的。",
@@ -224,6 +228,8 @@ def chrome(lang: str, en_path: str, zh_path: str) -> tuple[str, str]:
     p = UI[lang]["prefix"]
     nav = re.sub(r'<div class="nav-links">.*?</div>',
                  f'<div class="nav-links"><a href="{p}/docs">{UI[lang]["docs"]}</a>'
+                 f'<a href="{p}/compare">{UI[lang]["compare"]}</a>'
+                 f'<a href="{p}/changelog">{UI[lang]["changelog"]}</a>'
                  f'<a href="{p}/blog" aria-current="page">{UI[lang]["blog"]}</a></div>', nav)
     return nav, foot
 
