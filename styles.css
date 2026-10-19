@@ -583,7 +583,7 @@ button, input { font: inherit; }
 .gallery {
   --gallery-motion: cubic-bezier(0.4, 0, 0.2, 1);
   display: grid;
-  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) max-content;
   column-gap: 24px;
   align-items: baseline;
 }
