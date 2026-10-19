@@ -653,8 +653,11 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
 .gallery-tabs button.is-active { color: var(--ivory); background: var(--kaku-slate); border-color: var(--kaku-slate); }
 .gallery-tabs button.is-active:hover { background: var(--kaku-slate-light); border-color: var(--kaku-slate-light); }
 .gallery-tabs button:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
-/* Below 1120px the caption has no room for a line beside the tabs, so it takes its own row. */
+/* Below 1120px the caption has no room for a line beside the tabs, so it takes its own row,
+   and the title sits above the line so a line that wraps never runs beside it. */
 @media (max-width: 1119px) {
+  .gallery-caption, html[lang^="zh"] .gallery-caption { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .gallery-caption .line { margin-bottom: 0; }
   .gallery { grid-template-columns: minmax(0, 1fr); }
   .gallery-caption, .gallery-tabs { grid-column: 1; grid-row: auto; }
   .gallery-tabs {
