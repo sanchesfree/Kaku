@@ -1,6 +1,6 @@
 # Roadmap
 
-V0.22.0 shipped touch-friendly tab bar controls, smoother background session saves, app-reported tab titles, Kitty keyboard protocol support, and bundled diagnostics export; this cycle focuses on settings discoverability, AI sandbox tightening, and the macOS install experience.
+V0.24.0 added kaku remote, which opens this Mac's terminals in a browser on another computer, and V0.25.0 shipped agent titles, Claude Code alerts with no setup, and AI chat controls; this cycle focuses on settings discoverability, AI sandbox tightening, and the macOS install experience.
 
 ## Now
 
