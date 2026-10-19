@@ -985,11 +985,20 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
   width: 1%;
   white-space: nowrap;
 }
-/* Config descriptions contain inline code but still need to wrap as prose. */
-.doc-content table.config-fields:has(td:last-child > code:only-child) th:first-child,
-.doc-content table.config-fields:has(td:last-child > code:only-child) td:first-child { width: 1%; white-space: nowrap; }
-.doc-content table.config-fields:has(td:last-child > code:only-child) th:last-child,
-.doc-content table.config-fields:has(td:last-child > code:only-child) td:last-child { width: auto; white-space: normal; }
+/* Config descriptions, and any table marked prose-cells, contain inline code but
+   still need to wrap as prose. */
+.doc-content table:is(.config-fields, .prose-cells):has(td:last-child > code:only-child) th:first-child,
+.doc-content table:is(.config-fields, .prose-cells):has(td:last-child > code:only-child) td:first-child { width: 1%; white-space: nowrap; }
+.doc-content table:is(.config-fields, .prose-cells):has(td:last-child > code:only-child) th:last-child,
+.doc-content table:is(.config-fields, .prose-cells):has(td:last-child > code:only-child) td:last-child { width: auto; white-space: normal; }
+/* Keybinding tables share one action column width, so the shortcut column starts
+   at the same place in every section instead of jumping with each table's widest
+   key; a shortcut cell may wrap after its key chips. The repeated class outranks
+   the :has() column rules above. */
+.doc-content table.keys.keys.keys th:first-child,
+.doc-content table.keys.keys.keys td:first-child { width: 52%; white-space: normal; }
+.doc-content table.keys.keys.keys th:last-child,
+.doc-content table.keys.keys.keys td:last-child { width: auto; white-space: normal; }
 /* Never break an inline code token inside a table: `word-break` on
    .doc-content code drops its min-content width to one character, which let a
    key column collapse to ~60px and stack `chat_model_choices` letter by letter.

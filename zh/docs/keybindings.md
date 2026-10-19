@@ -31,7 +31,7 @@
 | 在 Tab Navigator 里关闭选中的标签 | 筛选框为空时按 `Backspace` |
 | 关闭标签 | `Cmd + Shift + W` |
 | 重开关闭的标签 | `Cmd + Shift + T` |
-| 重命名标签 | Cmd + Shift + I 或双击标签标题 |
+| 重命名标签 | `Cmd + Shift + I` 或双击标签标题 |
 
 ## 分屏
 

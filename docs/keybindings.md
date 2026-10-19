@@ -31,7 +31,7 @@ All keybindings use macOS-native modifier keys. `Opt` = Option/Alt, `Ctrl` = Con
 | Close the highlighted tab in the Tab Navigator | `Backspace` with an empty filter |
 | Close tab | `Cmd + Shift + W` |
 | Reopen closed tab | `Cmd + Shift + T` |
-| Rename tab | Cmd + Shift + I or double-click tab title |
+| Rename tab | `Cmd + Shift + I` or double-click tab title |
 
 ## Panes
 
