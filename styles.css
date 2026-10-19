@@ -37,7 +37,7 @@
   --border-soft: #e5e3d8;
   --line-faint: #edebe1;
   --border-card: color-mix(in srgb, var(--border-soft) 70%, var(--line));
-  --near-black: #141413;
+  --near-black: #363433;
   --dark-warm: #3d3d3a;
   --stone: #6b6a64;
   --brand: #287A3D;
@@ -1368,10 +1368,11 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   height: 5px;
   margin: -2.5px 0 0 -2.5px;
   border-radius: 50%;
-  background: var(--near-black);
-  opacity: 0.4;
-  transform: rotate(0deg) translate(calc(cos(var(--mark-orbit)) * 0.76em), calc(sin(var(--mark-orbit)) * 0.64em));
-  animation: mark-orbit 12s linear infinite normal;
+  background: var(--brand);
+  /* A terminal cursor: it ticks around a flat ellipse in steps instead of
+     gliding. */
+  transform: translate(calc(cos(var(--mark-orbit)) * 0.8em), calc(sin(var(--mark-orbit)) * 0.48em));
+  animation: mark-orbit 12s steps(30) infinite normal;
   pointer-events: none;
 }
 @keyframes mark-orbit {
