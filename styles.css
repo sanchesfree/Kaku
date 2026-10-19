@@ -1439,9 +1439,9 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   color: var(--stone);
   font-family: var(--mono);
   font-size: 12px;
+  letter-spacing: 0.3px;
 }
 .blog-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  letter-spacing: 0.3px;
 .blog-card {
   overflow: hidden;
   border: 1px solid var(--border-card);
