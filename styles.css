@@ -154,7 +154,6 @@ button, input { font: inherit; }
 }
 .section-head {
   display: grid;
-  gap: 10px;
   margin-bottom: 24px;
 }
 /* Section titles and ledes use mole.fit's 32px dark-warm title and 16px olive lede. */
@@ -167,7 +166,7 @@ button, input { font: inherit; }
   letter-spacing: -0.3px;
 }
 .section-head p {
-  margin: 0;
+  margin: 12px 0 0;
   color: var(--olive);
   font-size: 16px;
   line-height: 1.55;
@@ -179,7 +178,7 @@ button, input { font: inherit; }
   font-weight: 500;
   letter-spacing: 0;
   color: var(--brand);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .section-body { max-width: none; }
 .btn {
