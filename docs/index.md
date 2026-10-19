@@ -6,9 +6,7 @@ Install Kaku with the DMG or Homebrew, then check the shell setup.
 
 ## Download DMG
 
-Download the latest DMG from GitHub Releases, open it, drag Kaku into Applications, then launch it from the app list.
-
-[Open latest Release](https://github.com/tw93/Kaku/releases/latest)
+Download the latest DMG from [GitHub Releases](https://github.com/tw93/Kaku/releases/latest), open it, drag Kaku into Applications, then launch it from the app list.
 
 ## Homebrew
 
@@ -48,9 +46,7 @@ exec zsh -l
 - If the Homebrew install fails, run `brew update` and try `brew install --cask kaku` again. If `kaku update` reports a checksum error on a Homebrew install, use `brew upgrade --cask kaku` instead.
 - To set up the shell for the first time, run `kaku init`. It sets up zsh/fish integration and, in an interactive shell, asks before installing missing optional tools such as Starship, Delta, Lazygit, and Yazi through Homebrew.
 - If AI features don't work, open `kaku ai` and check Auth Type, Base URL, Simple Model, Deep Model, and API key.
-- When filing an issue, include how you installed Kaku, your macOS and Kaku versions, and steps to reproduce.
-
-[Open GitHub Issues](https://github.com/tw93/Kaku/issues)
+- When [filing an issue](https://github.com/tw93/Kaku/issues), include how you installed Kaku, your macOS and Kaku versions, and steps to reproduce.
 
 ---
 

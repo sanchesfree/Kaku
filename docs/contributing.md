@@ -79,11 +79,9 @@ These commands reproduce the release artifacts locally. Official releases go thr
 2. Make your changes.
 3. Run `make fmt && make check && make test` locally.
 4. Commit and push.
-5. Open a PR targeting `main`.
+5. Open a [pull request](https://github.com/tw93/Kaku/pulls) targeting `main`.
 
 For code changes, CI checks formatting, compilation, and tests. Universal builds run separately, on build-pipeline changes, on a schedule, or when dispatched by hand. Changes that only touch Markdown trigger neither.
-
-[Browse open Pull Requests](https://github.com/tw93/Kaku/pulls)
 
 ---
 

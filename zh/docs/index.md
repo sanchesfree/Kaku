@@ -6,9 +6,7 @@
 
 ## 下载 DMG
 
-从 GitHub Releases 下载最新的 DMG，打开后把 Kaku 拖进 Applications，再从应用列表启动。
-
-[打开最新 Release](https://github.com/tw93/Kaku/releases/latest)
+从 [GitHub Releases](https://github.com/tw93/Kaku/releases/latest) 下载最新的 DMG，打开后把 Kaku 拖进 Applications，再从应用列表启动。
 
 ## Homebrew
 
@@ -48,9 +46,7 @@ exec zsh -l
 - 若 Homebrew 安装失败，可先执行 `brew update` 后重试。对于通过 Homebrew 安装的 Kaku，若运行 `kaku update` 提示 checksum 校验错误，请改用 `brew upgrade --cask kaku` 更新。
 - 初次配置环境请运行 `kaku init`，会自动配置 zsh/fish 集成；在交互式终端中还会询问是否通过 Homebrew 安装缺失的 Starship、Delta、Lazygit、Yazi 等可选工具。
 - AI 功能用不了时，打开 `kaku ai` 检查一下 Auth Type、Base URL、Simple Model、Deep Model 和 API key。
-- 提交 issue 时带上安装方式、macOS 版本、Kaku 版本和复现步骤。
-
-[打开 GitHub Issues](https://github.com/tw93/Kaku/issues)
+- [提交 issue](https://github.com/tw93/Kaku/issues) 时带上安装方式、macOS 版本、Kaku 版本和复现步骤。
 
 ---
 

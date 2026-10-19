@@ -79,11 +79,9 @@ RUST_LOG=debug make dev
 2. 改代码。
 3. 本地跑 `make fmt && make check && make test`。
 4. 提交并推送。
-5. 开 PR，目标分支选 `main`。
+5. 开 [PR](https://github.com/tw93/Kaku/pulls)，目标分支选 `main`。
 
 代码改动将触发 CI 的格式化、编译与测试检查。Universal 架构构建流程独立运行，仅在构建工作流变更、每日定时或手动调度时触发；仅修改文档的提交不会触发构建检查。
-
-[查看现有 Pull Requests](https://github.com/tw93/Kaku/pulls)
 
 ---
 
