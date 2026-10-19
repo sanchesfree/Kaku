@@ -5,13 +5,6 @@ document.querySelectorAll('[data-gallery]').forEach(gallery => {
   const tablist = gallery.querySelector('[role="tablist"]');
   const title = gallery.querySelector('[data-gallery-title]');
   const line = gallery.querySelector('[data-gallery-line]');
-  panels.forEach(panel => {
-    const link = panel.querySelector('a');
-    const img = link.querySelector('img');
-    const syncImageLink = () => { link.href = img.currentSrc || img.src; };
-    img.addEventListener('load', syncImageLink);
-    if (img.complete) syncImageLink();
-  });
   let request = 0;
   let fadeTimer;
   let gesture;
@@ -89,7 +82,12 @@ document.querySelectorAll('[data-gallery]').forEach(gallery => {
     select(tabs[(index + (x < 0 ? 1 : -1) + tabs.length) % tabs.length]);
     swiped = true;
   });
+  // Like mole.fit: a click on the left half steps back, on the right half forward.
   frame.addEventListener('click', event => {
-    if (swiped) { event.preventDefault(); swiped = false; }
-  }, true);
+    if (swiped) { swiped = false; return; }
+    const box = frame.getBoundingClientRect();
+    const index = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+    const step = event.clientX < box.left + box.width / 2 ? -1 : 1;
+    select(tabs[(index + step + tabs.length) % tabs.length]);
+  });
 });
