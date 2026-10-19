@@ -8,7 +8,7 @@ import hashlib, html, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SHOTS = [
     ("ai", "AI coding", "AI 编程",
-     "Claude Code works in your project, and its topic shows at the top right",
+     "Claude Code at work, its topic shown at the top right",
      "Claude Code 在项目里干活，窗口右上角显示它正在做什么"),
     ("panes", "Panes", "分屏",
      "Press Cmd + D to split, and tabs sit along the bottom",
@@ -17,7 +17,7 @@ SHOTS = [
      "Press Cmd + L to ask, then copy or insert the command",
      "按 Cmd + L 直接问，回答里的命令可以复制或插入"),
     ("commands", "Commands", "一句话命令",
-     "Type ## and a sentence to get a few commands to pick from",
+     "Type ## and a sentence, then pick a command",
      "输入 ## 加一句话，给出几条命令供你挑"),
     ("remote", "Remote", "远程",
      "Run kaku remote to continue in a browser",
@@ -25,9 +25,6 @@ SHOTS = [
     ("files-dark", "Files", "文件管理",
      "Press Cmd + Shift + Y to browse files and code with Yazi",
      "按 Cmd + Shift + Y 用 Yazi 浏览文件和代码"),
-    ("files-light", "Light", "浅色主题",
-     "The same workspace in Kaku Light",
-     "同一个工作区换成 Kaku Light"),
     ("settings", "Settings", "设置",
      "Run kaku config to change fonts, themes and windows",
      "运行 kaku config 调整字体、主题和窗口"),

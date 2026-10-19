@@ -24,7 +24,6 @@ from __future__ import annotations
 import argparse
 import html
 import json
-import math
 import os
 import re
 import sys
@@ -166,10 +165,13 @@ def fmt_date(d: str, lang: str) -> str:
 def reading_minutes(text: str, lang: str) -> int:
     plain = re.sub(r"```.*?```", "", text, flags=re.S)
     plain = FIGURE_RE.sub("", plain)
+    # mole.fit's rates: Han at 300 a minute plus Latin words at 200, so a
+    # translation shows about the same minutes as its English original (400
+    # had Chinese posts reading well under their English).
+    words = len(re.findall(r"[A-Za-z0-9]+", plain))
     if lang == "zh":
-        n = len(re.findall(r"[一-鿿]", plain)) + len(re.findall(r"[A-Za-z0-9]+", plain)) // 2
-        return max(1, math.ceil(n / 400))
-    return max(1, math.ceil(len(re.findall(r"\S+", plain)) / 200))
+        return max(1, round(len(re.findall(r"[\u3400-\u4dbf\u4e00-\u9fff]", plain)) / 300 + words / 200))
+    return max(1, round(words / 200))
 
 
 def figure_dims(name: str) -> tuple[int, int]:
