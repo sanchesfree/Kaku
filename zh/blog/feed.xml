@@ -7,6 +7,14 @@
     <description>关于 Mac 终端、Claude Code、Codex、shell 配置的指南，以及 Kaku 是怎么做出来的。</description>
     <language>zh-CN</language>
     <item>
+      <title>2026 年 Mac 上的终端怎么选</title>
+      <link>https://kaku.fun/zh/blog/best-terminal-for-mac</link>
+      <guid isPermaLink="true">https://kaku.fun/zh/blog/best-terminal-for-mac</guid>
+      <pubDate>Mon, 19 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Terminal.app、iTerm2、Ghostty、WezTerm、Warp、Kitty、Alacritty 和 Kaku，按上手成本、配置方式、AI 工具和价格对比，2026 年 10 月核对。</description>
+    </item>
+    <item>
       <title>Claude Code 通知不弹出，在 Mac 上怎么修</title>
       <link>https://kaku.fun/zh/blog/claude-code-notifications</link>
       <guid isPermaLink="true">https://kaku.fun/zh/blog/claude-code-notifications</guid>

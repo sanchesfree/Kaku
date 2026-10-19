@@ -47,6 +47,7 @@ Kaku is driven from the shell, not over HTTP:
 <!-- blog:start -->
 ## Blog
 
+- [The Best Terminal for Mac in 2026: Eight Options Compared](https://kaku.fun/blog/best-terminal-for-mac.md): Terminal.app, iTerm2, Ghostty, WezTerm, Warp, Kitty, Alacritty and Kaku compared on setup, configuration, AI tools and price, checked October 2026.
 - [Claude Code Notifications Not Showing? How to Fix Them on Mac](https://kaku.fun/blog/claude-code-notifications.md): Why Claude Code and Codex stay silent in most terminals, which setting fixes each one, and how terminal notification sequences reach macOS.
 - [The Best Terminal for Claude Code: What Actually Matters](https://kaku.fun/blog/best-terminal-for-claude-code.md): Any terminal runs Claude Code. Five things decide how long sessions feel: multi-line prompts, notifications, clickable paths, restarts and splits.
 
