@@ -2,7 +2,7 @@ tmux 的每条命令都以前缀键开头，默认是 `Ctrl + B`，按下再松�
 
 ## 前缀键是怎么工作的
 
-tmux 跑着一个 server，你的 shell 归它管，终端只是一个负责画面的 client。你按下前缀键之后，client 会切换到一张按键表，下一个键就被当作 tmux 命令来读，不再发给 shell。需要往程序里输入一个真正的 `Ctrl + B` 时，连按两次。`prefix` 然后 `?` 会列出你这台机器上所有的绑定，这很有用，因为配置文件可以改掉下面任何一个默认值。
+tmux 跑着一个 server，你的 shell 归它管，终端只是一个负责画面的 client。你按下前缀键之后，client 会切换到一张按键表，下一个键就被当作 tmux 命令来读，不再发给 shell。需要往程序里输入一个真正的 `Ctrl + B` 时，连按两次。Claude Code 就是这样的程序，它用 `Ctrl + B` 把正在跑的命令放到后台，文档里专门写了 tmux 用户要按两次。`prefix` 然后 `?` 会列出你这台机器上所有的绑定，这很有用，因为配置文件可以改掉下面任何一个默认值。
 
 ## 会话
 
@@ -55,7 +55,7 @@ tmux kill-server          # 销毁 server 和所有会话
 
 ## 复制模式
 
-tmux 有自己的回滚缓冲区，所以终端自带的滚轮滚不动它。`prefix` 然后 `[` 进入复制模式，`Page Up` 也能进入并向上翻一页。默认按键是 emacs 风格，把 `mode-keys` 设成 `vi` 就换成 vi 风格，如果你的 `VISUAL` 或 `EDITOR` 变量里含有 vi，tmux 本来就会选 vi 键。
+tmux 有自己的回滚缓冲区，所以终端自带的滚轮滚不动它。这个缓冲区默认每个窗格只留 2000 行，也就是 tmux 3.8 上 `tmux show -g history-limit` 打出来的值，一段长的构建日志或者 agent 会话，开头早就被挤掉了，在 `~/.tmux.conf` 里加一行 `set -g history-limit 50000` 能多留一些。`prefix` 然后 `[` 进入复制模式，`Page Up` 也能进入并向上翻一页。默认按键是 emacs 风格，把 `mode-keys` 设成 `vi` 就换成 vi 风格，如果你的 `VISUAL` 或 `EDITOR` 变量里含有 vi，tmux 本来就会选 vi 键。
 
 | vi 模式下的键 | 作用 |
 |---|---|

@@ -17,7 +17,7 @@ On a plan, you can also turn on usage credits to keep working past the allowance
 
 ## Where to see what you spent
 
-`/usage` is the command to know. Its Session block shows token counts per model and a dollar figure for the current session. Claude Code works that figure out locally from token counts at list price, so the docs call it an estimate, and the Usage page in the Claude Console is the authoritative number for API billing. On Pro and Max the dollar figure is not what you are billed, since usage is included in the subscription. Those plans get plan usage bars and a breakdown instead, with recent usage attributed to skills, subagents, plugins and individual MCP servers. Press `d` or `w` to switch between 24 hours and 7 days.
+`/usage` is the command to know. Its Session block shows token counts per model and a dollar figure for the current session. Claude Code works that figure out locally from token counts at list price, so the docs call it an estimate, and the Usage page in the Claude Console is the authoritative number for API billing. On Pro and Max the dollar figure is not what you are billed, since usage is included in the subscription. Those plans get plan usage bars and a breakdown instead, with recent usage attributed to skills, subagents, plugins and individual MCP servers. Press `d` or `w` to switch between 24 hours and 7 days. The breakdown also flags behaviors such as long context or cache misses once one accounts for 10% or more of recent usage. Its figures are approximate, computed from session history on this machine, so usage from other devices or claude.ai is not in them.
 
 The session totals reset when `/clear` starts a new session. Newer versions also add a `Prompt cache (main)` line that shows what share of input came from cache and whether the cache is warm, which helps when a session suddenly feels expensive.
 
@@ -47,7 +47,7 @@ The costs page lists the usual reasons usage climbs:
 
 - **Long context.** Stale conversation from three tasks ago is sent again on every message.
 - **Cache misses.** The first message after a break longer than the cache lifetime reprocesses the full context. The lifetime is one hour on a subscription, dropping to five minutes once you draw on usage credits, and five minutes on an API key or cloud provider by default.
-- **Model choice.** The docs say Sonnet handles most coding tasks and costs less than Opus, and that unexpectedly high API spend usually traces back to long sessions that were never cleared or to Opus left as the default.
+- **Model choice.** The docs say Sonnet handles most coding tasks and costs less than Opus, and that unexpectedly high API spend usually traces back to long sessions that were never cleared or to Opus left as the default. Each model also has its own prompt cache, so switching with `/model` partway through a conversation makes the next request read the whole history with no cache hits; change models at the start of a task or right after `/clear`.
 - **Extended thinking.** Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request.
 - **Subagents and teams.** Each subagent sends its own requests on top of the main conversation. [Agent teams](/blog/claude-code-agent-teams) run separate instances, and the docs say they use about 7 times more tokens than a standard session when teammates run in plan mode.
 - **Scheduled and idle work.** Scheduled tasks, cross-session messages and goal check-ins send your full context even while you are away.

@@ -2,7 +2,7 @@ plan mode 让 Claude Code 读仓库、写一份计划，在你批准之前不改
 
 ## plan mode 允许什么、拦住什么
 
-[常见工作流](https://code.claude.com/docs/zh-CN/common-workflows)里，plan mode 用来在改动写进磁盘之前先看一遍，规则以[权限模式](https://code.claude.com/docs/en/iam)为准。交互式终端里已经能用 bypass permissions 时，Claude 收到的指令仍然是只写计划、不改文件，可它在规划期间一旦真的改文件或跑 shell，就不会再问。ask 规则还是会问，关键路径上的 `rm` 或 `rmdir` 也一样，文件系统根目录、你的主目录、当前工作目录都算关键路径。
+[常见工作流](https://code.claude.com/docs/zh-CN/common-workflows)里，plan mode 用来在改动写进磁盘之前先看一遍，规则以[权限模式](https://code.claude.com/docs/en/permission-modes)为准。交互式终端里已经能用 bypass permissions 时，Claude 收到的指令仍然是只写计划、不改文件，可它在规划期间一旦真的改文件或跑 shell，就不会再问。ask 规则还是会问，关键路径上的 `rm` 或 `rmdir` 也一样，文件系统根目录、你的主目录、当前工作目录都算关键路径。
 
 规划期间的 shell 命令按下面的顺序，命中第一条就照那一条办，2026 年 10 月核对过。
 

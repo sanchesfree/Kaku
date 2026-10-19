@@ -11,7 +11,7 @@ The first is [blocks](https://docs.warp.dev/terminal/blocks): each command and i
 Each of these is checked against what Warp's pages say today.
 
 - **An account.** The quickstart puts sign-up in the top right corner and says you can skip it and start using Warp immediately, so a login is not needed to open the terminal.
-- **Telemetry.** Warp's privacy docs say analytics are on a toggle, "Help improve Warp" under Settings, Privacy, and that with telemetry off no console interactions are persisted on its servers. The same page says telemetry must be on to use AI features on the free plan, so turning it off costs you those features there. Business and Enterprise plans are described as covered by a zero data retention agreement.
+- **Telemetry.** Warp's privacy docs say analytics are on a toggle, "Help improve Warp" under Settings, Privacy, and that with telemetry off no console interactions are persisted on its servers. The same page says telemetry must be on to use AI features on the free plan, so turning it off costs you those features there. Business and Enterprise plans are described as covered by a zero data retention agreement. Paid plans can turn telemetry off and keep using AI. Crash reports are a separate toggle, "Send crash reports", sent through Sentry. To see what Warp sends, search the Command Palette for "Show Warp Network Log", which inserts a `tail -f` command for its network log; the docs note that crash report traffic does not show up there.
 - **AI that is part of the product.** Warp's agent is built in, and its pricing page sells agent usage on top of the free plan. If you already work with Claude Code or Codex, the built-in agent may be something you never use.
 - **Not a plain terminal.** Warp groups output into blocks and puts its own input editor where the shell prompt usually is. If you want the terminal to stay out of the way of programs such as [Claude Code](/blog/best-terminal-for-claude-code), a classic terminal is simpler.
 
@@ -47,7 +47,7 @@ For a head-to-head on setup effort and release cadence, [the best terminal for M
 
 ## How to choose
 
-- You want blocks and a built-in agent: stay on Warp, and decide about telemetry in its Privacy settings.
+- You want blocks and a built-in agent: stay on Warp, and decide about telemetry in its Privacy settings. If you use its agent, also look at Secret Redaction, which is off by default and masks text matching your patterns before AI requests are sent.
 - You want AI from your own subscription: any terminal on the list runs Claude Code and Codex, so choose on the terminal itself. Kaku adds [notifications](/blog/claude-code-notifications) and `kaku ai` setup for them.
 - You want the fewest moving parts: Ghostty.
 - You want deep features behind a settings window: iTerm2.

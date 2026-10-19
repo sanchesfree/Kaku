@@ -43,7 +43,7 @@ Claude Code 用两层来决定要不要问你，一层是定下基线的权限�
 }
 ```
 
-Bash 规则里的 `*` 匹配任意文本，要放在子命令后面，`Bash(git log *)` 只放行 `git log`，而 `Bash(git *)` 放行所有 git 命令。复合命令会在 `&&`、`||`、`;`、管道和换行处拆开，每一段都得各自匹配，所以 `Bash(safe-cmd *)` 不会放行 `safe-cmd && other-cmd`。文件方面，`Read` 和 `Edit` 规则用 gitignore 风格的模式，`//path` 是绝对路径，`~/path` 从家目录算起，`./path` 相对当前目录，写给 `Write` 的规则会被接受但从不被查询，所以要写 `Edit`。
+Bash 规则里的 `*` 匹配任意文本，要放在子命令后面，`Bash(git log *)` 只放行 `git log`，而 `Bash(git *)` 放行所有 git 命令。复合命令会在 `&&`、`||`、`;`、管道和换行处拆开，每一段都得各自匹配，所以 `Bash(safe-cmd *)` 不会放行 `safe-cmd && other-cmd`。匹配之前，Claude Code 会先剥掉固定的几种包装命令，`timeout`、`time`、`nice`、`nohup`、`stdbuf` 和不带选项的 `xargs`，所以 `Bash(npm test *)` 也能匹配 `timeout 30 npm test`，`npx`、`docker exec`、`mise exec`、`devbox run` 这类执行器则不会被剥掉，`Bash(devbox run *)` 等于放行 `run` 后面的任何命令，反过来 `Bash(rm *)` 的 deny 也拦不住 `/bin/rm` 和 `find -delete`，因为规则比对的是命令文本，不是背后真正跑的程序。文件方面，`Read` 和 `Edit` 规则用 gitignore 风格的模式，`//path` 是绝对路径，`~/path` 从家目录算起，`./path` 相对当前目录，写给 `Write` 的规则会被接受但从不被查询，所以要写 `Edit`。
 
 ## 一次调用是怎么被决定的
 
@@ -91,7 +91,7 @@ PreToolUse hook 先跑，如果它以退出码 2 结束，调用在看任何规�
 }
 ```
 
-项目里放进 `.claude/settings.json`，所有会话通用就放 `~/.claude/settings.json`。`acceptEdits` 会自动批准工作目录里的编辑和 `rm`，`Bash(rm *)` 的 deny 规则就是为此加的。文档提到规则可能漏掉换了写法的命令，比如写成 `git -C . push` 的推送，`Bash(git push *)` 就匹配不到，所以把规则当成常见情况的护栏，别当安全边界，真正绝不能发生的事再加 hook 或 Bash 沙箱。
+项目里放进 `.claude/settings.json`，所有会话通用就放 `~/.claude/settings.json`。别写进 `~/.claude.json`，那个文件存的是应用状态和界面开关，写在里面的 `permissions` 和 `hooks` 会被忽略。项目 `.claude/settings.json` 里的 allow 规则，也要等你在这个文件夹接受了工作区信任对话框之后才会生效。`acceptEdits` 会自动批准工作目录里的编辑和 `rm`，`Bash(rm *)` 的 deny 规则就是为此加的。文档提到规则可能漏掉换了写法的命令，比如写成 `git -C . push` 的推送，`Bash(git push *)` 就匹配不到，所以把规则当成常见情况的护栏，别当安全边界，真正绝不能发生的事再加 hook 或 Bash 沙箱。
 
 ## 用 hook 拦命令
 

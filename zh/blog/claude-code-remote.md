@@ -30,7 +30,7 @@ claude --remote-control
 
 ## 云端会话，什么都不用开着
 
-云端会话把 Claude Code 跑在 Anthropic 提供的虚拟机上，对着一个 GitHub 仓库干活，可以从 claude.ai/code 或 App 里开，也可以在终端里开：
+云端会话把 Claude Code 跑在 Anthropic 提供的虚拟机上，一般是对着一个 GitHub 仓库干活，在没有 git remote 的仓库里，或者没装 Claude GitHub App 的仓库里跑 `claude --cloud`，它会把本地仓库打包传上去，不过开 pull request 还是要 GitHub，可以从 claude.ai/code 或 App 里开，也可以在终端里开：
 
 ```bash
 claude --cloud "fix the flaky login test"

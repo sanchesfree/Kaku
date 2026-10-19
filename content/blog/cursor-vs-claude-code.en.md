@@ -25,7 +25,7 @@ Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Ma
 
 Cursor lists each model with a default context window and, for many, a larger maximum. That table changes as models are added, so check the current numbers on the [models page](https://cursor.com/docs/models-and-pricing) rather than trusting a copy.
 
-Claude Code's docs give no fixed context window size. The extension shows how full the window is. Claude compacts when it needs to, and `/compact` does it on request. An `@` directory reference adds only the list of files, not their contents. Click the model name to switch, or type `/model` on Claude Code v2.1.284 or later.
+Claude Code's context window depends on the model: 200K tokens by default, and 1M tokens on models with extended context. The extension shows how full the window is. Claude compacts when it needs to, and `/compact` does it on request. An `@` directory reference adds only the list of files, not their contents. Click the model name to switch, or type `/model` on Claude Code v2.1.284 or later.
 
 ## Parallel work and long sessions
 

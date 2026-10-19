@@ -90,7 +90,9 @@ Each permission rule has an `action`, a `resource` and an `effect`, and the effe
 }
 ```
 
-The last matching rule wins, so the broad rule goes first and the exceptions after it. The prompt answers are allow once, always allow, which is saved for the project, or reject, and starting with `opencode --auto` approves requests that would ask, while explicit `deny` rules still apply. Config files from OpenCode 1 that use `permission` and `bash` still load, but new rules are easier to read in the form above.
+The last matching rule wins, so the broad rule goes first and the exceptions after it. The prompt answers are allow once, always allow, which is saved for the project, or reject, and starting with `opencode --auto` approves requests that would ask, while explicit `deny` rules still apply. Always allow saves the pattern the tool proposes rather than the exact request, so approving `git status --short` can save `git status *`. Saved approvals never override a configured `deny`, and reject also turns down every other request still pending in that session. Config files from OpenCode 1 that use `permission` and `bash` still load, but new rules are easier to read in the form above.
+
+Rules for one agent go under `agents.<id>.permissions` and are appended after the top-level ones, so they win for that agent, and a custom subagent runs on its own rules rather than a subset of its parent's. Shell rules match the command text, and OpenCode's guess at which directories a command touches is best effort, so the docs recommend a short allowlist of shell commands over patterns that try to catch every dangerous one.
 
 ## How it differs from Claude Code and Codex
 

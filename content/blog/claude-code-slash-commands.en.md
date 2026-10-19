@@ -42,7 +42,7 @@ The [interactive mode page](https://code.claude.com/docs/en/interactive-mode) li
 | `Ctrl+R` | Reverse search of your command history |
 | `Ctrl+G` | Edit the prompt in your default text editor |
 | `Ctrl+O` | Toggle the transcript viewer |
-| `Ctrl+B` | Background running Bash commands and agents |
+| `Ctrl+B` | Background running Bash commands and agents. Inside tmux, press it twice |
 | `!` at the start | Shell mode, run a command and show its output to Claude |
 | `@` | Autocomplete a file path |
 
@@ -68,6 +68,8 @@ A command file accepts the same frontmatter as a skill except `name` and `paths`
 - `argument-hint` shows expected arguments during autocomplete, such as `[issue-number]`.
 - `allowed-tools` lets Claude use listed tools without asking while the command runs.
 - `disable-model-invocation: true` stops Claude from running it on its own, which suits anything with side effects.
+
+The skills docs, which command files follow, add two cautions about `allowed-tools`. The grant lasts only for the turn that runs the command and clears when you send your next message, while the command text stays in context. And workspace trust does not gate it, so a command file checked into a repository can pre-approve tools for itself: read the `allowed-tools` lines in a cloned project's `.claude/commands/` before running Claude Code there.
 
 ## Arguments
 

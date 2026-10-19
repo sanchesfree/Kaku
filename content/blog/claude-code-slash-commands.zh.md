@@ -42,7 +42,7 @@
 | `Ctrl+R` | 反向搜索命令历史 |
 | `Ctrl+G` | 用默认文本编辑器编辑提示词 |
 | `Ctrl+O` | 切换对话记录视图 |
-| `Ctrl+B` | 把正在跑的 Bash 命令和 agent 放到后台 |
+| `Ctrl+B` | 把正在跑的 Bash 命令和 agent 放到后台，在 tmux 里要按两次 |
 | 开头的 `!` | shell 模式，直接跑命令并把输出给 Claude 看 |
 | `@` | 文件路径自动补全 |
 
@@ -68,6 +68,8 @@
 - `argument-hint` 在自动补全时提示参数，比如 `[issue-number]`。
 - `allowed-tools` 让 Claude 在命令运行期间不用询问就能用列出的工具。
 - `disable-model-invocation: true` 阻止 Claude 自己调用它，适合有副作用的操作。
+
+skill 文档对 `allowed-tools` 还有两点提醒，命令文件同样适用。一是授权只在执行这条命令的那一轮有效，你发出下一条消息就失效，命令正文倒会一直留在上下文里。二是这个字段不受工作区信任的约束，提交在仓库里的命令文件可以给自己预先批准工具，所以 clone 下来别人的项目，先看看 `.claude/commands/` 里各个文件的 `allowed-tools` 写了什么，再在里面跑 Claude Code。
 
 ## 参数
 

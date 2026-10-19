@@ -8,7 +8,7 @@ Plan mode lets Claude Code read the repo and write a plan, and blocks edits to y
 
 ## What plan mode does and does not allow
 
-[Common workflows](https://code.claude.com/docs/en/common-workflows) uses plan mode to review a change before it touches disk. The rules below are from [permission modes](https://code.claude.com/docs/en/iam). In an interactive terminal with bypass permissions available, Claude is still instructed to plan without editing, but any file edit or shell command it attempts during planning runs without a prompt. An ask rule still prompts, and so does `rm` or `rmdir` on a critical path, such as the filesystem root, your home directory, or the working directory.
+[Common workflows](https://code.claude.com/docs/en/common-workflows) uses plan mode to review a change before it touches disk. The rules below are from [permission modes](https://code.claude.com/docs/en/permission-modes). In an interactive terminal with bypass permissions available, Claude is still instructed to plan without editing, but any file edit or shell command it attempts during planning runs without a prompt. An ask rule still prompts, and so does `rm` or `rmdir` on a critical path, such as the filesystem root, your home directory, or the working directory.
 
 Shell commands during planning follow the first matching case. Checked October 2026:
 

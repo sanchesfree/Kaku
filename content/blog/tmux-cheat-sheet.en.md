@@ -2,7 +2,7 @@ Every tmux command starts with the prefix, `Ctrl + B` by default: press it, rele
 
 ## How the prefix works
 
-tmux runs a server that owns your shells, and the terminal is a client that draws them. When you press the prefix, the client switches to a key table and the next key is read as a tmux command instead of being sent to the shell. If you ever need to type a literal `Ctrl + B` into a program, press it twice. The `list-keys` view, `prefix` then `?`, shows every binding on your own machine, which matters because a config file can change any of the defaults below.
+tmux runs a server that owns your shells, and the terminal is a client that draws them. When you press the prefix, the client switches to a key table and the next key is read as a tmux command instead of being sent to the shell. If you ever need to type a literal `Ctrl + B` into a program, press it twice. Claude Code is one such program: its `Ctrl + B` sends a running command to the background, and its docs tell tmux users to press it twice. The `list-keys` view, `prefix` then `?`, shows every binding on your own machine, which matters because a config file can change any of the defaults below.
 
 ## Sessions
 
@@ -55,7 +55,7 @@ A pane is one split of a window. The names are easy to mix up, because `%` split
 
 ## Copy mode
 
-tmux keeps its own scrollback, so the scroll wheel of your terminal does not scroll it. `prefix` then `[` enters copy mode, and `Page Up` also enters it and scrolls one page. By default the keys are emacs style. Setting `mode-keys` to `vi` switches them, and tmux already picks vi keys if your `VISUAL` or `EDITOR` variable contains vi.
+tmux keeps its own scrollback, so the scroll wheel of your terminal does not scroll it. That scrollback holds 2,000 lines per pane by default, the `history-limit` value that `tmux show -g history-limit` prints on tmux 3.8, so the start of a long build log or agent session is gone; `set -g history-limit 50000` in `~/.tmux.conf` keeps more. `prefix` then `[` enters copy mode, and `Page Up` also enters it and scrolls one page. By default the keys are emacs style. Setting `mode-keys` to `vi` switches them, and tmux already picks vi keys if your `VISUAL` or `EDITOR` variable contains vi.
 
 | Key in vi mode | What it does |
 |---|---|

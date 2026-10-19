@@ -19,7 +19,7 @@ The managed file cannot be excluded by individual settings, which is why compani
 
 Claude Code does not pick one file. It concatenates all of them into context, so they add up instead of overriding each other. It loads `CLAUDE.md` and `CLAUDE.local.md` from your working directory and every directory above it, ordered from the filesystem root down, so the file closest to where you launched Claude is read last. Inside one directory, `CLAUDE.local.md` comes after `CLAUDE.md`, which puts your personal notes at the end.
 
-Files in subdirectories below your working directory are different. They are not loaded at launch. Claude Code loads one the first time Claude reads, writes or edits a file in that subdirectory. A `packages/api/CLAUDE.md` therefore costs nothing until Claude actually works in `packages/api`.
+Files in subdirectories below your working directory are different. They are not loaded at launch. Claude Code loads one the first time Claude reads, writes or edits a file in that subdirectory. A `packages/api/CLAUDE.md` therefore costs nothing until Claude actually works in `packages/api`. Large monorepos show the opposite problem, an ancestor file written by another team that loads whether you want it or not. List it in `claudeMdExcludes` in `.claude/settings.local.json`, as an absolute path or a glob such as `**/monorepo/CLAUDE.md`, and Claude Code skips it; only the managed policy file cannot be excluded.
 
 [[figure:claude-md-load-order|Managed, user, ancestor and working-directory CLAUDE.md files load at launch in that order and are concatenated into context, while a subdirectory CLAUDE.md loads only when Claude touches a file there|Everything is concatenated into context, the file nearest your working directory is read last, and subdirectory files wait until Claude works there.]]
 
@@ -115,7 +115,7 @@ In `./CLAUDE.local.md` at the project root, added to `.gitignore`. It loads afte
 
 ### Why does Claude ignore my CLAUDE.md?
 
-Check `/context` for the file under Memory files first. A subdirectory CLAUDE.md never appears in that list, because it loads on demand; when it loads, a `Loaded` line with its path shows in the terminal. Then look for vague wording and for two files that contradict each other. If the rule must always run, use a hook.
+Check `/context` for the file under Memory files first. A subdirectory CLAUDE.md never appears in that list, because it loads on demand; when it loads, a `Loaded` line with its path shows in the terminal. Then look for vague wording and for two files that contradict each other. A rule about commits or pull requests also competes with the git guidance Claude Code adds on its own, so set `includeGitInstructions` to `false` to remove that and use the `attribution` setting for the attribution text. If the rule must always run, use a hook.
 
 ### Does a bigger CLAUDE.md make Claude smarter about my project?
 

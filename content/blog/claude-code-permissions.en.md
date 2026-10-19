@@ -43,7 +43,7 @@ A rule is `Tool` or `Tool(specifier)`. A bare `Bash` matches every shell command
 }
 ```
 
-In a Bash rule, `*` matches any text, so put it after the subcommand. `Bash(git log *)` allows only `git log` commands, while `Bash(git *)` allows every git command. Compound commands are split at `&&`, `||`, `;`, pipes and newlines, and each part must match on its own, so `Bash(safe-cmd *)` does not allow `safe-cmd && other-cmd`. For files, `Read` and `Edit` rules use gitignore-style patterns: `//path` is absolute, `~/path` starts at your home directory, and `./path` is relative to the current directory. A rule written for `Write` is accepted but never consulted, so use `Edit`.
+In a Bash rule, `*` matches any text, so put it after the subcommand. `Bash(git log *)` allows only `git log` commands, while `Bash(git *)` allows every git command. Compound commands are split at `&&`, `||`, `;`, pipes and newlines, and each part must match on its own, so `Bash(safe-cmd *)` does not allow `safe-cmd && other-cmd`. Before matching, Claude Code strips a fixed set of wrappers, `timeout`, `time`, `nice`, `nohup`, `stdbuf` and `xargs` without flags, so `Bash(npm test *)` also covers `timeout 30 npm test`. Runners such as `npx`, `docker exec`, `mise exec` and `devbox run` are not stripped, so `Bash(devbox run *)` allows whatever follows `run`, and a deny on `Bash(rm *)` does not catch `/bin/rm` or `find -delete`, because rules match the command text, not the program behind it. For files, `Read` and `Edit` rules use gitignore-style patterns: `//path` is absolute, `~/path` starts at your home directory, and `./path` is relative to the current directory. A rule written for `Write` is accepted but never consulted, so use `Edit`.
 
 ## How a call gets decided
 
@@ -91,7 +91,7 @@ A setup that keeps most prompts away without turning off the checks:
 }
 ```
 
-Put it in `.claude/settings.json` for a project, or in `~/.claude/settings.json` for every session. `acceptEdits` auto-approves edits and `rm` inside the working directory, which is why the deny rule on `Bash(rm *)` is there. The docs note a rule can miss a command written another way, for example a push as `git -C . push` is not matched by `Bash(git push *)`. Treat rules as guard rails for common cases, not as a security boundary, and add a hook or the Bash sandbox for what must never happen.
+Put it in `.claude/settings.json` for a project, or in `~/.claude/settings.json` for every session. Not in `~/.claude.json`: that file holds app state and UI toggles, and `permissions` or `hooks` written there are ignored. Allow rules in a project's `.claude/settings.json` also wait until you accept the workspace trust dialog for that folder. `acceptEdits` auto-approves edits and `rm` inside the working directory, which is why the deny rule on `Bash(rm *)` is there. The docs note a rule can miss a command written another way, for example a push as `git -C . push` is not matched by `Bash(git push *)`. Treat rules as guard rails for common cases, not as a security boundary, and add a hook or the Bash sandbox for what must never happen.
 
 ## Hooks that block commands
 

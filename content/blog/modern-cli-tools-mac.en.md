@@ -24,7 +24,7 @@ rg 'TODO' -n              # matches with line numbers
 rg -tpy 'import requests' # only Python files
 ```
 
-The `-t` flag limits a search to a file type, and `-T` excludes one. When a search returns nothing you expected, the usual cause is that the file is ignored or hidden, so retry with `-uuu` before assuming the pattern is wrong.
+The `-t` flag limits a search to a file type, and `-T` excludes one. When a search returns nothing you expected, the usual cause is that the file is ignored or hidden, so retry with `-uuu` before assuming the pattern is wrong. Each `-u` removes one layer: `-u` stops honoring `.gitignore`, `-uu` adds hidden files and `-uuu` binary files, so the smallest one that finds the file tells you why it was skipped, and `--debug` explains why a particular file was ignored. ripgrep reads no config file on its own; flags you want every time go one per line in a file that `RIPGREP_CONFIG_PATH` points to.
 
 ## fd
 
@@ -37,7 +37,7 @@ fd -H -E .git config      # include hidden files, exclude .git
 fd -e jpg -x convert {} {.}.png
 ```
 
-`-e` filters by extension, `-H` includes hidden files and `-x` runs a command for each result, in parallel. Shell aliases and functions cannot be used with `-x`. fd also pairs well with fzf as a file source, which [the fzf post](/blog/fzf-zsh-mac) shows.
+`-e` filters by extension, `-H` includes hidden files and `-x` runs a command for each result, in parallel. Shell aliases and functions cannot be used with `-x`. The search pattern is a regular expression matched against the file name only, not a glob: use `-e md` for an extension, `-g '*.md'` for a glob, and `-p` to match against the full path. fd also pairs well with fzf as a file source, which [the fzf post](/blog/fzf-zsh-mac) shows.
 
 ## bat
 

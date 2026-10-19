@@ -19,7 +19,7 @@ CLAUDE.md 可以放在四个位置，文档按从宽到窄的顺序列出，项�
 
 Claude Code 不会从中挑一个，而是把它们全部拼进上下文，所以是叠加而不是覆盖。它会从工作目录一路往上，把每一层的 `CLAUDE.md` 和 `CLAUDE.local.md` 都读进来，顺序是从文件系统根目录往下排，离你启动 Claude 的位置最近的那份最后读到，同一个目录里 `CLAUDE.local.md` 排在 `CLAUDE.md` 后面，所以你的个人备注在最末尾。
 
-工作目录下面的子目录就不一样了，它们不会在启动时加载，Claude 第一次读、写或编辑那个子目录里的文件时才会把对应的 CLAUDE.md 读进来，所以 `packages/api/CLAUDE.md` 在 Claude 真正去改 `packages/api` 之前不占任何上下文。
+工作目录下面的子目录就不一样了，它们不会在启动时加载，Claude 第一次读、写或编辑那个子目录里的文件时才会把对应的 CLAUDE.md 读进来，所以 `packages/api/CLAUDE.md` 在 Claude 真正去改 `packages/api` 之前不占任何上下文。大型 monorepo 里碰到的常常是反过来的情况，上级目录里别的团队写的 CLAUDE.md 不管你要不要都会加载，这时在 `.claude/settings.local.json` 的 `claudeMdExcludes` 里写上它的绝对路径，或者 `**/monorepo/CLAUDE.md` 这样的 glob，Claude Code 就会跳过它，只有托管策略那份文件排除不掉。
 
 [[figure:claude-md-load-order|托管策略、用户、上级目录和工作目录的 CLAUDE.md 在启动时按顺序拼进上下文，子目录里的 CLAUDE.md 要等 Claude 碰到那里的文件才加载|所有文件是拼接进上下文的，离工作目录最近的最后读到，子目录里的文件要等 Claude 去那里干活时才加载。]]
 
@@ -115,7 +115,7 @@ Kaku 不会动你的指令文件。`kaku ai` 修改的是 Claude Code 这类工�
 
 ### Claude 为什么不听我的 CLAUDE.md
 
-先用 `/context` 看文件有没有出现在 Memory files 下面，子目录里的 CLAUDE.md 是按需加载的，不会出现在这个列表里，加载时终端会打出一行带路径的 `Loaded`。然后检查措辞是不是太含糊，有没有两个文件互相矛盾，必须每次执行的规则就改用 hook。
+先用 `/context` 看文件有没有出现在 Memory files 下面，子目录里的 CLAUDE.md 是按需加载的，不会出现在这个列表里，加载时终端会打出一行带路径的 `Loaded`。然后检查措辞是不是太含糊，有没有两个文件互相矛盾。规则管的如果是提交和 pull request，它还要和 Claude Code 自带的 git 指引抢，把 `includeGitInstructions` 设成 `false` 就能去掉自带的那部分，署名文字交给 `attribution` 设置。必须每次执行的规则就改用 hook。
 
 ### CLAUDE.md 写得越长 Claude 越懂我的项目吗
 

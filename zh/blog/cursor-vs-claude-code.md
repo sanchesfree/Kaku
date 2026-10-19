@@ -29,7 +29,7 @@ Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、
 
 Cursor 给每个模型标了默认上下文，很多还有更高的上限，这张表会随着新模型上线一直变，具体数字以[模型页面](https://cursor.com/docs/models-and-pricing)上的为准。
 
-Claude Code 的文档里没写固定的上下文窗口大小，扩展里能看到窗口填了多少，Claude 需要时会自己压缩，想现在就压就跑 `/compact`。`@` 引用目录时只放进文件列表，不放内容。点一下模型名字就能换，Claude Code v2.1.284 及以后，只打 `/model` 也会弹出模型列表。
+Claude Code 的上下文窗口跟着模型走，默认 200K token，支持扩展上下文的模型是 1M，扩展里能看到窗口填了多少，Claude 需要时会自己压缩，想现在就压就跑 `/compact`。`@` 引用目录时只放进文件列表，不放内容。点一下模型名字就能换，Claude Code v2.1.284 及以后，只打 `/model` 也会弹出模型列表。
 
 ## 并行和长会话
 

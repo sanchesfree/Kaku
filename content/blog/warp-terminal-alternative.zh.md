@@ -11,7 +11,7 @@ Warp 在官网上把自己的终端称作[为 AI 辅助软件开发做的开源�
 下面每一条都对照过 Warp 自己页面现在的说法。
 
 - **账号。** 快速上手文档说注册入口在右上角，也可以跳过直接开始用，所以打开终端不需要登录。
-- **遥测。** Warp 的隐私文档说，分析数据有开关，在设置的 Privacy 里关掉 Help improve Warp，关掉遥测之后控制台交互不会存到它的服务器上，同一页还说免费计划里要使用 AI 功能必须开着遥测，所以关掉要付出的代价是那边的 AI 功能。Business 和 Enterprise 计划被描述为受零数据留存协议覆盖。
+- **遥测。** Warp 的隐私文档说，分析数据有开关，在设置的 Privacy 里关掉 Help improve Warp，关掉遥测之后控制台交互不会存到它的服务器上，同一页还说免费计划里要使用 AI 功能必须开着遥测，所以关掉要付出的代价是那边的 AI 功能。Business 和 Enterprise 计划被描述为受零数据留存协议覆盖。付费计划关掉遥测也照样能用 AI。崩溃报告是另一个开关，叫 Send crash reports，走的是 Sentry。想看 Warp 往外发了什么，在命令面板里搜 Show Warp Network Log，它会插入一条 `tail -f` 网络日志的命令，不过文档也说了，崩溃报告的流量不会出现在这份日志里。
 - **AI 是产品的一部分。** Warp 的 agent 是内置的，它的价格页在免费计划之外另卖 agent 用量，如果你本来就在用 Claude Code 或 Codex，内置的 agent 可能一直用不上。
 - **它不是一个普通终端。** Warp 把输出分成 blocks，还用自己的输入编辑器顶替了 shell 提示符的位置，想让终端别挡着 [Claude Code](/zh/blog/best-terminal-for-claude-code) 这类程序的话，传统终端更简单。
 
@@ -47,7 +47,7 @@ Warp 在官网上把自己的终端称作[为 AI 辅助软件开发做的开源�
 
 ## 怎么选
 
-- 想要 blocks 和内置 agent：留在 Warp，遥测要不要开在它的 Privacy 设置里决定。
+- 想要 blocks 和内置 agent：留在 Warp，遥测要不要开在它的 Privacy 设置里决定。用它的 agent 的话再看一下 Secret Redaction，它默认是关的，打开后会在 AI 请求发出去之前把匹配你设定模式的内容遮掉。
 - 想用自己订阅的 AI：列表里的任何终端都能跑 Claude Code 和 Codex，所以按终端本身来选，Kaku 多出的是给它们的[通知](/zh/blog/claude-code-notifications)和 `kaku ai` 配置。
 - 想要最少的活动部件：Ghostty。
 - 想要设置窗口里一大堆功能：iTerm2。

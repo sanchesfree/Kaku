@@ -161,7 +161,7 @@ claude</code></pre>
 <p>Claude Code 用的是 <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claude 订阅</a>（Pro、Max、Team 或 Enterprise），或者按用量计费的 <a href="https://platform.claude.com/" target="_blank" rel="noopener noreferrer">Anthropic Console</a> 账号，Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 上也能用。安装和登录怎么做写在 Anthropic 的<a href="https://code.claude.com/docs/zh-CN/setup" target="_blank" rel="noopener noreferrer">安装文档</a>里。claude.ai 的方案里，<code>/usage</code> 显示当前会话和这一周，用 API key 或第三方登录时，显示的是这一次会话的费用和 token，更多价格在 <a href="https://code.claude.com" target="_blank" rel="noopener noreferrer">code.claude.com</a>。</p>
 <h2 id="上下文和模型">上下文和模型</h2>
 <p>Cursor 给每个模型标了默认上下文，很多还有更高的上限，这张表会随着新模型上线一直变，具体数字以<a href="https://cursor.com/docs/models-and-pricing" target="_blank" rel="noopener noreferrer">模型页面</a>上的为准。</p>
-<p>Claude Code 的文档里没写固定的上下文窗口大小，扩展里能看到窗口填了多少，Claude 需要时会自己压缩，想现在就压就跑 <code>/compact</code>。<code>@</code> 引用目录时只放进文件列表，不放内容。点一下模型名字就能换，Claude Code v2.1.284 及以后，只打 <code>/model</code> 也会弹出模型列表。</p>
+<p>Claude Code 的上下文窗口跟着模型走，默认 200K token，支持扩展上下文的模型是 1M，扩展里能看到窗口填了多少，Claude 需要时会自己压缩，想现在就压就跑 <code>/compact</code>。<code>@</code> 引用目录时只放进文件列表，不放内容。点一下模型名字就能换，Claude Code v2.1.284 及以后，只打 <code>/model</code> 也会弹出模型列表。</p>
 <h2 id="并行和长会话">并行和长会话</h2>
 <p>git worktree 会在另一个目录里把仓库再检出一份，用的是另一条分支，所以 <code>claude --worktree feature-auth</code> 能让两个 Claude Code 任务不改同一批文件，再开一个终端就换一个名字，怎么设置、用完怎么清理写在 Anthropic 的 <a href="https://code.claude.com/docs/zh-CN/worktrees" target="_blank" rel="noopener noreferrer">worktree 文档</a>里。</p>
 <p><strong>Open in New Tab</strong>（Mac 上是 <code>Cmd + Shift + Esc</code>）或 <strong>Open in New Window</strong> 开的是另一段对话，历史和上下文各自一份。</p>

@@ -24,7 +24,7 @@ It is the right choice when the work depends on your machine, such as a local da
 
 ## Cloud sessions: nothing has to stay on
 
-A cloud session runs Claude Code on a virtual machine Anthropic provides, against a GitHub repository. You can start one from claude.ai/code or the app, or from the terminal:
+A cloud session runs Claude Code on a virtual machine Anthropic provides, usually against a GitHub repository; `claude --cloud` run in a repository with no git remote, or one the Claude GitHub App is not installed on, uploads your local repository instead, though pull requests still need GitHub. You can start one from claude.ai/code or the app, or from the terminal:
 
 ```bash
 claude --cloud "fix the flaky login test"
