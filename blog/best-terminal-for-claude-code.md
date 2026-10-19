@@ -77,6 +77,8 @@ Checked on 2026-10-17 against Claude Code's terminal docs.
 | Warp | Works | No, set `terminal_bell` or add a hook |
 | Kaku | Works, `Cmd + Enter` too | Yes on 0.25.0 with Claude Code 2.1.295 or later, `ghostty` channel before that |
 
+Everything Kaku sets up for Claude Code, Codex and other AI coding tools, from `kaku ai` to restoring sessions, is collected on the [AI coding tools](/docs/ai-coding) page of the docs.
+
 ## FAQ
 
 ### Why don't Claude Code notifications show up?

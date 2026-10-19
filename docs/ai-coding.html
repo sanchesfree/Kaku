@@ -95,11 +95,13 @@
           <pre><code class="language-toml"><span class="tok-k">[tui]</span>
 notification_method = <span class="tok-s">"osc9"</span></code></pre>
           <p>Notifications appear while Kaku is in the background, not for the pane you are looking at. If none show up at all, choose Kaku &gt; Notification Settings... and turn on Allow Notifications.</p>
+          <p>Why Claude Code and Codex stay silent in most other terminals, and which setting fixes each one, is explained in <a href="/blog/claude-code-notifications">Claude Code notifications not showing</a>.</p>
           <h2 id="ai-coding-prompts"><a class="anchor" href="#ai-coding-prompts" aria-label="Link to Writing Prompts">#</a>Writing Prompts</h2>
           <p><code>Shift + Enter</code> and <code>Cmd + Enter</code> insert a newline, so a long prompt can span several lines before you send it.</p>
           <p><code>Cmd + Click</code> opens links and file paths the tool prints, even while it captures the mouse. A path with a location such as <code>src/main.rs:42:7</code> opens at that line. To choose the editor, set <code>file_link_editor</code>:</p>
           <pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"zed"</span>
 <span class="tok-c">-- config.file_link_editor = "cursor --goto"</span></code></pre>
+          <p>How other terminals handle multi-line prompts, notifications and clickable paths for Claude Code is compared in <a href="/blog/best-terminal-for-claude-code">the best terminal for Claude Code</a>.</p>
           <h2 id="ai-coding-splits"><a class="anchor" href="#ai-coding-splits" aria-label="Link to Several Agents Side by Side">#</a>Several Agents Side by Side</h2>
           <p>Split with <code>Cmd + D</code> or <code>Cmd + Shift + D</code> to run an agent next to a shell, or two agents on different tasks, and press <code>Cmd + Shift + Enter</code> to zoom the pane you are reading. Closing a pane or tab where Claude Code, Codex or another long-running program is in the foreground asks first, so a stray <code>Cmd + W</code> does not end a session.</p>
           <h2 id="ai-coding-restore"><a class="anchor" href="#ai-coding-restore" aria-label="Link to After a Restart">#</a>After a Restart</h2>

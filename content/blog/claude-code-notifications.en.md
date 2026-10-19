@@ -31,6 +31,8 @@ notification_method = "osc9"
 
 `notification_method` takes `auto`, `osc9` or `bel`. Two neighbours are worth knowing: `notifications` turns them on or off, or limits them to certain events, and `notification_condition` decides whether they fire only while the terminal is unfocused, the default, or always.
 
+The rest of Kaku's setup for Claude Code and Codex, such as `kaku ai`, splits for several agents and sessions that survive a restart, is on the [AI coding tools](/docs/ai-coding) page.
+
 ## When nothing shows up at all
 
 If the setting is right and still nothing appears, macOS is the next suspect. A notification from a terminal is shown by the terminal app, so the terminal itself needs permission. In System Settings > Notifications, find your terminal and turn on Allow Notifications. In Kaku the same page is one click away under Kaku > Notification Settings.

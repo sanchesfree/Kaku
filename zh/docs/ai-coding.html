@@ -95,11 +95,13 @@
           <pre><code class="language-toml"><span class="tok-k">[tui]</span>
 notification_method = <span class="tok-s">"osc9"</span></code></pre>
           <p>通知只在 Kaku 处于后台时出现，正在看的那个窗格不会弹。如果一条都收不到，打开 Kaku &gt; Notification Settings... 把 Allow Notifications 打开。</p>
+          <p>为什么 Claude Code 和 Codex 在大多数别的终端里不发通知，每种情况该改哪个设置，写在 <a href="/zh/blog/claude-code-notifications">Claude Code 通知不弹出</a>那篇。</p>
           <h2 id="ai-coding-prompts"><a class="anchor" href="#ai-coding-prompts" aria-label="Link to 写提示词">#</a>写提示词</h2>
           <p><code>Shift + Enter</code> 和 <code>Cmd + Enter</code> 都是换行，长提示词可以分几行写完再发。</p>
           <p>工具打印出来的链接和文件路径可以 <code>Cmd + Click</code> 打开，即使它正占用着鼠标也可以，带位置的路径比如 <code>src/main.rs:42:7</code> 会直接跳到那一行。想指定编辑器就设置 <code>file_link_editor</code>：</p>
           <pre><code class="language-lua">config.file_link_editor = <span class="tok-s">"zed"</span>
 <span class="tok-c">-- config.file_link_editor = "cursor --goto"</span></code></pre>
+          <p>别的终端在 Claude Code 里换行、通知和点开路径做得怎么样，<a href="/zh/blog/best-terminal-for-claude-code">Claude Code 用什么终端最好</a>那篇做了对比。</p>
           <h2 id="ai-coding-splits"><a class="anchor" href="#ai-coding-splits" aria-label="Link to 几个 agent 并排跑">#</a>几个 agent 并排跑</h2>
           <p>用 <code>Cmd + D</code> 或 <code>Cmd + Shift + D</code> 分屏，一边跑 agent 一边留一个 shell，或者让两个 agent 各做一件事，想细看哪个窗格就按 <code>Cmd + Shift + Enter</code> 放大。前台正在跑 Claude Code、Codex 或其他长时间运行程序的窗格和标签，关闭前会先确认，手滑按了 <code>Cmd + W</code> 也不会把会话关掉。</p>
           <h2 id="ai-coding-restore"><a class="anchor" href="#ai-coding-restore" aria-label="Link to 重启之后">#</a>重启之后</h2>

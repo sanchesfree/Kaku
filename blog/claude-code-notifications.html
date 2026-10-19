@@ -182,6 +182,7 @@
 <pre><code class="language-toml"><span class="tok-k">[tui]</span>
 notification_method = <span class="tok-s">"osc9"</span></code></pre>
 <p><code>notification_method</code> takes <code>auto</code>, <code>osc9</code> or <code>bel</code>. Two neighbours are worth knowing: <code>notifications</code> turns them on or off, or limits them to certain events, and <code>notification_condition</code> decides whether they fire only while the terminal is unfocused, the default, or always.</p>
+<p>The rest of Kaku's setup for Claude Code and Codex, such as <code>kaku ai</code>, splits for several agents and sessions that survive a restart, is on the <a href="/docs/ai-coding">AI coding tools</a> page.</p>
 <h2 id="when-nothing-shows-up-at-all">When nothing shows up at all</h2>
 <p>If the setting is right and still nothing appears, macOS is the next suspect. A notification from a terminal is shown by the terminal app, so the terminal itself needs permission. In System Settings &gt; Notifications, find your terminal and turn on Allow Notifications. In Kaku the same page is one click away under Kaku &gt; Notification Settings.</p>
 <p>macOS only asks for that permission once. If you clicked Don't Allow at some point, it never asks again, and every later notification is dropped without a trace. Kaku checks for that case and, after a notification is dropped, tells you the next time you switch back to it.</p>

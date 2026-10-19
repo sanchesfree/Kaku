@@ -37,6 +37,8 @@ notification_method = "osc9"
 
 `notification_method` 可以是 `auto`、`osc9` 或 `bel`，旁边还有两个值得知道的设置，`notifications` 控制开关，也可以只对某几类事件开，`notification_condition` 决定只在终端没获得焦点时提醒，也就是默认值，还是任何时候都提醒。
 
+Kaku 里 Claude Code 和 Codex 的其他设置，比如 `kaku ai`、几个 agent 分屏并排跑、重启后会话还在，写在 [AI 编程工具](/zh/docs/ai-coding)那一页。
+
 ## 一条都收不到的时候
 
 设置没问题还是什么都没有，下一个要怀疑的就是 macOS。终端发出的通知是由终端这个 App 来显示的，所以得给终端本身授权，在系统设置 > 通知里找到你的终端，打开允许通知，Kaku 里点 Kaku > Notification Settings 就能直接跳到这一页。

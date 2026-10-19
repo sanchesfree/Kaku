@@ -182,6 +182,7 @@
 <pre><code class="language-toml"><span class="tok-k">[tui]</span>
 notification_method = <span class="tok-s">"osc9"</span></code></pre>
 <p><code>notification_method</code> 可以是 <code>auto</code>、<code>osc9</code> 或 <code>bel</code>，旁边还有两个值得知道的设置，<code>notifications</code> 控制开关，也可以只对某几类事件开，<code>notification_condition</code> 决定只在终端没获得焦点时提醒，也就是默认值，还是任何时候都提醒。</p>
+<p>Kaku 里 Claude Code 和 Codex 的其他设置，比如 <code>kaku ai</code>、几个 agent 分屏并排跑、重启后会话还在，写在 <a href="/zh/docs/ai-coding">AI 编程工具</a>那一页。</p>
 <h2 id="一条都收不到的时候">一条都收不到的时候</h2>
 <p>设置没问题还是什么都没有，下一个要怀疑的就是 macOS。终端发出的通知是由终端这个 App 来显示的，所以得给终端本身授权，在系统设置 &gt; 通知里找到你的终端，打开允许通知，Kaku 里点 Kaku &gt; Notification Settings 就能直接跳到这一页。</p>
 <p>这个权限 macOS 只问一次，如果哪次点了不允许，之后它不会再问，后面的每条通知都会被悄无声息地丢掉。Kaku 会检查这种情况，有通知因此被丢掉时，下次你切回 Kaku 会提示一句。</p>

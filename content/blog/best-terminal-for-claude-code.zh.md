@@ -69,6 +69,8 @@ Kaku 运行时会定时保存窗口布局，再启动时把标签和分屏都恢
 | Warp | 可以 | 不行，要设 `terminal_bell` 或加 hook |
 | Kaku | 可以，`Cmd + Enter` 也行 | 可以，0.25.0 配 Claude Code 2.1.295 及以上，更早的版本设成 `ghostty` 通道 |
 
+Kaku 给 Claude Code、Codex 这些 AI 编程工具准备的东西，从 `kaku ai` 到重启后恢复会话，都收在文档的 [AI 编程工具](/zh/docs/ai-coding)那一页。
+
 ## 常见问题
 
 ### 为什么收不到 Claude Code 的通知？

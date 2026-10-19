@@ -27,6 +27,8 @@ notification_method = "osc9"
 
 通知只在 Kaku 处于后台时出现，正在看的那个窗格不会弹。如果一条都收不到，打开 Kaku > Notification Settings... 把 Allow Notifications 打开。
 
+为什么 Claude Code 和 Codex 在大多数别的终端里不发通知，每种情况该改哪个设置，写在 [Claude Code 通知不弹出](https://kaku.fun/zh/blog/claude-code-notifications)那篇。
+
 ## 写提示词
 
 `Shift + Enter` 和 `Cmd + Enter` 都是换行，长提示词可以分几行写完再发。
@@ -37,6 +39,8 @@ notification_method = "osc9"
 config.file_link_editor = "zed"
 -- config.file_link_editor = "cursor --goto"
 ```
+
+别的终端在 Claude Code 里换行、通知和点开路径做得怎么样，[Claude Code 用什么终端最好](https://kaku.fun/zh/blog/best-terminal-for-claude-code)那篇做了对比。
 
 ## 几个 agent 并排跑
 

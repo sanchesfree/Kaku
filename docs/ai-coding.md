@@ -27,6 +27,8 @@ notification_method = "osc9"
 
 Notifications appear while Kaku is in the background, not for the pane you are looking at. If none show up at all, choose Kaku > Notification Settings... and turn on Allow Notifications.
 
+Why Claude Code and Codex stay silent in most other terminals, and which setting fixes each one, is explained in [Claude Code notifications not showing](https://kaku.fun/blog/claude-code-notifications).
+
 ## Writing Prompts
 
 `Shift + Enter` and `Cmd + Enter` insert a newline, so a long prompt can span several lines before you send it.
@@ -37,6 +39,8 @@ Notifications appear while Kaku is in the background, not for the pane you are l
 config.file_link_editor = "zed"
 -- config.file_link_editor = "cursor --goto"
 ```
+
+How other terminals handle multi-line prompts, notifications and clickable paths for Claude Code is compared in [the best terminal for Claude Code](https://kaku.fun/blog/best-terminal-for-claude-code).
 
 ## Several Agents Side by Side
 
