@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Subset TsangerJinKai02 for the Chinese text on kaku.fun.
+"""Subset Source Han Serif SC for the Chinese text on kaku.fun.
 
 iOS has no Chinese serif, so a stack of system names set every iPhone's
 Chinese pages in PingFang, a sans, beside the serif Latin. The site carries
-TsangerJinKai02, Kaku's declared face, subsetted to exactly the CJK characters
-its pages use. The hero's 書 is a one-glyph cut of Source Han Serif TC, the face
-every family site uses for its mark. TsangerJinKai02's license is
-free for non-commercial use, which covers Kaku (MIT); a paid product's site
-uses Source Han Serif instead.
+Source Han Serif SC (SIL OFL), the face every family site uses, subsetted to
+exactly the CJK characters its pages use. The hero's 書 is a one-glyph cut of
+Source Han Serif TC, as on the siblings. Until 2026-10-19 the body used
+TsangerJinKai02, whose license is free for personal use only.
 
     python3 scripts/build_fonts.py          regenerate the subsets
     python3 scripts/build_fonts.py --check  verify every CJK character on the
@@ -27,14 +26,14 @@ import sys
 root = pathlib.Path(__file__).resolve().parent.parent
 FONT_DIR = root / "fonts"
 
-# Kami ships the source TTFs (18 MB each, not committed here). A checkout next
-# to ~/www/Kami needs no download; otherwise copy TsangerJinKai02-W04.ttf and
-# -W05.ttf from https://github.com/tw93/Kami/tree/main/assets/fonts into
-# .fontcache at the site root.
+# The source OTFs (about 24 MB each) are not committed. mole.fit keeps them in
+# ~/www/mole-mac/site/.fontcache; otherwise unzip SourceHanSerifSC-Regular.otf
+# and -SemiBold.otf from https://github.com/adobe-fonts/source-han-serif/releases
+# into .fontcache at the site root.
 CACHES = [
     pathlib.Path(os.environ["KAKU_FONT_CACHE"]) if os.environ.get("KAKU_FONT_CACHE") else None,
     root / ".fontcache",
-    root.parent / "Kami" / "assets" / "fonts",
+    root.parent / "mole-mac" / "site" / ".fontcache",
 ]
 
 # Every page: the English pages also set the hero's 書 in this face.
@@ -44,8 +43,8 @@ PAGES = [str(path.relative_to(root)) for path in root.rglob("*.html")
 # Regular for body text, SemiBold for every weight from 500 up, matching the
 # two @font-face rules in styles.css.
 SUBSETS = [
-    ("regular", "TsangerJinKai02-W04.ttf"),
-    ("medium", "TsangerJinKai02-W05.ttf"),
+    ("regular", "SourceHanSerifSC-Regular.otf"),
+    ("semibold", "SourceHanSerifSC-SemiBold.otf"),
 ]
 
 # Latin, digits and ASCII punctuation stay with Charter, so the subset carries
@@ -79,8 +78,7 @@ def charset():
 
 
 # The hero's 書 comes from Source Han Serif TC like the siblings' marks (Mole 鼴,
-# Pake 殼): TsangerJinKai02's heavier strokes read far darker than theirs. A
-# one-glyph file also keeps English visitors off the whole subset.
+# Pake 殼). A one-glyph file also keeps English visitors off the whole subset.
 MARK = "書"
 MARK_SOURCE = "SourceHanSerifTC-Regular.otf"
 MARK_FILE = FONT_DIR / "kaku-mark.woff2"
@@ -105,8 +103,8 @@ def source_dir():
 def regenerate():
     cache = source_dir()
     if cache is None:
-        print("missing TsangerJinKai02: put TsangerJinKai02-W04.ttf and -W05.ttf in .fontcache "
-              "(https://github.com/tw93/Kami/tree/main/assets/fonts)", file=sys.stderr)
+        print("missing Source Han Serif SC: put SourceHanSerifSC-Regular.otf and -SemiBold.otf in .fontcache "
+              "(https://github.com/adobe-fonts/source-han-serif/releases)", file=sys.stderr)
         return 1
     FONT_DIR.mkdir(exist_ok=True)
     chars = charset()

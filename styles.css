@@ -1,6 +1,6 @@
-/* Chinese text ships its own face: a TsangerJinKai02 subset (free for
-   non-commercial use; Kaku is MIT) built by scripts/build_fonts.py from every
-   page's CJK characters, including the hero's 書. iOS has no Chinese serif, so
+/* Chinese text ships its own face: a Source Han Serif SC subset, as on every
+   family site, built by scripts/build_fonts.py from every page's CJK
+   characters; the hero's 書 is a one-glyph Source Han Serif TC cut. iOS has no Chinese serif, so
    without it every iPhone fell back to PingFang. Latin uses the faces at the
    start of the stack. */
 @font-face {
@@ -21,7 +21,7 @@
 }
 @font-face {
   font-family: "Kaku Serif SC";
-  src: url("/fonts/kaku-serif-sc-medium.woff2") format("woff2");
+  src: url("/fonts/kaku-serif-sc-semibold.woff2") format("woff2");
   font-weight: 500 700;
   font-style: normal;
   font-display: swap;
@@ -58,7 +58,7 @@
   --term-line: #2a2930;
   --term-text: #e7e4d9;
   --term-muted: #9b978c;
-  --serif: Charter, Georgia, Palatino, "Times New Roman", "Kaku Serif SC", "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  --serif: Charter, Georgia, Palatino, "Times New Roman", "Kaku Serif SC", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
   --sans: var(--serif);
   --ui: var(--serif);
   --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -364,7 +364,7 @@ button, input { font: inherit; }
 .hero h1 .cn {
   display: inline-block;
   margin-left: 18px;
-  font-family: "Kaku Mark", "Kaku Serif SC", "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+  font-family: "Kaku Mark", "Kaku Serif SC", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
   font-weight: 400;
   letter-spacing: 0;
 }
