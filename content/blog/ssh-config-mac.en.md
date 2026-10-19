@@ -4,7 +4,7 @@
 
 ssh reads command-line options, then `~/.ssh/config`, then `/etc/ssh/ssh_config`. Keywords are case-insensitive and arguments are case-sensitive. A `#` line is a comment.
 
-The manual recommends that `~/.ssh` be readable, writable and executable by you and not accessible by others, and that the config be read/write for you and not writable by others. ssh ignores a private key others can read. The control socket needs a directory others cannot write:
+The manual recommends that `~/.ssh` be readable, writable and executable by you and not accessible by others, and that the config be read/write for you and not writable by others. ssh ignores a private key others can read. The control socket needs a directory others cannot write to:
 
 ```bash
 mkdir -p ~/.ssh/sockets
@@ -98,7 +98,7 @@ ssh -O exit dev
 
 If ssh asks for a password, others may be able to read the private key, so ssh skipped it. `ssh-add` skips that file too, and `chmod 600` on the key is the fix. A config someone else owns, or one with group or world write, makes OpenSSH 10.0 exit with `Bad owner or permissions on` and the path.
 
-If the server drops the connection before the right key, the agent offered other identities first. `ssh -G` should then show `identitiesonly yes` and one `identityfile` line. If `ssh -O check` cannot reach a master, create `~/.ssh/sockets`, connect once, and check again. `ssh -O exit dev` clears a stuck master.
+If the server drops the connection before the right key is tried, the agent offered other identities first. `ssh -G` should then show `identitiesonly yes` and one `identityfile` line. If `ssh -O check` cannot reach a master, create `~/.ssh/sockets`, connect once, and check again. `ssh -O exit dev` clears a stuck master.
 
 ## What Kaku changes
 

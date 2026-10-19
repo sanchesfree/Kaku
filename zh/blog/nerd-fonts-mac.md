@@ -48,7 +48,7 @@ config.font = wezterm.font_with_fallback {
 
 [Ghostty](https://ghostty.org/docs/config/reference) 也不需要装，它内嵌了 JetBrains Mono，Nerd Font 图标也是内置的。它的回退是多写几行 `font-family`，第一行是主字体，后面几行补主字体里缺的码位，想换一份别的符号字体，就让它单独占一行，具体名字用 `ghostty +list-fonts` 查，写一行空的 `font-family = ""` 可以清掉文件前面设过的字体。Ghostty 1.2.0 起还有 `adjust-icon-height`，能调 Nerd Font 图标的最大高度，Powerline 和制表符字形不受影响。
 
-README 里也说了，回退来的符号在缩放和位置上不一定对得齐，如果图标和文字放在一起看着有点歪，换成同一字体族的补丁版会更稳。Mac 上 WezTerm 的整套配置可以看 [Mac 版 WezTerm 配置](/zh/blog/wezterm-config-for-mac)。
+Nerd Fonts 的 README 里也说了，回退来的符号在缩放和位置上不一定对得齐，如果图标和文字放在一起看着有点歪，换成同一字体族的补丁版会更稳。Mac 上 WezTerm 的整套配置可以看 [Mac 版 WezTerm 配置](/zh/blog/wezterm-config-for-mac)。
 
 ## Mono、Propo 和默认宽度
 

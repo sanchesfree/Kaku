@@ -74,7 +74,7 @@ config.webgpu_power_preference = 'LowPower'
 
 A key is encoded and written to the master. The default encoding is xterm. `enable_csi_u_key_encoding` defaults off, and the Kitty keyboard protocol stays off unless `enable_kitty_keyboard` is true, which the configuration page suggests for Neovim.
 
-Newline mode starts off, so Enter sends carriage return, `\r`. If a program turns newline mode on, a line feed follows. Backspace sends DEL, `\x7f`, which the encoder treats as the usual `VERASE`. Control plus a letter uses the ASCII control map. Alt plus an ASCII letter or punctuation prefixes ESC. The bundled config makes the left Option key that Meta and the right Option key a compose key. [Mac terminal shortcuts](/blog/mac-terminal-shortcuts) picks up once those bytes reach the shell. Until an input method commits, the preedit covers the cell under the cursor. `ime_preedit_rendering = "BuiltinInsert"` shifts the following cells instead.
+Newline mode starts off, so Enter sends carriage return, `\r`. If a program turns newline mode on, a line feed follows. Backspace sends DEL, `\x7f`, which the encoder treats as the usual `VERASE`. Control plus a letter uses the ASCII control map. Alt plus an ASCII letter or punctuation prefixes ESC. The bundled config makes the left Option key act as Meta and the right Option key a compose key. [Mac terminal shortcuts](/blog/mac-terminal-shortcuts) picks up once those bytes reach the shell. Until an input method commits, the preedit covers the cell under the cursor. `ime_preedit_rendering = "BuiltinInsert"` shifts the following cells instead.
 
 ## When the screen and the program disagree
 

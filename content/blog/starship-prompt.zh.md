@@ -59,7 +59,7 @@ truncation_length = 2
 disabled = true
 ```
 
-`$schema` 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。`add_newline` 这种顶层的键管整个提示符，每个 `[表]` 管一个模块。按[配置文档](https://starship.rs/config/)的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 `nodejs` 模块会显示当前的 Node.js 版本。任何模块加上 `disabled = true` 就会从提示符里彻底消失。
+`$schema` 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。`add_newline` 这种顶层的键管整个提示符，每个 `[table]` 管一个模块。按[配置文档](https://starship.rs/config/)的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 `nodejs` 模块会显示当前的 Node.js 版本。任何模块加上 `disabled = true` 就会从提示符里彻底消失。
 
 有几个默认值最好心里有数，以下是 2026 年 10 月核对过的。`add_newline` 默认是 `true`，所以两次提示符之间会空一行，不喜欢就关掉。`directory` 默认截到三层父目录，在 Git 仓库里还会截到仓库根目录。`cmd_duration` 只在命令跑了超过两秒时才出现，对应的是 `min_time = 2_000`。`time` 和 `git_metrics` 默认是关着的，要自己写 `disabled = false` 才会显示。
 

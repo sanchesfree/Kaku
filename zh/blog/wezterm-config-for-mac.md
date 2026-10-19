@@ -35,7 +35,7 @@ config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 - **`line_height`** 大于 1.0 会在行与行之间加空隙，长输出读起来更舒服，但框线字符和方块字符会跟着行一起拉高，二维码和字符画都会变高。
 - **`harfbuzz_features`** 关掉连字，喜欢把 `=>` 画成箭头的话就别加这行。
 
-## 按键像个 Mac
+## 让按键用起来像 Mac
 
 ```lua
 config.send_composed_key_when_left_alt_is_pressed = false
@@ -119,7 +119,7 @@ config.line_height = 1.1
 
 ## 把 WezTerm 配置搬过来
 
-把你在意的设置复制到 `kaku.lua` 里 `-- User overrides:` 那一行下面，别整个文件覆盖掉，这样自带的那一层还会加载。没写的设置用的是 Kaku 的值而不是 WezTerm 的，大多数时候这正是你想要的，不过如果哪里看着和以前不一样，可以先想到这一点。
+把你在意的设置复制到 `kaku.lua` 里 `-- User overrides:` 那一行下面，别整个文件覆盖掉，这样自带的那一层还会加载。没写的设置用的是 Kaku 的值而不是 WezTerm 的，大多数时候这正是你想要的，不过如果哪里看着和以前不一样，可以先从这一点查起。
 
 ## 常见问题
 

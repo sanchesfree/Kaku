@@ -1,4 +1,4 @@
-The shortcuts that save the most time in a Mac terminal live in two layers. The terminal app owns tabs, splits, search and scrollback, and those keys differ between Terminal.app, Ghostty and Kaku. The shell owns line editing, Ctrl + A, Ctrl + E, Ctrl + W, Ctrl + U, Ctrl + K, Ctrl + R and the Alt word keys, and those work in every terminal once Option is set to act as Meta.
+The shortcuts that save the most time in a Mac terminal live in two layers. The terminal app owns tabs, splits, search and scrollback, and those keys differ between Terminal.app, Ghostty and Kaku. The shell owns line editing: Ctrl + A, Ctrl + E, Ctrl + W, Ctrl + U, Ctrl + K, Ctrl + R and the Alt word keys, and those work in every terminal once Option is set to act as Meta.
 
 ## Line editing that works everywhere
 

@@ -1,4 +1,4 @@
-Mac 终端里真正省时间的快捷键分在两层，一层归终端 App 管，开标签、分屏、搜索输出和翻滚动区都在这里，Terminal.app、Ghostty 和 Kaku 各有一套。另一层归 shell 管，也就是 Ctrl + A、Ctrl + E、Ctrl + W、Ctrl + U、Ctrl + K、Ctrl + R 和用 Alt 按词移动这些行编辑键，只要把 Option 设成 Meta，换到哪个终端里都一样能用。
+Mac 终端里真正省时间的快捷键分在两层，一层归终端 App 管，开标签、分屏、搜索输出和翻看回滚内容都在这里，Terminal.app、Ghostty 和 Kaku 各有一套。另一层归 shell 管，也就是 Ctrl + A、Ctrl + E、Ctrl + W、Ctrl + U、Ctrl + K、Ctrl + R 和用 Alt 按词移动这些行编辑键，只要把 Option 设成 Meta，换到哪个终端里都一样能用。
 
 ## 在哪个终端里都能用的行编辑
 
@@ -17,7 +17,7 @@ zsh 和 bash 默认都是 emacs 模式，所以命令行上怎么移动、怎么
 | `Alt + Backspace` | 删掉前一个词 |
 | `Alt + .` | 插入上一条命令的最后一个参数 |
 
-两个 shell 不一样的地方有两个键。一个是 `Ctrl + U`，zsh 里它是 `kill-whole-line`，光标后面的字也会一起删掉，bash 的 `unix-line-discard` 只删到光标为止。另一个是 `Ctrl + W`，zsh 里它是 `backward-kill-word`，词由字母、数字和 `$WORDCHARS` 里的字符组成。这个变量默认带着 `/`，所以一整段路径按一下就没了，把 `/` 从里面去掉之后就能一段一段删，bash 的 `unix-word-rubout` 则是简单地删到上一个空格。两边来回切的话，其他差别可以看 [zsh 和 bash 的区别](/zh/blog/zsh-vs-bash)。
+两个 shell 在两个键上不一样。一个是 `Ctrl + U`，zsh 里它是 `kill-whole-line`，光标后面的字也会一起删掉，bash 的 `unix-line-discard` 只删到光标为止。另一个是 `Ctrl + W`，zsh 里它是 `backward-kill-word`，词由字母、数字和 `$WORDCHARS` 里的字符组成。这个变量默认带着 `/`，所以一整段路径按一下就没了，把 `/` 从里面去掉之后就能一段一段删，bash 的 `unix-word-rubout` 则是简单地删到上一个空格。两边来回切的话，其他差别可以看 [zsh 和 bash 的区别](/zh/blog/zsh-vs-bash)。
 
 删掉的内容其实没丢，一条很长的命令敲到一半想先跑点别的，按 `Ctrl + U` 把它收起来，跑完再按 `Ctrl + Y` 就能原样贴回来，相当于给命令行临时找了个地方先放一放。
 
@@ -111,7 +111,7 @@ Kaku 自带的配置把左边的 Option 当成 Meta，右边的 Option 留给打
 
 ### 为什么按 Option + B 打出来的是 ∫，而不是往回跳一个词？
 
-因为终端把 Option 当成了打字符的键发出去，在 Terminal.app 里勾上 Use Option as Meta key，在 Ghostty 里设 `macos-option-as-alt`，在 WezTerm 里把 `send_composed_key_when_left_alt_is_pressed` 设成 `false` 就好，Kaku 默认已经给左边的 Option 这样设了。
+因为终端把 Option 当成了打字符的键发出去，所以只要在 Terminal.app 里勾上 Use Option as Meta key，在 Ghostty 里设 `macos-option-as-alt`，在 WezTerm 里把 `send_composed_key_when_left_alt_is_pressed` 设成 `false` 就好，Kaku 默认已经给左边的 Option 这样设了。
 
 ### Ctrl + U 在 zsh 和 bash 里有什么不同？
 

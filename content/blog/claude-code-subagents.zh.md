@@ -2,7 +2,7 @@
 
 ## subagent、skill 和 agent teams 的区别
 
-[skill](/zh/blog/claude-code-skills) 跑在主对话里，是一段可以反复用的流程，Claude 把它加载进你当前所在的上下文。subagent 则是从零开始，看不到你的对话历史，看不到你调用过的 skill，也看不到 Claude 已经读过的文件，Claude 给它写一段委派说明，它照着这段说明干活，最后交回一个结果。两者在两个方向上会碰到一起，带 `context: fork` 的 skill 会把自己的正文当成一个 subagent 的任务来跑，而写了 `skills` 字段的 subagent 会在启动时把这些 skill 的完整内容预先装进来。
+[skill](/zh/blog/claude-code-skills) 跑在主对话里，是一段可以反复用的流程，Claude 把它加载进你当前所在的上下文。subagent 则是从零开始，看不到你的对话历史，看不到你调用过的 skill，也看不到 Claude 已经读过的文件，Claude 给它写一段委派说明，它照着这段说明干活，最后交回一个结果。两者在两个方向上可以结合，带 `context: fork` 的 skill 会把自己的正文当成一个 subagent 的任务来跑，而写了 `skills` 字段的 subagent 会在启动时把这些 skill 的完整内容预先装进来。
 
 [agent teams](https://code.claude.com/docs/en/agent-teams) 是第三种东西，几个 Claude Code 会话一起干活，其中一个当 lead，队友之间可以直接发消息，还共用一份任务列表。2026 年 10 月核对过，它目前是实验功能，默认关着，要用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` 打开。打开之后，Claude 委派时只要给 subagent 起了名字，它就会作为队友启动，而不是普通的 subagent。文档对取舍说得很直白，subagent 把总结交回调用方，花得少，每个队友却是一个单独的 Claude 实例，token 消耗随着活跃队友的数量一起涨。
 

@@ -312,7 +312,7 @@ jq -nc --arg seq <span class="tok-s">"</span>$seq<span class="tok-s">"</span> <s
 <h2 id="hook-和-kaku">hook 和 Kaku</h2>
 <p>Kaku 不会往你的 agent 里加 hook，也不会加指令，<code>kaku ai</code> 只有你在那里改某个工具的设置时才会动它，你自己写的字段会留着。</p>
 <p>Claude Code 自带的提醒是另一路开关，Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要在 <code>~/.claude/settings.json</code> 里设上 <code>"preferredNotifChannel": "ghostty"</code>，见<a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>。</p>
-<p>Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上时，Claude 做完 Kaku 本来就会提醒，再挂这个 Stop hook 会多出一条通知，所以它适合更早的版本或者别的终端。OSC 9 也在允许的那几种里，Codex 设了 <code>notification_method = "osc9"</code> 时，Kaku 会把它显示成工具自己写的那条消息。</p>
+<p>Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上时，Claude 做完的时候 Kaku 本来就会提醒，再挂这个 Stop hook 会多出一条通知，所以它适合更早的版本或者别的终端。OSC 9 也在允许的那几种里，Codex 设了 <code>notification_method = "osc9"</code> 时，Kaku 会把它显示成工具自己写的那条消息。</p>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="退出码-0-算不算放行">退出码 0 算不算放行？</h3>
 <p>不算，<code>PreToolUse</code> 返回 0 时原来的权限检查还在，要跳过询问，得在 <code>hookSpecificOutput</code> 里写上 <code>"permissionDecision": "allow"</code>，再以 0 退出，拒绝规则仍然生效。</p>
@@ -330,6 +330,6 @@ jq -nc --arg seq <span class="tok-s">"</span>$seq<span class="tok-s">"</span> <s
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

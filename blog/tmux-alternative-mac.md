@@ -10,7 +10,7 @@ If you work mostly on your own Mac, you may not need tmux anymore. Most people s
 
 tmux runs a server that owns your shells. The terminal is only a client that draws them. That design gives you three things:
 
-1. **Splits and windows**, drawn inside one terminal window.
+1. **Splits and windows**: drawn inside one terminal window.
 2. **Persistence**: close the terminal, or lose the SSH connection, and the shells keep running inside the tmux server. `tmux attach` brings them back exactly as they were, programs still running.
 3. **Sharing**: attach from another terminal or [another machine](/blog/claude-code-remote) and see the same session.
 

@@ -33,7 +33,7 @@ Kaku 想做的是装好就能用的 Mac 终端，这页写它和几款常见终�
 
 ## Kaku 和 iTerm2
 
-iTerm2 是 Mac 上历史悠久的经典终端，很多人留下来是因为配置、快捷键和使用习惯早已磨合顺手。Kaku 适合不想从头折腾配置的人：字体和主题开箱调好，标签分屏、会话恢复、右键菜单、可点击路径，以及 Lazygit、Yazi 快捷调用都已备齐；当 PATH 或 shell 集成异常时，`kaku doctor` 会直接帮你排查诊断。
+iTerm2 是 Mac 上历史悠久的经典终端，很多人留下来是因为配置、快捷键和使用习惯早已磨合顺手。Kaku 适合不想从头折腾配置的人：字体和主题开箱调好，标签分屏、会话恢复、右键菜单、可点击路径，以及 Lazygit、Yazi 快捷调用都已备齐；当 PATH 或 shell 集成异常时，`kaku doctor` 会直接告诉你问题出在哪。
 
 iTerm2 自己也一直在更新，3.5 加了 AI 对话，要单独装插件、填自己的 API key，2026 年 9 月的 3.7 又加了标签分组和 Claude Code 集成。
 
@@ -49,7 +49,7 @@ Warp 目前定位为 Agent 驱动的开发环境，Agent 是其核心产品。�
 
 ## Kaku 和 Ghostty
 
-Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、深浅色主题、智能补全与 `z` 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。
+Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经有一套顺手的 shell 工具、字体和工作流，继续用 Ghostty 就很好。Kaku 同样采用 GPU 渲染，区别在于这些已经配好：JetBrains Mono、深浅色主题、补全和 `z` 跳转、Lazygit 和 Yazi、远程文件，以及可选的 AI 助手。
 
 ![在 Kaku 里运行的 Lazygit 提交记录](https://kaku.fun/shots/compare-lazygit.webp)Cmd + Shift + G 在当前仓库打开 Lazygit
 
@@ -63,7 +63,7 @@ cmux 是 Manaflow 做的免费 macOS 终端，渲染用的是 Ghostty 的引擎 
 
 ## Kaku 和 WezTerm
 
-Kaku 衍生自 WezTerm，完整保留了其成熟的 Lua 配置体系与渲染引擎，同时补齐了原生 macOS 体验所缺失的环节：更符合 Mac 习惯的默认值、完善的 shell 集成、Tab Navigator、窗口快照、`kaku` 命令行套件以及可选的 AI 助手。已有的 WezTerm 配置大多可以直接沿用（个别选项差异可参考[配置说明](https://kaku.fun/zh/docs/configuration)）。此外，上游自 2024 年 2 月后暂未发布新的正式稳定版，改动仅进入 nightly。
+Kaku 衍生自 WezTerm，保留了它的 Lua 配置和渲染引擎，再补上 WezTerm 留给用户自己配置的 Mac 部分：更符合 Mac 习惯的默认值、shell 集成、Tab Navigator、窗口快照、`kaku` 命令行套件以及可选的 AI 助手。已有的 WezTerm 配置大多可以直接沿用（个别选项差异可参考[配置说明](https://kaku.fun/zh/docs/configuration)）。此外，上游自 2024 年 2 月后暂未发布新的正式稳定版，改动仅进入 nightly。
 
 ![kaku config 设置界面，包含主题、字体和窗口选项](https://kaku.fun/shots/compare-config.webp)`kaku config` 改常用设置，不用打开 Lua 文件
 

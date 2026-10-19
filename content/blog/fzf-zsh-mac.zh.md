@@ -114,7 +114,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 ## 在 Kaku 里用 fzf
 
-Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，如果 zoxide 已经定义了 `z`，zsh-z 会自动跳过，所以 `source <(fzf --zsh)` 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，`kaku init` 又是把它的 source 行追加到 `.zshrc` 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，`**<Tab>` 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，`**` 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。
+Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，其中 zsh-z 在 zoxide 已经定义了 `z` 时会自动跳过，里面没有 fzf，所以 `source <(fzf --zsh)` 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，`kaku init` 又是把它的 source 行追加到 `.zshrc` 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，`**<Tab>` 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，`**` 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。
 
 要用 fzf-tab，就在 `~/.config/kaku/kaku.lua` 里写 `config.smart_tab_mode = 'off'`，新开的 shell 会带上 `KAKU_SMART_TAB_DISABLE=1`。再把 `compinit`、fzf 那行和 fzf-tab 都放在 Kaku 那行上面，补全已经初始化过的话 Kaku 会跳过自己的 `compinit`，autosuggestions 则排在 fzf-tab 之后加载，正好是 fzf-tab 要求的顺序。Alt + C 在 Kaku 里不用额外设置，自带配置把左 Option 当 Meta 发，右 Option 留着打组合字符。
 
@@ -122,7 +122,7 @@ Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只�
 
 ### 为什么按 Alt + C 打出一个奇怪的字符，而不是跳目录？
 
-因为终端把 Option 当成了输入字符的修饰键，在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 `macos-option-as-alt = left` 就好了。
+因为终端把 Option 当成了输入字符的修饰键，所以只要在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 `macos-option-as-alt = left` 就好了。
 
 ### 为什么 fzf 不理我设的 FZF_DEFAULT_COMMAND？
 

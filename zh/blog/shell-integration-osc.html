@@ -165,7 +165,7 @@ config.split_pane_inherit_working_directory = <span class="tok-b">true</span></c
 <h2 id="用-printf-检查">用 printf 检查</h2>
 <p>先看目录，从还没待在 <code>/tmp</code> 的 zsh 里执行下面这行，fish 会在下一个提示符发自己的 OSC 7，把测试值盖掉。</p>
 <pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]7;file://%s/tmp\033\\'</span> <span class="tok-s">"</span><span class="tok-k">$(</span>hostname<span class="tok-k">)</span><span class="tok-s">"</span></code></pre>
-<p>按 <code>Cmd + T</code>，再跑 <code>pwd</code>，应该打出 <code>/tmp</code>。zsh 自己不发 OSC 7，这个路径会一直留着，直到下一条 OSC 7 到来。发一条值不是 URL 的，解析失败就会把它清掉，新标签又跟着 shell 进程走。</p>
+<p>按 <code>Cmd + T</code>，再跑 <code>pwd</code>，应该打出 <code>/tmp</code>。zsh 自己不发 OSC 7，这个路径会一直留着，直到下一条 OSC 7 到来。发一条值不是 URL 的 OSC 7，解析失败就会把它清掉，新标签又跟着 shell 进程走。</p>
 <pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]7;x\033\\'</span></code></pre>
 <p>再看提示符标记，Kaku 会在你保存 <code>~/.config/kaku/kaku.lua</code> 时重新加载，追加一条绑定就行，如果给 <code>config.keys</code> 赋一张新表，默认绑定会全部丢掉。</p>
 <pre><code class="language-lua"><span class="tok-b">table.insert</span>(config.keys, {
@@ -176,7 +176,7 @@ config.split_pane_inherit_working_directory = <span class="tok-b">true</span></c
 <p>打两个标记再跳。</p>
 <pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\033]133;A\a'</span>; <span class="tok-b">echo</span> first
 <span class="tok-b">printf</span> <span class="tok-s">'\033]133;A\a'</span>; <span class="tok-b">echo</span> second</code></pre>
-<p>往上滚到 <code>first</code> 离开屏幕顶端，按 <code>Shift + Up</code>，视口会回到那个标记。fish 本来就会在每个提示符发 A，所以这颗键在 fish 里能在真正的提示符之间跳。zsh 里它只会落到确实有人打过的标记上。</p>
+<p>往上滚到 <code>first</code> 离开屏幕顶端，按 <code>Shift + Up</code>，视口会回到那个标记。fish 本来就会在每个提示符发 A，所以这颗键在 fish 里能在真正的提示符之间跳。zsh 里它只会落到确实发出过的标记上。</p>
 <p>通知要等窗口放到后台再跑。</p>
 <pre><code class="language-bash"><span class="tok-b">printf</span> <span class="tok-s">'\e]9;%s\a'</span> <span class="tok-s">"OSC 9"</span>
 <span class="tok-b">printf</span> <span class="tok-s">'\e]777;notify;%s;%s\a'</span> <span class="tok-s">"Build"</span> <span class="tok-s">"OSC 777"</span></code></pre>
@@ -202,6 +202,6 @@ config.split_pane_inherit_working_directory = <span class="tok-b">true</span></c
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

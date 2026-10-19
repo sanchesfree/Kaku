@@ -14,7 +14,7 @@ In Kaku, both `Shift + Enter` and `Cmd + Enter` insert a newline, with no setup 
 
 The most expensive minute in an agent session is the one where Claude asks a question while you are in another window. A desktop notification fixes that, but only if the terminal and Claude Code agree on how to send one.
 
-Claude Code's `preferredNotifChannel` setting defaults to `auto`, and `auto` only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it rings the bell, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.
+Claude Code's `preferredNotifChannel` setting defaults to `auto`, and `auto` only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it sends the bell character, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.
 
 Kaku 0.25.0 or later needs no configuration with Claude Code 2.1.295 or later: Claude Code tells Kaku when it is waiting on you or done, and Kaku turns that into a notification. On older versions, Kaku understands the sequence Claude Code sends to Ghostty, so one line in `~/.claude/settings.json` is enough:
 
@@ -61,7 +61,7 @@ Checked on 2026-10-17 against Claude Code's terminal docs.
 
 | Terminal | Shift + Enter newline | Claude Code notifications with default settings |
 |---|---|---|
-| Terminal.app | Works | Bell only, and only when the audible bell is off |
+| Terminal.app | Works | Bell character only, and only when the audible bell is off |
 | iTerm2 | Works | Yes, after enabling escape sequence alerts in its settings |
 | Ghostty | Works | Yes |
 | Kitty | Works | Yes |

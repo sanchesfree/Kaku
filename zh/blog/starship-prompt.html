@@ -182,7 +182,7 @@ truncation_length = <span class="tok-n">2</span>
 
 <span class="tok-k">[package]</span>
 disabled = <span class="tok-b">true</span></code></pre>
-<p><code>$schema</code> 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。<code>add_newline</code> 这种顶层的键管整个提示符，每个 <code>[表]</code> 管一个模块。按<a href="https://starship.rs/config/" target="_blank" rel="noopener noreferrer">配置文档</a>的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 <code>nodejs</code> 模块会显示当前的 Node.js 版本。任何模块加上 <code>disabled = true</code> 就会从提示符里彻底消失。</p>
+<p><code>$schema</code> 这一行让编辑器能按 Starship 的配置 schema 补全键名，写起来少查很多次文档。<code>add_newline</code> 这种顶层的键管整个提示符，每个 <code>[table]</code> 管一个模块。按<a href="https://starship.rs/config/" target="_blank" rel="noopener noreferrer">配置文档</a>的说法，模块就是根据当前环境显示信息的一个组件，比如在 Node.js 项目里 <code>nodejs</code> 模块会显示当前的 Node.js 版本。任何模块加上 <code>disabled = true</code> 就会从提示符里彻底消失。</p>
 <p>有几个默认值最好心里有数，以下是 2026 年 10 月核对过的。<code>add_newline</code> 默认是 <code>true</code>，所以两次提示符之间会空一行，不喜欢就关掉。<code>directory</code> 默认截到三层父目录，在 Git 仓库里还会截到仓库根目录。<code>cmd_duration</code> 只在命令跑了超过两秒时才出现，对应的是 <code>min_time = 2_000</code>。<code>time</code> 和 <code>git_metrics</code> 默认是关着的，要自己写 <code>disabled = false</code> 才会显示。</p>
 <h2 id="格式字符串">格式字符串</h2>
 <p>每个模块都有自己的 <code>format</code>，整个提示符也有一个，格式字符串里能放三种东西：</p>
@@ -288,6 +288,6 @@ disabled = <span class="tok-b">false</span></code></pre>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

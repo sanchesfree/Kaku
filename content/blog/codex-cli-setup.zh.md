@@ -1,4 +1,4 @@
-在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`。之后的事情基本都在 `~/.codex/config.toml` 这一个文件里，用哪个模型，不问你能做多少事，需要你的时候怎么提醒你，都由它决定。这篇按顺序讲每一步，最值得先改的几个设置，以及关掉终端之后怎么接着上次的会话，内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
+在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`。之后的事情基本都在 `~/.codex/config.toml` 这一个文件里，用哪个模型，不用问你就能做多少事，需要你的时候怎么提醒你，都由它决定。这篇按顺序讲每一步，最值得先改的几个设置，以及关掉终端之后怎么接着上次的会话，内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
 
 ## 安装
 
@@ -19,7 +19,7 @@ npm install -g @openai/codex
 
 ## 登录
 
-`codex login` 会打开浏览器，用 ChatGPT 账号登录，套餐里带 Codex 的话这是最省事的。想用 API key 的话，别直接贴在命令行里，不然会留在 shell 历史里，从环境变量管道进去：
+`codex login` 会打开浏览器，用 ChatGPT 账号登录，套餐里带 Codex 的话这是最省事的。想用 API key 的话，别直接贴在命令行里，不然会留在 shell 历史里，从环境变量用管道传进去：
 
 ```bash
 printenv OPENAI_API_KEY | codex login --with-api-key

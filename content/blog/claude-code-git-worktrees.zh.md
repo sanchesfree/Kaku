@@ -46,7 +46,7 @@ claude --worktree feature-auth
 }
 ```
 
-`claude --worktree "#1234"` 会从 `origin` 把这个 pull request 取到 `.claude/worktrees/pr-<number>/`，`#` 要加引号，这个名字的目录已经在的话，会重新打开那棵工作树。在 `"fresh"` 下，一棵工作树如果还停在 Claude 建的那条分支上、也是干净的，并且自己一次提交都没有，或者对应的 pull request 已经合并、远端分支也删了，重新打开时会被重置到默认分支。
+`claude --worktree "#1234"` 会从 `origin` 把这个 pull request 取到 `.claude/worktrees/pr-<number>/`，`#` 要加引号，这个名字的目录已经在的话，会重新打开那棵工作树。在 `"fresh"` 下，一棵工作树如果还停在 Claude 建的那条分支上，也是干净的，并且自己一次提交都没有，或者对应的 pull request 已经合并、远端分支也删了，重新打开时会被重置到默认分支。
 
 让 Claude 到某棵工作树里干活时会调用 `EnterWorktree`，subagent 要单独一棵的话，在 `.claude/agents/` 里写 `isolation: worktree`，干净做完会删掉，还留着改动的会留到 `cleanupPeriodDays` 那次清理，只有确认不会丢掉这些改动才会删。
 
@@ -91,7 +91,7 @@ claude --worktree feature-auth --resume
 
 [新建标签](/zh/docs/keybindings) 是 `Cmd + T`，新标签和分屏会继承当前目录，`config.tab_inherit_working_directory` 和 `config.split_pane_inherit_working_directory` 默认都是 true，所以可以 `cd ../repo-feature`，也可以直接在仓库里跑 `claude --worktree`。`Cmd + Shift + I` 或者双击能改标签名，手动改过的名字会留着，`config.tab_title_use_pane_title` 让标签显示 Claude Code 的标题时也不会被换掉，自动标题显示的是目录，`Cmd + Shift + O` 打开 Tab Navigator。
 
-`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，`Cmd + Shift + Enter` 放大当前窗格，窗格或标签前面正跑着 Claude Code 时，关掉之前会先问，内置的 `tab_close_confirmation` 和 `pane_close_confirmation` 都是 `SmartPrompt`，一个标签里有好几个窗格时，`Cmd + W` 关的是当前窗格。
+`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，`Cmd + Shift + Enter` 放大当前窗格，窗格或标签里 Claude Code 正在前台运行时，关掉之前会先问，内置的 `tab_close_confirmation` 和 `pane_close_confirmation` 都是 `SmartPrompt`，一个标签里有好几个窗格时，`Cmd + W` 关的是当前窗格。
 
 [`kaku start --new-tab`](/zh/docs/cli) 往当前窗口加一个标签，`kaku cli split-pane` 拆开当前窗格，还可以在新窗格里跑一条命令：
 

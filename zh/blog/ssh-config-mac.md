@@ -63,13 +63,13 @@ ssh 顺着命令行、用户配置、系统配置从上往下走，每个关键�
 
 `Host` 匹配的是命令行上的名字，`*` 匹配任意一串字符，`?` 匹配一个字符，模式前面加感叹号表示排除。`Host dev jump` 两个名字都匹配，中间用空白分开。这个模式看的是你敲进去的名字，只有打开 `CanonicalizeHostname` 时才会改用 `HostName` 再读一遍文件，这项默认是 `no`。
 
-`IdentityFile` 是例外，每写一次就往列表里加一把钥匙。OpenSSH 10.0 只在这份列表还是空的时候，才会放进默认路径，其中包含 `~/.ssh/id_ed25519`，所以 `Host dev` 上写了一条 `IdentityFile`，`dev` 的钥匙列表就只剩这一条。`Host *` 里再写一条，会加到每一个主机上，示例里的全局块因此不写 `IdentityFile`。`IdentitiesOnly yes` 只拿出已经配置的这些身份文件，代理里另外的钥匙不再拿去试。某个主机自己没写 `IdentityFile` 时，配置好的文件就是那几把默认钥匙。
+`IdentityFile` 是例外，每写一次就往列表里加一个密钥。OpenSSH 10.0 只在这份列表还是空的时候，才会放进默认路径，其中包含 `~/.ssh/id_ed25519`，所以 `Host dev` 上写了一条 `IdentityFile`，`dev` 的密钥列表就只剩这一条。`Host *` 里再写一条，会加到每一个主机上，示例里的全局块因此不写 `IdentityFile`。`IdentitiesOnly yes` 只拿出已经配置的这些身份文件，代理里另外的密钥不再拿去试。某个主机自己没写 `IdentityFile` 时，配置好的文件就是那几把默认钥匙。
 
 ## 密钥和 macOS 钥匙串
 
 `IdentityFile` 可以指向私钥，也可以指向公钥路径，只要对应的私钥已经在代理里。
 
-Apple 的 ssh 里 `UseKeychain` 默认是 `no`，写成 `yes` 之后，macOS 会到钥匙串里找这把钥匙的口令，你输入并且核对通过之后，口令会存进钥匙串。`AddKeysToAgent` 默认也是 `no`，写成 `yes` 时，从文件读入的钥匙会加进正在跑的代理，效果和跑了 `ssh-add` 一样，下一次连接就能在代理里找到它。
+Apple 的 ssh 里 `UseKeychain` 默认是 `no`，写成 `yes` 之后，macOS 会到钥匙串里找这个密钥的口令，你输入并且核对通过之后，口令会存进钥匙串。`AddKeysToAgent` 默认也是 `no`，写成 `yes` 时，从文件读入的密钥会加进正在跑的代理，效果和跑了 `ssh-add` 一样，下一次连接就能在代理里找到它。
 
 不想等下一次连接，也可以直接把口令存进去。
 
@@ -87,7 +87,7 @@ IgnoreUnknown UseKeychain
 
 ## 跳板、复用和保活
 
-`ProxyJump jump` 会先连上 `jump` 这个别名，再从那里把 TCP 转到最终主机，多跳之间用逗号分开，写成 `none` 就关掉。`ProxyJump` 和 `ProxyCommand` 谁先被读到，谁就把另一个挡住。目标主机上的配置不会套到跳板主机上，所以 `jump` 要有自己的 `Host` 块来写用户和钥匙。命令行上的写法是 `ssh -J jump dev`，这些参数作用在 `dev` 上，跳板自己的用户和钥匙仍然要写在 `jump` 的块里。
+`ProxyJump jump` 会先连上 `jump` 这个别名，再从那里把 TCP 转到最终主机，多跳之间用逗号分开，写成 `none` 就关掉。`ProxyJump` 和 `ProxyCommand` 谁先被读到，谁就把另一个挡住。目标主机上的配置不会套到跳板主机上，所以 `jump` 要有自己的 `Host` 块来写用户和密钥。命令行上的写法是 `ssh -J jump dev`，这些参数作用在 `dev` 上，跳板自己的用户和密钥仍然要写在 `jump` 的块里。
 
 `ControlMaster auto` 在套接字已经存在时复用主连接，没有就新开一条。`ControlPath ~/.ssh/sockets/%C` 把套接字放在别人不能写的目录里，`%C` 是本地主机、远端主机、端口、用户和 `ProxyJump` 的哈希。手册建议路径里至少有 `%h`、`%p` 和 `%r`，或者用 `%C`，避免两台机器共用一个套接字。
 
@@ -102,15 +102,15 @@ ssh -O exit dev
 
 ## 连不上的时候
 
-ssh 忽然来要密码，多半是私钥别人也能读，于是被跳过了。`ssh-add` 同样会跳过这种文件，把钥匙改成 `chmod 600` 就符合手册。配置文件主人不是你，或者组和其他人有写权限时，OpenSSH 10.0 会以 `Bad owner or permissions on` 加上路径退出。
+ssh 忽然来要密码，多半是私钥别人也能读，于是被跳过了。`ssh-add` 同样会跳过这种文件，对私钥执行 `chmod 600` 就符合手册。配置文件主人不是你，或者组和其他人有写权限时，OpenSSH 10.0 会以 `Bad owner or permissions on` 加上路径退出。
 
-服务器在试到正确的钥匙之前就把连接断掉，是代理先把别的身份送了上去。改完之后 `ssh -G` 应该出现 `identitiesonly yes`，并且只有一行 `identityfile`。`ssh -O check` 连不上主连接时，先建好 `~/.ssh/sockets`，连一次再查。卡住的主连接用 `ssh -O exit dev` 清掉。
+服务器在试到正确的密钥之前就把连接断掉，是代理先把别的身份送了上去。改完之后 `ssh -G` 应该出现 `identitiesonly yes`，并且只有一行 `identityfile`。`ssh -O check` 连不上主连接时，先建好 `~/.ssh/sockets`，连一次再查。卡住的主连接用 `ssh -O exit dev` 清掉。
 
 ## 在 Kaku 里会多出什么
 
 在 [Kaku](/zh/docs/features) 的标签里敲 `ssh dev`，跑的是 `PATH` 上的那个 `ssh`，读的还是这份文件。标签标题是一个 ssh 图标，加上命令行里的主机名，`user@` 会被去掉，端口全是数字时末尾单独的 `:port` 也会去掉，所以 `HostName` 写成 `10.0.0.8`，标题上仍然是 `dev`。`ssh`、`mosh`、`autossh`、`et` 都会被认成远程命令。
 
-`kaku init` 给 zsh 和 fish 包了一层 `ssh`。`TERM` 是 `kaku` 时，这层包装会改成 `TERM=xterm-256color` 再执行，因为远端通常没有 `kaku` 的 terminfo，设 `KAKU_SSH_SKIP_TERM_FIX=1` 可以关掉。`SSH_AUTH_SOCK` 里含有 `1password` 或 `2BUA8C4S2C` 时，它会加上 `-o IdentitiesOnly=yes`。你已经传了 `IdentitiesOnly`，或者设了 `KAKU_SSH_SKIP_1PASSWORD_FIX=1` 时，它不加。zsh 这段安装脚本写明，这是为了避开 1Password 把存着的钥匙全部拿出来、导致认证失败次数过多。你自己定义过的 `ssh` 函数会留着不动，zsh 里的 `ssh` 别名会被换成一个函数，里面仍然跑原来的命令。`command ssh -G dev` 会绕开这个函数。
+`kaku init` 给 zsh 和 fish 包了一层 `ssh`。`TERM` 是 `kaku` 时，这层包装会改成 `TERM=xterm-256color` 再执行，因为远端通常没有 `kaku` 的 terminfo，设 `KAKU_SSH_SKIP_TERM_FIX=1` 可以关掉。`SSH_AUTH_SOCK` 里含有 `1password` 或 `2BUA8C4S2C` 时，它会加上 `-o IdentitiesOnly=yes`。你已经传了 `IdentitiesOnly`，或者设了 `KAKU_SSH_SKIP_1PASSWORD_FIX=1` 时，它不加。zsh 这段安装脚本写明，这是为了避开 1Password 把存着的密钥全部拿出来、导致认证失败次数过多。你自己定义过的 `ssh` 函数会留着不动，zsh 里的 `ssh` 别名会被换成一个函数，里面仍然跑原来的命令。`command ssh -G dev` 会绕开这个函数。
 
 `Cmd + Shift + R` 用 sshfs 把当前 SSH 会话挂到 `~/Library/Caches/dev.kaku/sshfs/<host>`，再在 yazi 里打开。它需要 `sshfs-mac` 这个 cask、macFUSE，以及 `IdentityFile` 配好的密钥登录。挂载的细节在 [Yazi 的安装](/zh/blog/yazi-file-manager)。断线之后还想留着的进程，得在服务器上用 tmux，[在 Mac 上用 tmux](/zh/blog/tmux-alternative-mac) 写的是这件事。fzf 的 zsh 集成里，`ssh **` 再按 Tab，补全的主机来自这份配置、`~/.ssh/known_hosts` 和 `/etc/hosts`，[给 zsh 配 fzf](/zh/blog/fzf-zsh-mac) 会把快捷键接上。
 

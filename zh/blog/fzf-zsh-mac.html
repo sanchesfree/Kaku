@@ -99,7 +99,7 @@
           "name": "为什么按 Alt + C 打出一个奇怪的字符，而不是跳目录？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "因为终端把 Option 当成了输入字符的修饰键，在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 macos-option-as-alt = left 就好了。"
+            "text": "因为终端把 Option 当成了输入字符的修饰键，所以只要在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 macos-option-as-alt = left 就好了。"
           }
         },
         {
@@ -219,11 +219,11 @@ zstyle <span class="tok-s">':fzf-tab:complete:cd:*'</span> fzf-preview <span cla
 <p>最后一行是在补全 <code>cd</code> 时用 eza 预览目录内容，没装的话 <code>brew install eza</code>，或者直接删掉这一行。</p>
 <p>最容易出问题的是加载顺序。fzf-tab 要放在 <code>compinit</code> 之后，又得在 zsh-autosuggestions、fast-syntax-highlighting 这类会包装 widget 的插件之前。同时它还必须是最后一个绑定 Tab 的，而 fzf 自己的补全也绑了 Tab，所以上面 fzf-tab 排在 <code>source &lt;(fzf --zsh)</code> 后面。跑起来之后有两个键值得记一下，Ctrl + Space 多选，<code>/</code> 在补很深的路径时可以一路连着补下去。不用插件管理器、其余顺序也都排好的 <code>.zshrc</code> 可以参考<a href="/zh/blog/zsh-without-oh-my-zsh">不用 Oh My Zsh 配好 zsh</a>。</p>
 <h2 id="在-kaku-里用-fzf">在 Kaku 里用 fzf</h2>
-<p>Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，如果 zoxide 已经定义了 <code>z</code>，zsh-z 会自动跳过，所以 <code>source &lt;(fzf --zsh)</code> 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，<code>kaku init</code> 又是把它的 source 行追加到 <code>.zshrc</code> 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，<code>**&lt;Tab&gt;</code> 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，<code>**</code> 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。</p>
+<p>Kaku 不会帮你装 fzf，也不会替你配。它可选的 Homebrew 引导只装 starship、delta、lazygit 和 yazi，zoxide 只在 fish 下才装。zsh 这边自带的是 zsh-autosuggestions、fast-syntax-highlighting、zsh-completions 和 zsh-z，其中 zsh-z 在 zoxide 已经定义了 <code>z</code> 时会自动跳过，里面没有 fzf，所以 <code>source &lt;(fzf --zsh)</code> 这一行还是得你自己加。Kaku 里的 Smart Tab 会绑定 Tab，<code>kaku init</code> 又是把它的 source 行追加到 <code>.zshrc</code> 末尾的，这两件事碰在一起就有个先后问题。两种顺序的结果不一样，fzf 那行放在 Kaku 那行下面，<code>**&lt;Tab&gt;</code> 照常弹出 fzf，其余的 Tab 会交回给 Smart Tab。放在上面的话 Tab 就归 Smart Tab 了，<code>**</code> 不再触发 fzf。Ctrl + T、Ctrl + R 和 Alt + C 两种顺序下都还绑在 fzf 上。</p>
 <p>要用 fzf-tab，就在 <code>~/.config/kaku/kaku.lua</code> 里写 <code>config.smart_tab_mode = 'off'</code>，新开的 shell 会带上 <code>KAKU_SMART_TAB_DISABLE=1</code>。再把 <code>compinit</code>、fzf 那行和 fzf-tab 都放在 Kaku 那行上面，补全已经初始化过的话 Kaku 会跳过自己的 <code>compinit</code>，autosuggestions 则排在 fzf-tab 之后加载，正好是 fzf-tab 要求的顺序。Alt + C 在 Kaku 里不用额外设置，自带配置把左 Option 当 Meta 发，右 Option 留着打组合字符。</p>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="为什么按-alt-c-打出一个奇怪的字符而不是跳目录">为什么按 Alt + C 打出一个奇怪的字符，而不是跳目录？</h3>
-<p>因为终端把 Option 当成了输入字符的修饰键，在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 <code>macos-option-as-alt = left</code> 就好了。</p>
+<p>因为终端把 Option 当成了输入字符的修饰键，所以只要在 Terminal.app 的 Profiles 里勾上 Use Option as Meta key，在 iTerm2 里把 Left Option Key 设成 Esc+，Ghostty 里写 <code>macos-option-as-alt = left</code> 就好了。</p>
 <h3 id="为什么-fzf-不理我设的-fzf_default_command">为什么 fzf 不理我设的 FZF_DEFAULT_COMMAND？</h3>
 <p>shell 集成本来就不读这个变量，Ctrl + T 要设 <code>FZF_CTRL_T_COMMAND</code>，Alt + C 要设 <code>FZF_ALT_C_COMMAND</code>，<code>**&lt;Tab&gt;</code> 则是定义 <code>_fzf_compgen_path</code> 和 <code>_fzf_compgen_dir</code> 两个函数。</p>
 <h3 id="怎么关掉其中一个快捷键">怎么关掉其中一个快捷键？</h3>
@@ -238,6 +238,6 @@ zstyle <span class="tok-s">':fzf-tab:complete:cd:*'</span> fzf-preview <span cla
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

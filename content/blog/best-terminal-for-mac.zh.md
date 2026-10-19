@@ -17,7 +17,7 @@ Mac 上没有哪个终端对所有人都是最好的，但只要想清楚自己�
 
 ## Terminal.app
 
-每台 Mac 都自带，跑几条命令完全够用，macOS 26 给它翻新了一次，加上了 24 位色和 Powerline 字体，但真要整天待在终端里还是会不够。分屏只能把同一个会话显示两遍，设置存在 plist 里而不是文本文件，AI 编程工具能用上的东西也少，比如 Claude Code 在这里只会响铃，还得先把提示音关掉才响。
+每台 Mac 都自带，跑几条命令完全够用，macOS 26 给它翻新了一次，加上了 24 位色和 Powerline 字体，但真要整天待在终端里还是会不够。分屏只能把同一个会话显示两遍，设置存在 plist 里而不是文本文件，AI 编程工具能用上的东西也少，比如 Claude Code 在这里只会发一个响铃字符，还得先把提示音关掉才会发。
 
 ## iTerm2
 
@@ -41,7 +41,7 @@ Warp 围绕 block 重新设计了终端，每条命令和它的输出算一个�
 
 ## Kaku
 
-Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换。还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来。Claude Code 的通知在 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本设成 `ghostty` 通道，见[Claude Code 通知](/zh/blog/claude-code-notifications)。它只支持 macOS，这是为了在这一个平台上做得更贴合换来的。
+Kaku 是 WezTerm 的分支，保留了它的引擎和 Lua 配置，改的是你还没写任何配置时拿到的东西，自带 JetBrains Mono，Kaku Dark 和 Kaku Light 两套主题可以跟着系统深浅色切换。还有一套 zsh 配置，自动建议、语法高亮和 Starship 提示符都有，在 `.zshrc` 里只占两行。给 AI 编程命令行工具准备的部分大多不用设置，`Cmd + Click` 路径会在编辑器里打开到对应那一行，关闭正在跑 agent 的窗格前会先确认，重启之后标签、分屏和最后一屏都会回来。Claude Code 的通知在 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本设成 `ghostty` 通道，见[Claude Code 通知](/zh/blog/claude-code-notifications)。它只支持 macOS，是为了把这一个平台做得更贴合。
 
 ```bash
 brew install --cask kaku

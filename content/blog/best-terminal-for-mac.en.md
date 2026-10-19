@@ -17,7 +17,7 @@ There is no single best terminal for Mac, but the choice gets simple once you kn
 
 ## Terminal.app
 
-It is already on every Mac and it is fine for running a few commands. macOS 26 gave it a refresh with 24-bit color and Powerline fonts, but it still falls behind once you live in the terminal: a split only shows the same session twice, its settings live in a plist rather than a text file, and AI coding tools do less with it. Claude Code, for example, only rings its bell, and only after you turn off the audible bell.
+It is already on every Mac and it is fine for running a few commands. macOS 26 gave it a refresh with 24-bit color and Powerline fonts, but it still falls behind once you live in the terminal: a split only shows the same session twice, its settings live in a plist rather than a text file, and AI coding tools do less with it. Claude Code, for example, only sends the bell character, and only after you turn off the audible bell.
 
 ## iTerm2
 

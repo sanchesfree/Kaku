@@ -15,7 +15,7 @@ Open `~/.claude/settings.json` and set `preferredNotifChannel` to a channel your
 | iTerm2 | Nothing in Claude Code. In iTerm2, open Settings > Profiles > Terminal, check Notification Center Alerts, then under Filter Alerts enable Send escape sequence-generated alerts |
 | Ghostty, Kitty | Nothing, `auto` already works |
 | Kaku | Nothing on 0.25.0 or later with Claude Code 2.1.295 or later, `"ghostty"` before that |
-| Terminal.app | `auto` rings the bell only when the audible bell is off; `/terminal-setup` turns it off for you |
+| Terminal.app | `auto` sends the bell character only when the audible bell is off; `/terminal-setup` turns it off for you |
 | WezTerm, Warp, VS Code | `"terminal_bell"`, or a Notification hook |
 
 Kaku 0.25.0 or later with Claude Code 2.1.295 or later needs nothing, and setting `ghostty` there would make Claude Code post a second notification. On older versions the whole change is one line:

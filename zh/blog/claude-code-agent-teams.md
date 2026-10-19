@@ -91,7 +91,7 @@ subagent 和队友出现在同一个面板里，面板上有几行，说明不�
 
 ### Kaku 会给每个队友一个窗格吗？
 
-Kaku 里看到的是进程内面板。每个队友一个窗格，来自这个窗格里的 tmux，并且 `teammateMode` 设成 `auto` 或 `tmux`，或者来自装了 `it2` 的 iTerm2。
+Kaku 里看到的是进程内面板。每个队友一个窗格，需要满足其一：窗格里跑着 tmux 且 `teammateMode` 设成 `auto` 或 `tmux`，或者用装了 `it2` 的 iTerm2。
 
 ### `claude --help` 里有 teammate mode 吗？
 

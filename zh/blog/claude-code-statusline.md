@@ -37,7 +37,7 @@
 }
 ```
 
-`refreshInterval` 还会每 N 秒再跑一次，最小是 `1`。`hideVimModeIndicator` 设成 `true` 时，只要脚本打出 `vim.mode`，内置的 `-- INSERT --` 就藏起来，取值是 `NORMAL`、`INSERT`、`VISUAL` 或 `VISUAL LINE`，`vim` 这个对象只有开了 vim 模式才有。
+`refreshInterval` 还会每 N 秒再跑一次，最小是 `1`。`hideVimModeIndicator` 设成 `true` 时，只要脚本打出 `vim.mode`，内置的 `-- INSERT --` 就藏起来，`vim.mode` 的取值是 `NORMAL`、`INSERT`、`VISUAL` 或 `VISUAL LINE`，`vim` 这个对象只有开了 vim 模式才有。
 
 保存文件会重新加载设置，并马上跑一次命令，想去掉这一行，用 `/statusline delete`、`/statusline clear` 或 `/statusline remove it`。
 
@@ -60,7 +60,7 @@
 
 *分支不在这份 JSON 里，脚本自己去问 git。*
 
-`used_percentage` 把 `input_tokens`、`cache_creation_input_tokens` 和 `cache_read_input_tokens` 加在一起，不算 `output_tokens`，第一次 API 响应之前，`total_input_tokens` 和 `total_output_tokens` 都是 `0`。`current_usage` 在第一次调用前是 `null`，`/compact` 之后、下一次调用之前又是 `null`，百分比为 null 时 `// 0` 会换成 0。几条消息之后这一行还显示 `--`，就得重启。`/context` 显示的可能更高，因为它把那次响应之后新加的消息也估算进去了。
+`used_percentage` 把 `input_tokens`、`cache_creation_input_tokens` 和 `cache_read_input_tokens` 加在一起，不算 `output_tokens`，第一次 API 响应之前，`total_input_tokens` 和 `total_output_tokens` 都是 `0`。`current_usage` 在第一次调用前是 `null`，`/compact` 之后、下一次调用之前又是 `null`，百分比为 null 时 `// 0` 会换成 0。几条消息之后这一行还显示 `--`，就得重启会话。`/context` 显示的可能更高，因为它把那次响应之后新加的消息也估算进去了。
 
 `cost.total_cost_usd` 是客户端按标价估的，除非用了 [`modelPricing`](https://code.claude.com/docs/zh-CN/settings-reference#modelpricing) 这张表，数字和账单可能对不上。`/clear` 会把它重置成 $0，v2.1.211 之前这个总数会留下来。`total_duration_ms` 在恢复会话之后继续累加，会话没在跑的时间不算，`total_api_duration_ms` 是等 API 的时间。脚本本身不花 token。
 
@@ -155,7 +155,7 @@ Kaku 不用装补丁字体也能画出 Nerd Font 图标，它自带 Symbols Nerd
 
 ### 状态栏为什么是空的？
 
-脚本得有执行权限，往 stdout 打出内容，退出码是 0，少了任何一样状态栏就是空的。工作区还没被信任时，`claude --debug` 会记 `Status line command skipped: workspace trust not accepted`，`statusLine` 要跑 shell 命令，跟 [hook](/zh/blog/claude-code-hooks) 用的是同一套信任规则。在托管设置之外把 `disableAllHooks` 设成 `true`，就只剩托管的状态栏，`allowManagedHooksOnly` 会丢掉你自己的。
+脚本得有执行权限，往 stdout 打出内容，退出码是 0，少了任何一样状态栏就是空的。工作区还没被信任时，`claude --debug` 会记 `Status line command skipped: workspace trust not accepted`，`statusLine` 要跑 shell 命令，跟 [hook](/zh/blog/claude-code-hooks) 用的是同一套信任规则。在托管设置之外把 `disableAllHooks` 设成 `true`，就只剩托管的状态栏，`allowManagedHooksOnly` 会丢掉你自己写的命令。
 
 ### 百分比为什么和 `/context` 对不上？
 
@@ -167,7 +167,7 @@ Kaku 不用装补丁字体也能画出 Nerd Font 图标，它自带 Symbols Nerd
 
 ### 怎么显示 5 小时和 7 天的限额？
 
-订阅了 claude.ai Pro 或 Max 的人，以及设了消费上限的 Claude apps gateway，第一次 API 响应之后才会有 `rate_limits`。`five_hour.used_percentage` 和 `seven_day.used_percentage` 从 0 到 100，`resets_at` 是 Unix 秒，窗口没有，或者已经过了 `resets_at`，对应字段就不出现，5 小时的百分比是 `jq -r '.rate_limits.five_hour.used_percentage // empty'`。
+订阅了 claude.ai Pro 或 Max 的人，以及设了消费上限的 Claude apps gateway，第一次 API 响应之后才会有 `rate_limits`。`five_hour.used_percentage` 和 `seven_day.used_percentage` 从 0 到 100，`resets_at` 是 Unix 秒，窗口没有，或者已经过了 `resets_at`，对应字段就不出现，5 小时的百分比用 `jq -r '.rate_limits.five_hour.used_percentage // empty'` 读。
 
 ### subagent 在干活时，分支为什么不动？
 

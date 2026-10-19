@@ -116,7 +116,7 @@ Kaku 0.25.0 不会替你添加 MCP 服务器。`kaku ai` 改的是 `~/.claude/se
 
 `ANTHROPIC_AUTH_TOKEN` 不会被展开进远程 MCP 的 header，从 `kaku ai` 存下来的密钥要先抄到别的变量名，`.mcp.json` 才能引用。claude.ai 的 connector 只在订阅登录下加载，`ANTHROPIC_API_KEY`、`ANTHROPIC_AUTH_TOKEN` 或 `apiKeyHelper` 是当前凭证时不会去拉。`/status` 能看到现在用的是哪一种。
 
-`Cmd + T` 开一个标签，`Cmd + D` 或 `Cmd + Shift + D` 在旁边放一个 shell，`Cmd + Shift + Enter` 放大当前窗格。关掉窗格之前会先问一句。会话结束时，stdio 服务器会收到 `SIGINT`，100 毫秒后如果还在就收到 `SIGTERM`，再过 400 毫秒是 `SIGKILL`。Claude Code 打印出来的文件路径可以用 `Cmd + Click` 打开。Claude Code 2.1.295 及以后会把正在干活、正在等你、已经做完报告给 Kaku 0.25.0，不用额外设置，`preferredNotifChannel` 保持 `auto`。
+`Cmd + T` 开一个标签，`Cmd + D` 或 `Cmd + Shift + D` 在旁边放一个 shell，`Cmd + Shift + Enter` 放大当前窗格。关掉窗格之前会先问一句。会话结束时，stdio 服务器会收到 `SIGINT`，100 毫秒后如果还在就收到 `SIGTERM`，再过 400 毫秒是 `SIGKILL`。Claude Code 打印出来的文件路径可以用 `Cmd + Click` 打开。Claude Code 2.1.295 及以后会把正在干活、正在等你、已经做完这三种状态报告给 Kaku 0.25.0，不用额外设置，`preferredNotifChannel` 保持 `auto`。
 
 ## 什么时候不必接一台服务器
 

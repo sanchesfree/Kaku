@@ -160,7 +160,7 @@ brew link ffmpeg-full imagemagick-full -f --overwrite</code></pre>
 <thead>
 <tr>
 <th>包</th>
-<th>打开的能力</th>
+<th>带来的能力</th>
 </tr>
 </thead>
 <tbody>
@@ -313,7 +313,7 @@ brew link ffmpeg-full imagemagick-full -f --overwrite</code></pre>
 <li><code>keymap.toml</code> 放快捷键</li>
 <li><code>theme.toml</code> 放配色</li>
 </ul>
-<p>默认配置已经编进了发布版里，所以不用把整个文件抄一遍，新建文件、只写你要改的那一项就行，比如想默认显示隐藏文件：</p>
+<p>默认配置已经编进了发布版里，所以不用把整个文件抄一遍，新建文件，只写你要改的那一项就行，比如想默认显示隐藏文件：</p>
 <pre><code class="language-toml"><span class="tok-c"># ~/.config/yazi/yazi.toml</span>
 <span class="tok-k">[mgr]</span>
 show_hidden = <span class="tok-b">true</span></code></pre>
@@ -337,7 +337,7 @@ edit = [
 <h2 id="在-kaku-里用-yazi">在 Kaku 里用 Yazi</h2>
 <p><a href="/zh/docs/features">Kaku</a> 的 shell 配置里带了一整套 Yazi 设置，但不自带 Yazi 本体。<code>kaku init</code> 在交互式 shell 里会先问你，再用 Homebrew 装上缺的工具，Yazi 也在其中，不过只装 <code>yazi</code> 这一个，上面那些预览工具还是要自己补。shell 集成给 zsh 和 fish 都定义了同样的 <code>y</code> 函数，按 <code>Cmd + Shift + Y</code> 会往当前窗格里敲一个 <code>y</code>，所以按 <code>q</code> 退出后，shell 已经停在你选的那个目录里。</p>
 <p><code>~/.config/yazi/</code> 下缺哪个文件，Kaku 就写一份起步配置，<code>yazi.toml</code> 里把预览栏放宽到 <code>ratio = [3, 3, 10]</code>，再加上前面那个 <code>edit</code> opener，<code>keymap.toml</code> 里把 <code>e</code> 和 <code>o</code> 绑成打开，<code>Enter</code> 改成进入目录，0.25.0 起还有一个 <code>init.lua</code>，在路径和文件栏之间留出一行。已经有 <code>yazi.toml</code> 的话，zsh 的配置只在缺的时候补上预览尺寸（<code>max_width</code>、<code>max_height</code>）和 <code>edit</code> opener，其他已有的文件不会去动。Kaku 还装了 <code>kaku-dark</code> 和 <code>kaku-light</code> 两个 flavor，在 <code>theme.toml</code> 里维护一段带标记的 <code>[flavor]</code>，跟着当前配色是 Kaku Dark 还是 Kaku Light 走，每次启动 Yazi 前都会对一遍。你自己写了 <code>[flavor]</code> 的话 Kaku 会原样保留。它写的都是 <code>#:schema</code> 注释，也会把 <code>theme.toml</code>、<code>keymap.toml</code> 和 <code>yazi.toml</code> 里旧的 <code>$schema</code> 键改过来，上面说的 26.5.6 那个坑就不用自己处理了。</p>
-<p>图片预览要看终端能不能画像素，Kaku 实现了 iTerm2 的内联图片协议和 Kitty 图形协议，后者由 <code>enable_kitty_graphics</code> 控制、默认就是开的。在跑着 SSH 的窗格里按 <code>Cmd + Shift + R</code>，Kaku 会用 sshfs 把远端主机的文件挂到 <code>~/Library/Caches/dev.kaku/sshfs</code> 下，再在新标签里用 Yazi 打开，前提是装好了 macFUSE 和 sshfs。旁边的 <code>Cmd + Shift + G</code> 是 lazygit，可以看 <a href="/zh/blog/lazygit-and-delta">lazygit 和 delta</a>。</p>
+<p>图片预览要看终端能不能画像素，Kaku 实现了 iTerm2 的内联图片协议和 Kitty 图形协议，后者由 <code>enable_kitty_graphics</code> 控制，默认就是开的。在跑着 SSH 的窗格里按 <code>Cmd + Shift + R</code>，Kaku 会用 sshfs 把远端主机的文件挂到 <code>~/Library/Caches/dev.kaku/sshfs</code> 下，再在新标签里用 Yazi 打开，前提是装好了 macFUSE 和 sshfs。旁边的 <code>Cmd + Shift + G</code> 是 lazygit，可以看 <a href="/zh/blog/lazygit-and-delta">lazygit 和 delta</a>。</p>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="怎么让-yazi-退出时顺便切换-shell-的目录">怎么让 Yazi 退出时顺便切换 shell 的目录？</h3>
 <p>用快速上手页里的 <code>y</code> 函数，它给 <code>yazi</code> 传 <code>--cwd-file</code>，等 Yazi 退出后再执行 <code>cd</code>。用 <code>y</code> 启动，按 <code>q</code> 退出会切换目录，按 <code>Q</code> 退出则留在原地。</p>
@@ -355,6 +355,6 @@ edit = [
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

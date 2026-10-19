@@ -99,7 +99,7 @@
           "name": "Kaku 会给每个队友一个窗格吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Kaku 里看到的是进程内面板。每个队友一个窗格，来自这个窗格里的 tmux，并且 teammateMode 设成 auto 或 tmux，或者来自装了 it2 的 iTerm2。"
+            "text": "Kaku 里看到的是进程内面板。每个队友一个窗格，需要满足其一：窗格里跑着 tmux 且 teammateMode 设成 auto 或 tmux，或者用装了 it2 的 iTerm2。"
           }
         },
         {
@@ -177,17 +177,17 @@ Name them security, perf, and tests. Use Sonnet for each.</code></pre>
 <p>进程内队友的请求不在主对话那一档缓存里，默认保留五分钟，Claude 订阅也一样。把 <code>subagentPromptCacheTtl</code> 设成 <code>1h</code> 可以保留一小时，API 对这种一小时缓存写入收得更高。这个设置需要 Claude Code v2.1.242 或更新的版本。</p>
 <h2 id="常见问题">常见问题</h2>
 <h3 id="kaku-会给每个队友一个窗格吗">Kaku 会给每个队友一个窗格吗？</h3>
-<p>Kaku 里看到的是进程内面板。每个队友一个窗格，来自这个窗格里的 tmux，并且 <code>teammateMode</code> 设成 <code>auto</code> 或 <code>tmux</code>，或者来自装了 <code>it2</code> 的 iTerm2。</p>
+<p>Kaku 里看到的是进程内面板。每个队友一个窗格，需要满足其一：窗格里跑着 tmux 且 <code>teammateMode</code> 设成 <code>auto</code> 或 <code>tmux</code>，或者用装了 <code>it2</code> 的 iTerm2。</p>
 <h3 id="claude-help-里有-teammate-mode-吗"><code>claude --help</code> 里有 teammate mode 吗？</h3>
 <p><code>--teammate-mode</code> 是实验参数，<code>claude --help</code> 里没有。<code>claude --teammate-mode auto</code> 仍然会盖过这一次会话的 <code>teammateMode</code>。</p>
 <h3 id="为什么没有共享任务列表">为什么没有共享任务列表？</h3>
 <p>比 Opus 4.7、Sonnet 4.6、Haiku 4.5 更新的模型上，Task 工具默认关着，要自己打开，比如启动时带上 <code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code>。这时队伍靠邮箱消息来协调。</p>
           <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
-          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/cursor-vs-claude-code"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Cursor 和 Claude Code 怎么选</span><span class="blog-related-meta"><time datetime="2026-09-25">2026年9月25日</time> · 约 7 分钟</span></a></li><li><a href="/zh/blog/codex-cli-setup"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上配好 Codex CLI：安装、登录和配置</span><span class="blog-related-meta"><time datetime="2026-09-29">2026年9月29日</time> · 约 5 分钟</span></a></li></ul></nav>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/cursor-vs-claude-code"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Cursor 和 Claude Code 怎么选</span><span class="blog-related-meta"><time datetime="2026-09-25">2026年9月25日</time> · 约 8 分钟</span></a></li><li><a href="/zh/blog/codex-cli-setup"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上配好 Codex CLI：安装、登录和配置</span><span class="blog-related-meta"><time datetime="2026-09-29">2026年9月29日</time> · 约 5 分钟</span></a></li></ul></nav>
         </article>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

@@ -182,7 +182,7 @@ Kaku 不会往你的 agent 里加 hook，也不会加指令，`kaku ai` 只有�
 
 Claude Code 自带的提醒是另一路开关，Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置，更早的版本要在 `~/.claude/settings.json` 里设上 `"preferredNotifChannel": "ghostty"`，见[Claude Code 通知](/zh/blog/claude-code-notifications)。
 
-Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上时，Claude 做完 Kaku 本来就会提醒，再挂这个 Stop hook 会多出一条通知，所以它适合更早的版本或者别的终端。OSC 9 也在允许的那几种里，Codex 设了 `notification_method = "osc9"` 时，Kaku 会把它显示成工具自己写的那条消息。
+Stop 脚本和这条通道是分开的，它让 Claude Code 写出 OSC 777，也就是允许的那几种里 Ghostty 用的通知。Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上时，Claude 做完的时候 Kaku 本来就会提醒，再挂这个 Stop hook 会多出一条通知，所以它适合更早的版本或者别的终端。OSC 9 也在允许的那几种里，Codex 设了 `notification_method = "osc9"` 时，Kaku 会把它显示成工具自己写的那条消息。
 
 ## 常见问题
 

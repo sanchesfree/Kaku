@@ -22,7 +22,7 @@ Claude Code 自己的文档列了哪些终端里 `Shift + Enter` 不用设置就
 
 一个 agent 会话里最浪费的往往是这一分钟，Claude 问了一个问题，你却在另一个窗口里，桌面通知能解决这件事，前提是终端和 Claude Code 对怎么发通知有共识。
 
-Claude Code 的 `preferredNotifChannel` 默认是 `auto`，而 `auto` 只会在 iTerm2、Ghostty 和 Kitty 里发桌面通知，在 Terminal.app 里是响一下铃，还得是关掉了提示音才响，其他终端里它什么都不做，这就是为什么用 WezTerm、Warp 或者 Claude Code 不认识的终端时，一条通知都收不到。
+Claude Code 的 `preferredNotifChannel` 默认是 `auto`，而 `auto` 只会在 iTerm2、Ghostty 和 Kitty 里发桌面通知，在 Terminal.app 里是发一个响铃字符，还得是关掉了提示音才发，其他终端里它什么都不做，这就是为什么用 WezTerm、Warp 或者 Claude Code 不认识的终端时，一条通知都收不到。
 
 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 `~/.claude/settings.json` 里加一行就行：
 
@@ -69,7 +69,7 @@ Kaku 运行时会定时保存窗口布局，再启动时把标签和分屏都恢
 
 | 终端 | Shift + Enter 换行 | 默认设置下的 Claude Code 通知 |
 |---|---|---|
-| Terminal.app | 可以 | 只响铃，且要关掉提示音 |
+| Terminal.app | 可以 | 只发响铃字符，且要关掉提示音 |
 | iTerm2 | 可以 | 可以，需在设置里打开转义序列提醒 |
 | Ghostty | 可以 | 可以 |
 | Kitty | 可以 | 可以 |

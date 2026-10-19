@@ -4,7 +4,7 @@
 
 Published 2026-09-23 · Tw93 · https://kaku.fun/blog/claude-code-plan-mode
 
-Plan mode lets Claude Code read the repo and write a plan, and blocks edits to your source until you approve that plan, except in an interactive terminal session that already has bypass permissions available. Cycle to it with `Shift + Tab`, prefix one prompt with `/plan`, or start with `claude --permission-mode plan`. Approving the plan exits plan mode and continues in the permission mode specified by that option.
+Plan mode lets Claude Code read the repo and write a plan, and blocks edits to your source until you approve that plan, except in an interactive terminal session that already has bypass permissions available. Cycle to it with `Shift + Tab`, prefix one prompt with `/plan`, or start with `claude --permission-mode plan`. Approving the plan exits plan mode and continues in the permission mode of the approval option you choose.
 
 ## What plan mode does and does not allow
 

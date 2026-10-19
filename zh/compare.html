@@ -207,7 +207,7 @@
           </table>
 
           <h2 id="compare-iterm2">Kaku 和 iTerm2</h2>
-          <p>iTerm2 是 Mac 上历史悠久的经典终端，很多人留下来是因为配置、快捷键和使用习惯早已磨合顺手。Kaku 适合不想从头折腾配置的人：字体和主题开箱调好，标签分屏、会话恢复、右键菜单、可点击路径，以及 Lazygit、Yazi 快捷调用都已备齐；当 PATH 或 shell 集成异常时，<code>kaku doctor</code> 会直接帮你排查诊断。</p>
+          <p>iTerm2 是 Mac 上历史悠久的经典终端，很多人留下来是因为配置、快捷键和使用习惯早已磨合顺手。Kaku 适合不想从头折腾配置的人：字体和主题开箱调好，标签分屏、会话恢复、右键菜单、可点击路径，以及 Lazygit、Yazi 快捷调用都已备齐；当 PATH 或 shell 集成异常时，<code>kaku doctor</code> 会直接告诉你问题出在哪。</p>
           <p>iTerm2 自己也一直在更新，3.5 加了 AI 对话，要单独装插件、填自己的 API key，2026 年 9 月的 3.7 又加了标签分组和 Claude Code 集成。</p>
           <figure class="shot"><img src="/shots/compare-panes.webp" width="1920" height="1200" loading="lazy" alt="Kaku 窗口，三个标签，其中一个拆成三个分屏"><figcaption>三个标签加一组分屏，退出重开还是原样</figcaption></figure>
           <p>现有的 iTerm2 配置用得好好的，或者要用 Kaku 还没有的功能，那就继续用 iTerm2，Kaku 也不打算把它完整复刻一遍。</p>
@@ -217,7 +217,7 @@
           <p>想要终端里一整套托管的 AI 产品，选 Warp，想要开源、AI 可选而且只走你自己配置的 Mac 终端，选 Kaku。</p>
 
           <h2 id="compare-ghostty">Kaku 和 Ghostty</h2>
-          <p>Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经调优好自己的 shell 工具、字体和工作流，Ghostty 是极佳的选择。Kaku 同样采用 GPU 渲染，核心差异在于省去了从零装配的成本：JetBrains Mono、深浅色主题、智能补全与 <code>z</code> 跳转、Lazygit / Yazi 整合、远程文件挂载以及按需开启的 AI 助手均已开箱就绪。</p>
+          <p>Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS 原生控件呈现标签与分屏，并提供从菜单栏呼出的 Quick Terminal 和窗口恢复。如果你已经有一套顺手的 shell 工具、字体和工作流，继续用 Ghostty 就很好。Kaku 同样采用 GPU 渲染，区别在于这些已经配好：JetBrains Mono、深浅色主题、补全和 <code>z</code> 跳转、Lazygit 和 Yazi、远程文件，以及可选的 AI 助手。</p>
           <figure class="shot"><img src="/shots/compare-lazygit.webp" width="1920" height="1200" loading="lazy" alt="在 Kaku 里运行的 Lazygit 提交记录"><figcaption><span class="sk">Cmd + Shift + G</span> 在当前仓库打开 Lazygit</figcaption></figure>
           <p>想要更轻的终端，现有配置也顺手，就继续用 Ghostty，缺的是开箱那一套、又不想再写一份配置，可以试试 Kaku。</p>
 
@@ -226,7 +226,7 @@
           <p>同时跑很多个 agent，想要一个侧边栏盯着它们、要浏览器窗格，或者想让 agent 自己操作终端，选 cmux。想要一个日常工作直接能用的终端，agent 也照顾到了，又不想在上面再多一层工作区，选 Kaku。</p>
 
           <h2 id="compare-wezterm">Kaku 和 WezTerm</h2>
-          <p>Kaku 衍生自 WezTerm，完整保留了其成熟的 Lua 配置体系与渲染引擎，同时补齐了原生 macOS 体验所缺失的环节：更符合 Mac 习惯的默认值、完善的 shell 集成、Tab Navigator、窗口快照、<code>kaku</code> 命令行套件以及可选的 AI 助手。已有的 WezTerm 配置大多可以直接沿用（个别选项差异可参考<a href="/zh/docs/configuration">配置说明</a>）。此外，上游自 2024 年 2 月后暂未发布新的正式稳定版，改动仅进入 nightly。</p>
+          <p>Kaku 衍生自 WezTerm，保留了它的 Lua 配置和渲染引擎，再补上 WezTerm 留给用户自己配置的 Mac 部分：更符合 Mac 习惯的默认值、shell 集成、Tab Navigator、窗口快照、<code>kaku</code> 命令行套件以及可选的 AI 助手。已有的 WezTerm 配置大多可以直接沿用（个别选项差异可参考<a href="/zh/docs/configuration">配置说明</a>）。此外，上游自 2024 年 2 月后暂未发布新的正式稳定版，改动仅进入 nightly。</p>
           <figure class="shot"><img src="/shots/compare-config.webp" width="1920" height="1200" loading="lazy" alt="kaku config 设置界面，包含主题、字体和窗口选项"><figcaption><code>kaku config</code> 改常用设置，不用打开 Lua 文件</figcaption></figure>
           <p>要在 Windows 或 Linux 上用，或者就想要原版，继续用 WezTerm，Kaku 只做 macOS。</p>
 
@@ -250,6 +250,6 @@ kaku doctor</code></pre>
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用的 Mac 终端，内建 AI 助手</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
 </body>
 </html>

@@ -53,7 +53,7 @@ printf '\033[1;31mred\033[0m\n'
 
 自带字体栈是 JetBrains Mono，然后是 PingFang SC、Apple Symbols 和 Apple Color Emoji。Kaku 还会在后面追加几个回退字体，其中包括随包带的 Symbols Nerd Font Mono。浅色主题用 Medium，粗体用 SemiBold，深色主题用 Regular，粗体用 Medium，斜体按正体来画。图标变成空框，是这条链上的字体都没有那个码位，[Mac 上的 Nerd Font](/zh/blog/nerd-fonts-mac) 讲的就是这个缺口。
 
-随发行配置，连字是关的。
+自带配置里，连字是关的。
 
 ```lua
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }

@@ -18,7 +18,7 @@ brew link ffmpeg-full imagemagick-full -f --overwrite
 
 每个包管的是什么：
 
-| 包 | 打开的能力 |
+| 包 | 带来的能力 |
 |---|---|
 | `ffmpeg-full` | 视频缩略图 |
 | `sevenzip` | 解压和预览压缩包 |
@@ -94,7 +94,7 @@ Yazi 从 `~/.config/yazi/` 读[三个配置文件](https://yazi-rs.github.io/doc
 - `keymap.toml` 放快捷键
 - `theme.toml` 放配色
 
-默认配置已经编进了发布版里，所以不用把整个文件抄一遍，新建文件、只写你要改的那一项就行，比如想默认显示隐藏文件：
+默认配置已经编进了发布版里，所以不用把整个文件抄一遍，新建文件，只写你要改的那一项就行，比如想默认显示隐藏文件：
 
 ```toml
 # ~/.config/yazi/yazi.toml
@@ -143,7 +143,7 @@ edit = [
 
 `~/.config/yazi/` 下缺哪个文件，Kaku 就写一份起步配置，`yazi.toml` 里把预览栏放宽到 `ratio = [3, 3, 10]`，再加上前面那个 `edit` opener，`keymap.toml` 里把 `e` 和 `o` 绑成打开，`Enter` 改成进入目录，0.25.0 起还有一个 `init.lua`，在路径和文件栏之间留出一行。已经有 `yazi.toml` 的话，zsh 的配置只在缺的时候补上预览尺寸（`max_width`、`max_height`）和 `edit` opener，其他已有的文件不会去动。Kaku 还装了 `kaku-dark` 和 `kaku-light` 两个 flavor，在 `theme.toml` 里维护一段带标记的 `[flavor]`，跟着当前配色是 Kaku Dark 还是 Kaku Light 走，每次启动 Yazi 前都会对一遍。你自己写了 `[flavor]` 的话 Kaku 会原样保留。它写的都是 `#:schema` 注释，也会把 `theme.toml`、`keymap.toml` 和 `yazi.toml` 里旧的 `$schema` 键改过来，上面说的 26.5.6 那个坑就不用自己处理了。
 
-图片预览要看终端能不能画像素，Kaku 实现了 iTerm2 的内联图片协议和 Kitty 图形协议，后者由 `enable_kitty_graphics` 控制、默认就是开的。在跑着 SSH 的窗格里按 `Cmd + Shift + R`，Kaku 会用 sshfs 把远端主机的文件挂到 `~/Library/Caches/dev.kaku/sshfs` 下，再在新标签里用 Yazi 打开，前提是装好了 macFUSE 和 sshfs。旁边的 `Cmd + Shift + G` 是 lazygit，可以看 [lazygit 和 delta](/zh/blog/lazygit-and-delta)。
+图片预览要看终端能不能画像素，Kaku 实现了 iTerm2 的内联图片协议和 Kitty 图形协议，后者由 `enable_kitty_graphics` 控制，默认就是开的。在跑着 SSH 的窗格里按 `Cmd + Shift + R`，Kaku 会用 sshfs 把远端主机的文件挂到 `~/Library/Caches/dev.kaku/sshfs` 下，再在新标签里用 Yazi 打开，前提是装好了 macFUSE 和 sshfs。旁边的 `Cmd + Shift + G` 是 lazygit，可以看 [lazygit 和 delta](/zh/blog/lazygit-and-delta)。
 
 ## 常见问题
 

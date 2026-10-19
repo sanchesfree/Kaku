@@ -35,7 +35,7 @@ The reference lists more events. These six are the ones used below:
 
 `Stop` stays quiet if you interrupt the turn. An API error fires `StopFailure` instead.
 
-`PreToolUse` and `PostToolUse` match the tool name. `Edit|Write` and `Edit, Write` are the same case-sensitive list. Any character outside letters, digits, `_`, `-`, spaces, commas, and `|` is an unanchored regular expression, so `Edit.*` also matches `NotebookEdit`. `Stop` ignores a matcher. An empty matcher, `"*"`, or none at all fires every time. Edit and Write pass an absolute `tool_input.file_path`. Bash passes `tool_input.command`.
+`PreToolUse` and `PostToolUse` match the tool name. `Edit|Write` and `Edit, Write` are the same case-sensitive list. A matcher containing any character outside letters, digits, `_`, `-`, spaces, commas, and `|` is treated as an unanchored regular expression, so `Edit.*` also matches `NotebookEdit`. `Stop` ignores a matcher. An empty matcher, `"*"`, or none at all fires every time. Edit and Write pass an absolute `tool_input.file_path`. Bash passes `tool_input.command`.
 
 ## Format a file after an edit
 
@@ -149,7 +149,7 @@ jq -nc --arg seq "$seq" '{terminalSequence: $seq}'
 }
 ```
 
-A `Notification` hook can return the same field, and `preferredNotifChannel` set to `notifications_disabled` does not stop it. The input includes `message` and `notification_type`. `permission_prompt` waits about six seconds without typing. `idle_prompt` waits about 60 seconds after the response if you have not typed.
+A `Notification` hook can return the same field, and `preferredNotifChannel` set to `notifications_disabled` does not stop it. The input includes `message` and `notification_type`. `permission_prompt` fires after about six seconds without typing. `idle_prompt` fires about 60 seconds after the response if you have not typed.
 
 ## See what a hook did
 

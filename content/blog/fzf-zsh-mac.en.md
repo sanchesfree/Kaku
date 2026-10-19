@@ -31,7 +31,7 @@ FZF_CTRL_R_COMMAND= FZF_ALT_C_COMMAND= source <(fzf --zsh)
 
 **Alt + C, directories.** It lists directories only, built with `--walker dir,follow,hidden`, and runs `cd` into the one you choose.
 
-Inside the finder, Ctrl + K and Ctrl + J (or Ctrl + P and Ctrl + N) move up and down, Enter accepts, and Ctrl + C, Ctrl + G or Esc cancels. Typing is fuzzy by default, and spaces separate terms: `'wild` matches exactly, `^music` anchors the start, `.mp3$` the end, and `!fire` excludes. The `-e` option switches the whole search to exact mode.
+Inside the fzf list, Ctrl + K and Ctrl + J (or Ctrl + P and Ctrl + N) move up and down, Enter accepts, and Ctrl + C, Ctrl + G or Esc cancels. Typing is fuzzy by default, and spaces separate terms: `'wild` matches exactly, `^music` anchors the start, `.mp3$` the end, and `!fire` excludes. The `-e` option switches the whole search to exact mode.
 
 The same integration also adds fuzzy completion. End a word with `**` and press Tab:
 

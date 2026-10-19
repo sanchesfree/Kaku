@@ -46,7 +46,7 @@ zsh 的文件在 `preexec` 和 `precmd` 里发这些用户变量，不发 OSC 7 
 printf '\033]7;file://%s/tmp\033\\' "$(hostname)"
 ```
 
-按 `Cmd + T`，再跑 `pwd`，应该打出 `/tmp`。zsh 自己不发 OSC 7，这个路径会一直留着，直到下一条 OSC 7 到来。发一条值不是 URL 的，解析失败就会把它清掉，新标签又跟着 shell 进程走。
+按 `Cmd + T`，再跑 `pwd`，应该打出 `/tmp`。zsh 自己不发 OSC 7，这个路径会一直留着，直到下一条 OSC 7 到来。发一条值不是 URL 的 OSC 7，解析失败就会把它清掉，新标签又跟着 shell 进程走。
 
 ```bash
 printf '\033]7;x\033\\'
@@ -69,7 +69,7 @@ printf '\033]133;A\a'; echo first
 printf '\033]133;A\a'; echo second
 ```
 
-往上滚到 `first` 离开屏幕顶端，按 `Shift + Up`，视口会回到那个标记。fish 本来就会在每个提示符发 A，所以这颗键在 fish 里能在真正的提示符之间跳。zsh 里它只会落到确实有人打过的标记上。
+往上滚到 `first` 离开屏幕顶端，按 `Shift + Up`，视口会回到那个标记。fish 本来就会在每个提示符发 A，所以这颗键在 fish 里能在真正的提示符之间跳。zsh 里它只会落到确实发出过的标记上。
 
 通知要等窗口放到后台再跑。
 
