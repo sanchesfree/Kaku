@@ -38,6 +38,18 @@ Kaku uses WezTerm's Lua configuration system. Some upstream features differ; rev
 
 Run `kaku ai` to enable Kaku Assistant, choose Auth Type (`codex` to reuse a Codex login, or `api_key` for OpenAI-compatible endpoints), then set Simple Model and Deep Model. For custom endpoints, keep Auth Type set to API key and fill Base URL, API key, and model names manually. Once configured, Cmd+L opens the chat overlay. You configure your own AI service. Kaku does not provide or relay it.
 
+## AI coding tools (Claude Code, Codex)
+
+Full page: https://kaku.fun/docs/ai-coding
+
+- Setup: `kaku ai` configures external coding tools such as Claude Code, Codex, Gemini CLI, Copilot CLI and Kimi Code, and shows their plan usage. Kaku only changes a tool's settings when you edit them there, keeps fields you wrote yourself, and never adds hooks or instructions to your agents on its own.
+- Notifications: Kaku 0.25.0 or later notifies you with no setting when Claude Code 2.1.295 or later is waiting on you or done; leave `preferredNotifChannel` at its default `auto`, since `ghostty` there posts a second notification. With an older Claude Code or Kaku, set `{ "preferredNotifChannel": "ghostty" }` in `~/.claude/settings.json`. Codex works without changes through the terminal bell; `notification_method = "osc9"` under `[tui]` in `~/.codex/config.toml` shows Codex's own message. Notifications appear only while Kaku is in the background.
+- Prompts: Shift+Enter and Cmd+Enter insert a newline. Cmd+Click opens links and paths such as `src/main.rs:42:7` at that line even while the tool captures the mouse; `config.file_link_editor` picks the editor.
+- Several agents: split with Cmd+D or Cmd+Shift+D, zoom a pane with Cmd+Shift+Enter. Closing a pane or tab whose foreground program is Claude Code, Codex or another long-running program asks first.
+- After a restart: tabs and splits come back, and panes that were running Claude Code or Codex keep their last screen.
+- From another computer: `kaku remote` opens the Mac's terminals, including running agents, in a desktop browser on another computer.
+- Guides: https://kaku.fun/blog/best-terminal-for-claude-code compares terminals for Claude Code; https://kaku.fun/blog/claude-code-notifications explains why notifications stay silent in most terminals and how to fix each.
+
 ## Command line
 
 - `kaku doctor`: verify the app bundle, PATH, and shell integration, with auto-fixes (`--fix`) and a redacted diagnostic bundle (.zip) saved on your Mac for issue reports.
@@ -76,6 +88,7 @@ Kaku is built by Tw93 (https://tw93.fun, https://github.com/tw93, https://x.com/
 
 - Homepage: https://kaku.fun
 - Documentation: https://kaku.fun/docs
+- Blog: https://kaku.fun/blog
 - Roadmap: https://kaku.fun/roadmap
 - Changelog: https://kaku.fun/changelog
 - Release feed: https://kaku.fun/feed.xml
