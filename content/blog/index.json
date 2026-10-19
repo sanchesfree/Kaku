@@ -31,34 +31,6 @@
       "modified": "2026-10-19"
     },
     {
-      "slug": "codex-cli-setup",
-      "category": "agents",
-      "date": null,
-      "keyword": "codex cli",
-      "en": {
-        "title": "Setting Up Codex CLI on Mac: Install, Login and Config",
-        "description": "Install OpenAI's Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions."
-      },
-      "zh": {
-        "title": "在 Mac 上配好 Codex CLI：安装、登录和配置",
-        "description": "在 macOS 上安装 OpenAI 的 Codex CLI，用 ChatGPT 账号或 API key 登录，再配好 config.toml、审批、通知和会话恢复。"
-      }
-    },
-    {
-      "slug": "claude-code-remote",
-      "category": "agents",
-      "date": null,
-      "keyword": "claude code remote",
-      "en": {
-        "title": "Claude Code Remote: Three Ways to Reach a Running Session",
-        "description": "Anthropic's Remote Control, cloud sessions, and opening your Mac's terminal from another computer with kaku remote: what each needs and where it runs."
-      },
-      "zh": {
-        "title": "远程使用 Claude Code，接上正在跑的会话的三种办法",
-        "description": "Anthropic 的 Remote Control、云端会话，以及用 kaku remote 在另一台电脑上打开 Mac 的终端，各自需要什么、跑在哪里。"
-      }
-    },
-    {
       "slug": "best-terminal-for-mac",
       "category": "terminal",
       "date": null,
@@ -87,17 +59,17 @@
       }
     },
     {
-      "slug": "zsh-without-oh-my-zsh",
-      "category": "shell",
+      "slug": "claude-code-plan-mode",
+      "category": "agents",
       "date": null,
-      "keyword": "zsh autosuggestions",
+      "keyword": "claude code plan mode",
       "en": {
-        "title": "A Fast Zsh Setup Without Oh My Zsh",
-        "description": "Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it."
+        "title": "Claude Code Plan Mode: When and How to Use It",
+        "description": "What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it."
       },
       "zh": {
-        "title": "不用 Oh My Zsh，把 zsh 配得又快又好用",
-        "description": "用原生 zsh 配好自动建议、语法高亮、补全和 Starship 提示符，讲清楚保持启动快的加载顺序，以及怎么测。"
+        "title": "Claude Code 的 plan mode 什么时候用、怎么用",
+        "description": "plan mode 允许做什么，怎么用 Shift+Tab、/plan 或命令行参数打开，怎么审和改计划，以及什么时候不用它。"
       }
     },
     {
@@ -115,6 +87,34 @@
       }
     },
     {
+      "slug": "cursor-vs-claude-code",
+      "category": "agents",
+      "date": null,
+      "keyword": "cursor vs claude code",
+      "en": {
+        "title": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
+        "description": "How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together."
+      },
+      "zh": {
+        "title": "Cursor 和 Claude Code 怎么选",
+        "description": "Cursor 和 Claude Code 在哪里看改动、怎么收费、上下文、并行会话上有什么不同，以及两者怎么一起用。"
+      }
+    },
+    {
+      "slug": "zsh-without-oh-my-zsh",
+      "category": "shell",
+      "date": null,
+      "keyword": "zsh autosuggestions",
+      "en": {
+        "title": "A Fast Zsh Setup Without Oh My Zsh",
+        "description": "Autosuggestions, syntax highlighting, completions and a Starship prompt with plain zsh, the load order that keeps it fast, and how to measure it."
+      },
+      "zh": {
+        "title": "不用 Oh My Zsh，把 zsh 配得又快又好用",
+        "description": "用原生 zsh 配好自动建议、语法高亮、补全和 Starship 提示符，讲清楚保持启动快的加载顺序，以及怎么测。"
+      }
+    },
+    {
       "slug": "wezterm-config-for-mac",
       "category": "terminal",
       "date": null,
@@ -126,6 +126,34 @@
       "zh": {
         "title": "一份实用的 Mac 版 WezTerm 配置，以及 Kaku 改了什么",
         "description": "在 macOS 上最值得改的 WezTerm 设置，从字体、行高到快捷键和渲染，以及 Kaku 选了哪些默认值、为什么。"
+      }
+    },
+    {
+      "slug": "codex-cli-setup",
+      "category": "agents",
+      "date": null,
+      "keyword": "codex cli",
+      "en": {
+        "title": "Setting Up Codex CLI on Mac: Install, Login and Config",
+        "description": "Install OpenAI's Codex CLI on macOS, sign in with ChatGPT or an API key, and set up config.toml, approvals, notifications and resuming sessions."
+      },
+      "zh": {
+        "title": "在 Mac 上配好 Codex CLI：安装、登录和配置",
+        "description": "在 macOS 上安装 OpenAI 的 Codex CLI，用 ChatGPT 账号或 API key 登录，再配好 config.toml、审批、通知和会话恢复。"
+      }
+    },
+    {
+      "slug": "claude-code-remote",
+      "category": "agents",
+      "date": null,
+      "keyword": "claude code remote",
+      "en": {
+        "title": "Claude Code Remote: Three Ways to Reach a Running Session",
+        "description": "Anthropic's Remote Control, cloud sessions, and opening your Mac's terminal from another computer with kaku remote: what each needs and where it runs."
+      },
+      "zh": {
+        "title": "远程使用 Claude Code，接上正在跑的会话的三种办法",
+        "description": "Anthropic 的 Remote Control、云端会话，以及用 kaku remote 在另一台电脑上打开 Mac 的终端，各自需要什么、跑在哪里。"
       }
     },
     {
@@ -238,34 +266,6 @@
       "zh": {
         "title": "Mac 上的 Nerd Font，装补丁字体还是用符号回退",
         "description": "提示符和终端工具里的图标为什么变成方块，怎么用 Homebrew 装补丁版 Nerd Font，什么时候只靠符号回退就够了。"
-      }
-    },
-    {
-      "slug": "claude-code-plan-mode",
-      "category": "agents",
-      "date": null,
-      "keyword": "claude code plan mode",
-      "en": {
-        "title": "Claude Code Plan Mode: When and How to Use It",
-        "description": "What plan mode allows in Claude Code, how to turn it on with Shift+Tab, /plan or a flag, how to review and edit the plan, and when to skip it."
-      },
-      "zh": {
-        "title": "Claude Code 的 plan mode 什么时候用、怎么用",
-        "description": "plan mode 允许做什么，怎么用 Shift+Tab、/plan 或命令行参数打开，怎么审和改计划，以及什么时候不用它。"
-      }
-    },
-    {
-      "slug": "cursor-vs-claude-code",
-      "category": "agents",
-      "date": null,
-      "keyword": "cursor vs claude code",
-      "en": {
-        "title": "Cursor vs Claude Code: Editor Agent or Terminal Agent",
-        "description": "How Cursor and Claude Code differ in where you review changes, what you pay for, context, parallel sessions, and how to use both together."
-      },
-      "zh": {
-        "title": "Cursor 和 Claude Code 怎么选",
-        "description": "Cursor 和 Claude Code 在哪里看改动、怎么收费、上下文、并行会话上有什么不同，以及两者怎么一起用。"
       }
     },
     {

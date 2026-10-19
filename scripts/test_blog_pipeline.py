@@ -63,7 +63,7 @@ class BlogPipelineTests(unittest.TestCase):
 
     def test_two_days_and_same_day_rerun(self):
         for day, slug in (("2026-10-18", "claude-code-notifications"),
-                          ("2026-10-19", "codex-cli-setup")):
+                          ("2026-10-19", "best-terminal-for-mac")):
             with self.subTest(day=day):
                 self.assertEqual(self.script("publish_next_post", day=day).stdout.strip(), slug)
                 for name in ("build_blog", "build_markdown", "build_feed", "highlight"):
@@ -117,6 +117,19 @@ class BlogCategoryTests(unittest.TestCase):
                 build_blog.check_categories(list(broken))
         with self.assertRaises(SystemExit):
             build_blog.check_categories([{"slug": "d", "date": None}])
+
+    def test_posts_link_only_to_posts_queued_before_them(self):
+        # A queued post goes live alone, so a link to a later post would 404 until that one ships.
+        # Live posts are always fine targets: a published post may be edited to link a newer one.
+        posts = build_blog.load_queue()
+        queue = [p["slug"] for p in posts]
+        live = {p["slug"] for p in posts if p.get("date")}
+        for index, slug in enumerate(queue):
+            for lang in build_blog.LANGS:
+                body = (build_blog.SRC / f"{slug}.{lang}.md").read_text(encoding="utf-8")
+                for target in re.findall(r"\(/(?:zh/)?blog/([a-z0-9-]+)", body):
+                    with self.subTest(post=slug, lang=lang, link=target):
+                        self.assertIn(target, live | set(queue[:index]))
 
     def test_index_groups_live_posts_and_skips_empty_groups(self):
         live = [p for p in build_blog.live_posts(build_blog.load_queue(), build_blog.today())]

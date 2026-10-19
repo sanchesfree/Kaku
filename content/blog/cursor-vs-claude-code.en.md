@@ -19,7 +19,7 @@ Checked October 2026. The figures are on the pricing pages.
 
 [Cursor's pricing page](https://cursor.com/pricing) lists Free, Plus, Premium, Super, and Ultra, plus Teams and Enterprise. Cursor and Grok Chat, Imagine, Voice, and Bot share one usage pool. It refreshes weekly, higher tiers include a larger pool, and you can buy a top-off past the included amount. Free includes limited agent requests and limited chat requests. Plus includes Grok models only. Premium and above include Grok usage, and third-party models are billed at API list price outside that allowance, with spending caps. Cloud agents and Bugbot code reviews start at Premium. The agent is on every plan, including Free.
 
-Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Max, Team, or Enterprise) or an [Anthropic Console](https://platform.claude.com/) account billed per use, and is also available through Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry. [Installing it on a Mac](/blog/install-claude-code-mac) covers the sign-in. On a claude.ai plan, `/usage` shows usage for the current session and the week. An API key or third-party sign-in shows that session's cost and tokens. More pricing is on [code.claude.com](https://code.claude.com).
+Claude Code runs on a [Claude subscription](https://claude.com/pricing) (Pro, Max, Team, or Enterprise) or an [Anthropic Console](https://platform.claude.com/) account billed per use, and is also available through Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry. [Anthropic's setup guide](https://code.claude.com/docs/en/setup) covers installing it and signing in. On a claude.ai plan, `/usage` shows usage for the current session and the week. An API key or third-party sign-in shows that session's cost and tokens. More pricing is on [code.claude.com](https://code.claude.com).
 
 ## Context and models
 
@@ -29,7 +29,7 @@ Claude Code's docs give no fixed context window size. The extension shows how fu
 
 ## Parallel work and long sessions
 
-A git worktree checks the repo out again in another directory on another branch, so `claude --worktree feature-auth` keeps two Claude Code tasks off the same files, and a second terminal uses another name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and common errors.
+A git worktree checks the repo out again in another directory on another branch, so `claude --worktree feature-auth` keeps two Claude Code tasks off the same files, and a second terminal uses another name. [Anthropic's worktree guide](https://code.claude.com/docs/en/worktrees) covers setup and cleanup.
 
 **Open in New Tab** (`Cmd + Shift + Esc` on Mac) or **Open in New Window** opens another conversation, with its own history and context.
 
@@ -62,7 +62,7 @@ Open the integrated terminal with Command and backtick, then run `claude`. The C
 
 In [Kaku](/docs/ai-coding), `Cmd + D` splits side by side and `Cmd + Shift + D` top and bottom, so Claude Code can sit next to a shell or next to Codex. `Cmd + Shift + Enter` zooms the pane you are reading. Closing a pane or tab asks first while Claude Code, Codex, or another long-running program is in the foreground.
 
-`restore_previous_session` is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit restores that layout. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with `claude --resume`. Resuming Codex in the other pane is covered in [the Codex CLI post](/blog/codex-cli-setup).
+`restore_previous_session` is on by default. Launch reopens the last tabs and panes, and the layout is saved within a minute of opening or closing a window, tab, or pane, so a crash or force quit restores that layout. After a restart, a pane that was running Claude Code or Codex keeps its last screen. Resume Claude Code with `claude --resume`. In the other pane, `codex resume` reopens a recent Codex chat from the same repository.
 
 `Cmd + Click` opens a path such as `src/main.rs:42:7` even while the tool captures the mouse, the same reason it matters in [a terminal for Claude Code](/blog/best-terminal-for-claude-code). Point it at Cursor in `~/.config/kaku/kaku.lua`:
 
@@ -80,7 +80,7 @@ Yes. Use `cursor:extension/anthropic.claude-code`, or run `claude` in the integr
 
 ### How do I stop two Claude Code sessions from editing the same files?
 
-`claude --worktree feature-auth` creates another checkout on its own branch, and the next terminal uses a different name. [The worktrees post](/blog/claude-code-git-worktrees) covers setup and common errors.
+`claude --worktree feature-auth` creates another checkout on its own branch, and the next terminal uses a different name. [Anthropic's worktree guide](https://code.claude.com/docs/en/worktrees) covers setup and cleanup.
 
 ### How do I pick up a Claude Code session later?
 

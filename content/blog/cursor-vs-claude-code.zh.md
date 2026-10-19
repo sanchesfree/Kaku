@@ -17,7 +17,7 @@ claude
 
 [Cursor 的价格页](https://cursor.com/pricing) 列了 Free、Plus、Premium、Super 和 Ultra，另外还有 Teams 和 Enterprise，价目以这一页上的数字为准，2026 年 10 月核对过。Cursor 的用量和 Grok 那边的 Chat、Imagine、Voice、Bot 放在同一个池子里，每周刷新，更高的档位池子更大，包含的额度用完还可以再买一笔。Free 的 agent 请求有限，聊天请求也有限，Plus 只含 Grok 模型。Premium 及以上含 Grok 的用量，第三方模型按 API 标价另计，不在这份包含的额度里，并且有花费上限。Cloud agents 和 Bugbot 的代码审查从 Premium 起才有，agent 每个方案都有，Free 也有。
 
-Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、Team 或 Enterprise），或者按用量计费的 [Anthropic Console](https://platform.claude.com/) 账号，Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 上也能用。登录怎么做写在[在 Mac 上安装 Claude Code](/zh/blog/install-claude-code-mac) 那篇。claude.ai 的方案里，`/usage` 显示当前会话和这一周，用 API key 或第三方登录时，显示的是这一次会话的费用和 token，更多价格在 [code.claude.com](https://code.claude.com)。
+Claude Code 用的是 [Claude 订阅](https://claude.com/pricing)（Pro、Max、Team 或 Enterprise），或者按用量计费的 [Anthropic Console](https://platform.claude.com/) 账号，Amazon Bedrock、Google Cloud 的 Agent Platform 和 Microsoft Foundry 上也能用。安装和登录怎么做写在 Anthropic 的[安装文档](https://code.claude.com/docs/zh-CN/setup)里。claude.ai 的方案里，`/usage` 显示当前会话和这一周，用 API key 或第三方登录时，显示的是这一次会话的费用和 token，更多价格在 [code.claude.com](https://code.claude.com)。
 
 ## 上下文和模型
 
@@ -27,7 +27,7 @@ Cursor 给每个模型标了默认上下文，很多还有更高的上限，这�
 
 ## 并行和长会话
 
-git worktree 会在另一个目录里把仓库再检出一份，用的是另一条分支，所以 `claude --worktree feature-auth` 能让两个 Claude Code 任务不改同一批文件，再开一个终端就换一个名字，怎么设置、会报哪些错写在 [worktree 那篇](/zh/blog/claude-code-git-worktrees)。
+git worktree 会在另一个目录里把仓库再检出一份，用的是另一条分支，所以 `claude --worktree feature-auth` 能让两个 Claude Code 任务不改同一批文件，再开一个终端就换一个名字，怎么设置、用完怎么清理写在 Anthropic 的 [worktree 文档](https://code.claude.com/docs/zh-CN/worktrees)里。
 
 **Open in New Tab**（Mac 上是 `Cmd + Shift + Esc`）或 **Open in New Window** 开的是另一段对话，历史和上下文各自一份。
 
@@ -60,7 +60,7 @@ Claude Code 的 [plan mode](/zh/blog/claude-code-plan-mode) 只读仓库，你�
 
 在 [Kaku](/zh/docs/ai-coding) 里，`Cmd + D` 左右分屏，`Cmd + Shift + D` 上下分屏，Claude Code 可以挨着一个 shell，也可以挨着 Codex，`Cmd + Shift + Enter` 把你正在看的窗格放大。关掉窗格或标签时，如果前台正跑着 Claude Code、Codex 或其他要跑很久的程序，会先问一声。
 
-`restore_previous_session` 默认开着，启动时会重新打开上次的标签和窗格，窗口、标签或窗格一开一关，一分钟内会把布局存下来，所以崩溃或强制退出也能把那份布局带回来。重启之后，原来跑着 Claude Code 或 Codex 的窗格留着最后一屏，Claude Code 用 `claude --resume` 接上，另一个窗格里的 Codex 怎么接上写在 [Codex CLI 那篇](/zh/blog/codex-cli-setup)。
+`restore_previous_session` 默认开着，启动时会重新打开上次的标签和窗格，窗口、标签或窗格一开一关，一分钟内会把布局存下来，所以崩溃或强制退出也能把那份布局带回来。重启之后，原来跑着 Claude Code 或 Codex 的窗格留着最后一屏，Claude Code 用 `claude --resume` 接上，另一个窗格里的 Codex 用 `codex resume` 接上，它会列出这个仓库最近的会话。
 
 `Cmd + Click` 能打开 `src/main.rs:42:7` 这种路径，程序正占着鼠标时也点得开，[给 Claude Code 选终端](/zh/blog/best-terminal-for-claude-code)那篇讲过为什么这一点要紧，在 `~/.config/kaku/kaku.lua` 里把它指到 Cursor：
 
@@ -78,7 +78,7 @@ config.file_link_editor = "cursor --goto"
 
 ### 怎么让两个 Claude Code 会话不改同一批文件？
 
-`claude --worktree feature-auth` 会在自己的分支上再检出一份，下一个终端要用另一个名字，设置和报错写在 [worktree 那篇](/zh/blog/claude-code-git-worktrees)。
+`claude --worktree feature-auth` 会在自己的分支上再检出一份，下一个终端要用另一个名字，设置和清理写在 Anthropic 的 [worktree 文档](https://code.claude.com/docs/zh-CN/worktrees)里。
 
 ### 怎么接上之前的 Claude Code 会话？
 
