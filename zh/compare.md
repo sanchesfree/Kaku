@@ -1,4 +1,4 @@
-# Kaku 对比 iTerm2、Warp、Ghostty 和 WezTerm
+# Kaku 对比 iTerm2、Warp、Ghostty、WezTerm 和 cmux
 
 Kaku 想做的是装好就能用的 Mac 终端，这页写它和几款常见终端差在哪，以及什么情况下不必换。
 
@@ -19,17 +19,17 @@ Kaku 想做的是装好就能用的 Mac 终端，这页写它和几款常见终�
 
 ## 对照
 
-|  | Kaku | iTerm2 | Warp | Ghostty | WezTerm | 系统终端 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 协议 | MIT | GPL | 客户端 AGPL，后端闭源 | MIT | MIT | Apple |
-| 平台 | 仅 macOS | macOS | macOS、Linux、Windows | macOS 和 Linux | macOS、Linux、Windows | macOS |
-| 账号 | 无 | 无 | 可选 | 无 | 无 | 无 |
-| 默认值 | 开箱即用 | 自己拼 | 产品默认 | 快，预设少 | 自己拼 | 系统自带 |
-| AI | 可选，用你的服务 | 可选插件，用你的 key | 内置，跑在 Warp 的服务器上 | 没有内置 | 没有内置 | 没有内置 |
-| Shell 工具 | Kaku 会话里自带 | 自己加 | 产品自带 | 自己加 | 自己加 | 无 |
-| 安装 | DMG 或官方 brew cask | 下载 | 产品安装器 | 下载 | 下载 | 系统自带 |
-| 稳定版（2026 年 10 月） | 0.25.0 | 3.7.3 | 每周构建 | 1.3.1 | 20240203，之后只有 nightly | 随 macOS 更新 |
-| 自检 | `kaku doctor` | 无 | 产品界面 | 无 | 无 | 无 |
+|  | Kaku | iTerm2 | Warp | Ghostty | cmux | WezTerm | 系统终端 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 协议 | MIT | GPL | 客户端 AGPL，后端闭源 | MIT | App 用 GPL，云端服务用 BSL | MIT | Apple |
+| 平台 | 仅 macOS | macOS | macOS、Linux、Windows | macOS 和 Linux | macOS，iOS 配套 App 在测试 | macOS、Linux、Windows | macOS |
+| 账号 | 无 | 无 | 可选 | 无 | 只有付费方案需要 | 无 | 无 |
+| 默认值 | 开箱即用 | 自己拼 | 产品默认 | 快，预设少 | Ghostty 引擎，沿用 Ghostty 配置 | 自己拼 | 系统自带 |
+| AI | 可选，用你的服务 | 可选插件，用你的 key | 内置，跑在 Warp 的服务器上 | 没有内置 | 任何命令行 agent，付费方案有云端 agent | 没有内置 | 没有内置 |
+| Shell 工具 | Kaku 会话里自带 | 自己加 | 产品自带 | 自己加 | 自己加 | 自己加 | 无 |
+| 安装 | DMG 或官方 brew cask | 下载 | 产品安装器 | 下载 | DMG 或 brew tap | 下载 | 系统自带 |
+| 稳定版（2026 年 10 月） | 0.25.0 | 3.7.3 | 每周构建 | 1.3.1 | 0.65.2 | 20240203，之后只有 nightly | 随 macOS 更新 |
+| 自检 | `kaku doctor` | 无 | 产品界面 | 无 | 只检查配置文件 | 无 | 无 |
 
 ## Kaku 和 iTerm2
 
@@ -54,6 +54,12 @@ Ghostty 是一款非常轻快的 GPU 加速终端，MIT 开源，采用 macOS �
 ![在 Kaku 里运行的 Lazygit 提交记录](https://kaku.fun/shots/compare-lazygit.webp)Cmd + Shift + G 在当前仓库打开 Lazygit
 
 想要更轻的终端，现有配置也顺手，就继续用 Ghostty，缺的是开箱那一套、又不想再写一份配置，可以试试 Kaku。
+
+## Kaku 和 cmux
+
+cmux 是 Manaflow 做的免费 macOS 终端，渲染用的是 Ghostty 的引擎 libghostty，主打同时跑很多个编程 agent。侧边栏是一列竖排标签，每个工作区的 git 分支、目录、端口和最新一条通知都列在上面，agent 需要你时对应的窗格会亮起来，终端旁边还能开一个可编程的浏览器窗格，所有操作都能用命令行和 Unix socket 驱动。App 本身按 GPL 开源，付费方案按年付每月 40 美元起，加的是给 agent 用的云端虚拟机和 iOS App。Kaku 是 MIT 开源，没有付费档，沿用 WezTerm 的 Lua 配置，力气花在装好就能用上：JetBrains Mono、深浅色主题、补全和 `z`、Lazygit、Yazi、`kaku doctor`，以及接你自己服务的可选助手。Claude Code 和 Codex 要用的通知、分屏和重启后恢复都有，`kaku remote` 还能在另一台电脑的浏览器里打开这些终端。
+
+同时跑很多个 agent，想要一个侧边栏盯着它们、要浏览器窗格，或者想让 agent 自己操作终端，选 cmux。想要一个日常工作直接能用的终端，agent 也照顾到了，又不想在上面再多一层工作区，选 Kaku。
 
 ## Kaku 和 WezTerm
 

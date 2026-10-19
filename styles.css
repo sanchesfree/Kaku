@@ -963,6 +963,11 @@ button, input { font: inherit; }
 @media (max-width: 880px) {
   .doc-content table.config-fields { display: block; overflow-x: auto; }
 }
+/* The compare table has eight columns whose minimum width (about 805px in
+   English) exceeds the prose column until the viewport reaches about 940px. */
+@media (max-width: 960px) {
+  .doc-content table.compare-table { display: block; overflow-x: auto; }
+}
 .doc-content blockquote {
   margin: 24px 0;
   padding: 14px 18px;

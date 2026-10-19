@@ -1,4 +1,4 @@
-# Kaku vs iTerm2, Warp, Ghostty, and WezTerm
+# Kaku vs iTerm2, Warp, Ghostty, WezTerm, and cmux
 
 Kaku aims to be the Mac terminal that works the moment you install it. Here is how it stacks up against the usual picks, and when you should stay where you are.
 
@@ -19,17 +19,17 @@ People switch terminals for a handful of reasons. They want something usable wit
 
 ## At a glance
 
-|  | Kaku | iTerm2 | Warp | Ghostty | WezTerm | Terminal.app |
-| --- | --- | --- | --- | --- | --- | --- |
-| License | MIT | GPL | AGPL client, closed backend | MIT | MIT | Apple |
-| Platform | macOS only | macOS | macOS, Linux, Windows | macOS and Linux | macOS, Linux, Windows | macOS |
-| Account | None | None | Optional | None | None | None |
-| Defaults | Opinionated day-one setup | You assemble them | Product defaults | Fast, fewer presets | You assemble them | Stock Apple |
-| AI | Optional, your provider | Optional plugin, your key | Built in, runs on Warp's servers | None built in | None built in | None built in |
-| Shell tools | In the Kaku session | You add them | Product set | You add them | You add them | None |
-| Install | DMG or official brew cask | Download | Product installer | Download | Download | Built in |
-| Stable (Oct 2026) | 0.25.0 | 3.7.3 | Weekly builds | 1.3.1 | 20240203, then nightly | Ships with macOS |
-| Checkup | `kaku doctor` | None | Product UI | None | None | None |
+|  | Kaku | iTerm2 | Warp | Ghostty | cmux | WezTerm | Terminal.app |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| License | MIT | GPL | AGPL client, closed backend | MIT | GPL app, BSL server | MIT | Apple |
+| Platform | macOS only | macOS | macOS, Linux, Windows | macOS and Linux | macOS, iOS app in beta | macOS, Linux, Windows | macOS |
+| Account | None | None | Optional | None | Only for paid plans | None | None |
+| Defaults | Opinionated day-one setup | You assemble them | Product defaults | Fast, fewer presets | Ghostty engine, your Ghostty config | You assemble them | Stock Apple |
+| AI | Optional, your provider | Optional plugin, your key | Built in, runs on Warp's servers | None built in | Any CLI agent, cloud agents on paid plans | None built in | None built in |
+| Shell tools | In the Kaku session | You add them | Product set | You add them | You add them | You add them | None |
+| Install | DMG or official brew cask | Download | Product installer | Download | DMG or brew tap | Download | Built in |
+| Stable (Oct 2026) | 0.25.0 | 3.7.3 | Weekly builds | 1.3.1 | 0.65.2 | 20240203, then nightly | Ships with macOS |
+| Checkup | `kaku doctor` | None | Product UI | None | Config file check | None | None |
 
 ## Kaku vs iTerm2
 
@@ -54,6 +54,12 @@ Ghostty is a fast, MIT-licensed GPU terminal with native macOS tabs and splits, 
 ![Lazygit commit log running inside Kaku](https://kaku.fun/shots/compare-lazygit.webp)Cmd + Shift + G opens Lazygit in the current repository
 
 Stay on Ghostty if you want something leaner and like your current setup. Try Kaku if what you are missing is the out-of-the-box suite, not another config file.
+
+## Kaku vs cmux
+
+cmux, from Manaflow, is a free macOS terminal built on libghostty, Ghostty's rendering engine, for running many coding agents at once. A sidebar of vertical tabs shows each workspace's git branch, directory, ports and latest notification, panes light up when an agent needs attention, a scriptable browser pane can sit next to the terminal, and a CLI and Unix socket drive every action. The app is GPL licensed, and paid plans from $40 a month, billed yearly, add cloud VMs for agents and the iOS app. Kaku is MIT licensed with no paid tier, keeps WezTerm's Lua config, and spends its effort on a working day-one setup: JetBrains Mono, themes, completions and `z`, Lazygit, Yazi, `kaku doctor`, and an optional assistant on your own provider. For Claude Code and Codex it covers notifications, splits and restore, and `kaku remote` opens the same terminals in a browser on another computer.
+
+Pick cmux if you run many agents in parallel and want a sidebar to keep track of them, a browser pane, or a terminal your agents can script. Pick Kaku if you want one terminal that is ready for daily work, agents included, without a workspace layer on top.
 
 ## Kaku vs WezTerm
 
