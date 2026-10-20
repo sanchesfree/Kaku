@@ -1234,7 +1234,8 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
   border-radius: 4px;
   padding: 1px 6px;
 }
-.faq-answer a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+/* Links read by colour alone, as on mole.fit (maintainer 2026-10-20). */
+.faq-answer a { color: var(--brand); }
 @media (prefers-reduced-motion: reduce) {
   .faq-chevron, .faq-item::details-content { transition: none; }
 }
@@ -1268,7 +1269,9 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   }
   .section-head { max-width: none; }
   .foot { flex-direction: column; }
-  .foot-links { gap: 32px; flex-wrap: wrap; }
+  /* Stacked under the brand, the columns share the full width as on mole.fit;
+     at their natural widths they huddled left of an empty half (OPPO Pad mini). */
+  .foot-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 16px; }
   .docs-layout { gap: 34px; }
   .docs-sidebar {
     position: static;
