@@ -1324,6 +1324,10 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
 .foot-links { display: flex; gap: 44px; }
 .foot-links div { display: grid; gap: 12px; align-content: start; }
 .foot-links b { margin-bottom: 2px; color: color-mix(in srgb, #fff 92%, transparent); font-size: 13px; font-weight: 600; letter-spacing: 0.2px; }
+/* Chinese blog text tracks at 0.02em, as on mole.fit (maintainer 2026-10-21: zero tracking read cramped);
+   headings resolve it at their own size instead of the Latin -0.3px, code keeps 0. */
+html[lang^="zh"] .blog-page, html[lang^="zh"] .blog-page :is(h1, h2, h3, h4) { letter-spacing: 0.02em; }
+html[lang^="zh"] .blog-page :is(pre, code, kbd) { letter-spacing: 0; }
 html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 .foot a { color: color-mix(in srgb, var(--foot-ink) 68%, transparent); }
 @media (hover: hover) { .foot a:hover { color: #fff; text-decoration: none; } }
