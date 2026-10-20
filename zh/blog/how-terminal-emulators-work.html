@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="终端模拟器是怎么工作的">
   <meta property="og:url" content="https://kaku.fun/zh/blog/how-terminal-emulators-work">
   <meta property="article:published_time" content="2026-10-16">
-  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:modified_time" content="2026-10-20">
   <meta property="article:author" content="Tw93">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/how-terminal-emulators-work.webp">
@@ -62,7 +62,7 @@
       "url": "https://kaku.fun/zh/blog/how-terminal-emulators-work",
       "mainEntityOfPage": "https://kaku.fun/zh/blog/how-terminal-emulators-work",
       "datePublished": "2026-10-16",
-      "dateModified": "2026-10-19",
+      "dateModified": "2026-10-20",
       "inLanguage": "zh-CN",
       "articleSection": "终端",
       "image": "https://kaku.fun/img/blog/cards/how-terminal-emulators-work.webp",
@@ -136,7 +136,7 @@
   <a class="skip-link" href="#main-content">跳到内容</a>
   <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/compare">对比</a><a href="/zh/changelog">更新日志</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/how-terminal-emulators-work" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/how-terminal-emulators-work" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content" class="docs-page blog-page">
-    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>终端模拟器是怎么工作的</h1><p class="blog-meta"><span><a href="/zh/blog#topic-terminal">终端</a></span><span>发布于 <time datetime="2026-10-16">2026年10月16日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 10 分钟</span></p></div></header>
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>终端模拟器是怎么工作的</h1><p class="blog-meta"><span><a href="/zh/blog#topic-terminal">终端</a></span><span>发布于 <time datetime="2026-10-16">2026年10月16日</time></span><span>更新于 <time datetime="2026-10-20">2026年10月20日</time></span><span>约 10 分钟</span></p></div></header>
     <section class="section">
       <div class="wide">
         <article class="doc-content blog-article">
@@ -148,7 +148,7 @@
 <p>这个子进程的环境里，Kaku 把 <code>TERM</code> 设成 <code>xterm-256color</code>，<code>COLORTERM</code> 设成 <code>truecolor</code>，<code>TERM_PROGRAM</code> 设成 <code>Kaku</code>。<code>TERM_PROGRAM_VERSION</code> 是当前构建的版本字符串。自带配置坚持用这个 <code>TERM</code>，是因为远程机器上没有 <code>kaku</code> 这条 terminfo，配置里的注释写明，设成 <code>config.term = 'kaku'</code> 之后，SSH 过去的退格和删除会坏。</p>
 <p>在 macOS 上，Kaku 调的是 <code>libc::openpty</code>，也就是 <code>openpty(3)</code>，一次调用返回 primary 和 replica 两个描述符，同时可以把窗口尺寸设上。手册里克隆设备是 <code>/dev/ptmx</code>，replica 设备是 <code>/dev/ttys</code> 加三位数字。Linux 的 pty(7) 把两端叫做 master 和 slave，slave 出现在 <code>/dev/pts/</code> 下面。Kaku 的类型名仍是 <code>UnixMasterPty</code> 和 <code>UnixSlavePty</code>，终端读写 master，shell 看到的终端是 slave。</p>
 <p>尺寸通过 <code>TIOCSWINSZ</code> 写成一个 <code>winsize</code>，里面是行数、列数、像素宽和像素高，macOS 的 tty(4) 说多数全屏程序就是靠这份窗口尺寸知道画面有多大。<code>TIOCSCTTY</code> 旁边的注释写着，没有控制终端就不会收到 <code>SIGWINCH</code>，程序会一直用旧的行列。slave 关掉之后，读 master 会得到 <code>EIO</code>，Kaku 把它当成文件结束。</p>
-<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/how-terminal-emulators-work-mobile.webp" width="340" height="700"><img src="/img/blog/how-terminal-emulators-work.webp" width="910" height="231" loading="lazy" alt="shell 输出的字节经过 PTY 主设备进入转义序列解析器，解析器更新格子网格，HarfBuzz 把格子排成字形交给 WebGPU 窗口绘制，按键字节再经 PTY 主设备回到 shell"></picture><figcaption>输出字节从 shell 经 pty 和解析器变成格子，再变成字形，按键字节从窗口写回 shell。</figcaption></figure>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/how-terminal-emulators-work-mobile.webp" width="340" height="700"><img src="/img/blog/how-terminal-emulators-work.webp" width="910" height="231" loading="lazy" alt="shell 输出的字节经过 PTY 主设备进入转义序列解析器，解析器更新格子网格，HarfBuzz 把格子排成字形交给 WebGPU 窗口绘制，按键字节再经 PTY 主设备回到 shell"></picture><figcaption>shell、PTY 和终端窗口。</figcaption></figure>
 
 <p>输出字节从 shell 出来，经过 master，进解析器和字符网格，再经 HarfBuzz 到 WebGPU 窗口。按键字节从窗口写回 master，再交给 slave 上的 shell。</p>
 <h2 id="转义序列改的是格子">转义序列改的是格子</h2>

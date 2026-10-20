@@ -12,7 +12,7 @@
 
 尺寸通过 `TIOCSWINSZ` 写成一个 `winsize`，里面是行数、列数、像素宽和像素高，macOS 的 tty(4) 说多数全屏程序就是靠这份窗口尺寸知道画面有多大。`TIOCSCTTY` 旁边的注释写着，没有控制终端就不会收到 `SIGWINCH`，程序会一直用旧的行列。slave 关掉之后，读 master 会得到 `EIO`，Kaku 把它当成文件结束。
 
-[[figure:how-terminal-emulators-work|shell 输出的字节经过 PTY 主设备进入转义序列解析器，解析器更新格子网格，HarfBuzz 把格子排成字形交给 WebGPU 窗口绘制，按键字节再经 PTY 主设备回到 shell|输出字节从 shell 经 pty 和解析器变成格子，再变成字形，按键字节从窗口写回 shell。]]
+[[figure:how-terminal-emulators-work|shell 输出的字节经过 PTY 主设备进入转义序列解析器，解析器更新格子网格，HarfBuzz 把格子排成字形交给 WebGPU 窗口绘制，按键字节再经 PTY 主设备回到 shell|shell、PTY 和终端窗口。]]
 
 输出字节从 shell 出来，经过 master，进解析器和字符网格，再经 HarfBuzz 到 WebGPU 窗口。按键字节从窗口写回 master，再交给 slave 上的 shell。
 

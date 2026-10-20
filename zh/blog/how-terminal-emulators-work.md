@@ -20,7 +20,7 @@
 
 ![shell 输出的字节经过 PTY 主设备进入转义序列解析器，解析器更新格子网格，HarfBuzz 把格子排成字形交给 WebGPU 窗口绘制，按键字节再经 PTY 主设备回到 shell](https://kaku.fun/img/blog/how-terminal-emulators-work.webp)
 
-*输出字节从 shell 经 pty 和解析器变成格子，再变成字形，按键字节从窗口写回 shell。*
+*shell、PTY 和终端窗口。*
 
 输出字节从 shell 出来，经过 master，进解析器和字符网格，再经 HarfBuzz 到 WebGPU 窗口。按键字节从窗口写回 master，再交给 slave 上的 shell。
 

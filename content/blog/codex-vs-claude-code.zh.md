@@ -1,4 +1,4 @@
-Codex CLI 和 Claude Code 都是跑在终端里的 coding agent，都会读仓库、改文件、在你的机器上跑命令，区别在账号和价格，在沙箱和授权提示怎么工作，也在配置文件上，Codex 用 TOML，Claude Code 用 JSON。两边都有 skills、hooks 和 MCP，很多人干脆两个都装着。
+Codex CLI 和 Claude Code 都是跑在终端里的 coding agent，都会读仓库、改文件、在你的机器上跑命令，区别在账号和价格，在沙箱和授权提示怎么工作，也在配置文件上，Codex 用 TOML，Claude Code 用 JSON。两边都有 skills、hooks 和 MCP。
 
 ## 对比
 
@@ -65,7 +65,7 @@ git diff main --name-only | claude -p "review these changed files for security i
 
 项目根目录的 [`CLAUDE.md`](https://code.claude.com/docs/en/memory) 每次会话开始都会读，skills 是 `/review-pr` 这类大家共用的命令。返回 deny 的 `PreToolUse` hook 在 `bypassPermissions` 模式下、加了 `--dangerously-skip-permissions` 时照样能挡住工具。Claude Code 还会跑 prompt hook 和 agent hook，Codex 跑的是 command hook 和 MCP tool hook，prompt 和 agent 这两类处理器解析完就跳过不跑。
 
-[plan mode](/zh/blog/claude-code-plan-mode) 让 Claude Code 在你批准之前不改文件，[hook](/zh/blog/claude-code-hooks) 在任何模式下都能挡住一次工具调用。
+[plan mode](/zh/blog/claude-code-plan-mode) 在你批准之前拦住源码修改，已经能用 bypass permissions 的交互式终端是例外，[hook](/zh/blog/claude-code-hooks) 在任何模式下都能挡住一次工具调用。
 
 ## 一个仓库，两个 agent
 

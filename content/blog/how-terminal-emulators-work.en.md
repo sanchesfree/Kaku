@@ -12,7 +12,7 @@ On macOS, Kaku calls `libc::openpty` (`openpty(3)`). The call returns a primary 
 
 Size goes out as a `winsize` (rows, columns, pixel width, pixel height) through `TIOCSWINSZ`. macOS tty(4) says this window size is how most full-screen programs learn the screen size. The comment beside `TIOCSCTTY` says that without a controlling terminal, `SIGWINCH` is not delivered, so those programs keep the old size. Once the slave closes, a read on the master returns `EIO`, which Kaku treats as end of file.
 
-[[figure:how-terminal-emulators-work|Bytes from the shell pass through the PTY master into an escape parser that updates a cell grid, HarfBuzz shapes those cells into glyphs that the WebGPU window draws, and keystrokes travel back through the PTY master to the shell|Output bytes move from the shell through the pty and the parser into cells, then into glyphs, while key bytes travel back the other way.]]
+[[figure:how-terminal-emulators-work|Bytes from the shell pass through the PTY master into an escape parser that updates a cell grid, HarfBuzz shapes those cells into glyphs that the WebGPU window draws, and keystrokes travel back through the PTY master to the shell|The shell, PTY and terminal window.]]
 
 Output bytes go from the shell, through the master, into the parser and the cell grid, then through HarfBuzz to the WebGPU window. Key bytes go from the window back through the master to the shell.
 

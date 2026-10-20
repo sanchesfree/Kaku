@@ -4,7 +4,7 @@
 
 发布于 2026-09-28 · Tw93 · https://kaku.fun/zh/blog/wezterm-config-for-mac
 
-一份好用的 Mac 版 WezTerm 配置只需要十几行，一个带中文回退的字体，稍微加大一点的行高，左 Option 当 Meta 发出去，标题栏按钮放进标签栏，配色跟着系统走，再换成 Metal 渲染。配置文件是 `~/.wezterm.lua`，一段返回一张表的 Lua 脚本，每次保存 WezTerm 都会重新加载。这篇按组讲这些设置，最后说说 Kaku 已经替你设好了哪些，Kaku 是 WezTerm 的分支，自带一整份配置。还在 WezTerm、Ghostty 和 iTerm2 之间犹豫的话，可以先看 [Ghostty、iTerm2 和 WezTerm 怎么选](/zh/blog/ghostty-vs-iterm2-vs-wezterm)。
+一份好用的 Mac 版 WezTerm 配置只需要十几行，一个带中文回退的字体，稍微加大一点的行高，左 Option 当 Meta 发出去，标题栏按钮放进标签栏，配色跟着系统走，再换成 Metal 渲染。配置文件是 `~/.wezterm.lua`，一段返回一张表的 Lua 脚本，每次保存 WezTerm 都会重新加载。Kaku 是 WezTerm 的分支，自带一整份配置。还在 WezTerm、Ghostty 和 iTerm2 之间犹豫的话，可以先看 [Ghostty、iTerm2 和 WezTerm 怎么选](/zh/blog/ghostty-vs-iterm2-vs-wezterm)。
 
 ## 从 config_builder 开始
 

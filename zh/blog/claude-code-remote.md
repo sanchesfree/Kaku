@@ -4,7 +4,7 @@
 
 发布于 2026-09-30 · Tw93 · https://kaku.fun/zh/blog/claude-code-remote
 
-人不在跑着 Claude Code 的那台 Mac 旁边时，想接着干活大概有三种办法，Anthropic 的 Remote Control 让你在 claude.ai/code 或手机上的 Claude App 里操作 Mac 上的会话，云端会话干脆把活挪到 Anthropic 的机器上，家里什么都不用开着，`kaku remote` 则是在另一台电脑的浏览器里打开 Mac 的终端，所有标签和分屏都在。这三个解决的不是同一个问题，这篇讲每种需要什么、代码在哪跑、什么时候该用哪个，内容按 2026 年 10 月的 Claude Code 2.1.302 核对过。
+人不在跑着 Claude Code 的那台 Mac 旁边时，想接着干活大概有三种办法，Anthropic 的 Remote Control 让你在 claude.ai/code 或手机上的 Claude App 里操作 Mac 上的会话，云端会话干脆把活挪到 Anthropic 的机器上，家里什么都不用开着，`kaku remote` 则是在另一台电脑的浏览器里打开 Mac 的终端，所有标签和分屏都在。内容按 2026 年 10 月的 Claude Code 2.1.302 核对过。
 
 ## 先看结论
 
@@ -85,7 +85,7 @@ kaku remote --reset        # 移除所有已配对的浏览器
 
 ### 能不能直接 SSH 到 Mac 上跑 Claude Code？
 
-可以，前提是你配好了 SSH，也有办法连到这台 Mac，最好在 tmux 里跑，断线了会话还在，tmux 打开了 `allow-passthrough` 的话，[通知](/zh/blog/claude-code-notifications)也会回到你连过去的那个终端。
+可以，前提是你配好了 SSH，也有办法连到这台 Mac，最好在 tmux 里跑，断线了会话还在，要让[通知](/zh/blog/claude-code-notifications)通过 tmux passthrough 回到你连过去的终端，发送端得给序列加上包装，tmux 得允许它通过，外层终端也得支持对应的通知通道。
 
 ### kaku remote 能用 Codex 和别的命令行工具吗？
 

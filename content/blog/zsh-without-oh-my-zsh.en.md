@@ -1,4 +1,4 @@
-You do not need Oh My Zsh to get a good zsh. Four pieces cover what most people install it for: zsh-autosuggestions for the grey suggestion from your history, a syntax highlighter that colors commands as you type, zsh-completions for extra completion definitions, and Starship for the prompt. Loaded directly from your `.zshrc` in the right order, with completion caching, they start fast and stay easy to understand. This post gives you a `.zshrc` that does that, explains why the order matters, and shows how to measure it, then how Kaku ships the same setup in two lines.
+You do not need Oh My Zsh to get a good zsh. Four pieces cover what most people install it for: zsh-autosuggestions for the grey suggestion from your history, a syntax highlighter that colors commands as you type, zsh-completions for extra completion definitions, and Starship for the prompt. Loaded directly from your `.zshrc` in the right order, with completion caching, they start fast and stay easy to understand.
 
 ## Install the pieces
 

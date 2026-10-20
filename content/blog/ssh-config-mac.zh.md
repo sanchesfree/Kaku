@@ -96,7 +96,7 @@ ssh -O exit dev
 
 ## 连不上的时候
 
-ssh 忽然来要密码，多半是私钥别人也能读，于是被跳过了。`ssh-add` 同样会跳过这种文件，对私钥执行 `chmod 600` 就符合手册。配置文件主人不是你，或者组和其他人有写权限时，OpenSSH 10.0 会以 `Bad owner or permissions on` 加上路径退出。
+ssh 忽然来要密码，可以检查私钥权限，别人也能读的私钥会被跳过。`ssh-add` 同样会跳过这种文件，对私钥执行 `chmod 600` 就符合手册。配置文件主人不是你，或者组和其他人有写权限时，OpenSSH 10.0 会以 `Bad owner or permissions on` 加上路径退出。
 
 服务器在试到正确的密钥之前就把连接断掉，是代理先把别的身份送了上去。改完之后 `ssh -G` 应该出现 `identitiesonly yes`，并且只有一行 `identityfile`。`ssh -O check` 连不上主连接时，先建好 `~/.ssh/sockets`，连一次再查。卡住的主连接用 `ssh -O exit dev` 清掉。
 

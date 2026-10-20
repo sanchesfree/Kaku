@@ -4,7 +4,7 @@
 
 发布于 2026-10-06 · Tw93 · https://kaku.fun/zh/blog/claude-code-skills
 
-一个 [Claude Code skill](https://code.claude.com/docs/en/skills) 是带 `SKILL.md` 的文件夹，Claude 拿 `description` 和当前任务对，对上了才加载正文，你打 `/skill-name` 时也会加载。文件以 YAML frontmatter 开头，后面是说明，脚本和参考文件放在同一层，`name` 决定命令名，不写就用文件夹名。个人 skill 放在 `~/.claude/skills/<name>/SKILL.md`，这台机器上每个项目都能用，项目 skill 放在 `.claude/skills/<name>/SKILL.md`，只跟着这个仓库的会话走。这篇从它和 `CLAUDE.md`、斜杠命令、subagent 的差别写起，接着写 `description` 怎么对上，以及脚本和参考文件什么时候读、什么时候执行，最后是分享之后每一轮多占的上下文。
+一个 [Claude Code skill](https://code.claude.com/docs/en/skills) 是带 `SKILL.md` 的文件夹，Claude 拿 `description` 和当前任务对，对上了才加载正文，你打 `/skill-name` 时也会加载。文件以 YAML frontmatter 开头，后面是说明，脚本和参考文件放在同一层，`name` 决定命令名，不写就用文件夹名。个人 skill 放在 `~/.claude/skills/<name>/SKILL.md`，这台机器上每个项目都能用，项目 skill 放在 `.claude/skills/<name>/SKILL.md`，只跟着这个仓库的会话走。
 
 ## 怎么区分 skill、CLAUDE.md、斜杠命令和 subagent
 

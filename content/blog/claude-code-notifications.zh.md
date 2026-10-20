@@ -1,4 +1,4 @@
-如果 Claude Code 做完了或者在等你授权，却从来不提醒你，原因几乎都一样，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
+如果 Claude Code 做完了或者在等你授权，却从来不提醒你，可以先看通知通道，它默认只在 iTerm2、Ghostty 和 Kitty 这三个终端里发桌面通知，其他终端里你不告诉它用哪个通道，它就一声不吭，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用任何设置。Codex 的默认行为正好相反，它会响终端铃声，有的终端会把铃声变成通知，有的只闪一下。这篇讲每种情况该改哪个设置，两者都会被卡住的 macOS 权限，以及从转义序列到通知中心中间发生了什么。
 
 ## Claude Code 的快速修法
 
@@ -41,7 +41,7 @@ Kaku 里 Claude Code 和 Codex 的其他设置，比如 `kaku ai`、几个 agent
 
 还有两个常见原因：
 
-- **tmux。** 不在 `~/.tmux.conf` 里加上 `set -g allow-passthrough on` 并用 `tmux source-file ~/.tmux.conf` 重新加载的话，tmux 会把这些序列吞掉。
+- **tmux。** 通过 tmux passthrough 发送通知时，要在 `~/.tmux.conf` 里加上 `set -g allow-passthrough on`，再用 `tmux source-file ~/.tmux.conf` 重新加载，发送端也得给序列加上 tmux 的 passthrough 包装，`on` 只对可见窗格生效。
 - **你正看着它。** 大部分终端包括 Kaku 都不会对眼前这个窗口弹通知，Codex 默认也只在终端没获得焦点时提醒，测试时记得把窗口放到后台。
 
 ## 通知是怎么从 agent 走到 macOS 的
@@ -78,7 +78,7 @@ printf '\e]9;%s\a' "Tests finished"
 printf '\e]777;notify;%s;%s\a' "Build" "Release build finished"
 ```
 
-把终端放到后台再跑，就会像其他通知一样弹出来，在 tmux 里同样要打开上面说的 passthrough。
+这两个例子放在 tmux 外面跑，测试时把终端放到后台，要在 tmux 里用，还得给序列加上 passthrough 包装，并打开上面那项设置。
 
 ## 常见问题
 

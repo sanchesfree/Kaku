@@ -8,7 +8,7 @@ Since macOS 10.15, zsh is the default login shell and interactive shell, and it 
 
 ## What changed in macOS 10.15
 
-Apple documents the default and the ways to change it in [Use zsh as the default shell on Mac](https://support.apple.com/en-us/102360). From macOS 10.15, zsh is the default login shell and the default interactive shell, and it is the default for every user account created on that release or later. macOS 10.14 and earlier defaulted to bash. Those older releases can use zsh as the default too.
+Apple documents the default and the ways to change it in [Use zsh as the default shell on Mac](https://support.apple.com/en-us/102360). macOS 10.14 and earlier can use zsh as the default too.
 
 zsh is already on the system at `/bin/zsh`, and `/bin/bash` stays selectable. If you start bash while the account uses another shell, macOS prints a message that the default interactive shell is now zsh. Hide that message with a line in `~/.bash_profile` or `~/.profile`:
 

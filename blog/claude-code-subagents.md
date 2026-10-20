@@ -74,7 +74,7 @@ The docs single out three patterns where the output is big and the answer is sma
 
 **Search and research.** Ask a subagent to find where a config value is read, or to research the auth, database and API modules in parallel with one subagent each. The file reads stay in the subagents' context windows, and you get back a short answer, as long as the research paths do not depend on each other.
 
-**Review.** A read-only reviewer with `tools: Read, Glob, Grep, Bash` cannot edit anything, so you can let it loose on a diff. You can also chain them: a reviewer finds performance issues, then another subagent fixes them, with Claude passing the relevant findings along.
+**Review.** A reviewer with `tools: Read, Glob, Grep, Bash` has no Edit or Write tool, but Bash can still run commands that change files. Keeping it read-only also requires restrictions on the commands it may execute. You can also chain them: a reviewer finds performance issues, then another subagent fixes them, with Claude passing the relevant findings along.
 
 **Test runs and logs.** "Use a subagent to run the test suite and report only the failing tests with their error messages" is the clearest case. Thousands of lines of test output stay out of your context, and two lines of failures come back.
 

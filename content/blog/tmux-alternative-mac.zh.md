@@ -1,4 +1,4 @@
-在一台主要自己用的 Mac 上，你很可能已经用不着 tmux 了，大多数人开 tmux 图的是三件事，把一个窗口分成好几个窗格，终端关掉之后活儿还在，以及从别的地方接回同一个会话。第一件现在的终端原生就有，第二件大部分可以靠会话恢复，真正替代不了的是 tmux 最核心的那一点，断开连接之后进程还在服务器上跑。所以比较实在的答案是，本地分屏想不用 tmux 就不用，SSH 和远程机器上继续留着它。这篇讲清楚这条线划在哪，以及要留着的话怎么把 tmux 配好。
+在一台主要自己用的 Mac 上，你很可能已经用不着 tmux 了，大多数人开 tmux 图的是三件事，把一个窗口分成好几个窗格，终端关掉之后活儿还在，以及从别的地方接回同一个会话。第一件可以用原生分屏，会话恢复能帮你找回布局，要让交互式会话在终端退出后继续运行，本地和服务器上都可以用 tmux 这类多路复用器。所以比较实在的答案是，本地分屏想不用 tmux 就不用，SSH 会话和终端重启后还得继续跑的任务，继续留着它。这篇讲清楚这条线划在哪，以及要留着的话怎么把 tmux 配好。
 
 ## tmux 到底做了什么
 
@@ -10,7 +10,7 @@ tmux 跑着一个服务端，你的 shell 归它管，终端只是负责把它�
 
 ## 现在的终端已经能做到的
 
-**分屏。** macOS 上值得一用的终端都有原生分屏，iTerm2、Ghostty、WezTerm、Kitty 和 Kaku 都是，由终端自己来画，滚动、选中、复制都是正常的样子，不用进 tmux 的 copy mode。
+**分屏。** iTerm2、Ghostty、WezTerm、Kitty 和 Kaku 在 macOS 上都有原生分屏，由终端自己来画，滚动、选中、复制都是正常的样子，不用进 tmux 的 copy mode。
 
 **重启之后接着用。** 有些终端会在重启后把窗口、标签和分屏恢复回来，Kaku 多做了一步，把屏幕上的内容也存下来。
 
@@ -40,7 +40,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-`allow-passthrough` 让通知序列能传到外层的终端，另外两个让 `Shift + Enter` 作为单独的按键传进来，而不是变成普通的回车，改完用 `tmux source-file ~/.tmux.conf` 重新加载，这些通知最后是怎么走到 macOS 的，可以看这篇[通知指南](/zh/blog/claude-code-notifications)。
+`allow-passthrough` 让加了 tmux passthrough 包装的序列从可见窗格传到外层终端，另外两个让 `Shift + Enter` 作为单独的按键传进来，而不是变成普通的回车，改完用 `tmux source-file ~/.tmux.conf` 重新加载，这些通知最后是怎么走到 macOS 的，可以看这篇[通知指南](/zh/blog/claude-code-notifications)。
 
 装了 tmux 的话，`kaku init` 还会在 `~/.tmux.conf` 里加一行 `source-file`，指向一个由 Kaku 管理的小文件，它打开鼠标支持，让你从 Kaku attach 之后新开的窗格也保留 Kaku 的提示符，还让 `Shift` 加滚轮直接进入 tmux 的回滚。上面那三个设置还是要你自己加。
 

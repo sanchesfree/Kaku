@@ -82,7 +82,7 @@ bindkey '^[[1;3D' backward-word
 bindkey '^[[1;3C' forward-word
 ```
 
-In Terminal.app, holding Option while you move the pointer repositions the insertion point on the command line, which is faster than any key for a long command.
+In Terminal.app, holding Option while you move the pointer repositions the insertion point on the command line.
 
 ## Kaku shortcuts
 

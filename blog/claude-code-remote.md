@@ -4,7 +4,7 @@
 
 Published 2026-09-30 · Tw93 · https://kaku.fun/blog/claude-code-remote
 
-There are three ways to keep working with Claude Code when you are away from the Mac it runs on. Anthropic's Remote Control lets you steer a session on your Mac from claude.ai/code or the Claude app on your phone. Cloud sessions move the work to Anthropic's machines, so nothing has to stay running at home. And `kaku remote` opens your Mac's terminal, every tab and split included, in a browser on another computer. They solve different problems, so this post covers what each one needs, where the code runs, and which to pick. Checked against Claude Code 2.1.302 in October 2026.
+There are three ways to keep working with Claude Code when you are away from the Mac it runs on. Anthropic's Remote Control lets you steer a session on your Mac from claude.ai/code or the Claude app on your phone. Cloud sessions move the work to Anthropic's machines, so nothing has to stay running at home. And `kaku remote` opens your Mac's terminal, every tab and split included, in a browser on another computer. Checked against Claude Code 2.1.302 in October 2026.
 
 ## The short version
 
@@ -85,7 +85,7 @@ A local session, including one under Remote Control, stops when the Mac sleeps. 
 
 ### Can I SSH into my Mac and run Claude Code instead?
 
-Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. [Notifications](/blog/claude-code-notifications) travel back to the terminal you connected from, as long as tmux has `allow-passthrough` on.
+Yes, if you have set up SSH and a way to reach the Mac. Run it inside tmux so the session survives a dropped connection. [Notifications](/blog/claude-code-notifications) can reach the terminal you connected from through tmux passthrough if the sender wraps the sequences, tmux permits them and that terminal supports the notification channel.
 
 ### Does kaku remote work with Codex and other CLI tools?
 

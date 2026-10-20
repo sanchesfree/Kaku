@@ -68,7 +68,7 @@ and report issues ordered by priority with a suggested fix for each.
 
 **搜索和调研。** 让 subagent 去找某个配置值在哪里被读取，或者让三个 subagent 各管一块，同时去调研 auth、database 和 API 这几个模块，读过的文件都留在它们各自的窗口里，回到你这边的只是一段简短的结论，前提是这几条调研路线互相不依赖。
 
-**代码审查。** 一个只给了 `tools: Read, Glob, Grep, Bash` 的 reviewer 什么都改不了，丢一份 diff 给它看很放心，也可以串起来用，先让 reviewer 找性能问题，再让另一个 subagent 去修，中间由 Claude 把相关的发现传过去。
+**代码审查。** 给 reviewer 配 `tools: Read, Glob, Grep, Bash`，它没有 Edit 和 Write，但 Bash 仍能运行改文件的命令，想让它只读，还得限制允许执行的命令。也可以串起来用，先让 reviewer 找性能问题，再让另一个 subagent 去修，中间由 Claude 把相关的发现传过去。
 
 **跑测试和看日志。** `Use a subagent to run the test suite and report only the failing tests with their error messages` 是最典型的例子，几千行测试输出留在 subagent 那边，回到主对话的只有两行失败信息。
 

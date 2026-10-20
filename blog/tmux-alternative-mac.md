@@ -4,7 +4,7 @@
 
 Published 2026-10-01 · Tw93 · https://kaku.fun/blog/tmux-alternative-mac
 
-If you work mostly on your own Mac, you may not need tmux anymore. Most people start it for three things: splitting one window into panes, keeping work alive when the terminal closes, and getting back to a session from somewhere else. A modern terminal covers the first natively, and session restore covers most of the second. What it does not replace is tmux's real strength: processes that keep running on a server after you disconnect. So the practical answer is to drop tmux for local splits if you like, and keep it for SSH and remote machines. This post explains where the line falls and how to set tmux up well if you keep it.
+If you work mostly on your own Mac, you may not need tmux anymore. Most people start it for three things: splitting one window into panes, keeping work alive when the terminal closes, and getting back to a session from somewhere else. Native splits cover the first. Session restore brings back the layout. To keep an interactive session running after the terminal closes, you can use a multiplexer such as tmux, locally or on a server. So the practical answer is to drop tmux for local splits if you like, and keep it for SSH sessions and jobs that must survive a terminal restart. This post explains where the line falls and how to set tmux up well if you keep it.
 
 ## What tmux actually does
 
@@ -16,7 +16,7 @@ tmux runs a server that owns your shells. The terminal is only a client that dra
 
 ## What a terminal now covers
 
-**Splits.** Every terminal worth considering on macOS has native splits: iTerm2, Ghostty, WezTerm, Kitty and Kaku. They are drawn by the terminal itself, so scrolling, selecting and copying behave normally, without tmux's copy mode.
+**Splits.** iTerm2, Ghostty, WezTerm, Kitty and Kaku all have native splits on macOS. They are drawn by the terminal itself, so scrolling, selecting and copying behave normally, without tmux's copy mode.
 
 **Coming back after a restart.** Some terminals bring back windows, tabs and splits after a restart. Kaku goes a step further and saves what was on screen.
 
@@ -48,7 +48,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-`allow-passthrough` lets notification sequences reach the outer terminal, and the other two let `Shift + Enter` arrive as its own key instead of plain Enter. Reload with `tmux source-file ~/.tmux.conf`. The [notification guide](/blog/claude-code-notifications) explains how those notifications reach macOS.
+`allow-passthrough` lets sequences wrapped for tmux passthrough reach the outer terminal from a visible pane, and the other two let `Shift + Enter` arrive as its own key instead of plain Enter. Reload with `tmux source-file ~/.tmux.conf`. The [notification guide](/blog/claude-code-notifications) explains how those notifications reach macOS.
 
 When tmux is installed, `kaku init` also adds one `source-file` line to `~/.tmux.conf` for a small managed file: it turns on the mouse, keeps the Kaku prompt in panes opened after you attach from Kaku, and makes `Shift` plus the scroll wheel enter tmux's scrollback. The three settings above are still yours to add.
 

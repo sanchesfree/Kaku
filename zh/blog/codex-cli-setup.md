@@ -4,7 +4,7 @@
 
 发布于 2026-09-29 · Tw93 · https://kaku.fun/zh/blog/codex-cli-setup
 
-在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`。之后的事情基本都在 `~/.codex/config.toml` 这一个文件里，用哪个模型，不用问你就能做多少事，需要你的时候怎么提醒你，都由它决定。这篇按顺序讲每一步，最值得先改的几个设置，以及关掉终端之后怎么接着上次的会话，内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
+在 Mac 上配好 Codex CLI 只要三条命令，`brew install --cask codex` 装上，`codex login` 登录，再进到项目目录里跑 `codex`。常用的用户设置在 `~/.codex/config.toml` 里，用哪个模型，不用问你就能做多少事，需要你的时候怎么提醒你，都能在这里配置。内容按 2026 年 10 月的 Codex CLI 0.163.0 核对过。
 
 ## 安装
 

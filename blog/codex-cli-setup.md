@@ -4,7 +4,7 @@
 
 Published 2026-09-29 · Tw93 · https://kaku.fun/blog/codex-cli-setup
 
-Setting up Codex CLI on a Mac takes three commands: install it with `brew install --cask codex`, sign in with `codex login`, then run `codex` inside a project. Everything after that lives in one file, `~/.codex/config.toml`, which decides the model, how much Codex may do without asking, and how it tells you it needs you. This post walks through each step, the settings worth changing first, and how a session picks up where it left off. It was checked against Codex CLI 0.163.0 in October 2026.
+Setting up Codex CLI on a Mac takes three commands: install it with `brew install --cask codex`, sign in with `codex login`, then run `codex` inside a project. Common user settings live in `~/.codex/config.toml`, including the model, permissions and notifications. It was checked against Codex CLI 0.163.0 in October 2026.
 
 ## Install
 

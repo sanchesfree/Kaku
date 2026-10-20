@@ -1,4 +1,4 @@
-Lazygit and delta together give you a fast git workflow without leaving the terminal: lazygit is a full-screen git interface where staging a line, amending a commit or rebasing is one key away, and delta makes every diff readable, with syntax highlighting, line numbers and word-level changes. Install both with `brew install lazygit git-delta`, point git's pager at delta, and add one renderer line to lazygit's config so its diff view uses delta too. This post sets that up and covers the shortcuts that matter most when you are reviewing what an AI coding agent just changed. Checked with lazygit 0.66 and delta 0.20.1.
+Lazygit and delta together give you a fast git workflow without leaving the terminal: lazygit is a full-screen git interface where staging a line, amending a commit or rebasing is one key away, and delta adds syntax highlighting, line numbers and word-level changes to diffs. Install both with `brew install lazygit git-delta`, point git's pager at delta, and add one renderer line to lazygit's config so its diff view uses delta too. This post sets that up and covers the shortcuts that matter most when you are reviewing what an AI coding agent just changed. Checked with lazygit 0.66 and delta 0.20.1.
 
 ## Install
 
@@ -66,8 +66,6 @@ After Claude Code or Codex edits a dozen files, the question is what exactly cha
 2. Press `enter` on a file and stage only the hunks you agree with. The rest stays in the working tree for the agent to redo.
 3. Discard a file with `d` if the change is not worth keeping.
 4. Commit what is left, and use `z` if you change your mind.
-
-Staging hunk by hunk is the fastest way to keep the good half of an agent's work and send the rest back.
 
 ## Lazygit in Kaku
 

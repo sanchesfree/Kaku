@@ -77,7 +77,7 @@ git worktree remove ../repo-feature
 git worktree remove .claude/worktrees/feature-auth
 ```
 
-Pass `--force` when there are uncommitted changes or untracked files. If git refuses because the worktree is locked, run `git worktree unlock` on that path, then remove it. After you delete a folder yourself, `git worktree prune` drops the stale entry under `$GIT_DIR/worktrees`.
+If there are uncommitted changes or untracked files, save what you need first. Use `--force` only when you intend to discard what remains in that worktree. If git refuses because the worktree is locked, run `git worktree unlock` on that path, then remove it. After you delete a folder yourself, `git worktree prune` drops the stale entry under `$GIT_DIR/worktrees`.
 
 To return to a worktree you kept:
 

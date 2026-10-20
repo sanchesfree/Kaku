@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="Claude Code 用什么终端最好，真正影响体验的五件事">
   <meta property="og:url" content="https://kaku.fun/zh/blog/best-terminal-for-claude-code">
   <meta property="article:published_time" content="2026-09-19">
-  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:modified_time" content="2026-10-20">
   <meta property="article:author" content="Tw93">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/best-terminal-for-claude-code.webp">
@@ -62,7 +62,7 @@
       "url": "https://kaku.fun/zh/blog/best-terminal-for-claude-code",
       "mainEntityOfPage": "https://kaku.fun/zh/blog/best-terminal-for-claude-code",
       "datePublished": "2026-09-19",
-      "dateModified": "2026-10-19",
+      "dateModified": "2026-10-20",
       "inLanguage": "zh-CN",
       "articleSection": "Claude Code 与 Codex",
       "image": "https://kaku.fun/img/blog/cards/best-terminal-for-claude-code.webp",
@@ -107,7 +107,7 @@
           "name": "还能在 tmux 里用 Claude Code 吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以，tmux 里要让 Shift + Enter 生效需要 set -s extended-keys on 和 set -as terminal-features 'xterm*:extkeys'，通知还需要 set -g allow-passthrough on。"
+            "text": "可以，tmux 里要让 Shift + Enter 生效需要 set -s extended-keys on 和 set -as terminal-features 'xterm*:extkeys'，通过 tmux passthrough 发通知时，还需要 set -g allow-passthrough on，发送端也得给序列加上 tmux 的包装。"
           }
         }
       ]
@@ -120,12 +120,12 @@
   <a class="skip-link" href="#main-content">跳到内容</a>
   <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/compare">对比</a><a href="/zh/changelog">更新日志</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/best-terminal-for-claude-code" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/best-terminal-for-claude-code" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content" class="docs-page blog-page">
-    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 用什么终端最好，真正影响体验的五件事</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-09-19">2026年9月19日</time></span><span>更新于 <time datetime="2026-10-19">2026年10月19日</time></span><span>约 6 分钟</span></p></div></header>
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 用什么终端最好，真正影响体验的五件事</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-09-19">2026年9月19日</time></span><span>更新于 <time datetime="2026-10-20">2026年10月20日</time></span><span>约 6 分钟</span></p></div></header>
     <section class="section">
       <div class="wide">
         <article class="doc-content blog-article">
           <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/best-terminal-for-claude-code.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
-<p>Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样，长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 <code>Cmd + W</code> 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置，下面一项项讲，你也可以拿来对照自己现在用的终端。</p>
+<p>Claude Code 在哪个终端里都能跑，只要能显示现代的 TUI 就行，所以真正值得问的不是哪个终端能跑，而是一个会话跑上几个小时的时候，哪个终端最不碍事。决定这件事的其实就五样，长提示词能不能分行写完再发，Claude 停下来等你的时候你能不能知道，它打印出来的文件和链接能不能直接点开，终端重启之后会话还在不在，以及会不会手滑一个 <code>Cmd + W</code> 就把它关了。Ghostty 和 iTerm2 大部分都做得不错，我做的 Kaku 支持这五样，0.25.0 及以上配 Claude Code 2.1.295 及以上，通知也不用任何设置。</p>
 <figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-session-loop-mobile.webp" width="340" height="517"><img src="/img/blog/claude-code-session-loop.webp" width="873" height="231" loading="lazy" alt="Claude Code 会话的循环，写提示词，Claude 开始干活，它提问或做完，你回来看结果并打开文件，终端重启后会话还在"></picture><figcaption>终端会在这五个地方帮上忙，或者添乱。</figcaption></figure>
 
 <h2 id="提示词要能分行写">提示词要能分行写</h2>
@@ -133,7 +133,7 @@
 <p>Claude Code 自己的文档列了哪些终端里 <code>Shift + Enter</code> 不用设置就能换行，包括 Ghostty、Kitty、iTerm2、WezTerm、Warp、Apple Terminal 和 Windows Terminal，VS Code、Cursor、Zed 以及 0.16 之前的 Alacritty 需要先跑一次 <code>/terminal-setup</code>。还有两个到哪都能用的办法，<code>Ctrl + J</code>，或者先打一个反斜杠再回车。</p>
 <p>在 Kaku 里 <code>Shift + Enter</code> 和 <code>Cmd + Enter</code> 都是换行，不用提前跑任何命令。</p>
 <h2 id="claude-在等你的时候要能知道">Claude 在等你的时候要能知道</h2>
-<p>一个 agent 会话里最浪费的往往是这一分钟，Claude 问了一个问题，你却在另一个窗口里，桌面通知能解决这件事，前提是终端和 Claude Code 对怎么发通知有共识。</p>
+<p>Claude 问了一个问题，你却在另一个窗口里，桌面通知能让你及时回来，前提是终端和 Claude Code 对怎么发通知有共识。</p>
 <p>Claude Code 的 <code>preferredNotifChannel</code> 默认是 <code>auto</code>，而 <code>auto</code> 只会在 iTerm2、Ghostty 和 Kitty 里发桌面通知，在 Terminal.app 里是发一个响铃字符，还得是关掉了提示音才发，其他终端里它什么都不做，这就是为什么用 WezTerm、Warp 或者 Claude Code 不认识的终端时，一条通知都收不到。</p>
 <p>Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上版本不用任何设置，Claude Code 会告诉 Kaku 自己在等你还是已经跑完，Kaku 再把它变成通知。更早的版本里，Kaku 能识别 Claude Code 发给 Ghostty 的那段序列，在 <code>~/.claude/settings.json</code> 里加一行就行：</p>
 <pre><code class="language-json">{ "preferredNotifChannel": <span class="tok-s">"ghostty"</span> }</code></pre>
@@ -206,7 +206,7 @@
 <h3 id="为什么收不到-claude-code-的通知">为什么收不到 Claude Code 的通知？</h3>
 <p>默认的 <code>auto</code> 通道只给 iTerm2、Ghostty 和 Kitty 发通知，其他终端都要在 <code>~/.claude/settings.json</code> 里设好 <code>preferredNotifChannel</code>，只有 Kaku 0.25.0 及以上配 Claude Code 2.1.295 及以上不用设。每个终端该设成什么，tmux 里要加哪一行，<a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>那篇都列了。</p>
 <h3 id="还能在-tmux-里用-claude-code-吗">还能在 tmux 里用 Claude Code 吗？</h3>
-<p>可以，tmux 里要让 Shift + Enter 生效需要 <code>set -s extended-keys on</code> 和 <code>set -as terminal-features 'xterm*:extkeys'</code>，通知还需要 <code>set -g allow-passthrough on</code>。</p>
+<p>可以，tmux 里要让 Shift + Enter 生效需要 <code>set -s extended-keys on</code> 和 <code>set -as terminal-features 'xterm*:extkeys'</code>，通过 tmux passthrough 发通知时，还需要 <code>set -g allow-passthrough on</code>，发送端也得给序列加上 tmux 的包装。</p>
           <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
           <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/claude-code-notifications"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Claude Code 通知不弹出，在 Mac 上怎么修</span><span class="blog-related-meta"><time datetime="2026-09-20">2026年9月20日</time> · 约 5 分钟</span></a></li><li><a href="/zh/blog/claude-code-plan-mode"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">Claude Code 的 plan mode 什么时候用、怎么用</span><span class="blog-related-meta"><time datetime="2026-09-23">2026年9月23日</time> · 约 8 分钟</span></a></li></ul></nav>
         </article>

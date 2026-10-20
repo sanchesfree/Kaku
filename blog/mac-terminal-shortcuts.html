@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="Mac Terminal Shortcuts That Save the Most Time">
   <meta property="og:url" content="https://kaku.fun/blog/mac-terminal-shortcuts">
   <meta property="article:published_time" content="2026-10-13">
-  <meta property="article:modified_time" content="2026-10-19">
+  <meta property="article:modified_time" content="2026-10-20">
   <meta property="article:author" content="Tw93">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/mac-terminal-shortcuts.webp">
@@ -62,7 +62,7 @@
       "url": "https://kaku.fun/blog/mac-terminal-shortcuts",
       "mainEntityOfPage": "https://kaku.fun/blog/mac-terminal-shortcuts",
       "datePublished": "2026-10-13",
-      "dateModified": "2026-10-19",
+      "dateModified": "2026-10-20",
       "inLanguage": "en",
       "articleSection": "Terminal",
       "image": "https://kaku.fun/img/blog/cards/mac-terminal-shortcuts.webp",
@@ -144,7 +144,7 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/compare">Compare</a><a href="/changelog">Changelog</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/mac-terminal-shortcuts" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/mac-terminal-shortcuts" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
   <main id="main-content" class="docs-page blog-page">
-    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Mac Terminal Shortcuts That Save the Most Time</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-13">Oct 13, 2026</time></span><span>Updated <time datetime="2026-10-19">Oct 19, 2026</time></span><span>8 min read</span></p></div></header>
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>Mac Terminal Shortcuts That Save the Most Time</h1><p class="blog-meta"><span><a href="/blog#topic-terminal">Terminal</a></span><span>Published <time datetime="2026-10-13">Oct 13, 2026</time></span><span>Updated <time datetime="2026-10-20">Oct 20, 2026</time></span><span>8 min read</span></p></div></header>
     <section class="section">
       <div class="wide">
         <article class="doc-content blog-article">
@@ -275,7 +275,7 @@ bindkey <span class="tok-s">'^[[B'</span> down-line-or-beginning-search</code></
 <p>Moving by word with Option + Left and Option + Right is the habit most people bring from Mac text fields, and Apple lists it as a Terminal.app default. Not every terminal sends what the shell expects for those keys, though. When Option + Left prints <code>[1;3D</code> or <code>;3D</code> instead of moving, the terminal is sending an arrow code the shell has no binding for. Either map the key in the terminal to send <code>Esc b</code> and <code>Esc f</code>, or bind the codes in zsh:</p>
 <pre><code class="language-bash">bindkey <span class="tok-s">'^[[1;3D'</span> backward-word
 bindkey <span class="tok-s">'^[[1;3C'</span> forward-word</code></pre>
-<p>In Terminal.app, holding Option while you move the pointer repositions the insertion point on the command line, which is faster than any key for a long command.</p>
+<p>In Terminal.app, holding Option while you move the pointer repositions the insertion point on the command line.</p>
 <h2 id="kaku-shortcuts">Kaku shortcuts</h2>
 <p>Kaku's bundled config sets left Option to act as Meta and keeps right Option for composed characters, so <code>Alt + B</code>, <code>Alt + F</code> and <code>Alt + .</code> work on first launch without a setting. It also maps Option + Left and Option + Right to <code>Alt + B</code> and <code>Alt + F</code>, Cmd + Left and Cmd + Right to <code>Ctrl + A</code> and <code>Ctrl + E</code>, Option + Backspace to <code>Ctrl + W</code>, and Cmd + Backspace to <code>Ctrl + U</code>. Its zsh integration rebinds <code>Ctrl + U</code> to <code>backward-kill-line</code>, so Cmd + Backspace deletes to the start of the line the way it does in a Mac text field, not the whole line, and Up and Down do prefix history search unless a tool like atuin already owns them.</p>
 <p>For tabs, splits, search and the assistant, these are the defaults, read from the bundled key table and the <a href="/docs/keybindings">keybindings page</a>:</p>

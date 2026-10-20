@@ -4,7 +4,7 @@
 
 Published 2026-10-09 · Tw93 · https://kaku.fun/blog/codex-vs-claude-code
 
-Codex CLI and Claude Code are both terminal coding agents. Each one reads a repository, edits files, and runs commands on your machine. They differ in accounts and pricing, how the sandbox and approval prompts work, and configuration formats: TOML for Codex, JSON for Claude Code. Both support skills, hooks, and MCP, and many developers keep both installed.
+Codex CLI and Claude Code are both terminal coding agents. Each one reads a repository, edits files, and runs commands on your machine. They differ in accounts and pricing, how the sandbox and approval prompts work, and configuration formats: TOML for Codex, JSON for Claude Code. Both support skills, hooks, and MCP.
 
 ## Comparison
 
@@ -71,7 +71,7 @@ git diff main --name-only | claude -p "review these changed files for security i
 
 [`CLAUDE.md`](https://code.claude.com/docs/en/memory) at the project root is read at every session start. Skills are shared commands such as `/review-pr`. A `PreToolUse` hook that returns deny still blocks the tool in `bypassPermissions` mode and with `--dangerously-skip-permissions`. Claude Code also runs prompt hooks and agent hooks. Codex runs command hooks and MCP tool hooks, and skips prompt and agent handlers after parsing them.
 
-[Plan mode](/blog/claude-code-plan-mode) keeps Claude Code from editing until you approve, and a [hook](/blog/claude-code-hooks) can block a tool call in any mode.
+[Plan mode](/blog/claude-code-plan-mode) blocks source edits until you approve, except in interactive terminal sessions with bypass permissions available. A [hook](/blog/claude-code-hooks) can block a tool call in any mode.
 
 ## One repository, both agents
 

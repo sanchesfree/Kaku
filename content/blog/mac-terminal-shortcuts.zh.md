@@ -82,7 +82,7 @@ bindkey '^[[1;3D' backward-word
 bindkey '^[[1;3C' forward-word
 ```
 
-在 Terminal.app 里，按住 Option 再移动鼠标指针，可以把插入点直接放到命令行上任意位置，改一条很长的命令时比按什么键都快。
+在 Terminal.app 里，按住 Option 再移动鼠标指针，可以把插入点直接放到命令行上任意位置。
 
 ## Kaku 里的快捷键
 

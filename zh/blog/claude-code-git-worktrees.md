@@ -4,7 +4,7 @@
 
 发布于 2026-10-07 · Tw93 · https://kaku.fun/zh/blog/claude-code-git-worktrees
 
-`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。这篇讲两个会话为什么不能共用一棵工作树，`git worktree` 怎么添加、列出和删除，`--worktree` 怎么建、退出时怎么清理，以及一个标签放一棵工作树。文中的 flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
+`git worktree add ../repo-feature -b feature` 会给同一个仓库再检出一份，每个 Claude Code 会话拿到自己的目录和分支，一个会话做功能，另一个会话修 bug，两边写下去的不是同一批文件。这份检出就是 worktree，也就是链接工作树，Claude Code 自己也能建，命令是 `claude --worktree feature-auth`，目录在 `.claude/worktrees/feature-auth/`，分支名叫 `worktree-feature-auth`。文中的 flag 和清理行为是 2026 年 10 月对着 [git worktree 手册](https://git-scm.com/docs/git-worktree/zh_HANS-CN)、Claude Code 的[常见工作流程](https://code.claude.com/docs/zh-CN/common-workflows)和 [worktrees](https://code.claude.com/docs/zh-CN/worktrees) 页核对过的。
 
 ## 为什么两个 agent 不能共用一个检出目录
 
@@ -30,7 +30,7 @@ git worktree list
 git worktree remove ../repo-feature
 ```
 
-`remove` 不会动主工作树，链接工作树里有未跟踪文件，或者已跟踪文件被改过，它也会拒绝，不干净的工作树要加 `--force`，带子模块的也一样，锁定的工作树得把 `--force` 加两次。目录如果是你亲手删的，管理文件会留到 `git worktree prune`，或者留到 `gc.worktreePruneExpire`。Git 手册里说，同一仓库多份检出这个功能还算试验性的，子模块的支持也不完整。
+`remove` 不会动主工作树，链接工作树里有未跟踪文件，或者已跟踪文件被改过，它也会拒绝，带未提交改动或未跟踪文件的工作树只有加 `--force` 才能删除，这也会丢掉其中未保存的内容，带子模块的也需要这个参数，锁定的工作树得把 `--force` 加两次。目录如果是你亲手删的，管理文件会留到 `git worktree prune`，或者留到 `gc.worktreePruneExpire`。Git 手册里说，同一仓库多份检出这个功能还算试验性的，子模块的支持也不完整。
 
 ## 让 Claude Code 自己建 worktree
 
@@ -83,7 +83,7 @@ git worktree remove ../repo-feature
 git worktree remove .claude/worktrees/feature-auth
 ```
 
-有未提交的改动或者未跟踪文件时加上 `--force`，git 因为锁定而拒绝的话，先对那个路径跑 `git worktree unlock` 再删，目录如果是你亲手删的，`git worktree prune` 会清掉 `$GIT_DIR/worktrees` 下面那条过期记录。
+有未提交改动或未跟踪文件时，先保存需要的内容，只有确定要丢弃工作树里剩下的内容，才加 `--force`，git 因为锁定而拒绝的话，先对那个路径跑 `git worktree unlock` 再删，目录如果是你亲手删的，`git worktree prune` 会清掉 `$GIT_DIR/worktrees` 下面那条过期记录。
 
 想回到留下来的那棵工作树：
 

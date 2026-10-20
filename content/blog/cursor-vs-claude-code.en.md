@@ -46,7 +46,7 @@ claude --resume
 
 Cursor's review stays in the editor: inspect the diff, run checks, and catch problems before you merge.
 
-In Claude Code, [plan mode](/blog/claude-code-plan-mode) reads the repo and writes nothing until you approve. You reach it with `Shift + Tab`, `/plan`, or `--permission-mode plan`.
+In Claude Code, [plan mode](/blog/claude-code-plan-mode) reads the repo and writes a plan, blocking source edits until you approve, except in interactive terminal sessions with bypass permissions available. You reach it with `Shift + Tab`, `/plan`, or `--permission-mode plan`.
 
 The extension has several permission modes. Edit writes files without asking. Auto has a classifier review most actions. Manual waits on a side-by-side diff, where you accept, reject, or correct the proposal. **Accept this change** and **Reject this change** step through hunks on Claude Code v2.1.275 or later. A diff with more than 100 changes opens without those buttons.
 

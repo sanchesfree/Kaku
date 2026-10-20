@@ -20,7 +20,7 @@ Size goes out as a `winsize` (rows, columns, pixel width, pixel height) through 
 
 ![Bytes from the shell pass through the PTY master into an escape parser that updates a cell grid, HarfBuzz shapes those cells into glyphs that the WebGPU window draws, and keystrokes travel back through the PTY master to the shell](https://kaku.fun/img/blog/how-terminal-emulators-work.webp)
 
-*Output bytes move from the shell through the pty and the parser into cells, then into glyphs, while key bytes travel back the other way.*
+*The shell, PTY and terminal window.*
 
 Output bytes go from the shell, through the master, into the parser and the cell grid, then through HarfBuzz to the WebGPU window. Key bytes go from the window back through the master to the shell.
 

@@ -44,7 +44,7 @@ claude --resume
 
 Cursor 审改动留在编辑器里，你在里面看 diff、跑检查，合并前把问题看出来。
 
-Claude Code 的 [plan mode](/zh/blog/claude-code-plan-mode) 只读仓库，你批准之前什么都不写，用 `Shift + Tab`、`/plan` 或 `--permission-mode plan` 都能进去。
+Claude Code 的 [plan mode](/zh/blog/claude-code-plan-mode) 会读仓库、写计划，批准之前不改源码，已经能用 bypass permissions 的交互式终端是例外，用 `Shift + Tab`、`/plan` 或 `--permission-mode plan` 都能进去。
 
 扩展里有几种权限模式，Edit 直接写文件，不再问你，Auto 先让一个分类器把大部分动作过一遍，Manual 停在并排的 diff 上，等你接受、拒绝，或者改了再用。**Accept this change** 和 **Reject this change** 按 hunk 一步步过，从 Claude Code v2.1.275 起才有，改动超过 100 处的 diff 打开时没有这两个按钮。
 

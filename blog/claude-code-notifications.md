@@ -4,7 +4,7 @@
 
 Published 2026-09-20 · Tw93 · https://kaku.fun/blog/claude-code-notifications
 
-If Claude Code never tells you it finished or that it is waiting for permission, the cause is almost always the same: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use, except in Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs no setting. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.
+If Claude Code never tells you it finished or that it is waiting for permission, check the notification channel first: with its default settings it only sends desktop notifications in three terminals, iTerm2, Ghostty and Kitty. Everywhere else it stays silent until you tell it which channel to use, except in Kaku 0.25.0 or later with Claude Code 2.1.295 or later, which needs no setting. Codex has the opposite default and rings the terminal bell, which some terminals turn into a notification and others only flash. This post covers the setting that fixes each case, the macOS permission that blocks both, and what happens between the escape sequence and Notification Center.
 
 ## The quick fix for Claude Code
 
@@ -47,7 +47,7 @@ macOS only asks for that permission once. If you clicked Don't Allow at some poi
 
 Two more causes are common:
 
-- **tmux.** tmux swallows the sequences unless you add `set -g allow-passthrough on` to `~/.tmux.conf` and reload it with `tmux source-file ~/.tmux.conf`.
+- **tmux.** For notification sequences sent through tmux passthrough, add `set -g allow-passthrough on` to `~/.tmux.conf` and reload it with `tmux source-file ~/.tmux.conf`. The sender must also use tmux's passthrough wrapper, and the pane must be visible for the `on` setting to apply.
 - **You were looking at it.** Most terminals, Kaku included, suppress notifications from the window in front of you, and Codex by default only notifies while the terminal is unfocused. Test with the window in the background.
 
 ## How a notification gets from the agent to macOS
@@ -86,7 +86,7 @@ printf '\e]9;%s\a' "Tests finished"
 printf '\e]777;notify;%s;%s\a' "Build" "Release build finished"
 ```
 
-Run it with the terminal in the background and it arrives like any other notification. Inside tmux the passthrough setting above still applies.
+Run these examples outside tmux, with the terminal in the background. Inside tmux, they also need its passthrough wrapper and the setting above.
 
 ## FAQ
 

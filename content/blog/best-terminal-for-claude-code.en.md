@@ -1,4 +1,4 @@
-Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no configuration. This post walks through each one so you can check whatever terminal you use now.
+Claude Code runs in any terminal that can show a modern TUI, so the question is not which terminal can run it but which one gets out of the way during a long session. Five things decide that: typing a multi-line prompt without sending it early, hearing back when Claude stops and waits, opening the files and links it prints, keeping the session through a restart, and not losing it to a stray `Cmd + W`. Ghostty and iTerm2 handle most of these well. Kaku, the terminal I make, supports all five, and on 0.25.0 or later with Claude Code 2.1.295 or later its notifications need no configuration.
 
 [[figure:claude-code-session-loop|A Claude Code session as a loop: you write a prompt, Claude works, it asks for input or finishes, you read the result and open files, and the session survives a restart|The five places where the terminal either helps a Claude Code session or gets in its way.]]
 
@@ -12,7 +12,7 @@ In Kaku, both `Shift + Enter` and `Cmd + Enter` insert a newline, with no setup 
 
 ## Knowing when Claude is waiting for you
 
-The most expensive minute in an agent session is the one where Claude asks a question while you are in another window. A desktop notification fixes that, but only if the terminal and Claude Code agree on how to send one.
+A desktop notification lets you know when Claude needs input while you are in another window, but only if the terminal and Claude Code agree on how to send one.
 
 Claude Code's `preferredNotifChannel` setting defaults to `auto`, and `auto` only sends desktop notifications in iTerm2, Ghostty and Kitty. In Terminal.app it sends the bell character, and only when the audible bell is off. Everywhere else it does nothing, which is why people on WezTerm, Warp or a terminal Claude Code does not recognize see no notification at all.
 
@@ -79,4 +79,4 @@ With the default `auto` channel, Claude Code only notifies iTerm2, Ghostty and K
 
 ### Can I keep using tmux with Claude Code?
 
-Yes. `Shift + Enter` inside tmux needs `set -s extended-keys on` and `set -as terminal-features 'xterm*:extkeys'`, and notifications need `set -g allow-passthrough on`.
+Yes. `Shift + Enter` inside tmux needs `set -s extended-keys on` and `set -as terminal-features 'xterm*:extkeys'`, and notifications sent through tmux passthrough need `set -g allow-passthrough on` plus a sender that wraps the sequences for tmux.

@@ -1,6 +1,6 @@
-Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is configured through a settings window with more features than either of the others, Ghostty is a fast native app configured with a text file of `key = value` lines, and WezTerm uses a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds. Warp, Kitty, Alacritty and Terminal.app are covered in [the best terminal for Mac](/blog/best-terminal-for-mac).
+Ghostty, iTerm2 and WezTerm are all good terminals, and the real difference between them is how you configure them. iTerm2 is configured through a settings window, Ghostty is a fast native app configured with a text file of `key = value` lines, and WezTerm uses a Lua script that can compute its own config. Pick iTerm2 if you depend on `tmux -CC` or triggers, Ghostty if you want something fast that you configure once, and WezTerm if you want to program your terminal. The sections below compare them on splits, images, notifications, release cadence and AI coding tools, as of 2026-10-17: iTerm2 3.7.6, Ghostty 1.3.1, and WezTerm 20240203 plus nightly builds. Warp, Kitty, Alacritty and Terminal.app are covered in [the best terminal for Mac](/blog/best-terminal-for-mac).
 
-[[figure:terminal-config-models|iTerm2 is configured in a settings window saved to a plist, Ghostty in a text file of key = value lines, WezTerm in a Lua script with hot reload|The configuration model decides more about daily use than any single feature.]]
+[[figure:terminal-config-models|iTerm2 is configured in a settings window saved to a plist, Ghostty in a text file of key = value lines, WezTerm in a Lua script with hot reload|Three configuration formats: a settings window, a text file and a Lua script.]]
 
 ## Configuration
 
@@ -62,7 +62,7 @@ iTerm2 and Ghostty ship regular releases. WezTerm's last stable release is from 
 
 All three support `Shift + Enter` for a new line in Claude Code without setup, and all three ask before closing a pane with a running program, so the differences come down to notifications, as above, and how much setup each needs before a long agent session feels right, which [the best terminal for Claude Code](/blog/best-terminal-for-claude-code) goes through in more detail.
 
-Kaku sits next to WezTerm here. It is a fork that keeps the Lua config and the engine, sets up the parts AI coding CLIs use, such as `Cmd + Click` on `path:line` and an agent's last screen after a restart, and ships them as regular macOS releases instead of nightly builds. If you like WezTerm's model but want it ready for Claude Code and Codex, it is worth a try.
+Kaku sits next to WezTerm here. It is a fork that keeps the Lua config and the engine, sets up the parts AI coding CLIs use, such as `Cmd + Click` on `path:line` and an agent's last screen after a restart, and ships them as regular macOS releases instead of nightly builds.
 
 ## FAQ
 

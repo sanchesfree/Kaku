@@ -29,11 +29,11 @@ It is already on every Mac and it is fine for running a few commands. macOS 26 g
 
 ## iTerm2
 
-The long-standing default for Mac power users, and still the deepest feature set: profiles, triggers, a password manager, shell integration, and the best tmux integration of any terminal through `tmux -CC`, which turns tmux windows into native tabs. Everything is configured in a settings window, which is friendly at first and harder to keep in a dotfiles repository. Its AI chat works through a separate plugin.
+iTerm2 has profiles, triggers, a password manager, shell integration, and `tmux -CC` integration that turns tmux windows into native tabs. Everything is configured in a settings window, which is friendly at first and harder to keep in a dotfiles repository. Its AI chat works through a separate plugin.
 
 ## Ghostty
 
-The newest of the popular ones and the fastest to feel at home: a native macOS interface, GPU rendering with Metal, sensible defaults, and a config file of `key = value` lines. Its Quick Terminal drops down from the top of the screen with a hotkey, and it supports the common desktop notification sequences. The config itself has no scripting layer, so logic beyond settings and keybindings has to live somewhere else.
+Ghostty has a native macOS interface, GPU rendering with Metal, sensible defaults, and a config file of `key = value` lines. Its Quick Terminal drops down from the top of the screen with a hotkey, and it supports the common desktop notification sequences. The config itself has no scripting layer, so logic beyond settings and keybindings has to live somewhere else.
 
 ## WezTerm
 

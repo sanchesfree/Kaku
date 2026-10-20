@@ -1,4 +1,4 @@
-把 `~/.claude/settings.json` 里的 `statusLine` 设成一条 shell 命令就行，Claude Code 会把当前会话的 JSON 从 stdin 喂给它，再把脚本打到 stdout 的内容画在屏幕底部、页脚徽章上方的那一行，`/statusline` 也能生成脚本并把这项设置写进去。这篇讲 JSON 里有哪些字段、模型和 git 分支怎么放在同一行、颜色和图标怎么加、这条命令多久跑一次，套餐用量则去 `kaku ai` 里看，内容按 2026 年 10 月的[状态栏文档](https://code.claude.com/docs/zh-CN/statusline)核对过。
+把 `~/.claude/settings.json` 里的 `statusLine` 设成一条 shell 命令就行，Claude Code 会把当前会话的 JSON 从 stdin 喂给它，再把脚本打到 stdout 的内容画在屏幕底部、页脚徽章上方的那一行，`/statusline` 也能生成脚本并把这项设置写进去。内容按 2026 年 10 月的[状态栏文档](https://code.claude.com/docs/zh-CN/statusline)核对过。
 
 ## 配上状态栏
 
