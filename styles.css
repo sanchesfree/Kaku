@@ -189,11 +189,12 @@ button, input { font: inherit; }
   justify-content: center;
   gap: 8px;
   border-radius: var(--radius-pill);
-  border: 1.5px solid var(--brand);
+  border: 1px solid var(--brand);
   padding: 13px 28px;
+  min-width: 158px;
   font-family: var(--serif);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.2px;
   line-height: 1.55;
   text-decoration: none;
@@ -210,12 +211,14 @@ button, input { font: inherit; }
   box-shadow: none;
 }
 .btn-primary:hover { background: var(--kaku-slate-light); border-color: var(--kaku-slate-light); color: var(--ivory); }
+/* The family's secondary button (2026-10-20): an ivory pill with a hairline, so
+   it never competes with the filled primary beside it. */
 .btn-secondary {
-  background: transparent;
-  border-color: var(--kaku-slate);
-  color: var(--kaku-slate);
+  background: var(--ivory);
+  border-color: var(--line);
+  color: var(--near-black);
 }
-.btn-secondary:hover { background: color-mix(in srgb, var(--kaku-slate) 7%, transparent); color: var(--kaku-slate); }
+.btn-secondary:hover { background: var(--warm-sand); color: var(--near-black); }
 
 .site-nav {
   position: sticky;
@@ -915,12 +918,12 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
 }
 .doc-content li { margin-bottom: 8px; }
 .doc-content strong { color: var(--near-black); }
+/* Links read by colour alone, no underline, as on every family site (maintainer 2026-10-20). */
 .doc-content a {
-  border-bottom: 1px solid color-mix(in srgb, var(--brand) 34%, transparent);
   color: var(--brand);
   font-weight: 500;
 }
-.doc-content a:hover { border-bottom-color: var(--brand); text-decoration: none; }
+.doc-content a:hover { color: var(--brand-light); }
 .doc-content code {
   border: 1px solid var(--border-soft);
   border-radius: 4px;
@@ -1313,8 +1316,11 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
   .section-tight { margin-bottom: 33px; }
   .hero { padding: 32px 0 0; }
   .hero h1 { font-size: 56px; margin-bottom: 24px; }
-  .hero-actions { flex-wrap: wrap; gap: 12px; }
-  .btn { padding: 12px 22px; font-size: 15px; }
+  /* Phone hero buttons share one row, each as wide as its label plus an equal
+     share of the rest, and wrap to two full rows when a long label (German
+     Windows) does not fit. Height stays the desktop 51px. */
+  .hero-actions { flex-wrap: wrap; gap: 8px; }
+  .hero-actions .btn { flex: 1 1 auto; min-width: 0; padding: 13px 16px; white-space: nowrap; }
   .feature-grid, .quick-grid, .doc-grid, .doc-pager, .gallery { grid-template-columns: 1fr; }
   .docs-sidebar { gap: 12px; }
   .docs-menu {
