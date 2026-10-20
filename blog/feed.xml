@@ -7,6 +7,14 @@
     <description>Guides and notes on Mac terminals, Claude Code, Codex and shell setup, and how Kaku is built.</description>
     <language>en</language>
     <item>
+      <title>CLAUDE.md Explained: Memory Files, Load Order and What to Write</title>
+      <link>https://kaku.fun/blog/claude-md-memory</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-md-memory</guid>
+      <pubDate>Tue, 20 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.</description>
+    </item>
+    <item>
       <title>Claude Code MCP Servers: Add, Scope and Approve Them</title>
       <link>https://kaku.fun/blog/claude-code-mcp-servers</link>
       <guid isPermaLink="true">https://kaku.fun/blog/claude-code-mcp-servers</guid>

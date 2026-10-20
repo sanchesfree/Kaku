@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>CLAUDE.md Explained: Memory Files, Load Order and What to Write · Kaku Blog</title>
+  <meta name="description" content="Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.">
+  <meta property="og:title" content="CLAUDE.md Explained: Memory Files, Load Order and What to Write · Kaku Blog">
+  <meta property="og:description" content="Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-md-memory.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="CLAUDE.md Explained: Memory Files, Load Order and What to Write">
+  <meta property="og:url" content="https://kaku.fun/blog/claude-md-memory">
+  <meta property="article:published_time" content="2026-10-20">
+  <meta property="article:modified_time" content="2026-10-20">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-md-memory.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/blog/claude-md-memory"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku Blog" href="https://kaku.fun/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-md-memory">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-md-memory">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-md-memory">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/blog/claude-md-memory.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaku.fun/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CLAUDE.md Explained: Memory Files, Load Order and What to Write",
+          "item": "https://kaku.fun/blog/claude-md-memory"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/blog/claude-md-memory#article",
+      "headline": "CLAUDE.md Explained: Memory Files, Load Order and What to Write",
+      "description": "Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.",
+      "url": "https://kaku.fun/blog/claude-md-memory",
+      "mainEntityOfPage": "https://kaku.fun/blog/claude-md-memory",
+      "datePublished": "2026-10-20",
+      "dateModified": "2026-10-20",
+      "inLanguage": "en",
+      "articleSection": "Claude Code and Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-md-memory.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/blog/claude-md-memory.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where do I put personal preferences that should not be committed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In ./CLAUDE.local.md at the project root, added to .gitignore. It loads after CLAUDE.md in the same directory. In a project that relies on AGENTS.md, a CLAUDE.local.md stops Claude from reading AGENTS.md unless you set Project instructions to claude-md-and-agents-md in /config."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Claude ignore my CLAUDE.md?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Check /context for the file under Memory files first. A subdirectory CLAUDE.md never appears in that list, because it loads on demand; when it loads, a Loaded line with its path shows in the terminal. Then look for vague wording and for two files that contradict each other. A rule about commits or pull requests also competes with the git guidance Claude Code adds on its own, so set includeGitInstructions to false to remove that and use the attribution setting for the attribution text. If the rule must always run, use a hook."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a bigger CLAUDE.md make Claude smarter about my project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Past roughly 200 lines the docs say adherence drops and context cost rises. Move path-specific material to .claude/rules/ and procedures to skills."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is CLAUDE.md the same as auto memory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. You write CLAUDE.md. Claude writes auto memory, which lives under ~/.claude/projects/<project>/memory/, is machine-local, and loads only the first 200 lines or 25KB of MEMORY.md."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="wide nav-inner"><a class="brand" href="/"><strong>Kaku</strong></a><div class="nav-links"><a href="/docs">Docs</a><a href="/compare">Compare</a><a href="/changelog">Changelog</a><a href="/blog" aria-current="page">Blog</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="Choose a language"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">EN</span><span class="lang-current-name">English</span></summary><div class="lang-menu"><a class="lang-option" href="/zh/blog/claude-md-memory" hreflang="zh-CN">简体中文</a><a class="lang-option" aria-current="page" href="/blog/claude-md-memory" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav><h1>CLAUDE.md Explained: Memory Files, Load Order and What to Write</h1><p class="blog-meta"><span><a href="/blog#topic-agents">Claude Code and Codex</a></span><span>Published <time datetime="2026-10-20">Oct 20, 2026</time></span><span>8 min read</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-md-memory.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p><code>CLAUDE.md</code> is a plain Markdown file that Claude Code reads at the start of every session, so you stop retyping the same build commands and house rules. Put project rules in <code>./CLAUDE.md</code> and commit it, put personal preferences in <code>~/.claude/CLAUDE.md</code>, and keep each file under about 200 lines, because every line is paid for in context on every turn. Run <code>/init</code> to get a first draft, then cut it down to what Claude cannot work out from the code.</p>
+<h2 id="the-files-claude-code-reads">The files Claude Code reads</h2>
+<p>Claude Code has two memory systems, and they are easy to mix up. <a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener noreferrer">CLAUDE.md files</a> are instructions you write. Auto memory is notes Claude writes about your corrections and preferences, stored in <code>~/.claude/projects/&lt;project&gt;/memory/</code>, with the first 200 lines or 25KB of its <code>MEMORY.md</code> index loaded each session. This post is about the first kind, with a short note on the second near the end.</p>
+<p>CLAUDE.md files can live in four places. The docs list them from broadest to most specific, and a project instruction lands in context after a user instruction:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Location</th>
+<th>Shared with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Managed policy</td>
+<td><code>/Library/Application Support/ClaudeCode/CLAUDE.md</code> on macOS</td>
+<td>Everyone on the machine, set by IT</td>
+</tr>
+<tr>
+<td>User</td>
+<td><code>~/.claude/CLAUDE.md</code></td>
+<td>Only you, all projects</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><code>./CLAUDE.md</code> or <code>./.claude/CLAUDE.md</code></td>
+<td>The team, through git</td>
+</tr>
+<tr>
+<td>Local</td>
+<td><code>./CLAUDE.local.md</code></td>
+<td>Only you, this project (add to <code>.gitignore</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>The managed file cannot be excluded by individual settings, which is why companies use it for policy. Most people only touch the middle two.</p>
+<h2 id="how-the-files-load">How the files load</h2>
+<p>Claude Code does not pick one file. It concatenates all of them into context, so they add up instead of overriding each other. It loads <code>CLAUDE.md</code> and <code>CLAUDE.local.md</code> from your working directory and every directory above it, ordered from the filesystem root down, so the file closest to where you launched Claude is read last. Inside one directory, <code>CLAUDE.local.md</code> comes after <code>CLAUDE.md</code>, which puts your personal notes at the end.</p>
+<p>Files in subdirectories below your working directory are different. They are not loaded at launch. Claude Code loads one the first time Claude reads, writes or edits a file in that subdirectory. A <code>packages/api/CLAUDE.md</code> therefore costs nothing until Claude actually works in <code>packages/api</code>. Large monorepos show the opposite problem, an ancestor file written by another team that loads whether you want it or not. List it in <code>claudeMdExcludes</code> in <code>.claude/settings.local.json</code>, as an absolute path or a glob such as <code>**/monorepo/CLAUDE.md</code>, and Claude Code skips it; only the managed policy file cannot be excluded.</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-md-load-order-mobile.webp" width="340" height="634"><img src="/img/blog/claude-md-load-order.webp" width="838" height="631" loading="lazy" alt="Managed, user, ancestor and working-directory CLAUDE.md files load at launch in that order and are concatenated into context, while a subdirectory CLAUDE.md loads only when Claude touches a file there"></picture><figcaption>Everything is concatenated into context, the file nearest your working directory is read last, and subdirectory files wait until Claude works there.</figcaption></figure>
+
+<p>Two details matter in practice. The content arrives as a user message after the system prompt, not as part of the system prompt, so Claude tries to follow it but nothing enforces it. And block-level HTML comments (<code>&lt;!-- note for maintainers --&gt;</code>) are stripped before injection, so you can leave notes for humans without spending tokens on them.</p>
+<h2 id="imports-and-the-rules-folder">Imports and the rules folder</h2>
+<p>A CLAUDE.md can pull in other files with <code>@path</code> syntax. Relative paths resolve from the file that contains the import, and imports can nest up to four hops deep:</p>
+<pre><code class="language-markdown">See @README for the project overview and @package.json for npm scripts.
+
+# Workflow
+<span class="tok-k">-</span> git workflow @docs/git-instructions.md</code></pre>
+<p>Imports help you organize a long file, but they do not save context, because imported files load at launch with the file that references them. A path inside backticks stays literal text and is not imported. If an import points outside your working directory, such as <code>@~/.claude/my-project-instructions.md</code>, Claude Code asks for approval the first time it meets it in a project.</p>
+<p>To genuinely cut cost, use <code>.claude/rules/</code>. Each Markdown file there covers one topic, and a file with <code>paths</code> frontmatter loads only when Claude works on matching files:</p>
+<pre><code class="language-markdown">---
+paths:
+  - "src/api/**/*.ts"
+---
+
+# API rules
+<span class="tok-k">-</span> Every endpoint validates its input.</code></pre>
+<p>Rules without <code>paths</code> load at launch like the main file. The <a href="/blog/claude-code-skills">skills guide</a> covers the other half of this split: a multi-step procedure that only matters sometimes belongs in a skill, which loads only when you invoke it or Claude judges it relevant.</p>
+<h2 id="create-one-with-init-and-memory">Create one with /init and /memory</h2>
+<p>Run <code>/init</code> inside a project and Claude analyzes the codebase and writes a CLAUDE.md with the build commands, test instructions and conventions it finds. If a file exists, it suggests improvements instead of overwriting it. Treat the output as a draft: delete anything Claude would have found by reading the code, and add what it could not know. <code>/init</code> also reads Cursor rules in <code>.cursor/rules/</code> and Copilot rules in <code>.github/copilot-instructions.md</code>. Setting <code>CLAUDE_CODE_NEW_INIT=1</code> first switches it to a multi-phase flow that asks which artifacts to create.</p>
+<p><code>/memory</code> lists every memory file for your user and project scopes, including CLAUDE.md entries for files that do not exist yet, and opens any of them in your editor. It also holds the auto memory toggle. To see what actually loaded, run <code>/context</code> and read the list under Memory files.</p>
+<h2 id="what-belongs-in-it">What belongs in it</h2>
+<p>The docs say to write down what you would otherwise re-explain: build commands, conventions, project layout and "always do X" rules. Good triggers for a new line are Claude repeating a mistake, a code review catching something it should have known, or you typing the same correction twice. Make each line checkable. "Use 2-space indentation" works; "format code properly" does not.</p>
+<p>Here is a small file in that spirit:</p>
+<pre><code class="language-markdown"># Build and test
+<span class="tok-k">-</span> Install: <span class="tok-s">`pnpm install`</span>
+<span class="tok-k">-</span> Test one file: <span class="tok-s">`pnpm vitest run path/to/file.test.ts`</span>
+<span class="tok-k">-</span> Typecheck before finishing: <span class="tok-s">`pnpm tsc --noEmit`</span>
+
+# Conventions
+<span class="tok-k">-</span> API handlers live in <span class="tok-s">`src/api/handlers/`</span>
+<span class="tok-k">-</span> Use named exports, never default exports
+
+# Gotchas
+<span class="tok-k">-</span> <span class="tok-s">`pnpm test`</span> needs a local Redis on port 6379
+<span class="tok-k">-</span> Never edit <span class="tok-s">`src/generated/`</span>; run <span class="tok-s">`pnpm codegen`</span> instead</code></pre>
+<p>What does not belong: secrets, because the file is committed and sent to the model; long reference documents that most tasks never need; anything the code already says, such as directory listings and dependency lists; and rules that must hold every time. For that last case the docs point to a <a href="/blog/claude-code-hooks">hook</a>, since a hook runs as a shell command regardless of what Claude decides. A rule like "never run <code>rm -rf</code>" in CLAUDE.md is a request, not a guard.</p>
+<h2 id="keeping-it-short">Keeping it short</h2>
+<p>The size advice is concrete. Target under 200 lines per file, because longer files consume more context and reduce how well Claude follows them. Claude Code loads a file of up to 4 MiB, so the limit is about adherence rather than the loader. If a file is over the recommended length you see a warning at startup and in <code>/status</code>. Contradictions are the other failure: if two files disagree, Claude may pick one arbitrarily, so prune across the user file, the project file, nested files and the rules folder together. Running <code>/doctor prompt-audit</code> asks Claude to look for outdated and conflicting instructions and propose edits without changing anything until you approve.</p>
+<p>After <code>/compact</code>, the project-root CLAUDE.md is re-read from disk and injected again. An instruction that existed only in conversation is gone, so if you said it twice, add it to the file.</p>
+<h2 id="agentsmd-and-codex">AGENTS.md and Codex</h2>
+<p>Codex reads <code>AGENTS.md</code> instead. It builds a chain of <code>~/.codex/AGENTS.override.md</code> if that exists, otherwise <code>~/.codex/AGENTS.md</code>, then one file per directory from the project root down to your working directory, concatenated with later files winning, up to 32 KiB by default. Claude Code reads <code>AGENTS.md</code> directly since v2.1.277, but only when no <code>CLAUDE.md</code> or <code>CLAUDE.local.md</code> sits in your working directory or above it. With both present, it reads your <code>CLAUDE.md</code> files only.</p>
+<p>To keep one source of truth, put this in <code>CLAUDE.md</code>:</p>
+<pre><code class="language-markdown">@AGENTS.md
+
+## Claude Code
+
+Use plan mode for changes under <span class="tok-s">`src/billing/`</span>.</code></pre>
+<p>A symlink (<code>ln -s AGENTS.md CLAUDE.md</code>) also works, but Claude's edit tools refuse to write through it, and on Windows a committed symlink can check out as a one-line text file. Details on how the two tools compare are in <a href="/blog/codex-vs-claude-code">Codex vs Claude Code</a>, and <a href="/blog/codex-cli-setup">Codex CLI setup</a> covers its side.</p>
+<h2 id="using-it-in-kaku">Using it in Kaku</h2>
+<p>Kaku does not touch your instruction files. <code>kaku ai</code> edits the settings of tools such as Claude Code, keeps fields you wrote yourself, and the <a href="/docs/ai-coding">AI coding docs</a> say it never adds hooks or instructions to your agents on its own. What Kaku does give you is the surrounding workflow: <code>Cmd + Click</code> opens a file path that Claude prints, in the editor named by <code>file_link_editor</code>, so you can open the CLAUDE.md path it reports. <code>Cmd + D</code> splits a pane, which makes it easy to keep an editor on <code>CLAUDE.md</code> next to a running session and check it with <code>/context</code>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="where-do-i-put-personal-preferences-that-should-not-be-committed">Where do I put personal preferences that should not be committed?</h3>
+<p>In <code>./CLAUDE.local.md</code> at the project root, added to <code>.gitignore</code>. It loads after <code>CLAUDE.md</code> in the same directory. In a project that relies on <code>AGENTS.md</code>, a <code>CLAUDE.local.md</code> stops Claude from reading <code>AGENTS.md</code> unless you set Project instructions to <code>claude-md-and-agents-md</code> in <code>/config</code>.</p>
+<h3 id="why-does-claude-ignore-my-claudemd">Why does Claude ignore my CLAUDE.md?</h3>
+<p>Check <code>/context</code> for the file under Memory files first. A subdirectory CLAUDE.md never appears in that list, because it loads on demand; when it loads, a <code>Loaded</code> line with its path shows in the terminal. Then look for vague wording and for two files that contradict each other. A rule about commits or pull requests also competes with the git guidance Claude Code adds on its own, so set <code>includeGitInstructions</code> to <code>false</code> to remove that and use the <code>attribution</code> setting for the attribution text. If the rule must always run, use a hook.</p>
+<h3 id="does-a-bigger-claudemd-make-claude-smarter-about-my-project">Does a bigger CLAUDE.md make Claude smarter about my project?</h3>
+<p>No. Past roughly 200 lines the docs say adherence drops and context cost rises. Move path-specific material to <code>.claude/rules/</code> and procedures to skills.</p>
+<h3 id="is-claudemd-the-same-as-auto-memory">Is CLAUDE.md the same as auto memory?</h3>
+<p>No. You write CLAUDE.md. Claude writes auto memory, which lives under <code>~/.claude/projects/&lt;project&gt;/memory/</code>, is machine-local, and loads only the first 200 lines or 25KB of <code>MEMORY.md</code>.</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku is a free, open-source Mac terminal.</p><a class="btn btn-primary" href="/docs">Install Kaku</a></aside>
+          <nav class="blog-related" aria-label="Keep reading"><h2 class="blog-related-title">Keep reading</h2><ul class="blog-related-list"><li><a href="/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Install Claude Code on Mac: Installer, Homebrew and Updates</span><span class="blog-related-meta"><time datetime="2026-10-02">Oct 2, 2026</time> · 6 min read</span></a></li><li><a href="/blog/claude-code-mcp-servers"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code MCP Servers: Add, Scope and Approve Them</span><span class="blog-related-meta"><time datetime="2026-10-19">Oct 19, 2026</time> · 8 min read</span></a></li><li><a href="/blog/claude-code-subagents"><span class="blog-related-cat">Claude Code and Codex</span><span class="blog-related-name">Claude Code Subagents: What They Are and When They Help</span><span class="blog-related-meta"><time datetime="2026-10-11">Oct 11, 2026</time> · 8 min read</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">A fast, AI-friendly terminal for your Mac.</p></div><div class="foot-links"><div><b>Product</b><a href="/docs">Docs</a><a href="/changelog">Changelog</a><a href="/roadmap">Roadmap</a><a href="/compare">Compare</a><a href="/blog">Blog</a></div><div><b>Project</b><a href="/about">About</a><a href="/privacy">Privacy</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">Issues</a></div><div><b>Connect</b><a href="/contact">Contact</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

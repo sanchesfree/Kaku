@@ -6,6 +6,7 @@
 
 在终端里安装、配置和使用 AI 编程助手。
 
+- [CLAUDE.md 怎么写：记忆文件、加载顺序和该写什么](https://kaku.fun/zh/blog/claude-md-memory.md) (2026-10-20): Claude Code 从哪读 CLAUDE.md，文件怎么叠加，引用和 rules，该写什么，以及和 AGENTS.md 的关系。
 - [配置 Claude Code 的 MCP 服务器](https://kaku.fun/zh/blog/claude-code-mcp-servers.md) (2026-10-19): 用 claude mcp add 接 HTTP 或 stdio，分清 local、project、user，密钥放环境变量。
 - [Claude Code subagents 是什么，什么时候用](https://kaku.fun/zh/blog/claude-code-subagents.md) (2026-10-11): subagent 和 skill、agent teams 有什么区别，怎么定义一个，适合什么活，以及在上下文和 token 上的代价。
 - [Codex CLI 和 Claude Code 对比](https://kaku.fun/zh/blog/codex-vs-claude-code.md) (2026-10-09): 从安装、登录、配置文件、审批、扩展方式和通知几方面对比 Codex CLI 和 Claude Code，以及在同一个仓库里一起用。

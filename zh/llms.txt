@@ -35,6 +35,7 @@
 <!-- blog:start -->
 ## 博客
 
+- [CLAUDE.md 怎么写：记忆文件、加载顺序和该写什么](https://kaku.fun/zh/blog/claude-md-memory.md)：Claude Code 从哪读 CLAUDE.md，文件怎么叠加，引用和 rules，该写什么，以及和 AGENTS.md 的关系。
 - [配置 Claude Code 的 MCP 服务器](https://kaku.fun/zh/blog/claude-code-mcp-servers.md)：用 claude mcp add 接 HTTP 或 stdio，分清 local、project、user，密钥放环境变量。
 - [在 Mac 上配置 SSH config](https://kaku.fun/zh/blog/ssh-config-mac.md)：具体 Host 写在 Host * 前面，用 ssh -G 核对，钥匙串选项只留给系统自带的 ssh。
 - [终端 shell 集成靠 OSC 把目录和提示符交给终端](https://kaku.fun/zh/blog/shell-integration-osc.md)：OSC 7、133、9、8 各自告诉终端什么，Kaku 0.25.0 的 fish 和 zsh 实际发哪些，以及怎么用 printf 核对。

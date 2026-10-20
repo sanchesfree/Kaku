@@ -6,6 +6,7 @@ Notes on Mac terminals, AI coding tools and how Kaku is built, by Tw93.
 
 Install, configure and run AI coding agents in the terminal.
 
+- [CLAUDE.md Explained: Memory Files, Load Order and What to Write](https://kaku.fun/blog/claude-md-memory.md) (2026-10-20): Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.
 - [Claude Code MCP Servers: Add, Scope and Approve Them](https://kaku.fun/blog/claude-code-mcp-servers.md) (2026-10-19): Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.
 - [Claude Code Subagents: What They Are and When They Help](https://kaku.fun/blog/claude-code-subagents.md) (2026-10-11): How subagents differ from skills and agent teams, how to define one, which jobs they suit, and what they cost in context and tokens.
 - [Codex CLI vs Claude Code: A Practical Comparison](https://kaku.fun/blog/codex-vs-claude-code.md) (2026-10-09): Codex CLI and Claude Code compared on install, sign-in, config files, approvals, extension points and notifications, and how to run both on one repo.
