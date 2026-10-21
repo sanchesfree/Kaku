@@ -103,7 +103,7 @@ Kaku 带了一份极简的 AppleScript 字典，所以能在 Script Editor 和�
 ```applescript
 tell application "Kaku"
   get name        -- "Kaku"
-  get version     -- e.g. "0.25.0"
+  get version     -- e.g. "0.26.0"
   get frontmost   -- true / false
   quit            -- optional `saving ask|yes|no`
 end tell

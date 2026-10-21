@@ -2,6 +2,22 @@
 
 Stable Kaku releases, newest first. Nightly builds stay on GitHub. Subscribe with [RSS](https://kaku.fun/feed.xml).
 
+## V0.26.0 Bridge 2026-10-20
+
+1. **Remote Page**: The web page draws with your Mac's fonts, shows the agent title, previews an image path when you hover it, and picks up a new version on its own after reconnecting.
+2. **Remote Typing**: Typing stays ahead of file transfers, emoji take two cells as they do in Kaku, splits keep the Mac's layout, and the page redraws itself if it falls out of step.
+3. **Remote Access**: Only one Kaku serves remote access at a time, so a second copy no longer takes the page over, and notices say what to do when the Mac is offline.
+4. **Lower CPU**: Programs that keep updating the title, such as Claude Code and Codex, no longer redraw the whole window each time.
+5. **Dead Keys**: A dead key such as `~` followed by a key it cannot combine with now types both characters, as Terminal.app does.
+6. **Character Picker**: The emoji and Nerd Font picker is back in the command palette, found by searching emoji.
+7. **Fixes**: Frame lines are quieter on dark themes, SSH tabs show their number when tab numbers are on, and AI summaries keep file names whole.
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.26.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.26.0/Kaku.dmg)
+
+Special thanks to @SimonRen for their contribution to this release.
+
+---
+
 ## V0.25.0 Signal 2026-10-18
 
 1. **Agent Title**: While Claude Code, Codex or Kimi works, its mark and current topic show at the top right of the window, and Agent Title in kaku config turns it off.

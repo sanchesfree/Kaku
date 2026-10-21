@@ -2,6 +2,22 @@
 
 Kaku 正式版更新，从新到旧。Nightly 仍在 GitHub，可以用 [RSS](https://kaku.fun/feed.xml) 订阅。
 
+## V0.26.0 Bridge 2026-10-20
+
+1. **远程网页**：网页使用 Mac 上的字体，显示 Agent 标题，悬停图片路径即可预览，重连后自动换上新版本。
+2. **远程输入**：传文件时输入依然优先，emoji 与 Kaku 一样占两格，分屏保持 Mac 上的布局，画面错位时会自动重绘。
+3. **远程访问**：同一时间只有一个 Kaku 提供远程访问，另开的副本不再接管网页，Mac 离线时提示会说明该怎么做。
+4. **更低的 CPU 占用**：Claude Code、Codex 这类持续更新标题的程序不再每次重绘整个窗口。
+5. **死键**：`~` 这类死键后接无法组合的按键时，两个字符都会输入，与 Terminal.app 一致。
+6. **字符选择器**：emoji 和 Nerd Font 选择器回到命令面板，搜索 emoji 即可打开。
+7. **修复**：深色主题下的边框线更柔和，开启标签编号后 SSH 标签也显示编号，AI 摘要里的文件名保持完整。
+
+[GitHub](https://github.com/tw93/Kaku/releases/tag/V0.26.0) · [DMG](https://github.com/tw93/Kaku/releases/download/V0.26.0/Kaku.dmg)
+
+Special thanks to @SimonRen for their contribution to this release.
+
+---
+
 ## V0.25.0 Signal 2026-10-18
 
 1. **Agent 标题**：Claude Code、Codex 或 Kimi 工作时，窗口右上角会显示它的标志和当前话题，可在 kaku config 里关闭 Agent Title。
