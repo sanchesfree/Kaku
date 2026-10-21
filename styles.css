@@ -1088,9 +1088,6 @@ html[lang^="zh"] .gallery-caption .line { margin-bottom: 0; font-style: normal; 
   transition: color 160ms var(--ease);
 }
 .doc-pager a:hover strong { color: var(--brand-light); }
-.release-doc {
-  max-width: 860px;
-}
 .release-doc h2 {
   margin: 44px 0 14px;
   color: var(--dark-warm);
@@ -1486,13 +1483,12 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 
 /* ===== Blog =====
    Same parchment cards and serif rhythm as mole.fit's blog, on Kaku's tokens.
-   The article column is narrower than the docs so long prose stays readable. */
-.blog-article { max-width: 760px; }
+   Articles fill the page width like mole.fit's (maintainer 2026-10-21,
+   replacing the 760px column of 2026-10-19). */
 /* Blog tables hold sentences, not config keys, so the docs rules that pin a
    key column to nowrap would push long cells past the page. */
 .doc-content.blog-article table th,
 .doc-content.blog-article table td { width: auto !important; white-space: normal !important; }
-.blog-hero .wide > * { max-width: 760px; }
 .blog-crumb {
   margin: 0;
   font-size: 13px;
@@ -1526,7 +1522,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 .blog-diagram { margin: 28px 0 32px; }
 .blog-diagram picture { display: block; }
 /* Diagrams are saved at 2x and keep their own width up to the column, so a
-   narrow one is not blown up to 760px with oversized text. */
+   narrow one is not blown up to the full column with oversized text. */
 .blog-diagram img {
   display: block;
   max-width: 100%;
@@ -1631,7 +1627,7 @@ html[lang^="zh"] .foot-links b { letter-spacing: 0.6px; }
 /* Blog topic groups: the index lists live posts under their category, and the
    article meta line and related cards name it. Labels stay serif and unuppercased. */
 .blog-group + .blog-group { margin-top: 64px; }
-.blog-group-head { max-width: 760px; margin: 0 0 20px; }
+.blog-group-head { margin: 0 0 20px; }
 .blog-group-title { margin: 0 0 8px; color: var(--dark-warm); font-size: 22px; font-weight: 500; line-height: 1.25; }
 .blog-group-description { margin: 0; color: var(--stone); font-size: 15px; line-height: 1.55; }
 .page-hero .blog-meta a { color: var(--stone); }
