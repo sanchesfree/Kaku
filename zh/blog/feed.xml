@@ -7,6 +7,14 @@
     <description>关于 Mac 终端、Claude Code、Codex、shell 配置的指南，以及 Kaku 是怎么做出来的。</description>
     <language>zh-CN</language>
     <item>
+      <title>Claude Code 权限：模式、规则和跳过确认</title>
+      <link>https://kaku.fun/zh/blog/claude-code-permissions</link>
+      <guid isPermaLink="true">https://kaku.fun/zh/blog/claude-code-permissions</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Claude Code 的权限模式、allow/ask/deny 规则，bypass 的风险，一份更稳的配置，以及拦命令的 hook。</description>
+    </item>
+    <item>
       <title>CLAUDE.md 怎么写：记忆文件、加载顺序和该写什么</title>
       <link>https://kaku.fun/zh/blog/claude-md-memory</link>
       <guid isPermaLink="true">https://kaku.fun/zh/blog/claude-md-memory</guid>

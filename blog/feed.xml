@@ -7,6 +7,14 @@
     <description>Guides and notes on Mac terminals, Claude Code, Codex and shell setup, and how Kaku is built.</description>
     <language>en</language>
     <item>
+      <title>Claude Code Permissions: Modes, Rules and --dangerously-skip-permissions</title>
+      <link>https://kaku.fun/blog/claude-code-permissions</link>
+      <guid isPermaLink="true">https://kaku.fun/blog/claude-code-permissions</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0800</pubDate>
+      <dc:creator>Tw93</dc:creator>
+      <description>Claude Code permission modes, allow/ask/deny rules, what bypassPermissions risks, a safer middle-ground config and a hook that blocks commands.</description>
+    </item>
+    <item>
       <title>CLAUDE.md Explained: Memory Files, Load Order and What to Write</title>
       <link>https://kaku.fun/blog/claude-md-memory</link>
       <guid isPermaLink="true">https://kaku.fun/blog/claude-md-memory</guid>

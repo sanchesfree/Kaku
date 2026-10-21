@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Claude Code 权限：模式、规则和跳过确认 · Kaku 博客</title>
+  <meta name="description" content="Claude Code 的权限模式、allow/ask/deny 规则，bypass 的风险，一份更稳的配置，以及拦命令的 hook。">
+  <meta property="og:title" content="Claude Code 权限：模式、规则和跳过确认 · Kaku 博客">
+  <meta property="og:description" content="Claude Code 的权限模式、allow/ask/deny 规则，bypass 的风险，一份更稳的配置，以及拦命令的 hook。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://kaku.fun/img/blog/cards/claude-code-permissions.webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Claude Code 权限：模式、规则和跳过确认">
+  <meta property="og:url" content="https://kaku.fun/zh/blog/claude-code-permissions">
+  <meta property="article:published_time" content="2026-10-21">
+  <meta property="article:modified_time" content="2026-10-21">
+  <meta property="article:author" content="Tw93">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kaku.fun/img/blog/cards/claude-code-permissions.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-kaku-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-kaku-192.png"><link rel="apple-touch-icon" href="/img/favicon-kaku-180.png">
+  <link rel="canonical" href="https://kaku.fun/zh/blog/claude-code-permissions"><link rel="alternate" type="application/rss+xml" title="Kaku releases" href="https://kaku.fun/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Kaku 博客" href="https://kaku.fun/zh/blog/feed.xml">
+  <link rel="alternate" hreflang="en" href="https://kaku.fun/blog/claude-code-permissions">
+  <link rel="alternate" hreflang="zh-CN" href="https://kaku.fun/zh/blog/claude-code-permissions">
+  <link rel="alternate" hreflang="x-default" href="https://kaku.fun/blog/claude-code-permissions">
+  <link rel="alternate" type="text/markdown" href="https://kaku.fun/zh/blog/claude-code-permissions.md">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kaku",
+          "item": "https://kaku.fun/zh"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "博客",
+          "item": "https://kaku.fun/zh/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude Code 权限：模式、规则和跳过确认",
+          "item": "https://kaku.fun/zh/blog/claude-code-permissions"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaku.fun/zh/blog/claude-code-permissions#article",
+      "headline": "Claude Code 权限：模式、规则和跳过确认",
+      "description": "Claude Code 的权限模式、allow/ask/deny 规则，bypass 的风险，一份更稳的配置，以及拦命令的 hook。",
+      "url": "https://kaku.fun/zh/blog/claude-code-permissions",
+      "mainEntityOfPage": "https://kaku.fun/zh/blog/claude-code-permissions",
+      "datePublished": "2026-10-21",
+      "dateModified": "2026-10-21",
+      "inLanguage": "zh-CN",
+      "articleSection": "Claude Code 与 Codex",
+      "image": "https://kaku.fun/img/blog/cards/claude-code-permissions.webp",
+      "timeRequired": "PT8M",
+      "author": {
+        "@type": "Person",
+        "name": "Tw93",
+        "url": "https://tw93.fun",
+        "sameAs": [
+          "https://x.com/HiTw93",
+          "https://github.com/tw93"
+        ]
+      },
+      "publisher": {
+        "@id": "https://kaku.fun/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://kaku.fun/zh/blog#blog"
+      },
+      "about": {
+        "@id": "https://kaku.fun/#software"
+      },
+      "encoding": {
+        "@type": "MediaObject",
+        "encodingFormat": "text/markdown",
+        "contentUrl": "https://kaku.fun/zh/blog/claude-code-permissions.md"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "--dangerously-skip-permissions 安全吗",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在平时用的机器上不安全，文档把它限制在隔离环境里，并说它对提示词注入没有保护，本地工作用 auto 模式或上面的中间路线。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎么只对一条命令关掉提示",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "给它加一条 allow 规则，比如 Bash(npm test *)，或者在提示上选 Yes, and don't ask again，Bash 命令会把规则存进仓库根目录的 .claude/settings.local.json。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么 bypass 模式下 Claude 还会问",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "没有哪个模式会自动批准 ask 规则、指向关键路径的 rm 或 rmdir，以及需要你输入的工具，所以 bypass 模式下它们照样会提示。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "CLAUDE.md 能拦住命令吗",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能，它只影响 Claude 想做什么，真正改变 Claude Code 允许什么的是规则、模式和 hook。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到内容</a>
+  <nav class="site-nav" aria-label="主导航"><div class="wide nav-inner"><a class="brand" href="/zh"><strong>Kaku</strong></a><div class="nav-links"><a href="/zh/docs">文档</a><a href="/zh/compare">对比</a><a href="/zh/changelog">更新日志</a><a href="/zh/blog" aria-current="page">博客</a></div><div class="nav-actions"><details class="lang-switch"><summary class="lang-trigger" aria-label="切换语言"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-current-code" aria-hidden="true">中</span><span class="lang-current-name">简体中文</span></summary><div class="lang-menu"><a class="lang-option" aria-current="page" href="/zh/blog/claude-code-permissions" hreflang="zh-CN">简体中文</a><a class="lang-option" href="/blog/claude-code-permissions" hreflang="en">English</a></div></details><script src="/navigation.js" defer></script><a class="nav-icon" href="https://github.com/tw93/Kaku" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><a class="nav-icon" href="https://x.com/HiTw93" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div></nav>
+  <main id="main-content" class="docs-page blog-page">
+    <header class="page-hero doc-hero blog-hero"><div class="wide"><nav class="blog-crumb" aria-label="Breadcrumb"><a href="/zh/blog">博客</a></nav><h1>Claude Code 权限：模式、规则和跳过确认</h1><p class="blog-meta"><span><a href="/zh/blog#topic-agents">Claude Code 与 Codex</a></span><span>发布于 <time datetime="2026-10-21">2026年10月21日</time></span><span>约 8 分钟</span></p></div></header>
+    <section class="section">
+      <div class="wide">
+        <article class="doc-content blog-article">
+          <figure class="blog-cover" aria-hidden="true"><img src="/img/blog/cards/claude-code-permissions.webp" width="1600" height="900" alt="" fetchpriority="high"></figure>
+<p>Claude Code 用两层来决定要不要问你，一层是定下基线的权限模式，另一层是 <code>settings.json</code> 里针对具体工具的 allow、ask、deny 规则，规则会盖过模式。<code>--dangerously-skip-permissions</code> 打开的是跳过检查的 <code>bypassPermissions</code> 模式，Anthropic 的文档说只该在容器或虚拟机里用，因为它对提示词注入和误操作没有任何保护。日常工作更稳的做法是中间路线，用 <code>acceptEdits</code> 或 auto 模式，配一小份 allow 列表、几条 deny 规则，再加一个 hook 拦住你绝不想让它跑的那条命令，这样仍然安静。</p>
+<h2 id="权限模式">权限模式</h2>
+<p><a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener noreferrer">权限模式文档</a>（2026 年 10 月 19 日读的）按配置值列出这些模式：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>不用问就能做的事</th>
+<th>适合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code>（显示为 Manual）</td>
+<td>只读</td>
+<td>逐个审查，敏感工作</td>
+</tr>
+<tr>
+<td><code>acceptEdits</code></td>
+<td>读、改文件，以及 <code>mkdir</code>、<code>touch</code>、<code>mv</code>、<code>cp</code> 这类常见文件系统命令</td>
+<td>事后再审查代码的迭代</td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td>读，auto 模式可用时还包括分类器批准的命令，编辑要等你批准方案</td>
+<td>改动之前先摸清代码库</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>全部，由一个分类器模型在后台审查动作</td>
+<td>长任务，少打断</td>
+</tr>
+<tr>
+<td><code>dontAsk</code></td>
+<td>工作目录里的文件读取和预先批准的工具，会弹提示的一律拒绝</td>
+<td>CI 和脚本</td>
+</tr>
+<tr>
+<td><code>bypassPermissions</code></td>
+<td>全部</td>
+<td>只限隔离的容器和虚拟机</td>
+</tr>
+</tbody>
+</table>
+<p>终端里按 <code>Shift+Tab</code> 循环切换模式，状态栏会显示当前是哪个，比如 <code>⏵⏵ accept edits on</code> 或 <code>⏸ plan mode on</code>。有两个模式不一定在循环里，<code>dontAsk</code> 永远不在，<code>bypassPermissions</code> 只有在你用对应的标志或设置启动时才会出现。也可以用 <code>claude --permission-mode plan</code> 启动，或者在设置文件里写 <code>permissions.defaultMode</code>。</p>
+<p>如果你对 Claude Code 的印象还停在几个月前，有一个变化要留意，2.1.283 或更新的版本里，auto 模式是交互式终端和 VS Code 会话的内置起始模式，文档把它描述成减少提示，而不是安全保证，所以别默认一个会话什么都会问，先看一眼状态栏。</p>
+<h2 id="allowaskdeny-规则">allow、ask、deny 规则</h2>
+<p>规则写在 <code>settings.json</code> 的 <code>permissions</code> 下，<code>/permissions</code> 会列出所有规则以及每条来自哪个文件。allow 规则让工具不用批准就能跑，ask 规则每次都弹提示，deny 规则直接拦住，检查顺序是 deny、ask、allow，第一个命中的算数，所以 deny 总是压过更具体的 allow，没法在 deny 里再开例外。</p>
+<p>规则的写法是 <code>Tool</code> 或 <code>Tool(specifier)</code>，裸的 <code>Bash</code> 匹配所有 shell 命令，括号里的限定词把范围收窄：</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "allow": [
+      <span class="tok-s">"Bash(npm run *)"</span>,
+      <span class="tok-s">"Bash(git status)"</span>,
+      <span class="tok-s">"Bash(git diff *)"</span>
+    ],
+    "ask": [
+      <span class="tok-s">"Bash(git push *)"</span>
+    ],
+    "deny": [
+      <span class="tok-s">"Read(./.env)"</span>,
+      <span class="tok-s">"Read(./secrets/**)"</span>,
+      <span class="tok-s">"Bash(rm *)"</span>
+    ]
+  }
+}</code></pre>
+<p>Bash 规则里的 <code>*</code> 匹配任意文本，要放在子命令后面，<code>Bash(git log *)</code> 只放行 <code>git log</code>，而 <code>Bash(git *)</code> 放行所有 git 命令。复合命令会在 <code>&amp;&amp;</code>、<code>||</code>、<code>;</code>、管道和换行处拆开，每一段都得各自匹配，所以 <code>Bash(safe-cmd *)</code> 不会放行 <code>safe-cmd &amp;&amp; other-cmd</code>。匹配之前，Claude Code 会先剥掉固定的几种包装命令，<code>timeout</code>、<code>time</code>、<code>nice</code>、<code>nohup</code>、<code>stdbuf</code> 和不带选项的 <code>xargs</code>，所以 <code>Bash(npm test *)</code> 也能匹配 <code>timeout 30 npm test</code>，<code>npx</code>、<code>docker exec</code>、<code>mise exec</code>、<code>devbox run</code> 这类执行器则不会被剥掉，<code>Bash(devbox run *)</code> 等于放行 <code>run</code> 后面的任何命令，反过来 <code>Bash(rm *)</code> 的 deny 也拦不住 <code>/bin/rm</code> 和 <code>find -delete</code>，因为规则比对的是命令文本，不是背后真正跑的程序。文件方面，<code>Read</code> 和 <code>Edit</code> 规则用 gitignore 风格的模式，<code>//path</code> 是绝对路径，<code>~/path</code> 从家目录算起，<code>./path</code> 相对当前目录，写给 <code>Write</code> 的规则会被接受但从不被查询，所以要写 <code>Edit</code>。</p>
+<h2 id="一次调用是怎么被决定的">一次调用是怎么被决定的</h2>
+<p>规则、hook 和模式组合起来时顺序很重要，下面是一次工具调用的路径。</p>
+<figure class="blog-diagram"><picture><source media="(max-width: 640px)" srcset="/img/blog/claude-code-permission-layers-mobile.webp" width="340" height="726"><img src="/img/blog/claude-code-permission-layers.webp" width="565" height="834" loading="lazy" alt="工具调用先过 PreToolUse hook，再过 deny、ask、allow 规则，规则都没命中才看权限模式，放行的 Bash 命令在沙盒里运行，hook 返回 2 或命中 deny 规则就会被拦下"></picture><figcaption>hook 能在任何规则被读到之前拦下调用，接着由规则决定，模式只处理规则没覆盖到的部分。</figcaption></figure>
+
+<p>PreToolUse hook 先跑，如果它以退出码 2 结束，调用在看任何规则之前就被拦下，哪怕有 allow 规则本来会放行。hook 放过去之后，不管它返回了什么，deny 和 ask 规则照样会被评估，所以 hook 返回 allow 也压不过 deny 规则。规则定不了的时候由模式的基线决定。对 Bash 来说，可选的沙箱是批准之后的另一层，在操作系统层面限制已批准的命令能碰什么，文档建议权限和沙箱一起用，因为提示词注入骗过模型之后，沙箱的限制仍然有效。</p>
+<p>权限规则是由 Claude Code 执行的，不是由模型执行的，文档说你在提示词或 <code>CLAUDE.md</code> 里写的指令会影响 Claude 想做什么，但不会改变 Claude Code 允许什么。</p>
+<h2 id="bypasspermissions-到底冒什么险">bypassPermissions 到底冒什么险</h2>
+<p><code>bypassPermissions</code> 关掉提示和安全检查，包括对 <code>.git</code>、<code>.claude</code>、<code>.zshrc</code>、<code>.mcp.json</code> 这类受保护路径的写入。deny 规则在这个模式下仍然拦截，allow 规则则没有作用，因为一切本来就被允许。有几样即使在这里也仍会提示，ask 规则、指向 <code>/</code> 或家目录这类关键路径的 <code>rm</code> 和 <code>rmdir</code>，以及需要你输入的工具。</p>
+<p>文档警告说，这个模式对提示词注入没有任何保护，也就是 Claude 读到的文件或网页里的文字被它当成指令执行。官方的建议是只在隔离环境里用，比如容器、虚拟机，或者没有网络的 dev container。标志是 <code>claude --dangerously-skip-permissions</code>，等价于 <code>--permission-mode bypassPermissions</code>，交互式会话第一次用要接受一个警告对话框，在 Linux 和 macOS 上以 root 或 <code>sudo</code> 运行时会拒绝启动，除非检测到受认可的沙箱。<a href="https://code.claude.com/docs/en/sandbox-environments" target="_blank" rel="noopener noreferrer">沙箱环境页面</a>比较了内置的沙箱 Bash 工具、沙箱运行时、dev container 和虚拟机，权限模式页面则说，想要少提示又不想承担这种风险，auto 模式保留了后台安全检查。</p>
+<p>管理员可以在托管设置里把 <code>permissions.disableBypassPermissionsMode</code> 设成 <code>"disable"</code>，你也可以在自己的设置里设，把自己锁在这个模式之外。</p>
+<h2 id="更稳的中间路线">更稳的中间路线</h2>
+<p>一份让大部分提示消失、又不关掉检查的配置：</p>
+<pre><code class="language-json">{
+  "permissions": {
+    "defaultMode": <span class="tok-s">"acceptEdits"</span>,
+    "allow": [
+      <span class="tok-s">"Bash(npm run *)"</span>,
+      <span class="tok-s">"Bash(npm test *)"</span>,
+      <span class="tok-s">"Bash(git status)"</span>,
+      <span class="tok-s">"Bash(git diff *)"</span>,
+      <span class="tok-s">"Bash(git commit *)"</span>
+    ],
+    "ask": [
+      <span class="tok-s">"Bash(git push *)"</span>
+    ],
+    "deny": [
+      <span class="tok-s">"Read(./.env)"</span>,
+      <span class="tok-s">"Read(./secrets/**)"</span>,
+      <span class="tok-s">"Bash(rm *)"</span>,
+      <span class="tok-s">"Bash(git push --force *)"</span>
+    ]
+  }
+}</code></pre>
+<p>项目里放进 <code>.claude/settings.json</code>，所有会话通用就放 <code>~/.claude/settings.json</code>。别写进 <code>~/.claude.json</code>，那个文件存的是应用状态和界面开关，写在里面的 <code>permissions</code> 和 <code>hooks</code> 会被忽略。项目 <code>.claude/settings.json</code> 里的 allow 规则，也要等你在这个文件夹接受了工作区信任对话框之后才会生效。<code>acceptEdits</code> 会自动批准工作目录里的编辑和 <code>rm</code>，<code>Bash(rm *)</code> 的 deny 规则就是为此加的。文档提到规则可能漏掉换了写法的命令，比如写成 <code>git -C . push</code> 的推送，<code>Bash(git push *)</code> 就匹配不到，所以把规则当成常见情况的护栏，别当安全边界，真正绝不能发生的事再加 hook 或 Bash 沙箱。</p>
+<h2 id="用-hook-拦命令">用 hook 拦命令</h2>
+<p>hook 是 Claude Code 在工具调用之前运行的一个脚本，退出码 2 会拦住调用，脚本写到 stderr 的内容会作为理由回到 Claude 手里。文档自带的例子保护的是文件，下面是针对命令的变体：</p>
+<pre><code class="language-bash"><span class="tok-c">#!/bin/bash
+# .claude/hooks/block-danger.sh
+</span>INPUT=<span class="tok-k">$(</span>cat<span class="tok-k">)</span>
+CMD=<span class="tok-k">$(</span><span class="tok-b">echo</span> <span class="tok-s">"</span>$INPUT<span class="tok-s">"</span> | jq -r <span class="tok-s">'.tool_input.command // empty'</span><span class="tok-k">)</span>
+
+<span class="tok-k">if</span> [[ <span class="tok-s">"</span>$CMD<span class="tok-s">"</span> == *<span class="tok-s">"git push --force"</span>* || <span class="tok-s">"</span>$CMD<span class="tok-s">"</span> == *<span class="tok-s">"rm -rf"</span>* ]]; <span class="tok-k">then</span>
+  <span class="tok-b">echo</span> <span class="tok-s">"Blocked: </span>$CMD<span class="tok-s"> matches a protected pattern"</span> &gt;&amp;<span class="tok-n">2</span>
+  <span class="tok-b">exit</span> <span class="tok-n">2</span>
+<span class="tok-k">fi</span>
+<span class="tok-b">exit</span> <span class="tok-n">0</span></code></pre>
+<pre><code class="language-json">{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": <span class="tok-s">"Bash"</span>,
+        "hooks": [
+          { "type": <span class="tok-s">"command"</span>, "command": <span class="tok-s">"\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-danger.sh"</span> }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p>先 <code>chmod +x .claude/hooks/block-danger.sh</code>，再让 Claude 跑一条被拦的命令，应该会被拒绝，Claude 会收到你写的消息作为理由。想放行除了几条之外的所有 Bash 命令时，文档推荐的就是这个写法，把 <code>Bash</code> 加进 allow 列表，再让 hook 拒绝例外。这种字符串匹配换个写法就能绕过，所以凡是可能毁数据的，都和 deny 规则配合用，hook 的事件和设置见 <a href="/zh/blog/claude-code-hooks">Claude Code hooks</a>。</p>
+<h2 id="知道有提示在等你">知道有提示在等你</h2>
+<p>少弹提示是目标，但剩下的那些提示在你切到别的窗口时会让会话停住。Claude Code 2.1.295 或更新的版本会把正在干活、等你还是已完成告诉 Kaku，所以 Kaku 0.25.0 或更新的版本在 Kaku 处于后台时无需任何设置就会发通知，更旧的版本和其他终端要配置通知渠道，见 <a href="/zh/blog/claude-code-notifications">Claude Code 通知</a>。如果你同时并排跑几个 agent，<a href="/zh/blog/claude-code-git-worktrees">git worktree</a> 能把它们的改动隔开。</p>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="-dangerously-skip-permissions-安全吗">--dangerously-skip-permissions 安全吗</h3>
+<p>在平时用的机器上不安全，文档把它限制在隔离环境里，并说它对提示词注入没有保护，本地工作用 auto 模式或上面的中间路线。</p>
+<h3 id="怎么只对一条命令关掉提示">怎么只对一条命令关掉提示</h3>
+<p>给它加一条 allow 规则，比如 <code>Bash(npm test *)</code>，或者在提示上选 Yes, and don't ask again，Bash 命令会把规则存进仓库根目录的 <code>.claude/settings.local.json</code>。</p>
+<h3 id="为什么-bypass-模式下-claude-还会问">为什么 bypass 模式下 Claude 还会问</h3>
+<p>没有哪个模式会自动批准 ask 规则、指向关键路径的 <code>rm</code> 或 <code>rmdir</code>，以及需要你输入的工具，所以 bypass 模式下它们照样会提示。</p>
+<h3 id="claudemd-能拦住命令吗">CLAUDE.md 能拦住命令吗</h3>
+<p>不能，它只影响 Claude 想做什么，真正改变 Claude Code 允许什么的是规则、模式和 hook。</p>
+          <aside class="blog-cta"><img class="blog-cta-icon" src="/img/kaku-mark.png" width="40" height="40" alt=""><p>Kaku 是一个免费开源的 Mac 终端。</p><a class="btn btn-primary" href="/zh/docs">安装 Kaku</a></aside>
+          <nav class="blog-related" aria-label="继续阅读"><h2 class="blog-related-title">继续阅读</h2><ul class="blog-related-list"><li><a href="/zh/blog/install-claude-code-mac"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">在 Mac 上安装和更新 Claude Code</span><span class="blog-related-meta"><time datetime="2026-10-02">2026年10月2日</time> · 约 6 分钟</span></a></li><li><a href="/zh/blog/claude-md-memory"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">CLAUDE.md 怎么写：记忆文件、加载顺序和该写什么</span><span class="blog-related-meta"><time datetime="2026-10-20">2026年10月20日</time> · 约 9 分钟</span></a></li><li><a href="/zh/blog/claude-code-mcp-servers"><span class="blog-related-cat">Claude Code 与 Codex</span><span class="blog-related-name">配置 Claude Code 的 MCP 服务器</span><span class="blog-related-meta"><time datetime="2026-10-19">2026年10月19日</time> · 约 10 分钟</span></a></li></ul></nav>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wide foot"><div class="foot-brand"><p class="name">Kaku · <span class="foot-mark" lang="zh-Hant">書</span></p><p class="foot-sub">快速、开箱即用、AI 友好的 Mac 终端</p></div><div class="foot-links"><div><b>产品</b><a href="/zh/docs">文档</a><a href="/zh/changelog">更新日志</a><a href="/zh/roadmap">路线图</a><a href="/zh/compare">对比</a><a href="/zh/blog">博客</a></div><div><b>项目</b><a href="/zh/about">关于</a><a href="/zh/privacy">隐私</a><a href="https://github.com/tw93/Kaku">GitHub</a><a href="https://github.com/tw93/Kaku/issues">问题反馈</a></div><div><b>联系</b><a href="/zh/contact">联系我们</a><a href="https://x.com/HiTw93">X</a></div></div></div></footer>
+</body>
+</html>

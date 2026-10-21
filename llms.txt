@@ -47,6 +47,7 @@ Kaku is driven from the shell, not over HTTP:
 <!-- blog:start -->
 ## Blog
 
+- [Claude Code Permissions: Modes, Rules and --dangerously-skip-permissions](https://kaku.fun/blog/claude-code-permissions.md): Claude Code permission modes, allow/ask/deny rules, what bypassPermissions risks, a safer middle-ground config and a hook that blocks commands.
 - [CLAUDE.md Explained: Memory Files, Load Order and What to Write](https://kaku.fun/blog/claude-md-memory.md): Where Claude Code reads CLAUDE.md from, how files stack, imports and rules, what to put in one, and how it relates to AGENTS.md and auto memory.
 - [Claude Code MCP Servers: Add, Scope and Approve Them](https://kaku.fun/blog/claude-code-mcp-servers.md): Add Claude Code MCP servers over HTTP or stdio, choose local, project, or user scope, and keep tokens out of a committed .mcp.json.
 - [SSH Config on Mac: Hosts, Keys and the Keychain](https://kaku.fun/blog/ssh-config-mac.md): Put specific Host blocks in ~/.ssh/config, check them with ssh -G, and keep Apple keychain options on /usr/bin/ssh.

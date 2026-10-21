@@ -481,7 +481,7 @@
     {
       "slug": "claude-code-permissions",
       "category": "agents",
-      "date": null,
+      "date": "2026-10-21",
       "keyword": "claude code dangerously skip permissions",
       "en": {
         "title": "Claude Code Permissions: Modes, Rules and --dangerously-skip-permissions",
